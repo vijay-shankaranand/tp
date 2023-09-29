@@ -97,6 +97,9 @@ public class PersonBuilder {
         return new Person(name, phone, email, address, tags, remark);
     }
 
+    /**
+     * Sets the {@code Remark} of the {@code Person} that we are building.
+     */
     public PersonBuilder withRemark(String remarkStub) {
         this.remark = new Remark(remarkStub);
         return this;
