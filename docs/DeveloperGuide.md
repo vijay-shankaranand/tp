@@ -322,7 +322,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-* 3b. User does not input an index.
+* 3b. Missing index.
 
     * 3b1. JobFestGo shows an error message.
 
