@@ -149,6 +149,12 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
+### View all tags: `view_tags`
+
+Views all existing tags that have been created by the user.
+
+Format: `view_tags`
+
 ### Deleting a tag: `delete_tag`
 
 Deletes the specified tag from JobFestGo.
