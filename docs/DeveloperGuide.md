@@ -4,7 +4,7 @@
   pageNav: 3
 ---
 
-# AB-3 Developer Guide
+# JobFestGo Developer Guide
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -269,13 +269,15 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
+Job Events planner who:
+
 * has a need to manage a significant number of contacts
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: Each event planner has multiple events, each of which can have a large number of contacts associated and searching for contact would be a hassle. Our product provides a centralised system that would help job event planners organise their contact information for quick and easy access.
 
 
 ### User stories
@@ -284,8 +286,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a …​                                    | I want to …​                 | So that I can…​                                                        |
 |----------|--------------------------------------------|------------------------------|------------------------------------------------------------------------|
-| `* * *`  | new user                                   | see usage instructions       | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person             |                                                                        |
+| `* * *`  | job fest event planenr                                   | see usage instructions       | refer to instructions when I forget how to use the App                 |
+| `* * *`  | job fest event planner                                       | add a new person             |                                                                        |
 | `* * *`  | user                                       | delete a person              | remove entries that I no longer need                                   |
 | `* * *`  | user                                       | find a person by name        | locate details of persons without having to go through the entire list |
 | `* *`    | user                                       | hide private contact details | minimize chance of someone else seeing them by accident                |
@@ -293,6 +295,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | job fest event planner                                     | view all tags | remember contacts of a certain category to contact them for events                |
 | `* *`     | job fest event planner                     | be able to delete tags | can easily identify who I should be cold calling among my contacts without unnecessary tags     |
 | `*`      | user with many persons in the address book | sort persons by name         | locate a person easily                                                 |
+
 
 *{More to be added}*
 
@@ -343,7 +346,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-
 **Use case: Delete a person**
 
 **MSS**
@@ -354,6 +356,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 4.  JobFestGo deletes the person
 
    Use case ends.
+   
 
 **Use case: Add a tag**
 
@@ -363,54 +366,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2.  User keys in the tag to add to the collection of tags
 3.  JobFestGo adds the tag
 
-    Use case ends.
-
-**Extensions**
-
-* 2a. The list is empty.
-
    Use case ends.
 
-* 3a. The given tag name exists already.
-
-    * 3a1. JobFestGo shows an error message.
-
-      Use case resumes at step 2.
-
-* 3b. Missing `t/` in the command.
-   
-    * 3b1. JobFestGo shows an error message.
-
-      Use case resumes at step 2.
-
-* 3c. Missing tag name.
-    
-    * 3c1. JobFestGo shows an error message.
-
-      Use case resumes at step 2.
-
-*{More to be added}*
-
-
 **Use case: View all tags**
+
 
 **MSS**
 1. User requests to list tags
 2. JobFestGo shows a list of tags that are currently in use in the contacts list
    
    Use case ends.
-
-**Extensions**
-
-* 2a. The list is empty.
-
-  Use case ends.
-
-* 3a. The given index is invalid.
-
-    * 3a1. JobFestGo shows an error message.
-
-      Use case resumes at step 2.
 
 **Use case: Delete a tag**
 
@@ -460,14 +425,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * The user interface should be intuitive for event planners to use, for non-tech savy job event planners
 4. Performance:
 * The system should respond to all inputs within a reasonable time frame (within 2 seconds)
-
-*{More to be added}*
-
-### Non-Functional Requirements
-
-1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 
 *{More to be added}*
 
