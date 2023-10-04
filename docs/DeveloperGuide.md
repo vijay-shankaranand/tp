@@ -313,7 +313,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to add tags
+1.  User requests to add tag
 2.  User keys in the tag to add to the collection of tags
 3.  JobFestGo adds the tag
 
