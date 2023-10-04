@@ -21,15 +21,15 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Project Advisor
 
-### Jane Doe
+### Jaryl Goh Jun Zhong
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/rionshocker.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/rionshocker)]
+[[portfolio](team/rionshocker.md)]
 
-* Role: Team Lead
-* Responsibilities: UI
+* Role: ?
+* Responsibilities: ?
 
 ### Johnny Doe
 
