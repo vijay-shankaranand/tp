@@ -56,12 +56,12 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](http://github.com/tjch-o)]
 [[portfolio](team/tjch-o.md)]
 
-### Khaleelur Rahman
+### James Doe
 
-<img src="images/khaleelur-rahman.png" width="200px">
+<img src="images/johndoe.png" width="200px">
 
-[[github](http://github.com/Khaleelur-Rahman)]
-[[portfolio](team/khaleelur-rahman.md)]
+[[github](http://github.com/johndoe)]
+[[portfolio](team/johndoe.md)]
 
 * Role: ?
 * Responsibilities: ?
