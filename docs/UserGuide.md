@@ -149,11 +149,11 @@ Examples:
 
 Deletes the specified tag from the address book.
 
-Format: `delete_tag tn/tag_name`
+Format: `delete_tag t/tag_name`
 
 * Deletes the tag with the specified tag name `tag_name`.
 * The tag name **must be an existing tag** vendor, personal, customer, …​
-* The command must contain `/tn` for the command to be valid.
+* The command must contain `/t` for the command to be valid.
 * The tag name must be specified in the command.
 
 Examples:
@@ -213,6 +213,6 @@ Action     | Format, Examples
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**Delete Tag** | `delete_tag tn/tag_name` <br> e.g. `delete_tag tn/vendor`
+**Delete Tag** | `delete_tag t/tag_name` <br> e.g. `delete_tag t/vendor`
 **List**   | `list`
 **Help**   | `help`
