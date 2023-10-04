@@ -291,6 +291,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user                                       | delete a person              | remove entries that I no longer need                                   |
 | `* * *`  | user                                       | find a person by name        | locate details of persons without having to go through the entire list |
 | `* *`    | user                                       | hide private contact details | minimize chance of someone else seeing them by accident                |
+| `* *`    | job fest event planner                     | add tags                     | add to the pool of use categories already available    |
 | `* *`    | job fest event planner                                     | view all tags | remember contacts of a certain category to contact them for events                |
 | `* *`     | job fest event planner                     | be able to delete tags | can easily identify who I should be cold calling among my contacts without unnecessary tags     |
 | `*`      | user with many persons in the address book | sort persons by name         | locate a person easily                                                 |
@@ -345,7 +346,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-
 **Use case: Delete a person**
 
 **MSS**
@@ -356,26 +356,26 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 4.  JobFestGo deletes the person
 
    Use case ends.
+   
+
+**Use case: Add a tag**
+
+**MSS**
+
+1.  User requests to add tag
+2.  User keys in the tag to add to the collection of tags
+3.  JobFestGo adds the tag
+
+   Use case ends.
 
 **Use case: View all tags**
+
 
 **MSS**
 1. User requests to list tags
 2. JobFestGo shows a list of tags that are currently in use in the contacts list
    
    Use case ends.
-
-**Extensions**
-
-* 2a. The list is empty.
-
-  Use case ends.
-
-* 3a. The given index is invalid.
-
-    * 3a1. JobFestGo shows an error message.
-
-      Use case resumes at step 2.
 
 **Use case: Delete a tag**
 
