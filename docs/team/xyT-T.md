@@ -5,9 +5,7 @@
 
 ### Project: JobFestGo
 
-JobFestGo is a desktop address book application designed to aid job festival event organizers in 
-efficiently reaching out to a multitude of contacts, including vendors and customers. It eliminates the need 
-for organizers to sift through extensive contact lists, especially when they cannot recall specific names.
+JobFestGo is a desktop address book application designed to aid job festival event organizers in efficiently reaching out to a multitude of contacts, including vendors and customers. It eliminates the need for organizers to sift through extensive contact lists, especially when they cannot recall specific names.
 
 Given below are my contributions to the project.
 
