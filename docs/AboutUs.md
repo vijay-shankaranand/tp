@@ -21,6 +21,15 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Project Advisor
 
+### Jaryl Goh Jun Zhong
+
+<img src="images/rionshocker.png" width="200px">
+
+[[github](http://github.com/rionshocker)]
+[[portfolio](team/rionshocker.md)]
+
+* Role: ?
+* Responsibilities: ?
 ### Shankar Anand
 
 <img src="images/shankaranand.png" width="200px">
