@@ -289,24 +289,33 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user                                       | delete a person              | remove entries that I no longer need                                   |
 | `* * *`  | user                                       | find a person by name        | locate details of persons without having to go through the entire list |
 | `* *`    | user                                       | hide private contact details | minimize chance of someone else seeing them by accident                |
+| `* *`    | job fest event planner                                     | view all tags | remember contacts of a certain category to contact them for events                |
 | `*`      | user with many persons in the address book | sort persons by name         | locate a person easily                                                 |
 
 *{More to be added}*
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `JobFestGo` and the **Actor** is the `user`, unless specified otherwise)
 
 **Use case: Delete a person**
 
 **MSS**
 
 1.  User requests to list persons
-2.  AddressBook shows a list of persons
+2.  JobFestGo shows a list of persons
 3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+4.  JobFestGo deletes the person
 
-    Use case ends.
+   Use case ends.
+
+**Use case: View all tags**
+
+**MSS**
+1. User requests to list tags
+2. JobFestGo shows a list of tags that are currently in use in the contacts list
+   
+   Use case ends.
 
 **Extensions**
 
