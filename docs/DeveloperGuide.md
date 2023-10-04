@@ -286,18 +286,21 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a …​                                    | I want to …​                 | So that I can…​                                                        |
 |----------|--------------------------------------------|------------------------------|------------------------------------------------------------------------|
-| `* * *`  | events planenr                                   | see usage instructions       | refer to instructions when I forget how to use the App                 |
-| `* * *`  | events planner                                       | add a new person             |                                                                        |
+| `* * *`  | job fest event planenr                                   | see usage instructions       | refer to instructions when I forget how to use the App                 |
+| `* * *`  | job fest event planner                                       | add a new person             |                                                                        |
 | `* * *`  | user                                       | delete a person              | remove entries that I no longer need                                   |
 | `* * *`  | user                                       | find a person by name        | locate details of persons without having to go through the entire list |
 | `* *`    | user                                       | hide private contact details | minimize chance of someone else seeing them by accident                |
+| `* *`     | job fest event planner                     | be able to delete tags | can easily identify who I should be cold calling among my contacts without unnecessary tags     |
 | `*`      | user with many persons in the address book | sort persons by name         | locate a person easily                                                 |
+
 
 *{More to be added}*
 
 ### Use cases
 
 (For all use cases below, the **System** is the `JobFestGo` and the **Actor** is the `user`, unless specified otherwise)
+
 
 **Use case: Add a person**
 
@@ -341,16 +344,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
----
 
 **Use case: Delete a person**
 
 **MSS**
 
 1.  User requests to list persons
-2.  AddressBook shows a list of persons
+2.  JobFestGo shows a list of persons
 3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+4.  JobFestGo deletes the person
 
     Use case ends.
 
@@ -362,7 +364,42 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. JobFestGo shows an error message.
+
+      Use case resumes at step 2.
+
+**Use case: Delete a tag**
+
+**MSS**
+
+1. User requests to list the tags
+2. JobFestGo shows a list of tags
+3. User requests to delete a specified tag in the list
+4. JobFestGo deletes the tag
+
+      Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+   Use case ends.
+
+* 3a. The given tag name is invalid.
+
+    * 3a1. JobFestGo shows an error message.
+
+      Use case resumes at step 2.
+
+* 3b. Missing `t/` in the command.
+   
+    * 3b1. JobFestGo shows an error message.
+
+      Use case resumes at step 2.
+
+* 3c. Missing tag name.
+    
+    * 3c1. JobFestGo shows an error message.
 
       Use case resumes at step 2.
 
