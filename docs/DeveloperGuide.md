@@ -289,7 +289,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user                                       | delete a person              | remove entries that I no longer need                                   |
 | `* * *`  | user                                       | find a person by name        | locate details of persons without having to go through the entire list |
 | `* *`    | user                                       | hide private contact details | minimize chance of someone else seeing them by accident                |
-| `* *`     | job fest event planner                     | be able to tag and differentiate the different types of contacts | can easily identify who I should be cold calling among my contacts      |
+| `* *`     | job fest event planner                     | be able to delete tags | can easily identify who I should be cold calling among my contacts without unnecessary tags     |
 | `*`      | user with many persons in the address book | sort persons by name         | locate a person easily                                                 |
 
 
