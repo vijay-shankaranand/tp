@@ -4,9 +4,9 @@
   pageNav: 3
 ---
 
-# AB-3 User Guide
+# JobFestGo User Guide
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+JobFestGo is a **desktop app for managing contacts, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). It is an address book meant to assist you as job festival event planners in cold-calling various personnel (e.g. vendors, customers). This removes the hassle of having to shuffle through your contact list based on names that you might not remember.
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -89,6 +89,20 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+
+## Adding a tag : ``add_tag`
+
+Adds a tag to the address book.
+
+Format: `add_tag tn/TAG_NAME`
+
+* Adds the tag with the specified tag name `TAG_NAME`.
+* The tag name **must no already exist** in the address book.
+* The command must contain `/tn` for the command to be valid.
+* The tag name must be specified in the command.
+
+Examples:
+* `add_tag tn/vendor`
 
 ### Listing all persons : `list`
 
@@ -199,5 +213,6 @@ Action     | Format, Examples
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Add Tag** | `add_tag tn/TAG_NAME` <br> e.g. `add_tag tn/vendor`
 **List**   | `list`
 **Help**   | `help`
