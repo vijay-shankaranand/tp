@@ -291,6 +291,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user                                       | delete a person              | remove entries that I no longer need                                   |
 | `* * *`  | user                                       | find a person by name        | locate details of persons without having to go through the entire list |
 | `* *`    | user                                       | hide private contact details | minimize chance of someone else seeing them by accident                |
+| `* *`    | job fest event planner                                     | view all tags | remember contacts of a certain category to contact them for events                |
 | `* *`     | job fest event planner                     | be able to delete tags | can easily identify who I should be cold calling among my contacts without unnecessary tags     |
 | `*`      | user with many persons in the address book | sort persons by name         | locate a person easily                                                 |
 
@@ -354,7 +355,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 3.  User requests to delete a specific person in the list
 4.  JobFestGo deletes the person
 
-    Use case ends.
+   Use case ends.
+
+**Use case: View all tags**
+
+**MSS**
+1. User requests to list tags
+2. JobFestGo shows a list of tags that are currently in use in the contacts list
+   
+   Use case ends.
 
 **Extensions**
 
