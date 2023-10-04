@@ -345,7 +345,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-* 3b. Missing `/tn` in the command.
+* 3b. Missing `t/` in the command.
    
     * 3b1. JobFestGo shows an error message.
 
