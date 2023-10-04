@@ -4,9 +4,9 @@
   pageNav: 3
 ---
 
-# AB-3 User Guide
+# JobFestGo User Guide
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+JobFestGo is a **desktop app for managing contacts, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). It is an address book meant to assist you as job festival event planners in cold-calling various personnel (e.g. vendors, customers). This removes the hassle of having to shuffle through your contact list based on names that you might not remember.
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -17,11 +17,11 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `addressbook.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Download the latest `jobfestgo.jar` from [here](https://github.com/AY2324S1-CS2103T-T09-1/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+1. Copy the file to the folder you want to use as the _home folder_ for your JobFestGo.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
+1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar jobfestgo.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
@@ -30,7 +30,7 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
    * `list` : Lists all contacts.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to JobFestGo.
 
    * `delete 3` : Deletes the 3rd contact shown in the current list.
 
@@ -77,14 +77,18 @@ Format: `help`
 
 ### Adding a person: `add`
 
-Adds a person to the address book.
+Adds a person to JobFestGo.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
-<box type="tip" seamless>
 
-**Tip:** A person can have any number of tags (including 0)
-</box>
+* A person can have any number of tags (including 0)
+* A person must have mandatory fields name, phone number, email and address
+* Email should be in the appropriate (@xxx.com) format
+* Phone number should be in appropriate (8-digit numeric) format
+* Only tags from tags list can be used for tagging a person
+* A person cannot be added if their phone number already exists 
+
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
@@ -92,13 +96,13 @@ Examples:
 
 ### Listing all persons : `list`
 
-Shows a list of all persons in the address book.
+Shows a list of all persons in JobFestGo.
 
 Format: `list`
 
 ### Editing a person : `edit`
 
-Edits an existing person in the address book.
+Edits an existing person in JobFestGo.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
@@ -133,7 +137,7 @@ Examples:
 
 ### Deleting a person : `delete`
 
-Deletes the specified person from the address book.
+Deletes the specified person from JobFestGo.
 
 Format: `delete INDEX`
 
@@ -145,9 +149,23 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
+### Deleting a tag: `delete_tag`
+
+Deletes the specified tag from JobFestGo.
+
+Format: `delete_tag t/tag_name`
+
+* Deletes the tag with the specified tag name `tag_name`.
+* The tag name **must be an existing tag** vendor, personal, customer, …​
+* The command must contain `/t` for the command to be valid.
+* The tag name must be specified in the command.
+
+Examples:
+* `delete_tag` followed by `t/vendor` deletes the tag: vendor in JobFestGo.
+
 ### Clearing all entries : `clear`
 
-Clears all entries from the address book.
+Clears all entries from JobFestGo.
 
 Format: `clear`
 
@@ -159,16 +177,16 @@ Format: `exit`
 
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+JobFestGo data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+JobFestGo data are saved automatically as a JSON file `[JAR file location]/data/jobfestgo.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <box type="warning" seamless>
 
 **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.
+If your changes to the data file makes its format invalid, JobFestGo will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.
 </box>
 
 ### Archiving data files `[coming in v2.0]`
@@ -180,7 +198,7 @@ _Details coming soon ..._
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous JobFestGo home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -199,5 +217,6 @@ Action     | Format, Examples
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Delete Tag** | `delete_tag t/tag_name` <br> e.g. `delete_tag t/vendor`
 **List**   | `list`
 **Help**   | `help`
