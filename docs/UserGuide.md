@@ -151,7 +151,7 @@ Examples:
 
 ### Deleting a tag: `delete_tag`
 
-Deletes the specified tag from the address book.
+Deletes the specified tag from JobFestGo.
 
 Format: `delete_tag t/tag_name`
 
@@ -161,7 +161,7 @@ Format: `delete_tag t/tag_name`
 * The tag name must be specified in the command.
 
 Examples:
-* `delete_tag` followed by `tn/vendor` deletes the tag: vendor in the address book.
+* `delete_tag` followed by `t/vendor` deletes the tag: vendor in JobFestGo.
 
 ### Clearing all entries : `clear`
 
