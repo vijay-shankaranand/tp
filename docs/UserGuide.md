@@ -92,12 +92,12 @@ Examples:
 
 ## Adding a tag : ``add_tag`
 
-Adds a tag to the address book.
+Adds a tag to JobFestGo.
 
 Format: `add_tag tn/TAG_NAME`
 
 * Adds the tag with the specified tag name `TAG_NAME`.
-* The tag name **must no already exist** in the address book.
+* The tag name **must no already exist** in the JobFestGo.
 * The command must contain `/tn` for the command to be valid.
 * The tag name must be specified in the command.
 
