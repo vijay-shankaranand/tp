@@ -4,9 +4,9 @@
   pageNav: 3
 ---
 
-# AB-3 User Guide
+# JobFestGo User Guide
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+JobFestGo is a **desktop app for managing contacts, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). It is an address book meant to assist you as job festival event planners in cold-calling various personnel (e.g. vendors, customers). This removes the hassle of having to shuffle through your contact list based on names that you might not remember.
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -149,6 +149,20 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
+### Deleting a tag: `delete_tag`
+
+Deletes the specified tag from JobFestGo.
+
+Format: `delete_tag t/tag_name`
+
+* Deletes the tag with the specified tag name `tag_name`.
+* The tag name **must be an existing tag** vendor, personal, customer, …​
+* The command must contain `/t` for the command to be valid.
+* The tag name must be specified in the command.
+
+Examples:
+* `delete_tag` followed by `t/vendor` deletes the tag: vendor in JobFestGo.
+
 ### Clearing all entries : `clear`
 
 Clears all entries from JobFestGo.
@@ -203,5 +217,6 @@ Action     | Format, Examples
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Delete Tag** | `delete_tag t/tag_name` <br> e.g. `delete_tag t/vendor`
 **List**   | `list`
 **Help**   | `help`
