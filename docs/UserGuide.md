@@ -81,10 +81,14 @@ Adds a person to the address book.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
-<box type="tip" seamless>
 
-**Tip:** A person can have any number of tags (including 0)
-</box>
+* A person can have any number of tags (including 0)
+* A person must have mandatory fields name, phone number, email and address
+* Email should be in the appropriate (@xxx.com) format
+* Phone number should be in appropriate (8-digit numeric) format
+* Only tags from tags list can be used for tagging a person
+* A person cannot be added if their phone number already exists 
+
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
