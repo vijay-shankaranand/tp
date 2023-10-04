@@ -30,6 +30,15 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: ?
 * Responsibilities: ?
+### Shankar Anand
+
+<img src="images/shankaranand.png" width="200px">
+
+[[github](http://github.com/vijay-shankaranand)]
+[[portfolio](team/vijay-shankaranand.md)]
+
+* Role: UI Expert
+* Responsibilities: Scheduling and tracking, UI
 
 ### Johnny Doe
 
@@ -50,12 +59,12 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
 
-### James Doe
+### Khaleelur Rahman
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/khaleelur-rahman.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/Khaleelur-Rahman)]
+[[portfolio](team/khaleelur-rahman.md)]
 
 * Role: Developer
 * Responsibilities: UI
