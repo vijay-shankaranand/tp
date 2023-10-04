@@ -4,7 +4,7 @@
   pageNav: 3
 ---
 
-# AB-3 Developer Guide
+# JobFestGo Developer Guide
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -269,7 +269,8 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
+* is a job festival event planner
+* has a need to manage a significant number of contacts of different types (e.g. vendors, customers)
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
@@ -288,6 +289,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user                                       | add a new person             |                                                                        |
 | `* * *`  | user                                       | delete a person              | remove entries that I no longer need                                   |
 | `* * *`  | user                                       | find a person by name        | locate details of persons without having to go through the entire list |
+| `* * *`  | user                                       | view the entire contact list |                                                                        |
 | `* *`    | user                                       | hide private contact details | minimize chance of someone else seeing them by accident                |
 | `*`      | user with many persons in the address book | sort persons by name         | locate a person easily                                                 |
 
@@ -302,9 +304,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  User requests to list persons
-2.  AddressBook shows a list of persons
+2.  JobFestGo shows a list of persons
 3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+4.  JobFestGo deletes the person
 
     Use case ends.
 
@@ -316,9 +318,24 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. JobFestGo shows an error message.
 
       Use case resumes at step 2.
+
+* 3b. User does not input an index.
+
+    * 3b1. JobFestGo shows an error message.
+
+      Use case resumes at step 2.
+
+**Use case: List all persons**
+
+**MSS**
+
+1.  User requests to list all persons
+2.  JobFestGo shows a list of all persons
+
+    Use case ends.
 
 *{More to be added}*
 
