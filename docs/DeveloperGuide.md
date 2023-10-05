@@ -315,7 +315,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 1a. Any of the mandatory fields not specified
-  
+
   * 3a1. JobFestGo informs user that mandatory fields not specified
 
     Use case ends.
@@ -325,7 +325,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1b1. JobFestGo informs user that phone number already exists.
 
       Use case ends.
-      
+
 * 1c. Email is in incorrect format.
 
     * 1c1. JobFestGo informs user that email is in wrong format.
@@ -377,7 +377,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2.  JobFestGo shows a list of all persons
 
     Use case ends.
-   
+
 
 **Use case: Add a tag**
 
@@ -394,7 +394,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 3a. The given tag name already exists.
 
     * 3a1. JobFestGo shows an error message.
-  
+
       Use case resumes at step 2.
 
 * 3b. Missing `t/` in the command.
@@ -406,7 +406,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 3c. Missing tag name.
 
     * 3c1. JobFestGo shows an error message.
-    
+
       Use case resumes at step 2.
 
 
@@ -415,7 +415,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 1. User requests to list tags
 2. JobFestGo shows a list of tags that are currently in use in the contacts list
-   
+
    Use case ends.
 
 **Use case: Delete a tag**
@@ -442,13 +442,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case resumes at step 2.
 
 * 3b. Missing `t/` in the command.
-   
+
     * 3b1. JobFestGo shows an error message.
 
       Use case resumes at step 2.
 
 * 3c. Missing tag name.
-    
+
     * 3c1. JobFestGo shows an error message.
 
       Use case resumes at step 2.
