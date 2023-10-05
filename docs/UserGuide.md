@@ -87,7 +87,7 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 * Email should be in the appropriate (@xxx.com) format
 * Phone number should be in appropriate (8-digit numeric) format
 * Only tags from tags list can be used for tagging a person
-* A person cannot be added if their phone number already exists 
+* A person cannot be added if their phone number already exists
 
 
 Examples:
