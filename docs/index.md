@@ -6,7 +6,7 @@
 # JobFestGo
 
 [![CI Status](https://github.com/AY2324S1-CS2103T-T09-1/tp/workflows/Java%20CI/badge.svg)](https://github.com/AY2324S1-CS2103T-T09-1/tp/actions)
-[![codecov](https://codecov.io/gh/AY2324S1-CS2103T-T09-1/tp/branch/master/graph/badge.svg)](https://codecov.io/gh/AY2324S1-CS2103T-T09-1/tp)
+[![codecov](https://codecov.io/gh/AY2324S1-CS2103T-T09-1/tp/branch/master/graph/badge.svg)](https://codecov.io/gh/AY2324S1-CS2103T-T09-1/tp/tree/master)
 
 ![Ui](images/Ui.png)
 
