@@ -12,5 +12,5 @@ public interface ReadOnlyTagList {
      * Returns an unmodifiable view of tags collection.
      * This list will not contain any duplicate tags.
      */
-    ObservableList<Tag> getTagCollection();
+    ObservableList<Tag> getTagList();
 }

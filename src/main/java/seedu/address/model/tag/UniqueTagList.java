@@ -8,6 +8,9 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.exceptions.DuplicatePersonException;
+import seedu.address.model.person.exceptions.PersonNotFoundException;
 import seedu.address.model.tag.exceptions.DuplicateTagException;
 import seedu.address.model.tag.exceptions.TagNotFoundException;
 
@@ -34,6 +37,58 @@ public class UniqueTagList implements Iterable<Tag> {
             throw new DuplicateTagException();
         }
         internalList.add(toAdd);
+    }
+
+    /**
+     * Replaces the tag {@code target} in the list with {@code editedTag}.
+     * {@code target} must exist in the list.
+     * The tag of {@code editedTag} must not be the same as another existing tag in the list.
+     */
+    public void setTag(Tag target, Tag editedTag) {
+        requireAllNonNull(target, editedTag);
+
+        int index = internalList.indexOf(target);
+        if (index == -1) {
+            throw new TagNotFoundException();
+        }
+
+        if (!target.isSameTag(editedTag) && contains(editedTag)) {
+            throw new DuplicateTagException();
+        }
+
+        internalList.set(index, editedTag);
+    }
+
+    public void setTags(UniqueTagList replacement) {
+        requireNonNull(replacement);
+        internalList.setAll(replacement.internalList);
+    }
+
+    /**
+     * Replaces the contents of this list with {@code tags}.
+     * {@code tags} must not contain duplicate tags.
+     */
+    public void setTags(List<Tag> tags) {
+        requireAllNonNull(tags);
+        if (!tagsAreUnique(tags)) {
+            throw new DuplicatePersonException();
+        }
+
+        internalList.setAll(tags);
+    }
+
+    /**
+     * Returns true if {@code tags} contains only unique tags.
+     */
+    private boolean tagsAreUnique(List<Tag> tags) {
+        for (int i = 0; i < tags.size() - 1; i++) {
+            for (int j = i + 1; j < tags.size(); j++) {
+                if (tags.get(i).isSameTag(tags.get(j))) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
     /**
