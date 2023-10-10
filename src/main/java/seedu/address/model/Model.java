@@ -14,6 +14,7 @@ import seedu.address.model.tag.Tag;
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+    Predicate<Tag> PREDICATE_SHOW_ALL_TAGS = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -85,4 +86,44 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    Path getTagListFilePath();
+
+    /**
+     * Sets the user prefs' Tag List file path.
+     */
+    void setTagListFilePath(Path tagListFilePath);
+
+    /**
+     * Returns true if an existing tag with the same identity as {@code tag} exists in the tag list.
+     */
+    boolean hasTag(Tag tag);
+
+    /**
+     * Deletes the given tag.
+     * The tag must exist in the tag list.
+     */
+    void deleteTag(Tag tag);
+
+    /**
+     * Adds the given tag.
+     * {@code tag} must not already exist in the tag list.
+     */
+    void addTag(Tag tag);
+
+    /**
+     * Replaces the given tag {@code target} with {@code editedTag}.
+     * {@code target} must exist in the tag list.
+     * The tag identity of {@code editedTag} must not be the same as another existing tag in the tag list.
+     */
+    void setTag(Tag target, Tag editedTag);
+
+    /** Returns an unmodifiable view of the filtered tag list */
+    ObservableList<Tag> getFilteredTagList();
+
+    /**
+     * Updates the filter of the filtered tag list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredTagList(Predicate<Tag> predicate);
 }

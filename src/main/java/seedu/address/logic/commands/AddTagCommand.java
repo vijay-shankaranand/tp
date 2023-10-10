@@ -20,7 +20,7 @@ public class AddTagCommand extends Command {
             + PREFIX_TAG + "vendor ";
 
     public static final String MESSAGE_SUCCESS = "New tag added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This tag already exists in the tag collection";
+    public static final String MESSAGE_DUPLICATE_TAG = "This tag already exists in the tag collection";
     private final Tag toAdd;
 
     public AddTagCommand(Tag tag) {
@@ -32,12 +32,12 @@ public class AddTagCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (model.hasPerson(toAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        if (model.hasTag(toAdd)) {
+            throw new CommandException(MESSAGE_DUPLICATE_TAG);
         }
 
-        model.addPerson(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
+        model.addTag(toAdd);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
 
     @Override
@@ -51,7 +51,7 @@ public class AddTagCommand extends Command {
             return false;
         }
 
-        AddCommand otherAddCommand = (AddCommand) other;
+        AddTagCommand otherAddCommand = (AddTagCommand) other;
         return toAdd.equals(otherAddCommand.toAdd);
     }
 
