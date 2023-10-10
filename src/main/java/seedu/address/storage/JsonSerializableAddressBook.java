@@ -12,6 +12,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Person;
+import seedu.address.model.tag.Tag;
 
 /**
  * An Immutable AddressBook that is serializable to JSON format.
@@ -21,15 +22,21 @@ class JsonSerializableAddressBook {
 
     public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
 
+    public static final String MESSAGE_DUPLICATE_TAG = "Tags list contains duplicate tags(s).";
+
     private final List<JsonAdaptedPerson> persons = new ArrayList<>();
 
+    private final List<JsonAdaptedTag> tagList = new ArrayList<>();
+
     /**
-     * Constructs a {@code JsonSerializableAddressBook} with the given persons.
+     * Constructs a {@code JsonSerializableAddressBook} with the given persons and tags.
      */
     @JsonCreator
-    public JsonSerializableAddressBook(@JsonProperty("persons") List<JsonAdaptedPerson> persons) {
+    public JsonSerializableAddressBook(@JsonProperty("persons") List<JsonAdaptedPerson> persons, @JsonProperty("tagList") List<JsonAdaptedTag> tagList ) {
         this.persons.addAll(persons);
+        this.tagList.addAll(tagList);
     }
+
 
     /**
      * Converts a given {@code ReadOnlyAddressBook} into this class for Jackson use.
@@ -38,6 +45,7 @@ class JsonSerializableAddressBook {
      */
     public JsonSerializableAddressBook(ReadOnlyAddressBook source) {
         persons.addAll(source.getPersonList().stream().map(JsonAdaptedPerson::new).collect(Collectors.toList()));
+        tagList.addAll(source.getTagList().stream().map(JsonAdaptedTag::new).collect(Collectors.toList()));
     }
 
     /**
@@ -53,6 +61,13 @@ class JsonSerializableAddressBook {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
             }
             addressBook.addPerson(person);
+        }
+        for (JsonAdaptedTag jsonAdaptedTag : tagList) {
+            Tag tag = jsonAdaptedTag.toModelType();
+            if (addressBook.hasTag(tag)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_TAG);
+            }
+            addressBook.addTag(tag);
         }
         return addressBook;
     }
