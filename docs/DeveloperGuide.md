@@ -268,10 +268,8 @@ _{Explain here how the data archiving feature will be implemented}_
 ### Product scope
 
 **Target user profile**:
-
-Job Events planner who:
-
-* has a need to manage a significant number of contacts
+* is a job festival event planner
+* has a need to manage a significant number of contacts of different types (e.g. vendors, customers)
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
@@ -279,20 +277,20 @@ Job Events planner who:
 
 **Value proposition**: Each event planner has multiple events, each of which can have a large number of contacts associated and searching for contact would be a hassle. Our product provides a centralised system that would help job event planners organise their contact information for quick and easy access.
 
-
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
 | Priority | As a …​                                    | I want to …​                 | So that I can…​                                                        |
 |----------|--------------------------------------------|------------------------------|------------------------------------------------------------------------|
-| `* * *`  | job fest event planenr                                   | see usage instructions       | refer to instructions when I forget how to use the App                 |
-| `* * *`  | job fest event planner                                       | add a new person             |                                                                        |
+| `* * *`  | job fest event planner                     | see usage instructions       | refer to instructions when I forget how to use the App                 |
+| `* * *`  | job fest event planner                     | add a new person             |                                                                        |
 | `* * *`  | user                                       | delete a person              | remove entries that I no longer need                                   |
 | `* * *`  | user                                       | find a person by name        | locate details of persons without having to go through the entire list |
+| `* * *`  | job fest event planner                     | view the entire contact list |                                                                        |
 | `* *`    | user                                       | hide private contact details | minimize chance of someone else seeing them by accident                |
 | `* *`    | job fest event planner                     | add tags                     | add to the pool of use categories already available    |
-| `* *`    | job fest event planner                                     | view all tags | remember contacts of a certain category to contact them for events                |
+| `* *`    | job fest event planner                     | view all tags | remember contacts of a certain category to contact them for events                |
 | `* *`     | job fest event planner                     | be able to delete tags | can easily identify who I should be cold calling among my contacts without unnecessary tags     |
 | `*`      | user with many persons in the address book | sort persons by name         | locate a person easily                                                 |
 
@@ -317,7 +315,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 1a. Any of the mandatory fields not specified
-  
+
   * 3a1. JobFestGo informs user that mandatory fields not specified
 
     Use case ends.
@@ -327,7 +325,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1b1. JobFestGo informs user that phone number already exists.
 
       Use case ends.
-      
+
 * 1c. Email is in incorrect format.
 
     * 1c1. JobFestGo informs user that email is in wrong format.
@@ -356,7 +354,30 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 4.  JobFestGo deletes the person
 
    Use case ends.
-   
+
+**Extensions**
+
+* 3a. The given index is invalid.
+
+    * 3a1. JobFestGo shows an error message.
+
+      Use case resumes at step 2.
+
+* 3b. Missing index.
+
+    * 3b1. JobFestGo shows an error message.
+
+      Use case resumes at step 2.
+
+**Use case: List all persons**
+
+**MSS**
+
+1.  User requests to list all persons
+2.  JobFestGo shows a list of all persons
+
+    Use case ends.
+
 
 **Use case: Add a tag**
 
@@ -370,6 +391,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
+
 * 3a. The given tag name is already in the tag list.
 
     * 3a1. JobFestGo shows an error message.
@@ -377,25 +399,23 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case resumes at step 2.
 
 * 3b. Missing `t/` in the command.
-   
+* 
     * 3b1. JobFestGo shows an error message.
 
       Use case resumes at step 2.
 
 * 3c. Missing tag name.
-    
+
     * 3c1. JobFestGo shows an error message.
 
       Use case resumes at step 2.
 
-
 **Use case: View all tags**
-
 
 **MSS**
 1. User requests to list tags
 2. JobFestGo shows a list of tags that are currently in use in the contacts list
-   
+
    Use case ends.
 
 **Use case: Delete a tag**
@@ -422,13 +442,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case resumes at step 2.
 
 * 3b. Missing `t/` in the command.
-   
+
     * 3b1. JobFestGo shows an error message.
 
       Use case resumes at step 2.
 
 * 3c. Missing tag name.
-    
+
     * 3c1. JobFestGo shows an error message.
 
       Use case resumes at step 2.

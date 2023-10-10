@@ -87,12 +87,26 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 * Email should be in the appropriate (@xxx.com) format
 * Phone number should be in appropriate (8-digit numeric) format
 * Only tags from tags list can be used for tagging a person
-* A person cannot be added if their phone number already exists 
+* A person cannot be added if their phone number already exists
 
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+
+## Adding a tag : ``add_tag`
+
+Adds a tag to JobFestGo.
+
+Format: `add_tag tn/TAG_NAME`
+
+* Adds the tag with the specified tag name `TAG_NAME`.
+* The tag name **must no already exist** in the JobFestGo.
+* The command must contain `/tn` for the command to be valid.
+* The tag name must be specified in the command.
+
+Examples:
+* `add_tag tn/vendor`
 
 ### Listing all persons : `list`
 
@@ -146,7 +160,7 @@ Format: `delete INDEX`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
+* `list` followed by `delete 2` deletes the 2nd person in JobFestGo.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
 ### View all tags: `view_tags`
@@ -223,6 +237,8 @@ Action     | Format, Examples
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Add Tag** | `add_tag tn/TAG_NAME` <br> e.g. `add_tag tn/vendor`
+**View Tags** | `view_tags`
 **Delete Tag** | `delete_tag t/tag_name` <br> e.g. `delete_tag t/vendor`
 **List**   | `list`
 **Help**   | `help`
