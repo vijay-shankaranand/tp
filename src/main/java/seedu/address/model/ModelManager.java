@@ -79,19 +79,6 @@ public class ModelManager implements Model {
         userPrefs.setAddressBookFilePath(addressBookFilePath);
     }
 
-    @Override
-    public Path getTagListFilePath() {
-        return userPrefs.getTagListFilePath();
-    }
-
-    @Override
-    public void setTagListFilePath(Path tagListFilePath) {
-        requireNonNull(tagListFilePath);
-        userPrefs.setTagListFilePath(tagListFilePath);
-    }
-
-
-
     //=========== AddressBook ================================================================================
 
     //=========== Persons ====================================================================================

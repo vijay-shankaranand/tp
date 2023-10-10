@@ -87,13 +87,6 @@ public interface Model {
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
 
-    Path getTagListFilePath();
-
-    /**
-     * Sets the user prefs' Tag List file path.
-     */
-    void setTagListFilePath(Path tagListFilePath);
-
     /**
      * Returns true if an existing tag with the same identity as {@code tag} exists in the tag list.
      */
