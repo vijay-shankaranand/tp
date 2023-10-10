@@ -1,9 +1,10 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.stream.Stream;
+
 import seedu.address.logic.commands.AddTagCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.tag.Tag;
@@ -11,7 +12,6 @@ import seedu.address.model.tag.Tag;
 /**
  * Parses input arguments and creates a new AddTagCommand object
  */
-
 public class AddTagCommandParser implements Parser<AddTagCommand> {
 
     /**

@@ -15,7 +15,7 @@ import seedu.address.model.tag.UniqueTagList;
  * Wraps all data at the address-book level
  * Duplicates are not allowed (by .isSamePerson comparison)
  */
-public class AddressBook implements ReadOnlyAddressBook{
+public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
 
@@ -114,11 +114,6 @@ public class AddressBook implements ReadOnlyAddressBook{
     public ObservableList<Person> getPersonList() {
         return persons.asUnmodifiableObservableList();
     }
-
-    /**
-     * Replaces the contents of the tags list with {@code tags}.
-     * {@code tags} must not contain duplicate tags.
-     */
 
     //======Tag Operations=======================================================================
 

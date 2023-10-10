@@ -32,7 +32,8 @@ class JsonSerializableAddressBook {
      * Constructs a {@code JsonSerializableAddressBook} with the given persons and tags.
      */
     @JsonCreator
-    public JsonSerializableAddressBook(@JsonProperty("persons") List<JsonAdaptedPerson> persons, @JsonProperty("tagList") List<JsonAdaptedTag> tagList ) {
+    public JsonSerializableAddressBook(@JsonProperty("persons") List<JsonAdaptedPerson> persons,
+                                       @JsonProperty("tagList") List<JsonAdaptedTag> tagList ) {
         this.persons.addAll(persons);
         this.tagList.addAll(tagList);
     }
