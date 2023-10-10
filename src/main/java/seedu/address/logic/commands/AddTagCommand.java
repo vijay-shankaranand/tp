@@ -7,14 +7,13 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 
-public class AddTagCommand {
+public class AddTagCommand extends Command {
 
     public static final String COMMAND_WORD = "add_tag";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a tag to the tag collection. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a tag to the tag list. "
             + "Parameters: "
             + PREFIX_TAG + "TAG\n"
             + "Example: " + COMMAND_WORD + " "
