@@ -49,6 +49,10 @@ public class Tag {
         return test.matches(VALIDATION_REGEX);
     }
 
+    /**
+     * Returns true if both tags have the same identity and data fields.
+     * This defines a stronger notion of equality between two tags.
+     */
     @Override
     public boolean equals(Object other) {
         if (other == this) {

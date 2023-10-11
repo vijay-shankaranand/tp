@@ -31,21 +31,21 @@ public class UniqueTagList implements Iterable<Tag> {
     /**
      * Returns true if the list contains an equivalent tag as the given argument.
      */
-    public boolean contains(Tag toCheck) {
-        requireNonNull(toCheck);
-        return internalList.stream().anyMatch(toCheck::isSameTag);
+    public boolean contains(Tag tagToCheck) {
+        requireNonNull(tagToCheck);
+        return internalList.stream().anyMatch(tagToCheck::isSameTag);
     }
 
     /**
      * Adds a tag  to the list.
      * The tag must not already exist in the list.
      */
-    public void add(Tag toAdd) {
-        requireNonNull(toAdd);
-        if (contains(toAdd)) {
+    public void add(Tag tagToBAdd) {
+        requireNonNull(tagToBAdd);
+        if (contains(tagToBAdd)) {
             throw new DuplicateTagException();
         }
-        internalList.add(toAdd);
+        internalList.add(tagToBAdd);
     }
 
     /**
@@ -53,24 +53,24 @@ public class UniqueTagList implements Iterable<Tag> {
      * {@code target} must exist in the list.
      * The tag of {@code editedTag} must not be the same as another existing tag in the list.
      */
-    public void setTag(Tag target, Tag editedTag) {
-        requireAllNonNull(target, editedTag);
+    public void setTag(Tag targetTag, Tag editedTag) {
+        requireAllNonNull(targetTag, editedTag);
 
-        int index = internalList.indexOf(target);
+        int index = internalList.indexOf(targetTag);
         if (index == -1) {
             throw new TagNotFoundException();
         }
 
-        if (!target.isSameTag(editedTag) && contains(editedTag)) {
+        if (!targetTag.isSameTag(editedTag) && contains(editedTag)) {
             throw new DuplicateTagException();
         }
 
         internalList.set(index, editedTag);
     }
 
-    public void setTags(UniqueTagList replacement) {
-        requireNonNull(replacement);
-        internalList.setAll(replacement.internalList);
+    public void setTags(UniqueTagList replacementTag) {
+        requireNonNull(replacementTag);
+        internalList.setAll(replacementTag.internalList);
     }
 
     /**
@@ -79,7 +79,7 @@ public class UniqueTagList implements Iterable<Tag> {
      */
     public void setTags(List<Tag> tags) {
         requireAllNonNull(tags);
-        if (!tagsAreUnique(tags)) {
+        if (!areTagsUnique(tags)) {
             throw new DuplicatePersonException();
         }
 
@@ -89,7 +89,7 @@ public class UniqueTagList implements Iterable<Tag> {
     /**
      * Returns true if {@code tags} contains only unique tags.
      */
-    private boolean tagsAreUnique(List<Tag> tags) {
+    private boolean areTagsUnique(List<Tag> tags) {
         for (int i = 0; i < tags.size() - 1; i++) {
             for (int j = i + 1; j < tags.size(); j++) {
                 if (tags.get(i).isSameTag(tags.get(j))) {
