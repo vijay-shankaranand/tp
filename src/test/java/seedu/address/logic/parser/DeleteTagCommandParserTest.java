@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
@@ -22,7 +23,7 @@ public class DeleteTagCommandParserTest {
     public void parse_validArgs_returnsDeleteTagCommand() throws ParseException {
         Tag correctTag = new Tag("vendor");
         DeleteTagCommand correctCommand = new DeleteTagCommand(correctTag);
-        assertParseSuccess(parser, "delete_tag t/vendor ", correctCommand);
+        assertParseSuccess(parser, PREFIX_TAG + "vendor", correctCommand);
     }
 
     @Test
