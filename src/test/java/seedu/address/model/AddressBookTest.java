@@ -85,6 +85,14 @@ public class AddressBookTest {
     }
 
     @Test
+    public void deleteTag_successful_returnsTrue() {
+        Tag tag = new Tag("vendor");
+        addressBook.addTag(tag);
+        addressBook.deleteTag(tag);
+        assertTrue(!addressBook.hasTag(tag));
+    }
+
+    @Test
     public void toStringMethod() {
         String expected = AddressBook.class.getCanonicalName() + "{persons=" + addressBook.getPersonList()
                 +

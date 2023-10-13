@@ -2,7 +2,9 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -76,7 +78,16 @@ public class DeleteTagCommandTest {
         testModel.addTag(test);
         DeleteTagCommand same1 = new DeleteTagCommand(test);
         DeleteTagCommand same2 = new DeleteTagCommand(test);
+        DeleteCommand diffCommand = new DeleteCommand(INDEX_FIRST_PERSON);
         assertEquals(same1, same2);
+        assertEquals(same1, same1);
+        assertFalse(same1.equals(diffCommand));
+    }
+
+    @Test
+    public void toString_testEqual() {
+        DeleteTagCommand test = new DeleteTagCommand(new Tag("vendor"));
+        assertEquals(test.toString(), test.toString());
     }
 
     /**
