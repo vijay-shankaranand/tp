@@ -67,7 +67,7 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_deleteTag() throws Exception {
         Tag tag = new Tag("vendor");
-        DeleteTagCommand command = (DeleteTagCommand) parser.parseCommand(DeleteTagCommand.COMMAND_WORD 
+        DeleteTagCommand command = (DeleteTagCommand) parser.parseCommand(DeleteTagCommand.COMMAND_WORD
             + " " + "vendor");
         assertEquals(new DeleteTagCommand(tag), command);
     }
