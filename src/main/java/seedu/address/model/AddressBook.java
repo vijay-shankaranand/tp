@@ -137,9 +137,9 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Deletes a {@code tag} from the address book.
      * Deletes the tag from contacts using it as well.
      */
-    public void deleteTag(Tag tag) {
-        tags.delete(tag);
-        persons.updateTag(tag);
+    public void deleteTag(Tag tagToBeDeleted) {
+        tags.delete(tagToBeDeleted);
+        persons.updateTag(tagToBeDeleted);
     }
 
     /**

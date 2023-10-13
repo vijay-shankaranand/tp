@@ -8,7 +8,6 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.tag.exceptions.DuplicateTagException;
 import seedu.address.model.tag.exceptions.TagNotFoundException;
 
@@ -92,7 +91,7 @@ public class UniqueTagList implements Iterable<Tag> {
     public void setTags(List<Tag> tags) {
         requireAllNonNull(tags);
         if (!areTagsUnique(tags)) {
-            throw new DuplicatePersonException();
+            throw new DuplicateTagException();
         }
 
         internalList.setAll(tags);
