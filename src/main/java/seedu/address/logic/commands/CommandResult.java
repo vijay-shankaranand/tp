@@ -50,7 +50,6 @@ public class CommandResult {
 
     /**
      * Returns true if the tags panel should be displayed to the user, else false.
-     * 
      * @return true if the tags panel should be displayed to the user, else false
      */
     public boolean shouldDisplayTagsPanel() {
