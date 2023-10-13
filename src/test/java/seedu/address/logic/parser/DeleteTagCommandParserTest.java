@@ -20,7 +20,7 @@ public class DeleteTagCommandParserTest {
     public void parse_validArgs_returnsDeleteTagCommand() {
         Tag correctTag = new Tag("vendor");
         DeleteTagCommand correctCommand = new DeleteTagCommand(correctTag);
-        assertParseSuccess(parser, "delete_tag t/vendor", correctCommand);
+        assertParseSuccess(parser, "t/vendor", correctCommand);
     }
 
     @Test

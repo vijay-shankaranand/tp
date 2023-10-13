@@ -64,7 +64,7 @@ public class DeleteTagCommandTest {
         testModel.addTag(test2);
         DeleteTagCommand command = new DeleteTagCommand(test3);
 
-        assertCommandFailure(command, testModel, String.format(DeleteTagCommand.MESSAGE_MISSING_TAG, test3));
+        assertCommandFailure(command, testModel, DeleteTagCommand.MESSAGE_MISSING_TAG);
     }
 
     /**
