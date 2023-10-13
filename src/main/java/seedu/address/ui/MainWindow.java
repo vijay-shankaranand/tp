@@ -29,6 +29,7 @@ public class MainWindow extends UiPart<Stage> {
 
     private Stage primaryStage;
     private Logic logic;
+    private boolean shouldDisplayTagsPanel;
 
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
@@ -46,6 +47,9 @@ public class MainWindow extends UiPart<Stage> {
     private StackPane personListPanelPlaceholder;
 
     @FXML
+    private StackPane tagListPanelPlaceholder;
+
+    @FXML
     private StackPane resultDisplayPlaceholder;
 
     @FXML
@@ -60,6 +64,7 @@ public class MainWindow extends UiPart<Stage> {
         // Set dependencies
         this.primaryStage = primaryStage;
         this.logic = logic;
+        this.shouldDisplayTagsPanel = false;
 
         // Configure the UI
         setWindowDefaultSize(logic.getGuiSettings());
@@ -71,6 +76,10 @@ public class MainWindow extends UiPart<Stage> {
 
     public Stage getPrimaryStage() {
         return primaryStage;
+    }
+
+    private void setShouldDisplayTagsPanel() {
+        shouldDisplayTagsPanel = true;
     }
 
     private void setAccelerators() {
@@ -111,8 +120,10 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        if (!shouldDisplayTagsPanel) {
+            personListPanel = new PersonListPanel(logic.getFilteredPersonList());
+            personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        }
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -173,6 +184,15 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
+     * Shows the tags panel to the user.
+     */
+    public void handleViewTags() {
+        tagListPanel = new TagListPanel(logic.getFilteredTagList());
+        tagListPanelPlaceholder.getChildren().add(tagListPanel.getRoot());
+        this.setShouldDisplayTagsPanel();
+    }
+
+    /**
      * Executes the command and returns the result.
      *
      * @see seedu.address.logic.Logic#execute(String)
@@ -192,6 +212,7 @@ public class MainWindow extends UiPart<Stage> {
             }
 
             if (commandResult.shouldDisplayTagsPanel()) {
+                handleViewTags();
             }
 
             return commandResult;
