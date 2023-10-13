@@ -135,6 +135,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     public void deleteTag(Tag tag) {
         tags.delete(tag);
+        persons.updateTag(tag);
     }
 
     /**

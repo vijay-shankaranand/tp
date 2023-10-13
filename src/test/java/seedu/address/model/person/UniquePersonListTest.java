@@ -17,6 +17,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
+import seedu.address.model.tag.Tag;
 import seedu.address.testutil.PersonBuilder;
 
 public class UniquePersonListTest {
@@ -166,6 +167,17 @@ public class UniquePersonListTest {
     public void asUnmodifiableObservableList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, ()
             -> uniquePersonList.asUnmodifiableObservableList().remove(0));
+    }
+
+    @Test
+    public void updateTag_successful() {
+        uniquePersonList.add(ALICE);
+        uniquePersonList.updateTag(new Tag("friends"));
+        Person editedAlice = new PersonBuilder().withName("Alice Pauline")
+            .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
+            .withPhone("94351253")
+            .build();
+        assertTrue(uniquePersonList.contains(editedAlice));
     }
 
     @Test
