@@ -144,6 +144,26 @@ public class UniqueTagListTest {
     }
 
     @Test
+    public void deleteTag_validTag() {
+        uniqueTagList.add(VENUES);
+        uniqueTagList.add(CATERING);
+        uniqueTagList.delete(CATERING);
+        UniqueTagList expectedUniqueTagList = new UniqueTagList();
+        expectedUniqueTagList.add(VENUES);
+        assertEquals(expectedUniqueTagList, uniqueTagList);
+    }
+
+    @Test
+    public void deleteTag_nullTag_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> uniqueTagList.delete(null));
+    }
+
+    @Test
+    public void deleteTag_invalidTag_throwsTagNotFoundException() {
+        assertThrows(TagNotFoundException.class, () -> uniqueTagList.delete(VENUES));
+    }
+
+    @Test
     public void asUnmodifiableObservableList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, ()
                 -> uniqueTagList.asUnmodifiableObservableList().remove(0));

@@ -166,32 +166,32 @@ public class DeleteTagCommandTest {
 
         @Override
         public boolean hasTag(Tag tag) {
-            return false;
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public void deleteTag(Tag tag) {
-
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public void addTag(Tag tag) {
-
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public void setTag(Tag target, Tag editedTag) {
-
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public ObservableList<Tag> getFilteredTagList() {
-            return null;
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public void updateFilteredTagList(Predicate<Tag> predicate) {
-
+            throw new AssertionError("This method should not be called.");
         }
     }
 
