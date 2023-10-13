@@ -30,7 +30,7 @@ public class TagTest {
     @Test
     public void isValidTagName_nullTag() {
         // null tag name
-        assertThrows(NullPointerException.class, () -> Tag.isValidTagName("vendor"));
+        assertThrows(NullPointerException.class, () -> Tag.isValidTagName(null));
     }
     @Test
     public void isValidTagName_nonNullTag() {
