@@ -13,7 +13,7 @@ import seedu.address.model.tag.Tag;
  * Parses input arguments and creates a new DeleteTagCommand object for the specified argument.
  */
 public class DeleteTagCommandParser implements Parser<DeleteTagCommand> {
-    
+
     /**
      * Parses the given {@code args} of arguments in the context of a DeleteTagCommand
      * and returns a DeleteTagCommand object for execution.
@@ -39,4 +39,5 @@ public class DeleteTagCommandParser implements Parser<DeleteTagCommand> {
     private static boolean isPrefixPresent(ArgumentMultimap argMultimap, Prefix... prefixes) {
         return Stream.of(prefixes).allMatch(prefix -> argMultimap.getValue(prefix).isPresent());
     }
+
 }

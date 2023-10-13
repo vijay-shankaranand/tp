@@ -23,7 +23,7 @@ import seedu.address.model.tag.Tag;
  * {@code DeleteTagCommand}.
  */
 public class DeleteTagCommandTest {
-    
+
     /**
      * Tests the event in which a null tag is provided. Such a case throws a NullPointer.
      */

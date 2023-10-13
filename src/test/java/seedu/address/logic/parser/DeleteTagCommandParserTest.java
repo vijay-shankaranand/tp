@@ -15,7 +15,7 @@ import seedu.address.model.tag.Tag;
 public class DeleteTagCommandParserTest {
 
     private DeleteTagCommandParser parser = new DeleteTagCommandParser();
-    
+
     @Test
     public void parse_validArgs_returnsDeleteTagCommand() {
         assertParseSuccess(parser, "t/vendor", new DeleteTagCommand(new Tag("vendor")));
