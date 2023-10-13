@@ -44,7 +44,7 @@ public class DeleteTagCommandTest {
         CommandResult commandResult = new DeleteTagCommand(test).execute(testModel);
 
         assertEquals(String.format(DeleteTagCommand.MESSAGE_SUCCESS, test),
-        commandResult.getFeedbackToUser());
+            commandResult.getFeedbackToUser());
 
     }
 
@@ -63,14 +63,14 @@ public class DeleteTagCommandTest {
         CommandResult commandResult = new DeleteTagCommand(test3).execute(testModel);
 
         assertEquals(String.format(DeleteTagCommand.MESSAGE_MISSING_TAG, test3),
-        commandResult.getFeedbackToUser());
+            commandResult.getFeedbackToUser());
     }
 
     /**
      * Tests to see that DeleteTagCommands with the same tag is the same.
      */
     @Test
-    public void equals_SameTag() {
+    public void equals_sameTag() {
         Tag test = new Tag("vendor");
         ModelStubWithTags testModel = new ModelStubWithTags();
         testModel.addTag(test);
