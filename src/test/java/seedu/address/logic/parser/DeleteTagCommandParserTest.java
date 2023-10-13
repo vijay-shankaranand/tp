@@ -23,7 +23,7 @@ public class DeleteTagCommandParserTest {
     public void parse_validArgs_returnsDeleteTagCommand() throws ParseException {
         Tag correctTag = new Tag("vendor");
         DeleteTagCommand correctCommand = new DeleteTagCommand(correctTag);
-        assertParseSuccess(parser, PREFIX_TAG + "vendor", correctCommand);
+        assertParseSuccess(parser, "delete_tag " + PREFIX_TAG + "vendor", correctCommand);
     }
 
     @Test
