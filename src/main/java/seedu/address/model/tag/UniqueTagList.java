@@ -49,6 +49,18 @@ public class UniqueTagList implements Iterable<Tag> {
     }
 
     /**
+     * Deletes a tag {@code tagToBeDeleted} from the list.
+     * {@code tagToBeDeleted} must already exist in the list.
+     */
+    public void delete(Tag tagToBeDeleted) {
+        requireNonNull(tagToBeDeleted);
+        if (!contains(tagToBeDeleted)) {
+            throw new TagNotFoundException();
+        }
+        internalList.remove(tagToBeDeleted);
+    }
+
+    /**
      * Replaces the tag {@code target} in the list with {@code editedTag}.
      * {@code target} must exist in the list.
      * The tag of {@code editedTag} must not be the same as another existing tag in the list.

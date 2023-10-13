@@ -1,0 +1,224 @@
+package seedu.address.logic.commands;
+
+import static java.util.Objects.requireNonNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static seedu.address.testutil.Assert.assertThrows;
+
+import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.function.Predicate;
+
+import org.junit.jupiter.api.Test;
+
+import javafx.collections.ObservableList;
+import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.Model;
+import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.person.Person;
+import seedu.address.model.tag.Tag;
+
+/**
+ * Contains integration tests (interactions with the Model) and unit tests for
+ * {@code DeleteTagCommand}.
+ */
+public class DeleteTagCommandTest {
+    
+    /**
+     * Tests the event in which a null tag is provided. Such a case throws a NullPointer.
+     */
+    @Test
+    public void constructor_nullTag_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new DeleteTagCommand(null));
+    }
+
+    /**
+     * Tests when tag to be deleted is valid.
+     * @throws Exception when commandResult is invalid
+     */
+    @Test
+    public void execute_validTagToDelete() throws Exception {
+        Tag test = new Tag("vendor");
+        ModelStubWithTags testModel = new ModelStubWithTags();
+        testModel.addTag(test);
+        CommandResult commandResult = new DeleteTagCommand(test).execute(testModel);
+
+        assertEquals(String.format(DeleteTagCommand.MESSAGE_SUCCESS, test),
+        commandResult.getFeedbackToUser());
+
+    }
+
+    /**
+     * Tests when tag to be deleted is invalid (not found in the list).
+     * @throws Exception when commandResult is invalid
+     */
+    @Test
+    public void execute_invalidTagToDelete() throws Exception {
+        Tag test1 = new Tag("vendor");
+        Tag test2 = new Tag("personal");
+        Tag test3 = new Tag("private");
+        ModelStubWithTags testModel = new ModelStubWithTags();
+        testModel.addTag(test1);
+        testModel.addTag(test2);
+        CommandResult commandResult = new DeleteTagCommand(test3).execute(testModel);
+
+        assertEquals(String.format(DeleteTagCommand.MESSAGE_MISSING_TAG, test3),
+        commandResult.getFeedbackToUser());
+    }
+
+    /**
+     * Tests to see that DeleteTagCommands with the same tag is the same.
+     */
+    @Test
+    public void equals_SameTag() {
+        Tag test = new Tag("vendor");
+        ModelStubWithTags testModel = new ModelStubWithTags();
+        testModel.addTag(test);
+        DeleteTagCommand same1 = new DeleteTagCommand(test);
+        DeleteTagCommand same2 = new DeleteTagCommand(test);
+        assertEquals(same1, same2);
+    }
+
+    /**
+     * A default model stub that have all of the methods failing.
+     */
+    private class ModelStub implements Model {
+        @Override
+        public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ReadOnlyUserPrefs getUserPrefs() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public GuiSettings getGuiSettings() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setGuiSettings(GuiSettings guiSettings) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Path getAddressBookFilePath() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setAddressBookFilePath(Path addressBookFilePath) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addPerson(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setAddressBook(ReadOnlyAddressBook newData) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ReadOnlyAddressBook getAddressBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasPerson(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deletePerson(Person target) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setPerson(Person target, Person editedPerson) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Person> getFilteredPersonList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredPersonList(Predicate<Person> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasTag(Tag tag) {
+            return false;
+        }
+
+        @Override
+        public void deleteTag(Tag tag) {
+
+        }
+
+        @Override
+        public void addTag(Tag tag) {
+
+        }
+
+        @Override
+        public void setTag(Tag target, Tag editedTag) {
+
+        }
+
+        @Override
+        public ObservableList<Tag> getFilteredTagList() {
+            return null;
+        }
+
+        @Override
+        public void updateFilteredTagList(Predicate<Tag> predicate) {
+
+        }
+    }
+
+    /**
+     * A Model stub that contains a list of tags.
+     */
+    private class ModelStubWithTags extends ModelStub {
+        private ArrayList<Tag> tags;
+
+        ModelStubWithTags() {
+            this.tags = new ArrayList<>();
+        }
+
+        @Override
+        public boolean hasTag(Tag tag) {
+            requireNonNull(tag);
+            for (int i = 0; i < tags.size(); i++) {
+                if (tags.get(i).isSameTag(tag)) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        @Override
+        public void addTag(Tag tag) {
+            requireNonNull(tag);
+            if (!hasTag(tag)) {
+                this.tags.add(tag);
+            }
+        }
+
+        @Override
+        public void deleteTag(Tag tag) {
+            requireNonNull(tag);
+            if (hasTag(tag)) {
+                tags.remove(tag);
+            }
+        }
+    }
+}

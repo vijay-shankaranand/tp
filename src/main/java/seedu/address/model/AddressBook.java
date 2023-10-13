@@ -133,6 +133,10 @@ public class AddressBook implements ReadOnlyAddressBook {
         tags.add(p);
     }
 
+    public void deleteTag(Tag tag) {
+        tags.delete(tag);
+    }
+
     /**
      * Replaces the given tag {@code target} in the list with {@code editedTag}.
      * {@code target} must exist in the address book.
