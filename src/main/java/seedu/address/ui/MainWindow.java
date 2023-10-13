@@ -32,6 +32,7 @@ public class MainWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
+    private TagListPanel tagListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -167,6 +168,10 @@ public class MainWindow extends UiPart<Stage> {
         return personListPanel;
     }
 
+    public TagListPanel getTagListPanel() {
+        return tagListPanel;
+    }
+
     /**
      * Executes the command and returns the result.
      *
@@ -184,6 +189,9 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isExit()) {
                 handleExit();
+            }
+
+            if (commandResult.shouldDisplayTagsPanel()) {
             }
 
             return commandResult;

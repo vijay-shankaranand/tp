@@ -4,6 +4,8 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Objects;
 
+import javax.swing.text.View;
+
 import seedu.address.commons.util.ToStringBuilder;
 
 /**
@@ -46,6 +48,14 @@ public class CommandResult {
 
     public boolean isExit() {
         return exit;
+    }
+
+    public boolean shouldDisplayTagsPanel() {
+        if (feedbackToUser.equals(ViewTagsCommand.MESSAGE_SUCCESS)) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     @Override
