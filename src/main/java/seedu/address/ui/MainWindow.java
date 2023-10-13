@@ -29,7 +29,7 @@ public class MainWindow extends UiPart<Stage> {
 
     private Stage primaryStage;
     private Logic logic;
-    private boolean shouldDisplayTagsPanel;
+    private boolean shouldDisplayTags;
 
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
@@ -44,10 +44,7 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private StackPane personListPanelPlaceholder;
-
-    @FXML
-    private StackPane tagListPanelPlaceholder;
+    private StackPane listPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -64,7 +61,7 @@ public class MainWindow extends UiPart<Stage> {
         // Set dependencies
         this.primaryStage = primaryStage;
         this.logic = logic;
-        this.shouldDisplayTagsPanel = false;
+        this.shouldDisplayTags = false;
 
         // Configure the UI
         setWindowDefaultSize(logic.getGuiSettings());
@@ -78,8 +75,8 @@ public class MainWindow extends UiPart<Stage> {
         return primaryStage;
     }
 
-    private void setShouldDisplayTagsPanel() {
-        shouldDisplayTagsPanel = true;
+    private void setDisplayStatus(boolean status) {
+        shouldDisplayTags = status;
     }
 
     private void setAccelerators() {
@@ -120,9 +117,12 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        if (!shouldDisplayTagsPanel) {
+        if (shouldDisplayTags) {
+            tagListPanel = new TagListPanel(logic.getFilteredTagList());
+            listPanelPlaceholder.getChildren().add(tagListPanel.getRoot());
+        } else {
             personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-            personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+            listPanelPlaceholder.getChildren().add(personListPanel.getRoot());
         }
 
         resultDisplay = new ResultDisplay();
@@ -186,10 +186,9 @@ public class MainWindow extends UiPart<Stage> {
     /**
      * Shows the tags panel to the user.
      */
-    public void handleViewTags() {
-        tagListPanel = new TagListPanel(logic.getFilteredTagList());
-        tagListPanelPlaceholder.getChildren().add(tagListPanel.getRoot());
-        this.setShouldDisplayTagsPanel();
+    public void handleViewTags(boolean shouldDisplayTags) {
+        setDisplayStatus(shouldDisplayTags);
+        fillInnerParts(); 
     }
 
     /**
@@ -212,7 +211,9 @@ public class MainWindow extends UiPart<Stage> {
             }
 
             if (commandResult.shouldDisplayTagsPanel()) {
-                handleViewTags();
+                handleViewTags(true);
+            } else {
+                handleViewTags(false);
             }
 
             return commandResult;
