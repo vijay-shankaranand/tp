@@ -33,7 +33,7 @@ class JsonSerializableAddressBook {
      */
     @JsonCreator
     public JsonSerializableAddressBook(@JsonProperty("persons") List<JsonAdaptedPerson> persons,
-                                       @JsonProperty("tagList") List<JsonAdaptedTag> tagList ) {
+                                       @JsonProperty("tagList") List<JsonAdaptedTag> tagList) {
         this.persons.addAll(persons);
         this.tagList.addAll(tagList);
     }

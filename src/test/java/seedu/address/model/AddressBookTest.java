@@ -113,6 +113,21 @@ public class AddressBookTest {
     }
 
     @Test
+    public void deleteTag_successful_returnsTrue() {
+        Person initialAlice = new PersonBuilder(ALICE).withTags("vendor").build();
+        Person editedAlice = new PersonBuilder().withName("Alice Pauline")
+            .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
+            .withPhone("94351253")
+            .build();
+        addressBook.addPerson(initialAlice);
+        Tag tag = new Tag("vendor");
+        addressBook.addTag(tag);
+        addressBook.deleteTag(tag);
+        assertTrue(!addressBook.hasTag(tag));
+        assertTrue(addressBook.hasPerson(editedAlice));
+    }
+
+    @Test
     public void getTagsList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> addressBook.getTagList().remove(0));
     }

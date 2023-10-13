@@ -134,6 +134,15 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Deletes a {@code tag} from the address book.
+     * Deletes the tag from contacts using it as well.
+     */
+    public void deleteTag(Tag tagToBeDeleted) {
+        tags.delete(tagToBeDeleted);
+        persons.updateTag(tagToBeDeleted);
+    }
+
+    /**
      * Replaces the given tag {@code target} in the list with {@code editedTag}.
      * {@code target} must exist in the address book.
      * The tag identity of {@code editedTag} must not be the same as another existing tag in the address book.
