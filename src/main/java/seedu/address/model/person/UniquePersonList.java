@@ -3,8 +3,8 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.Iterator;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -115,7 +115,7 @@ public class UniquePersonList implements Iterable<Person> {
                     }
                 }
             }
-            Person editedPerson = new Person(curr.getName(), curr.getPhone(), 
+            Person editedPerson = new Person(curr.getName(), curr.getPhone(),
                 curr.getEmail(), curr.getAddress(), newTagList);
             internalList.set(i, editedPerson);
         }
