@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
@@ -53,7 +54,7 @@ public class DeleteTagCommandTest {
      * @throws Exception when commandResult is invalid
      */
     @Test
-    public void execute_invalidTagToDelete() throws Exception {
+    public void execute_invalidTagToDelete() throws CommandException {
         Tag test1 = new Tag("vendor");
         Tag test2 = new Tag("personal");
         Tag test3 = new Tag("private");
