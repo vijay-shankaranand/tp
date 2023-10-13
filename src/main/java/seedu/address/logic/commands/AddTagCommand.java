@@ -52,7 +52,7 @@ public class AddTagCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof AddCommand)) {
+        if (!(other instanceof AddTagCommand)) {
             return false;
         }
 
