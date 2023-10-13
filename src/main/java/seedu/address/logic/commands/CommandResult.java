@@ -4,8 +4,6 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Objects;
 
-import javax.swing.text.View;
-
 import seedu.address.commons.util.ToStringBuilder;
 
 /**
@@ -50,6 +48,11 @@ public class CommandResult {
         return exit;
     }
 
+    /**
+     * Returns true if the tags panel should be displayed to the user, else false.
+     * 
+     * @return true if the tags panel should be displayed to the user, else false
+     */
     public boolean shouldDisplayTagsPanel() {
         if (feedbackToUser.equals(ViewTagsCommand.MESSAGE_SUCCESS)) {
             return true;
