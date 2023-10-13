@@ -55,9 +55,8 @@ public class CommandResult {
     public boolean shouldDisplayTagsPanel() {
         if (feedbackToUser.equals(ViewTagsCommand.MESSAGE_SUCCESS)) {
             return true;
-        } else {
-            return false;
         }
+        return false;
     }
 
     @Override
