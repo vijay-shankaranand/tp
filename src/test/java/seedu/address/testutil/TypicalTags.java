@@ -7,6 +7,9 @@ import java.util.List;
 import seedu.address.model.AddressBook;
 import seedu.address.model.tag.Tag;
 
+/**
+ * A utility class containing a list of {@code Tag} objects to be used in tests.
+ */
 public class TypicalTags {
     public static final Tag EVENT_PLANNER = new TagBuilder().withTag("eventPlanner").build();
     public static final Tag CLIENTS = new TagBuilder().withTag("clients").build();
@@ -33,7 +36,7 @@ public class TypicalTags {
 
     public static AddressBook getTypicalAddressBook() {
         AddressBook ab = new AddressBook();
-        for(Tag tag : getTypicalTags()) {
+        for (Tag tag : getTypicalTags()) {
             ab.addTag(tag);
         }
         return ab;

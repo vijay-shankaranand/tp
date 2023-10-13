@@ -2,8 +2,6 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
@@ -156,45 +154,45 @@ public class AddTagCommandTest {
         }
     }
 
-        /**
-         * A Model stub that contains a single tag.
-         */
-        private class ModelStubWithTag extends AddTagCommandTest.ModelStub {
-            private final Tag tag;
+    /**
+     * A Model stub that contains a single tag.
+     */
+    private class ModelStubWithTag extends AddTagCommandTest.ModelStub {
+        private final Tag tag;
 
-            ModelStubWithTag(Tag tag) {
-                requireNonNull(tag);
-                this.tag = tag;
-            }
-
-            @Override
-            public boolean hasTag(Tag tag) {
-                requireNonNull(tag);
-                return this.tag.isSameTag(tag);
-            }
+        ModelStubWithTag(Tag tag) {
+            requireNonNull(tag);
+            this.tag = tag;
         }
 
-        /**
-         * A Model stub that always accept the tag being added.
-         */
-        private class ModelStubAcceptingTagAdded extends ModelStub {
-            final ArrayList<Tag> tagsAdded = new ArrayList<>();
-
-            @Override
-            public boolean hasTag(Tag tag) {
-                requireNonNull(tag);
-                return tagsAdded.stream().anyMatch(tag::isSameTag);
-            }
-
-            @Override
-            public void addTag(Tag tag) {
-                requireNonNull(tag);
-                tagsAdded.add(tag);
-            }
-
-            @Override
-            public ReadOnlyAddressBook getAddressBook() {
-                return new AddressBook();
-            }
+        @Override
+        public boolean hasTag(Tag tag) {
+            requireNonNull(tag);
+            return this.tag.isSameTag(tag);
         }
     }
+
+    /**
+     * A Model stub that always accept the tag being added.
+     */
+    private class ModelStubAcceptingTagAdded extends ModelStub {
+        final ArrayList<Tag> tagsAdded = new ArrayList<>();
+
+        @Override
+        public boolean hasTag(Tag tag) {
+            requireNonNull(tag);
+            return tagsAdded.stream().anyMatch(tag::isSameTag);
+        }
+
+        @Override
+        public void addTag(Tag tag) {
+            requireNonNull(tag);
+            tagsAdded.add(tag);
+        }
+
+        @Override
+        public ReadOnlyAddressBook getAddressBook() {
+            return new AddressBook();
+        }
+    }
+}

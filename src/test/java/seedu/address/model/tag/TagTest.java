@@ -3,15 +3,11 @@ package seedu.address.model.tag;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.*;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalTags.VENUES;
-import static seedu.address.testutil.TypicalTags.EVENT_PLANNER;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.person.Person;
-import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.TagBuilder;
 
 public class TagTest {
@@ -34,11 +30,11 @@ public class TagTest {
     }
     @Test
     public void isValidTagName_nonNullTag() {
-        String expected = "[vendor]";
+        String expected = "vendor";
         assertEquals(expected, new Tag("vendor").toString());
     }
 
-     @Test
+    @Test
     public void isSameTag() {
         // same object -> returns true
         assertTrue(VENUES.isSameTag(VENUES));
@@ -55,8 +51,9 @@ public class TagTest {
         assertThrows(IllegalArgumentException.class, () -> new TagBuilder().withTag(tagNameWithTrailingSpaces).build());
 
         // Tag name has non-alphanumeric character -> throws illegalArgumentException
-         String tagNameWithNonAlphanumericChar = VENUES.getTagName() + "_";
-         assertThrows(IllegalArgumentException.class, () -> new TagBuilder().withTag(tagNameWithNonAlphanumericChar).build());
+        String tagNameWithNonAlphanumericChar = VENUES.getTagName() + "_";
+        assertThrows(IllegalArgumentException.class, () ->
+                new TagBuilder().withTag(tagNameWithNonAlphanumericChar).build());
     }
 
 }

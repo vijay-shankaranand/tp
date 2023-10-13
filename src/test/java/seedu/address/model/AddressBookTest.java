@@ -10,13 +10,11 @@ import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalTags.VENUES;
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
-import org.junit.jupiter.api.Tags;
 import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
