@@ -8,12 +8,15 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalTags.VENUES;
 
+import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
+import org.junit.jupiter.api.Tags;
 import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
@@ -22,6 +25,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.TagBuilder;
 
 public class AddressBookTest {
 
@@ -30,6 +34,7 @@ public class AddressBookTest {
     @Test
     public void constructor() {
         assertEquals(Collections.emptyList(), addressBook.getPersonList());
+        assertEquals(Collections.emptyList(), addressBook.getTagList());
     }
 
     @Test
@@ -50,7 +55,8 @@ public class AddressBookTest {
         Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
         List<Person> newPersons = Arrays.asList(ALICE, editedAlice);
-        AddressBookStub newData = new AddressBookStub(newPersons);
+        List<Tag> tags = Arrays.asList(VENUES);
+        AddressBookStub newData = new AddressBookStub(newPersons, tags);
 
         assertThrows(DuplicatePersonException.class, () -> addressBook.resetData(newData));
     }
@@ -85,6 +91,35 @@ public class AddressBookTest {
     }
 
     @Test
+    public void hasTag_nullTag_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> addressBook.hasTag(null));
+    }
+
+    @Test
+    public void hasTag_tagNotInAddressBook_returnsFalse() {
+        assertFalse(addressBook.hasTag(VENUES));
+    }
+
+    @Test
+    public void hasTag_tagInAddressBook_returnsTrue() {
+        addressBook.addTag(VENUES);
+        assertTrue(addressBook.hasTag(VENUES));
+    }
+
+    @Test
+    public void hasTag_tagWithSameIdentityFieldsInAddressBook_returnsTrue() {
+        addressBook.addTag(VENUES);
+        Tag editedVenues = new TagBuilder().withTag(VENUES.getTagName())
+                .build();
+        assertTrue(addressBook.hasTag(editedVenues));
+    }
+
+    @Test
+    public void getTagsList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> addressBook.getTagList().remove(0));
+    }
+
+    @Test
     public void toStringMethod() {
         String expected = AddressBook.class.getCanonicalName() + "{persons=" + addressBook.getPersonList()
                 +
@@ -98,8 +133,11 @@ public class AddressBookTest {
     private static class AddressBookStub implements ReadOnlyAddressBook {
         private final ObservableList<Person> persons = FXCollections.observableArrayList();
 
-        AddressBookStub(Collection<Person> persons) {
+        private final ObservableList<Tag> tags = FXCollections.observableArrayList();
+
+        AddressBookStub(Collection<Person> persons, Collection<Tag> tags) {
             this.persons.setAll(persons);
+            this.tags.setAll(tags);
         }
 
         @Override
@@ -109,7 +147,7 @@ public class AddressBookTest {
 
         @Override
         public ObservableList<Tag> getTagList() {
-            return null;
+            return tags;
         }
     }
 
