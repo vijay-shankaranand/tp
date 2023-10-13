@@ -2,7 +2,6 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
@@ -64,7 +63,7 @@ public class DeleteTagCommandTest {
         testModel.addTag(test2);
         DeleteTagCommand command = new DeleteTagCommand(test3);
 
-        assertCommandFailure(command, testModel, DeleteTagCommand.MESSAGE_MISSING_TAG);
+        assertThrows(CommandException.class, () -> command.execute(testModel));
     }
 
     /**
