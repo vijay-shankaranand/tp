@@ -188,7 +188,7 @@ public class MainWindow extends UiPart<Stage> {
      */
     public void handleViewTags(boolean shouldDisplayTags) {
         setDisplayStatus(shouldDisplayTags);
-        fillInnerParts(); 
+        fillInnerParts();
     }
 
     /**
