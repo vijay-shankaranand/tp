@@ -68,7 +68,7 @@ public class AddressBookParserTest {
     public void parseCommand_deleteTag() throws Exception {
         Tag tag = new Tag("vendor");
         DeleteTagCommand command = (DeleteTagCommand) parser.parseCommand(DeleteTagCommand.COMMAND_WORD
-            + " " + "vendor");
+            + " " + "t/vendor");
         assertEquals(new DeleteTagCommand(tag), command);
     }
 
