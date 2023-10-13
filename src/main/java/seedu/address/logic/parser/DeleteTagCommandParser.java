@@ -39,5 +39,4 @@ public class DeleteTagCommandParser implements Parser<DeleteTagCommand> {
     private static boolean isPrefixPresent(ArgumentMultimap argMultimap, Prefix... prefixes) {
         return Stream.of(prefixes).allMatch(prefix -> argMultimap.getValue(prefix).isPresent());
     }
-
 }
