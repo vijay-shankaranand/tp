@@ -94,7 +94,7 @@ public interface Model {
 
     /**
      * Deletes the given tag.
-     * The tag must exist in the tag list.
+     * {@code tag} must exist in the tag list.
      */
     void deleteTag(Tag tag);
 

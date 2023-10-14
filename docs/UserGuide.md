@@ -237,7 +237,7 @@ Action     | Format, Examples
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**Add Tag** | `add_tag tn/TAG_NAME` <br> e.g. `add_tag tn/vendor`
+**Add Tag** | `add_tag t/TAG_NAME` <br> e.g. `add_tag t/vendor`
 **View Tags** | `view_tags`
 **Delete Tag** | `delete_tag t/tag_name` <br> e.g. `delete_tag t/vendor`
 **List**   | `list`

@@ -126,6 +126,8 @@ public class ModelManager implements Model {
 
     @Override
     public void deleteTag(Tag tag) {
+        addressBook.deleteTag(tag);
+        updateFilteredTagList(PREDICATE_SHOW_ALL_TAGS);
     }
 
     @Override
