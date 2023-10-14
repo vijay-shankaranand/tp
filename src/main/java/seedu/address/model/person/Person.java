@@ -62,6 +62,17 @@ public class Person {
     }
 
     /**
+     * Checks whether this {@code Person} is tagged by a given {@code Tag}.
+     *
+     * @param tag The given tag to be checked with.
+     * @return {@code true} if this {@code Person} is tagged with the given {@code Tag},
+     * and {@code false} otherwise.
+     */
+    public boolean isTaggedBy(Tag tag) {
+        return tags.contains(tag);
+    }
+
+    /**
      * Returns true if both persons have the same name.
      * This defines a weaker notion of equality between two persons.
      */
