@@ -5,13 +5,11 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailur
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.FilterCommand;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.PersonIsTaggedPredicate;
 import seedu.address.model.tag.Tag;
 
