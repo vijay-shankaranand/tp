@@ -79,7 +79,6 @@ public class AddressBookParser {
 
         case ViewTagsCommand.COMMAND_WORD:
             return new ViewTagsCommand();
-            
         case DeleteTagCommand.COMMAND_WORD:
             return new DeleteTagCommandParser().parse(arguments);
 
