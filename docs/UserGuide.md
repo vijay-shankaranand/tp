@@ -94,6 +94,20 @@ Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
 
+### Adding a tag : `add_tag`
+
+Adds a tag to JobFestGo.
+
+Format: `add_tag t/TAG_NAME`
+
+* Adds the tag with the specified tag name `TAG_NAME`.
+* The tag name **must no already exist** in the JobFestGo.
+* The command must contain `/t` for the command to be valid.
+* The tag name must be specified in the command.
+
+Examples:
+* `add_tag t/vendor`
+
 ### Listing all persons : `list`
 
 Shows a list of all persons in JobFestGo.
@@ -149,21 +163,7 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in JobFestGo.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
-### Adding a tag : `add_tag`
-
-Adds a tag to JobFestGo.
-
-Format: `add_tag t/TAG_NAME`
-
-* Adds the tag with the specified tag name `TAG_NAME`.
-* The tag name **must not already exist** in the JobFestGo.
-* The command must contain `t/` for the command to be valid.
-* The tag name must be specified in the command.
-
-Examples:
-* `add_tag t/vendor`
-
-### View all tags: `view_tags`
+### Viewing all tags: `view_tags`
 
 Views all existing tags that have been created by the user.
 
