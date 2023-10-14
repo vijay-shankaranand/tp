@@ -32,7 +32,7 @@ public class PersonIsTaggedPredicateTest {
         assertTrue(firstPredicate.equals(firstPredicate));
 
         // same values -> returns true
-        PersonIsTaggedPredicate firstPredicateCopy = new  PersonIsTaggedPredicate(firstTagList);
+        PersonIsTaggedPredicate firstPredicateCopy = new PersonIsTaggedPredicate(firstTagList);
         assertTrue(firstPredicate.equals(firstPredicateCopy));
 
         // different types -> returns false
