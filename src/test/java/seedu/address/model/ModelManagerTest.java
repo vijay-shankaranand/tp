@@ -1,5 +1,6 @@
 package seedu.address.model;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -16,6 +17,7 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.AddressBookBuilder;
@@ -85,7 +87,8 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void hasPerson_personInAddressBook_returnsTrue() {
+    public void hasPerson_personInAddressBook_returnsTrue() throws CommandException {
+        modelManager.addTag(new Tag("friends"));
         modelManager.addPerson(ALICE);
         assertTrue(modelManager.hasPerson(ALICE));
     }
