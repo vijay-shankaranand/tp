@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import java.util.List;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.person.PersonIsTaggedPredicate;
 import seedu.address.model.tag.Tag;
@@ -23,7 +24,6 @@ public class FilterCommand extends Command {
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_TAG + "vendor ";
 
-    public static final String MESSAGE_SUCCESS = "Listed persons tagged with: %1$s";
     private final List<Tag> tags;
     private final PersonIsTaggedPredicate predicate;
 
@@ -40,7 +40,7 @@ public class FilterCommand extends Command {
         requireNonNull(model);
         model.updateFilteredPersonList(predicate);
         return new CommandResult(
-                String.format(MESSAGE_SUCCESS, tags));
+                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
     }
 
     @Override
@@ -55,7 +55,7 @@ public class FilterCommand extends Command {
         }
 
         FilterCommand otherFilterCommand = (FilterCommand) other;
-        return predicate.equals(otherFilterCommand.predicate);
+        return tags.equals(otherFilterCommand.tags) && predicate.equals(otherFilterCommand.predicate);
     }
 
     @Override
