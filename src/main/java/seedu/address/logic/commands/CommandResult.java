@@ -48,6 +48,17 @@ public class CommandResult {
         return exit;
     }
 
+    /**
+     * Returns true if the tags panel should be displayed to the user, else false.
+     * @return true if the tags panel should be displayed to the user, else false
+     */
+    public boolean shouldDisplayTagsPanel() {
+        if (feedbackToUser.equals(ViewTagsCommand.MESSAGE_SUCCESS)) {
+            return true;
+        }
+        return false;
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {

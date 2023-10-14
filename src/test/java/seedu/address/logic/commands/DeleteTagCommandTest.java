@@ -3,86 +3,91 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
-import seedu.address.testutil.PersonBuilder;
 
-public class AddCommandTest {
+/**
+ * Contains integration tests (interactions with the Model) and unit tests for
+ * {@code DeleteTagCommand}.
+ */
+public class DeleteTagCommandTest {
 
+    /**
+     * Tests the event in which a null tag is provided. Such a case throws a NullPointer.
+     */
     @Test
-    public void constructor_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddCommand(null));
+    public void constructor_nullTag_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new DeleteTagCommand(null));
+    }
+
+    /**
+     * Tests when tag to be deleted is valid.
+     * @throws Exception when commandResult is invalid
+     */
+    @Test
+    public void execute_validTagToDelete() throws Exception {
+        Tag test = new Tag("vendor");
+        ModelStubWithTags testModel = new ModelStubWithTags();
+        testModel.addTag(test);
+        CommandResult commandResult = new DeleteTagCommand(test).execute(testModel);
+
+        assertEquals(String.format(DeleteTagCommand.MESSAGE_SUCCESS, test),
+            commandResult.getFeedbackToUser());
+
+    }
+
+    /**
+     * Tests when tag to be deleted is invalid (not found in the list).
+     * @throws Exception when commandResult is invalid
+     */
+    @Test
+    public void execute_invalidTagToDelete() throws CommandException {
+        Tag test1 = new Tag("vendor");
+        Tag test2 = new Tag("personal");
+        Tag test3 = new Tag("private");
+        ModelStubWithTags testModel = new ModelStubWithTags();
+        testModel.addTag(test1);
+        testModel.addTag(test2);
+        DeleteTagCommand command = new DeleteTagCommand(test3);
+
+        assertThrows(CommandException.class, () -> command.execute(testModel));
+    }
+
+    /**
+     * Tests to see that DeleteTagCommands with the same tag is the same.
+     */
+    @Test
+    public void equals_sameTag() {
+        Tag test = new Tag("vendor");
+        ModelStubWithTags testModel = new ModelStubWithTags();
+        testModel.addTag(test);
+        DeleteTagCommand same1 = new DeleteTagCommand(test);
+        DeleteTagCommand same2 = new DeleteTagCommand(test);
+        DeleteCommand diffCommand = new DeleteCommand(INDEX_FIRST_PERSON);
+        assertEquals(same1, same2);
+        assertEquals(same1, same1);
+        assertFalse(same1.equals(diffCommand));
     }
 
     @Test
-    public void execute_personAcceptedByModel_addSuccessful() throws Exception {
-        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
-        Person validPerson = new PersonBuilder().build();
-
-        CommandResult commandResult = new AddCommand(validPerson).execute(modelStub);
-
-        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validPerson)),
-                commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validPerson), modelStub.personsAdded);
-    }
-
-    @Test
-    public void execute_duplicatePerson_throwsCommandException() {
-        Person validPerson = new PersonBuilder().build();
-        AddCommand addCommand = new AddCommand(validPerson);
-        ModelStub modelStub = new ModelStubWithPerson(validPerson);
-
-        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PERSON, () -> addCommand.execute(modelStub));
-    }
-
-    @Test
-    public void equals() {
-        Person alice = new PersonBuilder().withName("Alice").build();
-        Person bob = new PersonBuilder().withName("Bob").build();
-        AddCommand addAliceCommand = new AddCommand(alice);
-        AddCommand addBobCommand = new AddCommand(bob);
-
-        // same object -> returns true
-        assertTrue(addAliceCommand.equals(addAliceCommand));
-
-        // same values -> returns true
-        AddCommand addAliceCommandCopy = new AddCommand(alice);
-        assertTrue(addAliceCommand.equals(addAliceCommandCopy));
-
-        // different types -> returns false
-        assertFalse(addAliceCommand.equals(1));
-
-        // null -> returns false
-        assertFalse(addAliceCommand.equals(null));
-
-        // different person -> returns false
-        assertFalse(addAliceCommand.equals(addBobCommand));
-    }
-
-    @Test
-    public void toStringMethod() {
-        AddCommand addCommand = new AddCommand(ALICE);
-        String expected = AddCommand.class.getCanonicalName() + "{toAdd=" + ALICE + "}";
-        assertEquals(expected, addCommand.toString());
+    public void toString_testEqual() {
+        DeleteTagCommand test = new DeleteTagCommand(new Tag("vendor"));
+        assertEquals(test.toString(), test.toString());
     }
 
     /**
@@ -191,45 +196,40 @@ public class AddCommandTest {
     }
 
     /**
-     * A Model stub that contains a single person.
+     * A Model stub that contains a list of tags.
      */
-    private class ModelStubWithPerson extends ModelStub {
-        private final Person person;
+    private class ModelStubWithTags extends ModelStub {
+        private ArrayList<Tag> tags;
 
-        ModelStubWithPerson(Person person) {
-            requireNonNull(person);
-            this.person = person;
+        ModelStubWithTags() {
+            this.tags = new ArrayList<>();
         }
 
         @Override
-        public boolean hasPerson(Person person) {
-            requireNonNull(person);
-            return this.person.isSamePerson(person);
+        public boolean hasTag(Tag tag) {
+            requireNonNull(tag);
+            for (int i = 0; i < tags.size(); i++) {
+                if (tags.get(i).isSameTag(tag)) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        @Override
+        public void addTag(Tag tag) {
+            requireNonNull(tag);
+            if (!hasTag(tag)) {
+                this.tags.add(tag);
+            }
+        }
+
+        @Override
+        public void deleteTag(Tag tag) {
+            requireNonNull(tag);
+            if (hasTag(tag)) {
+                tags.remove(tag);
+            }
         }
     }
-
-    /**
-     * A Model stub that always accept the person being added.
-     */
-    private class ModelStubAcceptingPersonAdded extends ModelStub {
-        final ArrayList<Person> personsAdded = new ArrayList<>();
-
-        @Override
-        public boolean hasPerson(Person person) {
-            requireNonNull(person);
-            return personsAdded.stream().anyMatch(person::isSamePerson);
-        }
-
-        @Override
-        public void addPerson(Person person) {
-            requireNonNull(person);
-            personsAdded.add(person);
-        }
-
-        @Override
-        public ReadOnlyAddressBook getAddressBook() {
-            return new AddressBook();
-        }
-    }
-
 }

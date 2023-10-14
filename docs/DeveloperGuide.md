@@ -391,14 +391,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 3a. The given tag name already exists.
+
+* 3a. The given tag name is already in the tag list.
 
     * 3a1. JobFestGo shows an error message.
 
       Use case resumes at step 2.
 
 * 3b. Missing `t/` in the command.
-
+* 
     * 3b1. JobFestGo shows an error message.
 
       Use case resumes at step 2.
@@ -408,7 +409,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3c1. JobFestGo shows an error message.
 
       Use case resumes at step 2.
-
 
 **Use case: View all tags**
 

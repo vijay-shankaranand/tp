@@ -29,9 +29,11 @@ public class MainWindow extends UiPart<Stage> {
 
     private Stage primaryStage;
     private Logic logic;
+    private boolean shouldDisplayTags;
 
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
+    private TagListPanel tagListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -42,7 +44,7 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private StackPane personListPanelPlaceholder;
+    private StackPane listPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -59,6 +61,7 @@ public class MainWindow extends UiPart<Stage> {
         // Set dependencies
         this.primaryStage = primaryStage;
         this.logic = logic;
+        this.shouldDisplayTags = false;
 
         // Configure the UI
         setWindowDefaultSize(logic.getGuiSettings());
@@ -70,6 +73,10 @@ public class MainWindow extends UiPart<Stage> {
 
     public Stage getPrimaryStage() {
         return primaryStage;
+    }
+
+    private void setDisplayStatus(boolean status) {
+        shouldDisplayTags = status;
     }
 
     private void setAccelerators() {
@@ -110,8 +117,13 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        if (shouldDisplayTags) {
+            tagListPanel = new TagListPanel(logic.getFilteredTagList());
+            listPanelPlaceholder.getChildren().add(tagListPanel.getRoot());
+        } else {
+            personListPanel = new PersonListPanel(logic.getFilteredPersonList());
+            listPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        }
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -167,6 +179,18 @@ public class MainWindow extends UiPart<Stage> {
         return personListPanel;
     }
 
+    public TagListPanel getTagListPanel() {
+        return tagListPanel;
+    }
+
+    /**
+     * Shows the tags panel to the user.
+     */
+    public void handleViewTags(boolean shouldDisplayTags) {
+        setDisplayStatus(shouldDisplayTags);
+        fillInnerParts();
+    }
+
     /**
      * Executes the command and returns the result.
      *
@@ -184,6 +208,12 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isExit()) {
                 handleExit();
+            }
+
+            if (commandResult.shouldDisplayTagsPanel()) {
+                handleViewTags(true);
+            } else {
+                handleViewTags(false);
             }
 
             return commandResult;

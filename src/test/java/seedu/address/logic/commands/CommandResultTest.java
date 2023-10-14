@@ -15,6 +15,7 @@ public class CommandResultTest {
         // same values -> returns true
         assertTrue(commandResult.equals(new CommandResult("feedback")));
         assertTrue(commandResult.equals(new CommandResult("feedback", false, false)));
+        assertEquals(commandResult.shouldDisplayTagsPanel(), false);
 
         // same object -> returns true
         assertTrue(commandResult.equals(commandResult));
@@ -33,6 +34,9 @@ public class CommandResultTest {
 
         // different exit value -> returns false
         assertFalse(commandResult.equals(new CommandResult("feedback", false, true)));
+
+        CommandResult commandResult1 = new CommandResult(ViewTagsCommand.MESSAGE_SUCCESS);
+        assertEquals(commandResult1.shouldDisplayTagsPanel(), true);
     }
 
     @Test
