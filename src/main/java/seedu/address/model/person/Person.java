@@ -66,7 +66,7 @@ public class Person {
      *
      * @param tag The given tag to be checked with.
      * @return {@code true} if this {@code Person} is tagged with the given {@code Tag},
-     * and {@code false} otherwise.
+     *     and {@code false} otherwise.
      */
     public boolean isTaggedBy(Tag tag) {
         return tags.contains(tag);
