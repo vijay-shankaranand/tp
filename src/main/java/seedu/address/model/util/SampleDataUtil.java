@@ -47,7 +47,7 @@ public class SampleDataUtil {
 
     /**
      * Returns an array of sample tags.
-     * @return
+     * @return an array of sample tags
      */
     public static Tag[] getSampleTags() {
         return new Tag[] {

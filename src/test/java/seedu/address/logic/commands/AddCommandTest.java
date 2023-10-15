@@ -52,7 +52,9 @@ public class AddCommandTest {
     @Test
     public void addPerson_tagNotPresentInAddressBook_throwsCommandException() {
         //Empty taglist in model
-        assertThrows(CommandException.class, () -> new AddCommand(ALICE).execute(model));
+        model.deletePerson(ALICE);
+        assertThrows(CommandException.class, "Tag: friends"
+                + AddCommand.MESSAGE_INVALID_TAG, () -> new AddCommand(ALICE).execute(model));
 
     }
 

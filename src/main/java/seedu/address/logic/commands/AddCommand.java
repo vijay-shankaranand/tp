@@ -39,8 +39,8 @@ public class AddCommand extends Command {
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person's name/phone number is already in "
             + "the address book";
-    public static final String MESSAGE_INVALID_TAG = "One or more tag(s) is not in Tag List. "
-            + "Please use tags added to Tag List only";
+    public static final String MESSAGE_INVALID_TAG = " is missing in address book. "
+            + "Please use tags already added to address book.";
     private final Person toAdd;
 
 
@@ -62,7 +62,7 @@ public class AddCommand extends Command {
 
         for (Tag tag : toAdd.getTags()) {
             if (!model.hasTag(tag)) {
-                throw new CommandException(MESSAGE_INVALID_TAG);
+                throw new CommandException("Tag: " + tag + MESSAGE_INVALID_TAG);
             }
         }
 

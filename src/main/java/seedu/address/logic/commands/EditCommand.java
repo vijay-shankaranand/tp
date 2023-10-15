@@ -51,8 +51,8 @@ public class EditCommand extends Command {
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
-    public static final String MESSAGE_INVALID_TAG = "One or more tag(s) is not in Tag List. "
-            + "Please use tags added to Tag List only";
+    public static final String MESSAGE_INVALID_TAG = " is missing in address book. "
+            + "Please use tags already added to address book.";
 
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
@@ -87,7 +87,7 @@ public class EditCommand extends Command {
 
         for (Tag tag : editedPerson.getTags()) {
             if (!model.hasTag(tag)) {
-                throw new CommandException(MESSAGE_INVALID_TAG);
+                throw new CommandException("Tag: " + tag + MESSAGE_INVALID_TAG);
             }
         }
 
