@@ -2,6 +2,7 @@ package seedu.address.model.tag;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalTags.CATERING;
@@ -167,6 +168,70 @@ public class UniqueTagListTest {
     public void asUnmodifiableObservableList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, ()
                 -> uniqueTagList.asUnmodifiableObservableList().remove(0));
+    }
+    @Test
+    public void iterator_iteration_success() {
+        UniqueTagList list = new UniqueTagList();
+        list.add(VENUES);
+        list.add(CATERING);
+
+        int count = 0;
+        for (Tag tag : list) {
+            if (tag.equals(VENUES) || tag.equals(CATERING)) {
+                count++;
+            }
+        }
+        assertEquals(2, count);
+    }
+    @Test
+    public void equal_sameList_returnsTrue() {
+        UniqueTagList uniqueTagList1 = new UniqueTagList();
+        uniqueTagList1.add(VENUES);
+        uniqueTagList1.add(CATERING);
+        assertTrue(uniqueTagList1.equals(uniqueTagList1));
+    }
+
+    @Test
+    public void equals_differentLists_returnsFalse() {
+        UniqueTagList firstList = new UniqueTagList();
+        firstList.add(VENUES);
+        UniqueTagList secondList = new UniqueTagList();
+        secondList.add(CATERING);
+        assertFalse(firstList.equals(secondList));
+    }
+
+    @Test
+    public void equals_null_returnsFalse() {
+        UniqueTagList list = new UniqueTagList();
+        list.add(VENUES);
+        assertFalse(list.equals(null));
+    }
+
+    @Test
+    public void equals_differentTypes_returnsFalse() {
+        UniqueTagList list = new UniqueTagList();
+        list.add(VENUES);
+        assertFalse(list.equals(VENUES));
+    }
+
+    @Test
+    public void hashCode_sameList_equalHashCodes() {
+        UniqueTagList firstList = new UniqueTagList();
+        firstList.add(VENUES);
+        firstList.add(CATERING);
+        UniqueTagList secondList = new UniqueTagList();
+        secondList.add(VENUES);
+        secondList.add(CATERING);
+        assertEquals(firstList.hashCode(), secondList.hashCode());
+    }
+
+    @Test
+    public void hashCode_differentLists_differentHashCodes() {
+        UniqueTagList firstList = new UniqueTagList();
+        firstList.add(VENUES);
+        UniqueTagList secondList = new UniqueTagList();
+        secondList.add(CATERING);
+        assertNotEquals(firstList.hashCode(), secondList.hashCode());
     }
 
     @Test
