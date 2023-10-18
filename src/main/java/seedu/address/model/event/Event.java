@@ -10,6 +10,10 @@ import java.util.Set;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Person;
 
+/**
+ * Represents an Event in the address book.
+ * Guarantees: details are present and not null, field values are validated, immutable.
+ */
 public class Event {
 
     // Identity fields
@@ -20,6 +24,14 @@ public class Event {
     private final EventAddress address;
     private final Set<Person> contacts = new HashSet<>();
 
+    /**
+     * Constructs a {@code Event}.
+     *
+     * @param name A valid name.
+     * @param date A valid date.
+     * @param address A valid address.
+     * @param contacts A valid set of contacts.
+     */
     public Event(EventName name, EventDate date, EventAddress address, Set<Person> contacts) {
         requireAllNonNull(name, date, address, contacts);
         this.name = name;

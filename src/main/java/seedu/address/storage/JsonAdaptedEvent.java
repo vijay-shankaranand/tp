@@ -16,6 +16,9 @@ import seedu.address.model.event.EventDate;
 import seedu.address.model.event.EventName;
 import seedu.address.model.person.Person;
 
+/**
+ * Jackson-friendly version of {@link Event}.
+ */
 public class JsonAdaptedEvent {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Event's %s field is missing!";
 
@@ -63,7 +66,8 @@ public class JsonAdaptedEvent {
         }
 
         if (name == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, EventName.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    EventName.class.getSimpleName()));
         }
         if (!EventName.isValidName(name)) {
             throw new IllegalValueException(EventName.MESSAGE_CONSTRAINTS);
@@ -71,7 +75,8 @@ public class JsonAdaptedEvent {
         final EventName modelName = new EventName(name);
 
         if (date == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, EventDate.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    EventDate.class.getSimpleName()));
         }
         if (!EventDate.isValidDate(date)) {
             throw new IllegalValueException(EventDate.MESSAGE_CONSTRAINTS);
@@ -79,7 +84,8 @@ public class JsonAdaptedEvent {
         final EventDate modelDate = new EventDate(date);
 
         if (address == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, EventAddress.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    EventAddress.class.getSimpleName()));
         }
         if (!EventAddress.isValidAddress(address)) {
             throw new IllegalValueException(EventAddress.MESSAGE_CONSTRAINTS);

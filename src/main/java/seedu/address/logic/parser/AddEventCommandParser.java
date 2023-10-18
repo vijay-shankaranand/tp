@@ -5,18 +5,21 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
-import java.util.Set;
 import java.util.HashSet;
+import java.util.Set;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddEventCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.event.Event;
 import seedu.address.model.event.EventAddress;
 import seedu.address.model.event.EventDate;
 import seedu.address.model.event.EventName;
-import seedu.address.model.event.Event;
 import seedu.address.model.person.Person;
 
+/**
+ * Parses input arguments and creates a new AddEventCommand object
+ */
 public class AddEventCommandParser implements Parser<AddEventCommand> {
 
     /**

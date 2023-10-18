@@ -5,6 +5,11 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.time.DateTimeException;
 import java.time.LocalDate;
+
+/**
+ * Represents an Event's date in the address book.
+ * Guarantees: immutable; is valid as declared in {@link #isValidDate(String)}
+ */
 public class EventDate {
 
     public static final String MESSAGE_CONSTRAINTS =
@@ -31,16 +36,20 @@ public class EventDate {
     public static boolean isValidDate(String test) {
         LocalDate date;
         if (test.matches(VALIDATION_REGEX)) {
-        try {
-            date = LocalDate.parse(test);
-        } catch (DateTimeException e) {
-            return false;
-        } } else {
+            try {
+                date = LocalDate.parse(test);
+            } catch (DateTimeException e) {
+                return false;
+            }
+        } else {
             return false;
         }
         return isDateTodayOrAfter(date);
     }
 
+    /**
+     * Returns true if a given date is today or after today.
+     */
     public static boolean isDateTodayOrAfter(LocalDate date) {
         LocalDate today = LocalDate.now();
         if (date.isBefore(today)) {
