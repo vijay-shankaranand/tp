@@ -33,11 +33,11 @@ public class EventDate {
     /**
      * Returns true if a given string is a valid date.
      */
-    public static boolean isValidDate(String test) {
+    public static boolean isValidDate(String testAddress) {
         LocalDate date;
-        if (test.matches(VALIDATION_REGEX)) {
+        if (testAddress.matches(VALIDATION_REGEX)) {
             try {
-                date = LocalDate.parse(test);
+                date = LocalDate.parse(testAddress);
             } catch (DateTimeException e) {
                 return false;
             }

@@ -30,8 +30,8 @@ public class EventName {
     /**
      * Returns true if a given string is a valid name.
      */
-    public static boolean isValidName(String test) {
-        return test.matches(VALIDATION_REGEX);
+    public static boolean isValidName(String testAddress) {
+        return testAddress.matches(VALIDATION_REGEX);
     }
 
     @Override

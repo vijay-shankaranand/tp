@@ -33,8 +33,8 @@ public class EventAddress {
     /**
      * Returns true if a given string is a valid email.
      */
-    public static boolean isValidAddress(String test) {
-        return test.matches(VALIDATION_REGEX);
+    public static boolean isValidAddress(String testAddress) {
+        return testAddress.matches(VALIDATION_REGEX);
     }
 
     @Override
