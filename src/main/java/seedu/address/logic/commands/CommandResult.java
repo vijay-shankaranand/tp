@@ -59,6 +59,10 @@ public class CommandResult {
         return false;
     }
 
+    /**
+     * Returns true if the contacts panel should be displayed to the user, else false.
+     * @return true if the contacts panel should be displayed to the user, else false
+     */
     public boolean shouldDisplayContactsPanel() {
         if (feedbackToUser.equals(ListCommand.MESSAGE_SUCCESS)) {
             return true;

@@ -260,7 +260,7 @@ public class MainWindow extends UiPart<Stage> {
                 handleViewContacts(true);
             }
 
-            if(!commandResult.shouldDisplayTagsPanel() && !commandResult.shouldDisplayContactsPanel()) {
+            if (!commandResult.shouldDisplayTagsPanel() && !commandResult.shouldDisplayContactsPanel()) {
                 handleElse();
             }
 
