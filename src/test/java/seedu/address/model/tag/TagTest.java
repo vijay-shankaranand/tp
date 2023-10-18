@@ -56,4 +56,10 @@ public class TagTest {
                 new TagBuilder().withTag(tagNameWithNonAlphanumericChar).build());
     }
 
+    @Test
+    public void equal_differentType_returnsFalse() {
+        Tag tag = new Tag("vendor");
+        assertFalse(tag.equals(""));
+    }
+
 }
