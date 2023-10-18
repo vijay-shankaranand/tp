@@ -6,5 +6,6 @@
     "address": "123, Jurong West Ave 6, #08-111",
     "tags": [ "friends" ]
   }],
-  "tagList" : [ "vendor", "vendor" ]
+  "tagList" : [ "vendor", "vendor" ],
+  "events" : []
 }

@@ -1,4 +1,5 @@
 {
-  "persons": [ ],
-  "tagList" : [ "vendor", "client" ]
+  "persons" : [ ],
+  "tagList" : [ "vendor", "client" ],
+  "events" : [ ]
 }

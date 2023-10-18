@@ -21,7 +21,6 @@ public class JsonSerializableAddressBookTest {
     private static final Path INVALID_PERSON_FILE = TEST_DATA_FOLDER.resolve("invalidPersonAddressBook.json");
     private static final Path DUPLICATE_PERSON_FILE = TEST_DATA_FOLDER.resolve("duplicatePersonAddressBook.json");
     private static final Path TYPICAL_TAGS_FILE = TEST_DATA_FOLDER.resolve("typicalTagsAddressBook.json");
-
     private static final Path INVALID_TAG_FILE = TEST_DATA_FOLDER.resolve("invalidTagAddressBook.json");
     private static final Path DUPLICATE_TAG_FILE = TEST_DATA_FOLDER.resolve("duplicateTagAddressBook.json");
 
