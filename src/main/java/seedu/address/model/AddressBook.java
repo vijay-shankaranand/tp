@@ -6,6 +6,8 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.event.Event;
+import seedu.address.model.event.UniqueEventList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 import seedu.address.model.tag.Tag;
@@ -21,6 +23,8 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniqueTagList tags;
 
+    private final UniqueEventList events;
+
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
      * between constructors. See https://docs.oracle.com/javase/tutorial/java/javaOO/initial.html
@@ -31,6 +35,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     {
         persons = new UniquePersonList();
         tags = new UniqueTagList();
+        events = new UniqueEventList();
     }
 
     public AddressBook() {}
@@ -62,6 +67,14 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Replaces the contents of the event list with {@code events}.
+     * {@code events} must not contain duplicate events.
+     */
+    public void setEvents(List<Event> events) {
+        this.events.setEvents(events);
+    }
+
+    /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
      */
     public void resetData(ReadOnlyAddressBook newData) {
@@ -69,9 +82,11 @@ public class AddressBook implements ReadOnlyAddressBook {
 
         setPersons(newData.getPersonList());
         setTags(newData.getTagList());
+        setEvents(newData.getEventList());
     }
 
-    //// person-level operations
+
+    //==== person-level operations ==================================================================
 
     /**
      * Returns true if a person with the same identity as {@code person} exists in the address book.
@@ -158,6 +173,40 @@ public class AddressBook implements ReadOnlyAddressBook {
         return tags.asUnmodifiableObservableList();
     }
 
+    //======Event Operations=======================================================================
+
+    /**
+     * Returns true if an event with the same identity as {@code event} exists in the address book.
+     */
+    public boolean hasEvent(Event event) {
+        requireNonNull(event);
+        return events.contains(event);
+    }
+
+    /**
+     * Adds an event to the address book.
+     * The event must not already exist in the address book.
+     */
+    public void addEvent(Event e) {
+        events.add(e);
+    }
+
+    /**
+     * Replaces the given event {@code target} in the list with {@code editedEvent}.
+     * {@code target} must exist in the address book.
+     * The event identity of {@code editedEvent} must not be the same as another existing event in the address book.
+     */
+    public void setEvent(Event target, Event editedEvent) {
+        requireNonNull(editedEvent);
+
+        events.setEvent(target, editedEvent);
+    }
+
+    @Override
+    public ObservableList<Event> getEventList() {
+        return events.asUnmodifiableObservableList();
+    }
+
     //====== util methods ===========================================================================
 
     @Override
@@ -180,6 +229,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         return new ToStringBuilder(this)
                 .add("persons", persons)
                 .add("tags", tags)
+                .add("events", events)
                 .toString();
     }
 

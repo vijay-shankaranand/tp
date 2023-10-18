@@ -15,8 +15,8 @@ public class UserPrefs implements ReadOnlyUserPrefs {
 
     private GuiSettings guiSettings = new GuiSettings();
     private Path addressBookFilePath = Paths.get("data" , "addressbook.json");
-
     private Path tagListFilePath = Paths.get("data", "taglist.json");
+    private Path eventListFilePath = Paths.get("data", "eventlist.json");
 
     /**
      * Creates a {@code UserPrefs} with default values.
@@ -39,6 +39,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         setGuiSettings(newUserPrefs.getGuiSettings());
         setAddressBookFilePath(newUserPrefs.getAddressBookFilePath());
         setTagListFilePath(newUserPrefs.getTagListFilePath());
+        setEventListFilePath(newUserPrefs.getEventListFilePath());
     }
 
     public GuiSettings getGuiSettings() {
@@ -68,6 +69,15 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         this.tagListFilePath = tagListFilePath;
     }
 
+    public Path getEventListFilePath() {
+        return eventListFilePath;
+    }
+
+    public void setEventListFilePath(Path eventListFilePath) {
+        requireNonNull(eventListFilePath);
+        this.eventListFilePath = eventListFilePath;
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -82,12 +92,13 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         UserPrefs otherUserPrefs = (UserPrefs) other;
         return guiSettings.equals(otherUserPrefs.guiSettings)
                 && addressBookFilePath.equals(otherUserPrefs.addressBookFilePath)
-                && tagListFilePath.equals(otherUserPrefs.tagListFilePath);
+                && tagListFilePath.equals(otherUserPrefs.tagListFilePath)
+                && eventListFilePath.equals(otherUserPrefs.eventListFilePath);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(guiSettings, addressBookFilePath, tagListFilePath);
+        return Objects.hash(guiSettings, addressBookFilePath, tagListFilePath, eventListFilePath);
     }
 
     @Override
@@ -96,6 +107,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         sb.append("Gui Settings : " + guiSettings);
         sb.append("\nLocal address book data file location : " + addressBookFilePath);
         sb.append("\nLocal tag list file location : " + tagListFilePath);
+        sb.append("\nLocal event list file location : " + eventListFilePath);
         return sb.toString();
     }
 
