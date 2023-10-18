@@ -23,5 +23,4 @@
           GridPane.columnIndex="1" GridPane.rowIndex="0" GridPane.columnSpan="1">
         <StackPane fx:id="personListPanelPlaceholder" prefHeight="99999" VBox.vgrow="ALWAYS"/>
     </VBox>
-    
 </GridPane>
