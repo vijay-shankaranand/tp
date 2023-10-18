@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+
+<?import javafx.geometry.Insets?>
+<GridPane fx:id="eventContactDisplay" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+          prefHeight="99999" minWidth="340.0" prefWidth="340.0"
+          alignment="CENTER_LEFT" hgap="10" vgap="10">
+    <padding>
+        <Insets top="5" bottom="5"/>
+    </padding>
+    <columnConstraints>
+        <ColumnConstraints hgrow="ALWAYS" minWidth="120" prefWidth="120" />
+    </columnConstraints>
+    <VBox fx:id="tagList" VBox.vgrow="ALWAYS"
+          GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.columnSpan="1">
+        <StackPane fx:id="tagListPanelPlaceholder" prefHeight="99999" VBox.vgrow="ALWAYS"/>
+    </VBox>
+    <columnConstraints>
+        <ColumnConstraints hgrow="ALWAYS" minWidth="120" prefWidth="120" />
+    </columnConstraints>
+    <VBox fx:id="personList" VBox.vgrow="ALWAYS"
+          GridPane.columnIndex="1" GridPane.rowIndex="0" GridPane.columnSpan="1">
+        <StackPane fx:id="personListPanelPlaceholder" prefHeight="99999" VBox.vgrow="ALWAYS"/>
+    </VBox>
+</GridPane>
