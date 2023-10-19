@@ -31,10 +31,12 @@ public class MainWindow extends UiPart<Stage> {
     private Logic logic;
     private boolean shouldDisplayTags;
     private boolean shouldDisplayContacts;
+    private boolean shouldDisplayEvents;
 
     // Independent Ui parts residing in this Ui container
-    private TagListPanel tagListPanel;
     private PersonListPanel personListPanel;
+    private TagListPanel tagListPanel;
+    private EventListPanel eventListPanel;
     private EventContactDisplay eventContactDisplay;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
@@ -65,6 +67,7 @@ public class MainWindow extends UiPart<Stage> {
         this.logic = logic;
         this.shouldDisplayTags = false;
         this.shouldDisplayContacts = false;
+        this.shouldDisplayContacts = false;
 
         // Configure the UI
         setWindowDefaultSize(logic.getGuiSettings());
@@ -78,12 +81,16 @@ public class MainWindow extends UiPart<Stage> {
         return primaryStage;
     }
 
-    private void setDisplayStatus(boolean status) {
+    private void setTagDisplayStatus(boolean status) {
         shouldDisplayTags = status;
     }
 
     private void setContactDisplayStatus(boolean status) {
         shouldDisplayContacts = status;
+    }
+
+    private void setEventDisplayStatus(boolean status) {
+        shouldDisplayEvents = status;
     }
 
     private void setAccelerators() {
@@ -136,6 +143,13 @@ public class MainWindow extends UiPart<Stage> {
                 listPanelPlaceholder.getChildren().remove(0, 1);
             }
             listPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        } else if (shouldDisplayEvents) {
+            System.out.println("displaying events");
+            eventListPanel = new EventListPanel(logic.getFilteredEventList());
+            if (!listPanelPlaceholder.getChildren().isEmpty()) {
+                listPanelPlaceholder.getChildren().remove(0, 1);
+            }
+            listPanelPlaceholder.getChildren().add(eventListPanel.getRoot());
         } else {
             eventContactDisplay = new EventContactDisplay(logic);
             if (!listPanelPlaceholder.getChildren().isEmpty()) {
@@ -202,6 +216,10 @@ public class MainWindow extends UiPart<Stage> {
         return tagListPanel;
     }
 
+    public EventListPanel getEventListPanel() {
+        return eventListPanel;
+    }
+
     public void updateResultDisplay(CommandResult commandResult) {
         resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
     }
@@ -210,7 +228,7 @@ public class MainWindow extends UiPart<Stage> {
      * Shows the tags panel to the user.
      */
     public void handleViewTags(boolean shouldDisplayTags) {
-        setDisplayStatus(shouldDisplayTags);
+        setTagDisplayStatus(shouldDisplayTags);
         setContactDisplayStatus(false);
         fillInnerParts();
     }
@@ -221,7 +239,14 @@ public class MainWindow extends UiPart<Stage> {
      */
     public void handleViewContacts(boolean shouldDisplayContacts) {
         setContactDisplayStatus(shouldDisplayContacts);
-        setDisplayStatus(false);
+        setTagDisplayStatus(false);
+        fillInnerParts();
+    }
+
+    public void handleViewEvents(boolean shouldDisplayEvents) {
+        setEventDisplayStatus(shouldDisplayEvents);
+        setContactDisplayStatus(false);
+        setTagDisplayStatus(false);
         fillInnerParts();
     }
 
@@ -229,8 +254,9 @@ public class MainWindow extends UiPart<Stage> {
      * Shows the event and contact panel to the user.
      */
     public void handleElse() {
-        setDisplayStatus(false);
+        setTagDisplayStatus(false);
         setContactDisplayStatus(false);
+        setEventDisplayStatus(false);
         fillInnerParts();
     }
 
@@ -258,6 +284,10 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.shouldDisplayContactsPanel()) {
                 handleViewContacts(true);
+            }
+
+            if (commandResult.shouldDisplayEventsPanel()) {
+                handleViewEvents(true);
             }
 
             if (!commandResult.shouldDisplayTagsPanel() && !commandResult.shouldDisplayContactsPanel()) {

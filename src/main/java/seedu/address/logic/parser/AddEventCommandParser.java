@@ -9,7 +9,7 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Stream;
 
-import seedu.address.logic.commands.AddEventCommand;
+import seedu.address.logic.commands.event.AddEventCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.EventAddress;
@@ -44,7 +44,6 @@ public class AddEventCommandParser implements Parser<AddEventCommand> {
         Event event = new Event(name, date, address, contacts);
 
         return new AddEventCommand(event);
-
     }
 
     /**
