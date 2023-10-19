@@ -64,7 +64,7 @@ public class Event {
      * Checks whether this {@code Event} is linked to the given {@code Person}.
      * @param contact The {@code Person} to be checked with.
      * @return {@code true} if this {@code Event} is linked to the given {@code Person}
-     * and {@code false} otherwise.
+     *     and {@code false} otherwise.
      */
     public boolean isLinkedToContact(Person contact) {
         return contacts.stream().anyMatch(contact::isSamePerson);
@@ -74,7 +74,7 @@ public class Event {
      * Links the given {@code Person} to this {@code Event}.
      * @param toLink The {@code Person} to be linked to this {@code Event}.
      */
-    public void linkContact (Person toLink) {
+    public void linkContact(Person toLink) {
         contacts.add(toLink);
     }
 
