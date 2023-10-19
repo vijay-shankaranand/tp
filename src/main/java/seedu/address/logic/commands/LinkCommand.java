@@ -29,10 +29,10 @@ public class LinkCommand extends Command {
             + PREFIX_CONTACT + "John Doe";
 
     public static final String MESSAGE_SUCCESS = "Linked contact: %1$s to event: %2$s";
-    public static final String MESSAGE_NO_SUCH_EVENT = "This event does not exist in the event list. "
-            + "Please add it in first: %1$s";
-    public static final String MESSAGE_NO_SUCH_CONTACT = "This person does not exist in JobFestGo. "
-            + "Please add it in first: %1$s";
+    public static final String MESSAGE_NO_SUCH_EVENT = "The event: %1$s does not exist in the event list. "
+            + "Please add it in first.";
+    public static final String MESSAGE_NO_SUCH_CONTACT = "The person: %1$s does not exist in JobFestGo. "
+            + "Please add it in first.";
     public static final String MESSAGE_LINKED_CONTACT = "The contact: %1$s is already linked to the event: %2$s";
 
     private final EventName eventNameToLink;
@@ -55,12 +55,12 @@ public class LinkCommand extends Command {
             Person contactToLink = model.getPerson(contactNameToLink);
 
             if (eventToLink.isLinkedToContact(contactToLink)) {
-                throw new CommandException(String.format(MESSAGE_LINKED_CONTACT, contactNameToLink, eventToLink));
+                throw new CommandException(String.format(MESSAGE_LINKED_CONTACT, contactNameToLink, eventNameToLink));
             }
 
             eventToLink.linkContact(contactToLink);
 
-            return new CommandResult(String.format(MESSAGE_SUCCESS, contactNameToLink, eventToLink));
+            return new CommandResult(String.format(MESSAGE_SUCCESS, contactNameToLink, eventNameToLink));
         } catch (EventNotFoundException enfe) {
             throw new CommandException(String.format(MESSAGE_NO_SUCH_EVENT, eventNameToLink));
         } catch (PersonNotFoundException pnfe) {
