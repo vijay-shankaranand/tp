@@ -235,7 +235,7 @@ public class MainWindow extends UiPart<Stage> {
 
     /**
      * Shows the contacts panel to the user if the user wants to view contacts.
-     * @param shouldDisplayContacts true if the user wants to view contacts.
+     * @param shouldDisplayContacts true if the user wants to view contacts
      */
     public void handleViewContacts(boolean shouldDisplayContacts) {
         setContactDisplayStatus(shouldDisplayContacts);
@@ -243,6 +243,10 @@ public class MainWindow extends UiPart<Stage> {
         fillInnerParts();
     }
 
+    /**
+     * Shows the events panel to the user if the user wants to view events.
+     * @param shouldDisplayEvents true if the user wants to view events
+     */
     public void handleViewEvents(boolean shouldDisplayEvents) {
         setEventDisplayStatus(shouldDisplayEvents);
         setContactDisplayStatus(false);
@@ -290,7 +294,8 @@ public class MainWindow extends UiPart<Stage> {
                 handleViewEvents(true);
             }
 
-            if (!commandResult.shouldDisplayTagsPanel() && !commandResult.shouldDisplayContactsPanel()) {
+            if (!commandResult.shouldDisplayTagsPanel() && !commandResult.shouldDisplayContactsPanel()
+                    && !commandResult.shouldDisplayEventsPanel()) {
                 handleElse();
             }
 
