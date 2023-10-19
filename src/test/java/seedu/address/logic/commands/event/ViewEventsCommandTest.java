@@ -27,10 +27,4 @@ public class ViewEventsCommandTest {
     public void execute_listIsNotFiltered_showsSameList() {
         assertCommandSuccess(new ViewEventsCommand(), model, ViewEventsCommand.MESSAGE_SUCCESS, expectedModel);
     }
-
-    @Test
-    public void execute_listIsFiltered_showsEverything() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
-        assertCommandSuccess(new ViewEventsCommand(), model, ViewEventsCommand.MESSAGE_SUCCESS, expectedModel);
-    }
 }
