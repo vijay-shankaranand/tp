@@ -114,6 +114,8 @@ public class UniquePersonList implements Iterable<Person> {
                         newTagList.add(t);
                     }
                 }
+            } else {
+                newTagList = tagList;
             }
             Person editedPerson = new Person(curr.getName(), curr.getPhone(),
                 curr.getEmail(), curr.getAddress(), newTagList);

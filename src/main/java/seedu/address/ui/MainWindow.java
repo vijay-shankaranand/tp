@@ -30,10 +30,12 @@ public class MainWindow extends UiPart<Stage> {
     private Stage primaryStage;
     private Logic logic;
     private boolean shouldDisplayTags;
+    private boolean shouldDisplayContacts;
 
     // Independent Ui parts residing in this Ui container
-    private PersonListPanel personListPanel;
     private TagListPanel tagListPanel;
+    private PersonListPanel personListPanel;
+    private EventContactDisplay eventContactDisplay;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -62,6 +64,7 @@ public class MainWindow extends UiPart<Stage> {
         this.primaryStage = primaryStage;
         this.logic = logic;
         this.shouldDisplayTags = false;
+        this.shouldDisplayContacts = false;
 
         // Configure the UI
         setWindowDefaultSize(logic.getGuiSettings());
@@ -77,6 +80,10 @@ public class MainWindow extends UiPart<Stage> {
 
     private void setDisplayStatus(boolean status) {
         shouldDisplayTags = status;
+    }
+
+    private void setContactDisplayStatus(boolean status) {
+        shouldDisplayContacts = status;
     }
 
     private void setAccelerators() {
@@ -119,10 +126,22 @@ public class MainWindow extends UiPart<Stage> {
     void fillInnerParts() {
         if (shouldDisplayTags) {
             tagListPanel = new TagListPanel(logic.getFilteredTagList());
+            if (!listPanelPlaceholder.getChildren().isEmpty()) {
+                listPanelPlaceholder.getChildren().remove(0, 1);
+            }
             listPanelPlaceholder.getChildren().add(tagListPanel.getRoot());
-        } else {
+        } else if (shouldDisplayContacts) {
             personListPanel = new PersonListPanel(logic.getFilteredPersonList());
+            if (!listPanelPlaceholder.getChildren().isEmpty()) {
+                listPanelPlaceholder.getChildren().remove(0, 1);
+            }
             listPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        } else {
+            eventContactDisplay = new EventContactDisplay(logic);
+            if (!listPanelPlaceholder.getChildren().isEmpty()) {
+                listPanelPlaceholder.getChildren().remove(0, 1);
+            }
+            listPanelPlaceholder.getChildren().add(eventContactDisplay.getRoot());
         }
 
         resultDisplay = new ResultDisplay();
@@ -183,11 +202,35 @@ public class MainWindow extends UiPart<Stage> {
         return tagListPanel;
     }
 
+    public void updateResultDisplay(CommandResult commandResult) {
+        resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+    }
+
     /**
      * Shows the tags panel to the user.
      */
     public void handleViewTags(boolean shouldDisplayTags) {
         setDisplayStatus(shouldDisplayTags);
+        setContactDisplayStatus(false);
+        fillInnerParts();
+    }
+
+    /**
+     * Shows the contacts panel to the user if the user wants to view contacts.
+     * @param shouldDisplayContacts true if the user wants to view contacts.
+     */
+    public void handleViewContacts(boolean shouldDisplayContacts) {
+        setContactDisplayStatus(shouldDisplayContacts);
+        setDisplayStatus(false);
+        fillInnerParts();
+    }
+
+    /**
+     * Shows the event and contact panel to the user.
+     */
+    public void handleElse() {
+        setDisplayStatus(false);
+        setContactDisplayStatus(false);
         fillInnerParts();
     }
 
@@ -200,7 +243,6 @@ public class MainWindow extends UiPart<Stage> {
         try {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
-            resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
             if (commandResult.isShowHelp()) {
                 handleHelp();
@@ -212,10 +254,17 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.shouldDisplayTagsPanel()) {
                 handleViewTags(true);
-            } else {
-                handleViewTags(false);
             }
 
+            if (commandResult.shouldDisplayContactsPanel()) {
+                handleViewContacts(true);
+            }
+
+            if (!commandResult.shouldDisplayTagsPanel() && !commandResult.shouldDisplayContactsPanel()) {
+                handleElse();
+            }
+
+            resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
             return commandResult;
         } catch (CommandException | ParseException e) {
             logger.info("An error occurred while executing command: " + commandText);

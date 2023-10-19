@@ -39,12 +39,12 @@ public class UniqueTagList implements Iterable<Tag> {
      * Adds a tag  to the list.
      * The tag must not already exist in the list.
      */
-    public void add(Tag tagToBAdd) {
-        requireNonNull(tagToBAdd);
-        if (contains(tagToBAdd)) {
+    public void add(Tag tagToBeAdded) {
+        requireNonNull(tagToBeAdded);
+        if (contains(tagToBeAdded)) {
             throw new DuplicateTagException();
         }
-        internalList.add(tagToBAdd);
+        internalList.add(tagToBeAdded);
     }
 
     /**

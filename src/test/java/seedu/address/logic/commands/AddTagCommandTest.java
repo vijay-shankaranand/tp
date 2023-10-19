@@ -2,7 +2,12 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalTags.CLIENTS;
+import static seedu.address.testutil.TypicalTags.VENUES;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -19,6 +24,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.event.Event;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.TagBuilder;
@@ -49,6 +55,31 @@ public class AddTagCommandTest {
         assertThrows(CommandException.class, AddTagCommand.MESSAGE_DUPLICATE_TAG, () -> addCommand.execute(modelStub));
     }
 
+    @Test
+    public void equals() {
+        AddTagCommand addFirstTagCommand = new AddTagCommand(VENUES);
+        AddTagCommand addSecondTagCommand = new AddTagCommand(CLIENTS);
+
+        assertTrue(addFirstTagCommand.equals(addFirstTagCommand));
+        assertTrue(addFirstTagCommand.equals(new AddTagCommand(VENUES)));
+        assertFalse(addSecondTagCommand.equals(addFirstTagCommand));
+        assertFalse(addFirstTagCommand.equals(null));
+        assertFalse(addFirstTagCommand.equals(""));
+        assertFalse(addFirstTagCommand.equals(addSecondTagCommand));
+    }
+
+    @Test
+    public void toString_testEqualTags() {
+        AddTagCommand addTagCommand = new AddTagCommand(VENUES);
+        assertEquals(addTagCommand.toString(), addTagCommand.toString());
+    }
+
+    @Test
+    public void toString_testDifferentTags() {
+        AddTagCommand addFirstTagCommand = new AddTagCommand(VENUES);
+        AddTagCommand addSecondTagCommand = new AddTagCommand(CLIENTS);
+        assertNotEquals(addSecondTagCommand.toString(), addFirstTagCommand.toString());
+    }
     /**
      * A default model stub that have all of the methods failing.
      */
@@ -152,6 +183,32 @@ public class AddTagCommandTest {
         public void updateFilteredTagList(Predicate<Tag> predicate) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public void addEvent(Event event) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setEvent(Event target, Event editedEvent) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasEvent(Event event) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredEventList(Predicate<Event> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Event> getFilteredEventList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
     }
 
     /**

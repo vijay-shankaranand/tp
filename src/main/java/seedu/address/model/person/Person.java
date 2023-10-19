@@ -10,6 +10,7 @@ import java.util.Set;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.tag.Tag;
 
+
 /**
  * Represents a Person in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
@@ -62,7 +63,18 @@ public class Person {
     }
 
     /**
-     * Returns true if both persons have the same name.
+     * Checks whether this {@code Person} is tagged by a given {@code Tag}.
+     *
+     * @param tag The given tag to be checked with.
+     * @return {@code true} if this {@code Person} is tagged with the given {@code Tag},
+     *     and {@code false} otherwise.
+     */
+    public boolean isTaggedBy(Tag tag) {
+        return tags.contains(tag);
+    }
+
+    /**
+     * Returns true if both persons have the same name or same phone number.
      * This defines a weaker notion of equality between two persons.
      */
     public boolean isSamePerson(Person otherPerson) {
@@ -71,7 +83,8 @@ public class Person {
         }
 
         return otherPerson != null
-                && otherPerson.getName().equals(getName());
+                && (otherPerson.getName().equals(getName())
+                || otherPerson.getPhone().equals(getPhone()));
     }
 
     /**

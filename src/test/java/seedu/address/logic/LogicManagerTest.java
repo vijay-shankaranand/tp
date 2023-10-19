@@ -13,16 +13,19 @@ import static seedu.address.testutil.TypicalPersons.AMY;
 import java.io.IOException;
 import java.nio.file.AccessDeniedException;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
+import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
@@ -176,5 +179,33 @@ public class LogicManagerTest {
         ModelManager expectedModel = new ModelManager();
         expectedModel.addPerson(expectedPerson);
         assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void getAddressBook_validAddressBook_success() {
+        ReadOnlyAddressBook sampleAddressBook = new AddressBook();
+        model.setAddressBook(sampleAddressBook); // Set the model's address book to the sample address book
+        assertEquals(sampleAddressBook, logic.getAddressBook());
+    }
+
+    @Test
+    public void getAddressBookFilePath_validFilePath_success() {
+        Path validFilePath = Paths.get("data/addressBook.json");
+        model.setAddressBookFilePath(validFilePath);
+        assertEquals(validFilePath, logic.getAddressBookFilePath());
+    }
+
+    @Test
+    public void getGuiSettings_validGuiSettings_success() {
+        GuiSettings validGuiSettings = new GuiSettings(800, 600, 0, 0);
+        model.setGuiSettings(validGuiSettings);
+        assertEquals(validGuiSettings, logic.getGuiSettings());
+    }
+
+    @Test
+    public void setGuiSettings_validGuiSettings_success() {
+        GuiSettings validGuiSettings = new GuiSettings(1024, 768, 100, 50);
+        logic.setGuiSettings(validGuiSettings);
+        assertEquals(validGuiSettings, model.getGuiSettings());
     }
 }

@@ -7,6 +7,7 @@ import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -14,12 +15,14 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddTagCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.DeleteTagCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
+import seedu.address.logic.commands.FilterCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
@@ -27,6 +30,7 @@ import seedu.address.logic.commands.ViewTagsCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.PersonIsTaggedPredicate;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
@@ -66,11 +70,15 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_deleteTag() throws Exception {
-        Tag tag = new Tag("vendor");
-        DeleteTagCommand command = (DeleteTagCommand) parser.parseCommand(DeleteTagCommand.COMMAND_WORD
-            + " " + "t/vendor");
-        assertEquals(new DeleteTagCommand(tag), command);
+    public void parseCommand_filter() throws Exception {
+        Tag tag = new Tag("friends");
+        List<Tag> tagList = new ArrayList<>();
+        tagList.add(tag);
+        PersonIsTaggedPredicate predicate = new PersonIsTaggedPredicate(tagList);
+
+        FilterCommand command = (FilterCommand) parser.parseCommand(FilterCommand.COMMAND_WORD
+                + " " + "friends");
+        assertEquals(new FilterCommand(tagList, predicate), command);
     }
 
     @Test
@@ -88,9 +96,21 @@ public class AddressBookParserTest {
     }
 
     @Test
+    public void parseCommand_addTag() throws Exception {
+        assertTrue(parser.parseCommand(AddTagCommand.COMMAND_WORD + " t/vendor") instanceof AddTagCommand);
+    }
+
+    @Test
     public void parseCommand_viewtag() throws Exception {
         assertTrue(parser.parseCommand(ViewTagsCommand.COMMAND_WORD) instanceof ViewTagsCommand);
         assertTrue(parser.parseCommand(ViewTagsCommand.COMMAND_WORD + " 3") instanceof ViewTagsCommand);
+    }
+    @Test
+    public void parseCommand_deleteTag() throws Exception {
+        Tag tag = new Tag("vendor");
+        DeleteTagCommand command = (DeleteTagCommand) parser.parseCommand(DeleteTagCommand.COMMAND_WORD
+                + " " + "t/vendor");
+        assertEquals(new DeleteTagCommand(tag), command);
     }
 
     @Test

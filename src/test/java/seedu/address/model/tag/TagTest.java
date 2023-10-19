@@ -42,9 +42,9 @@ public class TagTest {
         // null -> returns false
         assertFalse(VENUES.isSameTag(null));
 
-        // Tag name differs in case -> returns false
+        // Tag name differs in case -> returns true
         Tag editedVenues = new TagBuilder().withTag(VENUES.getTagName().toUpperCase()).build();
-        assertFalse(VENUES.isSameTag(editedVenues));
+        assertTrue(VENUES.isSameTag(editedVenues));
 
         // Tag name has trailing spaces -> throws illegalArgumentException as " " found
         String tagNameWithTrailingSpaces = VENUES.getTagName() + " ";
@@ -54,6 +54,12 @@ public class TagTest {
         String tagNameWithNonAlphanumericChar = VENUES.getTagName() + "_";
         assertThrows(IllegalArgumentException.class, () ->
                 new TagBuilder().withTag(tagNameWithNonAlphanumericChar).build());
+    }
+
+    @Test
+    public void equal_differentType_returnsFalse() {
+        Tag tag = new Tag("vendor");
+        assertFalse(tag.equals(""));
     }
 
 }

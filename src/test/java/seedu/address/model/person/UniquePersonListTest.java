@@ -2,6 +2,7 @@ package seedu.address.model.person;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
@@ -170,7 +171,7 @@ public class UniquePersonListTest {
     }
 
     @Test
-    public void updateTag_successful() {
+    public void updateTag_success() {
         uniquePersonList.add(ALICE);
         uniquePersonList.updateTag(new Tag("friends"));
         Person editedAlice = new PersonBuilder().withName("Alice Pauline")
@@ -178,6 +179,72 @@ public class UniquePersonListTest {
             .withPhone("94351253")
             .build();
         assertTrue(uniquePersonList.contains(editedAlice));
+    }
+
+    @Test
+    public void iterator_iteration_success() {
+        UniquePersonList list = new UniquePersonList();
+        list.add(ALICE);
+        list.add(BOB);
+
+        int count = 0;
+        for (Person person : list) {
+            if (person.equals(ALICE) || person.equals(BOB)) {
+                count++;
+            }
+        }
+        assertEquals(2, count);
+    }
+
+    @Test
+    public void equals_sameList_returnsTrue() {
+        UniquePersonList list = new UniquePersonList();
+        list.add(ALICE);
+        list.add(BOB);
+        assertTrue(list.equals(list));
+    }
+
+    @Test
+    public void equals_differentLists_returnsFalse() {
+        UniquePersonList firstList = new UniquePersonList();
+        firstList.add(ALICE);
+        UniquePersonList secondList = new UniquePersonList();
+        secondList.add(BOB);
+        assertFalse(firstList.equals(secondList));
+    }
+
+    @Test
+    public void equals_null_returnsFalse() {
+        UniquePersonList list = new UniquePersonList();
+        list.add(ALICE);
+        assertFalse(list.equals(null));
+    }
+
+    @Test
+    public void equals_differentTypes_returnsFalse() {
+        UniquePersonList list = new UniquePersonList();
+        list.add(ALICE);
+        assertFalse(list.equals(ALICE));
+    }
+
+    @Test
+    public void hashCode_sameList_equalHashCodes() {
+        UniquePersonList firstList = new UniquePersonList();
+        firstList.add(ALICE);
+        firstList.add(BOB);
+        UniquePersonList secondList = new UniquePersonList();
+        secondList.add(ALICE);
+        secondList.add(BOB);
+        assertEquals(firstList.hashCode(), secondList.hashCode());
+    }
+
+    @Test
+    public void hashCode_differentLists_differentHashCodes() {
+        UniquePersonList firstList = new UniquePersonList();
+        firstList.add(ALICE);
+        UniquePersonList secondList = new UniquePersonList();
+        secondList.add(BOB);
+        assertNotEquals(firstList.hashCode(), secondList.hashCode());
     }
 
     @Test

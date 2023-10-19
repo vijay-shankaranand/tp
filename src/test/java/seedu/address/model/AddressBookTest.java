@@ -19,6 +19,7 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.event.Event;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.tag.Tag;
@@ -33,6 +34,7 @@ public class AddressBookTest {
     public void constructor() {
         assertEquals(Collections.emptyList(), addressBook.getPersonList());
         assertEquals(Collections.emptyList(), addressBook.getTagList());
+        assertEquals(Collections.emptyList(), addressBook.getEventList());
     }
 
     @Test
@@ -136,7 +138,8 @@ public class AddressBookTest {
     public void toStringMethod() {
         String expected = AddressBook.class.getCanonicalName() + "{persons=" + addressBook.getPersonList()
                 +
-                ", tags=" + addressBook.getTagList() + "}";
+                ", tags=" + addressBook.getTagList()
+                + ", events=" + addressBook.getEventList() + "}";
         assertEquals(expected, addressBook.toString());
     }
 
@@ -148,9 +151,12 @@ public class AddressBookTest {
 
         private final ObservableList<Tag> tags = FXCollections.observableArrayList();
 
+        private final ObservableList<Event> events = FXCollections.observableArrayList();
+
         AddressBookStub(Collection<Person> persons, Collection<Tag> tags) {
             this.persons.setAll(persons);
             this.tags.setAll(tags);
+            this.events.setAll(events);
         }
 
         @Override
@@ -162,6 +168,10 @@ public class AddressBookTest {
         public ObservableList<Tag> getTagList() {
             return tags;
         }
-    }
 
+        @Override
+        public ObservableList<Event> getEventList() {
+            return events;
+        }
+    }
 }
