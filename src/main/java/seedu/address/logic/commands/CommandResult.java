@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.commands.event.ViewEventsCommand;
 
 /**
  * Represents the result of a command execution.
@@ -65,6 +66,17 @@ public class CommandResult {
      */
     public boolean shouldDisplayContactsPanel() {
         if (feedbackToUser.equals(ListCommand.MESSAGE_SUCCESS)) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Returns true if the events panel should be displayed to the user, else false.
+     * @return true if the events panel should be displayed to the user, else false
+     */
+    public boolean shouldDisplayEventsPanel() {
+        if (feedbackToUser.equals(ViewEventsCommand.MESSAGE_SUCCESS)) {
             return true;
         }
         return false;

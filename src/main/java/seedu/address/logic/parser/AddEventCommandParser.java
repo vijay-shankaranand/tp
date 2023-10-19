@@ -44,7 +44,6 @@ public class AddEventCommandParser implements Parser<AddEventCommand> {
         Event event = new Event(name, date, address, contacts);
 
         return new AddEventCommand(event);
-
     }
 
     /**
