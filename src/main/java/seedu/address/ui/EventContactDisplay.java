@@ -8,6 +8,8 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
+import seedu.address.logic.commands.CommandResult;
+import seedu.address.model.event.Event;
 
 /**
  * Panel containing events list and contacts list.
@@ -22,7 +24,7 @@ public class EventContactDisplay extends UiPart<Region> {
 
     //Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
-    private TagListPanel tagListPanel;
+    private EventListPanel eventListPanel;
 
     @FXML
     private GridPane eventContactDisplay;
@@ -31,10 +33,10 @@ public class EventContactDisplay extends UiPart<Region> {
     private StackPane personListPanelPlaceholder;
 
     @FXML
-    private StackPane tagListPanelPlaceholder;
+    private StackPane eventListPanelPlaceholder;
 
     @FXML
-    private StackPane tagCardPlaceholder;
+    private StackPane eventCardPlaceholder;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Logic}.
@@ -45,13 +47,25 @@ public class EventContactDisplay extends UiPart<Region> {
         fillInnerParts();
     }
     /**
-     * Fills up all the placeholders of this window
+     * Fills up all the placeholders of this window.
      */
     private void fillInnerParts() {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
-        tagListPanel = new TagListPanel(logic.getFilteredTagList());
-        tagListPanelPlaceholder.getChildren().add(tagListPanel.getRoot());
+        eventListPanel = new EventListPanel(logic.getFilteredEventList());
+        eventListPanelPlaceholder.getChildren().add(eventListPanel.getRoot());
+    }
+
+    /**
+     * Sets the feedback to user in the case that there is a change in UI.
+     *
+     * @param commandResult the command result of command executed.
+     */
+    public void setFeedbackToUser(CommandResult commandResult) {
+        Event selectedEvent = commandResult.getSelectedEvent();
+        if (selectedEvent != null) {
+            eventListPanel.selectEvent(selectedEvent);
+        }
     }
 }
