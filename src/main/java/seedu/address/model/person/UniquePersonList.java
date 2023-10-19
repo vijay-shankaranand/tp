@@ -10,6 +10,9 @@ import java.util.Set;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.event.Event;
+import seedu.address.model.event.EventName;
+import seedu.address.model.event.exceptions.EventNotFoundException;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 import seedu.address.model.tag.Tag;
@@ -49,6 +52,25 @@ public class UniquePersonList implements Iterable<Person> {
             throw new DuplicatePersonException();
         }
         internalList.add(toAdd);
+    }
+
+    /**
+     * Returns the {@code Person} with given name from the list.
+     * @param name The name of the desired {@code Person}.
+     */
+    public Person getByName(Name name) throws PersonNotFoundException {
+        Person toGet = null;
+        for (int i = 0; i < internalList.size(); i++) {
+            Person thisPerson = internalList.get(i);
+            if (thisPerson.getName().equals(name)) {
+                toGet = thisPerson;
+            }
+        }
+        if (toGet == null) {
+            throw new PersonNotFoundException();
+        } else {
+            return toGet;
+        }
     }
 
     /**
