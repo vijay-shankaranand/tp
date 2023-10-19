@@ -135,6 +135,12 @@ public interface Model {
     boolean hasEvent(Event event);
 
     /**
+     * Deletes the given event.
+     * The event must exist in the address book.
+     */
+    void deleteEvent(Event target);
+
+    /**
      * Adds the given event.
      * {@code event} must not already exist in the event list.
      */

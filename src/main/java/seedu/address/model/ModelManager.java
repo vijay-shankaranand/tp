@@ -159,10 +159,15 @@ public class ModelManager implements Model {
         requireNonNull(event);
         return addressBook.hasEvent(event);
     }
+    @Override
+    public void deleteEvent(Event eventToDelete) {
+        addressBook.deleteEvent(eventToDelete);
+        updateFilteredEventList(PREDICATE_SHOW_ALL_EVENTS);
+    }
 
     @Override
-    public void addEvent(Event event) {
-        addressBook.addEvent(event);
+    public void addEvent(Event eventToAdd) {
+        addressBook.addEvent(eventToAdd);
         updateFilteredEventList(PREDICATE_SHOW_ALL_EVENTS);
     }
 
