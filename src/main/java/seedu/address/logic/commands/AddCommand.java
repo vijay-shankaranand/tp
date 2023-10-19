@@ -43,7 +43,6 @@ public class AddCommand extends Command {
             + "Please use tags already added to address book.";
     private final Person toAdd;
 
-
     /**
      * Creates an AddCommand to add the specified {@code Person}
      */

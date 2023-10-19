@@ -29,7 +29,7 @@ public class UniqueEventList implements Iterable<Event> {
             FXCollections.unmodifiableObservableList(internalList);
 
     /**
-     * Returns true if the list contains an equivalent person as the given argument.
+     * Returns true if the list contains an equivalent event as the given argument.
      */
     public boolean contains(Event toCheck) {
         requireNonNull(toCheck);
@@ -37,7 +37,7 @@ public class UniqueEventList implements Iterable<Event> {
     }
 
     /**
-     * Adds a person to the list.
+     * Adds an Event to the list.
      * The person must not already exist in the list.
      */
     public void add(Event toAdd) {
@@ -46,6 +46,25 @@ public class UniqueEventList implements Iterable<Event> {
             throw new DuplicateEventException();
         }
         internalList.add(toAdd);
+    }
+
+    /**
+     * Returns the {@code Event} with given name from the list.
+     * @param name The name of the desired {@code Event}.
+     */
+    public Event getByName(EventName name) throws EventNotFoundException {
+        Event toGet = null;
+        for (int i = 0; i < internalList.size(); i++) {
+            Event thisEvent = internalList.get(i);
+            if (thisEvent.getName().equals(name)) {
+                toGet = thisEvent;
+            }
+        }
+        if (toGet == null) {
+            throw new EventNotFoundException();
+        } else {
+            return toGet;
+        }
     }
 
     public void setEvent(Event targetEvent, Event editedEvent) {
