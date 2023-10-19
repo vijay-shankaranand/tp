@@ -10,7 +10,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class EventName {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Names should only contain alphanumeric characters and spaces, and it should not be blank";
+            "Event names should only contain alphanumeric characters and spaces, and it should not be blank";
 
     public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
 
@@ -30,8 +30,8 @@ public class EventName {
     /**
      * Returns true if a given string is a valid name.
      */
-    public static boolean isValidName(String testAddress) {
-        return testAddress.matches(VALIDATION_REGEX);
+    public static boolean isValidName(String testName) {
+        return testName.matches(VALIDATION_REGEX);
     }
 
     @Override
