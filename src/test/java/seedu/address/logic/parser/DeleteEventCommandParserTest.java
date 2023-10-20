@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.event.DeleteEventCommand;
 public class DeleteEventCommandParserTest {
-    public DeleteEventCommandParser parser = new DeleteEventCommandParser();
+    private DeleteEventCommandParser parser = new DeleteEventCommandParser();
 
     @Test
     public void parseValidArgs_returnsDeleteEventCommand() {
@@ -18,7 +18,8 @@ public class DeleteEventCommandParserTest {
 
     @Test
     public void parse_invalidArgs_throwsParseException() {
-        assertParseFailure(parser, "a", String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteEventCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "a", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                DeleteEventCommand.MESSAGE_USAGE));
     }
 
 }

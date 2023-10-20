@@ -10,6 +10,9 @@ import seedu.address.model.event.EventName;
 import seedu.address.model.person.Person;
 import seedu.address.model.util.SampleDataUtil;
 
+/**
+ * A utility class to help with building Event objects.
+ */
 public class EventBuilder {
     public static final String DEFAULT_EVENT_NAME = "NUS Career Fair 2023";
     public static final String DEFAULT_EVENT_DATE = "2023-12-12";
@@ -31,6 +34,9 @@ public class EventBuilder {
         contacts.add(new PersonBuilder().build());
     }
 
+    /**
+     * Initializes the EventBuilder with the data of {@code eventToCopy}.
+     */
     public EventBuilder(Event eventToCopy) {
         name = eventToCopy.getName();
         date = eventToCopy.getDate();
@@ -38,21 +44,33 @@ public class EventBuilder {
         contacts = eventToCopy.getContacts();
     }
 
+    /**
+     * Sets the {@code EventName} of the {@code Event} that we are building.
+     */
     public EventBuilder withEventName(String eventName) {
         this.name = new EventName(eventName);
         return this;
     }
 
+    /**
+     * Sets the {@code EventDate} of the {@code Event} that we are building.
+     */
     public EventBuilder withEventDate(String eventDate) {
         this.date = new EventDate(eventDate);
         return this;
     }
 
+    /**
+     * Sets the {@code EventAddress} of the {@code Event} that we are building.
+     */
     public EventBuilder withEventAddress(String eventAddress) {
         this.address = new EventAddress(eventAddress);
         return this;
     }
 
+    /**
+     * Parses the {@code contacts} into a {@code Set<Person>} and set it to the {@code Event} that we are building.
+     */
     public EventBuilder withEventContacts(Person ... contacts) {
         this.contacts = SampleDataUtil.getPersonSet(contacts);
         return this;
