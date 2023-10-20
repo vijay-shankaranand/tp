@@ -1,11 +1,16 @@
 package seedu.address.model.util;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.event.Event;
+import seedu.address.model.event.EventAddress;
+import seedu.address.model.event.EventDate;
+import seedu.address.model.event.EventName;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -20,7 +25,7 @@ public class SampleDataUtil {
 
     /**
      * Returns an array of sample persons.
-     * @return
+     * @return an array of sample persons
      */
     public static Person[] getSamplePersons() {
         return new Person[] {
@@ -57,9 +62,34 @@ public class SampleDataUtil {
             new Tag("family"),
             new Tag("classmates")
         };
-
     }
 
+    /**
+     * Returns an array of sample events.
+     * @return an array of sample events
+     */
+    public static Event[] getSampleEvents() {
+        Person[] samplePersons = getSamplePersons();
+        Set<Person> samplePersonSet1 = new HashSet<>();
+        samplePersonSet1.add(samplePersons[0]);
+        samplePersonSet1.add(samplePersons[1]);
+
+        Set<Person> samplePersonSet2 = new HashSet<>();
+        samplePersonSet2.add(samplePersons[2]);
+        samplePersonSet2.add(samplePersons[3]);
+        samplePersonSet2.add(samplePersons[4]);
+
+        Set<Person> samplePersonSet3 = new HashSet<>();
+
+        return new Event[] {
+            new Event(new EventName("NUS Career Fair 2023"), new EventDate("2023-12-23"),
+                    new EventAddress("311, Clementi Ave 2, #02-25"), samplePersonSet1),
+            new Event(new EventName("JobFest 2023"), new EventDate("2023-11-22"),
+                    new EventAddress("3 Temasek Blvd, Singapore 038983"), samplePersonSet2),
+            new Event(new EventName("NTU Job In Fair 2023"), new EventDate("2023-11-10"),
+                    new EventAddress("50 Nanyang Ave, #32 Block N4 #02a, Singapore 639798"), samplePersonSet3)
+        };
+    }
 
     /**
      * Returns an {@code AddressBook} with sample data.
@@ -73,6 +103,9 @@ public class SampleDataUtil {
         for (Tag sampleTag : getSampleTags()) {
             sampleAb.addTag(sampleTag);
         }
+        for (Event sampleEvent : getSampleEvents()) {
+            sampleAb.addEvent(sampleEvent);
+        }
         return sampleAb;
     }
 
@@ -83,6 +116,9 @@ public class SampleDataUtil {
         return Arrays.stream(strings)
                 .map(Tag::new)
                 .collect(Collectors.toSet());
+    }
+    public static Set<Person> getPersonSet(Person ... persons) {
+        return Arrays.stream(persons).collect(Collectors.toSet());
     }
 
 }

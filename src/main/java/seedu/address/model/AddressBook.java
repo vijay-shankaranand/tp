@@ -130,6 +130,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void removePerson(Person key) {
         persons.remove(key);
+        events.updateContacts(key);
     }
 
     //// util methods
@@ -193,11 +194,19 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Deletes a {@code event} from the address book.
+     * Deletes the event from contacts using it as well.
+     */
+    public void deleteEvent(Event eventToDelete) {
+        events.remove(eventToDelete);
+    }
+
+    /**
      * Adds an event to the address book.
      * The event must not already exist in the address book.
      */
-    public void addEvent(Event e) {
-        events.add(e);
+    public void addEvent(Event eventToAdd) {
+        events.add(eventToAdd);
     }
 
     /**

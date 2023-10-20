@@ -4,11 +4,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalTags.VENUES;
+import static seedu.address.testutil.tag.TypicalTags.VENUES;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.testutil.TagBuilder;
+import seedu.address.testutil.tag.TagBuilder;
 
 public class TagTest {
 

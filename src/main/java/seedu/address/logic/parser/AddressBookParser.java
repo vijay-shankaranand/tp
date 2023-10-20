@@ -8,24 +8,36 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.logic.commands.AddCommand;
-import seedu.address.logic.commands.AddTagCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
-import seedu.address.logic.commands.DeleteCommand;
-import seedu.address.logic.commands.DeleteTagCommand;
-import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
-import seedu.address.logic.commands.FilterCommand;
-import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
-import seedu.address.logic.commands.LinkCommand;
-import seedu.address.logic.commands.ListCommand;
-import seedu.address.logic.commands.ViewTagsCommand;
 import seedu.address.logic.commands.event.AddEventCommand;
+import seedu.address.logic.commands.event.DeleteEventCommand;
+import seedu.address.logic.commands.event.LinkCommand;
 import seedu.address.logic.commands.event.SelectEventCommand;
 import seedu.address.logic.commands.event.ViewEventsCommand;
+import seedu.address.logic.commands.person.AddCommand;
+import seedu.address.logic.commands.person.DeleteCommand;
+import seedu.address.logic.commands.person.EditCommand;
+import seedu.address.logic.commands.person.FindCommand;
+import seedu.address.logic.commands.person.ListCommand;
+import seedu.address.logic.commands.tag.AddTagCommand;
+import seedu.address.logic.commands.tag.DeleteTagCommand;
+import seedu.address.logic.commands.tag.FilterCommand;
+import seedu.address.logic.commands.tag.ViewTagsCommand;
+import seedu.address.logic.parser.event.AddEventCommandParser;
+import seedu.address.logic.parser.event.DeleteEventCommandParser;
+import seedu.address.logic.parser.event.LinkCommandParser;
+import seedu.address.logic.parser.event.SelectEventCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.logic.parser.person.AddCommandParser;
+import seedu.address.logic.parser.person.DeleteCommandParser;
+import seedu.address.logic.parser.person.EditCommandParser;
+import seedu.address.logic.parser.person.FindCommandParser;
+import seedu.address.logic.parser.tag.AddTagCommandParser;
+import seedu.address.logic.parser.tag.DeleteTagCommandParser;
+import seedu.address.logic.parser.tag.FilterCommandParser;
 
 /**
  * Parses user input.
@@ -60,7 +72,6 @@ public class AddressBookParser {
         logger.fine("Command word: " + commandWord + "; Arguments: " + arguments);
 
         switch (commandWord) {
-
         case AddCommand.COMMAND_WORD:
             return new AddCommandParser().parse(arguments);
 
@@ -84,6 +95,9 @@ public class AddressBookParser {
 
         case ViewEventsCommand.COMMAND_WORD:
             return new ViewEventsCommand();
+
+        case DeleteEventCommand.COMMAND_WORD:
+            return new DeleteEventCommandParser().parse(arguments);
 
         case SelectEventCommand.COMMAND_WORD:
             return new SelectEventCommandParser().parse(arguments);
