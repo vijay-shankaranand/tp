@@ -79,13 +79,8 @@ public class AddressBookParser {
             return new ViewEventsCommand();
         case DeleteEventCommand.COMMAND_WORD:
             return new DeleteEventCommandParser().parse(arguments);
-<<<<<<< HEAD
-=======
-            
         case SelectEventCommand.COMMAND_WORD:
             return new SelectEventCommandParser().parse(arguments);
-
->>>>>>> ebdc0222a67ab222b139c26a1964ac93d4d4ba87
         case AddTagCommand.COMMAND_WORD:
             return new AddTagCommandParser().parse(arguments);
         case ViewTagsCommand.COMMAND_WORD:
