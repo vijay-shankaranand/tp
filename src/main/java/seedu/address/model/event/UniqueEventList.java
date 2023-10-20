@@ -3,13 +3,16 @@ package seedu.address.model.event;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.event.exceptions.DuplicateEventException;
 import seedu.address.model.event.exceptions.EventNotFoundException;
+import seedu.address.model.person.Person;
 
 /**
  * A list of events that enforces uniqueness between its elements and does not allow nulls.
@@ -108,6 +111,28 @@ public class UniqueEventList implements Iterable<Event> {
         }
 
         internalList.setAll(events);
+    }
+
+    /**
+     * Replaces the event list to remove {@code person} from contact list.
+     */
+    public void updateContacts(Person person) {
+        for (int i = 0; i < internalList.size(); i++) {
+            Event curr = internalList.get(i);
+            Set<Person> contactsList = curr.getContacts();
+            Set<Person> updatedContactsList = new HashSet<>();
+            if (contactsList.contains(person)) {
+                for (Person p : contactsList) {
+                    if (!p.equals(person)) {
+                        updatedContactsList.add(p);
+                    }
+                }
+            } else {
+                updatedContactsList = contactsList;
+            }
+            Event updatedEvent = new Event(curr.getName(), curr.getDate(), curr.getAddress(), updatedContactsList);
+            internalList.set(i, updatedEvent);
+        }
     }
 
     /**
