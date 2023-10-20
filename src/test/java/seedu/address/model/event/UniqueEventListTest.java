@@ -4,8 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalEvents.JOBFEST;
-import static seedu.address.testutil.TypicalEvents.NTU;
+import static seedu.address.testutil.event.TypicalEvents.JOBFEST;
+import static seedu.address.testutil.event.TypicalEvents.NTU;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -15,7 +15,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.model.event.exceptions.DuplicateEventException;
 import seedu.address.model.event.exceptions.EventNotFoundException;
-import seedu.address.testutil.EventBuilder;
+import seedu.address.testutil.event.EventBuilder;
 
 public class UniqueEventListTest {
 

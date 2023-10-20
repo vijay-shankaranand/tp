@@ -6,6 +6,8 @@ import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.event.ViewEventsCommand;
+import seedu.address.logic.commands.person.ListCommand;
+import seedu.address.logic.commands.tag.ViewTagsCommand;
 import seedu.address.model.event.Event;
 
 /**
