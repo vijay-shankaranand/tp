@@ -6,6 +6,7 @@ import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.event.ViewEventsCommand;
+import seedu.address.model.event.Event;
 
 /**
  * Represents the result of a command execution.
@@ -19,6 +20,9 @@ public class CommandResult {
 
     /** The application should exit. */
     private final boolean exit;
+
+    /** Event selected by the user through command. */
+    private Event selectedEvent = null;
 
     /**
      * Constructs a {@code CommandResult} with the specified fields.
@@ -37,8 +41,23 @@ public class CommandResult {
         this(feedbackToUser, false, false);
     }
 
+    /**
+     * Constructs a {@code CommandResult} with the specified {@code feedbackToUser},
+     * and {@code Event} selected by the user.
+     */
+    public CommandResult(String feedbackToUser, Event eventSelected) {
+        this.feedbackToUser = requireNonNull(feedbackToUser);
+        this.showHelp = false;
+        this.exit = false;
+        this.selectedEvent = eventSelected;
+    }
+
     public String getFeedbackToUser() {
         return feedbackToUser;
+    }
+
+    public Event getSelectedEvent() {
+        return selectedEvent;
     }
 
     public boolean isShowHelp() {

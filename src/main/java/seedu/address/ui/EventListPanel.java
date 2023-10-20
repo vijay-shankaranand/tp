@@ -1,5 +1,7 @@
 package seedu.address.ui;
 
+import static java.util.Objects.requireNonNull;
+
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
@@ -27,6 +29,14 @@ public class EventListPanel extends UiPart<Region> {
         super(FXML);
         eventListView.setItems(eventList);
         eventListView.setCellFactory(listView -> new EventListViewCell());
+    }
+
+    /**
+     * Selects the {@code EventCard} of the {@code Event} given.
+     */
+    public void selectEvent(Event event) {
+        requireNonNull(event);
+        eventListView.getSelectionModel().select(event);
     }
 
     /**

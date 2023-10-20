@@ -1,14 +1,23 @@
 package seedu.address.testutil;
 
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EVENT_ADDRESS;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EVENT_DATE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EVENT_NAME;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.event.Event;
+import seedu.address.model.event.EventAddress;
+import seedu.address.model.event.EventDate;
+import seedu.address.model.event.EventName;
+import seedu.address.model.person.Person;
+
 
 /**
  * A utility class containing a list of {@code Event} objects to be used in tests.

@@ -132,30 +132,13 @@ public class MainWindow extends UiPart<Stage> {
      */
     void fillInnerParts() {
         if (shouldDisplayTags) {
-            tagListPanel = new TagListPanel(logic.getFilteredTagList());
-            if (!listPanelPlaceholder.getChildren().isEmpty()) {
-                listPanelPlaceholder.getChildren().remove(0, 1);
-            }
-            listPanelPlaceholder.getChildren().add(tagListPanel.getRoot());
+            fillTagListPanel();
         } else if (shouldDisplayContacts) {
-            personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-            if (!listPanelPlaceholder.getChildren().isEmpty()) {
-                listPanelPlaceholder.getChildren().remove(0, 1);
-            }
-            listPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+            fillContactListPanel();
         } else if (shouldDisplayEvents) {
-            System.out.println("displaying events");
-            eventListPanel = new EventListPanel(logic.getFilteredEventList());
-            if (!listPanelPlaceholder.getChildren().isEmpty()) {
-                listPanelPlaceholder.getChildren().remove(0, 1);
-            }
-            listPanelPlaceholder.getChildren().add(eventListPanel.getRoot());
+            fillEventListPanel();
         } else {
-            eventContactDisplay = new EventContactDisplay(logic);
-            if (!listPanelPlaceholder.getChildren().isEmpty()) {
-                listPanelPlaceholder.getChildren().remove(0, 1);
-            }
-            listPanelPlaceholder.getChildren().add(eventContactDisplay.getRoot());
+            fillEventContactDisplay();
         }
 
         resultDisplay = new ResultDisplay();
@@ -166,6 +149,59 @@ public class MainWindow extends UiPart<Stage> {
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+    }
+
+    /**
+     * Fills up the tag list panel with the tags in the filtered tag list.
+     */
+    void fillTagListPanel() {
+        tagListPanel = new TagListPanel(logic.getFilteredTagList());
+
+        if (!listPanelPlaceholder.getChildren().isEmpty()) {
+            listPanelPlaceholder.getChildren().clear();
+        }
+
+        listPanelPlaceholder.getChildren().add(tagListPanel.getRoot());
+    }
+
+    /**
+     * Fills up the contact list panel with the contacts in the filtered contact list.
+     */
+    void fillContactListPanel() {
+        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
+
+        if (!listPanelPlaceholder.getChildren().isEmpty()) {
+            listPanelPlaceholder.getChildren().clear();
+        }
+
+        listPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+    }
+
+    /**
+     * Fills up the event list panel with the events in the filtered event list.
+     */
+    void fillEventListPanel() {
+        eventListPanel = new EventListPanel(logic.getFilteredEventList());
+
+        if (!listPanelPlaceholder.getChildren().isEmpty()) {
+            listPanelPlaceholder.getChildren().clear();
+        }
+
+        listPanelPlaceholder.getChildren().add(eventListPanel.getRoot());
+    }
+
+    /**
+     * Fills up the event and contact display with the events and contacts
+     * in the filtered event and contact list.
+     */
+    void fillEventContactDisplay() {
+        eventContactDisplay = new EventContactDisplay(logic);
+
+        if (!listPanelPlaceholder.getChildren().isEmpty()) {
+            listPanelPlaceholder.getChildren().clear();
+        }
+
+        listPanelPlaceholder.getChildren().add(eventContactDisplay.getRoot());
     }
 
     /**
@@ -297,6 +333,7 @@ public class MainWindow extends UiPart<Stage> {
             if (!commandResult.shouldDisplayTagsPanel() && !commandResult.shouldDisplayContactsPanel()
                     && !commandResult.shouldDisplayEventsPanel()) {
                 handleElse();
+                eventContactDisplay.setFeedbackToUser(commandResult); //to display that an event is selected
             }
 
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
