@@ -8,7 +8,6 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.event.SelectEventCommand;
-import seedu.address.logic.parser.event.SelectEventCommandParser;
 
 public class SelectEventCommandParserTest {
 
