@@ -91,7 +91,6 @@ public class SampleDataUtil {
         };
     }
 
-
     /**
      * Returns an {@code AddressBook} with sample data.
      * @return
@@ -117,6 +116,9 @@ public class SampleDataUtil {
         return Arrays.stream(strings)
                 .map(Tag::new)
                 .collect(Collectors.toSet());
+    }
+    public static Set<Person> getPersonSet(Person ... persons) {
+        return Arrays.stream(persons).collect(Collectors.toSet());
     }
 
 }

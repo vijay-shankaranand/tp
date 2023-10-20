@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalEvents.JOBFEST;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalTags.VENUES;
@@ -23,6 +24,7 @@ import seedu.address.model.event.Event;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.tag.Tag;
+import seedu.address.testutil.EventBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.TagBuilder;
 
@@ -132,6 +134,43 @@ public class AddressBookTest {
     @Test
     public void getTagsList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> addressBook.getTagList().remove(0));
+    }
+
+    @Test
+    public void hasEvent_nullEvent_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> addressBook.hasEvent(null));
+    }
+
+    @Test
+    public void hasEvent_eventNotInAddressBook_returnsFalse() {
+        assertFalse(addressBook.hasEvent(JOBFEST));
+    }
+
+    @Test
+    public void hasEvent_eventInAddressBook_returnsTrue() {
+        addressBook.addEvent(JOBFEST);
+        assertTrue(addressBook.hasEvent(JOBFEST));
+    }
+
+    @Test
+    public void hasEvent_eventWithSameIdentityFieldsInAddressBook_returnsTrue() {
+        addressBook.addEvent(JOBFEST);
+        Event editedEvent = new EventBuilder(JOBFEST)
+                .withEventDate("2023-12-01")
+                .build();
+        assertTrue(addressBook.hasEvent(editedEvent));
+    }
+
+    @Test
+    public void deleteEvent_successful_returnsTrue() {
+        addressBook.addEvent(JOBFEST);
+        addressBook.deleteEvent(JOBFEST);
+        assertFalse(addressBook.hasEvent(JOBFEST));
+    }
+
+    @Test
+    public void getEventList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> addressBook.getEventList().remove(0));
     }
 
     @Test
