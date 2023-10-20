@@ -6,8 +6,6 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_EVENT;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -88,8 +86,8 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_selectEvent() throws Exception {
         SelectEventCommand command = (SelectEventCommand) parser.parseCommand(
-                SelectEventCommand.COMMAND_WORD + " " + INDEX_FIRST_EVENT.getOneBased());
-        assertEquals(new SelectEventCommand(INDEX_FIRST_EVENT), command);
+                SelectEventCommand.COMMAND_WORD + " " + INDEX_FIRST.getOneBased());
+        assertEquals(new SelectEventCommand(INDEX_FIRST), command);
     }
 
     @Test
