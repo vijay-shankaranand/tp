@@ -12,6 +12,8 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.event.Event;
+import seedu.address.model.event.EventName;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 
@@ -113,6 +115,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public Person getPerson(Name name) {
+        return addressBook.getPerson(name);
+    }
+
+    @Override
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
 
@@ -152,11 +159,21 @@ public class ModelManager implements Model {
         requireNonNull(event);
         return addressBook.hasEvent(event);
     }
+    @Override
+    public void deleteEvent(Event eventToDelete) {
+        addressBook.deleteEvent(eventToDelete);
+        updateFilteredEventList(PREDICATE_SHOW_ALL_EVENTS);
+    }
 
     @Override
-    public void addEvent(Event event) {
-        addressBook.addEvent(event);
+    public void addEvent(Event eventToAdd) {
+        addressBook.addEvent(eventToAdd);
         updateFilteredEventList(PREDICATE_SHOW_ALL_EVENTS);
+    }
+
+    @Override
+    public Event getEvent(EventName name) {
+        return addressBook.getEvent(name);
     }
 
     @Override

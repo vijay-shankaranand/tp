@@ -6,6 +6,8 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.event.Event;
+import seedu.address.model.event.EventName;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 
@@ -74,6 +76,11 @@ public interface Model {
     void addPerson(Person person);
 
     /**
+     * Returns the {@code Person} with given name.
+     */
+    Person getPerson(Name name);
+
+    /**
      * Replaces the given person {@code target} with {@code editedPerson}.
      * {@code target} must exist in the address book.
      * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
@@ -128,10 +135,21 @@ public interface Model {
     boolean hasEvent(Event event);
 
     /**
+     * Deletes the given event.
+     * The event must exist in the address book.
+     */
+    void deleteEvent(Event target);
+
+    /**
      * Adds the given event.
      * {@code event} must not already exist in the event list.
      */
     void addEvent(Event event);
+
+    /**
+     * Returns the {@code Event} with given name.
+     */
+    Event getEvent(EventName name);
 
     /**
      * Replaces the given event {@code target} with {@code editedEvent}.

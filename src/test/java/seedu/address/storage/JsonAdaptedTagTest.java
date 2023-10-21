@@ -2,7 +2,7 @@ package seedu.address.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalTags.VENUES;
+import static seedu.address.testutil.tag.TypicalTags.VENUES;
 
 import org.junit.jupiter.api.Test;
 

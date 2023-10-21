@@ -5,8 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalTags.CATERING;
-import static seedu.address.testutil.TypicalTags.VENUES;
+import static seedu.address.testutil.tag.TypicalTags.CATERING;
+import static seedu.address.testutil.tag.TypicalTags.VENUES;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -16,7 +16,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.model.tag.exceptions.DuplicateTagException;
 import seedu.address.model.tag.exceptions.TagNotFoundException;
-import seedu.address.testutil.TagBuilder;
+import seedu.address.testutil.tag.TagBuilder;
 
 public class UniqueTagListTest {
 

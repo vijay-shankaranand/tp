@@ -7,6 +7,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.commands.event.ViewEventsCommand;
+import seedu.address.logic.commands.tag.ViewTagsCommand;
+
 public class CommandResultTest {
     @Test
     public void equals() {
@@ -16,6 +19,7 @@ public class CommandResultTest {
         assertTrue(commandResult.equals(new CommandResult("feedback")));
         assertTrue(commandResult.equals(new CommandResult("feedback", false, false)));
         assertEquals(commandResult.shouldDisplayTagsPanel(), false);
+        assertEquals(commandResult.shouldDisplayEventsPanel(), false);
 
         // same object -> returns true
         assertTrue(commandResult.equals(commandResult));
@@ -35,8 +39,11 @@ public class CommandResultTest {
         // different exit value -> returns false
         assertFalse(commandResult.equals(new CommandResult("feedback", false, true)));
 
-        CommandResult commandResult1 = new CommandResult(ViewTagsCommand.MESSAGE_SUCCESS);
-        assertEquals(commandResult1.shouldDisplayTagsPanel(), true);
+        CommandResult viewTagCommandResult = new CommandResult(ViewTagsCommand.MESSAGE_SUCCESS);
+        assertEquals(viewTagCommandResult.shouldDisplayTagsPanel(), true);
+
+        CommandResult viewEventCommandResult = new CommandResult(ViewEventsCommand.MESSAGE_SUCCESS);
+        assertEquals(viewEventCommandResult.shouldDisplayEventsPanel(), true);
     }
 
     @Test

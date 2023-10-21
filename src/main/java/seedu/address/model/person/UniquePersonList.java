@@ -52,6 +52,25 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
+     * Returns the {@code Person} with given name from the list.
+     * @param name The name of the desired {@code Person}.
+     */
+    public Person getByName(Name name) throws PersonNotFoundException {
+        Person toGet = null;
+        for (int i = 0; i < internalList.size(); i++) {
+            Person thisPerson = internalList.get(i);
+            if (thisPerson.getName().equals(name)) {
+                toGet = thisPerson;
+            }
+        }
+        if (toGet == null) {
+            throw new PersonNotFoundException();
+        } else {
+            return toGet;
+        }
+    }
+
+    /**
      * Replaces the person {@code target} in the list with {@code editedPerson}.
      * {@code target} must exist in the list.
      * The person identity of {@code editedPerson} must not be the same as another existing person in the list.

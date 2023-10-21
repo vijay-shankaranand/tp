@@ -7,7 +7,9 @@ import java.util.List;
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.event.Event;
+import seedu.address.model.event.EventName;
 import seedu.address.model.event.UniqueEventList;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 import seedu.address.model.tag.Tag;
@@ -105,6 +107,13 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Returns the {@code Person} with given name.
+     */
+    public Person getPerson(Name name) {
+        return persons.getByName(name);
+    }
+
+    /**
      * Replaces the given person {@code target} in the list with {@code editedPerson}.
      * {@code target} must exist in the address book.
      * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
@@ -121,6 +130,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void removePerson(Person key) {
         persons.remove(key);
+        events.updateContacts(key);
     }
 
     //// util methods
@@ -184,11 +194,19 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Deletes a {@code event} from the address book.
+     * Deletes the event from contacts using it as well.
+     */
+    public void deleteEvent(Event eventToDelete) {
+        events.remove(eventToDelete);
+    }
+
+    /**
      * Adds an event to the address book.
      * The event must not already exist in the address book.
      */
-    public void addEvent(Event e) {
-        events.add(e);
+    public void addEvent(Event eventToAdd) {
+        events.add(eventToAdd);
     }
 
     /**
@@ -200,6 +218,13 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(editedEvent);
 
         events.setEvent(target, editedEvent);
+    }
+
+    /**
+     * Returns the {@code Event} with given name.
+     */
+    public Event getEvent(EventName name) {
+        return events.getByName(name);
     }
 
     @Override
