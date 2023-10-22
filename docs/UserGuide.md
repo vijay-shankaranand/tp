@@ -278,6 +278,7 @@ Action     | Format, Examples
 **Add Tag** | `add_tag t/TAG_NAME` <br> e.g. `add_tag t/vendor`
 **View Tags** | `view_tags`
 **Delete Tag** | `delete_tag t/tag_name` <br> e.g. `delete_tag t/vendor`
-**Filter** | `filter TAG_NAME` <br> e.g. `filter vendor`
+**Filter** | `filter TAG_NAME [MORE_TAGNAMESS]` <br> e.g. `filter vendor`
+**Link** | `link ev/EVENT_NAME C/CONTACT [C/MORE_CONTACTS]` <br> e.g. `link ev/NUS Career Fest c/Alice Black`
 **List**   | `list`
 **Help**   | `help`
