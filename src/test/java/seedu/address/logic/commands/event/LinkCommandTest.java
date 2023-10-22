@@ -97,8 +97,7 @@ public class LinkCommandTest {
         contactNameList.add(ALICE.getName());
 
         LinkCommand command = new LinkCommand(event.getName(), contactNameList);
-        String expectedNameList = "[" + ALICE.getName() + "]";
-        String expectedMessage = String.format(LinkCommand.MESSAGE_LINKED_CONTACT, expectedNameList, event.getName());
+        String expectedMessage = String.format(LinkCommand.MESSAGE_LINKED_CONTACT, ALICE.getName(), event.getName());
         model.addEvent(event);
         assertCommandFailure(command, model, expectedMessage);
     }
