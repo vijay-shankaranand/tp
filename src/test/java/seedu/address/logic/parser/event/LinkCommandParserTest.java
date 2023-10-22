@@ -33,7 +33,7 @@ public class LinkCommandParserTest {
         contactNameList.add(CARL.getName());
         LinkCommand expectedLinkCommand = new LinkCommand(JOBFEST.getName(), contactNameList);
 
-        assertParseSuccess(parser," " + EventUtil.getEventName(JOBFEST.getName())
+        assertParseSuccess(parser, " " + EventUtil.getEventName(JOBFEST.getName())
                         + EventUtil.getContactName(CARL.getName()), expectedLinkCommand);
     }
 
@@ -51,7 +51,7 @@ public class LinkCommandParserTest {
         contactNameList.add(BENSON.getName());
         LinkCommand expectedLinkCommand = new LinkCommand(JOBFEST.getName(), contactNameList);
 
-        assertParseSuccess(parser," " + EventUtil.getEventName(JOBFEST.getName())
+        assertParseSuccess(parser, " " + EventUtil.getEventName(JOBFEST.getName())
                 + EventUtil.getContactName(CARL.getName()) + EventUtil.getContactName(BENSON.getName()),
                 expectedLinkCommand);
     }
