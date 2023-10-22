@@ -17,7 +17,6 @@ import seedu.address.model.event.exceptions.EventNotFoundException;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
-import seedu.address.model.tag.Tag;
 
 /**
  * Links a contact to a specific event.
