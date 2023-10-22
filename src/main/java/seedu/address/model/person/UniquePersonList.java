@@ -64,7 +64,7 @@ public class UniquePersonList implements Iterable<Person> {
             }
         }
         if (toGet == null) {
-            throw new PersonNotFoundException();
+            throw new PersonNotFoundException(name);
         } else {
             return toGet;
         }

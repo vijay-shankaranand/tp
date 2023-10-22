@@ -169,4 +169,16 @@ public class ParserUtil {
         }
         return new EventAddress(trimmedEventAddress);
     }
+
+    /**
+     * Parses {@code Collection<String> contactNames} into a {@code Set<Name>}.
+     */
+    public static Set<Name> parseContactNames(Collection<String> contactNames) throws ParseException {
+        requireNonNull(contactNames);
+        final Set<Name> contactNameSet = new HashSet<>();
+        for (String contactName : contactNames) {
+            contactNameSet.add(parseName(contactName));
+        }
+        return contactNameSet;
+    }
 }

@@ -4,6 +4,7 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CONTACT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT;
 
+import java.util.Set;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.event.LinkCommand;
@@ -35,11 +36,11 @@ public class LinkCommandParser implements Parser<LinkCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, LinkCommand.MESSAGE_USAGE));
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_EVENT, PREFIX_CONTACT);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_EVENT);
         EventName eventName = ParserUtil.parseEventName(argMultimap.getValue(PREFIX_EVENT).get());
-        Name contactName = ParserUtil.parseName(argMultimap.getValue(PREFIX_CONTACT).get());
+        Set<Name> contactNameList = ParserUtil.parseContactNames(argMultimap.getAllValues(PREFIX_CONTACT));
 
-        return new LinkCommand(eventName, contactName);
+        return new LinkCommand(eventName, contactNameList);
     }
 
     /**

@@ -4,6 +4,8 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CONTACT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT;
 
+import java.util.Set;
+
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
@@ -38,14 +40,14 @@ public class LinkCommand extends Command {
     public static final String MESSAGE_LINKED_CONTACT = "The contact: %1$s is already linked to the event: %2$s";
 
     private final EventName eventNameToLink;
-    private final Name contactNameToLink;
+    private final Set<Name> contactNameListToLink;
 
     /**
      * Creates a LinkCommand to link the person specified by the name to the event specified by the name.
      */
-    public LinkCommand(EventName eventNameToLink, Name contactNameToLink) {
+    public LinkCommand(EventName eventNameToLink, Set<Name> contactNameListToLink) {
         this.eventNameToLink = eventNameToLink;
-        this.contactNameToLink = contactNameToLink;
+        this.contactNameListToLink = contactNameListToLink;
     }
 
     @Override
@@ -54,19 +56,20 @@ public class LinkCommand extends Command {
 
         try {
             Event eventToLink = model.getEvent(eventNameToLink);
-            Person contactToLink = model.getPerson(contactNameToLink);
 
-            if (eventToLink.isLinkedToContact(contactToLink)) {
-                throw new CommandException(String.format(MESSAGE_LINKED_CONTACT, contactNameToLink, eventNameToLink));
+            for (Name contactName : contactNameListToLink) {
+                Person contactToLink = model.getPerson(contactName);
+                if (eventToLink.isLinkedToContact(contactToLink)) {
+                    throw new CommandException(String.format(MESSAGE_LINKED_CONTACT, contactName, eventNameToLink));
+                }
+                eventToLink.linkContact(contactToLink);
             }
 
-            eventToLink.linkContact(contactToLink);
-
-            return new CommandResult(String.format(MESSAGE_SUCCESS, contactNameToLink, eventNameToLink));
+            return new CommandResult(String.format(MESSAGE_SUCCESS, contactNameListToLink, eventNameToLink));
         } catch (EventNotFoundException enfe) {
             throw new CommandException(String.format(MESSAGE_NO_SUCH_EVENT, eventNameToLink));
         } catch (PersonNotFoundException pnfe) {
-            throw new CommandException(String.format(MESSAGE_NO_SUCH_CONTACT, contactNameToLink));
+            throw new CommandException(String.format(MESSAGE_NO_SUCH_CONTACT, pnfe.getName()));
         }
     }
 
@@ -83,14 +86,14 @@ public class LinkCommand extends Command {
 
         LinkCommand otherLinkCommand = (LinkCommand) other;
         return eventNameToLink.equals(otherLinkCommand.eventNameToLink)
-                && contactNameToLink.equals(otherLinkCommand.contactNameToLink);
+                && contactNameListToLink.equals(otherLinkCommand.contactNameListToLink);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .add("eventToLink", eventNameToLink)
-                .add("contactToLink", contactNameToLink)
+                .add("contactToLink", contactNameListToLink)
                 .toString();
     }
 }
