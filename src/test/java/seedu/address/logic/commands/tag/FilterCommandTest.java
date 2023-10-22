@@ -31,43 +31,6 @@ public class FilterCommandTest {
     private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
-    public void equals() {
-        Tag firstTag = new Tag("friends");
-        Tag secondTag = new Tag("owesMoney");
-
-        List<Tag> firstTagList = new ArrayList<>();
-        List<Tag> secondTagList = new ArrayList<>();
-
-        firstTagList.add(firstTag);
-        secondTagList.add(firstTag);
-        secondTagList.add(secondTag);
-
-        PersonIsTaggedPredicate firstPredicate =
-                new PersonIsTaggedPredicate(firstTagList);
-        PersonIsTaggedPredicate secondPredicate =
-                new PersonIsTaggedPredicate(secondTagList);
-
-        FilterCommand firstFilterCommand = new FilterCommand(firstTagList, firstPredicate);
-        FilterCommand secondFilterCommand = new FilterCommand(secondTagList, secondPredicate);
-
-        // same object -> returns true
-        assertTrue(firstFilterCommand.equals(firstFilterCommand));
-
-        // same values -> returns true
-        FilterCommand firstFilterCommandCopy = new FilterCommand(firstTagList, firstPredicate);
-        assertTrue(firstFilterCommand.equals(firstFilterCommandCopy));
-
-        // different types -> returns false
-        assertFalse(firstFilterCommand.equals(1));
-
-        // null -> returns false
-        assertFalse(firstFilterCommand.equals(null));
-
-        // different person -> returns false
-        assertFalse(firstFilterCommand.equals(secondFilterCommand));
-    }
-
-    @Test
     public void execute_zeroTags_noPersonFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
         PersonIsTaggedPredicate predicate =
@@ -107,6 +70,43 @@ public class FilterCommandTest {
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(BENSON), model.getFilteredPersonList());
+    }
+
+    @Test
+    public void equals() {
+        Tag firstTag = new Tag("friends");
+        Tag secondTag = new Tag("owesMoney");
+
+        List<Tag> firstTagList = new ArrayList<>();
+        List<Tag> secondTagList = new ArrayList<>();
+
+        firstTagList.add(firstTag);
+        secondTagList.add(firstTag);
+        secondTagList.add(secondTag);
+
+        PersonIsTaggedPredicate firstPredicate =
+                new PersonIsTaggedPredicate(firstTagList);
+        PersonIsTaggedPredicate secondPredicate =
+                new PersonIsTaggedPredicate(secondTagList);
+
+        FilterCommand firstFilterCommand = new FilterCommand(firstTagList, firstPredicate);
+        FilterCommand secondFilterCommand = new FilterCommand(secondTagList, secondPredicate);
+
+        // same object -> returns true
+        assertTrue(firstFilterCommand.equals(firstFilterCommand));
+
+        // same values -> returns true
+        FilterCommand firstFilterCommandCopy = new FilterCommand(firstTagList, firstPredicate);
+        assertTrue(firstFilterCommand.equals(firstFilterCommandCopy));
+
+        // different types -> returns false
+        assertFalse(firstFilterCommand.equals(1));
+
+        // null -> returns false
+        assertFalse(firstFilterCommand.equals(null));
+
+        // different person -> returns false
+        assertFalse(firstFilterCommand.equals(secondFilterCommand));
     }
 
     @Test

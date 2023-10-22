@@ -17,6 +17,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.event.LinkCommand;
 import seedu.address.logic.commands.event.SelectEventCommand;
 import seedu.address.logic.commands.event.ViewEventsCommand;
 import seedu.address.logic.commands.person.AddCommand;
@@ -30,10 +31,14 @@ import seedu.address.logic.commands.tag.DeleteTagCommand;
 import seedu.address.logic.commands.tag.FilterCommand;
 import seedu.address.logic.commands.tag.ViewTagsCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.event.Event;
+import seedu.address.model.event.EventName;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.PersonIsTaggedPredicate;
 import seedu.address.model.tag.Tag;
+import seedu.address.testutil.event.EventUtil;
 import seedu.address.testutil.person.EditPersonDescriptorBuilder;
 import seedu.address.testutil.person.PersonBuilder;
 import seedu.address.testutil.person.PersonUtil;
@@ -81,6 +86,15 @@ public class AddressBookParserTest {
         FilterCommand command = (FilterCommand) parser.parseCommand(FilterCommand.COMMAND_WORD
                 + " " + "friends");
         assertEquals(new FilterCommand(tagList, predicate), command);
+    }
+
+    @Test
+    public void parseCommand_link() throws Exception {
+        EventName eventName = new EventName("NUS Career Fair");
+        Name contactName = new Name("Li Mei");
+
+        LinkCommand command = (LinkCommand) parser.parseCommand(EventUtil.getLinkCommand(eventName, contactName));
+        assertEquals(new LinkCommand(eventName, contactName), command);
     }
 
     @Test
