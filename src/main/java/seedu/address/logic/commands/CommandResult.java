@@ -102,10 +102,14 @@ public class CommandResult {
         return false;
     }
 
+    /**
+     * Returns true if the home panel should be displayed to the user, else false.
+     * @return true if the home panel should be displayed to the user, else false
+     */
     public boolean shouldReturnToHome() {
         if (feedbackToUser.equals(HomeCommand.MESSAGE_SUCCESS)) {
             return true;
-        } 
+        }
         return false;
     }
 

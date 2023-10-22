@@ -350,7 +350,7 @@ public class MainWindow extends UiPart<Stage> {
                     && !commandResult.shouldDisplayEventsPanel()) {
                 handleElse();
                 // to display that an event is selected
-                eventContactDisplay.setFeedbackToUser(commandResult); 
+                eventContactDisplay.setFeedbackToUser(commandResult);
             }
 
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
