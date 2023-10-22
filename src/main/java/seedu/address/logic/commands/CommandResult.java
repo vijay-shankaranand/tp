@@ -14,7 +14,6 @@ import seedu.address.model.event.Event;
  * Represents the result of a command execution.
  */
 public class CommandResult {
-
     private final String feedbackToUser;
 
     /** Help information should be shown to the user. */
@@ -103,6 +102,13 @@ public class CommandResult {
         return false;
     }
 
+    public boolean shouldReturnToHome() {
+        if (feedbackToUser.equals(HomeCommand.MESSAGE_SUCCESS)) {
+            return true;
+        } 
+        return false;
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -133,5 +139,4 @@ public class CommandResult {
                 .add("exit", exit)
                 .toString();
     }
-
 }

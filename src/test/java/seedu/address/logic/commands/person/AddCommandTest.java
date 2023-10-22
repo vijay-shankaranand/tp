@@ -191,6 +191,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public ObservableList<Person> getUnfilteredPersonList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public boolean hasTag(Tag tag) {
             throw new AssertionError("This method should not be called.");
         }
@@ -254,6 +259,11 @@ public class AddCommandTest {
         public ObservableList<Event> getFilteredEventList() {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public ObservableList<Event> getUnfilteredEventList() {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**
@@ -297,6 +307,4 @@ public class AddCommandTest {
             return new AddressBook();
         }
     }
-
-
 }
