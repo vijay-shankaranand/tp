@@ -452,6 +452,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
+**Use case: Filter contacts by tag**
+
+**MSS**
+
+**Extensions**
+
 *{More to be added}*
 
 ---
