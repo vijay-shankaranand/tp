@@ -103,7 +103,7 @@ Format: `add_tag t/TAG_NAME`
 
 * Adds the tag with the specified tag name `TAG_NAME`.
 * The tag name **must no already exist** in the JobFestGo.
-* The command must contain `/t` for the command to be valid.
+* The command must contain `t/` for the command to be valid.
 * The tag name must be specified in the command.
 
 Examples:
@@ -184,6 +184,43 @@ Format: `delete_tag t/tag_name`
 Examples:
 * `delete_tag` followed by `t/vendor` deletes the tag: vendor in JobFestGo.
 
+### Filtering contacts by tag: `filter`
+
+Displays contacts tagged by any of the given tags.
+
+Format: `filter TAG_NAME [MORE_TAG_NAMES]`
+
+* Tag names are case-insensitive. e.g `Vendor` will match `vendor`
+* Only full words will be matched e.g. `ven` will not match `vendor`
+* Contacts tagged by at least one of the given tags  will be returned (i.e. `OR` search).
+  e.g. `vendor customer` will return all contacts tagged by `vendor` and
+ all contacts tagged by `customer`
+
+Examples:
+* `filter vendor` returns all contacts tagged by the tag: vendor in JobFestGo.
+* `filter vendor customer` returns all contacts tagged by the tag: vendor and
+  all contacts tagged by the tag: customer in JobFestGo.
+
+### Linking contacts to an event: `link`
+
+Linking specified contacts to the specified event.
+
+Format: `link ev/EVENT_NAME c/CONTACT_NAME [c/MORE_CONTACT_NAMES]`
+
+* Only existing contacts and events in JobFestGo can be linked.
+* Contacts that are already linked to the specified event cannot be linked again.
+* Only full words will be matched e.g. `NUS Career Fest` will not match `NUS Career Fest 2023`,
+  `Alice` will not match `Alice Black`
+* The order of the input does not matter. e.g. `link ev/NUS Career Fest c/Alice Black`
+ and `link c/Alice Black ev/NUS Career Fest` are both valid commands and will perform
+ the same task.
+* If there are invalid contacts in the input (e.g. non-existent contacts,
+ contacts that are already linked to the specified event), the contacts entered
+ before the first invalid contact will be linked while those after will not be linked.
+ e.g. if `John Doe` is an invalid contact, `link ev/NUS Career Fest c/Alice Black
+ c/John Doe c/Bob Dylan` will link `Alice Black` to the event `NUS Career Fest` while
+  `John Doe` and `Bob Dylan` will not be linked.
+
 ### Clearing all entries : `clear`
 
 Clears all entries from JobFestGo.
@@ -241,5 +278,6 @@ Action     | Format, Examples
 **Add Tag** | `add_tag t/TAG_NAME` <br> e.g. `add_tag t/vendor`
 **View Tags** | `view_tags`
 **Delete Tag** | `delete_tag t/tag_name` <br> e.g. `delete_tag t/vendor`
+**Filter** | `filter TAG_NAME` <br> e.g. `filter vendor`
 **List**   | `list`
 **Help**   | `help`
