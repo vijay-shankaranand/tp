@@ -6,10 +6,13 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
+import static seedu.address.testutil.person.TypicalPersons.CARL;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
@@ -92,9 +95,11 @@ public class AddressBookParserTest {
     public void parseCommand_link() throws Exception {
         EventName eventName = new EventName("NUS Career Fair");
         Name contactName = new Name("Li Mei");
+        Set<Name> contactNameList = new HashSet<>();
+        contactNameList.add(contactName);
 
         LinkCommand command = (LinkCommand) parser.parseCommand(EventUtil.getLinkCommand(eventName, contactName));
-        assertEquals(new LinkCommand(eventName, contactName), command);
+        assertEquals(new LinkCommand(eventName, contactNameList), command);
     }
 
     @Test
