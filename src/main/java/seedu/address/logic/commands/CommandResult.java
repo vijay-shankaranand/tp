@@ -103,6 +103,14 @@ public class CommandResult {
     }
 
     /**
+     * Returns true if all panels should be hidden from the user, else false.
+     * @return true if all panels should be hidden from the user, else false
+     */
+    public boolean shouldHideAllPanels() {
+        return !shouldDisplayTagsPanel() && !shouldDisplayContactsPanel() && !shouldDisplayEventsPanel();
+    }
+
+    /**
      * Returns true if the home panel should be displayed to the user, else false.
      * @return true if the home panel should be displayed to the user, else false
      */

@@ -340,14 +340,10 @@ public class MainWindow extends UiPart<Stage> {
                 handleViewEvents(true);
             }
 
-            if (commandResult.shouldReturnToHome()) {
-                setReturnToHomeStatus(true);
-            } else {
-                setReturnToHomeStatus(false);
-            }
+            boolean shouldReturnToHome = commandResult.shouldReturnToHome();
+            setReturnToHomeStatus(shouldReturnToHome);
 
-            if (!commandResult.shouldDisplayTagsPanel() && !commandResult.shouldDisplayContactsPanel()
-                    && !commandResult.shouldDisplayEventsPanel()) {
+            if (commandResult.shouldHideAllPanels()) {
                 handleElse();
                 // to display that an event is selected
                 eventContactDisplay.setFeedbackToUser(commandResult);
