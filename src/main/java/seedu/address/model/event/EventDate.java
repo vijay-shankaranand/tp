@@ -58,6 +58,21 @@ public class EventDate {
         return true;
     }
 
+    /**
+     * Compares two EventDates by date.
+     * @param secondEventDate second EventDate to compare
+     * @return -1 if first EventDate is before second EventDate, 0 if equal, 1 if first EventDate is after
+     */
+    public int compareTo(EventDate secondEventDate) {
+        LocalDate firstDate;
+        LocalDate secondDate;
+
+        firstDate = LocalDate.parse(this.eventDate);
+        secondDate = LocalDate.parse(secondEventDate.eventDate);
+
+        return firstDate.compareTo(secondDate);
+    }
+
     @Override
     public String toString() {
         return eventDate;

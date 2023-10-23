@@ -8,6 +8,7 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.EventName;
+import seedu.address.model.event.EventSortByDateComparator;
 import seedu.address.model.event.UniqueEventList;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -229,7 +230,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     @Override
     public ObservableList<Event> getEventList() {
-        return events.asUnmodifiableObservableList();
+        return events.asUnmodifiableObservableList().sorted(new EventSortByDateComparator());
     }
 
     //====== util methods ===========================================================================
