@@ -292,6 +292,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | job fest event planner                     | add tags                     | add to the pool of use categories already available    |
 | `* *`    | job fest event planner                     | view all tags | remember contacts of a certain category to contact them for events                |
 | `* *`     | job fest event planner                     | be able to delete tags | can easily identify who I should be cold calling among my contacts without unnecessary tags     |
+| `* *`     | job fest event planner                     | be able to select events | can easily view the contacts and tasks to do for each particular event    |
 | `*`      | user with many persons in the address book | sort persons by name         | locate a person easily                                                 |
 
 
@@ -451,6 +452,31 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3c1. JobFestGo shows an error message.
 
       Use case resumes at step 2.
+
+**Use case: Select an event**
+
+**MSS**
+
+1. User requests to select an event
+2. JobFestGo displays the contacts and tasks related to the event
+3. User <u>adds a task</u> or <u>deletes a task</u> or <u>marks a task</u> or <u>unmarks a task</u>.
+
+      Use case ends.
+
+
+**Extensions**
+
+* 1a. The given index is invalid.
+
+    * 1a1. JobFestGo shows an error message.
+
+      Use case resumes at step 1. 
+
+* 1b. Missing index.
+
+    * 1b1. JobFestGo shows an error message.
+
+      Use case resumes at step 1.
 
 *{More to be added}*
 
