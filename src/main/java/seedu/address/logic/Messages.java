@@ -79,8 +79,10 @@ public class Messages {
     public static String format(Task task) {
         final StringBuilder builder = new StringBuilder();
         builder.append(task.getDescription())
-                .append("; Description: ")
-                .append(task.getDate());
+                .append("; Date: ")
+                .append(task.getDate())
+                .append("; Associated Event: ")
+                .append(task.getAssociatedEvent());
         return builder.toString();
     }
 }

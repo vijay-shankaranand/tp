@@ -17,6 +17,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.task.TaskDescription;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -146,7 +147,7 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code eventDate} is invalid.
      */
-    public static Date parseEventDate(String eventDate) throws ParseException {
+    public static Date parseDate(String eventDate) throws ParseException {
         requireNonNull(eventDate);
         String trimmedEventDate = eventDate.trim();
         if (!Date.isValidDate(trimmedEventDate)) {
@@ -181,4 +182,21 @@ public class ParserUtil {
         }
         return contactNameSet;
     }
+
+    /**
+     * Parses a {@code String taskDescription} into an {@code TaskDescription}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code taskDescription} is invalid.
+     */
+    public static TaskDescription parseTaskDescription(String taskDescription) throws ParseException {
+        requireNonNull(taskDescription);
+        String trimmedTaskDescription = taskDescription.trim();
+        if (!TaskDescription.isValidDescription(trimmedTaskDescription)) {
+            throw new ParseException(TaskDescription.MESSAGE_CONSTRAINTS);
+        }
+        return new TaskDescription(trimmedTaskDescription);
+    }
+
+
 }

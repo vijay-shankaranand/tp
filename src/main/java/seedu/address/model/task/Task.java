@@ -4,6 +4,7 @@ import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.date.Date;
+import seedu.address.model.event.EventName;
 
 /**
  * Represents a Task in the Event list.
@@ -11,17 +12,19 @@ import seedu.address.model.date.Date;
  */
 public class Task {
     private final TaskDescription description;
-    private final Date date;
+    private final Date deadline;
+    private final EventName associatedEvent;
 
     /**
      * Constructs a {@code Task}.
      *
      * @param description A valid description.
-     * @param date A valid date.
+     * @param deadline A valid deadline.
      */
-    public Task(TaskDescription description, Date date) {
+    public Task(TaskDescription description, Date deadline, EventName associatedEvent) {
         this.description = description;
-        this.date = date;
+        this.deadline = deadline;
+        this.associatedEvent = associatedEvent;
     }
 
     public TaskDescription getDescription() {
@@ -29,7 +32,11 @@ public class Task {
     }
 
     public Date getDate() {
-        return date;
+        return deadline;
+    }
+
+    public EventName getAssociatedEvent() {
+        return associatedEvent;
     }
 
     /**
@@ -48,21 +55,23 @@ public class Task {
         }
 
         Task otherEvent = (Task) other;
-        return description.equals(otherEvent.description)
-                && date.equals(otherEvent.date);
+        return associatedEvent.equals(otherEvent.associatedEvent)
+                && description.equals(otherEvent.description)
+                && deadline.equals(otherEvent.deadline);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(description, date);
+        return Objects.hash(description, deadline, associatedEvent);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .add("description", description)
-                .add("date", date)
+                .add("deadline", deadline)
+                .add("for event", associatedEvent)
                 .toString();
     }
 

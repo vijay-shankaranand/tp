@@ -36,9 +36,9 @@ public class AddTaskCommand extends Command {
     /**
      * Creates an AddTaskCommand to add the specified {@code Task}
      */
-    public AddTaskCommand(Task event) {
-        requireNonNull(event);
-        taskToAdd = event;
+    public AddTaskCommand(Task task) {
+        requireNonNull(task);
+        taskToAdd = task;
     }
 
     @Override
