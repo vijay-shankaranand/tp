@@ -31,7 +31,7 @@ public class EventBuilder {
         name = new EventName(DEFAULT_EVENT_NAME);
         date = new EventDate(DEFAULT_EVENT_DATE);
         address = new EventAddress(DEFAULT_EVENT_ADDRESS);
-        Set<Person> contacts = new HashSet<>();
+        contacts = new HashSet<>();
         contacts.add(new PersonBuilder().build());
     }
 
