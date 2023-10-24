@@ -23,6 +23,7 @@ JobFestGo is a **desktop app for managing contacts, optimized for use via a  Lin
 
 1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar jobfestgo.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+
    ![Ui](images/Ui.png)
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
@@ -134,6 +135,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 Examples:
 * `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
+
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
 ### Deleting a person : `delete`
@@ -201,6 +203,12 @@ Examples:
 * `filter vendor customer` returns all contacts tagged by the tag: vendor and
   all contacts tagged by the tag: customer in JobFestGo.
 
+### Viewing all events: `view_events`
+
+Views all existing events.
+
+Format: `view_events`
+
 ### Linking contacts to an event: `link`
 
 Linking specified contacts to the specified event.
@@ -237,6 +245,12 @@ Examples:
 ### Clearing all entries : `clear`
 
 Clears all entries from JobFestGo.
+
+Format: `clear`
+
+### Returns to home page : `home`
+
+Returns to the home page of JobFestGo regardless of what screen the user is currently on.
 
 Format: `clear`
 
@@ -283,16 +297,18 @@ _Details coming soon ..._
 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Clear**  | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g. `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Delete** | `delete INDEX`<br> e.g. `delete 3`
+**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g. `edit 2 n/James Lee e/jameslee@example.com`
+**Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g. `find James Jake`
+**List**   | `list`
 **Add Tag** | `add_tag t/TAG_NAME` <br> e.g. `add_tag t/vendor`
-**View Tags** | `view_tags`
 **Delete Tag** | `delete_tag t/tag_name` <br> e.g. `delete_tag t/vendor`
 **Filter** | `filter TAG_NAME [MORE_TAGNAMESS]` <br> e.g. `filter vendor`
+**View Tags** | `view_tags`
 **Link** | `link ev/EVENT_NAME C/CONTACT [C/MORE_CONTACTS]` <br> e.g. `link ev/NUS Career Fest c/Alice Black`
-**Select Event** | `select_event INDEX` <br> e.g., `select_event 1`
-**List**   | `list`
+**Select Event** | `select_event INDEX` <br> e.g. `select_event 1`
+**View Events** | `view_events`
+**Clear**  | `clear`
 **Help**   | `help`
+**Home**   | `home`
