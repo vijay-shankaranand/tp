@@ -340,8 +340,8 @@ public class MainWindow extends UiPart<Stage> {
                 handleViewEvents(true);
             }
 
-            boolean shouldReturnToHome = commandResult.shouldReturnToHome();
-            setReturnToHomeStatus(shouldReturnToHome);
+            boolean shouldReturnHome = commandResult.shouldReturnToHome();
+            setReturnToHomeStatus(shouldReturnHome);
 
             if (commandResult.shouldHideAllPanels()) {
                 handleElse();
