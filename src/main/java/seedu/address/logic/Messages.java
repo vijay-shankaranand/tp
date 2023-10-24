@@ -8,6 +8,7 @@ import seedu.address.logic.parser.Prefix;
 import seedu.address.model.event.Event;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.task.Task;
 
 /**
  * Container for user visible messages.
@@ -72,4 +73,14 @@ public class Messages {
         return builder.toString();
     }
 
+    /**
+     * Formats the {@code Task} for display to the user.
+     */
+    public static String format(Task task) {
+        final StringBuilder builder = new StringBuilder();
+        builder.append(task.getDescription())
+                .append("; Description: ")
+                .append(task.getDate());
+        return builder.toString();
+    }
 }
