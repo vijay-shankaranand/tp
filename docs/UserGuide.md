@@ -157,7 +157,7 @@ Adds a tag to JobFestGo.
 Format: `add_tag t/TAG_NAME`
 
 * Adds the tag with the specified tag name `TAG_NAME`.
-* The tag name **must no already exist** in the JobFestGo.
+* The tag name **must not already exist** in JobFestGo.
 * The command must contain `t/` for the command to be valid.
 * The tag name must be specified in the command.
 
