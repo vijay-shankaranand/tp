@@ -248,7 +248,7 @@ Clears all entries from JobFestGo.
 
 Format: `clear`
 
-### Returns to home page : `home`
+### Returning to home page : `home`
 
 Returns to the home page of JobFestGo regardless of what screen the user is currently on.
 
