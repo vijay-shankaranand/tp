@@ -22,7 +22,7 @@ import seedu.address.model.task.exceptions.TaskNotFoundException;
  *
  * Supports a minimal set of list operations.
  *
- * @see Event#isSameEvent(Event)
+ * @see Task#equals(Object)
  */
 public class UniqueTaskList implements Iterable<Task> {
     private final ObservableList<Task> internalList = FXCollections.observableArrayList();

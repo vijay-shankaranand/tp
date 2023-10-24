@@ -11,8 +11,10 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.event.Event;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.task.Task;
 
 /**
  * An Immutable AddressBook that is serializable to JSON format.
@@ -26,22 +28,29 @@ class JsonSerializableAddressBook {
 
     public static final String MESSAGE_DUPLICATE_EVENT = "Events list contains duplicate event(s).";
 
+    public static final String MESSAGE_DUPLICATE_TASK = "Tasks list contains duplicate tasks(s).";
+
     private final List<JsonAdaptedPerson> persons = new ArrayList<>();
 
     private final List<JsonAdaptedTag> tagList = new ArrayList<>();
 
     private final List<JsonAdaptedEvent> events = new ArrayList<>();
 
+    private final List<JsonAdaptedTask> taskList = new ArrayList<>();
+
     /**
-     * Constructs a {@code JsonSerializableAddressBook} with the given persons, tags, events.
+     * Constructs a {@code JsonSerializableAddressBook} with the given persons, tags, events, tasks.
      */
     @JsonCreator
     public JsonSerializableAddressBook(@JsonProperty("persons") List<JsonAdaptedPerson> persons,
                                        @JsonProperty("tagList") List<JsonAdaptedTag> tagList,
-                                       @JsonProperty("events") List<JsonAdaptedEvent> events) {
+                                       @JsonProperty("events") List<JsonAdaptedEvent> events,
+                                       @JsonProperty("taskList") List<JsonAdaptedTask> taskList
+    ) {
         this.persons.addAll(persons);
         this.tagList.addAll(tagList);
         this.events.addAll(events);
+        this.taskList.addAll(taskList);
     }
 
 
@@ -54,6 +63,7 @@ class JsonSerializableAddressBook {
         persons.addAll(source.getPersonList().stream().map(JsonAdaptedPerson::new).collect(Collectors.toList()));
         tagList.addAll(source.getTagList().stream().map(JsonAdaptedTag::new).collect(Collectors.toList()));
         events.addAll(source.getEventList().stream().map(JsonAdaptedEvent::new).collect(Collectors.toList()));
+        taskList.addAll(source.getTaskList().stream().map(JsonAdaptedTask::new).collect(Collectors.toList()));
     }
 
     /**
@@ -83,6 +93,13 @@ class JsonSerializableAddressBook {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_EVENT);
             }
             addressBook.addEvent(event);
+        }
+        for (JsonAdaptedTask jsonAdaptedTask : taskList) {
+            Task task = jsonAdaptedTask.toModelType();
+            if (addressBook.hasTask(task)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_TASK);
+            }
+            addressBook.addTask(task);
         }
         return addressBook;
     }

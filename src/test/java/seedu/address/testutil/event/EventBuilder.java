@@ -84,7 +84,7 @@ public class EventBuilder {
      * Parses the {@code tasks} into a {@code Set<Task>} and set it to the {@code Event} that we are building.
      */
     public EventBuilder withEventTasks(Task ... tasks) {
-        this.tasks = SampleDataUtil.getTaskSet(taks);
+        this.tasks = SampleDataUtil.getTaskSet(tasks);
         return this;
     }
 

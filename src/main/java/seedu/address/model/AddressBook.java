@@ -83,6 +83,14 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Replaces the contents of the task list with {@code tasks}.
+     * {@code tasks} must not contain duplicate tasks.
+     */
+    public void setTasks(List<Task> tasks) {
+        this.tasks.setTasks(tasks);
+    }
+
+    /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
      */
     public void resetData(ReadOnlyAddressBook newData) {
@@ -91,6 +99,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         setPersons(newData.getPersonList());
         setTags(newData.getTagList());
         setEvents(newData.getEventList());
+        setTasks(newData.getTaskList());
     }
 
 
@@ -241,7 +250,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     //======Task Operations=======================================================================
 
     /**
-     * Returns true if an tas with the same identity as {@code task} exists in the address book.
+     * Returns true if a task with the same identity as {@code task} exists in the address book.
      */
     public boolean hasTask(Task task) {
         requireNonNull(task);
@@ -254,6 +263,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void addTask(Task taskToAdd) {
         tasks.add(taskToAdd);
+        events.addTaskInEvent(taskToAdd);
     }
 
     /**
@@ -301,6 +311,7 @@ public class AddressBook implements ReadOnlyAddressBook {
                 .add("persons", persons)
                 .add("tags", tags)
                 .add("events", events)
+                .add("tasks", tasks)
                 .toString();
     }
 

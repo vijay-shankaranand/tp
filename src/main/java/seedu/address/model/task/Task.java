@@ -5,6 +5,7 @@ import java.util.Objects;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.date.Date;
 import seedu.address.model.event.Event;
+import seedu.address.model.event.EventName;
 
 /**
  * Represents a Task in the Event list.
@@ -15,8 +16,14 @@ public class Task {
     private final Date deadline;
     private final Event associatedEvent;
 
+//    /**
+//     * To facilitate easy storage of event names in a task
+//     * inside storage.
+//     */
+//    private final EventName associatedEventName;
+
     /**
-     * Constructs a {@code Task}.
+     * Constructs a {@code Task}
      *
      * @param description A valid description.
      * @param deadline A valid deadline.
@@ -25,7 +32,22 @@ public class Task {
         this.description = description;
         this.deadline = deadline;
         this.associatedEvent = associatedEvent;
+//        this.associatedEventName = associatedEvent.getName();
     }
+
+//    /**
+//     * Constructs a {@Task task} with an already existing event.
+//     * This constructor aids in storage operations of tasks.
+//     * @param description A valid description.
+//     * @param deadline A valid deadline.
+//     * @param eventName A valid event name.
+//     */
+//    public Task(TaskDescription description, Date deadline, EventName eventName) {
+//        this.description = description;
+//        this.deadline = deadline;
+//        this.associatedEvent = null;
+//        this.associatedEventName = eventName;
+//    }
 
     public TaskDescription getDescription() {
         return description;
@@ -37,6 +59,10 @@ public class Task {
 
     public Event getAssociatedEvent() {
         return associatedEvent;
+    }
+
+    public EventName getAssociatedEventName() {
+        return this.associatedEvent.getName();
     }
 
     /**
@@ -71,8 +97,7 @@ public class Task {
         return new ToStringBuilder(this)
                 .add("description", description)
                 .add("deadline", deadline)
-                .add("for event", associatedEvent)
+                .add("event", associatedEvent.getName())
                 .toString();
     }
-
 }

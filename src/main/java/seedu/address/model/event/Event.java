@@ -36,7 +36,7 @@ public class Event {
      * @param contacts A valid set of contacts.
      */
     public Event(EventName name, Date date, EventAddress address, Set<Person> contacts, Set<Task> tasks) {
-        requireAllNonNull(name, date, address, contacts);
+        requireAllNonNull(name, date, address, contacts, tasks);
         this.name = name;
         this.date = date;
         this.address = address;
