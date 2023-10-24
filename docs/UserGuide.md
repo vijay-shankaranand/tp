@@ -252,7 +252,7 @@ Format: `clear`
 
 Returns to the home page of JobFestGo regardless of what screen the user is currently on.
 
-Format: `clear`
+Format: `home`
 
 ### Exiting the program : `exit`
 
