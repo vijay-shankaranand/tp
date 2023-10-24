@@ -88,6 +88,9 @@ public class EventContactDisplay extends UiPart<Region> {
 
         eventListPanel = new EventListPanel(logic.getUnfilteredEventList());
         eventListPanelPlaceholder.getChildren().add(eventListPanel.getRoot());
+
+        reminderListPanel = new ReminderListPanel(logic.getUnfilteredEventList());
+        reminderTaskListPanelPlaceholder.getChildren().add(reminderListPanel.getRoot());
     }
 
     /**
