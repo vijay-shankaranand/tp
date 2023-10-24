@@ -22,7 +22,6 @@ import seedu.address.model.tag.Tag;
 import seedu.address.testutil.AddressBookBuilder;
 
 public class ModelManagerTest {
-
     private ModelManager modelManager = new ModelManager();
 
     @Test
@@ -98,6 +97,11 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void getUnfilteredPersonList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> modelManager.getUnfilteredPersonList().remove(0));
+    }
+
+    @Test
     public void deleteTag_returnsTrue() {
         Tag tag = new Tag("vendor");
         modelManager.addTag(tag);
@@ -124,6 +128,11 @@ public class ModelManagerTest {
     @Test
     public void getFilteredTagList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredTagList().remove(0));
+    }
+
+    @Test
+    public void getUnfilteredEventList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> modelManager.getUnfilteredEventList().remove(0));
     }
 
     @Test

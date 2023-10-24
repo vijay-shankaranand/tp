@@ -74,6 +74,11 @@ public class LogicManager implements Logic {
     }
 
     @Override
+    public ObservableList<Person> getUnfilteredPersonList() {
+        return model.getUnfilteredPersonList();
+    }
+
+    @Override
     public ObservableList<Tag> getFilteredTagList() {
         return model.getFilteredTagList();
     }
@@ -81,6 +86,11 @@ public class LogicManager implements Logic {
     @Override
     public ObservableList<Event> getFilteredEventList() {
         return model.getFilteredEventList();
+    }
+
+    @Override
+    public ObservableList<Event> getUnfilteredEventList() {
+        return model.getUnfilteredEventList();
     }
 
     @Override
