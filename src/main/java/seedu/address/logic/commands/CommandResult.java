@@ -14,7 +14,6 @@ import seedu.address.model.event.Event;
  * Represents the result of a command execution.
  */
 public class CommandResult {
-
     private final String feedbackToUser;
 
     /** Help information should be shown to the user. */
@@ -103,6 +102,25 @@ public class CommandResult {
         return false;
     }
 
+    /**
+     * Returns true if all panels should be hidden from the user, else false.
+     * @return true if all panels should be hidden from the user, else false
+     */
+    public boolean shouldHideAllPanels() {
+        return !shouldDisplayTagsPanel() && !shouldDisplayContactsPanel() && !shouldDisplayEventsPanel();
+    }
+
+    /**
+     * Returns true if the home panel should be displayed to the user, else false.
+     * @return true if the home panel should be displayed to the user, else false
+     */
+    public boolean shouldReturnToHome() {
+        if (feedbackToUser.equals(HomeCommand.MESSAGE_SUCCESS)) {
+            return true;
+        }
+        return false;
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -133,5 +151,4 @@ public class CommandResult {
                 .add("exit", exit)
                 .toString();
     }
-
 }
