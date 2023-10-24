@@ -5,7 +5,7 @@ import java.util.Set;
 
 import seedu.address.model.event.Event;
 import seedu.address.model.event.EventAddress;
-import seedu.address.model.event.EventDate;
+import seedu.address.model.date.Date;
 import seedu.address.model.event.EventName;
 import seedu.address.model.person.Person;
 import seedu.address.model.util.SampleDataUtil;
@@ -20,7 +20,7 @@ public class EventBuilder {
     public static final String DEFAULT_EVENT_ADDRESS = "311, Clementi Ave 2, #02-25";
 
     private EventName name;
-    private EventDate date;
+    private Date date;
     private EventAddress address;
     private Set<Person> contacts;
 
@@ -29,7 +29,7 @@ public class EventBuilder {
      */
     public EventBuilder() {
         name = new EventName(DEFAULT_EVENT_NAME);
-        date = new EventDate(DEFAULT_EVENT_DATE);
+        date = new Date(DEFAULT_EVENT_DATE);
         address = new EventAddress(DEFAULT_EVENT_ADDRESS);
         Set<Person> contacts = new HashSet<>();
         contacts.add(new PersonBuilder().build());
@@ -57,7 +57,7 @@ public class EventBuilder {
      * Sets the {@code EventDate} of the {@code Event} that we are building.
      */
     public EventBuilder withEventDate(String eventDate) {
-        this.date = new EventDate(eventDate);
+        this.date = new Date(eventDate);
         return this;
     }
 

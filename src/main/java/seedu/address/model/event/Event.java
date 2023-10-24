@@ -8,6 +8,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.date.Date;
 import seedu.address.model.person.Person;
 
 /**
@@ -20,7 +21,7 @@ public class Event {
     private final EventName name;
 
     // Data fields
-    private final EventDate date;
+    private final Date date;
     private final EventAddress address;
     private final Set<Person> contacts = new HashSet<>();
 
@@ -32,7 +33,7 @@ public class Event {
      * @param address A valid address.
      * @param contacts A valid set of contacts.
      */
-    public Event(EventName name, EventDate date, EventAddress address, Set<Person> contacts) {
+    public Event(EventName name, Date date, EventAddress address, Set<Person> contacts) {
         requireAllNonNull(name, date, address, contacts);
         this.name = name;
         this.date = date;
@@ -48,7 +49,7 @@ public class Event {
         return name;
     }
 
-    public EventDate getDate() {
+    public Date getDate() {
         return date;
     }
 
@@ -93,7 +94,7 @@ public class Event {
 
     /**
      * Returns true if both events have the same identity and data fields.
-     * This defines a stronger notion of equality between two persons.
+     * This defines a stronger notion of equality between two events.
      */
     @Override
     public boolean equals(Object other) {

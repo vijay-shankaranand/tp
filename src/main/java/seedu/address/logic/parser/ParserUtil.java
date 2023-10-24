@@ -10,7 +10,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.event.EventAddress;
-import seedu.address.model.event.EventDate;
+import seedu.address.model.date.Date;
 import seedu.address.model.event.EventName;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -146,13 +146,13 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code eventDate} is invalid.
      */
-    public static EventDate parseEventDate(String eventDate) throws ParseException {
+    public static Date parseEventDate(String eventDate) throws ParseException {
         requireNonNull(eventDate);
         String trimmedEventDate = eventDate.trim();
-        if (!EventDate.isValidDate(trimmedEventDate)) {
-            throw new ParseException(EventDate.MESSAGE_CONSTRAINTS);
+        if (!Date.isValidDate(trimmedEventDate)) {
+            throw new ParseException(Date.MESSAGE_CONSTRAINTS);
         }
-        return new EventDate(trimmedEventDate);
+        return new Date(trimmedEventDate);
     }
 
     /**
