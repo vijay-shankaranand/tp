@@ -1,6 +1,7 @@
 package seedu.address.model.task;
 
 import java.util.Objects;
+import java.util.Optional;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.date.Date;
@@ -81,7 +82,10 @@ public class Task {
         }
 
         Task otherEvent = (Task) other;
-        return associatedEvent.equals(otherEvent.associatedEvent)
+        System.out.println("desc : " + description.equals(otherEvent.description));
+        System.out.println("dead: " + deadline.equals(otherEvent.deadline));
+        System.out.println("event: " + associatedEvent.getName().equals(otherEvent.associatedEvent.getName()) + "\n");
+        return associatedEvent.isSameEvent(otherEvent.associatedEvent)
                 && description.equals(otherEvent.description)
                 && deadline.equals(otherEvent.deadline);
     }
