@@ -7,7 +7,6 @@ import java.util.stream.Collectors;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.event.Event;
 import seedu.address.model.event.EventAddress;
 import seedu.address.model.date.Date;
 import seedu.address.model.event.EventName;

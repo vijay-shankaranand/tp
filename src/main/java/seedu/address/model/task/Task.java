@@ -4,7 +4,7 @@ import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.date.Date;
-import seedu.address.model.event.EventName;
+import seedu.address.model.event.Event;
 
 /**
  * Represents a Task in the Event list.
@@ -13,7 +13,7 @@ import seedu.address.model.event.EventName;
 public class Task {
     private final TaskDescription description;
     private final Date deadline;
-    private final EventName associatedEvent;
+    private final Event associatedEvent;
 
     /**
      * Constructs a {@code Task}.
@@ -21,7 +21,7 @@ public class Task {
      * @param description A valid description.
      * @param deadline A valid deadline.
      */
-    public Task(TaskDescription description, Date deadline, EventName associatedEvent) {
+    public Task(TaskDescription description, Date deadline, Event associatedEvent) {
         this.description = description;
         this.deadline = deadline;
         this.associatedEvent = associatedEvent;
@@ -35,7 +35,7 @@ public class Task {
         return deadline;
     }
 
-    public EventName getAssociatedEvent() {
+    public Event getAssociatedEvent() {
         return associatedEvent;
     }
 

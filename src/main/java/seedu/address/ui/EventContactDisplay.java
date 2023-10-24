@@ -9,7 +9,6 @@ import javafx.scene.layout.StackPane;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
-import seedu.address.model.event.Event;
 
 /**
  * Panel containing events list and contacts list.

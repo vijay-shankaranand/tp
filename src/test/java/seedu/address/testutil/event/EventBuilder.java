@@ -8,6 +8,7 @@ import seedu.address.model.event.EventAddress;
 import seedu.address.model.date.Date;
 import seedu.address.model.event.EventName;
 import seedu.address.model.person.Person;
+import seedu.address.model.task.Task;
 import seedu.address.model.util.SampleDataUtil;
 import seedu.address.testutil.person.PersonBuilder;
 
@@ -23,6 +24,8 @@ public class EventBuilder {
     private Date date;
     private EventAddress address;
     private Set<Person> contacts;
+    private Set<Task> tasks;
+
 
     /**
      * Creates a {@code EventBuilder} with the default details.
@@ -32,6 +35,7 @@ public class EventBuilder {
         date = new Date(DEFAULT_EVENT_DATE);
         address = new EventAddress(DEFAULT_EVENT_ADDRESS);
         Set<Person> contacts = new HashSet<>();
+        Set<Task> tasks = new HashSet<>();
         contacts.add(new PersonBuilder().build());
     }
 
@@ -76,8 +80,16 @@ public class EventBuilder {
         this.contacts = SampleDataUtil.getPersonSet(contacts);
         return this;
     }
+    /**
+     * Parses the {@code tasks} into a {@code Set<Task>} and set it to the {@code Event} that we are building.
+     */
+    public EventBuilder withEventTasks(Task ... tasks) {
+        this.tasks = SampleDataUtil.getTaskSet(taks);
+        return this;
+    }
+
     public Event build() {
-        return new Event(name, date, address, contacts);
+        return new Event(name, date, address, contacts, tasks);
     }
 
 

@@ -47,7 +47,7 @@ public class JsonAdaptedEvent {
      */
     public JsonAdaptedEvent(Event source) {
         name = source.getName().eventName;
-        date = source.getDate().eventDate;
+        date = source.getDate().;
         address = source.getAddress().value;
         contacts.addAll(source.getContacts().stream()
                 .map(JsonAdaptedPerson::new)

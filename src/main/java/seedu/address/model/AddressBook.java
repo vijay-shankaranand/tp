@@ -2,6 +2,7 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.Date;
 import java.util.List;
 
 import javafx.collections.ObservableList;
@@ -14,6 +15,9 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
+import seedu.address.model.task.Task;
+import seedu.address.model.task.TaskDescription;
+import seedu.address.model.task.UniqueTaskList;
 
 /**
  * Wraps all data at the address-book level
@@ -26,6 +30,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     private final UniqueTagList tags;
 
     private final UniqueEventList events;
+    private final UniqueTaskList tasks;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -38,6 +43,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons = new UniquePersonList();
         tags = new UniqueTagList();
         events = new UniqueEventList();
+        tasks = new UniqueTaskList();
     }
 
     public AddressBook() {}
@@ -232,6 +238,46 @@ public class AddressBook implements ReadOnlyAddressBook {
         return events.asUnmodifiableObservableList();
     }
 
+    //======Task Operations=======================================================================
+
+    /**
+     * Returns true if an tas with the same identity as {@code task} exists in the address book.
+     */
+    public boolean hasTask(Task task) {
+        requireNonNull(task);
+        return tasks.contains(task);
+    }
+
+    /**
+     * Adds a task to the address book.
+     * The task must not already exist in the address book.
+     */
+    public void addTask(Task taskToAdd) {
+        tasks.add(taskToAdd);
+    }
+
+    /**
+     * Replaces the given event {@code target} in the list with {@code editedTask}.
+     * {@code target} must exist in the address book.
+     * The event identity of {@code editedEvent} must not be the same as another existing event in the address book.
+     */
+    public void setTask(Task target, Task editedTask) {
+        requireNonNull(editedTask);
+
+        tasks.setTask(target, editedTask);
+    }
+
+    /**
+     * Returns the {@code Task} with given arguments.
+     */
+    public Task getTask(TaskDescription description, Date date, Event event) {
+        return tasks.getByValues(description, date, event);
+    }
+
+    @Override
+    public ObservableList<Task> getTaskList() {
+        return tasks.asUnmodifiableObservableList();
+    }
     //====== util methods ===========================================================================
 
     @Override

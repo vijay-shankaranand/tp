@@ -8,7 +8,6 @@ import java.util.HashSet;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.event.Event;
 import seedu.address.model.event.EventAddress;
 import seedu.address.model.date.Date;
 import seedu.address.model.event.EventName;

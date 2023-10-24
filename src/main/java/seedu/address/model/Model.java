@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.Date;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -11,6 +12,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.task.Task;
+import seedu.address.model.task.TaskDescription;
 
 /**
  * The API of the Model component.
@@ -182,7 +184,7 @@ public interface Model {
     /**
      * Returns the {@code task} with given description.
      */
-    Task getTask(Task description);
+    Task getTask(TaskDescription description, Date date, Event event);
 
     /**
      * Replaces the given task {@code target} with {@code editedTask}.

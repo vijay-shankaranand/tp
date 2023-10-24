@@ -130,7 +130,8 @@ public class UniqueEventList implements Iterable<Event> {
             } else {
                 updatedContactsList = contactsList;
             }
-            Event updatedEvent = new Event(curr.getName(), curr.getDate(), curr.getAddress(), updatedContactsList);
+            Event updatedEvent = new Event(curr.getName(), curr.getDate(), curr.getAddress(),
+                    updatedContactsList, curr.getTasks());
             internalList.set(i, updatedEvent);
         }
     }

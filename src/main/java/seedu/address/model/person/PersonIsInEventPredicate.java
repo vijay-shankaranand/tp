@@ -3,7 +3,6 @@ package seedu.address.model.person;
 import java.util.function.Predicate;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.event.Event;
 
 /**
  * Tests that a {@code Person} is linked to the given event.

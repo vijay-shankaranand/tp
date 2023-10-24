@@ -10,6 +10,7 @@ import java.util.Set;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.date.Date;
 import seedu.address.model.person.Person;
+import seedu.address.model.task.Task;
 
 /**
  * Represents an Event in the address book.
@@ -24,6 +25,7 @@ public class Event {
     private final Date date;
     private final EventAddress address;
     private final Set<Person> contacts = new HashSet<>();
+    private final Set<Task> tasks = new HashSet<>();
 
     /**
      * Constructs a {@code Event}.
@@ -33,12 +35,13 @@ public class Event {
      * @param address A valid address.
      * @param contacts A valid set of contacts.
      */
-    public Event(EventName name, Date date, EventAddress address, Set<Person> contacts) {
+    public Event(EventName name, Date date, EventAddress address, Set<Person> contacts, Set<Task> tasks) {
         requireAllNonNull(name, date, address, contacts);
         this.name = name;
         this.date = date;
         this.address = address;
         this.contacts.addAll(contacts);
+        this.tasks.addAll(tasks);
     }
 
     public EventAddress getAddress() {
@@ -60,6 +63,9 @@ public class Event {
     public Set<Person> getContacts() {
         return Collections.unmodifiableSet(contacts);
     }
+    public Set<Task> getTasks() {
+        return Collections.unmodifiableSet(tasks);
+    }
 
     /**
      * Checks whether this {@code Event} is linked to the given {@code Person}.
@@ -78,6 +84,14 @@ public class Event {
     public void linkContact(Person toLink) {
         contacts.add(toLink);
     }
+
+//    /**
+//     * Adds the given {@code Task} to this {@code Event}.
+//     * @param taskToAdd The {@code Task} to be linked to this {@code Event}.
+//     */
+//    public void addTaskToEvent(Task taskToAdd) {
+//        tasks.add(taskToAdd);
+//    }
 
     /**
      * Returns true if both events have the same name.
@@ -111,13 +125,14 @@ public class Event {
         return name.equals(otherEvent.name)
                 && date.equals(otherEvent.date)
                 && address.equals(otherEvent.address)
-                && contacts.equals(otherEvent.contacts);
+                && contacts.equals(otherEvent.contacts)
+                && tasks.equals(otherEvent.tasks);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, date, address, contacts);
+        return Objects.hash(name, date, address, contacts, tasks);
     }
 
     @Override
@@ -127,6 +142,7 @@ public class Event {
                 .add("date", date)
                 .add("address", address)
                 .add("contacts", contacts)
+                .add("tasks", tasks)
                 .toString();
     }
 
