@@ -20,6 +20,7 @@ import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.HomeCommand;
+import seedu.address.logic.commands.event.AddEventCommand;
 import seedu.address.logic.commands.event.LinkCommand;
 import seedu.address.logic.commands.event.SelectEventCommand;
 import seedu.address.logic.commands.event.ViewEventsCommand;
@@ -34,12 +35,14 @@ import seedu.address.logic.commands.tag.DeleteTagCommand;
 import seedu.address.logic.commands.tag.FilterCommand;
 import seedu.address.logic.commands.tag.ViewTagsCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.event.Event;
 import seedu.address.model.event.EventName;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.PersonIsTaggedPredicate;
 import seedu.address.model.tag.Tag;
+import seedu.address.testutil.event.EventBuilder;
 import seedu.address.testutil.event.EventUtil;
 import seedu.address.testutil.person.EditPersonDescriptorBuilder;
 import seedu.address.testutil.person.PersonBuilder;
@@ -115,6 +118,13 @@ public class AddressBookParserTest {
     }
 
     @Test
+    public void parseCommand_addEvent() throws Exception {
+        Event event = new EventBuilder().withEventContacts().build();
+        AddEventCommand command = (AddEventCommand) parser.parseCommand(EventUtil.getAddEventCommand(event));
+        assertEquals(new AddEventCommand(event), command);
+    }
+
+    @Test
     public void parseCommand_home() throws Exception {
         assertTrue(parser.parseCommand(HomeCommand.COMMAND_WORD) instanceof HomeCommand);
         assertTrue(parser.parseCommand(HomeCommand.COMMAND_WORD + " 3") instanceof HomeCommand);
@@ -152,6 +162,7 @@ public class AddressBookParserTest {
                 + " " + "t/vendor");
         assertEquals(new DeleteTagCommand(tag), command);
     }
+
 
     @Test
     public void parseCommand_help() throws Exception {

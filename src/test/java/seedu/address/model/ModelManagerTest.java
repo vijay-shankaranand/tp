@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.event.TypicalEvents.JOBFEST;
 import static seedu.address.testutil.person.TypicalPersons.ALICE;
 import static seedu.address.testutil.person.TypicalPersons.BENSON;
 import static seedu.address.testutil.tag.TypicalTags.VENUES;
@@ -17,6 +18,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.event.exceptions.EventNotFoundException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.AddressBookBuilder;
@@ -128,6 +130,54 @@ public class ModelManagerTest {
     @Test
     public void getFilteredTagList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredTagList().remove(0));
+    }
+
+    @Test
+    public void hasEvent_nullEvent_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.hasEvent(null));
+    }
+
+    @Test
+    public void hasEvent_eventNotInAddressBook_returnsFalse() {
+        assertFalse(modelManager.hasEvent(JOBFEST));
+    }
+
+    @Test
+    public void hasEvent_eventInAddressBook_returnsTrue() {
+        modelManager.addEvent(JOBFEST);
+        assertTrue(modelManager.hasEvent(JOBFEST));
+    }
+
+    @Test
+    public void setEvent_nullTargetEvent_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.setEvent(null, JOBFEST));
+    }
+
+    @Test
+    public void setEvent_nullEditedEvent_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.setEvent(JOBFEST, null));
+    }
+
+    @Test
+    public void setEvent_targetEventNotInAddressBook_throwsCommandException() {
+        assertThrows(EventNotFoundException.class, () -> modelManager.setEvent(JOBFEST, JOBFEST));
+    }
+
+    @Test
+    public void setEvent_editedEventIsSameEvent_success() throws CommandException {
+        modelManager.addEvent(JOBFEST);
+        modelManager.setEvent(JOBFEST, JOBFEST);
+        assertTrue(modelManager.hasEvent(JOBFEST));
+    }
+
+    @Test
+    public void getFilteredEventList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredEventList().remove(0));
+    }
+
+    @Test
+    public void updateFilteredEventList_nullPredicate_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.updateFilteredEventList(null));
     }
 
     @Test

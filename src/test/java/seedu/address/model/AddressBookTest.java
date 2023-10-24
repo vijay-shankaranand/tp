@@ -137,6 +137,27 @@ public class AddressBookTest {
     }
 
     @Test
+    public void addEvent_successful_returnsTrue() {
+        addressBook.addEvent(JOBFEST);
+        assertTrue(addressBook.hasEvent(JOBFEST));
+    }
+
+    @Test
+    public void setEvent_nullTargetEvent_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> addressBook.setEvent(null, JOBFEST));
+    }
+
+    @Test
+    public void setEvent_successful_returnsTrue() {
+        addressBook.addEvent(JOBFEST);
+        Event editedEvent = new EventBuilder(JOBFEST)
+                .withEventDate("2023-12-01")
+                .build();
+        addressBook.setEvent(JOBFEST, editedEvent);
+        assertTrue(addressBook.hasEvent(editedEvent));
+    }
+
+    @Test
     public void hasEvent_nullEvent_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> addressBook.hasEvent(null));
     }

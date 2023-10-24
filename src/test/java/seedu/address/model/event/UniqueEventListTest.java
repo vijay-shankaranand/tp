@@ -45,6 +45,13 @@ public class UniqueEventListTest {
     }
 
     @Test
+    public void contains_eventWithSameNameInList_returnsTrue() {
+        uniqueEventList.add(JOBFEST);
+        Event editedMeeting = new EventBuilder(JOBFEST).withEventDate("2023-12-23").build();
+        assertTrue(uniqueEventList.contains(editedMeeting));
+    }
+
+    @Test
     public void add_nullEvent_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> uniqueEventList.add(null));
     }
@@ -186,6 +193,7 @@ public class UniqueEventListTest {
         list.add(NTU);
         assertTrue(list.equals(list));
     }
+
 
 
 }
