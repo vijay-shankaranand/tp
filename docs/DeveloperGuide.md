@@ -454,6 +454,114 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
+**Use case: View all events**
+
+**MSS**
+1. User requests to list events
+2. JobFestGo shows a list of all events
+
+   Use case ends.
+
+**Use case: Delete an event**
+
+**MSS**
+
+1. JobFestGo shows a list of events
+2. User requests to delete a specified event in the list
+3. JobFestGo deletes the event
+4. JobFestGo displays the updated events
+
+      Use case ends.
+
+**Extensions**
+
+* 2a. The event list is empty.
+
+   Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. JobFestGo shows an error message.
+
+      Use case resumes at step 2.
+
+* 3b. Missing index in the command.
+
+    * 3b1. JobFestGo shows an error message.
+
+      Use case resumes at step 2.
+
+**Use case: Select an event**
+
+**MSS**
+
+1. User requests to select an event
+2. JobFestGo displays the contacts and tasks related to the event
+3. User <u>adds a task</u> or <u>deletes a task</u> or <u>marks a task</u> or <u>unmarks a task</u>.
+
+      Use case ends.
+
+
+**Extensions**
+
+* 1a. The given index is invalid.
+
+    * 1a1. JobFestGo shows an error message.
+
+      Use case resumes at step 1. 
+
+* 1b. Missing index.
+
+    * 1b1. JobFestGo shows an error message.
+
+      Use case resumes at step 1.
+
+**Use case: Add a task**
+
+**MSS**
+
+1.  User requests to add task and specifies details of task with the event to be added in
+2.  JobFestGo adds the task to list of tasks
+3.  JobFestGo adds the task to the event specified
+4.  JobFestGo shows updated list of tasks
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. Any of the mandatory fields not specified
+
+  * 1a1. JobFestGo informs user that mandatory fields not specified
+
+    Use case ends.
+
+* 1b. Date is invalid.
+
+    * 1b1. JobFestGo informs user that date is invalid.
+
+      Use case ends.
+
+* 1c. Event does not already exist.
+
+    * 1c1. JobFestGo informs user that event does not already exist.
+
+      Use case ends.
+
+**Use case: Return to the home page**
+
+**MSS**
+1. User is on any page 
+2. User requests to return to the home page
+3. JobFestGo returns user to the home page
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. The user is already on the home page
+
+   Use case ends.
+
 *{More to be added}*
 
 ---
