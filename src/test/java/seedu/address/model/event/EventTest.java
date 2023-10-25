@@ -19,7 +19,8 @@ import seedu.address.testutil.event.EventBuilder;
 public class EventTest {
     @Test
     public void constructor_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new Event(null, null, null, null));
+        assertThrows(NullPointerException.class, () -> new Event(null, null, null,
+                null, null));
     }
 
     @Test
@@ -37,7 +38,7 @@ public class EventTest {
         assertFalse(NTU.isSameEvent(null));
 
         // same name, all other attributes different -> returns true
-        Event editedEvent = new EventBuilder(NTU).withEventDate(VALID_EVENT_DATE).withEventAddress(VALID_EVENT_ADDRESS)
+        Event editedEvent = new EventBuilder(NTU).withDate(VALID_EVENT_DATE).withEventAddress(VALID_EVENT_ADDRESS)
                 .withEventContacts(VALID_EVENT_CONTACT).build();
         assertTrue(NTU.isSameEvent(editedEvent));
 
@@ -71,7 +72,7 @@ public class EventTest {
         assertFalse(NTU.equals(editedEvent));
 
         // different date -> returns false
-        editedEvent = new EventBuilder(NTU).withEventDate(VALID_EVENT_DATE).build();
+        editedEvent = new EventBuilder(NTU).withDate(VALID_EVENT_DATE).build();
         assertFalse(NTU.equals(editedEvent));
 
         // different address -> returns false
@@ -86,7 +87,9 @@ public class EventTest {
     @Test
     public void toStringMethod() {
         String expected = Event.class.getCanonicalName() + "{name=" + NTU.getName() + ", date=" + NTU.getDate()
-                + ", address=" + NTU.getAddress() + ", contacts=" + NTU.getContacts() + "}";
+                + ", address=" + NTU.getAddress() + ", contacts=" + NTU.getContacts()
+                + ", tasks=" + NTU.getTasks() + "}";
         assertEquals(expected, NTU.toString());
     }
+
 }

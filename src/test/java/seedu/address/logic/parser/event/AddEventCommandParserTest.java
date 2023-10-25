@@ -18,8 +18,8 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.event.AddEventCommand;
 import seedu.address.model.address.Address;
+import seedu.address.model.date.Date;
 import seedu.address.model.event.Event;
-import seedu.address.model.event.EventDate;
 import seedu.address.model.name.Name;
 import seedu.address.testutil.event.EventBuilder;
 
@@ -118,7 +118,7 @@ public class AddEventCommandParserTest {
 
         // invalid date
         assertParseFailure(parser, " " + PREFIX_NAME + NTU.getName()
-                + INVALID_DATE_DESC + " " + PREFIX_ADDRESS + NTU.getAddress(), EventDate.MESSAGE_CONSTRAINTS);
+                + INVALID_DATE_DESC + " " + PREFIX_ADDRESS + NTU.getAddress(), Date.MESSAGE_CONSTRAINTS);
 
         // invalid address
         assertParseFailure(parser, " " + PREFIX_NAME + NTU.getName() + " "

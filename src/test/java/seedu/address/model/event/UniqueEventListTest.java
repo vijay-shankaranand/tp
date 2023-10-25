@@ -47,7 +47,7 @@ public class UniqueEventListTest {
     @Test
     public void contains_eventWithSameNameInList_returnsTrue() {
         uniqueEventList.add(JOBFEST);
-        Event editedMeeting = new EventBuilder(JOBFEST).withEventDate("2023-12-23").build();
+        Event editedMeeting = new EventBuilder(JOBFEST).withDate("2023-12-23").build();
         assertTrue(uniqueEventList.contains(editedMeeting));
     }
 

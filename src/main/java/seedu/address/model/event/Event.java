@@ -9,8 +9,10 @@ import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.address.Address;
+import seedu.address.model.date.Date;
 import seedu.address.model.name.Name;
 import seedu.address.model.person.Person;
+import seedu.address.model.task.Task;
 
 /**
  * Represents an Event in the address book.
@@ -22,9 +24,11 @@ public class Event {
     private final Name name;
 
     // Data fields
-    private final EventDate date;
     private final Address address;
+    private final Date date;
+
     private final Set<Person> contacts = new HashSet<>();
+    private final Set<Task> tasks = new HashSet<>();
 
     /**
      * Constructs a {@code Event}.
@@ -34,12 +38,14 @@ public class Event {
      * @param address A valid address.
      * @param contacts A valid set of contacts.
      */
-    public Event(Name name, EventDate date, Address address, Set<Person> contacts) {
-        requireAllNonNull(name, date, address, contacts);
+    public Event(Name name, Date date, Address address, Set<Person> contacts, Set<Task> tasks) {
+        requireAllNonNull(name, date, address, contacts, tasks);
+
         this.name = name;
         this.date = date;
         this.address = address;
         this.contacts.addAll(contacts);
+        this.tasks.addAll(tasks);
     }
 
     public Address getAddress() {
@@ -50,7 +56,7 @@ public class Event {
         return name;
     }
 
-    public EventDate getDate() {
+    public Date getDate() {
         return date;
     }
 
@@ -60,6 +66,9 @@ public class Event {
      */
     public Set<Person> getContacts() {
         return Collections.unmodifiableSet(contacts);
+    }
+    public Set<Task> getTasks() {
+        return Collections.unmodifiableSet(tasks);
     }
 
     /**
@@ -95,7 +104,7 @@ public class Event {
 
     /**
      * Returns true if both events have the same identity and data fields.
-     * This defines a stronger notion of equality between two persons.
+     * This defines a stronger notion of equality between two events.
      */
     @Override
     public boolean equals(Object other) {
@@ -112,13 +121,14 @@ public class Event {
         return name.equals(otherEvent.name)
                 && date.equals(otherEvent.date)
                 && address.equals(otherEvent.address)
-                && contacts.equals(otherEvent.contacts);
+                && contacts.equals(otherEvent.contacts)
+                && tasks.equals(otherEvent.tasks);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, date, address, contacts);
+        return Objects.hash(name, date, address, contacts, tasks);
     }
 
     @Override
@@ -128,6 +138,7 @@ public class Event {
                 .add("date", date)
                 .add("address", address)
                 .add("contacts", contacts)
+                .add("tasks", tasks)
                 .toString();
     }
 

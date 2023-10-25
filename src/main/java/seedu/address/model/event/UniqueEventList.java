@@ -14,6 +14,7 @@ import seedu.address.model.event.exceptions.DuplicateEventException;
 import seedu.address.model.event.exceptions.EventNotFoundException;
 import seedu.address.model.name.Name;
 import seedu.address.model.person.Person;
+import seedu.address.model.task.Task;
 
 /**
  * A list of events that enforces uniqueness between its elements and does not allow nulls.
@@ -53,6 +54,25 @@ public class UniqueEventList implements Iterable<Event> {
     }
 
     /**
+     * Adds a task to the event.
+     * @param taskToAdd The task to be added.
+     */
+    public void addTaskInEvent(Task taskToAdd) {
+        for (int i = 0; i < internalList.size(); i++) {
+            Event curr = internalList.get(i);
+            Set<Task> newTasks = new HashSet<>();
+            if (curr.getName().equals(taskToAdd.getAssociatedEventName())) {
+                newTasks.addAll(curr.getTasks());
+                newTasks.add(taskToAdd);
+                Event updatedEvent = new Event(curr.getName(), curr.getDate(), curr.getAddress(),
+                        curr.getContacts(), newTasks);
+                setEvent(curr, updatedEvent);
+                return;
+            }
+        }
+    }
+
+    /**
      * Returns the {@code Event} with given name from the list.
      * @param name The name of the desired {@code Event}.
      */
@@ -65,7 +85,7 @@ public class UniqueEventList implements Iterable<Event> {
             }
         }
         if (toGet == null) {
-            throw new EventNotFoundException();
+            throw new EventNotFoundException(name);
         } else {
             return toGet;
         }
@@ -78,7 +98,7 @@ public class UniqueEventList implements Iterable<Event> {
     public void remove(Event toRemove) {
         requireNonNull(toRemove);
         if (!internalList.remove(toRemove)) {
-            throw new EventNotFoundException();
+            throw new EventNotFoundException(toRemove.getName());
         }
     }
 
@@ -131,7 +151,8 @@ public class UniqueEventList implements Iterable<Event> {
             } else {
                 updatedContactsList = contactsList;
             }
-            Event updatedEvent = new Event(curr.getName(), curr.getDate(), curr.getAddress(), updatedContactsList);
+            Event updatedEvent = new Event(curr.getName(), curr.getDate(), curr.getAddress(),
+                    updatedContactsList, curr.getTasks());
             internalList.set(i, updatedEvent);
         }
     }

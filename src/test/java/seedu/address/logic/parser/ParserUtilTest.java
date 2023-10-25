@@ -16,7 +16,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.address.Address;
-import seedu.address.model.event.EventDate;
+import seedu.address.model.date.Date;
 import seedu.address.model.name.Name;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Phone;
@@ -199,26 +199,26 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseEventDate_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseEventDate((String) null));
+    public void parseDate_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseDate((String) null));
     }
 
     @Test
-    public void parseEventDate_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseEventDate(INVALID_EVENT_DATE));
+    public void parseDate_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseDate(INVALID_EVENT_DATE));
     }
 
     @Test
-    public void parseEventDate_validValueWithoutWhitespace_returnsEventDate() throws Exception {
-        EventDate expectedEventDate = new EventDate(VALID_EVENT_DATE);
-        assertEquals(expectedEventDate, ParserUtil.parseEventDate(VALID_EVENT_DATE));
+    public void parseDate_validValueWithoutWhitespace_returnsDate() throws Exception {
+        Date expectedEventDate = new Date(VALID_EVENT_DATE);
+        assertEquals(expectedEventDate, ParserUtil.parseDate(VALID_EVENT_DATE));
     }
 
     @Test
-    public void parseEventDate_validValueWithWhitespace_returnsTrimmedEventDate() throws Exception {
+    public void parseDate_validValueWithWhitespace_returnsTrimmedEventDate() throws Exception {
         String eventDateWithWhitespace = WHITESPACE + VALID_EVENT_DATE + WHITESPACE;
-        EventDate expectedEventDate = new EventDate(VALID_EVENT_DATE);
-        assertEquals(expectedEventDate, ParserUtil.parseEventDate(eventDateWithWhitespace));
+        Date expectedEventDate = new Date(VALID_EVENT_DATE);
+        assertEquals(expectedEventDate, ParserUtil.parseDate(eventDateWithWhitespace));
     }
 
     @Test

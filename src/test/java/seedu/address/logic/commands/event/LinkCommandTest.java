@@ -37,12 +37,12 @@ public class LinkCommandTest {
     @Test
     public void execute_validSingleContact_success() {
         Event event = new EventBuilder().withName("JobFest 2023")
-                .withEventDate("2023-12-12")
+                .withDate("2023-12-12")
                 .withEventAddress("3 Temasek Blvd, Singapore 038983")
                 .withEventContacts(ALICE, BOB)
                 .build();
         Event expectedEvent = new EventBuilder().withName("JobFest 2023")
-                .withEventDate("2023-12-12")
+                .withDate("2023-12-12")
                 .withEventAddress("3 Temasek Blvd, Singapore 038983")
                 .withEventContacts(ALICE, BOB, CARL)
                 .build();
@@ -62,12 +62,12 @@ public class LinkCommandTest {
     @Test
     public void execute_validMultipleContact_success() {
         Event event = new EventBuilder().withName("JobFest 2023")
-                .withEventDate("2023-12-12")
+                .withDate("2023-12-12")
                 .withEventAddress("3 Temasek Blvd, Singapore 038983")
                 .withEventContacts(ALICE, BOB)
                 .build();
         Event expectedEvent = new EventBuilder().withName("JobFest 2023")
-                .withEventDate("2023-12-12")
+                .withDate("2023-12-12")
                 .withEventAddress("3 Temasek Blvd, Singapore 038983")
                 .withEventContacts(ALICE, BOB, CARL, BENSON)
                 .build();
@@ -88,7 +88,7 @@ public class LinkCommandTest {
     @Test
     public void execute_eventAlreadyLinkedToContact_throwsCommandException() {
         Event event = new EventBuilder().withName("JobFest 2023")
-                .withEventDate("2023-12-12")
+                .withDate("2023-12-12")
                 .withEventAddress("3 Temasek Blvd, Singapore 038983")
                 .withEventContacts(ALICE, BOB)
                 .build();
@@ -105,7 +105,7 @@ public class LinkCommandTest {
     @Test
     public void execute_eventNotInTheList_throwsCommandException() {
         Event event = new EventBuilder().withName("JobFest 2023")
-                .withEventDate("2023-12-12")
+                .withDate("2023-12-12")
                 .withEventAddress("3 Temasek Blvd, Singapore 038983")
                 .withEventContacts(ALICE, BOB)
                 .build();
@@ -121,7 +121,7 @@ public class LinkCommandTest {
     @Test
     public void execute_contactNotInTheList_throwsCommandException() {
         Event event = new EventBuilder().withName("JobFest 2023")
-                .withEventDate("2023-12-12")
+                .withDate("2023-12-12")
                 .withEventAddress("3 Temasek Blvd, Singapore 038983")
                 .withEventContacts(ALICE, BOB)
                 .build();

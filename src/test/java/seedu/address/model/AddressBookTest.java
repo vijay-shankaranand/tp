@@ -24,6 +24,7 @@ import seedu.address.model.event.Event;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.task.Task;
 import seedu.address.testutil.event.EventBuilder;
 import seedu.address.testutil.person.PersonBuilder;
 import seedu.address.testutil.tag.TagBuilder;
@@ -37,6 +38,7 @@ public class AddressBookTest {
         assertEquals(Collections.emptyList(), addressBook.getPersonList());
         assertEquals(Collections.emptyList(), addressBook.getTagList());
         assertEquals(Collections.emptyList(), addressBook.getEventList());
+        assertEquals(Collections.emptyList(), addressBook.getTaskList());
     }
 
     @Test
@@ -151,7 +153,7 @@ public class AddressBookTest {
     public void setEvent_successful_returnsTrue() {
         addressBook.addEvent(JOBFEST);
         Event editedEvent = new EventBuilder(JOBFEST)
-                .withEventDate("2023-12-01")
+                .withDate("2023-12-01")
                 .build();
         addressBook.setEvent(JOBFEST, editedEvent);
         assertTrue(addressBook.hasEvent(editedEvent));
@@ -177,7 +179,7 @@ public class AddressBookTest {
     public void hasEvent_eventWithSameIdentityFieldsInAddressBook_returnsTrue() {
         addressBook.addEvent(JOBFEST);
         Event editedEvent = new EventBuilder(JOBFEST)
-                .withEventDate("2023-12-01")
+                .withDate("2023-12-01")
                 .build();
         assertTrue(addressBook.hasEvent(editedEvent));
     }
@@ -199,7 +201,9 @@ public class AddressBookTest {
         String expected = AddressBook.class.getCanonicalName() + "{persons=" + addressBook.getPersonList()
                 +
                 ", tags=" + addressBook.getTagList()
-                + ", events=" + addressBook.getEventList() + "}";
+                + ", events=" + addressBook.getEventList()
+                + ", tasks=" + addressBook.getTaskList()
+                + "}";
         assertEquals(expected, addressBook.toString());
     }
 
@@ -212,11 +216,14 @@ public class AddressBookTest {
         private final ObservableList<Tag> tags = FXCollections.observableArrayList();
 
         private final ObservableList<Event> events = FXCollections.observableArrayList();
+        private final ObservableList<Task> tasks = FXCollections.observableArrayList();
+
 
         AddressBookStub(Collection<Person> persons, Collection<Tag> tags) {
             this.persons.setAll(persons);
             this.tags.setAll(tags);
             this.events.setAll(events);
+            this.tasks.setAll(tasks);
         }
 
         @Override
@@ -232,6 +239,10 @@ public class AddressBookTest {
         @Override
         public ObservableList<Event> getEventList() {
             return events;
+        }
+        @Override
+        public ObservableList<Task> getTaskList() {
+            return tasks;
         }
     }
 }

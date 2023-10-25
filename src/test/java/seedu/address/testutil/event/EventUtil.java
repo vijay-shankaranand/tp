@@ -50,7 +50,7 @@ public class EventUtil {
     public static String getEventDetails(Event event) {
         StringBuilder sb = new StringBuilder();
         sb.append(PREFIX_NAME + event.getName().fullName + " ");
-        sb.append(PREFIX_DATE + event.getDate().eventDate + " ");
+        sb.append(PREFIX_DATE + event.getDate().date + " ");
         sb.append(PREFIX_ADDRESS + event.getAddress().value + " ");
         return sb.toString();
     }
