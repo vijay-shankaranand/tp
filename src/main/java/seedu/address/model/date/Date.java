@@ -63,12 +63,12 @@ public class Date {
      * @param secondEventDate second EventDate to compare
      * @return -1 if first EventDate is before second EventDate, 0 if equal, 1 if first EventDate is after
      */
-    public int compareTo(EventDate secondEventDate) {
+    public int compareTo(Date secondEventDate) {
         LocalDate firstDate;
         LocalDate secondDate;
 
-        firstDate = LocalDate.parse(this.eventDate);
-        secondDate = LocalDate.parse(secondEventDate.eventDate);
+        firstDate = LocalDate.parse(this.date);
+        secondDate = LocalDate.parse(secondEventDate.date);
 
         return firstDate.compareTo(secondDate);
     }

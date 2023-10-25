@@ -18,6 +18,7 @@ import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.TaskDescription;
+import seedu.address.model.task.TaskSortByDateComparator;
 import seedu.address.model.task.UniqueTaskList;
 
 /**
@@ -287,7 +288,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     @Override
     public ObservableList<Task> getTaskList() {
-        return tasks.asUnmodifiableObservableList();
+        return tasks.asUnmodifiableObservableList().sorted(new TaskSortByDateComparator());
     }
     //====== util methods ===========================================================================
 

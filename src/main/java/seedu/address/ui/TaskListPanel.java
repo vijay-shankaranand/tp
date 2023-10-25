@@ -8,7 +8,7 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.event.Event;
+import seedu.address.model.task.Task;
 
 /**
  * Panel containing the list of tasks.
@@ -18,15 +18,12 @@ public class TaskListPanel extends UiPart<Region> {
     private final Logger logger = LogsCenter.getLogger(ReminderListPanel.class);
 
     @FXML
-    private ListView<Event> reminderListView;
-
-    @FXML
-    private ListView<Event> taskListView;
+    private ListView<Task> taskListView;
 
     /**
      * Creates a {@code TaskListPanel} with the given {@code ObservableList}.
      */
-    public TaskListPanel(ObservableList<Event> taskList) {
+    public TaskListPanel(ObservableList<Task> taskList) {
         super(FXML);
         taskListView.setItems(taskList);
         taskListView.setCellFactory(listView -> new TaskListViewCell());
@@ -35,16 +32,16 @@ public class TaskListPanel extends UiPart<Region> {
     /**
      * Custom {@code ListCell} that displays the graphics of a {@code Event} using a {@code EventCard}.
      */
-    class TaskListViewCell extends ListCell<Event> {
+    class TaskListViewCell extends ListCell<Task> {
         @Override
-        protected void updateItem(Event event, boolean empty) {
-            super.updateItem(event, empty);
+        protected void updateItem(Task task, boolean empty) {
+            super.updateItem(task, empty);
 
-            if (empty || event == null) {
+            if (empty || task == null) {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new EventCard(event, getIndex() + 1).getRoot());
+                setGraphic(new TaskCard(task, getIndex() + 1).getRoot());
             }
         }
     }

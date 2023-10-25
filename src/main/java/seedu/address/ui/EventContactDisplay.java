@@ -72,7 +72,7 @@ public class EventContactDisplay extends UiPart<Region> {
      * Fills up the task list panel with the filtered task list when an event is selected.
      */
     private void fillTaskList() {
-        taskListPanel = new TaskListPanel(logic.getFilteredEventList());
+        taskListPanel = new TaskListPanel(logic.getFilteredTaskList());
         if (!reminderTaskListPanelPlaceholder.getChildren().isEmpty()) {
                 reminderTaskListPanelPlaceholder.getChildren().clear();
         }
