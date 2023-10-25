@@ -35,7 +35,7 @@ public class EventBuilder {
         date = new Date(DEFAULT_EVENT_DATE);
         address = new EventAddress(DEFAULT_EVENT_ADDRESS);
         Set<Person> contacts = new HashSet<>();
-        Set<Task> tasks = new HashSet<>();
+        tasks = new HashSet<>();
         contacts.add(new PersonBuilder().build());
     }
 
@@ -47,6 +47,7 @@ public class EventBuilder {
         date = eventToCopy.getDate();
         address = eventToCopy.getAddress();
         contacts = eventToCopy.getContacts();
+        tasks = eventToCopy.getTasks();
     }
 
     /**

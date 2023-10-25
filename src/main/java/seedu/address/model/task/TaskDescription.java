@@ -3,6 +3,10 @@ package seedu.address.model.task;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+/**
+ * Represents an Task's description in the address book.
+ * Guarantees: immutable; is valid as declared in {@link #isValidDescription(String)}
+ */
 public class TaskDescription {
 
     public static final String MESSAGE_CONSTRAINTS = "Task descriptions can take any values, "

@@ -85,14 +85,6 @@ public class Event {
         contacts.add(toLink);
     }
 
-//    /**
-//     * Adds the given {@code Task} to this {@code Event}.
-//     * @param taskToAdd The {@code Task} to be linked to this {@code Event}.
-//     */
-//    public void addTaskToEvent(Task taskToAdd) {
-//        tasks.add(taskToAdd);
-//    }
-
     /**
      * Returns true if both events have the same name.
      * This defines a weaker notion of equality between two events.

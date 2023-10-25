@@ -60,14 +60,14 @@ public class UniqueEventList implements Iterable<Event> {
         for (int i = 0; i < internalList.size(); i++) {
             Event curr = internalList.get(i);
             Set<Task> newTasks = new HashSet<>();
-            if (curr.getName().equals(taskToAdd.getAssociatedEvent().getName())) {
+            if (curr.getName().equals(taskToAdd.getAssociatedEventName())) {
                 newTasks.addAll(curr.getTasks());
                 newTasks.add(taskToAdd);
+                Event updatedEvent = new Event(curr.getName(), curr.getDate(), curr.getAddress(),
+                        curr.getContacts(), newTasks);
+                setEvent(curr, updatedEvent);
+                return;
             }
-            Event updatedEvent = new Event(curr.getName(), curr.getDate(), curr.getAddress(),
-                    curr.getContacts(), newTasks);
-            setEvent(curr, updatedEvent);
-            return;
         }
     }
 

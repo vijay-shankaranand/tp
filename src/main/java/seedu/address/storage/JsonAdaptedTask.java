@@ -5,7 +5,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.date.Date;
-import seedu.address.model.event.Event;
 import seedu.address.model.event.EventName;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.TaskDescription;
@@ -18,14 +17,14 @@ public class JsonAdaptedTask {
 
     private final String description;
     private final String date;
-    private final JsonAdaptedEvent event;
+    private final EventName event;
 
     /**
      * Constructs a {@code JsonAdaptedTask} with the given task details.
      */
     @JsonCreator
     public JsonAdaptedTask(@JsonProperty("description") String description, @JsonProperty("date") String date,
-                            @JsonProperty("event") JsonAdaptedEvent event) {
+                            @JsonProperty("event") EventName event) {
         this.description = description;
         this.date = date;
         this.event = event;
@@ -37,7 +36,7 @@ public class JsonAdaptedTask {
     public JsonAdaptedTask(Task source) {
         description = source.getDescription().value;
         date = source.getDate().date;
-        event = new JsonAdaptedEvent(source.getAssociatedEvent());
+        event = source.getAssociatedEventName();
     }
 
     /**
@@ -64,10 +63,10 @@ public class JsonAdaptedTask {
         if (event == null) {
             throw new IllegalValueException(EventName.MESSAGE_CONSTRAINTS);
         }
-        if (!EventName.isValidName(event.toModelType().getName().eventName)) {
+        if (!EventName.isValidName(event.eventName)) {
             throw new IllegalValueException(EventName.MESSAGE_CONSTRAINTS);
         }
-        final Event modelEvent = event.toModelType();
+        final EventName modelEvent = new EventName(event.eventName);
         return new Task(modelDescription, modelDate, modelEvent);
     }
 }
