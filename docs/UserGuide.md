@@ -211,9 +211,9 @@ Adds an event to JobFestGo.
 
 Format: `add_event n/NAME d/DATE a/ADDRESS`
 
-* An event must have mandatory fields name, date and address
+* An event must have mandatory fields: name, date and address
 * The event name **must not already exist** in JobFestGo.
-* Date must be valid should be in the appropriate (YYYY-MM-DD) format
+* Date must be valid and should be in the appropriate (YYYY-MM-DD) format
 * Date should **not** be before current date
 
 Examples:
