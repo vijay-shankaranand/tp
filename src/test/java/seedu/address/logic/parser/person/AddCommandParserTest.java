@@ -36,10 +36,15 @@ import static seedu.address.testutil.person.TypicalPersons.BOB;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
+<<<<<<< HEAD:src/test/java/seedu/address/logic/parser/person/AddCommandParserTest.java
 import seedu.address.logic.commands.person.AddCommand;
 import seedu.address.model.person.Address;
+=======
+import seedu.address.logic.commands.AddCommand;
+import seedu.address.model.address.Address;
+>>>>>>> add-event:src/test/java/seedu/address/logic/parser/AddCommandParserTest.java
 import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
+import seedu.address.model.name.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
