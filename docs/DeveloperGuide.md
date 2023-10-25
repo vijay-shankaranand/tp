@@ -294,6 +294,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`     | job fest event planner                     | be able to delete tags | can easily identify who I should be cold calling among my contacts without unnecessary tags     |
 | `* *`     | job fest event planner                     | view all events | remember all the events I am involved in so far    |
 | `* *`    | job fest event planner                        | be able to delete events | remove events I no longer need                                          |
+| `* *`     | job fest event planner                     | be able to select events | can easily view the contacts and tasks to do for each particular event    |
 | `* *`    | job fest event planner                        | add a new task for a event | remember the tasks I need to do for the event                         |
 | `* *`      | job fest event planner | return to the home page        |                                                 |
 | `*`      | user with many persons in the address book | sort persons by name         | locate a person easily                                                 |
@@ -490,6 +491,31 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
+**Use case: Select an event**
+
+**MSS**
+
+1. User requests to select an event
+2. JobFestGo displays the contacts and tasks related to the event
+3. User <u>adds a task</u> or <u>deletes a task</u> or <u>marks a task</u> or <u>unmarks a task</u>.
+
+      Use case ends.
+
+
+**Extensions**
+
+* 1a. The given index is invalid.
+
+    * 1a1. JobFestGo shows an error message.
+
+      Use case resumes at step 1. 
+
+* 1b. Missing index.
+
+    * 1b1. JobFestGo shows an error message.
+
+      Use case resumes at step 1.
+
 **Use case: Add a task**
 
 **MSS**
@@ -508,15 +534,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   * 1a1. JobFestGo informs user that mandatory fields not specified
 
     Use case ends.
-    
+
 * 1b. Date is invalid.
 
     * 1b1. JobFestGo informs user that date is invalid.
 
       Use case ends.
-      
+
 * 1c. Event does not already exist.
-     
+
     * 1c1. JobFestGo informs user that event does not already exist.
 
       Use case ends.
