@@ -1,4 +1,4 @@
-package seedu.address.model.event;
+package seedu.address.model.date;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
@@ -10,24 +10,24 @@ import java.time.LocalDate;
  * Represents an Event's date in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidDate(String)}
  */
-public class EventDate {
+public class Date {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Date should be valid and in format YYYY-MM-DD not before today's date.";
 
     public static final String VALIDATION_REGEX = "\\d{4}-\\d{2}-\\d{2}";
 
-    public final String eventDate;
+    public final String date;
 
     /**
      * Constructs a {@code EventDate}.
      *
      * @param date A valid EventDate.
      */
-    public EventDate(String date) {
+    public Date(String date) {
         requireNonNull(date);
         checkArgument(isValidDate(date), MESSAGE_CONSTRAINTS);
-        eventDate = date;
+        this.date = date;
     }
 
     /**
@@ -60,7 +60,7 @@ public class EventDate {
 
     @Override
     public String toString() {
-        return eventDate;
+        return date;
     }
 
     @Override
@@ -70,17 +70,17 @@ public class EventDate {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof EventDate)) {
+        if (!(other instanceof Date)) {
             return false;
         }
 
-        EventDate otherName = (EventDate) other;
-        return eventDate.equals(otherName.eventDate);
+        Date otherName = (Date) other;
+        return date.equals(otherName.date);
     }
 
     @Override
     public int hashCode() {
-        return eventDate.hashCode();
+        return date.hashCode();
     }
 
 

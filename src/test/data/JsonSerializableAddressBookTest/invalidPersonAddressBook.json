@@ -1,5 +1,6 @@
 {
   "persons": [ ],
   "tagList" : [ "vendor", "ven-dor" ],
-  "events" : []
+  "events" : [],
+  "taskList" : [ ]
 }
