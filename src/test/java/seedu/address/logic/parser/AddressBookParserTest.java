@@ -20,6 +20,7 @@ import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.HomeCommand;
+import seedu.address.logic.commands.event.AddEventCommand;
 import seedu.address.logic.commands.event.LinkCommand;
 import seedu.address.logic.commands.event.SelectEventCommand;
 import seedu.address.logic.commands.event.ViewEventsCommand;
@@ -34,12 +35,13 @@ import seedu.address.logic.commands.tag.DeleteTagCommand;
 import seedu.address.logic.commands.tag.FilterCommand;
 import seedu.address.logic.commands.tag.ViewTagsCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.event.EventName;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.event.Event;
+import seedu.address.model.name.Name;
+import seedu.address.model.name.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.PersonIsTaggedPredicate;
 import seedu.address.model.tag.Tag;
+import seedu.address.testutil.event.EventBuilder;
 import seedu.address.testutil.event.EventUtil;
 import seedu.address.testutil.person.EditPersonDescriptorBuilder;
 import seedu.address.testutil.person.PersonBuilder;
@@ -92,13 +94,13 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_link() throws Exception {
-        EventName eventName = new EventName("NUS Career Fair");
+        Name name = new Name("NUS Career Fair");
         Name contactName = new Name("Li Mei");
         Set<Name> contactNameList = new HashSet<>();
         contactNameList.add(contactName);
 
-        LinkCommand command = (LinkCommand) parser.parseCommand(EventUtil.getLinkCommand(eventName, contactName));
-        assertEquals(new LinkCommand(eventName, contactNameList), command);
+        LinkCommand command = (LinkCommand) parser.parseCommand(EventUtil.getLinkCommand(name, contactName));
+        assertEquals(new LinkCommand(name, contactNameList), command);
     }
 
     @Test
@@ -112,6 +114,13 @@ public class AddressBookParserTest {
     public void parseCommand_viewevent() throws Exception {
         assertTrue(parser.parseCommand(ViewEventsCommand.COMMAND_WORD) instanceof ViewEventsCommand);
         assertTrue(parser.parseCommand(ViewEventsCommand.COMMAND_WORD + " 3") instanceof ViewEventsCommand);
+    }
+
+    @Test
+    public void parseCommand_addEvent() throws Exception {
+        Event event = new EventBuilder().withEventContacts().build();
+        AddEventCommand command = (AddEventCommand) parser.parseCommand(EventUtil.getAddEventCommand(event));
+        assertEquals(new AddEventCommand(event), command);
     }
 
     @Test
@@ -152,6 +161,7 @@ public class AddressBookParserTest {
                 + " " + "t/vendor");
         assertEquals(new DeleteTagCommand(tag), command);
     }
+
 
     @Test
     public void parseCommand_help() throws Exception {

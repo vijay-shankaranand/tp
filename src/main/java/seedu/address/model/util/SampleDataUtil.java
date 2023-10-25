@@ -7,13 +7,11 @@ import java.util.stream.Collectors;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.address.Address;
 import seedu.address.model.date.Date;
 import seedu.address.model.event.Event;
-import seedu.address.model.event.EventAddress;
-import seedu.address.model.event.EventName;
-import seedu.address.model.person.Address;
+import seedu.address.model.name.Name;
 import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
@@ -98,16 +96,18 @@ public class SampleDataUtil {
         Set<Task> sampleTaskSet1 = new HashSet<>();
         Set<Task> sampleTaskSet2 = new HashSet<>();
 
-        Event sampleEvent1 = new Event(new EventName("NUS Career Fair 2023"), new Date("2024-01-23"),
-                new EventAddress("311, Clementi Ave 2, #02-25"), samplePersonSet1, sampleTaskSet1);
-        Event sampleEvent2 = new Event(new EventName("JobFest 2023"), new Date("2024-01-12"),
-                new EventAddress("3 Temasek Blvd, Singapore 038983"), samplePersonSet2, sampleTaskSet2);
-        Event sampleEvent3 = new Event(new EventName("NTU Job In Fair 2023"), new Date("2024-02-10"),
-                new EventAddress("50 Nanyang Ave, #32 Block N4 #02a, Singapore 639798"),
+        Event sampleEvent1 = new Event(new Name("NUS Career Fair 2023"), new Date("2024-01-23"),
+                new Address("311, Clementi Ave 2, #02-25"), samplePersonSet1, sampleTaskSet1);
+        Event sampleEvent2 = new Event(new Name("JobFest 2023"), new Date("2024-01-12"),
+                new Address("3 Temasek Blvd, Singapore 038983"), samplePersonSet2, sampleTaskSet2);
+        Event sampleEvent3 = new Event(new Name("NTU Job In Fair 2023"), new Date("2024-02-10"),
+                new Address("50 Nanyang Ave, #32 Block N4 #02a, Singapore 639798"),
                 samplePersonSet3, sampleTaskSet1);
 
         return new Event[] {
+
             sampleEvent1, sampleEvent2, sampleEvent3
+
         };
     }
 

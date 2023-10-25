@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.date.Date;
-import seedu.address.model.event.EventName;
+import seedu.address.model.name.Name;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.TaskDescription;
 
@@ -17,14 +17,14 @@ public class JsonAdaptedTask {
 
     private final String description;
     private final String date;
-    private final EventName event;
+    private final Name event;
 
     /**
      * Constructs a {@code JsonAdaptedTask} with the given task details.
      */
     @JsonCreator
     public JsonAdaptedTask(@JsonProperty("description") String description, @JsonProperty("date") String date,
-                            @JsonProperty("event") EventName event) {
+                            @JsonProperty("event") Name event) {
         this.description = description;
         this.date = date;
         this.event = event;
@@ -61,12 +61,12 @@ public class JsonAdaptedTask {
         final Date modelDate = new Date(date);
 
         if (event == null) {
-            throw new IllegalValueException(EventName.MESSAGE_CONSTRAINTS);
+            throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
         }
-        if (!EventName.isValidName(event.eventName)) {
-            throw new IllegalValueException(EventName.MESSAGE_CONSTRAINTS);
+        if (!Name.isValidName(event.fullName)) {
+            throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
         }
-        final EventName modelEvent = new EventName(event.eventName);
+        final Name modelEvent = new Name(event.fullName);
         return new Task(modelDescription, modelDate, modelEvent);
     }
 }

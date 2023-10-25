@@ -5,7 +5,7 @@ import java.util.Objects;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.date.Date;
 import seedu.address.model.event.Event;
-import seedu.address.model.event.EventName;
+import seedu.address.model.name.Name;
 
 /**
  * Represents a Task in the Event list.
@@ -20,7 +20,7 @@ public class Task {
      * To facilitate easy storage of event names in a task
      * inside storage.
      */
-    private final EventName associatedEventName;
+    private final Name associatedEventName;
 
     /**
      * Constructs a {@code Task}
@@ -42,7 +42,7 @@ public class Task {
      * @param deadline A valid deadline.
      * @param eventName A valid event name.
      */
-    public Task(TaskDescription description, Date deadline, EventName eventName) {
+    public Task(TaskDescription description, Date deadline, Name eventName) {
         this.description = description;
         this.deadline = deadline;
         this.associatedEvent = null;
@@ -61,7 +61,7 @@ public class Task {
         return associatedEvent;
     }
 
-    public EventName getAssociatedEventName() {
+    public Name getAssociatedEventName() {
         return this.associatedEventName;
     }
 

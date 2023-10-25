@@ -7,6 +7,7 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
@@ -14,9 +15,10 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Address;
+import seedu.address.model.address.Address;
+import seedu.address.model.date.Date;
+import seedu.address.model.name.Name;
 import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 
@@ -26,6 +28,7 @@ public class ParserUtilTest {
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#friend";
+    private static final String INVALID_EVENT_DATE = "2020-22-15";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "12345678";
@@ -33,6 +36,7 @@ public class ParserUtilTest {
     private static final String VALID_EMAIL = "rachel@example.com";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
+    private static final String VALID_EVENT_DATE = "2023-12-15";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -193,4 +197,52 @@ public class ParserUtilTest {
 
         assertEquals(expectedTagSet, actualTagSet);
     }
+
+    @Test
+    public void parseDate_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseDate((String) null));
+    }
+
+    @Test
+    public void parseDate_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseDate(INVALID_EVENT_DATE));
+    }
+
+    @Test
+    public void parseDate_validValueWithoutWhitespace_returnsDate() throws Exception {
+        Date expectedEventDate = new Date(VALID_EVENT_DATE);
+        assertEquals(expectedEventDate, ParserUtil.parseDate(VALID_EVENT_DATE));
+    }
+
+    @Test
+    public void parseDate_validValueWithWhitespace_returnsTrimmedEventDate() throws Exception {
+        String eventDateWithWhitespace = WHITESPACE + VALID_EVENT_DATE + WHITESPACE;
+        Date expectedEventDate = new Date(VALID_EVENT_DATE);
+        assertEquals(expectedEventDate, ParserUtil.parseDate(eventDateWithWhitespace));
+    }
+
+    @Test
+    public void parseContactNames_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseContactNames((Collection<String>) null));
+    }
+
+    @Test
+    public void parseContactNames_collectionWithInvalidContactNames_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseContactNames(Arrays.asList(VALID_NAME, INVALID_NAME)));
+    }
+
+    @Test
+    public void parseContactNames_emptyCollection_returnsEmptySet() throws Exception {
+        assertTrue(ParserUtil.parseContactNames(Collections.emptyList()).isEmpty());
+    }
+
+    @Test
+    public void parseContactNames_collectionWithValidContactNames_returnsContactNameSet() throws Exception {
+        Set<Name> actualContactNameSet = ParserUtil.parseContactNames(Arrays.asList(VALID_NAME, VALID_NAME));
+        Set<Name> expectedContactNameSet = new HashSet<Name>(Arrays.asList(new Name(VALID_NAME), new Name(VALID_NAME)));
+
+        assertEquals(expectedContactNameSet, actualContactNameSet);
+    }
+
+
 }

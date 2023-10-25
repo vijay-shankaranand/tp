@@ -1,14 +1,13 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
-import java.util.Date;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.date.Date;
 import seedu.address.model.event.Event;
-import seedu.address.model.event.EventName;
-import seedu.address.model.person.Name;
+import seedu.address.model.name.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.task.Task;
@@ -155,7 +154,7 @@ public interface Model {
     /**
      * Returns the {@code Event} with given name.
      */
-    Event getEvent(EventName name);
+    Event getEvent(Name name);
 
     /**
      * Replaces the given event {@code target} with {@code editedEvent}.

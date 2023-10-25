@@ -1,22 +1,27 @@
-package seedu.address.logic.commands.tag;
+package seedu.address.logic.commands.event;
 
 import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
+import static seedu.address.testutil.event.TypicalEvents.JOBFEST;
+import static seedu.address.testutil.event.TypicalEvents.NTU;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.commands.person.DeleteCommand;
+import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
@@ -27,78 +32,62 @@ import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.TaskDescription;
-
-/**
- * Contains integration tests (interactions with the Model) and unit tests for
- * {@code DeleteTagCommand}.
- */
-public class DeleteTagCommandTest {
-
-    /**
-     * Tests the event in which a null tag is provided. Such a case throws a NullPointer.
-     */
+import seedu.address.testutil.event.EventBuilder;
+public class AddEventCommandTest {
     @Test
-    public void constructor_nullTag_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new DeleteTagCommand(null));
-    }
-
-    /**
-     * Tests when tag to be deleted is valid.
-     * @throws Exception when commandResult is invalid
-     */
-    @Test
-    public void execute_validTagToDelete() throws Exception {
-        Tag test = new Tag("vendor");
-        ModelStubWithTags testModel = new ModelStubWithTags();
-        testModel.addTag(test);
-        CommandResult commandResult = new DeleteTagCommand(test).execute(testModel);
-
-        assertEquals(String.format(DeleteTagCommand.MESSAGE_SUCCESS, test),
-            commandResult.getFeedbackToUser());
-
-    }
-
-    /**
-     * Tests when tag to be deleted is invalid (not found in the list).
-     * @throws Exception when commandResult is invalid
-     */
-    @Test
-    public void execute_invalidTagToDelete() throws CommandException {
-        Tag test1 = new Tag("vendor");
-        Tag test2 = new Tag("personal");
-        Tag test3 = new Tag("private");
-        ModelStubWithTags testModel = new ModelStubWithTags();
-        testModel.addTag(test1);
-        testModel.addTag(test2);
-        DeleteTagCommand command = new DeleteTagCommand(test3);
-
-        assertThrows(CommandException.class, () -> command.execute(testModel));
-    }
-
-    /**
-     * Tests to see that DeleteTagCommands with the same tag is the same.
-     */
-    @Test
-    public void equals_sameTag() {
-        Tag test = new Tag("vendor");
-        ModelStubWithTags testModel = new ModelStubWithTags();
-        testModel.addTag(test);
-        DeleteTagCommand same1 = new DeleteTagCommand(test);
-        DeleteTagCommand same2 = new DeleteTagCommand(test);
-        DeleteCommand diffCommand = new DeleteCommand(INDEX_FIRST);
-        assertEquals(same1, same2);
-        assertEquals(same1, same1);
-        assertFalse(same1.equals(diffCommand));
+    public void constructor_nullEvent_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new AddEventCommand(null));
     }
 
     @Test
-    public void toString_testEqual() {
-        DeleteTagCommand test = new DeleteTagCommand(new Tag("vendor"));
-        assertEquals(test.toString(), test.toString());
+    public void execute_eventAcceptedByModel_addSuccessful() throws Exception {
+        ModelStubAcceptingEventAdded modelStub = new ModelStubAcceptingEventAdded();
+        Event validEvent = new EventBuilder().build();
+
+        CommandResult commandResult = new AddEventCommand(validEvent).execute(modelStub);
+
+        assertEquals(String.format(AddEventCommand.MESSAGE_SUCCESS, Messages.format(validEvent)),
+                commandResult.getFeedbackToUser());
+        assertEquals(Arrays.asList(validEvent), modelStub.eventsAdded);
     }
 
+    @Test
+    public void execute_duplicateEvent_throwsCommandException() {
+        Event validEvent = new EventBuilder().build();
+        AddEventCommand addCommand = new AddEventCommand(validEvent);
+        ModelStub modelStub = new ModelStubWithEvent(validEvent);
+
+        assertThrows(CommandException.class, AddEventCommand.MESSAGE_DUPLICATE_EVENT, () ->
+                addCommand.execute(modelStub));
+    }
+
+    @Test
+    public void equals() {
+        AddEventCommand addFirstEventCommand = new AddEventCommand(NTU);
+        AddEventCommand addSecondEventCommand = new AddEventCommand(JOBFEST);
+
+        assertTrue(addFirstEventCommand.equals(addFirstEventCommand));
+        assertTrue(addFirstEventCommand.equals(new AddEventCommand(NTU)));
+        assertFalse(addSecondEventCommand.equals(addFirstEventCommand));
+        assertFalse(addFirstEventCommand.equals(null));
+        assertFalse(addFirstEventCommand.equals(""));
+        assertFalse(addFirstEventCommand.equals(addSecondEventCommand));
+    }
+
+    @Test
+    public void toString_testEqualEvents() {
+        AddEventCommand addEventCommand = new AddEventCommand(NTU);
+        assertEquals(addEventCommand.toString(), addEventCommand.toString());
+    }
+
+    @Test
+    public void toString_testDifferentEvents() {
+        AddEventCommand addFirstEventCommand = new AddEventCommand(NTU);
+        AddEventCommand addSecondEventCommand = new AddEventCommand(JOBFEST);
+        assertNotEquals(addSecondEventCommand.toString(), addFirstEventCommand.toString());
+    }
     /**
-     * A default model stub that have all of the methods failing.
+     * A default model stub that have all the methods failing.
      */
     private class ModelStub implements Model {
         @Override
@@ -108,11 +97,13 @@ public class DeleteTagCommandTest {
 
         @Override
         public ReadOnlyUserPrefs getUserPrefs() {
+
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public GuiSettings getGuiSettings() {
+
             throw new AssertionError("This method should not be called.");
         }
 
@@ -123,6 +114,7 @@ public class DeleteTagCommandTest {
 
         @Override
         public Path getAddressBookFilePath() {
+
             throw new AssertionError("This method should not be called.");
         }
 
@@ -133,11 +125,13 @@ public class DeleteTagCommandTest {
 
         @Override
         public void addPerson(Person person) {
+
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public Person getPerson(Name name) {
+
             throw new AssertionError("This method should not be called.");
         }
 
@@ -148,16 +142,19 @@ public class DeleteTagCommandTest {
 
         @Override
         public ReadOnlyAddressBook getAddressBook() {
+
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public boolean hasPerson(Person person) {
+
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public void deletePerson(Person target) {
+
             throw new AssertionError("This method should not be called.");
         }
 
@@ -183,21 +180,25 @@ public class DeleteTagCommandTest {
 
         @Override
         public boolean hasTag(Tag tag) {
+
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public void deleteTag(Tag tag) {
+
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public void addTag(Tag tag) {
+
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public void setTag(Tag target, Tag editedTag) {
+
             throw new AssertionError("This method should not be called.");
         }
 
@@ -228,16 +229,28 @@ public class DeleteTagCommandTest {
 
         @Override
         public boolean hasEvent(Event event) {
+
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public void deleteEvent(Event target) {
+
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public void updateFilteredEventList(Predicate<Event> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Event> getFilteredEventList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Event> getUnfilteredEventList() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -252,17 +265,12 @@ public class DeleteTagCommandTest {
         }
 
         @Override
-        public Task getTask(TaskDescription description, Date date, Event event) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
         public void setTask(Task target, Task editedTask) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ObservableList<Task> getFilteredTaskList() {
+        public Task getTask(TaskDescription taskDescription, Date date, Event event) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -272,51 +280,52 @@ public class DeleteTagCommandTest {
         }
 
         @Override
-        public ObservableList<Event> getFilteredEventList() {
+        public ObservableList<Task> getFilteredTaskList() {
             throw new AssertionError("This method should not be called.");
         }
 
+    }
+
+    /**
+     * A Model stub that contains a single event.
+     */
+    private class ModelStubWithEvent extends ModelStub {
+        private final Event event;
+
+        ModelStubWithEvent(Event event) {
+            requireNonNull(event);
+            this.event = event;
+        }
+
         @Override
-        public ObservableList<Event> getUnfilteredEventList() {
-            throw new AssertionError("This method should not be called.");
+        public boolean hasEvent(Event event) {
+            requireNonNull(event);
+            return this.event.isSameEvent(event);
         }
     }
 
     /**
-     * A Model stub that contains a list of tags.
+     * A Model stub that always accept the event being added.
      */
-    private class ModelStubWithTags extends ModelStub {
-        private ArrayList<Tag> tags;
+    private class ModelStubAcceptingEventAdded extends ModelStub {
+        final ArrayList<Event> eventsAdded = new ArrayList<>();
 
-        ModelStubWithTags() {
-            this.tags = new ArrayList<>();
+        @Override
+        public boolean hasEvent(Event event) {
+            requireNonNull(event);
+            return eventsAdded.stream().anyMatch(event :: isSameEvent);
         }
 
         @Override
-        public boolean hasTag(Tag tag) {
-            requireNonNull(tag);
-            for (int i = 0; i < tags.size(); i++) {
-                if (tags.get(i).isSameTag(tag)) {
-                    return true;
-                }
-            }
-            return false;
+        public void addEvent(Event event) {
+            requireNonNull(event);
+            eventsAdded.add(event);
         }
 
         @Override
-        public void addTag(Tag tag) {
-            requireNonNull(tag);
-            if (!hasTag(tag)) {
-                this.tags.add(tag);
-            }
-        }
-
-        @Override
-        public void deleteTag(Tag tag) {
-            requireNonNull(tag);
-            if (hasTag(tag)) {
-                tags.remove(tag);
-            }
+        public ReadOnlyAddressBook getAddressBook() {
+            return new AddressBook();
         }
     }
 }
+

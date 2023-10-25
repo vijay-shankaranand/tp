@@ -12,6 +12,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.event.exceptions.DuplicateEventException;
 import seedu.address.model.event.exceptions.EventNotFoundException;
+import seedu.address.model.name.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.task.Task;
 
@@ -75,7 +76,7 @@ public class UniqueEventList implements Iterable<Event> {
      * Returns the {@code Event} with given name from the list.
      * @param name The name of the desired {@code Event}.
      */
-    public Event getByName(EventName name) throws EventNotFoundException {
+    public Event getByName(Name name) throws EventNotFoundException {
         Event toGet = null;
         for (int i = 0; i < internalList.size(); i++) {
             Event thisEvent = internalList.get(i);
