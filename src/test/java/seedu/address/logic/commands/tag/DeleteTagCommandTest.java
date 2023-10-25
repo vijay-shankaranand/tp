@@ -21,8 +21,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.event.Event;
-import seedu.address.model.event.EventName;
-import seedu.address.model.person.Name;
+import seedu.address.model.name.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 
@@ -215,7 +214,7 @@ public class DeleteTagCommandTest {
         }
 
         @Override
-        public Event getEvent(EventName name) {
+        public Event getEvent(Name name) {
             throw new AssertionError("This method should not be called.");
         }
 

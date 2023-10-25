@@ -22,7 +22,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.event.Event;
-import seedu.address.model.person.Name;
+import seedu.address.model.name.Name;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.event.EventBuilder;
 import seedu.address.testutil.person.PersonBuilder;
@@ -36,12 +36,12 @@ public class LinkCommandTest {
 
     @Test
     public void execute_validSingleContact_success() {
-        Event event = new EventBuilder().withEventName("JobFest 2023")
+        Event event = new EventBuilder().withName("JobFest 2023")
                 .withEventDate("2023-12-12")
                 .withEventAddress("3 Temasek Blvd, Singapore 038983")
                 .withEventContacts(ALICE, BOB)
                 .build();
-        Event expectedEvent = new EventBuilder().withEventName("JobFest 2023")
+        Event expectedEvent = new EventBuilder().withName("JobFest 2023")
                 .withEventDate("2023-12-12")
                 .withEventAddress("3 Temasek Blvd, Singapore 038983")
                 .withEventContacts(ALICE, BOB, CARL)
@@ -61,12 +61,12 @@ public class LinkCommandTest {
 
     @Test
     public void execute_validMultipleContact_success() {
-        Event event = new EventBuilder().withEventName("JobFest 2023")
+        Event event = new EventBuilder().withName("JobFest 2023")
                 .withEventDate("2023-12-12")
                 .withEventAddress("3 Temasek Blvd, Singapore 038983")
                 .withEventContacts(ALICE, BOB)
                 .build();
-        Event expectedEvent = new EventBuilder().withEventName("JobFest 2023")
+        Event expectedEvent = new EventBuilder().withName("JobFest 2023")
                 .withEventDate("2023-12-12")
                 .withEventAddress("3 Temasek Blvd, Singapore 038983")
                 .withEventContacts(ALICE, BOB, CARL, BENSON)
@@ -87,7 +87,7 @@ public class LinkCommandTest {
 
     @Test
     public void execute_eventAlreadyLinkedToContact_throwsCommandException() {
-        Event event = new EventBuilder().withEventName("JobFest 2023")
+        Event event = new EventBuilder().withName("JobFest 2023")
                 .withEventDate("2023-12-12")
                 .withEventAddress("3 Temasek Blvd, Singapore 038983")
                 .withEventContacts(ALICE, BOB)
@@ -104,7 +104,7 @@ public class LinkCommandTest {
 
     @Test
     public void execute_eventNotInTheList_throwsCommandException() {
-        Event event = new EventBuilder().withEventName("JobFest 2023")
+        Event event = new EventBuilder().withName("JobFest 2023")
                 .withEventDate("2023-12-12")
                 .withEventAddress("3 Temasek Blvd, Singapore 038983")
                 .withEventContacts(ALICE, BOB)
@@ -120,7 +120,7 @@ public class LinkCommandTest {
 
     @Test
     public void execute_contactNotInTheList_throwsCommandException() {
-        Event event = new EventBuilder().withEventName("JobFest 2023")
+        Event event = new EventBuilder().withName("JobFest 2023")
                 .withEventDate("2023-12-12")
                 .withEventAddress("3 Temasek Blvd, Singapore 038983")
                 .withEventContacts(ALICE, BOB)

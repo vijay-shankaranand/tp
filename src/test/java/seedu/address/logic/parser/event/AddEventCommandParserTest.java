@@ -17,10 +17,10 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.event.AddEventCommand;
+import seedu.address.model.address.Address;
 import seedu.address.model.event.Event;
-import seedu.address.model.event.EventAddress;
 import seedu.address.model.event.EventDate;
-import seedu.address.model.event.EventName;
+import seedu.address.model.name.Name;
 import seedu.address.testutil.event.EventBuilder;
 
 
@@ -114,7 +114,7 @@ public class AddEventCommandParserTest {
 
         // invalid name
         assertParseFailure(parser, " " + INVALID_NAME_DESC + " "
-                + PREFIX_DATE + NTU.getDate() + " " + PREFIX_ADDRESS + NTU.getAddress(), EventName.MESSAGE_CONSTRAINTS);
+                + PREFIX_DATE + NTU.getDate() + " " + PREFIX_ADDRESS + NTU.getAddress(), Name.MESSAGE_CONSTRAINTS);
 
         // invalid date
         assertParseFailure(parser, " " + PREFIX_NAME + NTU.getName()
@@ -122,12 +122,12 @@ public class AddEventCommandParserTest {
 
         // invalid address
         assertParseFailure(parser, " " + PREFIX_NAME + NTU.getName() + " "
-                + PREFIX_DATE + NTU.getDate() + " " + INVALID_ADDRESS_DESC, EventAddress.MESSAGE_CONSTRAINTS);
+                + PREFIX_DATE + NTU.getDate() + " " + INVALID_ADDRESS_DESC, Address.MESSAGE_CONSTRAINTS);
 
         // two invalid values, only first invalid value reported
         assertParseFailure(parser, " " + INVALID_NAME_DESC
                         + INVALID_DATE_DESC + " " + PREFIX_ADDRESS + NTU.getAddress(),
-                EventName.MESSAGE_CONSTRAINTS);
+                Name.MESSAGE_CONSTRAINTS);
 
         // non-empty preamble
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + " " + PREFIX_NAME + NTU.getName() + " "

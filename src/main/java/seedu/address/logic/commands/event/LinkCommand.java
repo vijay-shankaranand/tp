@@ -38,14 +38,14 @@ public class LinkCommand extends Command {
             + "Please add it in first.";
     public static final String MESSAGE_LINKED_CONTACT = "The contact: %1$s is already linked to the event: %2$s";
 
-    private final Name eventNameToLink;
+    private final Name nameToLink;
     private final Set<Name> contactNameListToLink;
 
     /**
      * Creates a LinkCommand to link the person specified by the name to the event specified by the name.
      */
-    public LinkCommand(Name eventNameToLink, Set<Name> contactNameListToLink) {
-        this.eventNameToLink = eventNameToLink;
+    public LinkCommand(Name nameToLink, Set<Name> contactNameListToLink) {
+        this.nameToLink = nameToLink;
         this.contactNameListToLink = contactNameListToLink;
     }
 
@@ -54,19 +54,19 @@ public class LinkCommand extends Command {
         requireNonNull(model);
 
         try {
-            Event eventToLink = model.getEvent(eventNameToLink);
+            Event eventToLink = model.getEvent(nameToLink);
 
             for (Name contactName : contactNameListToLink) {
                 Person contactToLink = model.getPerson(contactName);
                 if (eventToLink.isLinkedToContact(contactToLink)) {
-                    throw new CommandException(String.format(MESSAGE_LINKED_CONTACT, contactName, eventNameToLink));
+                    throw new CommandException(String.format(MESSAGE_LINKED_CONTACT, contactName, nameToLink));
                 }
                 eventToLink.linkContact(contactToLink);
             }
 
-            return new CommandResult(String.format(MESSAGE_SUCCESS, contactNameListToLink, eventNameToLink));
+            return new CommandResult(String.format(MESSAGE_SUCCESS, contactNameListToLink, nameToLink));
         } catch (EventNotFoundException enfe) {
-            throw new CommandException(String.format(MESSAGE_NO_SUCH_EVENT, eventNameToLink));
+            throw new CommandException(String.format(MESSAGE_NO_SUCH_EVENT, nameToLink));
         } catch (PersonNotFoundException pnfe) {
             throw new CommandException(String.format(MESSAGE_NO_SUCH_CONTACT, pnfe.getName()));
         }
@@ -84,14 +84,14 @@ public class LinkCommand extends Command {
         }
 
         LinkCommand otherLinkCommand = (LinkCommand) other;
-        return eventNameToLink.equals(otherLinkCommand.eventNameToLink)
+        return nameToLink.equals(otherLinkCommand.nameToLink)
                 && contactNameListToLink.equals(otherLinkCommand.contactNameListToLink);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("eventToLink", eventNameToLink)
+                .add("eventToLink", nameToLink)
                 .add("contactToLink", contactNameListToLink)
                 .toString();
     }

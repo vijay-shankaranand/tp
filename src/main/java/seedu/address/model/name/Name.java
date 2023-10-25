@@ -34,15 +34,9 @@ public class Name {
     /**
      * Returns true if a given string is a valid name.
      */
-<<<<<<< HEAD:src/main/java/seedu/address/model/event/EventName.java
     public static boolean isValidName(String testName) {
         return testName.matches(VALIDATION_REGEX);
-=======
-    public static boolean isValidName(String test) {
-        return test.matches(VALIDATION_REGEX);
->>>>>>> add-event:src/main/java/seedu/address/model/name/Name.java
     }
-
 
     @Override
     public String toString() {

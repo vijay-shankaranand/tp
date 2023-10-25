@@ -4,15 +4,10 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-<<<<<<< HEAD:src/test/java/seedu/address/testutil/person/EditPersonDescriptorBuilder.java
 import seedu.address.logic.commands.person.EditCommand.EditPersonDescriptor;
-import seedu.address.model.person.Address;
-=======
-import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.model.address.Address;
->>>>>>> add-event:src/test/java/seedu/address/testutil/EditPersonDescriptorBuilder.java
-import seedu.address.model.person.Email;
 import seedu.address.model.name.Name;
+import seedu.address.model.person.Email;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;

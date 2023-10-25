@@ -42,7 +42,7 @@ public class EventTest {
         assertTrue(NTU.isSameEvent(editedEvent));
 
         // different name, all other attributes same -> returns false
-        editedEvent = new EventBuilder(NTU).withEventName(VALID_EVENT_NAME).build();
+        editedEvent = new EventBuilder(NTU).withName(VALID_EVENT_NAME).build();
         assertFalse(NTU.isSameEvent(editedEvent));
 
     }
@@ -67,7 +67,7 @@ public class EventTest {
         assertFalse(NTU.equals(JOBFEST));
 
         // different name -> returns false
-        Event editedEvent = new EventBuilder(NTU).withEventName(VALID_EVENT_NAME).build();
+        Event editedEvent = new EventBuilder(NTU).withName(VALID_EVENT_NAME).build();
         assertFalse(NTU.equals(editedEvent));
 
         // different date -> returns false

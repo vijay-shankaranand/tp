@@ -36,10 +36,10 @@ public class LinkCommandParser implements Parser<LinkCommand> {
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_EVENT);
-        Name eventName = ParserUtil.parseName(argMultimap.getValue(PREFIX_EVENT).get());
+        Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_EVENT).get());
         Set<Name> contactNameList = ParserUtil.parseContactNames(argMultimap.getAllValues(PREFIX_CONTACT));
 
-        return new LinkCommand(eventName, contactNameList);
+        return new LinkCommand(name, contactNameList);
     }
 
     /**
