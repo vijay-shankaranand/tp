@@ -283,7 +283,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a …​                                    | I want to …​                 | So that I can…​                                                        |
 |----------|--------------------------------------------|------------------------------|------------------------------------------------------------------------|
-| `* * *`  | job fest event planner                     | see usage instructions       | refer to instructions when I forget how to use the App                 |
+| `* * *`  | job fest event planner                     | see usage instructions       | refer to instructions when I forget how to use JobFestGo                 |
 | `* * *`  | job fest event planner                     | add a new person             |                                                                        |
 | `* * *`  | user                                       | delete a person              | remove entries that I no longer need                                   |
 | `* * *`  | user                                       | find a person by name        | locate details of persons without having to go through the entire list |
@@ -291,9 +291,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | user                                       | hide private contact details | minimize chance of someone else seeing them by accident                |
 | `* *`    | job fest event planner                     | add tags                     | add to the pool of use categories already available    |
 | `* *`    | job fest event planner                     | view all tags | remember contacts of a certain category to contact them for events                |
-| `* *`     | job fest event planner                    | be able to delete tags | can easily identify who I should be cold calling among my contacts without unnecessary tags     |
+| `* *`     | job fest event planner                     | be able to delete tags | can easily identify who I should be cold calling among my contacts without unnecessary tags     |
+| `* *`     | job fest event planner                     | view all events | remember all the events I am involved in so far    |
 | `* *`    | job fest event planner                        | be able to delete events | remove events I no longer need                                          |
 | `* *`    | job fest event planner                        | add a new task for a event | remember the tasks I need to do for the event                         |
+| `* *`      | job fest event planner | return to the home page        |                                                 |
 | `*`      | user with many persons in the address book | sort persons by name         | locate a person easily                                                 |
 
 
@@ -412,7 +414,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 1. User requests to list tags
-2. JobFestGo shows a list of tags that are currently in use in the contacts list
+2. JobFestGo shows a list of all tags
 
    Use case ends.
 
@@ -450,6 +452,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3c1. JobFestGo shows an error message.
 
       Use case resumes at step 2.
+
+**Use case: View all events**
+
+**MSS**
+1. User requests to list events
+2. JobFestGo shows a list of all events
+
+   Use case ends.
 
 **Use case: Delete an event**
 
@@ -510,6 +520,21 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1c1. JobFestGo informs user that event does not already exist.
 
       Use case ends.
+
+**Use case: Return to the home page**
+
+**MSS**
+1. User is on any page 
+2. User requests to return to the home page
+3. JobFestGo returns user to the home page
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. The user is already on the home page
+
+   Use case ends.
 
 *{More to be added}*
 
