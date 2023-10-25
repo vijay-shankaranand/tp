@@ -9,12 +9,10 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.event.EventAddress;
 import seedu.address.model.event.EventDate;
-import seedu.address.model.event.EventName;
-import seedu.address.model.person.Address;
+import seedu.address.model.address.Address;
 import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
+import seedu.address.model.name.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 
@@ -126,21 +124,6 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String eventName} into an {@code EventName}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code eventName} is invalid.
-     */
-    public static EventName parseEventName(String eventName) throws ParseException {
-        requireNonNull(eventName);
-        String trimmedEventName = eventName.trim();
-        if (!EventName.isValidName(trimmedEventName)) {
-            throw new ParseException(EventName.MESSAGE_CONSTRAINTS);
-        }
-        return new EventName(trimmedEventName);
-    }
-
-    /**
      * Parses a {@code String eventDate} into an {@code EventDate}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -155,18 +138,4 @@ public class ParserUtil {
         return new EventDate(trimmedEventDate);
     }
 
-    /**
-     * Parses a {@code String eventAddress} into an {@code EventAddress}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code eventAddress} is invalid.
-     */
-    public static EventAddress parseEventAddress(String eventAddress) throws ParseException {
-        requireNonNull(eventAddress);
-        String trimmedEventAddress = eventAddress.trim();
-        if (!EventAddress.isValidAddress(trimmedEventAddress)) {
-            throw new ParseException(EventAddress.MESSAGE_CONSTRAINTS);
-        }
-        return new EventAddress(trimmedEventAddress);
-    }
 }

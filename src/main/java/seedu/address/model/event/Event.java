@@ -8,6 +8,8 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.address.Address;
+import seedu.address.model.name.Name;
 import seedu.address.model.person.Person;
 
 /**
@@ -17,11 +19,11 @@ import seedu.address.model.person.Person;
 public class Event {
 
     // Identity fields
-    private final EventName name;
+    private final Name name;
 
     // Data fields
     private final EventDate date;
-    private final EventAddress address;
+    private final Address address;
     private final Set<Person> contacts = new HashSet<>();
 
     /**
@@ -32,7 +34,7 @@ public class Event {
      * @param address A valid address.
      * @param contacts A valid set of contacts.
      */
-    public Event(EventName name, EventDate date, EventAddress address, Set<Person> contacts) {
+    public Event(Name name, EventDate date, Address address, Set<Person> contacts) {
         requireAllNonNull(name, date, address, contacts);
         this.name = name;
         this.date = date;
@@ -40,11 +42,11 @@ public class Event {
         this.contacts.addAll(contacts);
     }
 
-    public EventAddress getAddress() {
+    public Address getAddress() {
         return address;
     }
 
-    public EventName getName() {
+    public Name getName() {
         return name;
     }
 
