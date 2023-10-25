@@ -23,6 +23,7 @@ JobFestGo is a **desktop app for managing contacts, optimized for use via a  Lin
 
 1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar jobfestgo.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+
    ![Ui](images/Ui.png)
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
@@ -95,20 +96,6 @@ Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
 
-### Adding a tag : `add_tag`
-
-Adds a tag to JobFestGo.
-
-Format: `add_tag t/TAG_NAME`
-
-* Adds the tag with the specified tag name `TAG_NAME`.
-* The tag name **must no already exist** in the JobFestGo.
-* The command must contain `t/` for the command to be valid.
-* The tag name must be specified in the command.
-
-Examples:
-* `add_tag t/vendor`
-
 ### Listing all persons : `list`
 
 Shows a list of all persons in JobFestGo.
@@ -148,6 +135,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 Examples:
 * `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
+
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
 ### Deleting a person : `delete`
@@ -164,6 +152,21 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in JobFestGo.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
+### Adding a tag : `add_tag`
+
+Adds a tag to JobFestGo.
+
+Format: `add_tag t/TAG_NAME`
+
+* Adds the tag with the specified tag name `TAG_NAME`.
+* The tag name **must not already exist** in JobFestGo.
+* The tag name` must be alphanumeric, i.e, should consist only of alphabets and numbers, and no other characters.
+* The command must contain `t/` for the command to be valid.
+* The tag name must be specified in the command.
+
+Examples:
+* `add_tag t/vendor`
+
 ### Viewing all tags: `view_tags`
 
 Views all existing tags that have been created by the user.
@@ -174,9 +177,9 @@ Format: `view_tags`
 
 Deletes the specified tag from JobFestGo.
 
-Format: `delete_tag t/tag_name`
+Format: `delete_tag t/TAG_NAME`
 
-* Deletes the tag with the specified tag name `tag_name`.
+* Deletes the tag with the specified tag name `TAG_NAME`.
 * The tag name **must be an existing tag** vendor, personal, customer, …​
 * The command must contain `/t` for the command to be valid.
 * The tag name must be specified in the command.
@@ -201,6 +204,26 @@ Examples:
 * `filter vendor customer` returns all contacts tagged by the tag: vendor and
   all contacts tagged by the tag: customer in JobFestGo.
 
+### Deleting an event: `delete_event`
+
+Deletes the event specified at the index from JobFestGo.
+
+Format: `delete_event INDEX`
+
+* Deletes the event specified at the `INDEX` from the list of events of JobFestGo.
+* The index refers to the index number shown in the displayed event list.
+* The index` **must be a positive integer** 1, 2, 3, …​
+* The index must be specified in the command.
+
+Examples:
+* `delete_event` followed by `1` deletes the 1st event in the displayed event list.
+
+### Viewing all events: `view_events`
+
+Views all existing events.
+
+Format: `view_events`
+
 ### Linking contacts to an event: `link`
 
 Linking specified contacts to the specified event.
@@ -221,11 +244,46 @@ Format: `link ev/EVENT_NAME c/CONTACT_NAME [c/MORE_CONTACT_NAMES]`
  c/John Doe c/Bob Dylan` will link `Alice Black` to the event `NUS Career Fest` while
   `John Doe` and `Bob Dylan` will not be linked.
 
+### Selecting an event: `select_event`
+
+Selects a specified event from JobFestGo. The relevant contacts and tasks will be displayed.
+
+Format: `select_event INDEX`
+
+* Selects the event at the specified `INDEX`. 
+* The index refers to the index number shown in the displayed events list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `select_event 1` selects the first event in the displayed events list.
+
+### Adding a task: `add_task`
+
+Adds a task to an event in JobFestGo.
+
+Format: `add_task n/TASK_DESCRIPTION d/DEADLINE ev/EVENT_NAME`
+
+* Task Description can take any value, no limit to the type of characters.
+* Deadline is a date in the format YYYY-MM-DD.
+* Deadline should not be before today's date.
+* Event name should be the **name of an already existing event**.
+* The command must contain all `/n`, `/d` and `/ev` for the command to be valid.
+* `TASK_DESCRIPTION`, `DEADLINE`, and `EVENT_NAME` must all be present.
+
+Examples:
+* `add_task n/Book Venue d/2023-12-23 ev/NUS Career Fair 2023` adds a `Book Venue` by `2023-12-23` task to the event `NUS Career Fair 2023`
+
 ### Clearing all entries : `clear`
 
 Clears all entries from JobFestGo.
 
 Format: `clear`
+
+### Returning to home page : `home`
+
+Returns to the home page of JobFestGo regardless of what screen the user is currently on.
+
+Format: `home`
 
 ### Exiting the program : `exit`
 
@@ -270,15 +328,20 @@ _Details coming soon ..._
 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Clear**  | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**Add Tag** | `add_tag t/TAG_NAME` <br> e.g. `add_tag t/vendor`
-**View Tags** | `view_tags`
-**Delete Tag** | `delete_tag t/tag_name` <br> e.g. `delete_tag t/vendor`
-**Filter** | `filter TAG_NAME [MORE_TAGNAMESS]` <br> e.g. `filter vendor`
-**Link** | `link ev/EVENT_NAME C/CONTACT [C/MORE_CONTACTS]` <br> e.g. `link ev/NUS Career Fest c/Alice Black`
+**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g. `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Delete** | `delete INDEX`<br> e.g. `delete 3`
+**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g. `edit 2 n/James Lee e/jameslee@example.com`
+**Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g. `find James Jake`
 **List**   | `list`
+**Add Tag** | `add_tag t/TAG_NAME` <br> e.g. `add_tag t/vendor`
+**Delete Tag** | `delete_tag t/TAG_NAME` <br> e.g. `delete_tag t/vendor`
+**Filter** | `filter TAG_NAME [MORE_TAGNAMESS]` <br> e.g. `filter vendor`
+**View Tags** | `view_tags`
+**Link** | `link ev/EVENT_NAME C/CONTACT [C/MORE_CONTACTS]` <br> e.g. `link ev/NUS Career Fest c/Alice Black`
+**Delete Event** | `delete_event INDEX` <br> e.g. `delete_event 1`
+**Select Event** | `select_event INDEX` <br> e.g. `select_event 1`
+**View Events** | `view_events`
+**Add Task** | `add_task n/TASK_DESCRIPTION d/DEADLINE ev/EVENT_NAME` <br> e.g. `add_task n/Book Venue d/2023-12-23 ev/NUS Career Fair 2023`
+**Clear**  | `clear`
 **Help**   | `help`
+**Home**   | `home`
