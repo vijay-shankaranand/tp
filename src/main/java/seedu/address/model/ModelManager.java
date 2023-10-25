@@ -223,6 +223,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public ObservableList<Person> getUnfilteredPersonList() {
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        return filteredPersons;
+    }
+
+    @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
@@ -245,6 +251,12 @@ public class ModelManager implements Model {
 
     @Override
     public ObservableList<Event> getFilteredEventList() {
+        return filteredEvents;
+    }
+
+    @Override
+    public ObservableList<Event> getUnfilteredEventList() {
+        updateFilteredEventList(PREDICATE_SHOW_ALL_EVENTS);
         return filteredEvents;
     }
 

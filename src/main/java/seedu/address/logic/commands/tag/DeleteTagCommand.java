@@ -14,7 +14,6 @@ import seedu.address.model.tag.Tag;
  * Deletes a tag from the JobFestGo.
  */
 public class DeleteTagCommand extends Command {
-
     public static final String COMMAND_WORD = "delete_tag";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": deletes an existing tag from the tag list. "
