@@ -14,7 +14,6 @@ import seedu.address.model.tag.Tag;
  * Adds a tag to the address book.
  */
 public class AddTagCommand extends Command {
-
     public static final String COMMAND_WORD = "add_tag";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a tag to the tag list. "
