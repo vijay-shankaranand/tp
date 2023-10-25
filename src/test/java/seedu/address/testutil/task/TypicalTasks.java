@@ -10,6 +10,9 @@ import java.util.List;
 import seedu.address.model.AddressBook;
 import seedu.address.model.task.Task;
 
+/**
+ * A utility class containing a list of {@code Task} objects to be used in tests.
+ */
 public class TypicalTasks {
     public static final Task BOOK_VENUE = new TaskBuilder().withEvent(JOBFEST)
             .withDate("2023-12-10")

@@ -227,7 +227,8 @@ public class AddTagCommandTest {
 
         @Override
         public boolean hasTask(Task task) {
-            throw new AssertionError("This method should not be called.");        }
+            throw new AssertionError("This method should not be called.");
+        }
 
         @Override
         public void addTask(Task task) {
@@ -236,7 +237,8 @@ public class AddTagCommandTest {
 
         @Override
         public Task getTask(TaskDescription description, Date date, Event event) {
-            throw new AssertionError("This method should not be called.");        }
+            throw new AssertionError("This method should not be called.");
+        }
 
         @Override
         public void setTask(Task target, Task editedTask) {
@@ -245,7 +247,8 @@ public class AddTagCommandTest {
 
         @Override
         public ObservableList<Task> getFilteredTaskList() {
-            throw new AssertionError("This method should not be called.");        }
+            throw new AssertionError("This method should not be called.");
+        }
 
         @Override
         public void updateFilteredTaskList(Predicate<Task> predicate) {

@@ -3,9 +3,9 @@ package seedu.address.testutil.event;
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.address.model.date.Date;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.EventAddress;
-import seedu.address.model.date.Date;
 import seedu.address.model.event.EventName;
 import seedu.address.model.person.Person;
 import seedu.address.model.task.Task;
