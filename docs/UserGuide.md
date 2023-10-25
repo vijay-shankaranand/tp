@@ -6,7 +6,7 @@
 
 # JobFestGo User Guide
 
-JobFestGo is a **desktop app for managing contacts, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). It is an address book meant to assist you as job festival event planners in cold-calling various personnel (e.g. vendors, customers). This removes the hassle of having to shuffle through your contact list based on names that you might not remember.
+JobFestGo is a **desktop app for managing contacts and tasks, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). It is an task management tool meant to assist you as job festival event planners in cold-calling various personnel (e.g. vendors, customers) and other event-related tasks. This removes the hassle of having to shuffle through your contact list based on names that you might not remember and organise your tasks neatly.
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -69,7 +69,7 @@ JobFestGo is a **desktop app for managing contacts, optimized for use via a  Lin
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a message explaining how to access the help page.
 
 ![help message](images/helpMessage.png)
 
@@ -83,7 +83,7 @@ Adds a person to JobFestGo.
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
 
-* A person can have any number of tags (including 0)
+* A person can have any number of tags
 * A person must have mandatory fields name, phone number, email and address
 * Email should be in the appropriate (@xxx.com) format
 * Phone number should be in appropriate (8-digit numeric) format
@@ -203,6 +203,21 @@ Examples:
 * `filter vendor` returns all contacts tagged by the tag: vendor in JobFestGo.
 * `filter vendor customer` returns all contacts tagged by the tag: vendor and
   all contacts tagged by the tag: customer in JobFestGo.
+
+
+### Adding an event: `add_event`
+
+Adds an event to JobFestGo.
+
+Format: `add_event n/NAME d/DATE a/ADDRESS`
+
+* An event must have mandatory fields name, date and address
+* The event name **must not already exist** in JobFestGo.
+* Date must be valid should be in the appropriate (YYYY-MM-DD) format
+* Date should **not** be before current date
+
+Examples:
+* `add_event n/NUS Career Fest 2023 d/2023-12-23 a/NUS` adds an event named `NUS Career Fest 2023` to JobFestGo.
 
 ### Deleting an event: `delete_event`
 
@@ -337,6 +352,7 @@ Action     | Format, Examples
 **Delete Tag** | `delete_tag t/TAG_NAME` <br> e.g. `delete_tag t/vendor`
 **Filter** | `filter TAG_NAME [MORE_TAGNAMESS]` <br> e.g. `filter vendor`
 **View Tags** | `view_tags`
+**Add Event** | `add_event n/NAME d/DATE a/ADDRESS` <br> e.g. `add_event n/NUS Career Fest 2023 d/2023-12-23 a/NUS`
 **Link** | `link ev/EVENT_NAME C/CONTACT [C/MORE_CONTACTS]` <br> e.g. `link ev/NUS Career Fest c/Alice Black`
 **Delete Event** | `delete_event INDEX` <br> e.g. `delete_event 1`
 **Select Event** | `select_event INDEX` <br> e.g. `select_event 1`
