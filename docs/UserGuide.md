@@ -160,6 +160,7 @@ Format: `add_tag t/TAG_NAME`
 
 * Adds the tag with the specified tag name `TAG_NAME`.
 * The tag name **must not already exist** in JobFestGo.
+* The tag name` must be alphanumeric, i.e, should consist only of alphabets and numbers, and no other characters.
 * The command must contain `t/` for the command to be valid.
 * The tag name must be specified in the command.
 
@@ -176,9 +177,9 @@ Format: `view_tags`
 
 Deletes the specified tag from JobFestGo.
 
-Format: `delete_tag t/tag_name`
+Format: `delete_tag t/TAG_NAME`
 
-* Deletes the tag with the specified tag name `tag_name`.
+* Deletes the tag with the specified tag name `TAG_NAME`.
 * The tag name **must be an existing tag** vendor, personal, customer, …​
 * The command must contain `/t` for the command to be valid.
 * The tag name must be specified in the command.
@@ -202,6 +203,20 @@ Examples:
 * `filter vendor` returns all contacts tagged by the tag: vendor in JobFestGo.
 * `filter vendor customer` returns all contacts tagged by the tag: vendor and
   all contacts tagged by the tag: customer in JobFestGo.
+
+### Deleting an event: `delete_event`
+
+Deletes the event specified at the index from JobFestGo.
+
+Format: `delete_event INDEX`
+
+* Deletes the event specified at the `INDEX` from the list of events of JobFestGo.
+* The index refers to the index number shown in the displayed event list.
+* The index` **must be a positive integer** 1, 2, 3, …​
+* The index must be specified in the command.
+
+Examples:
+* `delete_event` followed by `1` deletes the 1st event in the displayed event list.
 
 ### Viewing all events: `view_events`
 
@@ -241,6 +256,22 @@ Format: `select_event INDEX`
 
 Examples:
 * `select_event 1` selects the first event in the displayed events list.
+
+### Adding a task: `add_task`
+
+Adds a task to an event in JobFestGo.
+
+Format: `add_task n/TASK_DESCRIPTION d/DEADLINE ev/EVENT_NAME`
+
+* Task Description can take any value, no limit to the type of characters.
+* Deadline is a date in the format YYYY-MM-DD.
+* Deadline should not be before today's date.
+* Event name should be the **name of an already existing event**.
+* The command must contain all `/n`, `/d` and `/ev` for the command to be valid.
+* `TASK_DESCRIPTION`, `DEADLINE`, and `EVENT_NAME` must all be present.
+
+Examples:
+* `add_task n/Book Venue d/2023-12-23 ev/NUS Career Fair 2023` adds a `Book Venue` by `2023-12-23` task to the event `NUS Career Fair 2023`
 
 ### Clearing all entries : `clear`
 
@@ -303,12 +334,14 @@ Action     | Format, Examples
 **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g. `find James Jake`
 **List**   | `list`
 **Add Tag** | `add_tag t/TAG_NAME` <br> e.g. `add_tag t/vendor`
-**Delete Tag** | `delete_tag t/tag_name` <br> e.g. `delete_tag t/vendor`
+**Delete Tag** | `delete_tag t/TAG_NAME` <br> e.g. `delete_tag t/vendor`
 **Filter** | `filter TAG_NAME [MORE_TAGNAMESS]` <br> e.g. `filter vendor`
 **View Tags** | `view_tags`
 **Link** | `link ev/EVENT_NAME C/CONTACT [C/MORE_CONTACTS]` <br> e.g. `link ev/NUS Career Fest c/Alice Black`
+**Delete Event** | `delete_event INDEX` <br> e.g. `delete_event 1`
 **Select Event** | `select_event INDEX` <br> e.g. `select_event 1`
 **View Events** | `view_events`
+**Add Task** | `add_task n/TASK_DESCRIPTION d/DEADLINE ev/EVENT_NAME` <br> e.g. `add_task n/Book Venue d/2023-12-23 ev/NUS Career Fair 2023`
 **Clear**  | `clear`
 **Help**   | `help`
 **Home**   | `home`
