@@ -7,9 +7,9 @@ import java.util.stream.Collectors;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.date.Date;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.EventAddress;
-import seedu.address.model.event.EventDate;
 import seedu.address.model.event.EventName;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -17,6 +17,8 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.task.Task;
+import seedu.address.model.task.TaskDescription;
 
 /**
  * Contains utility methods for populating {@code AddressBook} with sample data.
@@ -65,11 +67,23 @@ public class SampleDataUtil {
     }
 
     /**
+     * Returns an array of sample tasks.
+     * @return an array of sample tasks
+     */
+    public static Task[] getSampleTasks() {
+        return new Task[] {
+            new Task(new TaskDescription("Order Food"), new Date("2024-01-13"), getSampleEvents()[0]),
+            new Task(new TaskDescription("Call vendors"), new Date("2024-01-12"), getSampleEvents()[1])
+        };
+    }
+
+    /**
      * Returns an array of sample events.
      * @return an array of sample events
      */
     public static Event[] getSampleEvents() {
         Person[] samplePersons = getSamplePersons();
+
         Set<Person> samplePersonSet1 = new HashSet<>();
         samplePersonSet1.add(samplePersons[0]);
         samplePersonSet1.add(samplePersons[1]);
@@ -81,19 +95,25 @@ public class SampleDataUtil {
 
         Set<Person> samplePersonSet3 = new HashSet<>();
 
+        Set<Task> sampleTaskSet1 = new HashSet<>();
+        Set<Task> sampleTaskSet2 = new HashSet<>();
+
+        Event sampleEvent1 = new Event(new EventName("NUS Career Fair 2023"), new Date("2024-01-23"),
+                new EventAddress("311, Clementi Ave 2, #02-25"), samplePersonSet1, sampleTaskSet1);
+        Event sampleEvent2 = new Event(new EventName("JobFest 2023"), new Date("2024-01-12"),
+                new EventAddress("3 Temasek Blvd, Singapore 038983"), samplePersonSet2, sampleTaskSet2);
+        Event sampleEvent3 = new Event(new EventName("NTU Job In Fair 2023"), new Date("2024-02-10"),
+                new EventAddress("50 Nanyang Ave, #32 Block N4 #02a, Singapore 639798"),
+                samplePersonSet3, sampleTaskSet1);
+
         return new Event[] {
-            new Event(new EventName("NUS Career Fair 2023"), new EventDate("2023-12-23"),
-                    new EventAddress("311, Clementi Ave 2, #02-25"), samplePersonSet1),
-            new Event(new EventName("JobFest 2023"), new EventDate("2023-11-22"),
-                    new EventAddress("3 Temasek Blvd, Singapore 038983"), samplePersonSet2),
-            new Event(new EventName("NTU Job In Fair 2023"), new EventDate("2023-11-10"),
-                    new EventAddress("50 Nanyang Ave, #32 Block N4 #02a, Singapore 639798"), samplePersonSet3)
+            sampleEvent1, sampleEvent2, sampleEvent3
         };
     }
 
     /**
      * Returns an {@code AddressBook} with sample data.
-     * @return
+     * @return sample readOnlyAddressBook
      */
     public static ReadOnlyAddressBook getSampleAddressBook() {
         AddressBook sampleAb = new AddressBook();
@@ -105,6 +125,9 @@ public class SampleDataUtil {
         }
         for (Event sampleEvent : getSampleEvents()) {
             sampleAb.addEvent(sampleEvent);
+        }
+        for (Task sampleTask : getSampleTasks()) {
+            sampleAb.addTask(sampleTask);
         }
         return sampleAb;
     }
@@ -121,4 +144,7 @@ public class SampleDataUtil {
         return Arrays.stream(persons).collect(Collectors.toSet());
     }
 
+    public static Set<Task> getTaskSet(Task ... tasks) {
+        return Arrays.stream(tasks).collect(Collectors.toSet());
+    }
 }

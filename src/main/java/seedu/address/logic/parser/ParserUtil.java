@@ -9,14 +9,15 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.date.Date;
 import seedu.address.model.event.EventAddress;
-import seedu.address.model.event.EventDate;
 import seedu.address.model.event.EventName;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.task.TaskDescription;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -146,13 +147,13 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code eventDate} is invalid.
      */
-    public static EventDate parseEventDate(String eventDate) throws ParseException {
+    public static Date parseDate(String eventDate) throws ParseException {
         requireNonNull(eventDate);
         String trimmedEventDate = eventDate.trim();
-        if (!EventDate.isValidDate(trimmedEventDate)) {
-            throw new ParseException(EventDate.MESSAGE_CONSTRAINTS);
+        if (!Date.isValidDate(trimmedEventDate)) {
+            throw new ParseException(Date.MESSAGE_CONSTRAINTS);
         }
-        return new EventDate(trimmedEventDate);
+        return new Date(trimmedEventDate);
     }
 
     /**
@@ -181,4 +182,21 @@ public class ParserUtil {
         }
         return contactNameSet;
     }
+
+    /**
+     * Parses a {@code String taskDescription} into an {@code TaskDescription}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code taskDescription} is invalid.
+     */
+    public static TaskDescription parseTaskDescription(String taskDescription) throws ParseException {
+        requireNonNull(taskDescription);
+        String trimmedTaskDescription = taskDescription.trim();
+        if (!TaskDescription.isValidDescription(trimmedTaskDescription)) {
+            throw new ParseException(TaskDescription.MESSAGE_CONSTRAINTS);
+        }
+        return new TaskDescription(trimmedTaskDescription);
+    }
+
+
 }
