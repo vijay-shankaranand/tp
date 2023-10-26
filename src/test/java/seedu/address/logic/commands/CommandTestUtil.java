@@ -19,10 +19,10 @@ import seedu.address.logic.commands.contact.EditContactCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
-import seedu.address.model.name.NameContainsKeywordsPredicate;
 import seedu.address.model.contact.Person;
-import seedu.address.testutil.contact.EditPersonDescriptorBuilder;
+import seedu.address.model.name.NameContainsKeywordsPredicate;
 import seedu.address.testutil.contact.ContactBuilder;
+import seedu.address.testutil.contact.EditPersonDescriptorBuilder;
 
 /**
  * Contains helper methods for testing commands.

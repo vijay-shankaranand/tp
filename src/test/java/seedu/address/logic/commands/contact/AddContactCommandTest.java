@@ -20,7 +20,6 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.CommandResult;
-import seedu.address.logic.commands.contact.AddContactCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
@@ -28,10 +27,10 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.contact.Person;
 import seedu.address.model.date.Date;
 import seedu.address.model.event.Event;
 import seedu.address.model.name.Name;
-import seedu.address.model.contact.Person;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.TaskDescription;
@@ -80,7 +79,8 @@ public class AddContactCommandTest {
         AddContactCommand addCommand = new AddContactCommand(validPerson);
         ModelStub modelStub = new ModelStubWithPerson(validPerson);
 
-        assertThrows(CommandException.class, AddContactCommand.MESSAGE_DUPLICATE_PERSON, () -> addCommand.execute(modelStub));
+        assertThrows(CommandException.class, AddContactCommand.MESSAGE_DUPLICATE_PERSON, () ->
+                addCommand.execute(modelStub));
     }
 
     @Test
