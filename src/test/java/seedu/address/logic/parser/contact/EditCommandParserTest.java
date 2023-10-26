@@ -38,7 +38,6 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.contact.EditContactCommand;
 import seedu.address.logic.commands.contact.EditContactCommand.EditPersonDescriptor;
-import seedu.address.logic.parser.contact.EditContactCommandParser;
 import seedu.address.model.address.Address;
 import seedu.address.model.contact.Email;
 import seedu.address.model.contact.Phone;
@@ -47,7 +46,6 @@ import seedu.address.model.tag.Tag;
 import seedu.address.testutil.contact.EditPersonDescriptorBuilder;
 
 public class EditCommandParserTest {
-
     private static final String TAG_EMPTY = " " + PREFIX_TAG;
 
     private static final String MESSAGE_INVALID_FORMAT =

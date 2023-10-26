@@ -37,12 +37,11 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.contact.AddContactCommand;
-import seedu.address.logic.parser.contact.AddContactCommandParser;
 import seedu.address.model.address.Address;
 import seedu.address.model.contact.Email;
+import seedu.address.model.contact.Person;
 import seedu.address.model.contact.Phone;
 import seedu.address.model.name.Name;
-import seedu.address.model.contact.Person;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.contact.ContactBuilder;
 

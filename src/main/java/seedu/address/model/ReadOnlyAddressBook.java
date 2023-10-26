@@ -1,8 +1,8 @@
 package seedu.address.model;
 
 import javafx.collections.ObservableList;
-import seedu.address.model.event.Event;
 import seedu.address.model.contact.Person;
+import seedu.address.model.event.Event;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.task.Task;
 
