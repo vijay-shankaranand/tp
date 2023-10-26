@@ -1,4 +1,4 @@
-package seedu.address.logic.commands.person;
+package seedu.address.logic.commands.contact;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
@@ -17,11 +17,10 @@ import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 
 /**
- * Adds a person to the address book.
+ * Adds a contact to the address book.
  */
-public class AddCommand extends Command {
-
-    public static final String COMMAND_WORD = "add";
+public class AddContactCommand extends Command {
+    public static final String COMMAND_WORD = "add_contact";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the address book. "
             + "Parameters: "
@@ -48,7 +47,7 @@ public class AddCommand extends Command {
     /**
      * Creates an AddCommand to add the specified {@code Person}
      */
-    public AddCommand(Person person) {
+    public AddContactCommand(Person person) {
         requireNonNull(person);
         toAdd = person;
     }
@@ -78,11 +77,11 @@ public class AddCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof AddCommand)) {
+        if (!(other instanceof AddContactCommand)) {
             return false;
         }
 
-        AddCommand otherAddCommand = (AddCommand) other;
+        AddContactCommand otherAddCommand = (AddContactCommand) other;
         return toAdd.equals(otherAddCommand.toAdd);
     }
 

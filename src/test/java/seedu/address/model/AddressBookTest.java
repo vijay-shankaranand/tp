@@ -6,9 +6,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.contact.TypicalPersons.ALICE;
+import static seedu.address.testutil.contact.TypicalPersons.getTypicalAddressBook;
 import static seedu.address.testutil.event.TypicalEvents.JOBFEST;
-import static seedu.address.testutil.person.TypicalPersons.ALICE;
-import static seedu.address.testutil.person.TypicalPersons.getTypicalAddressBook;
 import static seedu.address.testutil.tag.TypicalTags.VENUES;
 
 import java.util.Arrays;
@@ -25,8 +25,8 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.task.Task;
+import seedu.address.testutil.contact.ContactBuilder;
 import seedu.address.testutil.event.EventBuilder;
-import seedu.address.testutil.person.PersonBuilder;
 import seedu.address.testutil.tag.TagBuilder;
 
 public class AddressBookTest {
@@ -56,7 +56,7 @@ public class AddressBookTest {
     @Test
     public void resetData_withDuplicatePersons_throwsDuplicatePersonException() {
         // Two persons with the same identity fields
-        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        Person editedAlice = new ContactBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
         List<Person> newPersons = Arrays.asList(ALICE, editedAlice);
         List<Tag> tags = Arrays.asList(VENUES);
@@ -84,7 +84,7 @@ public class AddressBookTest {
     @Test
     public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
         addressBook.addPerson(ALICE);
-        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        Person editedAlice = new ContactBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
         assertTrue(addressBook.hasPerson(editedAlice));
     }
@@ -120,8 +120,8 @@ public class AddressBookTest {
 
     @Test
     public void deleteTag_successful_returnsTrue() {
-        Person initialAlice = new PersonBuilder(ALICE).withTags("vendor").build();
-        Person editedAlice = new PersonBuilder().withName("Alice Pauline")
+        Person initialAlice = new ContactBuilder(ALICE).withTags("vendor").build();
+        Person editedAlice = new ContactBuilder().withName("Alice Pauline")
             .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
             .withPhone("94351253")
             .build();

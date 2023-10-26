@@ -1,10 +1,10 @@
-package seedu.address.logic.parser.person;
+package seedu.address.logic.parser.contact;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import java.util.Arrays;
 
-import seedu.address.logic.commands.person.FindCommand;
+import seedu.address.logic.commands.contact.FindCommand;
 import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.name.NameContainsKeywordsPredicate;

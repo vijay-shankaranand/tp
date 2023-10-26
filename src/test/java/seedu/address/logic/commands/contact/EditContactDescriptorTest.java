@@ -1,4 +1,4 @@
-package seedu.address.logic.commands.person;
+package seedu.address.logic.commands.contact;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -13,10 +13,10 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.person.EditCommand.EditPersonDescriptor;
-import seedu.address.testutil.person.EditPersonDescriptorBuilder;
+import seedu.address.logic.commands.contact.EditContactCommand.EditPersonDescriptor;
+import seedu.address.testutil.contact.EditPersonDescriptorBuilder;
 
-public class EditPersonDescriptorTest {
+public class EditContactDescriptorTest {
 
     @Test
     public void equals() {

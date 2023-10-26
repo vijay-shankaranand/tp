@@ -1,20 +1,21 @@
-package seedu.address.logic.commands.person;
+package seedu.address.logic.commands.contact;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.person.TypicalPersons.CARL;
-import static seedu.address.testutil.person.TypicalPersons.ELLE;
-import static seedu.address.testutil.person.TypicalPersons.FIONA;
-import static seedu.address.testutil.person.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.contact.TypicalPersons.CARL;
+import static seedu.address.testutil.contact.TypicalPersons.ELLE;
+import static seedu.address.testutil.contact.TypicalPersons.FIONA;
+import static seedu.address.testutil.contact.TypicalPersons.getTypicalAddressBook;
 
 import java.util.Arrays;
 import java.util.Collections;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.commands.contact.FindCommand;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
