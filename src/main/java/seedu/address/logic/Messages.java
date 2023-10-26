@@ -5,8 +5,8 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.parser.Prefix;
-import seedu.address.model.event.Event;
 import seedu.address.model.contact.Person;
+import seedu.address.model.event.Event;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.task.Task;
 
@@ -14,7 +14,6 @@ import seedu.address.model.task.Task;
  * Container for user visible messages.
  */
 public class Messages {
-
     public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
     public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The person index provided is invalid";
