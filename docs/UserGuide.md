@@ -219,6 +219,12 @@ Format: `add_event n/NAME d/DATE a/ADDRESS`
 Examples:
 * `add_event n/NUS Career Fest 2023 d/2023-12-23 a/NUS` adds an event named `NUS Career Fest 2023` to JobFestGo.
 
+### Viewing all events: `view_events`
+
+Views all existing events.
+
+Format: `view_events`
+
 ### Deleting an event: `delete_event`
 
 Deletes the event specified at the index from JobFestGo.
@@ -232,12 +238,6 @@ Format: `delete_event INDEX`
 
 Examples:
 * `delete_event` followed by `1` deletes the 1st event in the displayed event list.
-
-### Viewing all events: `view_events`
-
-Views all existing events.
-
-Format: `view_events`
 
 ### Linking contacts to an event: `link`
 
