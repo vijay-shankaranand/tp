@@ -102,6 +102,20 @@ Shows a list of all contacts in JobFestGo.
 
 Format: `view_contacts`
 
+### Deleting a contact : `delete_contact`
+
+Deletes the specified contact from JobFestGo.
+
+Format: `delete_contact INDEX`
+
+* Deletes the contact at the specified `INDEX`.
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `list` followed by `delete_contact 2` deletes the 2nd contact in JobFestGo.
+* `find Betsy` followed by `delete_contact 1` deletes the 1st contact in the results of the `find` command.
+
 ### Editing a contact : `edit_contact`
 
 Edits an existing contact in JobFestGo.
@@ -137,20 +151,6 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
 
   ![result for 'find alex david'](images/findAlexDavidResult.png)
-
-### Deleting a contact : `delete_contact`
-
-Deletes the specified contact from JobFestGo.
-
-Format: `delete_contact INDEX`
-
-* Deletes the contact at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
-
-Examples:
-* `list` followed by `delete_contact 2` deletes the 2nd contact in JobFestGo.
-* `find Betsy` followed by `delete_contact 1` deletes the 1st contact in the results of the `find` command.
 
 ### Adding a tag : `add_tag`
 
@@ -353,8 +353,8 @@ Action     | Format, Examples
 **Filter** | `filter TAG_NAME [MORE_TAGNAMESS]` <br> e.g. `filter vendor`
 **View Tags** | `view_tags`
 **Add Event** | `add_event n/NAME d/DATE a/ADDRESS` <br> e.g. `add_event n/NUS Career Fest 2023 d/2023-12-23 a/NUS`
-**Link** | `link ev/EVENT_NAME C/CONTACT [C/MORE_CONTACTS]` <br> e.g. `link ev/NUS Career Fest c/Alice Black`
 **Delete Event** | `delete_event INDEX` <br> e.g. `delete_event 1`
+**Link** | `link ev/EVENT_NAME C/CONTACT [C/MORE_CONTACTS]` <br> e.g. `link ev/NUS Career Fest c/Alice Black`
 **Select Event** | `select_event INDEX` <br> e.g. `select_event 1`
 **View Events** | `view_events`
 **Add Task** | `add_task n/TASK_DESCRIPTION d/DEADLINE ev/EVENT_NAME` <br> e.g. `add_task n/Book Venue d/2023-12-23 ev/NUS Career Fair 2023`
