@@ -34,7 +34,7 @@ import seedu.address.model.tag.Tag;
  * Edits the details of an existing contact in the address book.
  */
 public class EditContactCommand extends Command {
-    public static final String COMMAND_WORD = "edit";
+    public static final String COMMAND_WORD = "edit_contact";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
             + "by the index number used in the displayed person list. "
