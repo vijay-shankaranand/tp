@@ -1,7 +1,7 @@
 ---
-  layout: default.md
-  title: "Developer Guide"
-  pageNav: 3
+layout: default.md
+title: "Developer Guide"
+pageNav: 3
 ---
 
 # JobFestGo Developer Guide
@@ -236,13 +236,13 @@ The following activity diagram summarizes what happens when a user executes a ne
 **Aspect: How undo & redo executes:**
 
 * **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
+    * Pros: Easy to implement.
+    * Cons: May have performance issues in terms of memory usage.
 
 * **Alternative 2:** Individual command knows how to undo/redo by
   itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
+    * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
+    * Cons: We must ensure that the implementation of each individual command are correct.
 
 _{more aspects and alternatives to be added}_
 
@@ -269,35 +269,33 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 * is a job festival event planner
-* has a need to manage a significant number of contacts of different types (e.g. vendors, customers)
+* has a need to manage a significant number of contacts of different types (e.g. vendors, customers) and tasks
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: Each event planner has multiple events, each of which can have a large number of contacts associated and searching for contact would be a hassle. Our product provides a centralised system that would help job event planners organise their contact information for quick and easy access.
+**Value proposition**: Each event planner has multiple events, each of which can have a large number of contacts and tasks associated and searching for contact would be a hassle. Our product provides a centralised system that would help job event planners organise their contact information and tasks for quick and easy access.
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                 | So that I can…​                                                        |
-|----------|--------------------------------------------|------------------------------|------------------------------------------------------------------------|
-| `* * *`  | job fest event planner                     | see usage instructions       | refer to instructions when I forget how to use JobFestGo                 |
-| `* * *`  | job fest event planner                     | add a new person             |                                                                        |
-| `* * *`  | user                                       | delete a person              | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name        | locate details of persons without having to go through the entire list |
-| `* * *`  | job fest event planner                     | view the entire contact list |                                                                        |
-| `* *`    | user                                       | hide private contact details | minimize chance of someone else seeing them by accident                |
-| `* *`    | job fest event planner                     | add tags                     | add to the pool of use categories already available    |
-| `* *`    | job fest event planner                     | view all tags | remember contacts of a certain category to contact them for events                |
-| `* *`     | job fest event planner                     | be able to delete tags | can easily identify who I should be cold calling among my contacts without unnecessary tags     |
-| `* *`     | job fest event planner                     | view all events | remember all the events I am involved in so far    |
-| `* *`    | job fest event planner                        | be able to delete events | remove events I no longer need                                          |
-| `* *`     | job fest event planner                     | be able to select events | can easily view the contacts and tasks to do for each particular event    |
-| `* *`    | job fest event planner                        | add a new task for a event | remember the tasks I need to do for the event                         |
-| `* *`      | job fest event planner | return to the home page        |                                                 |
-| `*`      | user with many persons in the address book | sort persons by name         | locate a person easily                                                 |
+| Priority | As a …​                                    | I want to …​                 | So that I can…​                                                                             |
+|----------|--------------------------------------------|------------------------------|---------------------------------------------------------------------------------------------|
+| `* * *`  | job fest event planner                     | see usage instructions       | refer to instructions when I forget how to use the App                                      |
+| `* * *`  | job fest event planner                     | add a new person             |                                                                                             |
+| `* * *`  | job fest event planner                     | delete a person              | remove entries that I no longer need                                                        |
+| `* * *`  | job fest event planner                     | find a person by name        | locate details of persons without having to go through the entire list                      |
+| `* * *`  | job fest event planner                     | view the entire contact list |                                                                                             |
+| `* *`    | job fest event planner                     | hide private contact details | minimize chance of someone else seeing them by accident                                     |
+| `* *`    | job fest event planner                     | add tags                     | add to the pool of use categories already available                                         |
+| `* *`    | job fest event planner                     | view all tags                | remember contacts of a certain category to contact them for events                          |
+| `* *`    | job fest event planner                     | be able to delete tags       | can easily identify who I should be cold calling among my contacts without unnecessary tags |
+| `* *`    | job fest event planner                     | be able to add events        | keep track of the events I have to plan                                                     |
+| `* *`    | job fest event planner                     | be able to delete events     | remove events I no longer need                                                              |
+| `* *`    | job fest event planner                     | add a new task for a event   | remember the tasks I need to do for the event                                               |
+| `*`      | job fest event planner                     | sort persons by name         | locate a person easily                                                                      |
 
 
 *{More to be added}*
@@ -321,9 +319,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. Any of the mandatory fields not specified
 
-  * 1a1. JobFestGo informs user that mandatory fields not specified
+    * 1a1. JobFestGo informs user that mandatory fields not specified
 
-    Use case ends.
+      Use case ends.
 
 * 1b. Phone number already exists.
 
@@ -358,7 +356,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 3.  User requests to delete a specific person in the list
 4.  JobFestGo deletes the person
 
-   Use case ends.
+Use case ends.
 
 **Extensions**
 
@@ -392,7 +390,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2.  User keys in the tag to add to the collection of tags
 3.  JobFestGo adds the tag
 
-   Use case ends.
+Use case ends.
 
 **Extensions**
 * 2a. Missing `t/` in the command.
@@ -415,7 +413,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 1. User requests to list tags
-2. JobFestGo shows a list of all tags
+2. JobFestGo shows a list of tags that are currently in use in the contacts list
 
    Use case ends.
 
@@ -428,13 +426,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 3. User requests to delete a specified tag in the list
 4. JobFestGo deletes the tag
 
-      Use case ends.
+   Use case ends.
 
 **Extensions**
 
 * 2a. The list is empty.
 
-   Use case ends.
+  Use case ends.
 
 * 3a. The given tag name is invalid.
 
@@ -454,13 +452,43 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-**Use case: View all events**
+**Use case: Add an event**
 
 **MSS**
-1. User requests to list events
-2. JobFestGo shows a list of all events
+
+1. User requests to add event
+2. User specifies the details of the event
+3. JobFestGo adds the event to collection of events
+4. JobFestGo shows updated list of events
 
    Use case ends.
+
+**Extensions**
+
+* 1a. Any of the mandatory fields not specified
+
+    * 1a1. JobFestGo informs user that mandatory fields not specified
+
+      Use case ends.
+
+* 1b. Event name already exists.
+
+    * 1b1. JobFestGo informs user that event name already exists.
+
+      Use case ends.
+
+* 1c. Date is in incorrect format.
+
+    * 1c1. JobFestGo informs user that date is in wrong format.
+
+      Use case ends.
+
+* 1d. Date is before current date.
+
+    * 1d1. JobFestGo informs user that date is before current date.
+
+      Use case ends.
+
 
 **Use case: Delete an event**
 
@@ -471,13 +499,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 3. JobFestGo deletes the event
 4. JobFestGo displays the updated events
 
-      Use case ends.
+   Use case ends.
 
 **Extensions**
 
 * 2a. The event list is empty.
 
-   Use case ends.
+  Use case ends.
 
 * 3a. The given index is invalid.
 
@@ -490,31 +518,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3b1. JobFestGo shows an error message.
 
       Use case resumes at step 2.
-
-**Use case: Select an event**
-
-**MSS**
-
-1. User requests to select an event
-2. JobFestGo displays the contacts and tasks related to the event
-3. User <u>adds a task</u> or <u>deletes a task</u> or <u>marks a task</u> or <u>unmarks a task</u>.
-
-      Use case ends.
-
-
-**Extensions**
-
-* 1a. The given index is invalid.
-
-    * 1a1. JobFestGo shows an error message.
-
-      Use case resumes at step 1. 
-
-* 1b. Missing index.
-
-    * 1b1. JobFestGo shows an error message.
-
-      Use case resumes at step 1.
 
 **Use case: Add a task**
 
@@ -531,9 +534,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. Any of the mandatory fields not specified
 
-  * 1a1. JobFestGo informs user that mandatory fields not specified
+    * 1a1. JobFestGo informs user that mandatory fields not specified
 
-    Use case ends.
+      Use case ends.
 
 * 1b. Date is invalid.
 
@@ -546,21 +549,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1c1. JobFestGo informs user that event does not already exist.
 
       Use case ends.
-
-**Use case: Return to the home page**
-
-**MSS**
-1. User is on any page 
-2. User requests to return to the home page
-3. JobFestGo returns user to the home page
-
-   Use case ends.
-
-**Extensions**
-
-* 2a. The user is already on the home page
-
-   Use case ends.
 
 *{More to be added}*
 
@@ -600,15 +588,15 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-   1. Download the jar file and copy into an empty folder
+    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+    1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 1. Saving window preferences
 
-   1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
 1. _{ more test cases …​ }_
@@ -617,16 +605,16 @@ testers are expected to do more *exploratory* testing.
 
 1. Deleting a person while all persons are being shown
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+    1. Test case: `delete 1`<br>
+       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+    1. Test case: `delete 0`<br>
+       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
 
 1. _{ more test cases …​ }_
 
@@ -634,6 +622,6 @@ testers are expected to do more *exploratory* testing.
 
 1. Dealing with missing/corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
