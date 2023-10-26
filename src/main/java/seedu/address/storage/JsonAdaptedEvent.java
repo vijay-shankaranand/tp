@@ -14,7 +14,7 @@ import seedu.address.model.address.Address;
 import seedu.address.model.date.Date;
 import seedu.address.model.event.Event;
 import seedu.address.model.name.Name;
-import seedu.address.model.person.Person;
+import seedu.address.model.contact.Person;
 import seedu.address.model.task.Task;
 
 /**

@@ -13,7 +13,7 @@ import javafx.collections.ObservableList;
 import seedu.address.model.event.exceptions.DuplicateEventException;
 import seedu.address.model.event.exceptions.EventNotFoundException;
 import seedu.address.model.name.Name;
-import seedu.address.model.person.Person;
+import seedu.address.model.contact.Person;
 import seedu.address.model.task.Task;
 
 /**

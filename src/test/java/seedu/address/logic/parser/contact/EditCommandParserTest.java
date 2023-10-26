@@ -40,9 +40,9 @@ import seedu.address.logic.commands.contact.EditContactCommand;
 import seedu.address.logic.commands.contact.EditContactCommand.EditPersonDescriptor;
 import seedu.address.logic.parser.contact.EditContactCommandParser;
 import seedu.address.model.address.Address;
+import seedu.address.model.contact.Email;
+import seedu.address.model.contact.Phone;
 import seedu.address.model.name.Name;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.contact.EditPersonDescriptorBuilder;
 

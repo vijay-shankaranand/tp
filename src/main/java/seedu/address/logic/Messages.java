@@ -6,7 +6,7 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.parser.Prefix;
 import seedu.address.model.event.Event;
-import seedu.address.model.person.Person;
+import seedu.address.model.contact.Person;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.task.Task;
 

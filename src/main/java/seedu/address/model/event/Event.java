@@ -11,7 +11,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.address.Address;
 import seedu.address.model.date.Date;
 import seedu.address.model.name.Name;
-import seedu.address.model.person.Person;
+import seedu.address.model.contact.Person;
 import seedu.address.model.task.Task;
 
 /**

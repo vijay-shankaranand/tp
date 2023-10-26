@@ -10,7 +10,7 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.tag.FilterCommand;
-import seedu.address.model.person.PersonIsTaggedPredicate;
+import seedu.address.model.contact.PersonIsTaggedPredicate;
 import seedu.address.model.tag.Tag;
 
 public class FilterCommandParserTest {

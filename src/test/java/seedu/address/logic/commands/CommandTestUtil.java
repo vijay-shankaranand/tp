@@ -20,7 +20,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.name.NameContainsKeywordsPredicate;
-import seedu.address.model.person.Person;
+import seedu.address.model.contact.Person;
 import seedu.address.testutil.contact.EditPersonDescriptorBuilder;
 import seedu.address.testutil.contact.ContactBuilder;
 

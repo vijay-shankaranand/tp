@@ -23,7 +23,7 @@ import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.date.Date;
 import seedu.address.model.event.Event;
 import seedu.address.model.name.Name;
-import seedu.address.model.person.Person;
+import seedu.address.model.contact.Person;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.TaskDescription;

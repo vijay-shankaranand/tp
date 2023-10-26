@@ -23,7 +23,7 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.event.Event;
 import seedu.address.model.name.Name;
-import seedu.address.model.person.Person;
+import seedu.address.model.contact.Person;
 import seedu.address.testutil.contact.ContactBuilder;
 import seedu.address.testutil.event.EventBuilder;
 

@@ -12,7 +12,7 @@ import seedu.address.logic.commands.contact.AddContactCommand;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.Person;
+import seedu.address.model.contact.Person;
 import seedu.address.testutil.contact.ContactBuilder;
 
 /**
