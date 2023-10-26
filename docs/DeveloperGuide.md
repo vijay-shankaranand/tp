@@ -281,23 +281,24 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                 | So that I can…​                                                        |
-|----------|--------------------------------------------|------------------------------|------------------------------------------------------------------------|
-| `* * *`  | job fest event planner                     | see usage instructions       | refer to instructions when I forget how to use JobFestGo                 |
-| `* * *`  | job fest event planner                     | add a new person             |                                                                        |
-| `* * *`  | user                                       | delete a person              | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name        | locate details of persons without having to go through the entire list |
-| `* * *`  | job fest event planner                     | view the entire contact list |                                                                        |
-| `* *`    | user                                       | hide private contact details | minimize chance of someone else seeing them by accident                |
-| `* *`    | job fest event planner                     | add tags                     | add to the pool of use categories already available    |
-| `* *`    | job fest event planner                     | view all tags | remember contacts of a certain category to contact them for events                |
-| `* *`     | job fest event planner                     | be able to delete tags | can easily identify who I should be cold calling among my contacts without unnecessary tags     |
-| `* *`     | job fest event planner                     | view all events | remember all the events I am involved in so far    |
-| `* *`    | job fest event planner                        | be able to delete events | remove events I no longer need                                          |
-| `* *`     | job fest event planner                     | be able to select events | can easily view the contacts and tasks to do for each particular event    |
-| `* *`    | job fest event planner                        | add a new task for a event | remember the tasks I need to do for the event                         |
-| `* *`      | job fest event planner | return to the home page        |                                                 |
-| `*`      | user with many persons in the address book | sort persons by name         | locate a person easily                                                 |
+| Priority | As a …​                                    | I want to …​                 | So that I can…​                                                                             |
+|----------|--------------------------------------------|------------------------------|---------------------------------------------------------------------------------------------|
+| `* * *`  | job fest event planner                     | see usage instructions       | refer to instructions when I forget how to use JobFestGo                                    |
+| `* * *`  | job fest event planner                     | add a new person             |                                                                                             |
+| `* * *`  | user                                       | delete a person              | remove entries that I no longer need                                                        |
+| `* * *`  | user                                       | find a person by name        | locate details of persons without having to go through the entire list                      |
+| `* * *`  | job fest event planner                     | view the entire contact list |                                                                                             |
+| `* *`    | user                                       | hide private contact details | minimize chance of someone else seeing them by accident                                     |
+| `* *`    | job fest event planner                     | add tags                     | add to the pool of use categories already available                                         |
+| `* *`    | job fest event planner                     | view all tags | remember contacts of a certain category to contact them for events                          |
+| `* *`     | job fest event planner                     | be able to delete tags | can easily identify who I should be cold calling among my contacts without unnecessary tags |
+| `* *`     | job fest event planner                     | add a new event | keep track of the events I am involved in                                                   |
+| `* *`     | job fest event planner                     | view all events | remember all the events I am involved in so far                                             |
+| `* *`    | job fest event planner                        | be able to delete events | remove events I no longer need                                                              |
+| `* *`     | job fest event planner                     | be able to select events | can easily view the contacts and tasks to do for each particular event                      |
+| `* *`    | job fest event planner                        | add a new task for a event | remember the tasks I need to do for the event                                               |
+| `* *`      | job fest event planner | return to the home page        |                                                                                             |
+| `*`      | user with many persons in the address book | sort persons by name         | locate a person easily                                                                      |
 
 
 *{More to be added}*
@@ -453,6 +454,43 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3c1. JobFestGo shows an error message.
 
       Use case resumes at step 2.
+
+**Use case: Add an event**
+
+**MSS**
+
+1. User requests to add event
+2. User specifies the details of the event
+3. JobFestGo adds the event to collection of events
+4. JobFestGo shows updated list of events
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. Any of the mandatory fields not specified
+
+    * 1a1. JobFestGo informs user that mandatory fields not specified
+
+      Use case ends.
+
+* 1b. Event name already exists.
+
+    * 1b1. JobFestGo informs user that event name already exists.
+
+      Use case ends.
+
+* 1c. Date is in incorrect format.
+
+    * 1c1. JobFestGo informs user that date is in wrong format.
+
+      Use case ends.
+
+* 1d. Date is before current date.
+
+    * 1d1. JobFestGo informs user that date is before current date.
+
+      Use case ends.
 
 **Use case: View all events**
 
