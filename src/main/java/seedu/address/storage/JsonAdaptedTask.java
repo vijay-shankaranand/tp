@@ -18,16 +18,18 @@ public class JsonAdaptedTask {
     private final String description;
     private final String date;
     private final Name event;
+    private final String status;
 
     /**
      * Constructs a {@code JsonAdaptedTask} with the given task details.
      */
     @JsonCreator
     public JsonAdaptedTask(@JsonProperty("description") String description, @JsonProperty("date") String date,
-                            @JsonProperty("event") Name event) {
+                            @JsonProperty("event") Name event, @JsonProperty("status") String status) {
         this.description = description;
         this.date = date;
         this.event = event;
+        this.status = status;
     }
 
     /**
@@ -37,6 +39,7 @@ public class JsonAdaptedTask {
         description = source.getDescription().value;
         date = source.getDate().date;
         event = source.getAssociatedEventName();
+        status = source.
     }
 
     /**

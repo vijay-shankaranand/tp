@@ -73,6 +73,25 @@ public class UniqueEventList implements Iterable<Event> {
     }
 
     /**
+     * Deletes the specified task from the event.
+     * @param taskToDelete The task to be deleted.
+     */
+    public void deleteTaskFromEvent(Task taskToDelete) {
+        for (int i = 0; i < internalList.size(); i++) {
+            Event curr = internalList.get(i);
+            Set<Task> updatedTasks = new HashSet<>();
+            if (curr.getName().equals(taskToDelete.getAssociatedEventName())) {
+                updatedTasks.addAll(curr.getTasks());
+                updatedTasks.add(taskToDelete);
+                Event updatedEvent = new Event(curr.getName(), curr.getDate(), curr.getAddress(),
+                        curr.getContacts(), updatedTasks);
+                setEvent(curr, updatedEvent);
+                return;
+            }
+        }
+    }
+
+    /**
      * Returns the {@code Event} with given name from the list.
      * @param name The name of the desired {@code Event}.
      */

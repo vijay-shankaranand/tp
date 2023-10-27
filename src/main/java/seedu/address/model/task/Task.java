@@ -21,6 +21,7 @@ public class Task {
      * inside storage.
      */
     private final Name associatedEventName;
+    private final boolean isCompleted;
 
     /**
      * Constructs a {@code Task}
@@ -33,6 +34,7 @@ public class Task {
         this.deadline = deadline;
         this.associatedEvent = associatedEvent;
         this.associatedEventName = associatedEvent.getName();
+        this.isCompleted = false;
     }
 
     /**
@@ -42,11 +44,12 @@ public class Task {
      * @param deadline A valid deadline.
      * @param eventName A valid event name.
      */
-    public Task(TaskDescription description, Date deadline, Name eventName) {
+    public Task(TaskDescription description, Date deadline, Name eventName, boolean isCompleted) {
         this.description = description;
         this.deadline = deadline;
         this.associatedEvent = null;
         this.associatedEventName = eventName;
+        this.isCompleted = isCompleted;
     }
 
     public TaskDescription getDescription() {
@@ -63,6 +66,28 @@ public class Task {
 
     public Name getAssociatedEventName() {
         return this.associatedEventName;
+    }
+
+    public boolean isCompleted() {
+        return this.isCompleted;
+    }
+
+    public String getIsCompletedString() {
+        return this.isCompleted ? "isCompleted" : "hasNotBeenCompleted";
+    }
+
+    /**
+     * Marks the task as completed.
+     */
+    public void setAsCompleted() {
+        this.isCompleted = true;
+    }
+
+    /**
+     * Marks the task as not completed.
+     */
+    public void setAsNotCompleted() {
+        this.isCompleted = false;
     }
 
     /**

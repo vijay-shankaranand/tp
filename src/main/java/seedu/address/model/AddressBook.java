@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.List;
 
@@ -257,12 +258,31 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Returns true if an existing event has the given {@code taskDescription} exists in
+     * the event specified by the given {@code associatedEventName}.
+     */
+    public boolean hasTask(TaskDescription taskDescription, Name associatedEventName) {
+        requireAllNonNull(taskDescription, associatedEventName);
+        return tasks.contains(taskDescription, associatedEventName);
+    }
+
+    /**
      * Adds a task to the address book.
-     * The task must not already exist in the address book.
+     * The task must not already exist in JobFestGo.
      */
     public void addTask(Task taskToAdd) {
         tasks.add(taskToAdd);
         events.addTaskInEvent(taskToAdd);
+    }
+
+    /**
+     * Deletes the task specified by the given task description from its associated event.
+     * The task must already exist in JobFestGo.
+     */
+    public void deleteTask(TaskDescription taskDescription, Name associatedEventName) {
+        Task taskToDelete = tasks.getByValues(taskDescription, associatedEventName);
+        tasks.delete(taskToDelete);
+        events.deleteTaskFromEvent(taskToDelete);
     }
 
     /**
@@ -281,6 +301,20 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public Task getTask(TaskDescription description, Date date, Event event) {
         return tasks.getByValues(description, date, event);
+    }
+
+    /**
+     * Returns the {@code Task} with given arguments.
+     */
+    public Task getTask(TaskDescription description, Name eventName) {
+        return tasks.getByValues(description, eventName);
+    }
+
+    /**
+     * Marks the specified task as completed.
+     */
+    public void markTask(TaskDescription taskDescription, Name associatedEventName) {
+        tasks.markTask();
     }
 
     @Override

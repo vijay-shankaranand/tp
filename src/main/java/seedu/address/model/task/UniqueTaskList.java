@@ -10,6 +10,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.date.Date;
 import seedu.address.model.event.Event;
+import seedu.address.model.name.Name;
 import seedu.address.model.task.exceptions.DuplicateTaskException;
 import seedu.address.model.task.exceptions.TaskNotFoundException;
 
@@ -38,9 +39,32 @@ public class UniqueTaskList implements Iterable<Task> {
     }
 
     /**
-     * Adds a task to the list.
-     * The task must not already exist in the task list.
+     * Returns true if the list contains an equivalent task as the given argument.
      */
+    public boolean contains(TaskDescription taskDescription, Name associatedEventName) {
+        requireAllNonNull(taskDescription, associatedEventName);
+        for (int i = 0; i < internalList.size(); i++) {
+            Task curr = internalList.get(i);
+            if (curr.getDescription().equals(taskDescription)
+                    && curr.getAssociatedEvent().getName().equals(associatedEventName)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Deletes the specified task from the list.
+     * The task must already exist in the task list.
+     */
+    public void delete(Task toDelete) {
+        requireNonNull(toDelete);
+        if (!contains(toDelete)) {
+            throw new TaskNotFoundException();
+        }
+        internalList.remove(toDelete);
+    }
+
     public void add(Task toAdd) {
         requireNonNull(toAdd);
         if (contains(toAdd)) {
@@ -61,6 +85,17 @@ public class UniqueTaskList implements Iterable<Task> {
         throw new TaskNotFoundException();
     }
 
+    public Task getByValues(TaskDescription taskDescription, Name associatedEventName) throws TaskNotFoundException {
+        for (int i = 0; i < internalList.size(); i++) {
+            Task curr = internalList.get(i);
+            if (curr.getDescription().equals(taskDescription)
+                    && curr.getAssociatedEvent().getName().equals(associatedEventName)) {
+                return curr;
+            }
+        }
+        throw new TaskNotFoundException();
+    }
+
     public void setTask(Task targetTask, Task editedTask) {
         requireAllNonNull(targetTask, editedTask);
         int index = internalList.indexOf(targetTask);
@@ -74,6 +109,7 @@ public class UniqueTaskList implements Iterable<Task> {
 
         internalList.set(index, editedTask);
     }
+
     public void setTasks(UniqueTaskList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
