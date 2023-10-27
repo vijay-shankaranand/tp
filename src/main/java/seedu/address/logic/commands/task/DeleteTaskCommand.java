@@ -19,7 +19,7 @@ import seedu.address.model.task.TaskDescription;
 public class DeleteTaskCommand extends Command {
     public static final String COMMAND_WORD = "delete_task";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": deletes an existing task from the specified event. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes an existing task from the specified event. "
             + "Parameters: "
             + PREFIX_NAME + "TASK_DESCRIPTION "
             + PREFIX_EVENT + "EVENT \n"

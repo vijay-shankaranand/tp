@@ -19,7 +19,7 @@ import seedu.address.model.task.TaskDescription;
 public class UnmarkCommand extends Command {
     public static final String COMMAND_WORD = "unmark";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": marks a task as not completed. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks a task as not completed. "
             + "Parameters: "
             + PREFIX_NAME + "TASK_DESCRIPTION "
             + PREFIX_EVENT + "EVENT \n"
