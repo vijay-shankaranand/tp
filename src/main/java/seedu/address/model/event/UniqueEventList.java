@@ -8,6 +8,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+import com.sun.jdi.event.EventSet;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.event.exceptions.DuplicateEventException;
@@ -82,7 +84,49 @@ public class UniqueEventList implements Iterable<Event> {
             Set<Task> updatedTasks = new HashSet<>();
             if (curr.getName().equals(taskToDelete.getAssociatedEventName())) {
                 updatedTasks.addAll(curr.getTasks());
-                updatedTasks.add(taskToDelete);
+                updatedTasks.remove(taskToDelete);
+                Event updatedEvent = new Event(curr.getName(), curr.getDate(), curr.getAddress(),
+                        curr.getContacts(), updatedTasks);
+                setEvent(curr, updatedEvent);
+                return;
+            }
+        }
+    }
+
+    /**
+     * Marks the specified task as completed.
+     */
+    public void markTask(Task taskTobeMarked) {
+        for (int i = 0; i < internalList.size(); i++) {
+            Event curr = internalList.get(i);
+            Set<Task> updatedTasks = new HashSet<>();
+            if (curr.getName().equals(taskTobeMarked.getAssociatedEventName())) {
+                updatedTasks.addAll(curr.getTasks());
+                updatedTasks.remove(taskTobeMarked);
+                Task markedTask = new Task(taskTobeMarked.getDescription(), taskTobeMarked.getDate(),
+                        taskTobeMarked.getAssociatedEvent(), true);
+                updatedTasks.add(markedTask);
+                Event updatedEvent = new Event(curr.getName(), curr.getDate(), curr.getAddress(),
+                        curr.getContacts(), updatedTasks);
+                setEvent(curr, updatedEvent);
+                return;
+            }
+        }
+    }
+
+    /**
+     * Marks the specified task as not completed.
+     */
+    public void unmarkTask(Task taskTobeUnmarked) {
+        for (int i = 0; i < internalList.size(); i++) {
+            Event curr = internalList.get(i);
+            Set<Task> updatedTasks = new HashSet<>();
+            if (curr.getName().equals(taskTobeUnmarked.getAssociatedEventName())) {
+                updatedTasks.addAll(curr.getTasks());
+                updatedTasks.remove(taskTobeUnmarked);
+                Task unmarkedTask = new Task(taskTobeUnmarked.getDescription(), taskTobeUnmarked.getDate(),
+                        taskTobeUnmarked.getAssociatedEvent(), false);
+                updatedTasks.add(unmarkedTask);
                 Event updatedEvent = new Event(curr.getName(), curr.getDate(), curr.getAddress(),
                         curr.getContacts(), updatedTasks);
                 setEvent(curr, updatedEvent);

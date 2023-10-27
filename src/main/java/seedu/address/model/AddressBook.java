@@ -286,13 +286,12 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Replaces the given event {@code target} in the list with {@code editedTask}.
+     * Replaces the given task {@code target} in the list with {@code editedTask}.
      * {@code target} must exist in the address book.
      * The event identity of {@code editedEvent} must not be the same as another existing event in the address book.
      */
     public void setTask(Task target, Task editedTask) {
         requireNonNull(editedTask);
-
         tasks.setTask(target, editedTask);
     }
 
@@ -314,7 +313,18 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Marks the specified task as completed.
      */
     public void markTask(TaskDescription taskDescription, Name associatedEventName) {
-        tasks.markTask();
+        Task taskToMark = tasks.getByValues(taskDescription, associatedEventName);
+        tasks.mark(taskToMark);
+        events.markTask(taskToMark);
+    }
+
+    /**
+     * Marks the specified task as not completed.
+     */
+    public void unmarkTask(TaskDescription taskDescription, Name associatedEventName) {
+        Task taskToUnmark = tasks.getByValues(taskDescription, associatedEventName);
+        tasks.unmark(taskToUnmark);
+        events.unmarkTask(taskToUnmark);
     }
 
     @Override

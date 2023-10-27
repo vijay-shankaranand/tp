@@ -73,6 +73,26 @@ public class UniqueTaskList implements Iterable<Task> {
         internalList.add(toAdd);
     }
 
+    /**
+     * Marks the given task as completed.
+     */
+    public void mark(Task toMark) {
+        requireNonNull(toMark);
+        Task marked = new Task(toMark.getDescription(), toMark.getDate(),
+                toMark.getAssociatedEvent(), true);
+        setTask(toMark, marked);
+    }
+
+    /**
+     * Marks the given task as not completed.
+     */
+    public void unmark(Task toUnmark) {
+        requireNonNull(toUnmark);
+        Task unmarked = new Task(toUnmark.getDescription(), toUnmark.getDate(),
+                toUnmark.getAssociatedEvent(), false);
+        setTask(toUnmark, unmarked);
+    }
+
     public Task getByValues(TaskDescription description, Date date, Event event) throws TaskNotFoundException {
         for (int i = 0; i < internalList.size(); i++) {
             Task curr = internalList.get(i);

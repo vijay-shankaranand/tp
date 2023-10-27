@@ -70,8 +70,8 @@ public class SampleDataUtil {
      */
     public static Task[] getSampleTasks() {
         return new Task[] {
-            new Task(new TaskDescription("Order Food"), new Date("2024-01-13"), getSampleEvents()[0]),
-            new Task(new TaskDescription("Call vendors"), new Date("2024-01-12"), getSampleEvents()[1])
+            new Task(new TaskDescription("Order Food"), new Date("2024-01-13"), getSampleEvents()[0], false),
+            new Task(new TaskDescription("Call vendors"), new Date("2024-01-12"), getSampleEvents()[1], false)
         };
     }
 

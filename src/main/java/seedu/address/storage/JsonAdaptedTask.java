@@ -39,7 +39,7 @@ public class JsonAdaptedTask {
         description = source.getDescription().value;
         date = source.getDate().date;
         event = source.getAssociatedEventName();
-        status = source.
+        status = source.getIsCompletedString();
     }
 
     /**
@@ -69,7 +69,12 @@ public class JsonAdaptedTask {
         if (!Name.isValidName(event.fullName)) {
             throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
         }
+        if (status == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    "status"));
+        }
         final Name modelEvent = new Name(event.fullName);
-        return new Task(modelDescription, modelDate, modelEvent);
+        final boolean isCompleted = status == Task.TASK_IS_COMPLETED ? true : false;
+        return new Task(modelDescription, modelDate, modelEvent, isCompleted);
     }
 }

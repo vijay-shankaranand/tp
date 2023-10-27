@@ -12,6 +12,9 @@ import seedu.address.model.name.Name;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Task {
+    public static final String TASK_IS_COMPLETED = "isCompleted";
+    public static final String TASK_HAS_NOT_BEEN_COMPLETED = "hasNotBeenCompleted";
+
     private final TaskDescription description;
     private final Date deadline;
     private final Event associatedEvent;
@@ -29,12 +32,12 @@ public class Task {
      * @param description A valid description.
      * @param deadline A valid deadline.
      */
-    public Task(TaskDescription description, Date deadline, Event associatedEvent) {
+    public Task(TaskDescription description, Date deadline, Event associatedEvent, boolean isCompleted) {
         this.description = description;
         this.deadline = deadline;
         this.associatedEvent = associatedEvent;
         this.associatedEventName = associatedEvent.getName();
-        this.isCompleted = false;
+        this.isCompleted = isCompleted;
     }
 
     /**
@@ -73,21 +76,7 @@ public class Task {
     }
 
     public String getIsCompletedString() {
-        return this.isCompleted ? "isCompleted" : "hasNotBeenCompleted";
-    }
-
-    /**
-     * Marks the task as completed.
-     */
-    public void setAsCompleted() {
-        this.isCompleted = true;
-    }
-
-    /**
-     * Marks the task as not completed.
-     */
-    public void setAsNotCompleted() {
-        this.isCompleted = false;
+        return this.isCompleted ? TASK_IS_COMPLETED : TASK_HAS_NOT_BEEN_COMPLETED;
     }
 
     /**
