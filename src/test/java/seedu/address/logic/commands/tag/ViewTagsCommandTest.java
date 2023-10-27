@@ -1,7 +1,7 @@
 package seedu.address.logic.commands.tag;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.person.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.contact.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

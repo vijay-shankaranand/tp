@@ -5,8 +5,8 @@ import static java.util.Objects.requireNonNull;
 import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.commands.contact.ViewContactsCommand;
 import seedu.address.logic.commands.event.ViewEventsCommand;
-import seedu.address.logic.commands.person.ListCommand;
 import seedu.address.logic.commands.tag.ViewTagsCommand;
 import seedu.address.model.event.Event;
 
@@ -85,7 +85,7 @@ public class CommandResult {
      * @return true if the contacts panel should be displayed to the user, else false
      */
     public boolean shouldDisplayContactsPanel() {
-        if (feedbackToUser.equals(ListCommand.MESSAGE_SUCCESS)) {
+        if (feedbackToUser.equals(ViewContactsCommand.MESSAGE_SUCCESS)) {
             return true;
         }
         return false;

@@ -10,7 +10,7 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.model.Model;
-import seedu.address.model.person.PersonIsTaggedPredicate;
+import seedu.address.model.contact.PersonIsTaggedPredicate;
 import seedu.address.model.tag.Tag;
 
 /**

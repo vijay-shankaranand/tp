@@ -16,10 +16,10 @@ import seedu.address.model.task.exceptions.TaskNotFoundException;
 
 /**
  * A list of tasks that enforces uniqueness between its elements and does not allow nulls.
- * A task is considered unique by comparing using {@code Tvent#equals(Task)}. As such, adding and updating of
- * task uses Task#equals(Task) for equality so as to ensure that the task being added or updated is
- * unique in terms of identity in the UniqueTaskList. However, the removal of a Task uses Task#equals(Object) so
- * as to ensure that the task with exactly the same fields will be removed.
+ * A task is considered unique by comparing using {@code Task#equals(Task)}. As such, adding and updating of
+ * task uses Task#equals(Task) for equality to ensure that the task being added or updated is
+ * unique in terms of identity in the UniqueTaskList. However, the removal of a Task uses Task#equals(Object) to
+ * ensure that the task with exactly the same fields will be removed.
  *
  * Supports a minimal set of list operations.
  *

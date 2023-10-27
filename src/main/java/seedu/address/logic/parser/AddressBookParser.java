@@ -13,16 +13,16 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.HomeCommand;
+import seedu.address.logic.commands.contact.AddContactCommand;
+import seedu.address.logic.commands.contact.DeleteContactCommand;
+import seedu.address.logic.commands.contact.EditContactCommand;
+import seedu.address.logic.commands.contact.FindCommand;
+import seedu.address.logic.commands.contact.ViewContactsCommand;
 import seedu.address.logic.commands.event.AddEventCommand;
 import seedu.address.logic.commands.event.DeleteEventCommand;
 import seedu.address.logic.commands.event.LinkCommand;
 import seedu.address.logic.commands.event.SelectEventCommand;
 import seedu.address.logic.commands.event.ViewEventsCommand;
-import seedu.address.logic.commands.person.AddCommand;
-import seedu.address.logic.commands.person.DeleteCommand;
-import seedu.address.logic.commands.person.EditCommand;
-import seedu.address.logic.commands.person.FindCommand;
-import seedu.address.logic.commands.person.ListCommand;
 import seedu.address.logic.commands.tag.AddTagCommand;
 import seedu.address.logic.commands.tag.DeleteTagCommand;
 import seedu.address.logic.commands.tag.FilterCommand;
@@ -31,15 +31,15 @@ import seedu.address.logic.commands.task.AddTaskCommand;
 import seedu.address.logic.commands.task.DeleteTaskCommand;
 import seedu.address.logic.commands.task.MarkCommand;
 import seedu.address.logic.commands.task.UnmarkCommand;
+import seedu.address.logic.parser.contact.AddContactCommandParser;
+import seedu.address.logic.parser.contact.DeleteContactCommandParser;
+import seedu.address.logic.parser.contact.EditContactCommandParser;
+import seedu.address.logic.parser.contact.FindCommandParser;
 import seedu.address.logic.parser.event.AddEventCommandParser;
 import seedu.address.logic.parser.event.DeleteEventCommandParser;
 import seedu.address.logic.parser.event.LinkCommandParser;
 import seedu.address.logic.parser.event.SelectEventCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.logic.parser.person.AddCommandParser;
-import seedu.address.logic.parser.person.DeleteCommandParser;
-import seedu.address.logic.parser.person.EditCommandParser;
-import seedu.address.logic.parser.person.FindCommandParser;
 import seedu.address.logic.parser.tag.AddTagCommandParser;
 import seedu.address.logic.parser.tag.DeleteTagCommandParser;
 import seedu.address.logic.parser.tag.FilterCommandParser;
@@ -82,14 +82,14 @@ public class AddressBookParser {
         logger.fine("Command word: " + commandWord + "; Arguments: " + arguments);
 
         switch (commandWord) {
-        case AddCommand.COMMAND_WORD:
-            return new AddCommandParser().parse(arguments);
+        case AddContactCommand.COMMAND_WORD:
+            return new AddContactCommandParser().parse(arguments);
 
-        case EditCommand.COMMAND_WORD:
-            return new EditCommandParser().parse(arguments);
+        case EditContactCommand.COMMAND_WORD:
+            return new EditContactCommandParser().parse(arguments);
 
-        case DeleteCommand.COMMAND_WORD:
-            return new DeleteCommandParser().parse(arguments);
+        case DeleteContactCommand.COMMAND_WORD:
+            return new DeleteContactCommandParser().parse(arguments);
 
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
@@ -97,8 +97,8 @@ public class AddressBookParser {
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
 
-        case ListCommand.COMMAND_WORD:
-            return new ListCommand();
+        case ViewContactsCommand.COMMAND_WORD:
+            return new ViewContactsCommand();
 
         case AddEventCommand.COMMAND_WORD:
             return new AddEventCommandParser().parse(arguments);
