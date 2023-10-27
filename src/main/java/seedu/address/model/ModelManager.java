@@ -11,11 +11,13 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.date.Date;
 import seedu.address.model.event.Event;
-import seedu.address.model.event.EventName;
-import seedu.address.model.person.Name;
+import seedu.address.model.name.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.task.Task;
+import seedu.address.model.task.TaskDescription;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -28,6 +30,7 @@ public class ModelManager implements Model {
     private final FilteredList<Person> filteredPersons;
     private final FilteredList<Tag> filteredTags;
     private final FilteredList<Event> filteredEvents;
+    private final FilteredList<Task> filteredTasks;
 
 
     /**
@@ -43,6 +46,7 @@ public class ModelManager implements Model {
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         filteredTags = new FilteredList<>(this.addressBook.getTagList());
         filteredEvents = new FilteredList<>(this.addressBook.getEventList());
+        filteredTasks = new FilteredList<>(this.addressBook.getTaskList());
     }
 
     public ModelManager() {
@@ -172,7 +176,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Event getEvent(EventName name) {
+    public Event getEvent(Name name) {
         return addressBook.getEvent(name);
     }
 
@@ -182,6 +186,29 @@ public class ModelManager implements Model {
         addressBook.setEvent(target, editedEvent);
     }
 
+    //=========== Tasks ======================================================================================
+    @Override
+    public boolean hasTask(Task task) {
+        requireNonNull(task);
+        return addressBook.hasTask(task);
+    }
+
+    @Override
+    public void addTask(Task task) {
+        requireNonNull(task);
+        addressBook.addTask(task);
+    }
+
+    @Override
+    public Task getTask(TaskDescription description, Date date, Event event) {
+        return addressBook.getTask(description, date, event);
+    }
+
+    @Override
+    public void setTask(Task target, Task editedTask) {
+        requireAllNonNull(target, editedTask);
+        addressBook.setTask(target, editedTask);
+    }
 
     //=========== Filtered Person List Accessors =============================================================
 
@@ -191,6 +218,12 @@ public class ModelManager implements Model {
      */
     @Override
     public ObservableList<Person> getFilteredPersonList() {
+        return filteredPersons;
+    }
+
+    @Override
+    public ObservableList<Person> getUnfilteredPersonList() {
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return filteredPersons;
     }
 
@@ -221,9 +254,28 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public ObservableList<Event> getUnfilteredEventList() {
+        updateFilteredEventList(PREDICATE_SHOW_ALL_EVENTS);
+        return filteredEvents;
+    }
+
+    @Override
     public void updateFilteredEventList(Predicate<Event> predicate) {
         requireNonNull(predicate);
         filteredEvents.setPredicate(predicate);
+    }
+
+    //======== Filtered Event List Accessors ===============================================================
+
+    @Override
+    public ObservableList<Task> getFilteredTaskList() {
+        return filteredTasks;
+    }
+
+    @Override
+    public void updateFilteredTaskList(Predicate<Task> predicate) {
+        requireNonNull(predicate);
+        filteredTasks.setPredicate(predicate);
     }
 
     @Override

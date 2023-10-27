@@ -10,11 +10,12 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.address.Address;
+import seedu.address.model.date.Date;
 import seedu.address.model.event.Event;
-import seedu.address.model.event.EventAddress;
-import seedu.address.model.event.EventDate;
-import seedu.address.model.event.EventName;
+import seedu.address.model.name.Name;
 import seedu.address.model.person.Person;
+import seedu.address.model.task.Task;
 
 /**
  * Jackson-friendly version of {@link Event}.
@@ -26,6 +27,7 @@ public class JsonAdaptedEvent {
     private final String date;
     private final String address;
     private final List<JsonAdaptedPerson> contacts = new ArrayList<>();
+    private final List<JsonAdaptedTask> tasks = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedEvent} with the given event details.
@@ -33,12 +35,16 @@ public class JsonAdaptedEvent {
     @JsonCreator
     public JsonAdaptedEvent(@JsonProperty("name") String name, @JsonProperty("date") String date,
                             @JsonProperty("address") String address,
-                             @JsonProperty("contacts") List<JsonAdaptedPerson> contacts) {
+                             @JsonProperty("contacts") List<JsonAdaptedPerson> contacts,
+                            @JsonProperty("tasks") List<JsonAdaptedTask> tasks) {
         this.name = name;
         this.date = date;
         this.address = address;
         if (contacts != null) {
             this.contacts.addAll(contacts);
+        }
+        if (tasks != null) {
+            this.tasks.addAll(tasks);
         }
     }
 
@@ -46,11 +52,15 @@ public class JsonAdaptedEvent {
      * Converts a given {@code Event} into this class for Jackson use.
      */
     public JsonAdaptedEvent(Event source) {
-        name = source.getName().eventName;
-        date = source.getDate().eventDate;
+
+        name = source.getName().fullName;
+        date = source.getDate().date;
         address = source.getAddress().value;
         contacts.addAll(source.getContacts().stream()
                 .map(JsonAdaptedPerson::new)
+                .collect(Collectors.toList()));
+        tasks.addAll(source.getTasks().stream()
+                .map(JsonAdaptedTask::new)
                 .collect(Collectors.toList()));
     }
 
@@ -64,35 +74,41 @@ public class JsonAdaptedEvent {
         for (JsonAdaptedPerson person : contacts) {
             eventContacts.add(person.toModelType());
         }
+        final Set<Person> modelPersons = new HashSet<>(eventContacts);
+
+        final List<Task> eventTasks = new ArrayList<>();
+        for (JsonAdaptedTask task : tasks) {
+            eventTasks.add(task.toModelType());
+        }
+        final Set<Task> modeltasks = new HashSet<>(eventTasks);
 
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    EventName.class.getSimpleName()));
+                    Name.class.getSimpleName()));
         }
-        if (!EventName.isValidName(name)) {
-            throw new IllegalValueException(EventName.MESSAGE_CONSTRAINTS);
+        if (!Name.isValidName(name)) {
+            throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
         }
-        final EventName modelName = new EventName(name);
+        final Name modelName = new Name(name);
 
         if (date == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    EventDate.class.getSimpleName()));
+                    Date.class.getSimpleName()));
         }
-        if (!EventDate.isValidDate(date)) {
-            throw new IllegalValueException(EventDate.MESSAGE_CONSTRAINTS);
+        if (!Date.isValidDate(date)) {
+            throw new IllegalValueException(Date.MESSAGE_CONSTRAINTS);
         }
-        final EventDate modelDate = new EventDate(date);
+        final Date modelDate = new Date(date);
 
         if (address == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    EventAddress.class.getSimpleName()));
+                    Address.class.getSimpleName()));
         }
-        if (!EventAddress.isValidAddress(address)) {
-            throw new IllegalValueException(EventAddress.MESSAGE_CONSTRAINTS);
+        if (!Address.isValidAddress(address)) {
+            throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
         }
-        final EventAddress modelAddress = new EventAddress(address);
+        final Address modelAddress = new Address(address);
 
-        final Set<Person> modelPersons = new HashSet<>(eventContacts);
-        return new Event(modelName, modelDate, modelAddress, modelPersons);
+        return new Event(modelName, modelDate, modelAddress, modelPersons, modeltasks);
     }
 }

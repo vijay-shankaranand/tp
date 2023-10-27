@@ -4,6 +4,7 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CONTACT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT;
 
+import java.util.Set;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.event.LinkCommand;
@@ -13,8 +14,7 @@ import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.event.EventName;
-import seedu.address.model.person.Name;
+import seedu.address.model.name.Name;
 
 /**
  * Parses input arguments and creates a new LinkCommand object
@@ -35,11 +35,11 @@ public class LinkCommandParser implements Parser<LinkCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, LinkCommand.MESSAGE_USAGE));
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_EVENT, PREFIX_CONTACT);
-        EventName eventName = ParserUtil.parseEventName(argMultimap.getValue(PREFIX_EVENT).get());
-        Name contactName = ParserUtil.parseName(argMultimap.getValue(PREFIX_CONTACT).get());
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_EVENT);
+        Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_EVENT).get());
+        Set<Name> contactNameList = ParserUtil.parseContactNames(argMultimap.getAllValues(PREFIX_CONTACT));
 
-        return new LinkCommand(eventName, contactName);
+        return new LinkCommand(name, contactNameList);
     }
 
     /**

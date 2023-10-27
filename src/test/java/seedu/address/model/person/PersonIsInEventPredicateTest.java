@@ -8,18 +8,22 @@ import java.util.HashSet;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.address.Address;
+import seedu.address.model.date.Date;
 import seedu.address.model.event.Event;
-import seedu.address.model.event.EventAddress;
-import seedu.address.model.event.EventDate;
-import seedu.address.model.event.EventName;
+import seedu.address.model.name.Name;
+import seedu.address.model.task.Task;
+
 
 public class PersonIsInEventPredicateTest {
     @Test
     public void equals() {
-        Event firstEvent = new Event(new EventName("Job Fest 2023"), new EventDate("2023-12-23"),
-            new EventAddress("NUS"), new HashSet<Person>());
-        Event secondEvent = new Event(new EventName("Job Fest 2024"), new EventDate("2024-12-23"),
-            new EventAddress("NUS"), new HashSet<Person>());
+
+        Event firstEvent = new Event(new Name("Job Fest 2023"), new Date("2023-12-23"),
+            new Address("NUS"), new HashSet<Person>(), new HashSet<Task>());
+        Event secondEvent = new Event(new Name("Job Fest 2024"), new Date("2024-12-23"),
+            new Address("NUS"), new HashSet<Person>(), new HashSet<Task>());
+
 
         PersonIsInEventPredicate firstPredicate = new PersonIsInEventPredicate(firstEvent);
         PersonIsInEventPredicate secondPredicate = new PersonIsInEventPredicate(secondEvent);
@@ -43,8 +47,10 @@ public class PersonIsInEventPredicateTest {
 
     @Test
     public void toString_testEquals() {
-        Event firstEvent = new Event(new EventName("Job Fest 2023"), new EventDate("2023-12-23"),
-            new EventAddress("NUS"), new HashSet<Person>());
+
+        Event firstEvent = new Event(new Name("Job Fest 2023"), new Date("2023-12-23"),
+            new Address("NUS"), new HashSet<Person>(), new HashSet<Task>());
+
         PersonIsInEventPredicate firstPredicate = new PersonIsInEventPredicate(firstEvent);
         String expected = new ToStringBuilder(firstPredicate).add("event", firstEvent).toString();
     }

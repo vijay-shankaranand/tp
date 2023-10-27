@@ -25,7 +25,13 @@ public class DeleteEventCommand extends Command {
 
     public static final String MESSAGE_DELETE_EVENT_SUCCESS = "Deleted Event: %1$s";
     private final Index targetIndex;
+
+    /**
+     * Creates a DeleteEventCommand object.
+     * @param targetIndex index to delete
+     */
     public DeleteEventCommand(Index targetIndex) {
+        requireNonNull(targetIndex);
         this.targetIndex = targetIndex;
     }
 

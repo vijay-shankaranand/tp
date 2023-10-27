@@ -16,5 +16,6 @@ public interface ReadOnlyUserPrefs {
     Path getTagListFilePath();
 
     Path getEventListFilePath();
+    Path getTaskListFilePath();
 
 }

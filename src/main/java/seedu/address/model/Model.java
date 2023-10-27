@@ -5,11 +5,13 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.date.Date;
 import seedu.address.model.event.Event;
-import seedu.address.model.event.EventName;
-import seedu.address.model.person.Name;
+import seedu.address.model.name.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.task.Task;
+import seedu.address.model.task.TaskDescription;
 
 /**
  * The API of the Model component.
@@ -90,6 +92,9 @@ public interface Model {
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
 
+    /** Returns an unmodifiable view of the unfiltered person list */
+    ObservableList<Person> getUnfilteredPersonList();
+
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
@@ -149,7 +154,7 @@ public interface Model {
     /**
      * Returns the {@code Event} with given name.
      */
-    Event getEvent(EventName name);
+    Event getEvent(Name name);
 
     /**
      * Replaces the given event {@code target} with {@code editedEvent}.
@@ -161,10 +166,44 @@ public interface Model {
     /** Returns an unmodifiable view of the filtered event list */
     ObservableList<Event> getFilteredEventList();
 
+    /** Returns an unmodifiable view of the unfiltered event list */
+    ObservableList<Event> getUnfilteredEventList();
+
     /**
      * Updates the filter of the filtered tag list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredEventList(Predicate<Event> predicate);
 
+    /**
+     * Returns true if an existing event with the same identity as {@code task} exists in the event.
+     */
+    boolean hasTask(Task task);
+
+    /**
+     * Adds the given task.
+     * {@code event} must not already exist in the task.
+     */
+    void addTask(Task task);
+
+    /**
+     * Returns the {@code task} with given description.
+     */
+    Task getTask(TaskDescription description, Date date, Event event);
+
+    /**
+     * Replaces the given task {@code target} with {@code editedTask}.
+     * {@code target} must exist in the event.
+     * The event identity of {@code editedTask} must not be the same as another existing task in the event.
+     */
+    void setTask(Task target, Task editedTask);
+
+    /** Returns an unmodifiable view of the filtered tasks in an event */
+    ObservableList<Task> getFilteredTaskList();
+
+    /**
+     * Updates the filter of the filtered task list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredTaskList(Predicate<Task> predicate);
 }
