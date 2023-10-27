@@ -18,7 +18,6 @@ public class PersonIsTaggedPredicate implements Predicate<Person> {
 
     @Override
     public boolean test(Person person) {
-
         return tags.stream().anyMatch(tag -> person.isTaggedBy(tag));
     }
 

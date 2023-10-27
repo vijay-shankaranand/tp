@@ -10,8 +10,8 @@ import java.util.Set;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.contact.exceptions.DuplicatePersonException;
-import seedu.address.model.contact.exceptions.PersonNotFoundException;
+import seedu.address.model.contact.exceptions.ContactNotFoundException;
+import seedu.address.model.contact.exceptions.DuplicateContactException;
 import seedu.address.model.name.Name;
 import seedu.address.model.tag.Tag;
 
@@ -47,7 +47,7 @@ public class UniquePersonList implements Iterable<Person> {
     public void add(Person toAdd) {
         requireNonNull(toAdd);
         if (contains(toAdd)) {
-            throw new DuplicatePersonException();
+            throw new DuplicateContactException();
         }
         internalList.add(toAdd);
     }
@@ -56,7 +56,7 @@ public class UniquePersonList implements Iterable<Person> {
      * Returns the {@code Person} with given name from the list.
      * @param name The name of the desired {@code Person}.
      */
-    public Person getByName(Name name) throws PersonNotFoundException {
+    public Person getByName(Name name) throws ContactNotFoundException {
         Person toGet = null;
         for (int i = 0; i < internalList.size(); i++) {
             Person thisPerson = internalList.get(i);
@@ -65,7 +65,7 @@ public class UniquePersonList implements Iterable<Person> {
             }
         }
         if (toGet == null) {
-            throw new PersonNotFoundException(name);
+            throw new ContactNotFoundException(name);
         } else {
             return toGet;
         }
@@ -81,11 +81,11 @@ public class UniquePersonList implements Iterable<Person> {
 
         int index = internalList.indexOf(target);
         if (index == -1) {
-            throw new PersonNotFoundException();
+            throw new ContactNotFoundException();
         }
 
         if (!target.isSamePerson(editedPerson) && contains(editedPerson)) {
-            throw new DuplicatePersonException();
+            throw new DuplicateContactException();
         }
 
         internalList.set(index, editedPerson);
@@ -98,7 +98,7 @@ public class UniquePersonList implements Iterable<Person> {
     public void remove(Person toRemove) {
         requireNonNull(toRemove);
         if (!internalList.remove(toRemove)) {
-            throw new PersonNotFoundException();
+            throw new ContactNotFoundException();
         }
     }
 
@@ -109,12 +109,12 @@ public class UniquePersonList implements Iterable<Person> {
 
     /**
      * Replaces the contents of this list with {@code persons}.
-     * {@code persons} must not contain duplicate persons.
+     * {@code persons} must not contain duplicate contacts.
      */
     public void setPersons(List<Person> persons) {
         requireAllNonNull(persons);
         if (!arePersonsUnique(persons)) {
-            throw new DuplicatePersonException();
+            throw new DuplicateContactException();
         }
 
         internalList.setAll(persons);

@@ -16,8 +16,8 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.contact.exceptions.DuplicatePersonException;
-import seedu.address.model.contact.exceptions.PersonNotFoundException;
+import seedu.address.model.contact.exceptions.ContactNotFoundException;
+import seedu.address.model.contact.exceptions.DuplicateContactException;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.contact.ContactBuilder;
 
@@ -57,7 +57,7 @@ public class UniquePersonListTest {
     @Test
     public void add_duplicatePerson_throwsDuplicatePersonException() {
         uniquePersonList.add(ALICE);
-        assertThrows(DuplicatePersonException.class, () -> uniquePersonList.add(ALICE));
+        assertThrows(DuplicateContactException.class, () -> uniquePersonList.add(ALICE));
     }
 
     @Test
@@ -71,8 +71,8 @@ public class UniquePersonListTest {
     }
 
     @Test
-    public void setPerson_targetPersonNotInList_throwsPersonNotFoundException() {
-        assertThrows(PersonNotFoundException.class, () -> uniquePersonList.setPerson(ALICE, ALICE));
+    public void setPerson_targetPersonNotInList_throwsContactNotFoundException() {
+        assertThrows(ContactNotFoundException.class, () -> uniquePersonList.setPerson(ALICE, ALICE));
     }
 
     @Test
@@ -108,7 +108,7 @@ public class UniquePersonListTest {
     public void setPerson_editedPersonHasNonUniqueIdentity_throwsDuplicatePersonException() {
         uniquePersonList.add(ALICE);
         uniquePersonList.add(BOB);
-        assertThrows(DuplicatePersonException.class, () -> uniquePersonList.setPerson(ALICE, BOB));
+        assertThrows(DuplicateContactException.class, () -> uniquePersonList.setPerson(ALICE, BOB));
     }
 
     @Test
@@ -117,8 +117,8 @@ public class UniquePersonListTest {
     }
 
     @Test
-    public void remove_personDoesNotExist_throwsPersonNotFoundException() {
-        assertThrows(PersonNotFoundException.class, () -> uniquePersonList.remove(ALICE));
+    public void remove_personDoesNotExist_throwsContactNotFoundException() {
+        assertThrows(ContactNotFoundException.class, () -> uniquePersonList.remove(ALICE));
     }
 
     @Test
@@ -161,7 +161,7 @@ public class UniquePersonListTest {
     @Test
     public void setPersons_listWithDuplicatePersons_throwsDuplicatePersonException() {
         List<Person> listWithDuplicatePersons = Arrays.asList(ALICE, ALICE);
-        assertThrows(DuplicatePersonException.class, () -> uniquePersonList.setPersons(listWithDuplicatePersons));
+        assertThrows(DuplicateContactException.class, () -> uniquePersonList.setPersons(listWithDuplicatePersons));
     }
 
     @Test
