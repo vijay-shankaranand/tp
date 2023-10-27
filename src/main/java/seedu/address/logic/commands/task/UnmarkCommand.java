@@ -13,6 +13,9 @@ import seedu.address.model.Model;
 import seedu.address.model.name.Name;
 import seedu.address.model.task.TaskDescription;
 
+/**
+ * Marks the specified task as not completed.
+ */
 public class UnmarkCommand extends Command {
     public static final String COMMAND_WORD = "unmark";
 

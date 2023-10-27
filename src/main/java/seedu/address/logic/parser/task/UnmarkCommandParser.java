@@ -6,7 +6,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
 import java.util.stream.Stream;
 
-import seedu.address.logic.commands.task.DeleteTaskCommand;
 import seedu.address.logic.commands.task.UnmarkCommand;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
@@ -20,7 +19,7 @@ import seedu.address.model.task.TaskDescription;
 /**
  * Parses input arguments and creates a new UnmarkCommand object
  */
-public class UnmarkCommandParser implements Parser<UnmarkCommand>  {
+public class UnmarkCommandParser implements Parser<UnmarkCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the UnmarkCommand
      * and returns an UnmarkCommand object for execution.

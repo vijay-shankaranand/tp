@@ -65,6 +65,9 @@ public class UniqueTaskList implements Iterable<Task> {
         internalList.remove(toDelete);
     }
 
+    /**
+     * Add a task to an event.
+     */
     public void add(Task toAdd) {
         requireNonNull(toAdd);
         if (contains(toAdd)) {

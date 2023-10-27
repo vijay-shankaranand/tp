@@ -13,6 +13,9 @@ import seedu.address.model.Model;
 import seedu.address.model.name.Name;
 import seedu.address.model.task.TaskDescription;
 
+/**
+ * Adds the specified task from its associated event.
+ */
 public class DeleteTaskCommand extends Command {
     public static final String COMMAND_WORD = "delete_task";
 
