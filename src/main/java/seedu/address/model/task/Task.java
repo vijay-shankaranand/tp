@@ -97,8 +97,7 @@ public class Task {
         Task otherEvent = (Task) other;
 
         return associatedEvent.isSameEvent(otherEvent.associatedEvent)
-                && description.equals(otherEvent.description)
-                && deadline.equals(otherEvent.deadline);
+                && description.equals(otherEvent.description);
     }
 
     @Override
