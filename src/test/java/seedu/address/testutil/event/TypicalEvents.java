@@ -1,7 +1,7 @@
 package seedu.address.testutil.event;
 
-import static seedu.address.testutil.person.TypicalPersons.ALICE;
-import static seedu.address.testutil.person.TypicalPersons.BOB;
+import static seedu.address.testutil.contact.TypicalPersons.ALICE;
+import static seedu.address.testutil.contact.TypicalPersons.BOB;
 
 import java.util.ArrayList;
 import java.util.Arrays;

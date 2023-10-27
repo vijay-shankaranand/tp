@@ -4,10 +4,10 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.address.testutil.contact.TypicalPersons.BENSON;
+import static seedu.address.testutil.contact.TypicalPersons.CARL;
 import static seedu.address.testutil.event.TypicalEvents.JOBFEST;
 import static seedu.address.testutil.event.TypicalEvents.NTU;
-import static seedu.address.testutil.person.TypicalPersons.BENSON;
-import static seedu.address.testutil.person.TypicalPersons.CARL;
 
 import java.util.HashSet;
 import java.util.Set;

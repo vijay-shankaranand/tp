@@ -4,13 +4,13 @@ import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.model.address.Address;
+import seedu.address.model.contact.Person;
 import seedu.address.model.date.Date;
 import seedu.address.model.event.Event;
 import seedu.address.model.name.Name;
-import seedu.address.model.person.Person;
 import seedu.address.model.task.Task;
 import seedu.address.model.util.SampleDataUtil;
-import seedu.address.testutil.person.PersonBuilder;
+import seedu.address.testutil.contact.ContactBuilder;
 
 /**
  * A utility class to help with building Event objects.
@@ -39,7 +39,7 @@ public class EventBuilder {
         address = new Address(DEFAULT_EVENT_ADDRESS);
         contacts = new HashSet<>();
         tasks = new HashSet<>();
-        contacts.add(new PersonBuilder().build());
+        contacts.add(new ContactBuilder().build());
     }
 
     /**

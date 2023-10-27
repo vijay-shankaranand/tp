@@ -15,14 +15,14 @@ import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.contact.EditContactCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.commands.person.EditCommand;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
+import seedu.address.model.contact.Person;
 import seedu.address.model.name.NameContainsKeywordsPredicate;
-import seedu.address.model.person.Person;
-import seedu.address.testutil.person.EditPersonDescriptorBuilder;
-import seedu.address.testutil.person.PersonBuilder;
+import seedu.address.testutil.contact.ContactBuilder;
+import seedu.address.testutil.contact.EditPersonDescriptorBuilder;
 
 /**
  * Contains helper methods for testing commands.
@@ -60,13 +60,13 @@ public class CommandTestUtil {
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
-    public static final EditCommand.EditPersonDescriptor DESC_AMY;
-    public static final EditCommand.EditPersonDescriptor DESC_BOB;
+    public static final EditContactCommand.EditPersonDescriptor DESC_AMY;
+    public static final EditContactCommand.EditPersonDescriptor DESC_BOB;
 
     public static final String VALID_EVENT_NAME = "Job Fest 2023";
     public static final String VALID_EVENT_DATE = "2023-12-23";
     public static final String VALID_EVENT_ADDRESS = "NUS";
-    public static final Person VALID_EVENT_CONTACT = new PersonBuilder().build();
+    public static final Person VALID_EVENT_CONTACT = new ContactBuilder().build();
 
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)

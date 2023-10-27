@@ -11,11 +11,11 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.contact.Person;
+import seedu.address.model.contact.exceptions.ContactNotFoundException;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.exceptions.EventNotFoundException;
 import seedu.address.model.name.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.exceptions.PersonNotFoundException;
 
 /**
  * Links a contact to a specific event.
@@ -67,7 +67,7 @@ public class LinkCommand extends Command {
             return new CommandResult(String.format(MESSAGE_SUCCESS, contactNameListToLink, eventNameToLink));
         } catch (EventNotFoundException enfe) {
             throw new CommandException(String.format(MESSAGE_NO_SUCH_EVENT, eventNameToLink));
-        } catch (PersonNotFoundException pnfe) {
+        } catch (ContactNotFoundException pnfe) {
             throw new CommandException(String.format(MESSAGE_NO_SUCH_CONTACT, pnfe.getName()));
         }
     }
