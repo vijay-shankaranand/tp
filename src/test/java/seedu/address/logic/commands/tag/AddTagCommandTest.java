@@ -235,6 +235,16 @@ public class AddTagCommandTest {
         }
 
         @Override
+        public boolean hasTask(TaskDescription taskDescription, Name associatedEventName) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteTask(TaskDescription taskDescription, Name associatedEventName) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void addTask(Task task) {
             throw new AssertionError("This method should not be called.");
         }
@@ -246,6 +256,16 @@ public class AddTagCommandTest {
 
         @Override
         public void setTask(Task target, Task editedTask) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void markTask(TaskDescription taskDescription, Name associatedEventName) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void unmarkTask(TaskDescription taskDescription, Name associatedEventName) {
             throw new AssertionError("This method should not be called.");
         }
 

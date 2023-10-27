@@ -58,7 +58,7 @@ public class AddTaskCommand extends Command {
 
         try {
             Event eventToAddIn = model.getEvent(associatedEventName);
-            taskToAdd = new Task(taskDescription, taskDeadline, eventToAddIn);
+            taskToAdd = new Task(taskDescription, taskDeadline, eventToAddIn, false);
 
             if (model.hasTask(taskToAdd)) {
                 throw new CommandException(MESSAGE_DUPLICATE_TASK);

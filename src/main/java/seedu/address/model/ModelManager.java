@@ -194,6 +194,17 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean hasTask(TaskDescription taskDescription, Name associatedEventName) {
+        requireAllNonNull(taskDescription, associatedEventName);
+        return addressBook.hasTask(taskDescription, associatedEventName);
+    }
+
+    @Override
+    public void deleteTask(TaskDescription taskDescription, Name associatedEventName) {
+        addressBook.deleteTask(taskDescription, associatedEventName);
+    }
+
+    @Override
     public void addTask(Task task) {
         requireNonNull(task);
         addressBook.addTask(task);
@@ -208,6 +219,16 @@ public class ModelManager implements Model {
     public void setTask(Task target, Task editedTask) {
         requireAllNonNull(target, editedTask);
         addressBook.setTask(target, editedTask);
+    }
+
+    @Override
+    public void markTask(TaskDescription taskDescription, Name associatedEventName) {
+        addressBook.markTask(taskDescription, associatedEventName);
+    }
+
+    @Override
+    public void unmarkTask(TaskDescription taskDescription, Name associatedEventName) {
+        addressBook.unmarkTask(taskDescription, associatedEventName);
     }
 
     //=========== Filtered Person List Accessors =============================================================
