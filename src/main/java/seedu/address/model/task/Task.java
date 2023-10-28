@@ -55,6 +55,16 @@ public class Task {
         this.isCompleted = isCompleted;
     }
 
+    /**
+     * Returns true if the task is due within 3 days.
+     */
+    public boolean isDueWithinThreeDays() {
+        if (isCompleted) {
+            return false;
+        }
+        return this.deadline.isDueWithinThreeDays();
+    }
+
     public TaskDescription getDescription() {
         return description;
     }
@@ -74,6 +84,7 @@ public class Task {
     public boolean isCompleted() {
         return this.isCompleted;
     }
+
 
     public String getIsCompletedString() {
         return this.isCompleted ? TASK_IS_COMPLETED : TASK_HAS_NOT_BEEN_COMPLETED;

@@ -58,6 +58,24 @@ public class Date {
         return true;
     }
 
+    /**
+     * Returns true if a given date is today or after today.
+     */
+    public boolean isDueWithinThreeDays() {
+        LocalDate today = LocalDate.now();
+        LocalDate date = LocalDate.parse(this.date);
+        if (date.isBefore(today)) {
+            return true;
+        }
+        if (date.isEqual(today)) {
+            return true;
+        }
+        if (date.isAfter(today) && date.isBefore(today.plusDays(3))) {
+            return true;
+        }
+        return false;
+    }
+
     @Override
     public String toString() {
         return date;
@@ -82,6 +100,8 @@ public class Date {
     public int hashCode() {
         return date.hashCode();
     }
+
+
 
 
 }

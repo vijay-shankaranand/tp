@@ -22,6 +22,8 @@ public class Messages {
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
 
+    public static final String MESSAGE_TASKS_REMINDERS_OVERVIEW = "You have %1$d task(s) due in the next 3 days!\n";
+
     /**
      * Returns an error message indicating the duplicate prefixes.
      */

@@ -286,7 +286,7 @@ public class ModelManager implements Model {
         filteredEvents.setPredicate(predicate);
     }
 
-    //======== Filtered Event List Accessors ===============================================================
+    //======== Filtered Task List Accessors ===============================================================
 
     @Override
     public ObservableList<Task> getFilteredTaskList() {
