@@ -32,7 +32,6 @@ import seedu.address.model.name.Name;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.TaskDescription;
-import seedu.address.model.task.TaskIsInEventPredicate;
 import seedu.address.testutil.tag.TagBuilder;
 public class AddTagCommandTest {
     @Test
@@ -287,11 +286,6 @@ public class AddTagCommandTest {
 
         @Override
         public ObservableList<Event> getUnfilteredEventList() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void unfilterTaskList() {
             throw new AssertionError("This method should not be called.");
         }
 

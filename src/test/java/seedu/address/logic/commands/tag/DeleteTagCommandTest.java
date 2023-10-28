@@ -27,7 +27,6 @@ import seedu.address.model.name.Name;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.TaskDescription;
-import seedu.address.model.task.TaskIsInEventPredicate;
 
 /**
  * Contains integration tests (interactions with the Model) and unit tests for
@@ -299,11 +298,6 @@ public class DeleteTagCommandTest {
 
         @Override
         public ObservableList<Event> getUnfilteredEventList() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void unfilterTaskList() {
             throw new AssertionError("This method should not be called.");
         }
 

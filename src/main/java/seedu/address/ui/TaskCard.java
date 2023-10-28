@@ -9,8 +9,8 @@ import seedu.address.model.task.Task;
 /**
  * An UI component that displays information of a {@code Task}.
  */
-public class TaskCard extends UiPart<Region>{
-    
+public class TaskCard extends UiPart<Region> {
+
     private static final String FXML = "TaskCard.fxml";
 
     public final Task task;
@@ -24,7 +24,7 @@ public class TaskCard extends UiPart<Region>{
     @FXML
     private Label id;
 
-    @FXML 
+    @FXML
     private Label completed;
 
     @FXML

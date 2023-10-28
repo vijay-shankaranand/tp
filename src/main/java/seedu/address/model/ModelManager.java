@@ -302,11 +302,6 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void unfilterTaskList() {
-        updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
-    }
-
-    @Override
     public void updateFilteredTaskList(Predicate<Task> predicate) {
         filteredTasks.setPredicate(PREDICATE_SHOW_ALL_TASKS);
         requireNonNull(predicate);

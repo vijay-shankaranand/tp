@@ -74,7 +74,7 @@ public class EventContactDisplay extends UiPart<Region> {
     private void fillTaskList() {
         taskListPanel = new TaskListPanel(logic.getFilteredTaskList());
         if (!reminderTaskListPanelPlaceholder.getChildren().isEmpty()) {
-                reminderTaskListPanelPlaceholder.getChildren().clear();
+            reminderTaskListPanelPlaceholder.getChildren().clear();
         }
         reminderTaskListPanelPlaceholder.getChildren().add(taskListPanel.getRoot());
     }

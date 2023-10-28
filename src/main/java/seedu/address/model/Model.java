@@ -227,9 +227,6 @@ public interface Model {
     /** Returns an unmodifiable view of the tasks due soon */
     ObservableList<Task> getTaskDueSoonList();
 
-    /** Defilters the task list */
-    void unfilterTaskList();
-
     /**
      * Updates the filter of the filtered task list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
