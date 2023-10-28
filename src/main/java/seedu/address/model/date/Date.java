@@ -89,7 +89,6 @@ public class Date {
 
     /**
      * Returns the date four days after today's date.
-     * @param date today's date.
      * @return date four days after today's date.
      */
     public LocalDate fourDaysFromNow() {
