@@ -24,15 +24,14 @@ public class JsonAdaptedTask {
 
     private final String description;
     private final String date;
-    private final JsonAdaptedEvent event;
+    private final String event;
     private final String status;
-
     /**
      * Constructs a {@code JsonAdaptedTask} with the given task details.
      */
     @JsonCreator
     public JsonAdaptedTask(@JsonProperty("description") String description, @JsonProperty("date") String date,
-                            @JsonProperty("event") JsonAdaptedEvent event, @JsonProperty("status") String status) {
+                            @JsonProperty("event") String event, @JsonProperty("status") String status) {
         this.description = description;
         this.date = date;
         this.event = event;
@@ -45,7 +44,7 @@ public class JsonAdaptedTask {
     public JsonAdaptedTask(Task source) {
         description = source.getDescription().value;
         date = source.getDate().date;
-        event = new JsonAdaptedEvent(source.getAssociatedEvent());
+        event = source.getAssociatedEventName().fullName;
         status = source.getIsCompletedString();
     }
 
@@ -73,15 +72,39 @@ public class JsonAdaptedTask {
         if (event == null) {
             throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
         }
-        if (!Name.isValidName(event.toModelType().getName().fullName)) {
+        if (!Name.isValidName(event)) {
             throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
         }
         if (status == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     "status"));
         }
-        final Event modelEvent = event.toModelType();
+        final Name modelEvent = new Name(event);
         final boolean isCompleted = status == Task.TASK_IS_COMPLETED ? true : false;
         return new Task(modelDescription, modelDate, modelEvent, isCompleted);
+    }
+
+    /**
+     * Converts this Jackson-friendly adapted task object into the model's {@code Task} object.
+     * @param event The event to be associated with the task.
+     * @throws IllegalValueException if there were any data constraints violated in the adapted task.
+     */
+    public Task toModelTypeForEvent(Event event) throws IllegalValueException {
+        if (description == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    TaskDescription.class.getSimpleName()));
+        }
+        final TaskDescription modelDescription = new TaskDescription(description);
+
+        if (date == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Date.class.getSimpleName()));
+        }
+        if (!Date.isValidDate(date)) {
+            throw new IllegalValueException(Date.MESSAGE_CONSTRAINTS);
+        }
+        final Date modelDate = new Date(date);
+        final boolean isCompleted = status == Task.TASK_IS_COMPLETED ? true : false;
+        return new Task(modelDescription, modelDate, event, isCompleted);
     }
 }
