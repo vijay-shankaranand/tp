@@ -269,30 +269,38 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 * is a job festival event planner
-* has a need to manage a significant number of contacts of different types (e.g. vendors, customers)
+* has a need to manage a significant number of contacts of different types (e.g. vendors, customers) and tasks for different events
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: Each event planner has multiple events, each of which can have a large number of contacts associated and searching for contact would be a hassle. Our product provides a centralised system that would help job event planners organise their contact information for quick and easy access.
+**Value proposition**: Each event planner has multiple events, each of which can have a large number of contacts and tasks associated and searching for contact would be a hassle. Our product provides a centralised system that would help job event planners organise their contact information and tasks for quick and easy access.
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                 | So that I can…​                                                        |
-|----------|--------------------------------------------|------------------------------|------------------------------------------------------------------------|
-| `* * *`  | job fest event planner                     | see usage instructions       | refer to instructions when I forget how to use the App                 |
-| `* * *`  | job fest event planner                     | add a new person             |                                                                        |
-| `* * *`  | user                                       | delete a person              | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name        | locate details of persons without having to go through the entire list |
-| `* * *`  | job fest event planner                     | view the entire contact list |                                                                        |
-| `* *`    | user                                       | hide private contact details | minimize chance of someone else seeing them by accident                |
-| `* *`    | job fest event planner                     | add tags                     | add to the pool of use categories already available    |
-| `* *`    | job fest event planner                     | view all tags | remember contacts of a certain category to contact them for events                |
-| `* *`     | job fest event planner                     | be able to delete tags | can easily identify who I should be cold calling among my contacts without unnecessary tags     |
-| `*`      | user with many persons in the address book | sort persons by name         | locate a person easily                                                 |
+| Priority | As a …​                                    | I want to …​                 | So that I can…​                                                                             |
+|----------|--------------------------------------------|------------------------------|---------------------------------------------------------------------------------------------|
+| `* * *`  | job fest event planner                     | see usage instructions       | refer to instructions when I forget how to use JobFestGo                                    |
+| `* * *`  | job fest event planner                     | add a new person             |                                                                                             |
+| `* * *`  | job fest event planner                                       | delete a person              | remove entries that I no longer need                                                        |
+| `* * *`  | job fest event planner                                       | find a person by name        | locate details of persons without having to go through the entire list                      |
+| `* * *`  | job fest event planner                     | view the entire contact list |                                                                                             |
+| `* *`    | job fest event planner                                       | hide private contact details | minimize chance of someone else seeing them by accident                                     |
+| `* *`    | job fest event planner                     | add tags                     | add to the pool of use categories already available                                         |
+| `* *`    | job fest event planner                     | view all tags                | remember contacts of a certain category to contact them for events                          |
+| `* *`     | job fest event planner                     | be able to delete tags       | can easily identify who I should be cold calling among my contacts without unnecessary tags |
+| `* *`     | job fest event planner                     | filter contacts by tags      | conveniently view all the contacts tagged by specific tags                                  |
+| `* *`    | job fest event planner                        | add a new event              | keep track of the events I have to plan                                                     |
+| `* *`     | job fest event planner                     | view all events              | remember all the events I am involved in so far                                             |
+| `* *`    | job fest event planner                        | be able to delete events     | remove events I no longer need                                                              |
+| `* *`     | job fest event planner                     | be able to select events     | can easily view the contacts and tasks to do for each particular event                      |
+| `* *`     | job fest event planner                     | link contacts to events      | remember which event the specific contacts are involved in                                  |
+| `* *`    | job fest event planner                        | add a new task for an event  | remember the tasks I need to do for the event                                               |
+| `* *`      | job fest event planner | return to the home page      |                                                                                             |
+| `*`      | job fest event planner | sort persons by name         | locate a person easily                                                                      |
 
 
 *{More to be added}*
@@ -316,7 +324,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. Any of the mandatory fields not specified
 
-  * 3a1. JobFestGo informs user that mandatory fields not specified
+  * 1a1. JobFestGo informs user that mandatory fields not specified
 
     Use case ends.
 
@@ -390,7 +398,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
    Use case ends.
 
 **Extensions**
+* 2a. Missing `t/` in the command.
+    * 2a1. JobFestGo shows an error message.
 
+      Use case resumes at step 2.
+
+* 2b. Missing tag name.
+    * 2b1. JobFestGo shows an error message.
+
+      Use case resumes at step 2.
 
 * 3a. The given tag name is already in the tag list.
 
@@ -398,22 +414,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-* 3b. Missing `t/` in the command.
-    * 3b1. JobFestGo shows an error message.
-
-      Use case resumes at step 2.
-
-* 3c. Missing tag name.
-
-    * 3c1. JobFestGo shows an error message.
-
-      Use case resumes at step 2.
-
 **Use case: View all tags**
 
 **MSS**
 1. User requests to list tags
-2. JobFestGo shows a list of tags that are currently in use in the contacts list
+2. JobFestGo shows a list of all tags
 
    Use case ends.
 
@@ -451,6 +456,193 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3c1. JobFestGo shows an error message.
 
       Use case resumes at step 2.
+
+**Use case: Filter contacts by tag**
+
+**MSS**
+1. User requests to filter contacts by tags
+2. JobFestGo shows a list of contacts tagged by specified tags
+
+   Use case ends.
+
+**Extensions**
+* 1a. The given tag name is invalid.
+
+    * 1a1. JobFestGo shows an error message.
+
+      Use case resumes at step 1.
+
+**Use case: Add an event**
+
+**MSS**
+
+1. User requests to add event
+2. User specifies the details of the event
+3. JobFestGo adds the event to collection of events
+4. JobFestGo shows updated list of events
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. Any of the mandatory fields not specified
+
+    * 1a1. JobFestGo informs user that mandatory fields not specified
+
+      Use case ends.
+
+* 1b. Event name already exists.
+
+    * 1b1. JobFestGo informs user that event name already exists.
+
+      Use case ends.
+
+* 1c. Date is in incorrect format.
+
+    * 1c1. JobFestGo informs user that date is in wrong format.
+
+      Use case ends.
+
+* 1d. Date is before current date.
+
+    * 1d1. JobFestGo informs user that date is before current date.
+
+      Use case ends.
+
+**Use case: View all events**
+
+**MSS**
+1. User requests to list events
+2. JobFestGo shows a list of all events
+
+   Use case ends.
+
+**Use case: Delete an event**
+
+**MSS**
+
+1. JobFestGo shows a list of events
+2. User requests to delete a specified event in the list
+3. JobFestGo deletes the event
+4. JobFestGo displays the updated events
+
+      Use case ends.
+
+**Extensions**
+
+* 2a. The event list is empty.
+
+   Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. JobFestGo shows an error message.
+
+      Use case resumes at step 2.
+
+* 3b. Missing index in the command.
+
+    * 3b1. JobFestGo shows an error message.
+
+      Use case resumes at step 2.
+
+**Use case: Select an event**
+
+**MSS**
+
+1. User requests to select an event
+2. JobFestGo displays the contacts and tasks related to the event
+3. User <u>adds a task</u> or <u>deletes a task</u> or <u>marks a task</u> or <u>unmarks a task</u>.
+
+      Use case ends.
+
+
+**Extensions**
+
+* 1a. The given index is invalid.
+
+    * 1a1. JobFestGo shows an error message.
+
+      Use case resumes at step 1. 
+
+* 1b. Missing index.
+
+    * 1b1. JobFestGo shows an error message.
+
+      Use case resumes at step 1.
+
+**Use case: Link contacts to an event**
+
+**MSS**
+1. User requests to link specified contacts to a specified event.
+2. JobFestGo links the contacts to the event.
+
+   Use case ends.
+
+**Extensions**
+* 1a. The given event does not exist.
+
+    * 1a1. JobFestGo shows an error message.
+
+      Use case resumes at step 1.
+
+* 1b. One of the given contacts does not exist.
+
+    * 1b1. JobFestGo shows an error message.
+
+      Use case resumes at step 1.
+
+* 1a. One of the given contacts is already linked to the given event.
+
+    * 1a1. JobFestGo shows an error message.
+
+      Use case resumes at step 1.
+
+**Use case: Add a task**
+
+**MSS**
+
+1.  User requests to add task and specifies details of task with the event to be added in
+2.  JobFestGo adds the task to list of tasks
+3.  JobFestGo adds the task to the event specified
+4.  JobFestGo shows updated list of tasks
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. Any of the mandatory fields not specified
+
+  * 1a1. JobFestGo informs user that mandatory fields not specified
+
+    Use case ends.
+
+* 1b. Date is invalid.
+
+    * 1b1. JobFestGo informs user that date is invalid.
+
+      Use case ends.
+
+* 1c. Event does not already exist.
+
+    * 1c1. JobFestGo informs user that event does not already exist.
+
+      Use case ends.
+
+**Use case: Return to the home page**
+
+**MSS**
+1. User is on any page 
+2. User requests to return to the home page
+3. JobFestGo returns user to the home page
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. The user is already on the home page
+
+   Use case ends.
 
 *{More to be added}*
 

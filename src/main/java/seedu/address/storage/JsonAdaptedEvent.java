@@ -10,11 +10,11 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.address.Address;
+import seedu.address.model.contact.Person;
 import seedu.address.model.date.Date;
 import seedu.address.model.event.Event;
-import seedu.address.model.event.EventAddress;
-import seedu.address.model.event.EventName;
-import seedu.address.model.person.Person;
+import seedu.address.model.name.Name;
 import seedu.address.model.task.Task;
 
 /**
@@ -52,7 +52,8 @@ public class JsonAdaptedEvent {
      * Converts a given {@code Event} into this class for Jackson use.
      */
     public JsonAdaptedEvent(Event source) {
-        name = source.getName().eventName;
+
+        name = source.getName().fullName;
         date = source.getDate().date;
         address = source.getAddress().value;
         contacts.addAll(source.getContacts().stream()
@@ -83,12 +84,12 @@ public class JsonAdaptedEvent {
 
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    EventName.class.getSimpleName()));
+                    Name.class.getSimpleName()));
         }
-        if (!EventName.isValidName(name)) {
-            throw new IllegalValueException(EventName.MESSAGE_CONSTRAINTS);
+        if (!Name.isValidName(name)) {
+            throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
         }
-        final EventName modelName = new EventName(name);
+        final Name modelName = new Name(name);
 
         if (date == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
@@ -101,12 +102,12 @@ public class JsonAdaptedEvent {
 
         if (address == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    EventAddress.class.getSimpleName()));
+                    Address.class.getSimpleName()));
         }
-        if (!EventAddress.isValidAddress(address)) {
-            throw new IllegalValueException(EventAddress.MESSAGE_CONSTRAINTS);
+        if (!Address.isValidAddress(address)) {
+            throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
         }
-        final EventAddress modelAddress = new EventAddress(address);
+        final Address modelAddress = new Address(address);
 
         return new Event(modelName, modelDate, modelAddress, modelPersons, modeltasks);
     }

@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
-import java.util.Date;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -12,10 +11,10 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.contact.Person;
+import seedu.address.model.date.Date;
 import seedu.address.model.event.Event;
-import seedu.address.model.event.EventName;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
+import seedu.address.model.name.Name;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.TaskDescription;
@@ -177,7 +176,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Event getEvent(EventName name) {
+    public Event getEvent(Name name) {
         return addressBook.getEvent(name);
     }
 
@@ -195,6 +194,17 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean hasTask(TaskDescription taskDescription, Name associatedEventName) {
+        requireAllNonNull(taskDescription, associatedEventName);
+        return addressBook.hasTask(taskDescription, associatedEventName);
+    }
+
+    @Override
+    public void deleteTask(TaskDescription taskDescription, Name associatedEventName) {
+        addressBook.deleteTask(taskDescription, associatedEventName);
+    }
+
+    @Override
     public void addTask(Task task) {
         requireNonNull(task);
         addressBook.addTask(task);
@@ -209,6 +219,16 @@ public class ModelManager implements Model {
     public void setTask(Task target, Task editedTask) {
         requireAllNonNull(target, editedTask);
         addressBook.setTask(target, editedTask);
+    }
+
+    @Override
+    public void markTask(TaskDescription taskDescription, Name associatedEventName) {
+        addressBook.markTask(taskDescription, associatedEventName);
+    }
+
+    @Override
+    public void unmarkTask(TaskDescription taskDescription, Name associatedEventName) {
+        addressBook.unmarkTask(taskDescription, associatedEventName);
     }
 
     //=========== Filtered Person List Accessors =============================================================

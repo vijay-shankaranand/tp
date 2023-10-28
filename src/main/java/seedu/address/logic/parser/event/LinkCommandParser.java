@@ -14,8 +14,7 @@ import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.event.EventName;
-import seedu.address.model.person.Name;
+import seedu.address.model.name.Name;
 
 /**
  * Parses input arguments and creates a new LinkCommand object
@@ -37,10 +36,10 @@ public class LinkCommandParser implements Parser<LinkCommand> {
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_EVENT);
-        EventName eventName = ParserUtil.parseEventName(argMultimap.getValue(PREFIX_EVENT).get());
+        Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_EVENT).get());
         Set<Name> contactNameList = ParserUtil.parseContactNames(argMultimap.getAllValues(PREFIX_CONTACT));
 
-        return new LinkCommand(eventName, contactNameList);
+        return new LinkCommand(name, contactNameList);
     }
 
     /**

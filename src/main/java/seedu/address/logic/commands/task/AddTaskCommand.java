@@ -14,8 +14,8 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.date.Date;
 import seedu.address.model.event.Event;
-import seedu.address.model.event.EventName;
 import seedu.address.model.event.exceptions.EventNotFoundException;
+import seedu.address.model.name.Name;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.TaskDescription;
 
@@ -39,13 +39,13 @@ public class AddTaskCommand extends Command {
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the event";
     private final TaskDescription taskDescription;
     private final Date taskDeadline;
-    private final EventName associatedEventName;
+    private final Name associatedEventName;
     private Task taskToAdd;
 
     /**
      * Creates an AddTaskCommand to add the specified {@code Task}
      */
-    public AddTaskCommand(TaskDescription taskDescription, Date taskDeadline, EventName associatedEvent) {
+    public AddTaskCommand(TaskDescription taskDescription, Date taskDeadline, Name associatedEvent) {
         requireAllNonNull(taskDescription, taskDeadline, associatedEvent);
         this.taskDescription = taskDescription;
         this.taskDeadline = taskDeadline;
@@ -58,7 +58,7 @@ public class AddTaskCommand extends Command {
 
         try {
             Event eventToAddIn = model.getEvent(associatedEventName);
-            taskToAdd = new Task(taskDescription, taskDeadline, eventToAddIn);
+            taskToAdd = new Task(taskDescription, taskDeadline, eventToAddIn, false);
 
             if (model.hasTask(taskToAdd)) {
                 throw new CommandException(MESSAGE_DUPLICATE_TASK);

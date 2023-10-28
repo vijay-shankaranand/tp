@@ -24,6 +24,12 @@ public class TaskCard extends UiPart<Region>{
     @FXML
     private Label id;
 
+    @FXML 
+    private Label completed;
+
+    @FXML
+    private Label dueSoon;
+
     @FXML
     private Label deadline;
 
@@ -36,5 +42,15 @@ public class TaskCard extends UiPart<Region>{
         id.setText(displayedIndex + ". ");
         description.setText(task.getDescription().toString());
         deadline.setText(task.getDate().date);
+
+        if (task.isCompleted()) {
+            completed.setText("Completed");
+            dueSoon.setText("");
+            dueSoon.setVisible(false);
+        } else {
+            dueSoon.setText("Due Soon");
+            completed.setText("");
+            completed.setVisible(false);
+        }
     }
 }

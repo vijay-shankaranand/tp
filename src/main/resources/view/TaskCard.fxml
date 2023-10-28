@@ -26,6 +26,8 @@
           </minWidth>
         </Label>
         <Label fx:id="description" text="\$first" styleClass="cell_big_label" />
+        <Label fx:id="completed" text="\$completed" />
+        <Label fx:id="dueSoon" text="\$dueSoon" />
       </HBox>
       <Label fx:id="deadline" styleClass="cell_small_label" text="\$deadline" />
     </VBox>

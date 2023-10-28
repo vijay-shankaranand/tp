@@ -15,7 +15,7 @@ import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.date.Date;
-import seedu.address.model.event.EventName;
+import seedu.address.model.name.Name;
 import seedu.address.model.task.TaskDescription;
 
 /**
@@ -38,7 +38,7 @@ public class AddTaskCommandParser implements Parser<AddTaskCommand> {
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_DATE, PREFIX_EVENT);
         TaskDescription description = ParserUtil.parseTaskDescription(argMultimap.getValue(PREFIX_NAME).get());
         Date date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
-        EventName eventNameToAddIn = ParserUtil.parseEventName(argMultimap.getValue(PREFIX_EVENT).get());
+        Name eventNameToAddIn = ParserUtil.parseName(argMultimap.getValue(PREFIX_EVENT).get());
 
         return new AddTaskCommand(description, date, eventNameToAddIn);
     }

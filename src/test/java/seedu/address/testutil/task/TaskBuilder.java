@@ -15,6 +15,7 @@ public class TaskBuilder {
     private TaskDescription description;
     private Date date;
     private Event event;
+    private boolean isCompleted;
 
     /**
      * Creates a {@code TaskBuilder} with the default details.
@@ -23,6 +24,7 @@ public class TaskBuilder {
         description = new TaskDescription(DEFAULT_TASK_NAME);
         date = new Date(DEFAULT_TASK_DATE);
         event = new EventBuilder().build();
+        isCompleted = false;
     }
 
     /**
@@ -32,6 +34,7 @@ public class TaskBuilder {
         description = taskToCopy.getDescription();
         date = taskToCopy.getDate();
         event = taskToCopy.getAssociatedEvent();
+        isCompleted = taskToCopy.isCompleted();
     }
 
     /**
@@ -58,7 +61,15 @@ public class TaskBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code isCompleted} status of the {@code Task} that we are building.
+     */
+    public TaskBuilder withIsCompleted(boolean isCompleted) {
+        this.isCompleted = isCompleted;
+        return this;
+    }
+
     public Task build() {
-        return new Task(description, date, event);
+        return new Task(description, date, event, isCompleted);
     }
 }

@@ -1,15 +1,14 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
-import java.util.Date;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.contact.Person;
+import seedu.address.model.date.Date;
 import seedu.address.model.event.Event;
-import seedu.address.model.event.EventName;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
+import seedu.address.model.name.Name;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.TaskDescription;
@@ -155,7 +154,7 @@ public interface Model {
     /**
      * Returns the {@code Event} with given name.
      */
-    Event getEvent(EventName name);
+    Event getEvent(Name name);
 
     /**
      * Replaces the given event {@code target} with {@code editedEvent}.
@@ -182,6 +181,18 @@ public interface Model {
     boolean hasTask(Task task);
 
     /**
+     * Returns true if an existing event has the given {@code taskDescription} exists in
+     * the event specified by the given {@code associatedEventName}.
+     */
+    boolean hasTask(TaskDescription taskDescription, Name associatedEventName);
+
+    /**
+     * Deletes the task specified by the task description from its associated event.
+     * The task must exist in the address book.
+     */
+    void deleteTask(TaskDescription taskDescription, Name associatedEventName);
+
+    /**
      * Adds the given task.
      * {@code event} must not already exist in the task.
      */
@@ -198,6 +209,16 @@ public interface Model {
      * The event identity of {@code editedTask} must not be the same as another existing task in the event.
      */
     void setTask(Task target, Task editedTask);
+
+    /**
+     * Marks the specified task as completed.
+     */
+    void markTask(TaskDescription taskDescription, Name associatedEventName);
+
+    /**
+     * Marks the specified task as not completed.
+     */
+    void unmarkTask(TaskDescription taskDescription, Name associatedEventName);
 
     /** Returns an unmodifiable view of the filtered tasks in an event */
     ObservableList<Task> getFilteredTaskList();

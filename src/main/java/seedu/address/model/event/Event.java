@@ -7,9 +7,13 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.address.Address;
+import seedu.address.model.contact.Person;
 import seedu.address.model.date.Date;
-import seedu.address.model.person.Person;
+import seedu.address.model.name.Name;
 import seedu.address.model.task.Task;
 
 /**
@@ -19,41 +23,43 @@ import seedu.address.model.task.Task;
 public class Event {
 
     // Identity fields
-    private final EventName name;
+    private final Name eventName;
 
     // Data fields
-    private final Date date;
-    private final EventAddress address;
+    private final Address address;
+    private final Date eventDate;
+
     private final Set<Person> contacts = new HashSet<>();
     private final Set<Task> tasks = new HashSet<>();
 
     /**
      * Constructs a {@code Event}.
      *
-     * @param name A valid name.
-     * @param date A valid date.
+     * @param eventName A valid name.
+     * @param eventDate A valid date.
      * @param address A valid address.
      * @param contacts A valid set of contacts.
      */
-    public Event(EventName name, Date date, EventAddress address, Set<Person> contacts, Set<Task> tasks) {
-        requireAllNonNull(name, date, address, contacts, tasks);
-        this.name = name;
-        this.date = date;
+    public Event(Name eventName, Date eventDate, Address address, Set<Person> contacts, Set<Task> tasks) {
+        requireAllNonNull(eventName, eventDate, address, contacts, tasks);
+
+        this.eventName = eventName;
+        this.eventDate = eventDate;
         this.address = address;
         this.contacts.addAll(contacts);
         this.tasks.addAll(tasks);
     }
 
-    public EventAddress getAddress() {
+    public Address getAddress() {
         return address;
     }
 
-    public EventName getName() {
-        return name;
+    public Name getName() {
+        return eventName;
     }
 
     public Date getDate() {
-        return date;
+        return eventDate;
     }
 
     /**
@@ -114,8 +120,8 @@ public class Event {
         }
 
         Event otherEvent = (Event) other;
-        return name.equals(otherEvent.name)
-                && date.equals(otherEvent.date)
+        return eventName.equals(otherEvent.eventName)
+                && eventDate.equals(otherEvent.eventDate)
                 && address.equals(otherEvent.address)
                 && contacts.equals(otherEvent.contacts)
                 && tasks.equals(otherEvent.tasks);
@@ -124,14 +130,14 @@ public class Event {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, date, address, contacts, tasks);
+        return Objects.hash(eventName, eventDate, address, contacts, tasks);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("name", name)
-                .add("date", date)
+                .add("name", eventName)
+                .add("date", eventDate)
                 .add("address", address)
                 .add("contacts", contacts)
                 .add("tasks", tasks)
