@@ -48,7 +48,12 @@ public class TaskCard extends UiPart<Region>{
             dueSoon.setText("");
             dueSoon.setVisible(false);
         } else {
-            dueSoon.setText("Due Soon");
+            if (task.getDate().withinThreeDays()) {
+                dueSoon.setText("Due Soon");
+            } else {
+                dueSoon.setText("");
+                dueSoon.setVisible(false);
+            }
             completed.setText("");
             completed.setVisible(false);
         }

@@ -100,6 +100,11 @@ public class LogicManager implements Logic {
     }
 
     @Override
+    public ObservableList<Task> getTaskDueSoonList() {
+        return model.getTaskDueSoonList();
+    }
+
+    @Override
     public Path getAddressBookFilePath() {
         return model.getAddressBookFilePath();
     }

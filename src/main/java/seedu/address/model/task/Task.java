@@ -79,6 +79,10 @@ public class Task {
         return this.isCompleted ? TASK_IS_COMPLETED : TASK_HAS_NOT_BEEN_COMPLETED;
     }
 
+    public boolean isDueSoon() {
+        return this.deadline.withinThreeDays();
+    }
+
     /**
      * Returns true if both events have the same identity and data fields.
      * This defines a stronger notion of equality between two tasks.

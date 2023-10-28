@@ -51,6 +51,9 @@ public interface Logic {
     /** Returns an unmodifiable view of the filtered list of tasks */
     ObservableList<Task> getFilteredTaskList();
 
+    /** Returns an unmodifiable view of the tasks due soon */
+    ObservableList<Task> getTaskDueSoonList();
+
     /**
      * Returns the user prefs' address book file path.
      */

@@ -317,6 +317,16 @@ public class AddContactCommandTest {
         public ObservableList<Event> getUnfilteredEventList() {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public void unfilterTaskList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Task> getTaskDueSoonList() {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**

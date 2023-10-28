@@ -7,8 +7,6 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.address.Address;
 import seedu.address.model.contact.Person;

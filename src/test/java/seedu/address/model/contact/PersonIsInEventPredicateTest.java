@@ -53,5 +53,6 @@ public class PersonIsInEventPredicateTest {
 
         PersonIsInEventPredicate firstPredicate = new PersonIsInEventPredicate(firstEvent);
         String expected = new ToStringBuilder(firstPredicate).add("event", firstEvent).toString();
+        assertTrue(firstPredicate.toString().equals(expected));
     }
 }

@@ -8,7 +8,7 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.event.Event;
+import seedu.address.model.task.Task;
 
 /**
  * Panel containing the list of reminders.
@@ -18,15 +18,12 @@ public class ReminderListPanel extends UiPart<Region> {
     private final Logger logger = LogsCenter.getLogger(ReminderListPanel.class);
 
     @FXML
-    private ListView<Event> reminderListView;
-
-    @FXML
-    private ListView<Event> taskListView;
+    private ListView<Task> reminderListView;
 
     /**
      * Creates a {@code ReminderListPanel} with the given {@code ObservableList}.
      */
-    public ReminderListPanel(ObservableList<Event> reminderList) {
+    public ReminderListPanel(ObservableList<Task> reminderList) {
         super(FXML);
         reminderListView.setItems(reminderList);
         reminderListView.setCellFactory(listView -> new ReminderListViewCell());
@@ -35,16 +32,16 @@ public class ReminderListPanel extends UiPart<Region> {
     /**
      * Custom {@code ListCell} that displays the graphics of a {@code Event} using a {@code EventCard}.
      */
-    class ReminderListViewCell extends ListCell<Event> {
+    class ReminderListViewCell extends ListCell<Task> {
         @Override
-        protected void updateItem(Event event, boolean empty) {
-            super.updateItem(event, empty);
+        protected void updateItem(Task task, boolean empty) {
+            super.updateItem(task, empty);
 
-            if (empty || event == null) {
+            if (empty || task == null) {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new EventCard(event, getIndex() + 1).getRoot());
+                setGraphic(new ReminderCard(task, getIndex() + 1).getRoot());
             }
         }
     }

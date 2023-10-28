@@ -73,6 +73,17 @@ public class Date {
         return firstDate.compareTo(secondDate);
     }
 
+    public boolean withinThreeDays() {
+        LocalDate today = LocalDate.now();
+        LocalDate taskDue = LocalDate.parse(this.date);
+
+        if (taskDue.isBefore(today.plusDays(4))) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     @Override
     public String toString() {
         return date;
