@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.date.Date;
+import seedu.address.model.event.Event;
 import seedu.address.model.event.EventName;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.TaskDescription;
@@ -17,17 +18,17 @@ public class JsonAdaptedTask {
 
     private final String description;
     private final String date;
-    private final EventName event;
+    private final String eventName;
 
     /**
      * Constructs a {@code JsonAdaptedTask} with the given task details.
      */
     @JsonCreator
     public JsonAdaptedTask(@JsonProperty("description") String description, @JsonProperty("date") String date,
-                            @JsonProperty("event") EventName event) {
+                            @JsonProperty("eventName") String event) {
         this.description = description;
         this.date = date;
-        this.event = event;
+        this.eventName = event;
     }
 
     /**
@@ -36,7 +37,7 @@ public class JsonAdaptedTask {
     public JsonAdaptedTask(Task source) {
         description = source.getDescription().value;
         date = source.getDate().date;
-        event = source.getAssociatedEventName();
+        eventName = source.getAssociatedEventName().eventName;
     }
 
     /**
@@ -60,13 +61,36 @@ public class JsonAdaptedTask {
         }
         final Date modelDate = new Date(date);
 
-        if (event == null) {
+        if (eventName == null) {
             throw new IllegalValueException(EventName.MESSAGE_CONSTRAINTS);
         }
-        if (!EventName.isValidName(event.eventName)) {
+        if (!EventName.isValidName(eventName)) {
             throw new IllegalValueException(EventName.MESSAGE_CONSTRAINTS);
         }
-        final EventName modelEvent = new EventName(event.eventName);
+        final EventName modelEvent = new EventName(eventName);
         return new Task(modelDescription, modelDate, modelEvent);
+    }
+
+    /**
+     * Converts this Jackson-friendly adapted task object into the model's {@code Task} object.
+     * @param event The event to be associated with the task.
+     * @throws IllegalValueException if there were any data constraints violated in the adapted task.
+     */
+    public Task toModelTypeForEvent(Event event) throws IllegalValueException {
+        if (description == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    TaskDescription.class.getSimpleName()));
+        }
+        final TaskDescription modelDescription = new TaskDescription(description);
+
+        if (date == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Date.class.getSimpleName()));
+        }
+        if (!Date.isValidDate(date)) {
+            throw new IllegalValueException(Date.MESSAGE_CONSTRAINTS);
+        }
+        final Date modelDate = new Date(date);
+        return new Task(modelDescription, modelDate, event);
     }
 }

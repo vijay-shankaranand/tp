@@ -75,12 +75,6 @@ public class JsonAdaptedEvent {
         }
         final Set<Person> modelPersons = new HashSet<>(eventContacts);
 
-        final List<Task> eventTasks = new ArrayList<>();
-        for (JsonAdaptedTask task : tasks) {
-            eventTasks.add(task.toModelType());
-        }
-        final Set<Task> modeltasks = new HashSet<>(eventTasks);
-
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     EventName.class.getSimpleName()));
@@ -107,6 +101,12 @@ public class JsonAdaptedEvent {
             throw new IllegalValueException(EventAddress.MESSAGE_CONSTRAINTS);
         }
         final EventAddress modelAddress = new EventAddress(address);
+
+        Set<Task> modeltasks = new HashSet<>();
+        Event tempEvent = new Event(modelName, modelDate, modelAddress, modelPersons, modeltasks);
+        for (JsonAdaptedTask task : tasks) {
+            modeltasks.add(task.toModelTypeForEvent(tempEvent));
+        }
 
         return new Event(modelName, modelDate, modelAddress, modelPersons, modeltasks);
     }

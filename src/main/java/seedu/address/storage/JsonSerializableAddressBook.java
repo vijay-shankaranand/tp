@@ -96,6 +96,7 @@ class JsonSerializableAddressBook {
         }
         for (JsonAdaptedTask jsonAdaptedTask : taskList) {
             Task task = jsonAdaptedTask.toModelType();
+            task = new Task(task.getDescription(), task.getDate(), addressBook.getEvent(task.getAssociatedEventName()));
             if (addressBook.hasTask(task)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_TASK);
             }
