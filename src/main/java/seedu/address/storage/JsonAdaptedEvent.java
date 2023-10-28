@@ -103,12 +103,12 @@ public class JsonAdaptedEvent {
         }
         final Address modelAddress = new Address(address);
 
-        Set<Task> modeltasks = new HashSet<>();
-        Event tempEvent = new Event(modelName, modelDate, modelAddress, modelPersons, modeltasks);
+        Set<Task> modelTasks = new HashSet<>();
+        Event tempEvent = new Event(modelName, modelDate, modelAddress, modelPersons, modelTasks);
         for (JsonAdaptedTask task : tasks) {
-            modeltasks.add(task.toModelTypeForEvent(tempEvent));
+            modelTasks.add(task.toModelTypeForEvent(tempEvent));
         }
 
-        return new Event(modelName, modelDate, modelAddress, modelPersons, modeltasks);
+        return new Event(modelName, modelDate, modelAddress, modelPersons, modelTasks);
     }
 }

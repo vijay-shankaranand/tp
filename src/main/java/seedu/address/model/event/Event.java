@@ -60,6 +60,7 @@ public class Event {
         return eventDate;
     }
 
+
     /**
      * Returns an immutable contacts set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
