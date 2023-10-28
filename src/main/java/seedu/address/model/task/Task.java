@@ -96,7 +96,7 @@ public class Task {
 
         Task otherEvent = (Task) other;
 
-        return associatedEvent.isSameEvent(otherEvent.associatedEvent)
+        return associatedEventName.equals(otherEvent.getAssociatedEventName())
                 && description.equals(otherEvent.description);
     }
 
@@ -111,7 +111,7 @@ public class Task {
         return new ToStringBuilder(this)
                 .add("description", description)
                 .add("deadline", deadline)
-                .add("event", associatedEvent.getName())
+                .add("event", associatedEventName)
                 .toString();
     }
 }
