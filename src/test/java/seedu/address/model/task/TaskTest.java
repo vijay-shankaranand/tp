@@ -42,7 +42,7 @@ public class TaskTest {
         String expected = Task.class.getCanonicalName() + "{description=" + BOOK_VENUE.getDescription() + ", "
                 + "deadline=" + BOOK_VENUE.getDate() + ", "
                 + "event=" + BOOK_VENUE.getAssociatedEventName() + ", "
-                + "isDone=" + BOOK_VENUE.isCompleted() + "}";
+                + "isCompleted=" + BOOK_VENUE.isCompleted() + "}";
         assertEquals(expected, BOOK_VENUE.toString());
     }
 

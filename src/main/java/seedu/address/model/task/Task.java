@@ -112,7 +112,7 @@ public class Task {
                 .add("description", description)
                 .add("deadline", deadline)
                 .add("event", associatedEventName)
-                .add("isDone", isCompleted)
+                .add("isCompleted", isCompleted)
                 .toString();
     }
 }
