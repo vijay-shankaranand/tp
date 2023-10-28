@@ -5,13 +5,13 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.testutil.contact.TypicalPersons.ALICE;
+import static seedu.address.testutil.contact.TypicalPersons.BENSON;
+import static seedu.address.testutil.contact.TypicalPersons.BOB;
+import static seedu.address.testutil.contact.TypicalPersons.CARL;
+import static seedu.address.testutil.contact.TypicalPersons.getTypicalAddressBook;
 import static seedu.address.testutil.event.TypicalEvents.JOBFEST;
 import static seedu.address.testutil.event.TypicalEvents.NTU;
-import static seedu.address.testutil.person.TypicalPersons.ALICE;
-import static seedu.address.testutil.person.TypicalPersons.BENSON;
-import static seedu.address.testutil.person.TypicalPersons.BOB;
-import static seedu.address.testutil.person.TypicalPersons.CARL;
-import static seedu.address.testutil.person.TypicalPersons.getTypicalAddressBook;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -21,11 +21,11 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.contact.Person;
 import seedu.address.model.event.Event;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
+import seedu.address.model.name.Name;
+import seedu.address.testutil.contact.ContactBuilder;
 import seedu.address.testutil.event.EventBuilder;
-import seedu.address.testutil.person.PersonBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code LinkCommand}.
@@ -36,13 +36,13 @@ public class LinkCommandTest {
 
     @Test
     public void execute_validSingleContact_success() {
-        Event event = new EventBuilder().withEventName("JobFest 2023")
-                .withEventDate("2023-12-12")
+        Event event = new EventBuilder().withName("JobFest 2023")
+                .withDate("2023-12-12")
                 .withEventAddress("3 Temasek Blvd, Singapore 038983")
                 .withEventContacts(ALICE, BOB)
                 .build();
-        Event expectedEvent = new EventBuilder().withEventName("JobFest 2023")
-                .withEventDate("2023-12-12")
+        Event expectedEvent = new EventBuilder().withName("JobFest 2023")
+                .withDate("2023-12-12")
                 .withEventAddress("3 Temasek Blvd, Singapore 038983")
                 .withEventContacts(ALICE, BOB, CARL)
                 .build();
@@ -61,13 +61,13 @@ public class LinkCommandTest {
 
     @Test
     public void execute_validMultipleContact_success() {
-        Event event = new EventBuilder().withEventName("JobFest 2023")
-                .withEventDate("2023-12-12")
+        Event event = new EventBuilder().withName("JobFest 2023")
+                .withDate("2023-12-12")
                 .withEventAddress("3 Temasek Blvd, Singapore 038983")
                 .withEventContacts(ALICE, BOB)
                 .build();
-        Event expectedEvent = new EventBuilder().withEventName("JobFest 2023")
-                .withEventDate("2023-12-12")
+        Event expectedEvent = new EventBuilder().withName("JobFest 2023")
+                .withDate("2023-12-12")
                 .withEventAddress("3 Temasek Blvd, Singapore 038983")
                 .withEventContacts(ALICE, BOB, CARL, BENSON)
                 .build();
@@ -87,8 +87,8 @@ public class LinkCommandTest {
 
     @Test
     public void execute_eventAlreadyLinkedToContact_throwsCommandException() {
-        Event event = new EventBuilder().withEventName("JobFest 2023")
-                .withEventDate("2023-12-12")
+        Event event = new EventBuilder().withName("JobFest 2023")
+                .withDate("2023-12-12")
                 .withEventAddress("3 Temasek Blvd, Singapore 038983")
                 .withEventContacts(ALICE, BOB)
                 .build();
@@ -104,8 +104,8 @@ public class LinkCommandTest {
 
     @Test
     public void execute_eventNotInTheList_throwsCommandException() {
-        Event event = new EventBuilder().withEventName("JobFest 2023")
-                .withEventDate("2023-12-12")
+        Event event = new EventBuilder().withName("JobFest 2023")
+                .withDate("2023-12-12")
                 .withEventAddress("3 Temasek Blvd, Singapore 038983")
                 .withEventContacts(ALICE, BOB)
                 .build();
@@ -120,12 +120,12 @@ public class LinkCommandTest {
 
     @Test
     public void execute_contactNotInTheList_throwsCommandException() {
-        Event event = new EventBuilder().withEventName("JobFest 2023")
-                .withEventDate("2023-12-12")
+        Event event = new EventBuilder().withName("JobFest 2023")
+                .withDate("2023-12-12")
                 .withEventAddress("3 Temasek Blvd, Singapore 038983")
                 .withEventContacts(ALICE, BOB)
                 .build();
-        Person contact = new PersonBuilder().withName("Li Mei")
+        Person contact = new ContactBuilder().withName("Li Mei")
                 .withAddress("123, East Coast Ave 6, #08-382").withEmail("limei@example.com")
                 .withPhone("97292222")
                 .withTags("friends").build();

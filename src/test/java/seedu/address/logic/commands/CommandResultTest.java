@@ -20,6 +20,7 @@ public class CommandResultTest {
         assertTrue(commandResult.equals(new CommandResult("feedback", false, false)));
         assertEquals(commandResult.shouldDisplayTagsPanel(), false);
         assertEquals(commandResult.shouldDisplayEventsPanel(), false);
+        assertEquals(commandResult.shouldReturnToHome(), false);
 
         // same object -> returns true
         assertTrue(commandResult.equals(commandResult));
@@ -44,6 +45,9 @@ public class CommandResultTest {
 
         CommandResult viewEventCommandResult = new CommandResult(ViewEventsCommand.MESSAGE_SUCCESS);
         assertEquals(viewEventCommandResult.shouldDisplayEventsPanel(), true);
+
+        CommandResult homeCommandResult = new CommandResult(HomeCommand.MESSAGE_SUCCESS);
+        assertEquals(homeCommandResult.shouldReturnToHome(), true);
     }
 
     @Test

@@ -10,17 +10,18 @@ import java.util.Set;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.contact.Person;
 import seedu.address.model.event.exceptions.DuplicateEventException;
 import seedu.address.model.event.exceptions.EventNotFoundException;
-import seedu.address.model.person.Person;
+import seedu.address.model.name.Name;
 import seedu.address.model.task.Task;
 
 /**
  * A list of events that enforces uniqueness between its elements and does not allow nulls.
  * An event is considered unique by comparing using {@code Event#isSameEvent(Event)}. As such, adding and updating of
- * event uses Event#isSameEvent(Event) for equality so as to ensure that the event being added or updated is
- * unique in terms of identity in the UniqueEventList. However, the removal of a Event uses Event#equals(Object) so
- * as to ensure that the event with exactly the same fields will be removed.
+ * event uses Event#isSameEvent(Event) for equality to ensure that the event being added or updated is
+ * unique in terms of identity in the UniqueEventList. However, the removal of a Event uses Event#equals(Object) to
+ * ensure that the event with exactly the same fields will be removed.
  *
  * Supports a minimal set of list operations.
  *
@@ -72,10 +73,71 @@ public class UniqueEventList implements Iterable<Event> {
     }
 
     /**
+     * Deletes the specified task from the event.
+     * @param taskToDelete The task to be deleted.
+     */
+    public void deleteTaskFromEvent(Task taskToDelete) {
+        for (int i = 0; i < internalList.size(); i++) {
+            Event curr = internalList.get(i);
+            Set<Task> updatedTasks = new HashSet<>();
+            if (curr.getName().equals(taskToDelete.getAssociatedEventName())) {
+                updatedTasks.addAll(curr.getTasks());
+                updatedTasks.remove(taskToDelete);
+                Event updatedEvent = new Event(curr.getName(), curr.getDate(), curr.getAddress(),
+                        curr.getContacts(), updatedTasks);
+                setEvent(curr, updatedEvent);
+                return;
+            }
+        }
+    }
+
+    /**
+     * Marks the specified task as completed.
+     */
+    public void markTask(Task taskTobeMarked) {
+        for (int i = 0; i < internalList.size(); i++) {
+            Event curr = internalList.get(i);
+            Set<Task> updatedTasks = new HashSet<>();
+            if (curr.getName().equals(taskTobeMarked.getAssociatedEventName())) {
+                updatedTasks.addAll(curr.getTasks());
+                updatedTasks.remove(taskTobeMarked);
+                Task markedTask = new Task(taskTobeMarked.getDescription(), taskTobeMarked.getDate(),
+                        taskTobeMarked.getAssociatedEvent(), true);
+                updatedTasks.add(markedTask);
+                Event updatedEvent = new Event(curr.getName(), curr.getDate(), curr.getAddress(),
+                        curr.getContacts(), updatedTasks);
+                setEvent(curr, updatedEvent);
+                return;
+            }
+        }
+    }
+
+    /**
+     * Marks the specified task as not completed.
+     */
+    public void unmarkTask(Task taskTobeUnmarked) {
+        for (int i = 0; i < internalList.size(); i++) {
+            Event curr = internalList.get(i);
+            Set<Task> updatedTasks = new HashSet<>();
+            if (curr.getName().equals(taskTobeUnmarked.getAssociatedEventName())) {
+                updatedTasks.addAll(curr.getTasks());
+                updatedTasks.remove(taskTobeUnmarked);
+                Task unmarkedTask = new Task(taskTobeUnmarked.getDescription(), taskTobeUnmarked.getDate(),
+                        taskTobeUnmarked.getAssociatedEvent(), false);
+                updatedTasks.add(unmarkedTask);
+                Event updatedEvent = new Event(curr.getName(), curr.getDate(), curr.getAddress(),
+                        curr.getContacts(), updatedTasks);
+                setEvent(curr, updatedEvent);
+                return;
+            }
+        }
+    }
+
+    /**
      * Returns the {@code Event} with given name from the list.
      * @param name The name of the desired {@code Event}.
      */
-    public Event getByName(EventName name) throws EventNotFoundException {
+    public Event getByName(Name name) throws EventNotFoundException {
         Event toGet = null;
         for (int i = 0; i < internalList.size(); i++) {
             Event thisEvent = internalList.get(i);

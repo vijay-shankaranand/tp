@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.date.Date;
 import seedu.address.model.event.Event;
-import seedu.address.model.event.EventName;
+import seedu.address.model.name.Name;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.TaskDescription;
 
@@ -18,17 +18,18 @@ public class JsonAdaptedTask {
 
     private final String description;
     private final String date;
-    private final String eventName;
-
+    private final String event;
+    private final String status;
     /**
      * Constructs a {@code JsonAdaptedTask} with the given task details.
      */
     @JsonCreator
     public JsonAdaptedTask(@JsonProperty("description") String description, @JsonProperty("date") String date,
-                            @JsonProperty("eventName") String event) {
+                            @JsonProperty("event") String event, @JsonProperty("status") String status) {
         this.description = description;
         this.date = date;
-        this.eventName = event;
+        this.event = event;
+        this.status = status;
     }
 
     /**
@@ -37,7 +38,8 @@ public class JsonAdaptedTask {
     public JsonAdaptedTask(Task source) {
         description = source.getDescription().value;
         date = source.getDate().date;
-        eventName = source.getAssociatedEventName().eventName;
+        event = source.getAssociatedEventName().fullName;
+        status = source.getIsCompletedString();
     }
 
     /**
@@ -61,14 +63,19 @@ public class JsonAdaptedTask {
         }
         final Date modelDate = new Date(date);
 
-        if (eventName == null) {
-            throw new IllegalValueException(EventName.MESSAGE_CONSTRAINTS);
+        if (event == null) {
+            throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
         }
-        if (!EventName.isValidName(eventName)) {
-            throw new IllegalValueException(EventName.MESSAGE_CONSTRAINTS);
+        if (!Name.isValidName(event)) {
+            throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
         }
-        final EventName modelEvent = new EventName(eventName);
-        return new Task(modelDescription, modelDate, modelEvent);
+        if (status == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    "status"));
+        }
+        final Name modelEvent = new Name(event);
+        final boolean isCompleted = status == Task.TASK_IS_COMPLETED ? true : false;
+        return new Task(modelDescription, modelDate, modelEvent, isCompleted);
     }
 
     /**
@@ -91,6 +98,7 @@ public class JsonAdaptedTask {
             throw new IllegalValueException(Date.MESSAGE_CONSTRAINTS);
         }
         final Date modelDate = new Date(date);
-        return new Task(modelDescription, modelDate, event);
+        final boolean isCompleted = status == Task.TASK_IS_COMPLETED ? true : false;
+        return new Task(modelDescription, modelDate, event, isCompleted);
     }
 }

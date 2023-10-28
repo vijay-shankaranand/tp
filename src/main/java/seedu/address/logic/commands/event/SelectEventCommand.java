@@ -11,14 +11,13 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.contact.PersonIsInEventPredicate;
 import seedu.address.model.event.Event;
-import seedu.address.model.person.PersonIsInEventPredicate;
 
 /**
  * Selects an event identified using its displayed index from the address book.
  */
 public class SelectEventCommand extends Command {
-
     public static final String COMMAND_WORD = "select_event";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD

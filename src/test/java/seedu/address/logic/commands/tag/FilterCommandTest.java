@@ -5,10 +5,10 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.person.TypicalPersons.ALICE;
-import static seedu.address.testutil.person.TypicalPersons.BENSON;
-import static seedu.address.testutil.person.TypicalPersons.DANIEL;
-import static seedu.address.testutil.person.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.contact.TypicalPersons.ALICE;
+import static seedu.address.testutil.contact.TypicalPersons.BENSON;
+import static seedu.address.testutil.contact.TypicalPersons.DANIEL;
+import static seedu.address.testutil.contact.TypicalPersons.getTypicalAddressBook;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -20,7 +20,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.PersonIsTaggedPredicate;
+import seedu.address.model.contact.PersonIsTaggedPredicate;
 import seedu.address.model.tag.Tag;
 
 /**

@@ -1,18 +1,18 @@
 package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.Date;
 import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.contact.Person;
+import seedu.address.model.contact.UniquePersonList;
+import seedu.address.model.date.Date;
 import seedu.address.model.event.Event;
-import seedu.address.model.event.EventName;
 import seedu.address.model.event.UniqueEventList;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.UniquePersonList;
+import seedu.address.model.name.Name;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.task.Task;
@@ -238,7 +238,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Returns the {@code Event} with given name.
      */
-    public Event getEvent(EventName name) {
+    public Event getEvent(Name name) {
         return events.getByName(name);
     }
 
@@ -258,8 +258,17 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Returns true if an existing event has the given {@code taskDescription} exists in
+     * the event specified by the given {@code associatedEventName}.
+     */
+    public boolean hasTask(TaskDescription taskDescription, Name associatedEventName) {
+        requireAllNonNull(taskDescription, associatedEventName);
+        return tasks.contains(taskDescription, associatedEventName);
+    }
+
+    /**
      * Adds a task to the address book.
-     * The task must not already exist in the address book.
+     * The task must not already exist in JobFestGo.
      */
     public void addTask(Task taskToAdd) {
         tasks.add(taskToAdd);
@@ -267,13 +276,22 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Replaces the given event {@code target} in the list with {@code editedTask}.
+     * Deletes the task specified by the given task description from its associated event.
+     * The task must already exist in JobFestGo.
+     */
+    public void deleteTask(TaskDescription taskDescription, Name associatedEventName) {
+        Task taskToDelete = tasks.getByValues(taskDescription, associatedEventName);
+        tasks.delete(taskToDelete);
+        events.deleteTaskFromEvent(taskToDelete);
+    }
+
+    /**
+     * Replaces the given task {@code target} in the list with {@code editedTask}.
      * {@code target} must exist in the address book.
      * The event identity of {@code editedEvent} must not be the same as another existing event in the address book.
      */
     public void setTask(Task target, Task editedTask) {
         requireNonNull(editedTask);
-
         tasks.setTask(target, editedTask);
     }
 
@@ -282,6 +300,31 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public Task getTask(TaskDescription description, Date date, Event event) {
         return tasks.getByValues(description, date, event);
+    }
+
+    /**
+     * Returns the {@code Task} with given arguments.
+     */
+    public Task getTask(TaskDescription description, Name eventName) {
+        return tasks.getByValues(description, eventName);
+    }
+
+    /**
+     * Marks the specified task as completed.
+     */
+    public void markTask(TaskDescription taskDescription, Name associatedEventName) {
+        Task taskToMark = tasks.getByValues(taskDescription, associatedEventName);
+        tasks.mark(taskToMark);
+        events.markTask(taskToMark);
+    }
+
+    /**
+     * Marks the specified task as not completed.
+     */
+    public void unmarkTask(TaskDescription taskDescription, Name associatedEventName) {
+        Task taskToUnmark = tasks.getByValues(taskDescription, associatedEventName);
+        tasks.unmark(taskToUnmark);
+        events.unmarkTask(taskToUnmark);
     }
 
     @Override

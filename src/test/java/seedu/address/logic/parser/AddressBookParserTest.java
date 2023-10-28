@@ -19,30 +19,33 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.HomeCommand;
+import seedu.address.logic.commands.contact.AddContactCommand;
+import seedu.address.logic.commands.contact.DeleteContactCommand;
+import seedu.address.logic.commands.contact.EditContactCommand;
+import seedu.address.logic.commands.contact.EditContactCommand.EditPersonDescriptor;
+import seedu.address.logic.commands.contact.FindCommand;
+import seedu.address.logic.commands.contact.ViewContactsCommand;
+import seedu.address.logic.commands.event.AddEventCommand;
 import seedu.address.logic.commands.event.LinkCommand;
 import seedu.address.logic.commands.event.SelectEventCommand;
 import seedu.address.logic.commands.event.ViewEventsCommand;
-import seedu.address.logic.commands.person.AddCommand;
-import seedu.address.logic.commands.person.DeleteCommand;
-import seedu.address.logic.commands.person.EditCommand;
-import seedu.address.logic.commands.person.EditCommand.EditPersonDescriptor;
-import seedu.address.logic.commands.person.FindCommand;
-import seedu.address.logic.commands.person.ListCommand;
 import seedu.address.logic.commands.tag.AddTagCommand;
 import seedu.address.logic.commands.tag.DeleteTagCommand;
 import seedu.address.logic.commands.tag.FilterCommand;
 import seedu.address.logic.commands.tag.ViewTagsCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.event.EventName;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.PersonIsTaggedPredicate;
+import seedu.address.model.contact.Person;
+import seedu.address.model.contact.PersonIsTaggedPredicate;
+import seedu.address.model.event.Event;
+import seedu.address.model.name.Name;
+import seedu.address.model.name.NameContainsKeywordsPredicate;
 import seedu.address.model.tag.Tag;
+import seedu.address.testutil.contact.ContactBuilder;
+import seedu.address.testutil.contact.EditPersonDescriptorBuilder;
+import seedu.address.testutil.contact.PersonUtil;
+import seedu.address.testutil.event.EventBuilder;
 import seedu.address.testutil.event.EventUtil;
-import seedu.address.testutil.person.EditPersonDescriptorBuilder;
-import seedu.address.testutil.person.PersonBuilder;
-import seedu.address.testutil.person.PersonUtil;
 
 public class AddressBookParserTest {
 
@@ -50,9 +53,9 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_add() throws Exception {
-        Person person = new PersonBuilder().build();
-        AddCommand command = (AddCommand) parser.parseCommand(PersonUtil.getAddCommand(person));
-        assertEquals(new AddCommand(person), command);
+        Person person = new ContactBuilder().build();
+        AddContactCommand command = (AddContactCommand) parser.parseCommand(PersonUtil.getAddCommand(person));
+        assertEquals(new AddContactCommand(person), command);
     }
 
     @Test
@@ -63,18 +66,18 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_delete() throws Exception {
-        DeleteCommand command = (DeleteCommand) parser.parseCommand(
-                DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST.getOneBased());
-        assertEquals(new DeleteCommand(INDEX_FIRST), command);
+        DeleteContactCommand command = (DeleteContactCommand) parser.parseCommand(
+                DeleteContactCommand.COMMAND_WORD + " " + INDEX_FIRST.getOneBased());
+        assertEquals(new DeleteContactCommand(INDEX_FIRST), command);
     }
 
     @Test
     public void parseCommand_edit() throws Exception {
-        Person person = new PersonBuilder().build();
+        Person person = new ContactBuilder().build();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(person).build();
-        EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
+        EditContactCommand command = (EditContactCommand) parser.parseCommand(EditContactCommand.COMMAND_WORD + " "
                 + INDEX_FIRST.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
-        assertEquals(new EditCommand(INDEX_FIRST, descriptor), command);
+        assertEquals(new EditContactCommand(INDEX_FIRST, descriptor), command);
     }
 
     @Test
@@ -91,13 +94,13 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_link() throws Exception {
-        EventName eventName = new EventName("NUS Career Fair");
+        Name name = new Name("NUS Career Fair");
         Name contactName = new Name("Li Mei");
         Set<Name> contactNameList = new HashSet<>();
         contactNameList.add(contactName);
 
-        LinkCommand command = (LinkCommand) parser.parseCommand(EventUtil.getLinkCommand(eventName, contactName));
-        assertEquals(new LinkCommand(eventName, contactNameList), command);
+        LinkCommand command = (LinkCommand) parser.parseCommand(EventUtil.getLinkCommand(name, contactName));
+        assertEquals(new LinkCommand(name, contactNameList), command);
     }
 
     @Test
@@ -111,6 +114,19 @@ public class AddressBookParserTest {
     public void parseCommand_viewevent() throws Exception {
         assertTrue(parser.parseCommand(ViewEventsCommand.COMMAND_WORD) instanceof ViewEventsCommand);
         assertTrue(parser.parseCommand(ViewEventsCommand.COMMAND_WORD + " 3") instanceof ViewEventsCommand);
+    }
+
+    @Test
+    public void parseCommand_addEvent() throws Exception {
+        Event event = new EventBuilder().withEventContacts().build();
+        AddEventCommand command = (AddEventCommand) parser.parseCommand(EventUtil.getAddEventCommand(event));
+        assertEquals(new AddEventCommand(event), command);
+    }
+
+    @Test
+    public void parseCommand_home() throws Exception {
+        assertTrue(parser.parseCommand(HomeCommand.COMMAND_WORD) instanceof HomeCommand);
+        assertTrue(parser.parseCommand(HomeCommand.COMMAND_WORD + " 3") instanceof HomeCommand);
     }
 
     @Test
@@ -146,6 +162,7 @@ public class AddressBookParserTest {
         assertEquals(new DeleteTagCommand(tag), command);
     }
 
+
     @Test
     public void parseCommand_help() throws Exception {
         assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD) instanceof HelpCommand);
@@ -154,8 +171,8 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_list() throws Exception {
-        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
-        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
+        assertTrue(parser.parseCommand(ViewContactsCommand.COMMAND_WORD) instanceof ViewContactsCommand);
+        assertTrue(parser.parseCommand(ViewContactsCommand.COMMAND_WORD + " 3") instanceof ViewContactsCommand);
     }
 
     @Test

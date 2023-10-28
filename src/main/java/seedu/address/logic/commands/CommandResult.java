@@ -5,8 +5,8 @@ import static java.util.Objects.requireNonNull;
 import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.commands.contact.ViewContactsCommand;
 import seedu.address.logic.commands.event.ViewEventsCommand;
-import seedu.address.logic.commands.person.ListCommand;
 import seedu.address.logic.commands.tag.ViewTagsCommand;
 import seedu.address.model.event.Event;
 
@@ -14,7 +14,6 @@ import seedu.address.model.event.Event;
  * Represents the result of a command execution.
  */
 public class CommandResult {
-
     private final String feedbackToUser;
 
     /** Help information should be shown to the user. */
@@ -86,7 +85,7 @@ public class CommandResult {
      * @return true if the contacts panel should be displayed to the user, else false
      */
     public boolean shouldDisplayContactsPanel() {
-        if (feedbackToUser.equals(ListCommand.MESSAGE_SUCCESS)) {
+        if (feedbackToUser.equals(ViewContactsCommand.MESSAGE_SUCCESS)) {
             return true;
         }
         return false;
@@ -98,6 +97,25 @@ public class CommandResult {
      */
     public boolean shouldDisplayEventsPanel() {
         if (feedbackToUser.equals(ViewEventsCommand.MESSAGE_SUCCESS)) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Returns true if all panels should be hidden from the user, else false.
+     * @return true if all panels should be hidden from the user, else false
+     */
+    public boolean shouldHideAllPanels() {
+        return !shouldDisplayTagsPanel() && !shouldDisplayContactsPanel() && !shouldDisplayEventsPanel();
+    }
+
+    /**
+     * Returns true if the home panel should be displayed to the user, else false.
+     * @return true if the home panel should be displayed to the user, else false
+     */
+    public boolean shouldReturnToHome() {
+        if (feedbackToUser.equals(HomeCommand.MESSAGE_SUCCESS)) {
             return true;
         }
         return false;
@@ -133,5 +151,4 @@ public class CommandResult {
                 .add("exit", exit)
                 .toString();
     }
-
 }

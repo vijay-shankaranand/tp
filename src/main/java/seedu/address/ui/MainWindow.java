@@ -22,7 +22,6 @@ import seedu.address.logic.parser.exceptions.ParseException;
  * a menu bar and space where other JavaFX elements can be placed.
  */
 public class MainWindow extends UiPart<Stage> {
-
     private static final String FXML = "MainWindow.fxml";
 
     private final Logger logger = LogsCenter.getLogger(getClass());
@@ -32,6 +31,7 @@ public class MainWindow extends UiPart<Stage> {
     private boolean shouldDisplayTags;
     private boolean shouldDisplayContacts;
     private boolean shouldDisplayEvents;
+    private boolean shouldReturnToHome;
 
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
@@ -68,6 +68,7 @@ public class MainWindow extends UiPart<Stage> {
         this.shouldDisplayTags = false;
         this.shouldDisplayContacts = false;
         this.shouldDisplayContacts = false;
+        this.shouldReturnToHome = false;
 
         // Configure the UI
         setWindowDefaultSize(logic.getGuiSettings());
@@ -91,6 +92,10 @@ public class MainWindow extends UiPart<Stage> {
 
     private void setEventDisplayStatus(boolean status) {
         shouldDisplayEvents = status;
+    }
+
+    private void setReturnToHomeStatus(boolean status) {
+        shouldReturnToHome = status;
     }
 
     private void setAccelerators() {
@@ -137,8 +142,10 @@ public class MainWindow extends UiPart<Stage> {
             fillContactListPanel();
         } else if (shouldDisplayEvents) {
             fillEventListPanel();
+        } else if (shouldReturnToHome) {
+            fillEventContactDisplay(true);
         } else {
-            fillEventContactDisplay();
+            fillEventContactDisplay(false);
         }
 
         resultDisplay = new ResultDisplay();
@@ -152,19 +159,6 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     * Fills up the tag list panel with the tags in the filtered tag list.
-     */
-    void fillTagListPanel() {
-        tagListPanel = new TagListPanel(logic.getFilteredTagList());
-
-        if (!listPanelPlaceholder.getChildren().isEmpty()) {
-            listPanelPlaceholder.getChildren().clear();
-        }
-
-        listPanelPlaceholder.getChildren().add(tagListPanel.getRoot());
-    }
-
-    /**
      * Fills up the contact list panel with the contacts in the filtered contact list.
      */
     void fillContactListPanel() {
@@ -175,6 +169,19 @@ public class MainWindow extends UiPart<Stage> {
         }
 
         listPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+    }
+
+    /**
+     * Fills up the tag list panel with the tags in the filtered tag list.
+     */
+    void fillTagListPanel() {
+        tagListPanel = new TagListPanel(logic.getFilteredTagList());
+
+        if (!listPanelPlaceholder.getChildren().isEmpty()) {
+            listPanelPlaceholder.getChildren().clear();
+        }
+
+        listPanelPlaceholder.getChildren().add(tagListPanel.getRoot());
     }
 
     /**
@@ -194,8 +201,8 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up the event and contact display with the events and contacts
      * in the filtered event and contact list.
      */
-    void fillEventContactDisplay() {
-        eventContactDisplay = new EventContactDisplay(logic);
+    void fillEventContactDisplay(boolean shouldReset) {
+        eventContactDisplay = new EventContactDisplay(logic, shouldReset);
 
         if (!listPanelPlaceholder.getChildren().isEmpty()) {
             listPanelPlaceholder.getChildren().clear();
@@ -261,21 +268,23 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     * Shows the tags panel to the user.
-     */
-    public void handleViewTags(boolean shouldDisplayTags) {
-        setTagDisplayStatus(shouldDisplayTags);
-        setContactDisplayStatus(false);
-        fillInnerParts();
-    }
-
-    /**
      * Shows the contacts panel to the user if the user wants to view contacts.
      * @param shouldDisplayContacts true if the user wants to view contacts
      */
     public void handleViewContacts(boolean shouldDisplayContacts) {
         setContactDisplayStatus(shouldDisplayContacts);
         setTagDisplayStatus(false);
+        setReturnToHomeStatus(false);
+        fillInnerParts();
+    }
+
+    /**
+     * Shows the tags panel to the user.
+     */
+    public void handleViewTags(boolean shouldDisplayTags) {
+        setTagDisplayStatus(shouldDisplayTags);
+        setContactDisplayStatus(false);
+        setReturnToHomeStatus(false);
         fillInnerParts();
     }
 
@@ -287,6 +296,7 @@ public class MainWindow extends UiPart<Stage> {
         setEventDisplayStatus(shouldDisplayEvents);
         setContactDisplayStatus(false);
         setTagDisplayStatus(false);
+        setReturnToHomeStatus(false);
         fillInnerParts();
     }
 
@@ -318,22 +328,25 @@ public class MainWindow extends UiPart<Stage> {
                 handleExit();
             }
 
-            if (commandResult.shouldDisplayTagsPanel()) {
-                handleViewTags(true);
-            }
-
             if (commandResult.shouldDisplayContactsPanel()) {
                 handleViewContacts(true);
+            }
+
+            if (commandResult.shouldDisplayTagsPanel()) {
+                handleViewTags(true);
             }
 
             if (commandResult.shouldDisplayEventsPanel()) {
                 handleViewEvents(true);
             }
 
-            if (!commandResult.shouldDisplayTagsPanel() && !commandResult.shouldDisplayContactsPanel()
-                    && !commandResult.shouldDisplayEventsPanel()) {
+            boolean shouldReturnHome = commandResult.shouldReturnToHome();
+            setReturnToHomeStatus(shouldReturnHome);
+
+            if (commandResult.shouldHideAllPanels()) {
                 handleElse();
-                eventContactDisplay.setFeedbackToUser(commandResult); //to display that an event is selected
+                // to display that an event is selected
+                eventContactDisplay.setFeedbackToUser(commandResult);
             }
 
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());

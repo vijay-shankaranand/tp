@@ -11,8 +11,8 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.contact.Person;
 import seedu.address.model.event.Event;
-import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.task.Task;
 
@@ -96,7 +96,8 @@ class JsonSerializableAddressBook {
         }
         for (JsonAdaptedTask jsonAdaptedTask : taskList) {
             Task task = jsonAdaptedTask.toModelType();
-            task = new Task(task.getDescription(), task.getDate(), addressBook.getEvent(task.getAssociatedEventName()));
+            task = new Task(task.getDescription(), task.getDate(),
+                    addressBook.getEvent(task.getAssociatedEventName()), task.isCompleted());
             if (addressBook.hasTask(task)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_TASK);
             }

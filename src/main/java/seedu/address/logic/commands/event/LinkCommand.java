@@ -11,12 +11,11 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.contact.Person;
+import seedu.address.model.contact.exceptions.ContactNotFoundException;
 import seedu.address.model.event.Event;
-import seedu.address.model.event.EventName;
 import seedu.address.model.event.exceptions.EventNotFoundException;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.exceptions.PersonNotFoundException;
+import seedu.address.model.name.Name;
 
 /**
  * Links a contact to a specific event.
@@ -39,13 +38,13 @@ public class LinkCommand extends Command {
             + "Please add it in first.";
     public static final String MESSAGE_LINKED_CONTACT = "The contact: %1$s is already linked to the event: %2$s";
 
-    private final EventName eventNameToLink;
+    private final Name eventNameToLink;
     private final Set<Name> contactNameListToLink;
 
     /**
      * Creates a LinkCommand to link the person specified by the name to the event specified by the name.
      */
-    public LinkCommand(EventName eventNameToLink, Set<Name> contactNameListToLink) {
+    public LinkCommand(Name eventNameToLink, Set<Name> contactNameListToLink) {
         this.eventNameToLink = eventNameToLink;
         this.contactNameListToLink = contactNameListToLink;
     }
@@ -68,7 +67,7 @@ public class LinkCommand extends Command {
             return new CommandResult(String.format(MESSAGE_SUCCESS, contactNameListToLink, eventNameToLink));
         } catch (EventNotFoundException enfe) {
             throw new CommandException(String.format(MESSAGE_NO_SUCH_EVENT, eventNameToLink));
-        } catch (PersonNotFoundException pnfe) {
+        } catch (ContactNotFoundException pnfe) {
             throw new CommandException(String.format(MESSAGE_NO_SUCH_CONTACT, pnfe.getName()));
         }
     }

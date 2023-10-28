@@ -12,7 +12,6 @@ import static seedu.address.testutil.tag.TypicalTags.VENUES;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -26,10 +25,10 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.contact.Person;
+import seedu.address.model.date.Date;
 import seedu.address.model.event.Event;
-import seedu.address.model.event.EventName;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
+import seedu.address.model.name.Name;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.TaskDescription;
@@ -161,6 +160,11 @@ public class AddTagCommandTest {
         }
 
         @Override
+        public ObservableList<Person> getUnfilteredPersonList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
             throw new AssertionError("This method should not be called.");
         }
@@ -201,7 +205,7 @@ public class AddTagCommandTest {
         }
 
         @Override
-        public Event getEvent(EventName name) {
+        public Event getEvent(Name name) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -231,6 +235,16 @@ public class AddTagCommandTest {
         }
 
         @Override
+        public boolean hasTask(TaskDescription taskDescription, Name associatedEventName) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteTask(TaskDescription taskDescription, Name associatedEventName) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void addTask(Task task) {
             throw new AssertionError("This method should not be called.");
         }
@@ -242,6 +256,16 @@ public class AddTagCommandTest {
 
         @Override
         public void setTask(Task target, Task editedTask) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void markTask(TaskDescription taskDescription, Name associatedEventName) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void unmarkTask(TaskDescription taskDescription, Name associatedEventName) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -260,6 +284,10 @@ public class AddTagCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
+        @Override
+        public ObservableList<Event> getUnfilteredEventList() {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**
