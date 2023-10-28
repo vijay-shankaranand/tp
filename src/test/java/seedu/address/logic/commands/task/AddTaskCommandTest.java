@@ -1,23 +1,25 @@
 package seedu.address.logic.commands.task;
 
 import static java.util.Objects.requireNonNull;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.event.LinkCommand.MESSAGE_NO_SUCH_EVENT;
 import static seedu.address.logic.commands.task.AddTaskCommand.MESSAGE_DUPLICATE_TASK;
 import static seedu.address.logic.commands.task.AddTaskCommand.MESSAGE_SUCCESS;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.event.TypicalEvents.JOBFEST;
+import static seedu.address.testutil.event.TypicalEvents.NTU;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.logic.Messages;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
@@ -28,13 +30,12 @@ import seedu.address.model.contact.Person;
 import seedu.address.model.date.Date;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.exceptions.EventNotFoundException;
-import seedu.address.model.task.Task;
 import seedu.address.model.name.Name;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.task.Task;
 import seedu.address.model.task.TaskDescription;
-import static seedu.address.testutil.event.TypicalEvents.JOBFEST;
-import static seedu.address.testutil.event.TypicalEvents.NTU;
 import seedu.address.testutil.task.TaskBuilder;
+
 
 public class AddTaskCommandTest {
     @Test
@@ -44,14 +45,16 @@ public class AddTaskCommandTest {
 
     @Test
     public void execute_taskAcceptedByModel_addSuccessful() throws Exception {
-       ModelStubAcceptingTaskAdded modelStub = new ModelStubAcceptingTaskAdded();
+        ModelStubAcceptingTaskAdded modelStub = new ModelStubAcceptingTaskAdded();
 
         modelStub.addEvent(NTU);
         Task validTask = new TaskBuilder().withEvent(NTU).build();
 
-        CommandResult commandResult = new AddTaskCommand(validTask.getDescription(), validTask.getDate(), validTask.getAssociatedEventName()).execute(modelStub);
+        CommandResult commandResult = new AddTaskCommand(validTask.getDescription(),
+                validTask.getDate(), validTask.getAssociatedEventName()).execute(modelStub);
 
-        assertEquals(String.format(MESSAGE_SUCCESS, validTask.getDescription(), validTask.getDate(), validTask.getAssociatedEventName()),
+        assertEquals(String.format(MESSAGE_SUCCESS, validTask.getDescription(),
+                        validTask.getDate(), validTask.getAssociatedEventName()),
                 commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(validTask), modelStub.tasksAdded);
     }
@@ -60,11 +63,12 @@ public class AddTaskCommandTest {
     public void execute_noSuchEvent_throwsCommandException() {
         ModelStubAcceptingTaskAdded modelStub = new ModelStubAcceptingTaskAdded();
         Task validTask = new TaskBuilder().build();
-        AddTaskCommand addTaskCommand = new AddTaskCommand(validTask.getDescription(), validTask.getDate(), validTask.getAssociatedEventName());
+        AddTaskCommand addTaskCommand = new AddTaskCommand(validTask.getDescription(),
+                validTask.getDate(), validTask.getAssociatedEventName());
         System.out.println(addTaskCommand);
 
-        assertThrows(CommandException.class, String.format(MESSAGE_NO_SUCH_EVENT, validTask.getAssociatedEventName()),
-                () -> addTaskCommand.execute(modelStub));
+        assertThrows(CommandException.class, String.format(MESSAGE_NO_SUCH_EVENT,
+                validTask.getAssociatedEventName()), () -> addTaskCommand.execute(modelStub));
     }
 
     @Test
@@ -73,7 +77,8 @@ public class AddTaskCommandTest {
         Task validTask = new TaskBuilder().withEvent(NTU).build();
         ModelStub modelStub = new ModelStubWithTask(validTask);
 
-        AddTaskCommand addTaskCommand = new AddTaskCommand(validTask.getDescription(), validTask.getDate(), validTask.getAssociatedEventName());
+        AddTaskCommand addTaskCommand = new AddTaskCommand(validTask.getDescription(),
+                validTask.getDate(), validTask.getAssociatedEventName());
 
         assertThrows(CommandException.class, MESSAGE_DUPLICATE_TASK, () -> addTaskCommand.execute(modelStub));
     }
@@ -82,14 +87,17 @@ public class AddTaskCommandTest {
     public void equals() {
         Task validTask = new TaskBuilder().withEvent(NTU).build();
         Task validTask2 = new TaskBuilder().withEvent(JOBFEST).build();
-        AddTaskCommand addTaskCommand = new AddTaskCommand(validTask.getDescription(), validTask.getDate(), validTask.getAssociatedEventName());
-        AddTaskCommand addTaskCommand2 = new AddTaskCommand(validTask2.getDescription(), validTask2.getDate(), validTask2.getAssociatedEventName());
+        AddTaskCommand addTaskCommand = new AddTaskCommand(validTask.getDescription(),
+                validTask.getDate(), validTask.getAssociatedEventName());
+        AddTaskCommand addTaskCommand2 = new AddTaskCommand(validTask2.getDescription(),
+                validTask2.getDate(), validTask2.getAssociatedEventName());
 
         // same object -> returns true
         assertTrue(addTaskCommand.equals(addTaskCommand));
 
         // same values -> returns true
-        AddTaskCommand addTaskCommandCopy = new AddTaskCommand(validTask.getDescription(), validTask.getDate(), validTask.getAssociatedEventName());
+        AddTaskCommand addTaskCommandCopy = new AddTaskCommand(validTask.getDescription(),
+                validTask.getDate(), validTask.getAssociatedEventName());
         assertTrue(addTaskCommand.equals(addTaskCommandCopy));
 
         // different types -> returns false
@@ -341,8 +349,8 @@ public class AddTaskCommandTest {
      * A Model stub that always accept the task being added.
      */
     private class ModelStubAcceptingTaskAdded extends ModelStub {
-        final ArrayList<Task> tasksAdded = new ArrayList<>();
-        ArrayList<Event> eventsAdded = new ArrayList<>();
+        private final ArrayList<Task> tasksAdded = new ArrayList<>();
+        private ArrayList<Event> eventsAdded = new ArrayList<>();
 
         @Override
         public boolean hasTask(Task task) {

@@ -9,8 +9,8 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.contact.TypicalPersons.ALICE;
 import static seedu.address.testutil.contact.TypicalPersons.getTypicalAddressBook;
 import static seedu.address.testutil.event.TypicalEvents.JOBFEST;
-import static seedu.address.testutil.task.TypicalTasks.BOOK_VENUE;
 import static seedu.address.testutil.tag.TypicalTags.VENUES;
+import static seedu.address.testutil.task.TypicalTasks.BOOK_VENUE;
 
 import java.util.Arrays;
 import java.util.Collection;

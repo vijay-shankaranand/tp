@@ -26,11 +26,11 @@ public class TaskDescriptionTest {
         assertFalse(TaskDescription.isValidDescription("")); // empty string
         assertFalse(TaskDescription.isValidDescription(" ")); // spaces only
 
-        assertTrue(TaskDescription.isValidDescription("Do CS2103T tutorial")); // contains no whitespace
-        assertTrue(TaskDescription.isValidDescription("Do CS2103T tutorial 2")); // contains whitespace
-        assertTrue(TaskDescription.isValidDescription("Do CS2103T tutorial 2!")); // contains non-alphanumeric characters
-        assertTrue(TaskDescription.isValidDescription("Do CS2103T tutorial 2!!")); // contains non-alphanumeric characters
-        assertTrue(TaskDescription.isValidDescription("Do CS2103T tutorial 2!!!")); // contains non-alphanumeric characters
+        assertTrue(TaskDescription.isValidDescription("Do CS2103T tutorial"));
+        assertTrue(TaskDescription.isValidDescription("Do CS2103T tutorial 2"));
+        assertTrue(TaskDescription.isValidDescription("Do CS2103T tutorial 2!"));
+        assertTrue(TaskDescription.isValidDescription("Do CS2103T tutorial 2!!"));
+        assertTrue(TaskDescription.isValidDescription("Do CS2103T tutorial 2!!!"));
     }
 
     @Test

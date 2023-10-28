@@ -1,15 +1,15 @@
 package seedu.address.model.task;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
-
+import static seedu.address.testutil.event.TypicalEvents.JOBFEST;
 import static seedu.address.testutil.task.TypicalTasks.BOOK_VENUE;
 import static seedu.address.testutil.task.TypicalTasks.ORDER_FOOD;
-import static seedu.address.testutil.event.TypicalEvents.JOBFEST;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.date.Date;
 import seedu.address.model.name.Name;
 import seedu.address.testutil.task.TaskBuilder;
 

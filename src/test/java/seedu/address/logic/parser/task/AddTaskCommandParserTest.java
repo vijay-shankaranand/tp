@@ -2,11 +2,14 @@ package seedu.address.logic.parser.task;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.task.AddTaskCommand.MESSAGE_USAGE;
-import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.event.TypicalEvents.NTU;
 import static seedu.address.testutil.task.TypicalTasks.BOOK_VENUE;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
@@ -64,7 +67,7 @@ public class AddTaskCommandParserTest {
                         + PREFIX_DATE + BOOK_VENUE.getDate() + " "
                         + PREFIX_DATE + BOOK_VENUE.getDate() + " " + PREFIX_EVENT + NTU.getName(),
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_DATE));
-//
+
         // repeated event prefix
         assertParseFailure(parser, " " + PREFIX_NAME + BOOK_VENUE.getDescription() + " "
                         + PREFIX_DATE + BOOK_VENUE.getDate() + " "

@@ -1,8 +1,9 @@
 package seedu.address.model.task;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
-
 import static seedu.address.testutil.task.TypicalTasks.BOOK_VENUE;
 import static seedu.address.testutil.task.TypicalTasks.ORDER_FOOD;
 
@@ -74,14 +75,15 @@ public class UniqueTaskListTest {
     @Test
     public void getByValues_taskInList_returnsTrue() {
         uniqueTaskList.add(BOOK_VENUE);
-        assertEquals(uniqueTaskList.getByValues(BOOK_VENUE.getDescription(), BOOK_VENUE.getDate(), BOOK_VENUE.getAssociatedEvent()), BOOK_VENUE);
+        assertEquals(uniqueTaskList.getByValues(BOOK_VENUE.getDescription(),
+                BOOK_VENUE.getDate(), BOOK_VENUE.getAssociatedEvent()), BOOK_VENUE);
     }
 
     @Test
     public void getByValues_taskNotInList_throwsTaskNotFound() {
         uniqueTaskList.add(ORDER_FOOD);
-        assertThrows(TaskNotFoundException.class,
-                () -> uniqueTaskList.getByValues(BOOK_VENUE.getDescription(), BOOK_VENUE.getDate(), BOOK_VENUE.getAssociatedEvent()));
+        assertThrows(TaskNotFoundException.class, () -> uniqueTaskList.getByValues(BOOK_VENUE.getDescription(),
+                        BOOK_VENUE.getDate(), BOOK_VENUE.getAssociatedEvent()));
     }
 
     @Test
@@ -159,7 +161,7 @@ public class UniqueTaskListTest {
     }
 
     @Test
-    public void setTasks_list_hasDuplicate_throwsDuplicateTaskException() {
+    public void setTasks_hasDuplicate_throwsDuplicateTaskException() {
         List<Task> listWithDuplicate = List.of(BOOK_VENUE, BOOK_VENUE);
         assertThrows(DuplicateTaskException.class, () -> uniqueTaskList.setTasks(listWithDuplicate));
     }
