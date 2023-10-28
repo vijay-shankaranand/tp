@@ -1,0 +1,11 @@
+{
+  "persons": [ ],
+  "tagList" : [ ],
+  "events" : [ ],
+  "taskList" : [ {
+    "description" : "",
+    "date" : "2023-12-23",
+    "event" : "NUS Career Fair 2023",
+    "status" : "hasNotBeenCompleted"
+  }]
+}

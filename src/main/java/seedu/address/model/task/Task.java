@@ -55,6 +55,16 @@ public class Task {
         this.isCompleted = isCompleted;
     }
 
+    /**
+     * Returns true if the task is due within 3 days.
+     */
+    public boolean isDueWithinThreeDays() {
+        if (isCompleted) {
+            return false;
+        }
+        return this.deadline.isWithinThreeDays();
+    }
+
     public TaskDescription getDescription() {
         return description;
     }
@@ -80,7 +90,7 @@ public class Task {
     }
 
     public boolean isDueSoon() {
-        return this.deadline.withinThreeDays();
+        return this.deadline.isWithinThreeDays();
     }
 
     /**
@@ -100,7 +110,7 @@ public class Task {
 
         Task otherEvent = (Task) other;
 
-        return associatedEvent.isSameEvent(otherEvent.associatedEvent)
+        return associatedEventName.equals(otherEvent.getAssociatedEventName())
                 && description.equals(otherEvent.description);
     }
 
@@ -115,7 +125,8 @@ public class Task {
         return new ToStringBuilder(this)
                 .add("description", description)
                 .add("deadline", deadline)
-                .add("event", associatedEvent.getName())
+                .add("event", associatedEventName)
+                .add("isCompleted", isCompleted)
                 .toString();
     }
 }

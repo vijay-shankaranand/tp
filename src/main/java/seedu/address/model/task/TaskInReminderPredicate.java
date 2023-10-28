@@ -4,14 +4,16 @@ import java.util.function.Predicate;
 
 import seedu.address.commons.util.ToStringBuilder;
 
-public class TaskIsDueSoonPredicate implements Predicate<Task> {
+/**
+ * Tests that a {@code Task} has deadline within 3 days.
+ */
+public class TaskInReminderPredicate implements Predicate<Task> {
 
-    public TaskIsDueSoonPredicate() {
+    public TaskInReminderPredicate() {
     }
-
     @Override
     public boolean test(Task task) {
-        return task.isDueSoon();
+        return task.isDueWithinThreeDays();
     }
 
     @Override
@@ -21,7 +23,7 @@ public class TaskIsDueSoonPredicate implements Predicate<Task> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof TaskIsDueSoonPredicate)) {
+        if (!(other instanceof TaskInReminderPredicate)) {
             return false;
         }
 

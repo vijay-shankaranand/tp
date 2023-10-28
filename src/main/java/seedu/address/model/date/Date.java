@@ -73,7 +73,11 @@ public class Date {
         return firstDate.compareTo(secondDate);
     }
 
-    public boolean withinThreeDays() {
+    /**
+     * Returns true if the date is within 3 days from today.
+     * @return true if date is within 3 days from today, false, otherwise.
+     */
+    public boolean isWithinThreeDays() {
         LocalDate today = LocalDate.now();
         LocalDate taskDue = LocalDate.parse(this.date);
 
@@ -108,6 +112,8 @@ public class Date {
     public int hashCode() {
         return date.hashCode();
     }
+
+
 
 
 }

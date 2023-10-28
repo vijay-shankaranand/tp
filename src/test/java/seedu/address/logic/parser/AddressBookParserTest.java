@@ -4,6 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 
@@ -34,6 +37,7 @@ import seedu.address.logic.commands.tag.AddTagCommand;
 import seedu.address.logic.commands.tag.DeleteTagCommand;
 import seedu.address.logic.commands.tag.FilterCommand;
 import seedu.address.logic.commands.tag.ViewTagsCommand;
+import seedu.address.logic.commands.task.AddTaskCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.contact.Person;
 import seedu.address.model.contact.PersonIsTaggedPredicate;
@@ -111,7 +115,7 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_viewevent() throws Exception {
+    public void parseCommand_viewEvent() throws Exception {
         assertTrue(parser.parseCommand(ViewEventsCommand.COMMAND_WORD) instanceof ViewEventsCommand);
         assertTrue(parser.parseCommand(ViewEventsCommand.COMMAND_WORD + " 3") instanceof ViewEventsCommand);
     }
@@ -121,6 +125,14 @@ public class AddressBookParserTest {
         Event event = new EventBuilder().withEventContacts().build();
         AddEventCommand command = (AddEventCommand) parser.parseCommand(EventUtil.getAddEventCommand(event));
         assertEquals(new AddEventCommand(event), command);
+    }
+
+    @Test
+    public void parseCommand_deleteEvent() throws Exception {
+        Event event = new EventBuilder().withEventContacts().build();
+        DeleteContactCommand command = (DeleteContactCommand) parser.parseCommand(
+                DeleteContactCommand.COMMAND_WORD + " " + INDEX_FIRST.getOneBased());
+        assertEquals(new DeleteContactCommand(INDEX_FIRST), command);
     }
 
     @Test
@@ -173,6 +185,12 @@ public class AddressBookParserTest {
     public void parseCommand_list() throws Exception {
         assertTrue(parser.parseCommand(ViewContactsCommand.COMMAND_WORD) instanceof ViewContactsCommand);
         assertTrue(parser.parseCommand(ViewContactsCommand.COMMAND_WORD + " 3") instanceof ViewContactsCommand);
+    }
+
+    @Test
+    public void parseCommand_addTask() throws Exception {
+        assertTrue(parser.parseCommand(AddTaskCommand.COMMAND_WORD + " " + PREFIX_NAME + "Task 1 "
+                + PREFIX_DATE + "2024-01-12 " + PREFIX_EVENT + "NUS") instanceof AddTaskCommand);
     }
 
     @Test
