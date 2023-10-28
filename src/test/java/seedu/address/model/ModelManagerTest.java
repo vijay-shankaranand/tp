@@ -9,6 +9,7 @@ import static seedu.address.testutil.contact.TypicalPersons.ALICE;
 import static seedu.address.testutil.contact.TypicalPersons.BENSON;
 import static seedu.address.testutil.event.TypicalEvents.JOBFEST;
 import static seedu.address.testutil.tag.TypicalTags.VENUES;
+import static seedu.address.testutil.task.TypicalTasks.BOOK_VENUE;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -21,6 +22,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.event.exceptions.EventNotFoundException;
 import seedu.address.model.name.NameContainsKeywordsPredicate;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.task.exceptions.TaskNotFoundException;
 import seedu.address.testutil.AddressBookBuilder;
 
 public class ModelManagerTest {
@@ -128,6 +130,31 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void setTag_nullTargetTag_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.setTag(null, VENUES));
+    }
+
+    @Test
+    public void setTag_nullEditedTag_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.setTag(VENUES, null));
+    }
+
+    @Test
+    public void setTag_editedTagIsSameTag_success() {
+        modelManager.addTag(VENUES);
+        modelManager.setTag(VENUES, VENUES);
+        assertTrue(modelManager.hasTag(VENUES));
+    }
+
+    @Test
+    public void setTag_success() {
+        modelManager.addTag(VENUES);
+        modelManager.setTag(VENUES, new Tag("vendor"));
+        assertFalse(modelManager.hasTag(VENUES));
+        assertTrue(modelManager.hasTag(new Tag("vendor")));
+    }
+
+    @Test
     public void getFilteredTagList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredTagList().remove(0));
     }
@@ -183,6 +210,73 @@ public class ModelManagerTest {
     @Test
     public void getUnfilteredEventList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getUnfilteredEventList().remove(0));
+    }
+
+    @Test
+    public void hasTask_nullTask_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.hasTask(null));
+    }
+
+    @Test
+    public void hasTask_taskNotInAddressBook_returnsFalse() {
+        assertFalse(modelManager.hasTask(BOOK_VENUE));
+    }
+
+    @Test
+    public void hasTask_taskInAddressBook_returnsTrue() {
+        modelManager.addTask(BOOK_VENUE);
+        assertTrue(modelManager.hasTask(BOOK_VENUE));
+    }
+
+    @Test
+    public void setTask_nullTargetTask_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.setTask(null, BOOK_VENUE));
+    }
+
+    @Test
+    public void setTask_nullEditedTask_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.setTask(BOOK_VENUE, null));
+    }
+
+    @Test
+    public void setTask_targetTaskNotInAddressBook_throwsCommandException() {
+        assertThrows(TaskNotFoundException.class, () -> modelManager.setTask(BOOK_VENUE, BOOK_VENUE));
+    }
+
+    @Test
+    public void setTask_editedTaskIsSameTask_success() throws CommandException {
+        modelManager.addTask(BOOK_VENUE);
+        modelManager.setTask(BOOK_VENUE, BOOK_VENUE);
+        assertTrue(modelManager.hasTask(BOOK_VENUE));
+    }
+
+    @Test
+    public void getTask_success() {
+        modelManager.addTask(BOOK_VENUE);
+        assertEquals(BOOK_VENUE, modelManager.getTask(BOOK_VENUE.getDescription(), BOOK_VENUE.getDate(),
+                BOOK_VENUE.getAssociatedEvent()));
+    }
+
+    @Test
+    public void getFilteredTaskList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredTaskList().remove(0));
+    }
+
+    @Test
+    public void updateFilteredTaskList_nullPredicate_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.updateFilteredTaskList(null));
+    }
+
+    @Test
+    public void updatedFilteredTaskList_success() {
+        modelManager.addTask(BOOK_VENUE);
+        modelManager.updateFilteredTaskList(task -> task.getDescription().equals(BOOK_VENUE.getDescription()));
+        assertEquals(BOOK_VENUE, modelManager.getFilteredTaskList().get(0));
+    }
+
+    @Test
+    public void getUnfilteredTaskList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredTaskList().remove(0));
     }
 
     @Test

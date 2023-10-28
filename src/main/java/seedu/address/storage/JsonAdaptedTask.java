@@ -52,6 +52,9 @@ public class JsonAdaptedTask {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     TaskDescription.class.getSimpleName()));
         }
+        if (!TaskDescription.isValidDescription(description)) {
+            throw new IllegalValueException(TaskDescription.MESSAGE_CONSTRAINTS);
+        }
         final TaskDescription modelDescription = new TaskDescription(description);
 
         if (date == null) {
@@ -69,12 +72,15 @@ public class JsonAdaptedTask {
         if (!Name.isValidName(event)) {
             throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
         }
+        final Name modelEvent = new Name(event);
+
         if (status == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     "status"));
         }
-        final Name modelEvent = new Name(event);
+
         final boolean isCompleted = status == Task.TASK_IS_COMPLETED ? true : false;
+
         return new Task(modelDescription, modelDate, modelEvent, isCompleted);
     }
 
@@ -88,6 +94,9 @@ public class JsonAdaptedTask {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     TaskDescription.class.getSimpleName()));
         }
+        if (!TaskDescription.isValidDescription(description)) {
+            throw new IllegalValueException(TaskDescription.MESSAGE_CONSTRAINTS);
+        }
         final TaskDescription modelDescription = new TaskDescription(description);
 
         if (date == null) {
@@ -98,6 +107,12 @@ public class JsonAdaptedTask {
             throw new IllegalValueException(Date.MESSAGE_CONSTRAINTS);
         }
         final Date modelDate = new Date(date);
+
+        if (status == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    "status"));
+        }
+
         final boolean isCompleted = status == Task.TASK_IS_COMPLETED ? true : false;
         return new Task(modelDescription, modelDate, event, isCompleted);
     }

@@ -21,6 +21,7 @@ import seedu.address.model.contact.Phone;
 import seedu.address.model.date.Date;
 import seedu.address.model.name.Name;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.task.TaskDescription;
 
 public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";
@@ -244,5 +245,34 @@ public class ParserUtilTest {
         assertEquals(expectedContactNameSet, actualContactNameSet);
     }
 
+    @Test
+    public void parseTaskDescriptions_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseTaskDescription(null));
+    }
+
+    @Test
+    public void parseTaskDescriptions_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseTaskDescription(""));
+    }
+
+    @Test
+    public void parseTaskDescriptions_validValueWithoutWhitespace_returnsTaskDescription() throws Exception {
+        TaskDescription expectedTaskDescription = new TaskDescription("test");
+        assertEquals(expectedTaskDescription, ParserUtil.parseTaskDescription("test"));
+    }
+
+    @Test
+    public void parseTaskDescriptions_validValueWithWhitespace_returnsTrimmedTaskDescription() throws Exception {
+        String taskDescriptionWithWhitespace = WHITESPACE + "test" + WHITESPACE;
+        TaskDescription expectedTaskDescription = new TaskDescription("test");
+        assertEquals(expectedTaskDescription, ParserUtil.parseTaskDescription(taskDescriptionWithWhitespace));
+    }
+
+    @Test
+    public void parseTaskDescriptions_validValueWithSpecialCharacter_returnsTrimmedTaskDescription() throws Exception {
+        String taskDescriptionWithSpecialCharacter = WHITESPACE + "test@#$%^&*()" + WHITESPACE;
+        TaskDescription expectedTaskDescription = new TaskDescription("test@#$%^&*()");
+        assertEquals(expectedTaskDescription, ParserUtil.parseTaskDescription(taskDescriptionWithSpecialCharacter));
+    }
 
 }

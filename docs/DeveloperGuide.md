@@ -563,7 +563,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 1a1. JobFestGo shows an error message.
 
-      Use case resumes at step 1. 
+      Use case resumes at step 1.
 
 * 1b. Missing index.
 
@@ -632,7 +632,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Use case: Return to the home page**
 
 **MSS**
-1. User is on any page 
+1. User is on any page
 2. User requests to return to the home page
 3. JobFestGo returns user to the home page
 

@@ -25,7 +25,7 @@ import seedu.address.model.task.TaskDescription;
 public class AddTaskCommand extends Command {
     public static final String COMMAND_WORD = "add_task";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an task to the specified event. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to the specified event. "
             + "Parameters: "
             + PREFIX_NAME + "TASK_DESCRIPTION "
             + PREFIX_DATE + "TASK_DEADLINE "
@@ -50,6 +50,7 @@ public class AddTaskCommand extends Command {
         this.taskDescription = taskDescription;
         this.taskDeadline = taskDeadline;
         this.associatedEventName = associatedEvent;
+        taskToAdd = new Task(taskDescription, taskDeadline, associatedEvent, false);
     }
 
     @Override
