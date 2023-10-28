@@ -1,7 +1,8 @@
 package seedu.address.logic.commands.task;
 
 import static java.util.Objects.requireNonNull;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
+import static seedu.address.logic.commands.event.LinkCommand.MESSAGE_NO_SUCH_EVENT;
 import static seedu.address.logic.commands.task.AddTaskCommand.MESSAGE_DUPLICATE_TASK;
 import static seedu.address.logic.commands.task.AddTaskCommand.MESSAGE_SUCCESS;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -26,6 +27,7 @@ import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.contact.Person;
 import seedu.address.model.date.Date;
 import seedu.address.model.event.Event;
+import seedu.address.model.event.exceptions.EventNotFoundException;
 import seedu.address.model.task.Task;
 import seedu.address.model.name.Name;
 import seedu.address.model.tag.Tag;
@@ -55,13 +57,49 @@ public class AddTaskCommandTest {
     }
 
     @Test
-    public void execute_duplicateTag_throwsCommandException() {
-        Task validTask = new TaskBuilder().withEvent(NTU).build();
-
+    public void execute_noSuchEvent_throwsCommandException() {
+        ModelStubAcceptingTaskAdded modelStub = new ModelStubAcceptingTaskAdded();
+        Task validTask = new TaskBuilder().build();
         AddTaskCommand addTaskCommand = new AddTaskCommand(validTask.getDescription(), validTask.getDate(), validTask.getAssociatedEventName());
+        System.out.println(addTaskCommand);
+
+        assertThrows(CommandException.class, String.format(MESSAGE_NO_SUCH_EVENT, validTask.getAssociatedEventName()),
+                () -> addTaskCommand.execute(modelStub));
+    }
+
+    @Test
+    public void execute_duplicateTag_throwsCommandException() {
+
+        Task validTask = new TaskBuilder().withEvent(NTU).build();
         ModelStub modelStub = new ModelStubWithTask(validTask);
 
+        AddTaskCommand addTaskCommand = new AddTaskCommand(validTask.getDescription(), validTask.getDate(), validTask.getAssociatedEventName());
+
         assertThrows(CommandException.class, MESSAGE_DUPLICATE_TASK, () -> addTaskCommand.execute(modelStub));
+    }
+
+    @Test
+    public void equals() {
+        Task validTask = new TaskBuilder().withEvent(NTU).build();
+        Task validTask2 = new TaskBuilder().withEvent(JOBFEST).build();
+        AddTaskCommand addTaskCommand = new AddTaskCommand(validTask.getDescription(), validTask.getDate(), validTask.getAssociatedEventName());
+        AddTaskCommand addTaskCommand2 = new AddTaskCommand(validTask2.getDescription(), validTask2.getDate(), validTask2.getAssociatedEventName());
+
+        // same object -> returns true
+        assertTrue(addTaskCommand.equals(addTaskCommand));
+
+        // same values -> returns true
+        AddTaskCommand addTaskCommandCopy = new AddTaskCommand(validTask.getDescription(), validTask.getDate(), validTask.getAssociatedEventName());
+        assertTrue(addTaskCommand.equals(addTaskCommandCopy));
+
+        // different types -> returns false
+        assertFalse(addTaskCommand.equals(1));
+
+        // null -> returns false
+        assertFalse(addTaskCommand.equals(null));
+
+        // different task -> returns false
+        assertFalse(addTaskCommand.equals(addTaskCommand2));
     }
 
     private class ModelStub implements Model {
@@ -280,7 +318,6 @@ public class AddTaskCommandTest {
             requireNonNull(task);
             this.task = task;
             eventsAdded.add(NTU);
-            eventsAdded.add(JOBFEST);
         }
 
         @Override
@@ -322,7 +359,12 @@ public class AddTaskCommandTest {
         @Override
         public Event getEvent(Name eventName) {
             requireNonNull(eventName);
-            return eventsAdded.stream().filter(event -> event.getName().equals(eventName)).findFirst().get();
+            try {
+                return eventsAdded.stream().filter(event -> event.getName().equals(eventName)).findFirst().get();
+
+            } catch (Exception e) {
+                throw new EventNotFoundException();
+            }
         }
 
         @Override

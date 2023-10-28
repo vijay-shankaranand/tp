@@ -9,6 +9,7 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.contact.TypicalPersons.ALICE;
 import static seedu.address.testutil.contact.TypicalPersons.getTypicalAddressBook;
 import static seedu.address.testutil.event.TypicalEvents.JOBFEST;
+import static seedu.address.testutil.task.TypicalTasks.BOOK_VENUE;
 import static seedu.address.testutil.tag.TypicalTags.VENUES;
 
 import java.util.Arrays;
@@ -28,6 +29,7 @@ import seedu.address.model.task.Task;
 import seedu.address.testutil.contact.ContactBuilder;
 import seedu.address.testutil.event.EventBuilder;
 import seedu.address.testutil.tag.TagBuilder;
+import seedu.address.testutil.task.TaskBuilder;
 
 public class AddressBookTest {
 
@@ -194,6 +196,64 @@ public class AddressBookTest {
     @Test
     public void getEventList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> addressBook.getEventList().remove(0));
+    }
+
+    @Test
+    public void addTask_successful_returnsTrue() {
+        addressBook.addTask(BOOK_VENUE);
+        assertTrue(addressBook.hasTask(BOOK_VENUE));
+    }
+
+    @Test
+    public void setTask_nullTargetTask_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> addressBook.setTask(null, BOOK_VENUE));
+    }
+
+    @Test
+    public void setTask_successful_returnsTrue() {
+        addressBook.addTask(BOOK_VENUE);
+        Task editedTask = new TaskBuilder(BOOK_VENUE)
+                .withDate("2023-12-01")
+                .build();
+        addressBook.setTask(BOOK_VENUE, editedTask);
+        assertTrue(addressBook.hasTask(editedTask));
+    }
+
+    @Test
+    public void hasTask_nullTask_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> addressBook.hasTask(null));
+    }
+
+    @Test
+    public void hasTask_taskNotInAddressBook_returnsFalse() {
+        assertFalse(addressBook.hasTask(BOOK_VENUE));
+    }
+
+    @Test
+    public void hasTask_taskInAddressBook_returnsTrue() {
+        addressBook.addTask(BOOK_VENUE);
+        assertTrue(addressBook.hasTask(BOOK_VENUE));
+    }
+
+    @Test
+    public void hasTask_taskWithSameIdentityFieldsInAddressBook_returnsTrue() {
+        addressBook.addTask(BOOK_VENUE);
+        Task editedTask = new TaskBuilder(BOOK_VENUE)
+                .withDate("2023-12-01")
+                .build();
+        assertTrue(addressBook.hasTask(editedTask));
+    }
+
+    @Test
+    public void deleteTask_successful_returnsTrue() {
+        addressBook.addTask(BOOK_VENUE);
+        addressBook.deleteTask(BOOK_VENUE.getDescription(), BOOK_VENUE.getAssociatedEventName());
+        assertFalse(addressBook.hasTask(BOOK_VENUE));
+    }
+
+    @Test
+    public void getTaskList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> addressBook.getTaskList().remove(0));
     }
 
     @Test

@@ -11,6 +11,7 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.contact.Person;
 import seedu.address.model.event.Event;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.task.Task;
 
 /**
  * API of the Logic component
@@ -46,6 +47,9 @@ public interface Logic {
 
     /** Returns an unmodifiable view of the unfiltered list of events */
     ObservableList<Event> getUnfilteredEventList();
+
+    /** Returns an unmodifiable view of the filtered list of tasks */
+    ObservableList<Task> getFilteredTaskList();
 
     /**
      * Returns the user prefs' address book file path.

@@ -1,0 +1,54 @@
+{
+  "persons": [ ],
+  "tagList" : [ ],
+  "events" : [ {
+    "name" : "NUS Career Fair 2023",
+    "date" : "2024-01-23",
+    "address" : "311, Clementi Ave 2, #02-25",
+    "contacts" : [ {
+      "name" : "Alex Yeoh",
+      "phone" : "87438807",
+      "email" : "alexyeoh@example.com",
+      "address" : "Blk 30 Geylang Street 29, #06-40",
+      "tags" : [ "friends" ]
+    }, {
+      "name" : "Bernice Yu",
+      "phone" : "99272758",
+      "email" : "berniceyu@example.com",
+      "address" : "Blk 30 Lorong 3 Serangoon Gardens, #07-18",
+      "tags" : [ "colleagues", "friends" ]
+    } ],
+    "tasks" : [ {
+      "description" : "Book Venue",
+      "date" : "2023-12-23",
+      "event" : "NUS Career Fair 2023",
+      "status" : "hasNotBeenCompleted"
+    }, {
+      "description" : "Order Food",
+      "date" : "2024-01-13",
+      "event" : "NUS Career Fair 2023",
+      "status" : "hasNotBeenCompleted"
+    }, {
+      "description" : "Order Food",
+      "date" : "2024-01-13",
+      "event" : "NUS Career Fair 2023",
+      "status" : "hasNotBeenCompleted"
+    }, {
+      "description" : "Book Venue",
+      "date" : "2023-12-23",
+      "event" : "NUS Career Fair 2023",
+      "status" : "hasNotBeenCompleted"
+    } ]
+  }],
+  "taskList" : [ {
+    "description" : "Book Venue",
+    "date" : "2023-12-23",
+    "event" : "NUS Career Fair 2023",
+    "status" : "hasNotBeenCompleted"
+  }, {
+    "description" : "Book Venue",
+    "date" : "2024-01-13",
+    "event" : "NUS Career Fair 2023",
+    "status" : "hasNotBeenCompleted"
+  }]
+}
