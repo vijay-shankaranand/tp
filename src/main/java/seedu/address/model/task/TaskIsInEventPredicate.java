@@ -9,7 +9,7 @@ import seedu.address.model.event.Event;
  * Tests that a {@code Task} is linked to the given event.
  */
 public class TaskIsInEventPredicate implements Predicate<Task> {
-    //Event to check if Person is involved.
+    // Event to check if Person is involved.
     private final Event event;
 
     public TaskIsInEventPredicate(Event event) {

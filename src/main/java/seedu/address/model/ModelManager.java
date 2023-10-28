@@ -295,7 +295,9 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public ObservableList<Task> getTaskDueSoonList() {
+    public ObservableList<Task> getTasksDueSoonList() {
+        // Creation of a new filtered list to prevent the original filtered list
+        // from not showing accurately when filtered further
         FilteredList<Task> taskDueSoonList = new FilteredList<>(filteredTasks);
         taskDueSoonList.setPredicate(new TaskInReminderPredicate());
         return taskDueSoonList;

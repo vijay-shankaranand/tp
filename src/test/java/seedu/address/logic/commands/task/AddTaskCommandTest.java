@@ -315,7 +315,7 @@ public class AddTaskCommandTest {
         }
 
         @Override
-        public ObservableList<Task> getTaskDueSoonList() {
+        public ObservableList<Task> getTasksDueSoonList() {
             throw new AssertionError("This method should not be called.");
         }
     }

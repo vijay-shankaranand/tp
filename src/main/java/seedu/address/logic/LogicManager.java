@@ -100,8 +100,8 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public ObservableList<Task> getTaskDueSoonList() {
-        return model.getTaskDueSoonList();
+    public ObservableList<Task> getTasksDueSoonList() {
+        return model.getTasksDueSoonList();
     }
 
     @Override

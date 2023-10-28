@@ -37,7 +37,7 @@ public class EventContactDisplay extends UiPart<Region> {
     private StackPane eventListPanelPlaceholder;
 
     @FXML
-    private StackPane reminderTaskListPanelPlaceholder;
+    private StackPane taskPanelPlaceholder;
 
     @FXML
     private StackPane eventCardPlaceholder;
@@ -64,8 +64,8 @@ public class EventContactDisplay extends UiPart<Region> {
         eventListPanel = new EventListPanel(logic.getFilteredEventList());
         eventListPanelPlaceholder.getChildren().add(eventListPanel.getRoot());
 
-        reminderListPanel = new ReminderListPanel(logic.getTaskDueSoonList());
-        reminderTaskListPanelPlaceholder.getChildren().add(reminderListPanel.getRoot());
+        reminderListPanel = new ReminderListPanel(logic.getTasksDueSoonList());
+        taskPanelPlaceholder.getChildren().add(reminderListPanel.getRoot());
     }
 
     /**
@@ -73,10 +73,10 @@ public class EventContactDisplay extends UiPart<Region> {
      */
     private void fillTaskList() {
         taskListPanel = new TaskListPanel(logic.getFilteredTaskList());
-        if (!reminderTaskListPanelPlaceholder.getChildren().isEmpty()) {
-            reminderTaskListPanelPlaceholder.getChildren().clear();
+        if (!taskPanelPlaceholder.getChildren().isEmpty()) {
+            taskPanelPlaceholder.getChildren().clear();
         }
-        reminderTaskListPanelPlaceholder.getChildren().add(taskListPanel.getRoot());
+        taskPanelPlaceholder.getChildren().add(taskListPanel.getRoot());
     }
 
     /**
@@ -89,8 +89,8 @@ public class EventContactDisplay extends UiPart<Region> {
         eventListPanel = new EventListPanel(logic.getUnfilteredEventList());
         eventListPanelPlaceholder.getChildren().add(eventListPanel.getRoot());
 
-        reminderListPanel = new ReminderListPanel(logic.getTaskDueSoonList());
-        reminderTaskListPanelPlaceholder.getChildren().add(reminderListPanel.getRoot());
+        reminderListPanel = new ReminderListPanel(logic.getTasksDueSoonList());
+        taskPanelPlaceholder.getChildren().add(reminderListPanel.getRoot());
     }
 
     /**

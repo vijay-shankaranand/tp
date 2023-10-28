@@ -225,7 +225,7 @@ public interface Model {
     ObservableList<Task> getFilteredTaskList();
 
     /** Returns an unmodifiable view of the tasks due soon */
-    ObservableList<Task> getTaskDueSoonList();
+    ObservableList<Task> getTasksDueSoonList();
 
     /**
      * Updates the filter of the filtered task list to filter by the given {@code predicate}.

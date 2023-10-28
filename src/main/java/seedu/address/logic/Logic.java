@@ -52,7 +52,7 @@ public interface Logic {
     ObservableList<Task> getFilteredTaskList();
 
     /** Returns an unmodifiable view of the tasks due soon */
-    ObservableList<Task> getTaskDueSoonList();
+    ObservableList<Task> getTasksDueSoonList();
 
     /**
      * Returns the user prefs' address book file path.

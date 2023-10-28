@@ -78,14 +78,23 @@ public class Date {
      * @return true if date is within 3 days from today, false, otherwise.
      */
     public boolean isWithinThreeDays() {
-        LocalDate today = LocalDate.now();
         LocalDate taskDue = LocalDate.parse(this.date);
 
-        if (taskDue.isBefore(today.plusDays(4))) {
+        if (taskDue.isBefore(fourDaysFromNow())) {
             return true;
         } else {
             return false;
         }
+    }
+
+    /**
+     * Returns the date four days after today's date.
+     * @param date today's date.
+     * @return date four days after today's date.
+     */
+    public LocalDate fourDaysFromNow() {
+        LocalDate today = LocalDate.now();
+        return today.plusDays(4);
     }
 
     @Override
