@@ -59,21 +59,41 @@ public class Date {
     }
 
     /**
-     * Returns true if a given date is today or after today.
+     * Compares two EventDates by date.
+     * @param secondEventDate second EventDate to compare
+     * @return -1 if first EventDate is before second EventDate, 0 if equal, 1 if first EventDate is after
      */
-    public boolean isDueWithinThreeDays() {
+    public int compareTo(Date secondEventDate) {
+        LocalDate firstDate;
+        LocalDate secondDate;
+
+        firstDate = LocalDate.parse(this.date);
+        secondDate = LocalDate.parse(secondEventDate.date);
+
+        return firstDate.compareTo(secondDate);
+    }
+
+    /**
+     * Returns true if the date is within 3 days from today.
+     * @return true if date is within 3 days from today, false, otherwise.
+     */
+    public boolean isWithinThreeDays() {
+        LocalDate taskDue = LocalDate.parse(this.date);
+
+        if (taskDue.isBefore(fourDaysFromNow())) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Returns the date four days after today's date.
+     * @return date four days after today's date.
+     */
+    public LocalDate fourDaysFromNow() {
         LocalDate today = LocalDate.now();
-        LocalDate date = LocalDate.parse(this.date);
-        if (date.isBefore(today)) {
-            return true;
-        }
-        if (date.isEqual(today)) {
-            return true;
-        }
-        if (date.isAfter(today) && date.isBefore(today.plusDays(3))) {
-            return true;
-        }
-        return false;
+        return today.plusDays(4);
     }
 
     @Override

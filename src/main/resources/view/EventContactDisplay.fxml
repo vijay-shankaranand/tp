@@ -23,4 +23,11 @@
           GridPane.columnIndex="1" GridPane.rowIndex="0" GridPane.columnSpan="1">
         <StackPane fx:id="personListPanelPlaceholder" prefHeight="99999" VBox.vgrow="ALWAYS"/>
     </VBox>
+    <columnConstraints>
+        <ColumnConstraints hgrow="ALWAYS" minWidth = "120" prefWidth="120" />
+    </columnConstraints>
+    <VBox fx:id="reminderTaskList" VBox.vgrow="ALWAYS"
+          GridPane.columnIndex="2" GridPane.rowIndex="0" GridPane.columnSpan="1">
+        <StackPane fx:id="taskPanelPlaceholder" prefHeight="99999" VBox.vgrow="ALWAYS"/>
+    </VBox>
 </GridPane>

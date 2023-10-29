@@ -18,6 +18,7 @@ import seedu.address.model.name.Name;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.TaskDescription;
+import seedu.address.model.task.TaskInReminderPredicate;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -294,7 +295,17 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public ObservableList<Task> getTasksDueSoonList() {
+        // Creation of a new filtered list to prevent the original filtered list
+        // from not showing accurately when filtered further
+        FilteredList<Task> taskDueSoonList = new FilteredList<>(filteredTasks);
+        taskDueSoonList.setPredicate(new TaskInReminderPredicate());
+        return taskDueSoonList;
+    }
+
+    @Override
     public void updateFilteredTaskList(Predicate<Task> predicate) {
+        filteredTasks.setPredicate(PREDICATE_SHOW_ALL_TASKS);
         requireNonNull(predicate);
         filteredTasks.setPredicate(predicate);
     }

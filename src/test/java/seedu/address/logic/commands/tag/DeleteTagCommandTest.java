@@ -300,6 +300,11 @@ public class DeleteTagCommandTest {
         public ObservableList<Event> getUnfilteredEventList() {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public ObservableList<Task> getTasksDueSoonList() {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**

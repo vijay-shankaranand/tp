@@ -62,7 +62,7 @@ public class Task {
         if (isCompleted) {
             return false;
         }
-        return this.deadline.isDueWithinThreeDays();
+        return this.deadline.isWithinThreeDays();
     }
 
     public TaskDescription getDescription() {
@@ -85,9 +85,12 @@ public class Task {
         return this.isCompleted;
     }
 
-
     public String getIsCompletedString() {
         return this.isCompleted ? TASK_IS_COMPLETED : TASK_HAS_NOT_BEEN_COMPLETED;
+    }
+
+    public boolean isDueSoon() {
+        return this.deadline.isWithinThreeDays();
     }
 
     /**

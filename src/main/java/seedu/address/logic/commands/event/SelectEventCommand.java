@@ -13,6 +13,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.contact.PersonIsInEventPredicate;
 import seedu.address.model.event.Event;
+import seedu.address.model.task.TaskIsInEventPredicate;
 
 /**
  * Selects an event identified using its displayed index from the address book.
@@ -48,7 +49,9 @@ public class SelectEventCommand extends Command {
 
         Event eventToBeSelected = lastShownEventList.get(targetIndex.getZeroBased());
         PersonIsInEventPredicate predicate = new PersonIsInEventPredicate(eventToBeSelected);
+        TaskIsInEventPredicate taskPredicate = new TaskIsInEventPredicate(eventToBeSelected);
         model.updateFilteredPersonList(predicate);
+        model.updateFilteredTaskList(taskPredicate);
         return new CommandResult(String.format(MESSAGE_SELECT_EVENT_SUCCESS,
             Messages.format(eventToBeSelected)), eventToBeSelected);
     }

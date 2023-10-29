@@ -66,7 +66,7 @@ public class MainWindow extends UiPart<Stage> {
         this.primaryStage = primaryStage;
         this.logic = logic;
         this.shouldDisplayTags = false;
-        this.shouldDisplayContacts = false;
+        this.shouldDisplayEvents = false;
         this.shouldDisplayContacts = false;
         this.shouldReturnToHome = false;
 

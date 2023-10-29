@@ -21,6 +21,7 @@ public interface Model {
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
     Predicate<Tag> PREDICATE_SHOW_ALL_TAGS = unused -> true;
     Predicate<Event> PREDICATE_SHOW_ALL_EVENTS = unused -> true;
+    Predicate<Task> PREDICATE_SHOW_ALL_TASKS = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -222,6 +223,9 @@ public interface Model {
 
     /** Returns an unmodifiable view of the filtered tasks in an event */
     ObservableList<Task> getFilteredTaskList();
+
+    /** Returns an unmodifiable view of the tasks due soon */
+    ObservableList<Task> getTasksDueSoonList();
 
     /**
      * Updates the filter of the filtered task list to filter by the given {@code predicate}.

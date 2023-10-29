@@ -98,6 +98,12 @@ public class LogicManager implements Logic {
     public ObservableList<Task> getFilteredTaskList() {
         return model.getFilteredTaskList();
     }
+
+    @Override
+    public ObservableList<Task> getTasksDueSoonList() {
+        return model.getTasksDueSoonList();
+    }
+
     @Override
     public Path getAddressBookFilePath() {
         return model.getAddressBookFilePath();

@@ -4,7 +4,6 @@ import java.util.function.Predicate;
 
 import seedu.address.commons.util.ToStringBuilder;
 
-
 /**
  * Tests that a {@code Task} has deadline within 3 days.
  */

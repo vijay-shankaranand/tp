@@ -11,12 +11,14 @@ import seedu.address.model.contact.Person;
 import seedu.address.model.contact.UniquePersonList;
 import seedu.address.model.date.Date;
 import seedu.address.model.event.Event;
+import seedu.address.model.event.EventSortByDateComparator;
 import seedu.address.model.event.UniqueEventList;
 import seedu.address.model.name.Name;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.TaskDescription;
+import seedu.address.model.task.TaskSortByDateAndCompletionComparator;
 import seedu.address.model.task.UniqueTaskList;
 
 /**
@@ -244,7 +246,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     @Override
     public ObservableList<Event> getEventList() {
-        return events.asUnmodifiableObservableList();
+        return events.asUnmodifiableObservableList().sorted(new EventSortByDateComparator());
     }
 
     //======Task Operations=======================================================================
@@ -329,7 +331,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     @Override
     public ObservableList<Task> getTaskList() {
-        return tasks.asUnmodifiableObservableList();
+        return tasks.asUnmodifiableObservableList().sorted(new TaskSortByDateAndCompletionComparator());
     }
     //====== util methods ===========================================================================
 

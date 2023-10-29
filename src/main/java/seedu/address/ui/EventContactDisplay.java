@@ -24,6 +24,8 @@ public class EventContactDisplay extends UiPart<Region> {
     //Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
     private EventListPanel eventListPanel;
+    private ReminderListPanel reminderListPanel;
+    private TaskListPanel taskListPanel;
 
     @FXML
     private GridPane eventContactDisplay;
@@ -33,6 +35,9 @@ public class EventContactDisplay extends UiPart<Region> {
 
     @FXML
     private StackPane eventListPanelPlaceholder;
+
+    @FXML
+    private StackPane taskPanelPlaceholder;
 
     @FXML
     private StackPane eventCardPlaceholder;
@@ -58,6 +63,20 @@ public class EventContactDisplay extends UiPart<Region> {
 
         eventListPanel = new EventListPanel(logic.getFilteredEventList());
         eventListPanelPlaceholder.getChildren().add(eventListPanel.getRoot());
+
+        reminderListPanel = new ReminderListPanel(logic.getTasksDueSoonList());
+        taskPanelPlaceholder.getChildren().add(reminderListPanel.getRoot());
+    }
+
+    /**
+     * Fills up the task list panel with the filtered task list when an event is selected.
+     */
+    private void fillTaskList() {
+        taskListPanel = new TaskListPanel(logic.getFilteredTaskList());
+        if (!taskPanelPlaceholder.getChildren().isEmpty()) {
+            taskPanelPlaceholder.getChildren().clear();
+        }
+        taskPanelPlaceholder.getChildren().add(taskListPanel.getRoot());
     }
 
     /**
@@ -69,6 +88,9 @@ public class EventContactDisplay extends UiPart<Region> {
 
         eventListPanel = new EventListPanel(logic.getUnfilteredEventList());
         eventListPanelPlaceholder.getChildren().add(eventListPanel.getRoot());
+
+        reminderListPanel = new ReminderListPanel(logic.getTasksDueSoonList());
+        taskPanelPlaceholder.getChildren().add(reminderListPanel.getRoot());
     }
 
     /**
@@ -80,6 +102,7 @@ public class EventContactDisplay extends UiPart<Region> {
         Event selectedEvent = commandResult.getSelectedEvent();
         if (selectedEvent != null) {
             eventListPanel.selectEvent(selectedEvent);
+            this.fillTaskList();
         }
     }
 }
