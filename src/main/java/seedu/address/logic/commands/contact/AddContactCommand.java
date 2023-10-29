@@ -22,7 +22,7 @@ import seedu.address.model.tag.Tag;
 public class AddContactCommand extends Command {
     public static final String COMMAND_WORD = "add_contact";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the address book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a contact to the address book. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
@@ -37,15 +37,15 @@ public class AddContactCommand extends Command {
             + PREFIX_TAG + "friends "
             + PREFIX_TAG + "owesMoney";
 
-    public static final String MESSAGE_SUCCESS = "New person added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person's name/phone number is already in "
+    public static final String MESSAGE_SUCCESS = "New contact added: %1$s";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This contact's name/phone number is already in "
             + "the address book";
     public static final String MESSAGE_INVALID_TAG = " is missing in address book. "
             + "Please use tags already added to address book.";
     private final Person toAdd;
 
     /**
-     * Creates an AddCommand to add the specified {@code Person}
+     * Creates an AddContactCommand to add the specified {@code Person}
      */
     public AddContactCommand(Person person) {
         requireNonNull(person);

@@ -13,7 +13,7 @@ import seedu.address.model.Model;
 public class ViewContactsCommand extends Command {
     public static final String COMMAND_WORD = "view_contacts";
 
-    public static final String MESSAGE_SUCCESS = "Listed all persons";
+    public static final String MESSAGE_SUCCESS = "Listed all contacts";
 
     @Override
     public CommandResult execute(Model model) {
