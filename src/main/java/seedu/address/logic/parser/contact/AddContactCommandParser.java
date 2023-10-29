@@ -18,8 +18,8 @@ import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.address.Address;
+import seedu.address.model.contact.Contact;
 import seedu.address.model.contact.Email;
-import seedu.address.model.contact.Person;
 import seedu.address.model.contact.Phone;
 import seedu.address.model.name.Name;
 import seedu.address.model.tag.Tag;
@@ -30,8 +30,8 @@ import seedu.address.model.tag.Tag;
 public class AddContactCommandParser implements Parser<AddContactCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the AddCommand
-     * and returns an AddCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the AddContactCommand
+     * and returns an AddContactCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public AddContactCommand parse(String args) throws ParseException {
@@ -50,7 +50,7 @@ public class AddContactCommandParser implements Parser<AddContactCommand> {
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-        Person person = new Person(name, phone, email, address, tagList);
+        Contact person = new Contact(name, phone, email, address, tagList);
 
         return new AddContactCommand(person);
     }

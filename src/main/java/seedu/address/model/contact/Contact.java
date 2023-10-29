@@ -13,10 +13,10 @@ import seedu.address.model.name.Name;
 import seedu.address.model.tag.Tag;
 
 /**
- * Represents a Person in the address book.
+ * Represents a Contact in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Person {
+public class Contact {
     // Identity fields
     private final Name name;
     private final Phone phone;
@@ -29,7 +29,7 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
+    public Contact(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
@@ -63,10 +63,10 @@ public class Person {
     }
 
     /**
-     * Checks whether this {@code Person} is tagged by a given {@code Tag}.
+     * Checks whether this {@code Contact} is tagged by a given {@code Tag}.
      *
      * @param tag The given tag to be checked with.
-     * @return {@code true} if this {@code Person} is tagged with the given {@code Tag},
+     * @return {@code true} if this {@code Contact} is tagged with the given {@code Tag},
      *     and {@code false} otherwise.
      */
     public boolean isTaggedBy(Tag tag) {
@@ -77,14 +77,14 @@ public class Person {
      * Returns true if both persons have the same name or same phone number.
      * This defines a weaker notion of equality between two persons.
      */
-    public boolean isSamePerson(Person otherPerson) {
-        if (otherPerson == this) {
+    public boolean isSamePerson(Contact otherContact) {
+        if (otherContact == this) {
             return true;
         }
 
-        return otherPerson != null
-                && (otherPerson.getName().equals(getName())
-                || otherPerson.getPhone().equals(getPhone()));
+        return otherContact != null
+                && (otherContact.getName().equals(getName())
+                || otherContact.getPhone().equals(getPhone()));
     }
 
     /**
@@ -98,16 +98,16 @@ public class Person {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof Person)) {
+        if (!(other instanceof Contact)) {
             return false;
         }
 
-        Person otherPerson = (Person) other;
-        return name.equals(otherPerson.name)
-                && phone.equals(otherPerson.phone)
-                && email.equals(otherPerson.email)
-                && address.equals(otherPerson.address)
-                && tags.equals(otherPerson.tags);
+        Contact otherContact = (Contact) other;
+        return name.equals(otherContact.name)
+                && phone.equals(otherContact.phone)
+                && email.equals(otherContact.email)
+                && address.equals(otherContact.address)
+                && tags.equals(otherContact.tags);
     }
 
     @Override

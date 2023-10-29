@@ -13,7 +13,7 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.contact.Person;
+import seedu.address.model.contact.Contact;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -42,14 +42,14 @@ public class AddContactCommand extends Command {
             + "the address book";
     public static final String MESSAGE_INVALID_TAG = " is missing in address book. "
             + "Please use tags already added to address book.";
-    private final Person toAdd;
+    private final Contact toAdd;
 
     /**
-     * Creates an AddContactCommand to add the specified {@code Person}
+     * Creates an AddContactCommand to add the specified {@code Contact}
      */
-    public AddContactCommand(Person person) {
-        requireNonNull(person);
-        toAdd = person;
+    public AddContactCommand(Contact contact) {
+        requireNonNull(contact);
+        toAdd = contact;
     }
 
     @Override

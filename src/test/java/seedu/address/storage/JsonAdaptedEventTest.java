@@ -27,8 +27,8 @@ public class JsonAdaptedEventTest {
     private static final String VALID_NAME = NTU.getName().toString();
     private static final String VALID_DATE = NTU.getDate().toString();
     private static final String VALID_ADDRESS = NTU.getAddress().toString();
-    private static final List<JsonAdaptedPerson> VALID_CONTACTS = NTU.getContacts().stream()
-            .map(JsonAdaptedPerson::new)
+    private static final List<JsonAdaptedContact> VALID_CONTACTS = NTU.getContacts().stream()
+            .map(JsonAdaptedContact::new)
             .collect(Collectors.toList());
 
     private static final List<JsonAdaptedTask> VALID_TASKS = NTU.getTasks().stream().map(JsonAdaptedTask::new)
@@ -90,8 +90,8 @@ public class JsonAdaptedEventTest {
 
     @Test
     public void toModelType_invalidContacts_throwsIllegalValueException() {
-        List<JsonAdaptedPerson> invalidContacts = new ArrayList<>(VALID_CONTACTS);
-        invalidContacts.add(new JsonAdaptedPerson(INVALID_NAME, INVALID_PHONE, INVALID_EMAIL, INVALID_ADDRESS,
+        List<JsonAdaptedContact> invalidContacts = new ArrayList<>(VALID_CONTACTS);
+        invalidContacts.add(new JsonAdaptedContact(INVALID_NAME, INVALID_PHONE, INVALID_EMAIL, INVALID_ADDRESS,
                 null));
         JsonAdaptedEvent event =
                 new JsonAdaptedEvent(VALID_NAME, VALID_DATE, VALID_ADDRESS, invalidContacts, VALID_TASKS);

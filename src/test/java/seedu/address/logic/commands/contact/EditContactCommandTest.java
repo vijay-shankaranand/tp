@@ -25,7 +25,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.contact.Person;
+import seedu.address.model.contact.Contact;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.contact.ContactBuilder;
 import seedu.address.testutil.contact.EditPersonDescriptorBuilder;
@@ -38,13 +38,13 @@ public class EditContactCommandTest {
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
-        Person editedPerson = new ContactBuilder().build();
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedPerson).build();
+        Contact editedContact = new ContactBuilder().build();
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedContact).build();
         EditContactCommand editCommand = new EditContactCommand(INDEX_FIRST, descriptor);
         String expectedMessage = String.format(EditContactCommand.MESSAGE_EDIT_PERSON_SUCCESS,
-                Messages.format(editedPerson));
+                Messages.format(editedContact));
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setPerson(model.getFilteredPersonList().get(0), editedPerson);
+        expectedModel.setPerson(model.getFilteredPersonList().get(0), editedContact);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
@@ -54,10 +54,10 @@ public class EditContactCommandTest {
 
         model.addTag(new Tag(VALID_TAG_HUSBAND));
         Index indexLastPerson = Index.fromOneBased(model.getFilteredPersonList().size());
-        Person lastPerson = model.getFilteredPersonList().get(indexLastPerson.getZeroBased());
+        Contact lastContact = model.getFilteredPersonList().get(indexLastPerson.getZeroBased());
 
-        ContactBuilder personInList = new ContactBuilder(lastPerson);
-        Person editedPerson = personInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
+        ContactBuilder personInList = new ContactBuilder(lastContact);
+        Contact editedContact = personInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
                 .withTags(VALID_TAG_HUSBAND).build();
 
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
@@ -66,10 +66,10 @@ public class EditContactCommandTest {
         EditContactCommand editCommand = new EditContactCommand(indexLastPerson, descriptor);
 
         String expectedMessage = String.format(EditContactCommand.MESSAGE_EDIT_PERSON_SUCCESS,
-                Messages.format(editedPerson));
+                Messages.format(editedContact));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setPerson(lastPerson, editedPerson);
+        expectedModel.setPerson(lastContact, editedContact);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
@@ -79,10 +79,10 @@ public class EditContactCommandTest {
 
         model.addTag(new Tag("friends"));
         EditContactCommand editCommand = new EditContactCommand(INDEX_FIRST, new EditPersonDescriptor());
-        Person editedPerson = model.getFilteredPersonList().get(INDEX_FIRST.getZeroBased());
+        Contact editedContact = model.getFilteredPersonList().get(INDEX_FIRST.getZeroBased());
 
         String expectedMessage = String.format(EditContactCommand.MESSAGE_EDIT_PERSON_SUCCESS,
-                Messages.format(editedPerson));
+                Messages.format(editedContact));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
 
@@ -93,23 +93,23 @@ public class EditContactCommandTest {
     public void execute_filteredList_success() {
         showPersonAtIndex(model, INDEX_FIRST);
         model.addTag(new Tag("friends"));
-        Person personInFilteredList = model.getFilteredPersonList().get(INDEX_FIRST.getZeroBased());
-        Person editedPerson = new ContactBuilder(personInFilteredList).withName(VALID_NAME_BOB).build();
+        Contact contactInFilteredList = model.getFilteredPersonList().get(INDEX_FIRST.getZeroBased());
+        Contact editedContact = new ContactBuilder(contactInFilteredList).withName(VALID_NAME_BOB).build();
 
         EditContactCommand editCommand = new EditContactCommand(INDEX_FIRST,
                 new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build());
         String expectedMessage = String.format(EditContactCommand.MESSAGE_EDIT_PERSON_SUCCESS,
-                Messages.format(editedPerson));
+                Messages.format(editedContact));
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setPerson(model.getFilteredPersonList().get(0), editedPerson);
+        expectedModel.setPerson(model.getFilteredPersonList().get(0), editedContact);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_duplicatePersonUnfilteredList_failure() {
-        Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST.getZeroBased());
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(firstPerson).build();
+        Contact firstContact = model.getFilteredPersonList().get(INDEX_FIRST.getZeroBased());
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(firstContact).build();
         EditContactCommand editCommand = new EditContactCommand(INDEX_SECOND, descriptor);
 
         assertCommandFailure(editCommand, model, EditContactCommand.MESSAGE_DUPLICATE_PERSON);
@@ -119,10 +119,10 @@ public class EditContactCommandTest {
     public void execute_duplicatePersonFilteredList_failure() {
         showPersonAtIndex(model, INDEX_FIRST);
 
-        // edit person in filtered list into a duplicate in address book
-        Person personInList = model.getAddressBook().getPersonList().get(INDEX_SECOND.getZeroBased());
+        // edit contact in filtered list into a duplicate in address book
+        Contact contactInList = model.getAddressBook().getContactList().get(INDEX_SECOND.getZeroBased());
         EditContactCommand editCommand = new EditContactCommand(INDEX_FIRST,
-                new EditPersonDescriptorBuilder(personInList).build());
+                new EditPersonDescriptorBuilder(contactInList).build());
 
         assertCommandFailure(editCommand, model, EditContactCommand.MESSAGE_DUPLICATE_PERSON);
     }
@@ -145,7 +145,7 @@ public class EditContactCommandTest {
         showPersonAtIndex(model, INDEX_FIRST);
         Index outOfBoundIndex = INDEX_SECOND;
         // ensures that outOfBoundIndex is still in bounds of address book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getContactList().size());
 
         EditContactCommand editCommand = new EditContactCommand(outOfBoundIndex,
                 new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build());
@@ -157,10 +157,10 @@ public class EditContactCommandTest {
     public void execute_tagNotPresentInAddressBook_throwsCommandException() {
 
         Index indexLastPerson = Index.fromOneBased(model.getFilteredPersonList().size());
-        Person lastPerson = model.getFilteredPersonList().get(indexLastPerson.getZeroBased());
+        Contact lastContact = model.getFilteredPersonList().get(indexLastPerson.getZeroBased());
 
-        ContactBuilder personInList = new ContactBuilder(lastPerson);
-        Person editedPerson = personInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
+        ContactBuilder personInList = new ContactBuilder(lastContact);
+        Contact editedContact = personInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
                 .withTags(VALID_TAG_HUSBAND).build();
 
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
@@ -169,7 +169,7 @@ public class EditContactCommandTest {
         EditContactCommand editCommand = new EditContactCommand(indexLastPerson, descriptor);
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setPerson(lastPerson, editedPerson);
+        expectedModel.setPerson(lastContact, editedContact);
 
         assertCommandFailure(editCommand, model, "Tag: family" + EditContactCommand.MESSAGE_INVALID_TAG);
     }
@@ -178,10 +178,10 @@ public class EditContactCommandTest {
     public void execute_tagPresentInAddressBook_doesNotThrowException() {
         model.addTag(new Tag(VALID_TAG_HUSBAND));
         Index indexLastPerson = Index.fromOneBased(model.getFilteredPersonList().size());
-        Person lastPerson = model.getFilteredPersonList().get(indexLastPerson.getZeroBased());
+        Contact lastContact = model.getFilteredPersonList().get(indexLastPerson.getZeroBased());
 
-        ContactBuilder personInList = new ContactBuilder(lastPerson);
-        Person editedPerson = personInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
+        ContactBuilder personInList = new ContactBuilder(lastContact);
+        Contact editedContact = personInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
                 .withTags(VALID_TAG_HUSBAND).build();
 
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
@@ -189,9 +189,9 @@ public class EditContactCommandTest {
 
         EditContactCommand editCommand = new EditContactCommand(indexLastPerson, descriptor);
         String expectedMessage = String.format(EditContactCommand.MESSAGE_EDIT_PERSON_SUCCESS,
-                Messages.format(editedPerson));
+                Messages.format(editedContact));
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setPerson(lastPerson, editedPerson);
+        expectedModel.setPerson(lastContact, editedContact);
 
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);

@@ -11,7 +11,7 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.contact.Person;
+import seedu.address.model.contact.Contact;
 import seedu.address.model.event.Event;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.task.Task;
@@ -22,7 +22,7 @@ import seedu.address.model.task.Task;
 @JsonRootName(value = "addressbook")
 class JsonSerializableAddressBook {
 
-    public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
+    public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate contact(s).";
 
     public static final String MESSAGE_DUPLICATE_TAG = "Tags list contains duplicate tag(s).";
 
@@ -30,7 +30,7 @@ class JsonSerializableAddressBook {
 
     public static final String MESSAGE_DUPLICATE_TASK = "Tasks list contains duplicate tasks(s).";
 
-    private final List<JsonAdaptedPerson> persons = new ArrayList<>();
+    private final List<JsonAdaptedContact> contacts = new ArrayList<>();
 
     private final List<JsonAdaptedTag> tagList = new ArrayList<>();
 
@@ -42,12 +42,12 @@ class JsonSerializableAddressBook {
      * Constructs a {@code JsonSerializableAddressBook} with the given persons, tags, events, tasks.
      */
     @JsonCreator
-    public JsonSerializableAddressBook(@JsonProperty("persons") List<JsonAdaptedPerson> persons,
+    public JsonSerializableAddressBook(@JsonProperty("contacts") List<JsonAdaptedContact> persons,
                                        @JsonProperty("tagList") List<JsonAdaptedTag> tagList,
                                        @JsonProperty("events") List<JsonAdaptedEvent> events,
                                        @JsonProperty("taskList") List<JsonAdaptedTask> taskList
     ) {
-        this.persons.addAll(persons);
+        this.contacts.addAll(persons);
         this.tagList.addAll(tagList);
         this.events.addAll(events);
         this.taskList.addAll(taskList);
@@ -60,7 +60,7 @@ class JsonSerializableAddressBook {
      * @param source future changes to this will not affect the created {@code JsonSerializableAddressBook}.
      */
     public JsonSerializableAddressBook(ReadOnlyAddressBook source) {
-        persons.addAll(source.getPersonList().stream().map(JsonAdaptedPerson::new).collect(Collectors.toList()));
+        contacts.addAll(source.getContactList().stream().map(JsonAdaptedContact::new).collect(Collectors.toList()));
         tagList.addAll(source.getTagList().stream().map(JsonAdaptedTag::new).collect(Collectors.toList()));
         events.addAll(source.getEventList().stream().map(JsonAdaptedEvent::new).collect(Collectors.toList()));
         taskList.addAll(source.getTaskList().stream().map(JsonAdaptedTask::new).collect(Collectors.toList()));
@@ -73,12 +73,12 @@ class JsonSerializableAddressBook {
      */
     public AddressBook toModelType() throws IllegalValueException {
         AddressBook addressBook = new AddressBook();
-        for (JsonAdaptedPerson jsonAdaptedPerson : persons) {
-            Person person = jsonAdaptedPerson.toModelType();
-            if (addressBook.hasPerson(person)) {
+        for (JsonAdaptedContact jsonAdaptedPerson : contacts) {
+            Contact contact = jsonAdaptedPerson.toModelType();
+            if (addressBook.hasPerson(contact)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
             }
-            addressBook.addPerson(person);
+            addressBook.addPerson(contact);
         }
         for (JsonAdaptedTag jsonAdaptedTag : tagList) {
             Tag tag = jsonAdaptedTag.toModelType();

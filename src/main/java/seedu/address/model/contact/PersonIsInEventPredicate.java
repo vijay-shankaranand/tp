@@ -6,10 +6,10 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.event.Event;
 
 /**
- * Tests that a {@code Person} is linked to the given event.
+ * Tests that a {@code Contact} is linked to the given event.
  */
-public class PersonIsInEventPredicate implements Predicate<Person> {
-    //Event to check if Person is involved.
+public class PersonIsInEventPredicate implements Predicate<Contact> {
+    //Event to check if Contact is involved.
     private final Event event;
 
     public PersonIsInEventPredicate(Event event) {
@@ -17,8 +17,8 @@ public class PersonIsInEventPredicate implements Predicate<Person> {
     }
 
     @Override
-    public boolean test(Person person) {
-        return event.isLinkedToContact(person);
+    public boolean test(Contact contact) {
+        return event.isLinkedToContact(contact);
     }
 
     @Override

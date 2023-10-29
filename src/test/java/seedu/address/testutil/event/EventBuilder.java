@@ -4,7 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.model.address.Address;
-import seedu.address.model.contact.Person;
+import seedu.address.model.contact.Contact;
 import seedu.address.model.date.Date;
 import seedu.address.model.event.Event;
 import seedu.address.model.name.Name;
@@ -25,7 +25,7 @@ public class EventBuilder {
     private Address address;
     private Date date;
 
-    private Set<Person> contacts;
+    private Set<Contact> contacts;
     private Set<Task> tasks;
 
 
@@ -78,9 +78,9 @@ public class EventBuilder {
     }
 
     /**
-     * Parses the {@code contacts} into a {@code Set<Person>} and set it to the {@code Event} that we are building.
+     * Parses the {@code contacts} into a {@code Set<Contact>} and set it to the {@code Event} that we are building.
      */
-    public EventBuilder withEventContacts(Person ... contacts) {
+    public EventBuilder withEventContacts(Contact... contacts) {
         this.contacts = SampleDataUtil.getPersonSet(contacts);
         return this;
     }

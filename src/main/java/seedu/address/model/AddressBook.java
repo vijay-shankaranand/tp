@@ -7,8 +7,8 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.contact.Person;
-import seedu.address.model.contact.UniquePersonList;
+import seedu.address.model.contact.Contact;
+import seedu.address.model.contact.UniqueContactList;
 import seedu.address.model.date.Date;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.EventSortByDateComparator;
@@ -27,7 +27,7 @@ import seedu.address.model.task.UniqueTaskList;
  */
 public class AddressBook implements ReadOnlyAddressBook {
 
-    private final UniquePersonList persons;
+    private final UniqueContactList persons;
 
     private final UniqueTagList tags;
 
@@ -42,7 +42,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      *   among constructors.
      */
     {
-        persons = new UniquePersonList();
+        persons = new UniqueContactList();
         tags = new UniqueTagList();
         events = new UniqueEventList();
         tasks = new UniqueTaskList();
@@ -61,11 +61,11 @@ public class AddressBook implements ReadOnlyAddressBook {
     //==== list overwrite operations ================================================================
 
     /**
-     * Replaces the contents of the person list with {@code persons}.
-     * {@code persons} must not contain duplicate persons.
+     * Replaces the contents of the contact list with {@code contacts}.
+     * {@code contacts} must not contain duplicate contacts.
      */
-    public void setPersons(List<Person> persons) {
-        this.persons.setPersons(persons);
+    public void setContacts(List<Contact> contacts) {
+        this.persons.setPersons(contacts);
     }
 
     /**
@@ -98,54 +98,54 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
 
-        setPersons(newData.getPersonList());
+        setContacts(newData.getContactList());
         setTags(newData.getTagList());
         setEvents(newData.getEventList());
         setTasks(newData.getTaskList());
     }
 
 
-    //==== person-level operations ==================================================================
+    //==== contact-level operations ==================================================================
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Returns true if a contact with the same identity as {@code contact} exists in the address book.
      */
-    public boolean hasPerson(Person person) {
-        requireNonNull(person);
-        return persons.contains(person);
+    public boolean hasPerson(Contact contact) {
+        requireNonNull(contact);
+        return persons.contains(contact);
     }
 
     /**
-     * Adds a person to the address book.
-     * The person must not already exist in the address book.
+     * Adds a contact to the address book.
+     * The contact must not already exist in the address book.
      */
-    public void addPerson(Person p) {
+    public void addPerson(Contact p) {
         persons.add(p);
     }
 
     /**
-     * Returns the {@code Person} with given name.
+     * Returns the {@code Contact} with given name.
      */
-    public Person getPerson(Name name) {
+    public Contact getPerson(Name name) {
         return persons.getByName(name);
     }
 
     /**
-     * Replaces the given person {@code target} in the list with {@code editedPerson}.
+     * Replaces the given contact {@code target} in the list with {@code editedContact}.
      * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+     * The contact identity of {@code editedContact} must not be the same as another existing contact in the address book.
      */
-    public void setPerson(Person target, Person editedPerson) {
-        requireNonNull(editedPerson);
+    public void setPerson(Contact target, Contact editedContact) {
+        requireNonNull(editedContact);
 
-        persons.setPerson(target, editedPerson);
+        persons.setPerson(target, editedContact);
     }
 
     /**
      * Removes {@code key} from this {@code AddressBook}.
      * {@code key} must exist in the address book.
      */
-    public void removePerson(Person key) {
+    public void removePerson(Contact key) {
         persons.remove(key);
         events.updateContacts(key);
     }
@@ -153,7 +153,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     //// util methods
 
     @Override
-    public ObservableList<Person> getPersonList() {
+    public ObservableList<Contact> getContactList() {
         return persons.asUnmodifiableObservableList();
     }
 
@@ -353,7 +353,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("persons", persons)
+                .add("contacts", persons)
                 .add("tags", tags)
                 .add("events", events)
                 .add("tasks", tasks)

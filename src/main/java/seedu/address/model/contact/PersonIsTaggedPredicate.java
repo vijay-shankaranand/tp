@@ -7,9 +7,9 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.tag.Tag;
 
 /**
- * Tests that a {@code Person} is tagged by any of the given tags.
+ * Tests that a {@code Contact} is tagged by any of the given tags.
  */
-public class PersonIsTaggedPredicate implements Predicate<Person> {
+public class PersonIsTaggedPredicate implements Predicate<Contact> {
     private final List<Tag> tags;
 
     public PersonIsTaggedPredicate(List<Tag> tags) {
@@ -17,8 +17,8 @@ public class PersonIsTaggedPredicate implements Predicate<Person> {
     }
 
     @Override
-    public boolean test(Person person) {
-        return tags.stream().anyMatch(tag -> person.isTaggedBy(tag));
+    public boolean test(Contact contact) {
+        return tags.stream().anyMatch(tag -> contact.isTaggedBy(tag));
     }
 
     @Override

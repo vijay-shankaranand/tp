@@ -17,7 +17,7 @@ import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.address.Address;
-import seedu.address.model.contact.Person;
+import seedu.address.model.contact.Contact;
 import seedu.address.model.date.Date;
 import seedu.address.model.event.Event;
 import seedu.address.model.name.Name;
@@ -47,7 +47,7 @@ public class AddEventCommandParser implements Parser<AddEventCommand> {
         Date date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
 
-        Set<Person> contacts = new HashSet<>();
+        Set<Contact> contacts = new HashSet<>();
         Set<Task> tasks = new HashSet<>();
 
         Event event = new Event(name, date, address, contacts, tasks);

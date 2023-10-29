@@ -15,14 +15,14 @@ import seedu.address.model.name.Name;
 import seedu.address.model.task.Task;
 
 
-public class PersonIsInEventPredicateTest {
+public class ContactIsInEventPredicateTest {
     @Test
     public void equals() {
 
         Event firstEvent = new Event(new Name("Job Fest 2023"), new Date("2023-12-23"),
-            new Address("NUS"), new HashSet<Person>(), new HashSet<Task>());
+            new Address("NUS"), new HashSet<Contact>(), new HashSet<Task>());
         Event secondEvent = new Event(new Name("Job Fest 2024"), new Date("2024-12-23"),
-            new Address("NUS"), new HashSet<Person>(), new HashSet<Task>());
+            new Address("NUS"), new HashSet<Contact>(), new HashSet<Task>());
 
 
         PersonIsInEventPredicate firstPredicate = new PersonIsInEventPredicate(firstEvent);
@@ -49,7 +49,7 @@ public class PersonIsInEventPredicateTest {
     public void toString_testEquals() {
 
         Event firstEvent = new Event(new Name("Job Fest 2023"), new Date("2023-12-23"),
-            new Address("NUS"), new HashSet<Person>(), new HashSet<Task>());
+            new Address("NUS"), new HashSet<Contact>(), new HashSet<Task>());
 
         PersonIsInEventPredicate firstPredicate = new PersonIsInEventPredicate(firstEvent);
         String expected = new ToStringBuilder(firstPredicate).add("event", firstEvent).toString();
