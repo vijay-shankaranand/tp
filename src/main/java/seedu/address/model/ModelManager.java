@@ -103,31 +103,30 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean hasPerson(Contact contact) {
+    public boolean hasContact(Contact contact) {
         requireNonNull(contact);
         return addressBook.hasPerson(contact);
     }
 
     @Override
-    public void deletePerson(Contact target) {
+    public void deleteContact(Contact target) {
         addressBook.removePerson(target);
     }
 
     @Override
-    public void addPerson(Contact contact) {
+    public void addContact(Contact contact) {
         addressBook.addPerson(contact);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
     @Override
-    public Contact getPerson(Name name) {
+    public Contact getContact(Name name) {
         return addressBook.getPerson(name);
     }
 
     @Override
-    public void setPerson(Contact target, Contact editedContact) {
+    public void setContact(Contact target, Contact editedContact) {
         requireAllNonNull(target, editedContact);
-
         addressBook.setPerson(target, editedContact);
     }
 

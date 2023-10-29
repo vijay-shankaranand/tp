@@ -58,7 +58,7 @@ public class AddContactCommandTest {
     @Test
     public void addPerson_tagNotPresentInAddressBook_throwsCommandException() {
         //Empty taglist in model
-        model.deletePerson(ALICE);
+        model.deleteContact(ALICE);
         assertThrows(CommandException.class, "Tag: friends"
                 + AddContactCommand.MESSAGE_INVALID_TAG, () -> new AddContactCommand(ALICE).execute(model));
 
@@ -67,7 +67,7 @@ public class AddContactCommandTest {
     @Test
     public void addPerson_tagPresentInAddressBook_doesNotThrowException() {
         //Add "friends tag into tag list"
-        model.deletePerson(ALICE);
+        model.deleteContact(ALICE);
         model.addTag(new Tag("friends"));
         assertDoesNotThrow(() -> new AddContactCommand(ALICE).execute(model));
     }
@@ -149,12 +149,12 @@ public class AddContactCommandTest {
         }
 
         @Override
-        public void addPerson(Contact contact) {
+        public void addContact(Contact contact) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public Contact getPerson(Name name) {
+        public Contact getContact(Name name) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -169,17 +169,17 @@ public class AddContactCommandTest {
         }
 
         @Override
-        public boolean hasPerson(Contact contact) {
+        public boolean hasContact(Contact contact) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void deletePerson(Contact target) {
+        public void deleteContact(Contact target) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void setPerson(Contact target, Contact editedContact) {
+        public void setContact(Contact target, Contact editedContact) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -336,7 +336,7 @@ public class AddContactCommandTest {
         }
 
         @Override
-        public boolean hasPerson(Contact contact) {
+        public boolean hasContact(Contact contact) {
             requireNonNull(contact);
             return this.contact.isSamePerson(contact);
         }
@@ -349,13 +349,13 @@ public class AddContactCommandTest {
         final ArrayList<Contact> personsAdded = new ArrayList<>();
 
         @Override
-        public boolean hasPerson(Contact contact) {
+        public boolean hasContact(Contact contact) {
             requireNonNull(contact);
             return personsAdded.stream().anyMatch(contact::isSamePerson);
         }
 
         @Override
-        public void addPerson(Contact contact) {
+        public void addContact(Contact contact) {
             requireNonNull(contact);
             personsAdded.add(contact);
         }

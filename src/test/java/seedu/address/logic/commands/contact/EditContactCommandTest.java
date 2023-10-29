@@ -44,7 +44,7 @@ public class EditContactCommandTest {
         String expectedMessage = String.format(EditContactCommand.MESSAGE_EDIT_PERSON_SUCCESS,
                 Messages.format(editedContact));
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setPerson(model.getFilteredPersonList().get(0), editedContact);
+        expectedModel.setContact(model.getFilteredPersonList().get(0), editedContact);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
@@ -69,7 +69,7 @@ public class EditContactCommandTest {
                 Messages.format(editedContact));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setPerson(lastContact, editedContact);
+        expectedModel.setContact(lastContact, editedContact);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
@@ -101,7 +101,7 @@ public class EditContactCommandTest {
         String expectedMessage = String.format(EditContactCommand.MESSAGE_EDIT_PERSON_SUCCESS,
                 Messages.format(editedContact));
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setPerson(model.getFilteredPersonList().get(0), editedContact);
+        expectedModel.setContact(model.getFilteredPersonList().get(0), editedContact);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
@@ -169,7 +169,7 @@ public class EditContactCommandTest {
         EditContactCommand editCommand = new EditContactCommand(indexLastPerson, descriptor);
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setPerson(lastContact, editedContact);
+        expectedModel.setContact(lastContact, editedContact);
 
         assertCommandFailure(editCommand, model, "Tag: family" + EditContactCommand.MESSAGE_INVALID_TAG);
     }
@@ -191,7 +191,7 @@ public class EditContactCommandTest {
         String expectedMessage = String.format(EditContactCommand.MESSAGE_EDIT_PERSON_SUCCESS,
                 Messages.format(editedContact));
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setPerson(lastContact, editedContact);
+        expectedModel.setContact(lastContact, editedContact);
 
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);

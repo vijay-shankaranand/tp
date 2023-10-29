@@ -57,7 +57,7 @@ public class LinkCommand extends Command {
             Event eventToLink = model.getEvent(eventNameToLink);
 
             for (Name contactName : contactNameListToLink) {
-                Contact contactToLink = model.getPerson(contactName);
+                Contact contactToLink = model.getContact(contactName);
                 if (eventToLink.isLinkedToContact(contactToLink)) {
                     throw new CommandException(String.format(MESSAGE_LINKED_CONTACT, contactName, eventNameToLink));
                 }

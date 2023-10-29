@@ -64,24 +64,24 @@ public interface Model {
     /**
      * Returns true if a contact with the same identity as {@code contact} exists in the address book.
      */
-    boolean hasPerson(Contact contact);
+    boolean hasContact(Contact contact);
 
     /**
      * Deletes the given contact.
      * The contact must exist in the address book.
      */
-    void deletePerson(Contact target);
+    void deleteContact(Contact target);
 
     /**
      * Adds the given contact.
      * {@code contact} must not already exist in the address book.
      */
-    void addPerson(Contact contact);
+    void addContact(Contact contact);
 
     /**
      * Returns the {@code Contact} with given name.
      */
-    Contact getPerson(Name name);
+    Contact getContact(Name name);
 
     /**
      * Replaces the given contact {@code target} with {@code editedContact}.
@@ -89,7 +89,7 @@ public interface Model {
      * The contact identity of {@code editedContact} must not be the same as another existing contact in the address
      * book.
      */
-    void setPerson(Contact target, Contact editedContact);
+    void setContact(Contact target, Contact editedContact);
 
     /** Returns an unmodifiable view of the filtered contact list */
     ObservableList<Contact> getFilteredPersonList();

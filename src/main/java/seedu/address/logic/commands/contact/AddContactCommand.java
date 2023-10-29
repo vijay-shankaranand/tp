@@ -56,7 +56,7 @@ public class AddContactCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (model.hasPerson(toAdd)) {
+        if (model.hasContact(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
@@ -66,7 +66,7 @@ public class AddContactCommand extends Command {
             }
         }
 
-        model.addPerson(toAdd);
+        model.addContact(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
 

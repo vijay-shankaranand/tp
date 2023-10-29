@@ -82,7 +82,7 @@ public class EditContactCommand extends Command {
         Contact contactToEdit = lastShownList.get(index.getZeroBased());
         Contact editedContact = createEditedPerson(contactToEdit, editPersonDescriptor);
 
-        if (!contactToEdit.isSamePerson(editedContact) && model.hasPerson(editedContact)) {
+        if (!contactToEdit.isSamePerson(editedContact) && model.hasContact(editedContact)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
@@ -92,7 +92,7 @@ public class EditContactCommand extends Command {
             }
         }
 
-        model.setPerson(contactToEdit, editedContact);
+        model.setContact(contactToEdit, editedContact);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedContact)));
     }

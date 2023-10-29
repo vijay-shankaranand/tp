@@ -26,8 +26,7 @@ import seedu.address.model.task.UniqueTaskList;
  * Duplicates are not allowed (by .isSamePerson comparison)
  */
 public class AddressBook implements ReadOnlyAddressBook {
-
-    private final UniqueContactList persons;
+    private final UniqueContactList contacts;
 
     private final UniqueTagList tags;
 
@@ -42,7 +41,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      *   among constructors.
      */
     {
-        persons = new UniqueContactList();
+        contacts = new UniqueContactList();
         tags = new UniqueTagList();
         events = new UniqueEventList();
         tasks = new UniqueTaskList();
@@ -65,7 +64,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * {@code contacts} must not contain duplicate contacts.
      */
     public void setContacts(List<Contact> contacts) {
-        this.persons.setPersons(contacts);
+        this.contacts.setPersons(contacts);
     }
 
     /**
@@ -112,7 +111,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public boolean hasPerson(Contact contact) {
         requireNonNull(contact);
-        return persons.contains(contact);
+        return contacts.contains(contact);
     }
 
     /**
@@ -120,25 +119,25 @@ public class AddressBook implements ReadOnlyAddressBook {
      * The contact must not already exist in the address book.
      */
     public void addPerson(Contact p) {
-        persons.add(p);
+        contacts.add(p);
     }
 
     /**
      * Returns the {@code Contact} with given name.
      */
     public Contact getPerson(Name name) {
-        return persons.getByName(name);
+        return contacts.getByName(name);
     }
 
     /**
      * Replaces the given contact {@code target} in the list with {@code editedContact}.
      * {@code target} must exist in the address book.
-     * The contact identity of {@code editedContact} must not be the same as another existing contact in the address book.
+     * The contact identity of {@code editedContact} must not be the same as another existing contact in the address
+     * book.
      */
     public void setPerson(Contact target, Contact editedContact) {
         requireNonNull(editedContact);
-
-        persons.setPerson(target, editedContact);
+        contacts.setPerson(target, editedContact);
     }
 
     /**
@@ -146,7 +145,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * {@code key} must exist in the address book.
      */
     public void removePerson(Contact key) {
-        persons.remove(key);
+        contacts.remove(key);
         events.updateContacts(key);
     }
 
@@ -154,7 +153,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     @Override
     public ObservableList<Contact> getContactList() {
-        return persons.asUnmodifiableObservableList();
+        return contacts.asUnmodifiableObservableList();
     }
 
     //======Tag Operations=======================================================================
@@ -181,7 +180,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void deleteTag(Tag tagToBeDeleted) {
         tags.delete(tagToBeDeleted);
-        persons.updateTag(tagToBeDeleted);
+        contacts.updateTag(tagToBeDeleted);
     }
 
     /**
@@ -347,13 +346,13 @@ public class AddressBook implements ReadOnlyAddressBook {
         }
 
         AddressBook otherAddressBook = (AddressBook) other;
-        return persons.equals(otherAddressBook.persons);
+        return contacts.equals(otherAddressBook.contacts);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("contacts", persons)
+                .add("contacts", contacts)
                 .add("tags", tags)
                 .add("events", events)
                 .add("tasks", tasks)
@@ -362,6 +361,6 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     @Override
     public int hashCode() {
-        return persons.hashCode();
+        return contacts.hashCode();
     }
 }
