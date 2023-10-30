@@ -61,7 +61,7 @@ JobFestGo is a **desktop app for managing contacts and tasks, optimized for use 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `view_contacts`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
@@ -87,7 +87,7 @@ Format: `add_contact n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 * A contact must have mandatory fields name, phone number, email and address
 * Email should be in the appropriate (@xxx.com) format
 * Phone number should be in appropriate (8-digit numeric) format
-* Only tags from tags list can be used for tagging a person
+* Only tags from tags list can be used for tagging a contact
 * A contact cannot be added if their phone number already exists
 * A contact cannot be added if their name already exists
 
@@ -109,7 +109,7 @@ Deletes the specified contact from JobFestGo.
 Format: `delete_contact INDEX`
 
 * Deletes the contact at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
+* The index refers to the index number shown in the displayed contact list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:

@@ -105,7 +105,7 @@ public class FilterCommandTest {
         // null -> returns false
         assertFalse(firstFilterCommand.equals(null));
 
-        // different person -> returns false
+        // different contact -> returns false
         assertFalse(firstFilterCommand.equals(secondFilterCommand));
     }
 

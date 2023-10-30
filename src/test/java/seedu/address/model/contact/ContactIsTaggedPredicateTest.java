@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.model.tag.Tag;
 
-public class PersonIsTaggedPredicateTest {
+public class ContactIsTaggedPredicateTest {
     @Test
     public void equals() {
         Tag firstTag = new Tag("friends");
@@ -41,7 +41,7 @@ public class PersonIsTaggedPredicateTest {
         // null -> returns false
         assertFalse(firstPredicate.equals(null));
 
-        // different person -> returns false
+        // different contact -> returns false
         assertFalse(firstPredicate.equals(secondPredicate));
     }
 }

@@ -10,7 +10,7 @@ public class SampleDataUtilTest {
     @Test
     public void getSampleAddressBook_hasPersonList_success() {
         ReadOnlyAddressBook ab = SampleDataUtil.getSampleAddressBook();
-        assertTrue(!ab.getPersonList().isEmpty());
+        assertTrue(!ab.getContactList().isEmpty());
     }
 
     @Test

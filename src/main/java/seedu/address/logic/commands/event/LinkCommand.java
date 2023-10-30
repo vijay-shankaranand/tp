@@ -11,7 +11,7 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.contact.Person;
+import seedu.address.model.contact.Contact;
 import seedu.address.model.contact.exceptions.ContactNotFoundException;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.exceptions.EventNotFoundException;
@@ -34,7 +34,7 @@ public class LinkCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Linked contact: %1$s to event: %2$s";
     public static final String MESSAGE_NO_SUCH_EVENT = "The event: %1$s does not exist in the event list. "
             + "Please add it in first.";
-    public static final String MESSAGE_NO_SUCH_CONTACT = "The person: %1$s does not exist in JobFestGo. "
+    public static final String MESSAGE_NO_SUCH_CONTACT = "The contact: %1$s does not exist in JobFestGo. "
             + "Please add it in first.";
     public static final String MESSAGE_LINKED_CONTACT = "The contact: %1$s is already linked to the event: %2$s";
 
@@ -42,7 +42,7 @@ public class LinkCommand extends Command {
     private final Set<Name> contactNameListToLink;
 
     /**
-     * Creates a LinkCommand to link the person specified by the name to the event specified by the name.
+     * Creates a LinkCommand to link the contact specified by the name to the event specified by the name.
      */
     public LinkCommand(Name eventNameToLink, Set<Name> contactNameListToLink) {
         this.eventNameToLink = eventNameToLink;
@@ -57,7 +57,7 @@ public class LinkCommand extends Command {
             Event eventToLink = model.getEvent(eventNameToLink);
 
             for (Name contactName : contactNameListToLink) {
-                Person contactToLink = model.getPerson(contactName);
+                Contact contactToLink = model.getContact(contactName);
                 if (eventToLink.isLinkedToContact(contactToLink)) {
                     throw new CommandException(String.format(MESSAGE_LINKED_CONTACT, contactName, eventNameToLink));
                 }

@@ -64,7 +64,7 @@ public class EventTest {
         // different type -> returns false
         assertFalse(NTU.equals(5));
 
-        // different person -> returns false
+        // different contact -> returns false
         assertFalse(NTU.equals(JOBFEST));
 
         // different name -> returns false

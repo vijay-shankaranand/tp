@@ -11,7 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.contact.Person;
+import seedu.address.model.contact.Contact;
 import seedu.address.model.date.Date;
 import seedu.address.model.event.Event;
 import seedu.address.model.name.Name;
@@ -28,7 +28,7 @@ public class ModelManager implements Model {
 
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
-    private final FilteredList<Person> filteredPersons;
+    private final FilteredList<Contact> filteredContacts;
     private final FilteredList<Tag> filteredTags;
     private final FilteredList<Event> filteredEvents;
     private final FilteredList<Task> filteredTasks;
@@ -44,7 +44,7 @@ public class ModelManager implements Model {
 
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredContacts = new FilteredList<>(this.addressBook.getContactList());
         filteredTags = new FilteredList<>(this.addressBook.getTagList());
         filteredEvents = new FilteredList<>(this.addressBook.getEventList());
         filteredTasks = new FilteredList<>(this.addressBook.getTaskList());
@@ -103,32 +103,31 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean hasPerson(Person person) {
-        requireNonNull(person);
-        return addressBook.hasPerson(person);
+    public boolean hasContact(Contact contact) {
+        requireNonNull(contact);
+        return addressBook.hasPerson(contact);
     }
 
     @Override
-    public void deletePerson(Person target) {
+    public void deleteContact(Contact target) {
         addressBook.removePerson(target);
     }
 
     @Override
-    public void addPerson(Person person) {
-        addressBook.addPerson(person);
+    public void addContact(Contact contact) {
+        addressBook.addPerson(contact);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
     @Override
-    public Person getPerson(Name name) {
+    public Contact getContact(Name name) {
         return addressBook.getPerson(name);
     }
 
     @Override
-    public void setPerson(Person target, Person editedPerson) {
-        requireAllNonNull(target, editedPerson);
-
-        addressBook.setPerson(target, editedPerson);
+    public void setContact(Contact target, Contact editedContact) {
+        requireAllNonNull(target, editedContact);
+        addressBook.setPerson(target, editedContact);
     }
 
     //=========== Tags =======================================================================================
@@ -232,27 +231,27 @@ public class ModelManager implements Model {
         addressBook.unmarkTask(taskDescription, associatedEventName);
     }
 
-    //=========== Filtered Person List Accessors =============================================================
+    //=========== Filtered Contact List Accessors =============================================================
 
     /**
-     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
+     * Returns an unmodifiable view of the list of {@code Contact} backed by the internal list of
      * {@code versionedAddressBook}
      */
     @Override
-    public ObservableList<Person> getFilteredPersonList() {
-        return filteredPersons;
+    public ObservableList<Contact> getFilteredPersonList() {
+        return filteredContacts;
     }
 
     @Override
-    public ObservableList<Person> getUnfilteredPersonList() {
+    public ObservableList<Contact> getUnfilteredPersonList() {
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return filteredPersons;
+        return filteredContacts;
     }
 
     @Override
-    public void updateFilteredPersonList(Predicate<Person> predicate) {
+    public void updateFilteredPersonList(Predicate<Contact> predicate) {
         requireNonNull(predicate);
-        filteredPersons.setPredicate(predicate);
+        filteredContacts.setPredicate(predicate);
     }
 
     //======== Filtered Tag List Accessors ===============================================================
@@ -324,7 +323,7 @@ public class ModelManager implements Model {
         ModelManager otherModelManager = (ModelManager) other;
         return addressBook.equals(otherModelManager.addressBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
-                && filteredPersons.equals(otherModelManager.filteredPersons)
+                && filteredContacts.equals(otherModelManager.filteredContacts)
                 && filteredTags.equals(otherModelManager.filteredTags)
                 && filteredEvents.equals(otherModelManager.filteredEvents);
     }
