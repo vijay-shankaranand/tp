@@ -49,9 +49,12 @@ public class EventContactDisplay extends UiPart<Region> {
     public EventContactDisplay(Logic logic, boolean shouldReset) {
         super(FXML);
         this.logic = logic;
+
+        // Disable mouse events for all panels
         personListPanelPlaceholder.addEventFilter(MouseEvent.ANY, handler);
         eventListPanelPlaceholder.addEventFilter(MouseEvent.ANY, handler);
         taskPanelPlaceholder.addEventFilter(MouseEvent.ANY, handler);
+
         if (shouldReset) {
             fillInnerPartsAfterReset();
         } else {

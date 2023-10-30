@@ -107,9 +107,9 @@ public class Event {
      * Checks if the event has concluded.
      * @return true if the event date is past, false otherwise.
      */
-     public boolean isCompleted() {
+    public boolean isCompleted() {
         return this.eventDate.isOverdue();
-     }
+    }
 
     /**
      * Returns true if both events have the same identity and data fields.

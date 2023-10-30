@@ -39,11 +39,6 @@ public class EventListPanel extends UiPart<Region> {
         eventListView.getSelectionModel().select(event);
     }
 
-    public void deselectEvent(Event event) {
-        requireNonNull(event);
-        eventListView.getSelectionModel().clearSelection();
-    }
-
     /**
      * Custom {@code ListCell} that displays the graphics of a {@code Event} using a {@code EventCard}.
      */
