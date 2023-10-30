@@ -8,6 +8,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.event.Event;
@@ -37,6 +38,11 @@ public class EventListPanel extends UiPart<Region> {
     public void selectEvent(Event event) {
         requireNonNull(event);
         eventListView.getSelectionModel().select(event);
+    }
+
+    public void deselectEvent(Event event) {
+        requireNonNull(event);
+        eventListView.getSelectionModel().clearSelection();
     }
 
     /**

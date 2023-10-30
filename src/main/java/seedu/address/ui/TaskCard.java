@@ -31,6 +31,9 @@ public class TaskCard extends UiPart<Region> {
     private Label dueSoon;
 
     @FXML
+    private Label overdue;
+
+    @FXML
     private Label deadline;
 
     /**
@@ -45,14 +48,24 @@ public class TaskCard extends UiPart<Region> {
 
         if (task.isCompleted()) {
             completed.setText("Completed");
+            overdue.setText("");
+            overdue.setVisible(false);
             dueSoon.setText("");
             dueSoon.setVisible(false);
         } else {
-            if (task.getDate().isWithinThreeDays()) {
+            if (task.isDueWithinThreeDays() && !task.isOverdue()) {
                 dueSoon.setText("Due Soon");
+                overdue.setText("");
+                overdue.setVisible(false);
+            } else if (task.isOverdue()) {
+                overdue.setText("Overdue");
+                dueSoon.setText("");
+                dueSoon.setVisible(false);
             } else {
                 dueSoon.setText("");
                 dueSoon.setVisible(false);
+                overdue.setText("");
+                overdue.setVisible(false);
             }
             completed.setText("");
             completed.setVisible(false);

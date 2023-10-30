@@ -2,7 +2,9 @@ package seedu.address.ui;
 
 import java.util.logging.Logger;
 
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
@@ -18,6 +20,8 @@ public class EventContactDisplay extends UiPart<Region> {
     private static final String FXML = "EventContactDisplay.fxml";
 
     private static final Logger logger = LogsCenter.getLogger(EventContactDisplay.class);
+
+    private static final EventHandler<MouseEvent> handler = MouseEvent::consume;
 
     private Logic logic;
 
@@ -39,15 +43,15 @@ public class EventContactDisplay extends UiPart<Region> {
     @FXML
     private StackPane taskPanelPlaceholder;
 
-    @FXML
-    private StackPane eventCardPlaceholder;
-
     /**
      * Creates a {@code MainWindow} with the given {@code Logic}.
      */
     public EventContactDisplay(Logic logic, boolean shouldReset) {
         super(FXML);
         this.logic = logic;
+        personListPanelPlaceholder.addEventFilter(MouseEvent.ANY, handler);
+        eventListPanelPlaceholder.addEventFilter(MouseEvent.ANY, handler);
+        taskPanelPlaceholder.addEventFilter(MouseEvent.ANY, handler);
         if (shouldReset) {
             fillInnerPartsAfterReset();
         } else {

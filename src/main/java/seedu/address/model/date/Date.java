@@ -96,6 +96,17 @@ public class Date {
         return today.plusDays(4);
     }
 
+    /**
+     * Returns true if the date is before today's date.
+     * @return true if date is before today's date, false otherwise.
+     */
+    public boolean isOverdue() {
+        LocalDate today = LocalDate.now();
+        LocalDate taskDue = LocalDate.parse(this.date);
+
+        return taskDue.isBefore(today);
+    }
+
     @Override
     public String toString() {
         return date;
