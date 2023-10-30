@@ -3,7 +3,7 @@ package seedu.address.logic.commands.task;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_DESCRIPTION;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.Command;
@@ -21,10 +21,10 @@ public class MarkCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks a task as completed. "
             + "Parameters: "
-            + PREFIX_NAME + "TASK_DESCRIPTION "
+            + PREFIX_TASK_DESCRIPTION + "TASK_DESCRIPTION "
             + PREFIX_EVENT + "EVENT \n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_NAME + "Book Venue "
+            + PREFIX_TASK_DESCRIPTION + "Book Venue "
             + PREFIX_EVENT + "NUS Career Fair 2023";
 
     public static final String MESSAGE_SUCCESS = "Marked task: %1$s from event: %2$s as completed";

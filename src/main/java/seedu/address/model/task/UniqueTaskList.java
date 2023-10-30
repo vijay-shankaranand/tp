@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -54,6 +55,17 @@ public class UniqueTaskList implements Iterable<Task> {
     }
 
     /**
+     * Add a task to an event.
+     */
+    public void add(Task toAdd) {
+        requireNonNull(toAdd);
+        if (contains(toAdd)) {
+            throw new DuplicateTaskException();
+        }
+        internalList.add(toAdd);
+    }
+
+    /**
      * Deletes the specified task from the list.
      * The task must already exist in the task list.
      */
@@ -66,14 +78,14 @@ public class UniqueTaskList implements Iterable<Task> {
     }
 
     /**
-     * Add a task to an event.
+     * Deletes all the specified task from the list.
+     * @param tasksToDelete set of tasks to delete.
      */
-    public void add(Task toAdd) {
-        requireNonNull(toAdd);
-        if (contains(toAdd)) {
-            throw new DuplicateTaskException();
+    public void deleteTasksFromEvent(Set<Task> tasksToDelete) {
+        requireNonNull(tasksToDelete);
+        for (Task taskToDelete : tasksToDelete) {
+            delete(taskToDelete);
         }
-        internalList.add(toAdd);
     }
 
     /**

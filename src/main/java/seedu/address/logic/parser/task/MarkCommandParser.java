@@ -2,7 +2,7 @@ package seedu.address.logic.parser.task;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_DESCRIPTION;
 
 import java.util.stream.Stream;
 
@@ -26,14 +26,15 @@ public class MarkCommandParser implements Parser<MarkCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public MarkCommand parse(String args) throws ParseException {
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_EVENT);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_TASK_DESCRIPTION, PREFIX_EVENT);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_EVENT)) {
+        if (!arePrefixesPresent(argMultimap, PREFIX_TASK_DESCRIPTION, PREFIX_EVENT)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkCommand.MESSAGE_USAGE));
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_EVENT);
-        TaskDescription taskDescription = ParserUtil.parseTaskDescription(argMultimap.getValue(PREFIX_NAME).get());
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_TASK_DESCRIPTION, PREFIX_EVENT);
+        TaskDescription taskDescription = ParserUtil.parseTaskDescription(argMultimap.getValue(
+                PREFIX_TASK_DESCRIPTION).get());
         Name associatedEventName = ParserUtil.parseName(argMultimap.getValue(PREFIX_EVENT).get());
 
         return new MarkCommand(taskDescription, associatedEventName);

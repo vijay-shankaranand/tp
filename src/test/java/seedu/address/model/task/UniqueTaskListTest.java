@@ -8,6 +8,7 @@ import static seedu.address.testutil.task.TypicalTasks.BOOK_VENUE;
 import static seedu.address.testutil.task.TypicalTasks.ORDER_FOOD;
 
 import java.util.List;
+import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
@@ -95,6 +96,28 @@ public class UniqueTaskListTest {
     public void add_duplicateTask_throwsDuplicateTaskException() {
         uniqueTaskList.add(BOOK_VENUE);
         assertThrows(DuplicateTaskException.class, () -> uniqueTaskList.add(BOOK_VENUE));
+    }
+
+    @Test
+    public void deleteTasksFromEvent_nullSet_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> uniqueTaskList.deleteTasksFromEvent(null));
+    }
+
+    @Test
+    public void deleteTasksFromEvent_validSet_success() {
+        uniqueTaskList.add(BOOK_VENUE);
+        uniqueTaskList.add(ORDER_FOOD);
+        uniqueTaskList.deleteTasksFromEvent(Set.of(BOOK_VENUE));
+        UniqueTaskList expectedUniqueTaskList = new UniqueTaskList();
+        expectedUniqueTaskList.add(ORDER_FOOD);
+        assertTrue(uniqueTaskList.equals(expectedUniqueTaskList));
+    }
+
+    @Test
+    public void deleteTasksFromEvent_invalidSet_throwsTaskNotFoundException() {
+        uniqueTaskList.add(ORDER_FOOD);
+        assertThrows(TaskNotFoundException.class, () -> uniqueTaskList.deleteTasksFromEvent(Set.of(BOOK_VENUE,
+                ORDER_FOOD)));
     }
 
     @Test

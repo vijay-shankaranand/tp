@@ -4,7 +4,7 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.task.AddTaskCommand.MESSAGE_USAGE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_DESCRIPTION;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.event.TypicalEvents.NTU;
@@ -30,7 +30,7 @@ public class AddTaskCommandParserTest {
         AddTaskCommand correctCommand = new AddTaskCommand(correctTask.getDescription(), correctTask.getDate(),
                 correctTask.getAssociatedEventName());
         System.out.println(correctCommand);
-        assertParseSuccess(parser, " " + PREFIX_NAME
+        assertParseSuccess(parser, " " + PREFIX_TASK_DESCRIPTION
                 + BOOK_VENUE.getDescription()
                 + " " + PREFIX_DATE + BOOK_VENUE.getDate() + " " + PREFIX_EVENT + NTU.getName(), correctCommand);
     }
@@ -44,12 +44,12 @@ public class AddTaskCommandParserTest {
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
 
         // missing date prefix
-        assertParseFailure(parser, " " + PREFIX_NAME + BOOK_VENUE.getDescription() + " "
+        assertParseFailure(parser, " " + PREFIX_TASK_DESCRIPTION + BOOK_VENUE.getDescription() + " "
                         + BOOK_VENUE.getDate() + " " + PREFIX_EVENT + NTU.getName(),
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
 
         // missing event prefix
-        assertParseFailure(parser, " " + PREFIX_NAME + BOOK_VENUE.getDescription() + " "
+        assertParseFailure(parser, " " + PREFIX_TASK_DESCRIPTION + BOOK_VENUE.getDescription() + " "
                         + PREFIX_DATE + BOOK_VENUE.getDate() + " " + NTU.getName(),
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
     }
@@ -57,19 +57,19 @@ public class AddTaskCommandParserTest {
     @Test
     public void parse_repeatedValue_failure() {
         // repeated name prefix
-        assertParseFailure(parser, " " + PREFIX_NAME + BOOK_VENUE.getDescription() + " "
-                        + PREFIX_NAME + BOOK_VENUE.getDescription() + " "
+        assertParseFailure(parser, " " + PREFIX_TASK_DESCRIPTION + BOOK_VENUE.getDescription() + " "
+                        + PREFIX_TASK_DESCRIPTION + BOOK_VENUE.getDescription() + " "
                         + PREFIX_DATE + BOOK_VENUE.getDate() + " " + PREFIX_EVENT + NTU.getName(),
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME));
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_TASK_DESCRIPTION));
 
         // repeated date prefix
-        assertParseFailure(parser, " " + PREFIX_NAME + BOOK_VENUE.getDescription() + " "
+        assertParseFailure(parser, " " + PREFIX_TASK_DESCRIPTION + BOOK_VENUE.getDescription() + " "
                         + PREFIX_DATE + BOOK_VENUE.getDate() + " "
                         + PREFIX_DATE + BOOK_VENUE.getDate() + " " + PREFIX_EVENT + NTU.getName(),
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_DATE));
 
         // repeated event prefix
-        assertParseFailure(parser, " " + PREFIX_NAME + BOOK_VENUE.getDescription() + " "
+        assertParseFailure(parser, " " + PREFIX_TASK_DESCRIPTION + BOOK_VENUE.getDescription() + " "
                         + PREFIX_DATE + BOOK_VENUE.getDate() + " "
                         + PREFIX_EVENT + NTU.getName() + " " + PREFIX_EVENT + NTU.getName(),
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_EVENT));
@@ -78,17 +78,17 @@ public class AddTaskCommandParserTest {
     @Test
     public void parse_invalidValue_failure() {
         // invalid name
-        assertParseFailure(parser, " " + PREFIX_NAME + " " + PREFIX_DATE + BOOK_VENUE.getDate() + " "
+        assertParseFailure(parser, " " + PREFIX_TASK_DESCRIPTION + " " + PREFIX_DATE + BOOK_VENUE.getDate() + " "
                         + PREFIX_EVENT + NTU.getName(),
                 TaskDescription.MESSAGE_CONSTRAINTS);
 
         // invalid date
-        assertParseFailure(parser, " " + PREFIX_NAME + BOOK_VENUE.getDescription() + " "
+        assertParseFailure(parser, " " + PREFIX_TASK_DESCRIPTION + BOOK_VENUE.getDescription() + " "
                         + PREFIX_DATE + " " + PREFIX_EVENT + NTU.getName(),
                 Date.MESSAGE_CONSTRAINTS);
 
         // invalid event
-        assertParseFailure(parser, " " + PREFIX_NAME + BOOK_VENUE.getDescription() + " "
+        assertParseFailure(parser, " " + PREFIX_TASK_DESCRIPTION + BOOK_VENUE.getDescription() + " "
                         + PREFIX_DATE + BOOK_VENUE.getDate() + " " + PREFIX_EVENT,
                 Name.MESSAGE_CONSTRAINTS);
     }

@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.parser.ParserUtil.MESSAGE_CONTAINS_MORE_THAN_ONE_WHITE_SPACE;
 import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
@@ -25,6 +26,7 @@ import seedu.address.model.task.TaskDescription;
 
 public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";
+    private static final String INVALID_NAME_DOUBLE_WHITESPACE = "Rachel  Lim";
     private static final String INVALID_PHONE = "+651234";
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
@@ -34,6 +36,7 @@ public class ParserUtilTest {
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "12345678";
     private static final String VALID_ADDRESS = "123 Main Street #0505";
+    private static final String INVALID_ADDRESS_DOUBLE_WHITESPACE = "123  Main Street #0505";
     private static final String VALID_EMAIL = "rachel@example.com";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
@@ -71,6 +74,11 @@ public class ParserUtilTest {
         assertThrows(ParseException.class, () -> ParserUtil.parseName(INVALID_NAME));
     }
 
+    @Test
+    public void parseName_invalidValueDoubleWhiteSpace_throwsParseException() {
+        assertThrows(ParseException.class, String.format(MESSAGE_CONTAINS_MORE_THAN_ONE_WHITE_SPACE, "Name"), ()
+                -> ParserUtil.parseName(INVALID_NAME_DOUBLE_WHITESPACE));
+    }
     @Test
     public void parseName_validValueWithoutWhitespace_returnsName() throws Exception {
         Name expectedName = new Name(VALID_NAME);
@@ -115,6 +123,12 @@ public class ParserUtilTest {
     @Test
     public void parseAddress_invalidValue_throwsParseException() {
         assertThrows(ParseException.class, () -> ParserUtil.parseAddress(INVALID_ADDRESS));
+    }
+
+    @Test
+    public void parseAddress_invalidValueDoubleWhiteSpace_throwsParseException() {
+        assertThrows(ParseException.class, String.format(MESSAGE_CONTAINS_MORE_THAN_ONE_WHITE_SPACE, "Address"), () ->
+                ParserUtil.parseAddress(INVALID_ADDRESS_DOUBLE_WHITESPACE));
     }
 
     @Test
