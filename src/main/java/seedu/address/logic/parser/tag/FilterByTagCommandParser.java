@@ -12,9 +12,9 @@ import seedu.address.model.contact.PersonIsTaggedPredicate;
 import seedu.address.model.tag.Tag;
 
 /**
- * Parses input arguments and creates a new FilterCommand object
+ * Parses input arguments and creates a new FilterByTagCommand object
  */
-public class FilterCommandParser implements Parser<FilterByTagCommand> {
+public class FilterByTagCommandParser implements Parser<FilterByTagCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the FilterByTagCommand
      * and returns a FilterByTagCommand object for execution.

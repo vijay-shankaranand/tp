@@ -35,7 +35,7 @@ import seedu.address.logic.commands.event.SelectEventCommand;
 import seedu.address.logic.commands.event.ViewEventsCommand;
 import seedu.address.logic.commands.tag.AddTagCommand;
 import seedu.address.logic.commands.tag.DeleteTagCommand;
-import seedu.address.logic.commands.tag.FilterCommand;
+import seedu.address.logic.commands.tag.FilterByTagCommand;
 import seedu.address.logic.commands.tag.ViewTagsCommand;
 import seedu.address.logic.commands.task.AddTaskCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -91,9 +91,9 @@ public class AddressBookParserTest {
         tagList.add(tag);
         PersonIsTaggedPredicate predicate = new PersonIsTaggedPredicate(tagList);
 
-        FilterCommand command = (FilterCommand) parser.parseCommand(FilterCommand.COMMAND_WORD
+        FilterByTagCommand command = (FilterByTagCommand) parser.parseCommand(FilterByTagCommand.COMMAND_WORD
                 + " " + "friends");
-        assertEquals(new FilterCommand(tagList, predicate), command);
+        assertEquals(new FilterByTagCommand(tagList, predicate), command);
     }
 
     @Test

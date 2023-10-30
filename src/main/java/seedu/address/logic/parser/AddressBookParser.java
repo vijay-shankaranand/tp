@@ -25,7 +25,7 @@ import seedu.address.logic.commands.event.SelectEventCommand;
 import seedu.address.logic.commands.event.ViewEventsCommand;
 import seedu.address.logic.commands.tag.AddTagCommand;
 import seedu.address.logic.commands.tag.DeleteTagCommand;
-import seedu.address.logic.commands.tag.FilterCommand;
+import seedu.address.logic.commands.tag.FilterByTagCommand;
 import seedu.address.logic.commands.tag.ViewTagsCommand;
 import seedu.address.logic.commands.task.AddTaskCommand;
 import seedu.address.logic.commands.task.DeleteTaskCommand;
@@ -42,7 +42,7 @@ import seedu.address.logic.parser.event.SelectEventCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.logic.parser.tag.AddTagCommandParser;
 import seedu.address.logic.parser.tag.DeleteTagCommandParser;
-import seedu.address.logic.parser.tag.FilterCommandParser;
+import seedu.address.logic.parser.tag.FilterByTagCommandParser;
 import seedu.address.logic.parser.task.AddTaskCommandParser;
 import seedu.address.logic.parser.task.DeleteTaskCommandParser;
 import seedu.address.logic.parser.task.MarkCommandParser;
@@ -121,8 +121,8 @@ public class AddressBookParser {
         case DeleteTagCommand.COMMAND_WORD:
             return new DeleteTagCommandParser().parse(arguments);
 
-        case FilterCommand.COMMAND_WORD:
-            return new FilterCommandParser().parse(arguments);
+        case FilterByTagCommand.COMMAND_WORD:
+            return new FilterByTagCommandParser().parse(arguments);
 
         case LinkCommand.COMMAND_WORD:
             return new LinkCommandParser().parse(arguments);

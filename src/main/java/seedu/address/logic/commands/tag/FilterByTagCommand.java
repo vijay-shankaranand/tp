@@ -14,12 +14,12 @@ import seedu.address.model.contact.PersonIsTaggedPredicate;
 import seedu.address.model.tag.Tag;
 
 /**
- * Filters persons in JobFestGo by {@code Tag}.
+ * Filters contacts in JobFestGo by {@code Tag}.
  */
-public class FilterCommand extends Command {
-    public static final String COMMAND_WORD = "filter";
+public class FilterByTagCommand extends Command {
+    public static final String COMMAND_WORD = "filter_by_tag";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": filters and displays all persons who "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": filters and displays all contacts who "
             + " are tagged with the input tag.\n"
             + "Parameters: "
             + PREFIX_TAG + "TAG\n"
@@ -32,7 +32,7 @@ public class FilterCommand extends Command {
     /**
      * Creates a FilterCommand to filter persons in JobFestGo.
      */
-    public FilterCommand(List<Tag> tags, PersonIsTaggedPredicate predicate) {
+    public FilterByTagCommand(List<Tag> tags, PersonIsTaggedPredicate predicate) {
         this.tags = tags;
         this.predicate = predicate;
     }
@@ -52,11 +52,11 @@ public class FilterCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof FilterCommand)) {
+        if (!(other instanceof FilterByTagCommand)) {
             return false;
         }
 
-        FilterCommand otherFilterCommand = (FilterCommand) other;
+        FilterByTagCommand otherFilterCommand = (FilterByTagCommand) other;
         return tags.equals(otherFilterCommand.tags) && predicate.equals(otherFilterCommand.predicate);
     }
 
