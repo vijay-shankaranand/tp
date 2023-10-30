@@ -18,7 +18,7 @@ import seedu.address.model.name.Name;
  */
 public class EventUtil {
     /**
-     * Returns a link command string for linking the {@code person} to the {@code Event}.
+     * Returns a link command string for linking the {@code contact} to the {@code Event}.
      */
     public static String getLinkCommand(Name name, Name contactName) {
         return LinkCommand.COMMAND_WORD + " "
@@ -36,7 +36,7 @@ public class EventUtil {
     }
 
     /**
-     * Returns the part of command string for the given {@code Person}'s name.
+     * Returns the part of command string for the given {@code Contact}'s name.
      */
     public static String getContactName(Name contactName) {
         StringBuilder sb = new StringBuilder();

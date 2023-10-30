@@ -9,7 +9,7 @@ import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.address.Address;
-import seedu.address.model.contact.Person;
+import seedu.address.model.contact.Contact;
 import seedu.address.model.date.Date;
 import seedu.address.model.name.Name;
 import seedu.address.model.task.Task;
@@ -27,7 +27,7 @@ public class Event {
     private final Address address;
     private final Date eventDate;
 
-    private final Set<Person> contacts = new HashSet<>();
+    private final Set<Contact> contacts = new HashSet<>();
     private final Set<Task> tasks = new HashSet<>();
 
     /**
@@ -38,7 +38,7 @@ public class Event {
      * @param address A valid address.
      * @param contacts A valid set of contacts.
      */
-    public Event(Name eventName, Date eventDate, Address address, Set<Person> contacts, Set<Task> tasks) {
+    public Event(Name eventName, Date eventDate, Address address, Set<Contact> contacts, Set<Task> tasks) {
         requireAllNonNull(eventName, eventDate, address, contacts, tasks);
 
         this.eventName = eventName;
@@ -65,7 +65,7 @@ public class Event {
      * Returns an immutable contacts set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
-    public Set<Person> getContacts() {
+    public Set<Contact> getContacts() {
         return Collections.unmodifiableSet(contacts);
     }
     public Set<Task> getTasks() {
@@ -73,20 +73,20 @@ public class Event {
     }
 
     /**
-     * Checks whether this {@code Event} is linked to the given {@code Person}.
-     * @param contact The {@code Person} to be checked with.
-     * @return {@code true} if this {@code Event} is linked to the given {@code Person}
+     * Checks whether this {@code Event} is linked to the given {@code Contact}.
+     * @param contact The {@code Contact} to be checked with.
+     * @return {@code true} if this {@code Event} is linked to the given {@code Contact}
      *     and {@code false} otherwise.
      */
-    public boolean isLinkedToContact(Person contact) {
+    public boolean isLinkedToContact(Contact contact) {
         return contacts.stream().anyMatch(contact::isSamePerson);
     }
 
     /**
-     * Links the given {@code Person} to this {@code Event}.
-     * @param toLink The {@code Person} to be linked to this {@code Event}.
+     * Links the given {@code Contact} to this {@code Event}.
+     * @param toLink The {@code Contact} to be linked to this {@code Event}.
      */
-    public void linkContact(Person toLink) {
+    public void linkContact(Contact toLink) {
         contacts.add(toLink);
     }
 

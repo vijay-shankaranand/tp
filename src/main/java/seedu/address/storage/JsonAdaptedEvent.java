@@ -11,7 +11,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.address.Address;
-import seedu.address.model.contact.Person;
+import seedu.address.model.contact.Contact;
 import seedu.address.model.date.Date;
 import seedu.address.model.event.Event;
 import seedu.address.model.name.Name;
@@ -26,7 +26,7 @@ public class JsonAdaptedEvent {
     private final String name;
     private final String date;
     private final String address;
-    private final List<JsonAdaptedPerson> contacts = new ArrayList<>();
+    private final List<JsonAdaptedContact> contacts = new ArrayList<>();
     private final List<JsonAdaptedTask> tasks = new ArrayList<>();
 
     /**
@@ -35,7 +35,7 @@ public class JsonAdaptedEvent {
     @JsonCreator
     public JsonAdaptedEvent(@JsonProperty("name") String name, @JsonProperty("date") String date,
                             @JsonProperty("address") String address,
-                             @JsonProperty("contacts") List<JsonAdaptedPerson> contacts,
+                             @JsonProperty("contacts") List<JsonAdaptedContact> contacts,
                             @JsonProperty("tasks") List<JsonAdaptedTask> tasks) {
         this.name = name;
         this.date = date;
@@ -57,7 +57,7 @@ public class JsonAdaptedEvent {
         date = source.getDate().date;
         address = source.getAddress().value;
         contacts.addAll(source.getContacts().stream()
-                .map(JsonAdaptedPerson::new)
+                .map(JsonAdaptedContact::new)
                 .collect(Collectors.toList()));
         tasks.addAll(source.getTasks().stream()
                 .map(JsonAdaptedTask::new)
@@ -70,11 +70,11 @@ public class JsonAdaptedEvent {
      * @throws IllegalValueException if there were any data constraints violated in the adapted event.
      */
     public Event toModelType() throws IllegalValueException {
-        final List<Person> eventContacts = new ArrayList<>();
-        for (JsonAdaptedPerson person : contacts) {
+        final List<Contact> eventContacts = new ArrayList<>();
+        for (JsonAdaptedContact person : contacts) {
             eventContacts.add(person.toModelType());
         }
-        final Set<Person> modelPersons = new HashSet<>(eventContacts);
+        final Set<Contact> modelContacts = new HashSet<>(eventContacts);
 
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
@@ -104,11 +104,11 @@ public class JsonAdaptedEvent {
         final Address modelAddress = new Address(address);
 
         Set<Task> modelTasks = new HashSet<>();
-        Event tempEvent = new Event(modelName, modelDate, modelAddress, modelPersons, modelTasks);
+        Event tempEvent = new Event(modelName, modelDate, modelAddress, modelContacts, modelTasks);
         for (JsonAdaptedTask task : tasks) {
             modelTasks.add(task.toModelTypeForEvent(tempEvent));
         }
 
-        return new Event(modelName, modelDate, modelAddress, modelPersons, modelTasks);
+        return new Event(modelName, modelDate, modelAddress, modelContacts, modelTasks);
     }
 }

@@ -21,7 +21,7 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.contact.Person;
+import seedu.address.model.contact.Contact;
 import seedu.address.model.contact.exceptions.DuplicateContactException;
 import seedu.address.model.event.Event;
 import seedu.address.model.tag.Tag;
@@ -37,7 +37,7 @@ public class AddressBookTest {
 
     @Test
     public void constructor() {
-        assertEquals(Collections.emptyList(), addressBook.getPersonList());
+        assertEquals(Collections.emptyList(), addressBook.getContactList());
         assertEquals(Collections.emptyList(), addressBook.getTagList());
         assertEquals(Collections.emptyList(), addressBook.getEventList());
         assertEquals(Collections.emptyList(), addressBook.getTaskList());
@@ -57,12 +57,12 @@ public class AddressBookTest {
 
     @Test
     public void resetData_withDuplicateContacts_throwsDuplicateContactException() {
-        // Two persons with the same identity fields
-        Person editedAlice = new ContactBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        // Two contacts with the same identity fields
+        Contact editedAlice = new ContactBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
-        List<Person> newPersons = Arrays.asList(ALICE, editedAlice);
+        List<Contact> newContacts = Arrays.asList(ALICE, editedAlice);
         List<Tag> tags = Arrays.asList(VENUES);
-        AddressBookStub newData = new AddressBookStub(newPersons, tags);
+        AddressBookStub newData = new AddressBookStub(newContacts, tags);
 
         assertThrows(DuplicateContactException.class, () -> addressBook.resetData(newData));
     }
@@ -78,7 +78,7 @@ public class AddressBookTest {
     }
 
     @Test
-    public void hasPerson_personInAddressBook_returnsTrue() {
+    public void hasContact_contactInAddressBook_returnsTrue() {
         addressBook.addPerson(ALICE);
         assertTrue(addressBook.hasPerson(ALICE));
     }
@@ -86,14 +86,14 @@ public class AddressBookTest {
     @Test
     public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
         addressBook.addPerson(ALICE);
-        Person editedAlice = new ContactBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        Contact editedAlice = new ContactBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
         assertTrue(addressBook.hasPerson(editedAlice));
     }
 
     @Test
-    public void getPersonList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> addressBook.getPersonList().remove(0));
+    public void getContactList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> addressBook.getContactList().remove(0));
     }
 
     @Test
@@ -122,8 +122,8 @@ public class AddressBookTest {
 
     @Test
     public void deleteTag_successful_returnsTrue() {
-        Person initialAlice = new ContactBuilder(ALICE).withTags("vendor").build();
-        Person editedAlice = new ContactBuilder().withName("Alice Pauline")
+        Contact initialAlice = new ContactBuilder(ALICE).withTags("vendor").build();
+        Contact editedAlice = new ContactBuilder().withName("Alice Pauline")
             .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
             .withPhone("94351253")
             .build();
@@ -258,7 +258,7 @@ public class AddressBookTest {
 
     @Test
     public void toStringMethod() {
-        String expected = AddressBook.class.getCanonicalName() + "{persons=" + addressBook.getPersonList()
+        String expected = AddressBook.class.getCanonicalName() + "{contacts=" + addressBook.getContactList()
                 +
                 ", tags=" + addressBook.getTagList()
                 + ", events=" + addressBook.getEventList()
@@ -268,10 +268,10 @@ public class AddressBookTest {
     }
 
     /**
-     * A stub ReadOnlyAddressBook whose persons list can violate interface constraints.
+     * A stub ReadOnlyAddressBook whose contacts list can violate interface constraints.
      */
     private static class AddressBookStub implements ReadOnlyAddressBook {
-        private final ObservableList<Person> persons = FXCollections.observableArrayList();
+        private final ObservableList<Contact> contacts = FXCollections.observableArrayList();
 
         private final ObservableList<Tag> tags = FXCollections.observableArrayList();
 
@@ -279,16 +279,16 @@ public class AddressBookTest {
         private final ObservableList<Task> tasks = FXCollections.observableArrayList();
 
 
-        AddressBookStub(Collection<Person> persons, Collection<Tag> tags) {
-            this.persons.setAll(persons);
+        AddressBookStub(Collection<Contact> contacts, Collection<Tag> tags) {
+            this.contacts.setAll(contacts);
             this.tags.setAll(tags);
             this.events.setAll(events);
             this.tasks.setAll(tasks);
         }
 
         @Override
-        public ObservableList<Person> getPersonList() {
-            return persons;
+        public ObservableList<Contact> getContactList() {
+            return contacts;
         }
 
         @Override

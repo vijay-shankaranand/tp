@@ -4,8 +4,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.model.address.Address;
+import seedu.address.model.contact.Contact;
 import seedu.address.model.contact.Email;
-import seedu.address.model.contact.Person;
 import seedu.address.model.contact.Phone;
 import seedu.address.model.name.Name;
 import seedu.address.model.tag.Tag;
@@ -15,7 +15,6 @@ import seedu.address.model.util.SampleDataUtil;
  * A utility class to help with building Contact objects.
  */
 public class ContactBuilder {
-
     public static final String DEFAULT_NAME = "Amy Bee";
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
@@ -39,18 +38,18 @@ public class ContactBuilder {
     }
 
     /**
-     * Initializes the PersonBuilder with the data of {@code personToCopy}.
+     * Initializes the PersonBuilder with the data of {@code contactToCopy}.
      */
-    public ContactBuilder(Person personToCopy) {
-        name = personToCopy.getName();
-        phone = personToCopy.getPhone();
-        email = personToCopy.getEmail();
-        address = personToCopy.getAddress();
-        tags = new HashSet<>(personToCopy.getTags());
+    public ContactBuilder(Contact contactToCopy) {
+        name = contactToCopy.getName();
+        phone = contactToCopy.getPhone();
+        email = contactToCopy.getEmail();
+        address = contactToCopy.getAddress();
+        tags = new HashSet<>(contactToCopy.getTags());
     }
 
     /**
-     * Sets the {@code Name} of the {@code Person} that we are building.
+     * Sets the {@code Name} of the {@code Contact} that we are building.
      */
     public ContactBuilder withName(String name) {
         this.name = new Name(name);
@@ -58,7 +57,7 @@ public class ContactBuilder {
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
+     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Contact} that we are building.
      */
     public ContactBuilder withTags(String ... tags) {
         this.tags = SampleDataUtil.getTagSet(tags);
@@ -66,7 +65,7 @@ public class ContactBuilder {
     }
 
     /**
-     * Sets the {@code Address} of the {@code Person} that we are building.
+     * Sets the {@code Address} of the {@code Contact} that we are building.
      */
     public ContactBuilder withAddress(String address) {
         this.address = new Address(address);
@@ -74,7 +73,7 @@ public class ContactBuilder {
     }
 
     /**
-     * Sets the {@code Phone} of the {@code Person} that we are building.
+     * Sets the {@code Phone} of the {@code Contact} that we are building.
      */
     public ContactBuilder withPhone(String phone) {
         this.phone = new Phone(phone);
@@ -82,15 +81,15 @@ public class ContactBuilder {
     }
 
     /**
-     * Sets the {@code Email} of the {@code Person} that we are building.
+     * Sets the {@code Email} of the {@code Contact} that we are building.
      */
     public ContactBuilder withEmail(String email) {
         this.email = new Email(email);
         return this;
     }
 
-    public Person build() {
-        return new Person(name, phone, email, address, tags);
+    public Contact build() {
+        return new Contact(name, phone, email, address, tags);
     }
 
 }

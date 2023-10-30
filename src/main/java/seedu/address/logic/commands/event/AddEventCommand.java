@@ -11,6 +11,7 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.date.Date;
 import seedu.address.model.event.Event;
 
 /**
@@ -47,6 +48,9 @@ public class AddEventCommand extends Command {
         requireNonNull(model);
         if (model.hasEvent(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_EVENT);
+        }
+        if (!Date.isDateTodayOrAfter(toAdd.getDate())) {
+            throw new CommandException(Date.MESSAGE_CONSTRAINTS);
         }
         model.addEvent(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));

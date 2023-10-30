@@ -10,7 +10,7 @@ import java.util.Set;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.contact.Person;
+import seedu.address.model.contact.Contact;
 import seedu.address.model.event.exceptions.DuplicateEventException;
 import seedu.address.model.event.exceptions.EventNotFoundException;
 import seedu.address.model.name.Name;
@@ -43,7 +43,7 @@ public class UniqueEventList implements Iterable<Event> {
 
     /**
      * Adds an Event to the list.
-     * The person must not already exist in the list.
+     * The contact must not already exist in the list.
      */
     public void add(Event toAdd) {
         requireNonNull(toAdd);
@@ -196,16 +196,16 @@ public class UniqueEventList implements Iterable<Event> {
     }
 
     /**
-     * Replaces the event list to remove {@code person} from contact list.
+     * Replaces the event list to remove {@code contact} from contact list.
      */
-    public void updateContacts(Person person) {
+    public void updateContacts(Contact contact) {
         for (int i = 0; i < internalList.size(); i++) {
             Event curr = internalList.get(i);
-            Set<Person> contactsList = curr.getContacts();
-            Set<Person> updatedContactsList = new HashSet<>();
-            if (contactsList.contains(person)) {
-                for (Person p : contactsList) {
-                    if (!p.equals(person)) {
+            Set<Contact> contactsList = curr.getContacts();
+            Set<Contact> updatedContactsList = new HashSet<>();
+            if (contactsList.contains(contact)) {
+                for (Contact p : contactsList) {
+                    if (!p.equals(contact)) {
                         updatedContactsList.add(p);
                     }
                 }

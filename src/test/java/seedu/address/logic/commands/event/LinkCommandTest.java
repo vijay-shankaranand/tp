@@ -21,7 +21,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.contact.Person;
+import seedu.address.model.contact.Contact;
 import seedu.address.model.event.Event;
 import seedu.address.model.name.Name;
 import seedu.address.testutil.contact.ContactBuilder;
@@ -125,7 +125,7 @@ public class LinkCommandTest {
                 .withEventAddress("3 Temasek Blvd, Singapore 038983")
                 .withEventContacts(ALICE, BOB)
                 .build();
-        Person contact = new ContactBuilder().withName("Li Mei")
+        Contact contact = new ContactBuilder().withName("Li Mei")
                 .withAddress("123, East Coast Ave 6, #08-382").withEmail("limei@example.com")
                 .withPhone("97292222")
                 .withTags("friends").build();

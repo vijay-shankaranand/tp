@@ -58,6 +58,11 @@ public class AddTaskCommand extends Command {
         requireNonNull(model);
 
         try {
+
+            if (!Date.isDateTodayOrAfter(taskDeadline)) {
+                throw new CommandException(Date.MESSAGE_CONSTRAINTS);
+            }
+
             Event eventToAddIn = model.getEvent(associatedEventName);
             taskToAdd = new Task(taskDescription, taskDeadline, eventToAddIn, false);
 

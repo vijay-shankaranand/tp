@@ -103,7 +103,7 @@ How the `Logic` component works:
 
 1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to delete a person).
+1. The command can communicate with the `Model` when it is executed (e.g. to delete a contact).
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
@@ -175,11 +175,11 @@ Step 1. The user launches the application for the first time. The `VersionedAddr
 
 <puml src="diagrams/UndoRedoState0.puml" alt="UndoRedoState0" />
 
-Step 2. The user executes `delete_contact 5` command to delete the 5th person in the address book. The `delete_contact` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete_contact 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+Step 2. The user executes `delete_contact 5` command to delete the 5th contact in the address book. The `delete_contact` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete_contact 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
 
 <puml src="diagrams/UndoRedoState1.puml" alt="UndoRedoState1" />
 
-Step 3. The user executes `add_contact n/David …​` to add a new person. The `add_contact` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+Step 3. The user executes `add_contact n/David …​` to add a new contact. The `add_contact` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
 
 <puml src="diagrams/UndoRedoState2.puml" alt="UndoRedoState2" />
 
@@ -189,7 +189,7 @@ Step 3. The user executes `add_contact n/David …​` to add a new person. The 
 
 </box>
 
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+Step 4. The user now decides that adding the contact was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
 
 <puml src="diagrams/UndoRedoState3.puml" alt="UndoRedoState3" />
 
@@ -241,7 +241,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 * **Alternative 2:** Individual command knows how to undo/redo by
   itself.
-  * Pros: Will use less memory (e.g. for `delete_contact`, just save the person being deleted).
+  * Pros: Will use less memory (e.g. for `delete_contact`, just save the contact being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
 
 _{more aspects and alternatives to be added}_
@@ -284,9 +284,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | Priority | As a …​                                    | I want to …​                 | So that I can…​                                                                             |
 |----------|--------------------------------------------|------------------------------|---------------------------------------------------------------------------------------------|
 | `* * *`  | job fest event planner                     | see usage instructions       | refer to instructions when I forget how to use JobFestGo                                    |
-| `* * *`  | job fest event planner                     | add a new person             |                                                                                             |
-| `* * *`  | job fest event planner                                       | delete a person              | remove entries that I no longer need                                                        |
-| `* * *`  | job fest event planner                                       | find a person by name        | locate details of persons without having to go through the entire list                      |
+| `* * *`  | job fest event planner                     | add a new contact             |                                                                                             |
+| `* * *`  | job fest event planner                                       | delete a contact              | remove entries that I no longer need                                                        |
+| `* * *`  | job fest event planner                                       | find a contact by name        | locate details of contacts without having to go through the entire list                      |
 | `* * *`  | job fest event planner                     | view the entire contact list |                                                                                             |
 | `* *`    | job fest event planner                                       | hide private contact details | minimize chance of someone else seeing them by accident                                     |
 | `* *`    | job fest event planner                     | add tags                     | add to the pool of use categories already available                                         |
@@ -300,7 +300,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`     | job fest event planner                     | link contacts to events      | remember which event the specific contacts are involved in                                  |
 | `* *`    | job fest event planner                        | add a new task for an event  | remember the tasks I need to do for the event                                               |
 | `* *`      | job fest event planner | return to the home page      |                                                                                             |
-| `*`      | job fest event planner | sort persons by name         | locate a person easily                                                                      |
+| `*`      | job fest event planner | sort contacts by name         | locate a contact easily                                                                      |
 
 
 *{More to be added}*
@@ -310,13 +310,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 (For all use cases below, the **System** is the `JobFestGo` and the **Actor** is the `user`, unless specified otherwise)
 
 
-**Use case: Add a person**
+**Use case: Add a contact**
 
 **MSS**
 
-1.  User requests to add person and specifies details of person
-2.  JobFestGo adds the person to list of persons
-3.  JobFestGo shows updated list of persons
+1.  User requests to add contact and specifies details of contact
+2.  JobFestGo adds the contact to list of contacts
+3.  JobFestGo shows updated list of contacts
 
     Use case ends.
 
@@ -352,14 +352,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Use case: Delete a person**
+**Use case: Delete a contact**
 
 **MSS**
 
-1.  User requests to list persons
-2.  JobFestGo shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  JobFestGo deletes the person
+1.  User requests to list contacts
+2.  JobFestGo shows a list of contacts
+3.  User requests to delete a specific contact in the list
+4.  JobFestGo deletes the contact
 
    Use case ends.
 
@@ -377,12 +377,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-**Use case: List all persons**
+**Use case: List all contacts**
 
 **MSS**
 
-1.  User requests to list all persons
-2.  JobFestGo shows a list of all persons
+1.  User requests to list all contacts
+2.  JobFestGo shows a list of all contacts
 
     Use case ends.
 
@@ -651,7 +651,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. Environment requirement:
 * Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2. Scalability:
-* Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+* Should be able to hold up to 1000 contacts without a noticeable sluggishness in performance for typical usage.
 3. Usability:
 * A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 * The user interface should be intuitive for event planners to use, for non-tech savy job event planners
@@ -695,17 +695,17 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
-### Deleting a person
+### Deleting a contact
 
-1. Deleting a person while all contacts are being shown
+1. Deleting a contact while all contacts are being shown
 
-   1. Prerequisites: List all contacts using the `view_contacts` command. Multiple persons in the list.
+   1. Prerequisites: List all contacts using the `view_contacts` command. Multiple contacts in the list.
 
    1. Test case: `delete_contact 1`<br>
       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
    1. Test case: `delete_contact 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+      Expected: No contact is deleted. Error details shown in the status message. Status bar remains the same.
 
    1. Other incorrect delete commands to try: `delete_contact`, `delete_contact x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
