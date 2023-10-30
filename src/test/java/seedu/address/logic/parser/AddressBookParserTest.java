@@ -27,7 +27,7 @@ import seedu.address.logic.commands.contact.AddContactCommand;
 import seedu.address.logic.commands.contact.DeleteContactCommand;
 import seedu.address.logic.commands.contact.EditContactCommand;
 import seedu.address.logic.commands.contact.EditContactCommand.EditPersonDescriptor;
-import seedu.address.logic.commands.contact.FindCommand;
+import seedu.address.logic.commands.contact.FindContactCommand;
 import seedu.address.logic.commands.contact.ViewContactsCommand;
 import seedu.address.logic.commands.event.AddEventCommand;
 import seedu.address.logic.commands.event.LinkCommand;
@@ -150,9 +150,9 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_find() throws Exception {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
-        FindCommand command = (FindCommand) parser.parseCommand(
-                FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords)), command);
+        FindContactCommand command = (FindContactCommand) parser.parseCommand(
+                FindContactCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
+        assertEquals(new FindContactCommand(new NameContainsKeywordsPredicate(keywords)), command);
     }
 
     @Test

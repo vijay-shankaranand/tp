@@ -16,7 +16,7 @@ import seedu.address.logic.commands.HomeCommand;
 import seedu.address.logic.commands.contact.AddContactCommand;
 import seedu.address.logic.commands.contact.DeleteContactCommand;
 import seedu.address.logic.commands.contact.EditContactCommand;
-import seedu.address.logic.commands.contact.FindCommand;
+import seedu.address.logic.commands.contact.FindContactCommand;
 import seedu.address.logic.commands.contact.ViewContactsCommand;
 import seedu.address.logic.commands.event.AddEventCommand;
 import seedu.address.logic.commands.event.DeleteEventCommand;
@@ -34,7 +34,7 @@ import seedu.address.logic.commands.task.UnmarkCommand;
 import seedu.address.logic.parser.contact.AddContactCommandParser;
 import seedu.address.logic.parser.contact.DeleteContactCommandParser;
 import seedu.address.logic.parser.contact.EditContactCommandParser;
-import seedu.address.logic.parser.contact.FindCommandParser;
+import seedu.address.logic.parser.contact.FindContactCommandParser;
 import seedu.address.logic.parser.event.AddEventCommandParser;
 import seedu.address.logic.parser.event.DeleteEventCommandParser;
 import seedu.address.logic.parser.event.LinkCommandParser;
@@ -94,8 +94,8 @@ public class AddressBookParser {
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
 
-        case FindCommand.COMMAND_WORD:
-            return new FindCommandParser().parse(arguments);
+        case FindContactCommand.COMMAND_WORD:
+            return new FindContactCommandParser().parse(arguments);
 
         case ViewContactsCommand.COMMAND_WORD:
             return new ViewContactsCommand();
