@@ -3,7 +3,7 @@ package seedu.address.logic.parser.task;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_DESCRIPTION;
 
 import java.util.stream.Stream;
 
@@ -29,14 +29,16 @@ public class AddTaskCommandParser implements Parser<AddTaskCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public AddTaskCommand parse(String args) throws ParseException {
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_DATE, PREFIX_EVENT);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_TASK_DESCRIPTION,
+                PREFIX_DATE, PREFIX_EVENT);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_DATE, PREFIX_EVENT)) {
+        if (!arePrefixesPresent(argMultimap, PREFIX_TASK_DESCRIPTION, PREFIX_DATE, PREFIX_EVENT)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddTaskCommand.MESSAGE_USAGE));
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_DATE, PREFIX_EVENT);
-        TaskDescription description = ParserUtil.parseTaskDescription(argMultimap.getValue(PREFIX_NAME).get());
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_TASK_DESCRIPTION, PREFIX_DATE, PREFIX_EVENT);
+        TaskDescription description = ParserUtil.parseTaskDescription(
+                argMultimap.getValue(PREFIX_TASK_DESCRIPTION).get());
         Date date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
         Name eventNameToAddIn = ParserUtil.parseName(argMultimap.getValue(PREFIX_EVENT).get());
 
