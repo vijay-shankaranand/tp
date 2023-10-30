@@ -8,7 +8,11 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.contact.ViewContactsCommand;
 import seedu.address.logic.commands.event.ViewEventsCommand;
 import seedu.address.logic.commands.tag.ViewTagsCommand;
+import seedu.address.logic.commands.task.MarkCommand;
+import seedu.address.logic.commands.task.UnmarkCommand;
 import seedu.address.model.event.Event;
+import seedu.address.model.name.Name;
+import seedu.address.model.task.TaskDescription;
 
 /**
  * Represents the result of a command execution.
@@ -24,6 +28,12 @@ public class CommandResult {
 
     /** Event selected by the user through command. */
     private Event selectedEvent = null;
+
+    /** Description of task marked/unmarked by user through command. */
+    private TaskDescription taskDescription = null;
+
+    /** Name of event of task that was marked/unmarked by user through command. */
+    private Name associatedEventName = null;
 
     /**
      * Constructs a {@code CommandResult} with the specified fields.
@@ -51,6 +61,20 @@ public class CommandResult {
         this.showHelp = false;
         this.exit = false;
         this.selectedEvent = eventSelected;
+    }
+
+    /**
+     * Constructs a {@code CommandResult} with the specified {@code feedbackToUser},
+     * and {@code TaskDescription} and {@code Name} of {@code Event} associated with task.
+     * Used for marking/unmarking tasks.
+     */
+    public CommandResult(String feedbackToUser, TaskDescription desc, Name eventName) {
+        this.feedbackToUser = requireNonNull(feedbackToUser);
+        this.showHelp = false;
+        this.exit = false;
+        this.taskDescription = desc;
+        this.associatedEventName = eventName;
+
     }
 
     public String getFeedbackToUser() {
@@ -118,6 +142,27 @@ public class CommandResult {
         if (feedbackToUser.equals(HomeCommand.MESSAGE_SUCCESS)) {
             return true;
         }
+        return false;
+    }
+
+    /**
+     * Upon marking a task as completed, remain on the selected event.
+     * @return true if the current screen should remain displayed, else false
+     */
+    public boolean shouldStayOnScreen() {
+        String markFeedback = String.format(MarkCommand.MESSAGE_SUCCESS,
+            taskDescription, associatedEventName);
+
+        String unmarkFeedback = String.format(UnmarkCommand.MESSAGE_SUCCESS,
+            taskDescription, associatedEventName);
+        if (feedbackToUser.equals(markFeedback)) {
+            return true;
+        }
+
+        if (feedbackToUser.equals(unmarkFeedback)) {
+            return true;
+        }
+
         return false;
     }
 

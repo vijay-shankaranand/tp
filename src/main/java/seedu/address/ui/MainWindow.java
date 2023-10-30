@@ -344,7 +344,9 @@ public class MainWindow extends UiPart<Stage> {
             setReturnToHomeStatus(shouldReturnHome);
 
             if (commandResult.shouldHideAllPanels()) {
-                handleElse();
+                if (!commandResult.shouldStayOnScreen()) {
+                    handleElse();
+                }
                 // to display that an event is selected
                 eventContactDisplay.setFeedbackToUser(commandResult);
             }

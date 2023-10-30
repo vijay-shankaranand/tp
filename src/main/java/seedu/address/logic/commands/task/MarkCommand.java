@@ -50,7 +50,8 @@ public class MarkCommand extends Command {
         }
 
         model.markTask(taskDescription, associatedEventName);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, taskDescription, associatedEventName));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, taskDescription, associatedEventName),
+                taskDescription, associatedEventName);
     }
 
     @Override
