@@ -17,6 +17,14 @@ public class EventSortByDateComparator implements Comparator<Event> {
         Date firstDate = eventA.getDate();
         Date secondDate = eventB.getDate();
 
+        if (firstDate.isOverdue() && !secondDate.isOverdue()) {
+            return 1;
+        }
+
+        if (!firstDate.isOverdue() && secondDate.isOverdue()) {
+            return -1;
+        }
+
         return firstDate.compareTo(secondDate);
     }
 }
