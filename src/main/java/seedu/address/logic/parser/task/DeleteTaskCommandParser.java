@@ -33,7 +33,8 @@ public class DeleteTaskCommandParser implements Parser<DeleteTaskCommand> {
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_TASK_DESCRIPTION, PREFIX_EVENT);
-        TaskDescription taskDescription = ParserUtil.parseTaskDescription(argMultimap.getValue(PREFIX_TASK_DESCRIPTION).get());
+        TaskDescription taskDescription = ParserUtil.parseTaskDescription(argMultimap.getValue(
+                PREFIX_TASK_DESCRIPTION).get());
         Name associatedEventName = ParserUtil.parseName(argMultimap.getValue(PREFIX_EVENT).get());
 
         return new DeleteTaskCommand(taskDescription, associatedEventName);

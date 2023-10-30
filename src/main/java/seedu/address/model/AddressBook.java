@@ -215,6 +215,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void deleteEvent(Event eventToDelete) {
         events.remove(eventToDelete);
+        tasks.deleteTasksFromEvent(eventToDelete.getTasks());
     }
 
     /**

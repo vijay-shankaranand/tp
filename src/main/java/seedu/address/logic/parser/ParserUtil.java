@@ -23,6 +23,8 @@ import seedu.address.model.task.TaskDescription;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_CONTAINS_MORE_THAN_ONE_WHITE_SPACE =
+            "%1$s contains more than one white space.";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -48,6 +50,9 @@ public class ParserUtil {
         String trimmedName = name.trim();
         if (!Name.isValidName(trimmedName)) {
             throw new ParseException(Name.MESSAGE_CONSTRAINTS);
+        }
+        if (isContainsMoreThanOneWhiteSpace(trimmedName)) {
+            throw new ParseException(String.format(MESSAGE_CONTAINS_MORE_THAN_ONE_WHITE_SPACE, "Name"));
         }
         return new Name(trimmedName);
     }
@@ -78,6 +83,9 @@ public class ParserUtil {
         String trimmedAddress = address.trim();
         if (!Address.isValidAddress(trimmedAddress)) {
             throw new ParseException(Address.MESSAGE_CONSTRAINTS);
+        }
+        if (isContainsMoreThanOneWhiteSpace(trimmedAddress)) {
+            throw new ParseException(String.format(MESSAGE_CONTAINS_MORE_THAN_ONE_WHITE_SPACE, "Address"));
         }
         return new Address(trimmedAddress);
     }
@@ -164,7 +172,19 @@ public class ParserUtil {
         if (!TaskDescription.isValidDescription(trimmedTaskDescription)) {
             throw new ParseException(TaskDescription.MESSAGE_CONSTRAINTS);
         }
+        if (isContainsMoreThanOneWhiteSpace(trimmedTaskDescription)) {
+            throw new ParseException(String.format(MESSAGE_CONTAINS_MORE_THAN_ONE_WHITE_SPACE, "Task Description"));
+        }
         return new TaskDescription(trimmedTaskDescription);
+    }
+
+    /**
+     * Parses input to check if thw input contains more than one white space.
+     * @param input Input string to check.
+     * @return true if input contains more than one white space, false otherwise.
+     */
+    public static boolean isContainsMoreThanOneWhiteSpace(String input) {
+        return input.matches(".*\\s{2,}.*");
     }
 
 }
