@@ -6,7 +6,7 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_DESCRIPTION;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 
@@ -189,7 +189,7 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_addTask() throws Exception {
-        assertTrue(parser.parseCommand(AddTaskCommand.COMMAND_WORD + " " + PREFIX_NAME + "Task 1 "
+        assertTrue(parser.parseCommand(AddTaskCommand.COMMAND_WORD + " " + PREFIX_TASK_DESCRIPTION + "Task 1 "
                 + PREFIX_DATE + "2024-01-12 " + PREFIX_EVENT + "NUS") instanceof AddTaskCommand);
     }
 

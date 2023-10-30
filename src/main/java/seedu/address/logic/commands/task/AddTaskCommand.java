@@ -5,7 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.commands.event.LinkCommand.MESSAGE_NO_SUCH_EVENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_DESCRIPTION;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.Command;
@@ -27,11 +27,11 @@ public class AddTaskCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to the specified event. "
             + "Parameters: "
-            + PREFIX_NAME + "TASK_DESCRIPTION "
+            + PREFIX_TASK_DESCRIPTION + "TASK_DESCRIPTION "
             + PREFIX_DATE + "TASK_DEADLINE "
             + PREFIX_EVENT + "EVENT \n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_NAME + "Book Venue "
+            + PREFIX_TASK_DESCRIPTION + "Book Venue "
             + PREFIX_DATE + "2023-12-23 "
             + PREFIX_EVENT + "NUS Career Fair 2023";
 
@@ -58,6 +58,11 @@ public class AddTaskCommand extends Command {
         requireNonNull(model);
 
         try {
+
+            if (!Date.isDateTodayOrAfter(taskDeadline)) {
+                throw new CommandException(Date.MESSAGE_CONSTRAINTS);
+            }
+
             Event eventToAddIn = model.getEvent(associatedEventName);
             taskToAdd = new Task(taskDescription, taskDeadline, eventToAddIn, false);
 

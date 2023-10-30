@@ -187,9 +187,12 @@ public class AddressBookTest {
 
     @Test
     public void deleteEvent_successful_returnsTrue() {
-        addressBook.addEvent(JOBFEST);
-        addressBook.deleteEvent(JOBFEST);
-        assertFalse(addressBook.hasEvent(JOBFEST));
+        Event editedEvent = new EventBuilder(JOBFEST).withEventTasks(BOOK_VENUE).build();
+        addressBook.addEvent(editedEvent);
+        addressBook.addTask(BOOK_VENUE);
+        addressBook.deleteEvent(editedEvent);
+        assertFalse(addressBook.hasEvent(editedEvent));
+        assertFalse(addressBook.hasTask(BOOK_VENUE));
     }
 
     @Test

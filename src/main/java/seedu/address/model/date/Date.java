@@ -34,25 +34,32 @@ public class Date {
      * Returns true if a given string is a valid date.
      */
     public static boolean isValidDate(String testDate) {
-        LocalDate date;
         if (testDate.matches(VALIDATION_REGEX)) {
-            try {
-                date = LocalDate.parse(testDate);
-            } catch (DateTimeException e) {
-                return false;
-            }
+            return isParsable(testDate);
         } else {
             return false;
         }
-        return isDateTodayOrAfter(date);
+    }
+
+    /**
+     * Returns true if a given string is parsable.
+     */
+    public static boolean isParsable(String testDate) {
+        try {
+            LocalDate.parse(testDate);
+        } catch (DateTimeException e) {
+            return false;
+        }
+        return true;
     }
 
     /**
      * Returns true if a given date is today or after today.
      */
-    public static boolean isDateTodayOrAfter(LocalDate date) {
+    public static boolean isDateTodayOrAfter(Date date) {
         LocalDate today = LocalDate.now();
-        if (date.isBefore(today)) {
+        LocalDate taskDue = LocalDate.parse(date.date);
+        if (taskDue.isBefore(today)) {
             return false;
         }
         return true;
@@ -94,6 +101,17 @@ public class Date {
     public LocalDate fourDaysFromNow() {
         LocalDate today = LocalDate.now();
         return today.plusDays(4);
+    }
+
+    /**
+     * Returns true if the date is before today's date.
+     * @return true if date is before today's date, false otherwise.
+     */
+    public boolean isOverdue() {
+        LocalDate today = LocalDate.now();
+        LocalDate taskDue = LocalDate.parse(this.date);
+
+        return taskDue.isBefore(today);
     }
 
     @Override

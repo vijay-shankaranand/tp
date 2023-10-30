@@ -65,6 +65,16 @@ public class Task {
         return this.deadline.isWithinThreeDays();
     }
 
+    /**
+     * Returns true if the task is overdue.
+     */
+    public boolean isOverdue() {
+        if (isCompleted) {
+            return false;
+        }
+        return this.deadline.isOverdue();
+    }
+
     public TaskDescription getDescription() {
         return description;
     }

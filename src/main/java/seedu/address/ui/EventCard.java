@@ -33,6 +33,8 @@ public class EventCard extends UiPart<Region> {
     private Label date;
     @FXML
     private Label address;
+    @FXML
+    private Label completed;
 
     /**
      * Creates a {@code EventCode} with the given {@code Event} and index to display.
@@ -44,5 +46,12 @@ public class EventCard extends UiPart<Region> {
         name.setText(event.getName().fullName);
         date.setText(event.getDate().date);
         address.setText(event.getAddress().value);
+
+        if (event.isCompleted()) {
+            completed.setText("Completed");
+        } else {
+            completed.setText("");
+            completed.setVisible(false);
+        }
     }
 }

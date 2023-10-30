@@ -276,17 +276,17 @@ Examples:
 
 Adds a task to an event in JobFestGo.
 
-Format: `add_task n/TASK_DESCRIPTION d/DEADLINE ev/EVENT_NAME`
+Format: `add_task td/TASK_DESCRIPTION d/DEADLINE ev/EVENT_NAME`
 
 * Task Description can take any value, no limit to the type of characters.
 * Deadline is a date in the format YYYY-MM-DD.
 * Deadline should not be before today's date.
 * Event name should be the **name of an already existing event**.
-* The command must contain all `/n`, `/d` and `/ev` for the command to be valid.
+* The command must contain all `td/`, `d/` and `ev/` for the command to be valid.
 * `TASK_DESCRIPTION`, `DEADLINE`, and `EVENT_NAME` must all be present.
 
 Examples:
-* `add_task n/Book Venue d/2023-12-23 ev/NUS Career Fair 2023` adds a `Book Venue` by `2023-12-23` task to the event `NUS Career Fair 2023`
+* `add_task td/Book Venue d/2023-12-23 ev/NUS Career Fair 2023` adds a `Book Venue` by `2023-12-23` task to the event `NUS Career Fair 2023`
 
 ### Clearing all entries : `clear`
 
@@ -357,7 +357,7 @@ Action     | Format, Examples
 **Link** | `link ev/EVENT_NAME C/CONTACT [C/MORE_CONTACTS]` <br> e.g. `link ev/NUS Career Fest c/Alice Black`
 **Select Event** | `select_event INDEX` <br> e.g. `select_event 1`
 **View Events** | `view_events`
-**Add Task** | `add_task n/TASK_DESCRIPTION d/DEADLINE ev/EVENT_NAME` <br> e.g. `add_task n/Book Venue d/2023-12-23 ev/NUS Career Fair 2023`
+**Add Task** | `add_task td/TASK_DESCRIPTION d/DEADLINE ev/EVENT_NAME` <br> e.g. `add_task n/Book Venue d/2023-12-23 ev/NUS Career Fair 2023`
 **Clear**  | `clear`
 **Help**   | `help`
 **Home**   | `home`
