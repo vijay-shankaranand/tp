@@ -1,6 +1,7 @@
 package seedu.address.logic.commands.task;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.commands.event.LinkCommand.MESSAGE_NO_SUCH_EVENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
@@ -48,6 +49,7 @@ public class AddTaskCommand extends Command {
     public AddTaskCommand(TaskDescription taskDescription, Date taskDeadline, Name associatedEvent) {
         requireAllNonNull(taskDescription, taskDeadline, associatedEvent);
         this.taskDescription = taskDescription;
+        checkArgument(Date.isDateTodayOrAfter(taskDeadline), Date.MESSAGE_CONSTRAINTS);
         this.taskDeadline = taskDeadline;
         this.associatedEventName = associatedEvent;
         taskToAdd = new Task(taskDescription, taskDeadline, associatedEvent, false);
@@ -58,6 +60,11 @@ public class AddTaskCommand extends Command {
         requireNonNull(model);
 
         try {
+
+            if (!Date.isDateTodayOrAfter(taskDeadline)) {
+                throw new CommandException(Date.MESSAGE_CONSTRAINTS);
+            }
+
             Event eventToAddIn = model.getEvent(associatedEventName);
             taskToAdd = new Task(taskDescription, taskDeadline, eventToAddIn, false);
 
