@@ -114,7 +114,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("Gui Settings : " + guiSettings);
-        sb.append("\nLocal job fest go data file location : " + jobFestGoFilePath);
+        sb.append("\nLocal jobfestgo data file location : " + jobFestGoFilePath);
         sb.append("\nLocal tag list file location : " + tagListFilePath);
         sb.append("\nLocal event list file location : " + eventListFilePath);
         return sb.toString();

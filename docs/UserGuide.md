@@ -180,7 +180,7 @@ Deletes the specified tag from JobFestGo.
 Format: `delete_tag t/TAG_NAME`
 
 * Deletes the tag with the specified tag name `TAG_NAME`.
-* The tag name **must be an existing tag** vendor, Contactal, customer, …​
+* The tag name **must be an existing tag** vendor, personal, customer, …​
 * The command must contain `/t` for the command to be valid.
 * The tag name must be specified in the command.
 
