@@ -7,7 +7,7 @@ import java.time.DateTimeException;
 import java.time.LocalDate;
 
 /**
- * Represents an Event's date in the address book.
+ * Represents an Event's date in the JobFestGo.
  * Guarantees: immutable; is valid as declared in {@link #isValidDate(String)}
  */
 public class Date {

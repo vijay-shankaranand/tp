@@ -44,37 +44,37 @@ public interface Model {
     void setGuiSettings(GuiSettings guiSettings);
 
     /**
-     * Returns the user prefs' address book file path.
+     * Returns the user prefs' JobFestGo file path.
      */
-    Path getAddressBookFilePath();
+    Path getJobFestGoFilePath();
 
     /**
-     * Sets the user prefs' address book file path.
+     * Sets the user prefs' JobFestGo file path.
      */
-    void setAddressBookFilePath(Path addressBookFilePath);
+    void setJobFestGoFilePath(Path jobFestGoFilePath);
 
     /**
-     * Replaces address book data with the data in {@code addressBook}.
+     * Replaces JobFestGo data with the data in {@code JobFestGo}.
      */
-    void setAddressBook(ReadOnlyAddressBook addressBook);
+    void setJobFestGo(ReadOnlyJobFestGo jobFestGo);
 
-    /** Returns the AddressBook */
-    ReadOnlyAddressBook getAddressBook();
+    /** Returns the JobFestGo */
+    ReadOnlyJobFestGo getJobFestGo();
 
     /**
-     * Returns true if a contact with the same identity as {@code contact} exists in the address book.
+     * Returns true if a contact with the same identity as {@code contact} exists in JobFestGo.
      */
     boolean hasContact(Contact contact);
 
     /**
      * Deletes the given contact.
-     * The contact must exist in the address book.
+     * The contact must exist in JobFestGo.
      */
     void deleteContact(Contact target);
 
     /**
      * Adds the given contact.
-     * {@code contact} must not already exist in the address book.
+     * {@code contact} must not already exist in JobFestGo.
      */
     void addContact(Contact contact);
 
@@ -85,7 +85,7 @@ public interface Model {
 
     /**
      * Replaces the given contact {@code target} with {@code editedContact}.
-     * {@code target} must exist in the address book.
+     * {@code target} must exist in JobFestGo.
      * The contact identity of {@code editedContact} must not be the same as another existing contact in the address
      * book.
      */
@@ -143,7 +143,7 @@ public interface Model {
 
     /**
      * Deletes the given event.
-     * The event must exist in the address book.
+     * The event must exist in JobFestGo.
      */
     void deleteEvent(Event target);
 
@@ -190,7 +190,7 @@ public interface Model {
 
     /**
      * Deletes the task specified by the task description from its associated event.
-     * The task must exist in the address book.
+     * The task must exist in JobFestGo.
      */
     void deleteTask(TaskDescription taskDescription, Name associatedEventName);
 

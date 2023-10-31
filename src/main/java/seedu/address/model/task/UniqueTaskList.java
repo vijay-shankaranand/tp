@@ -200,7 +200,7 @@ public class UniqueTaskList implements Iterable<Task> {
     }
 
     /**
-     * Returns true if {@code Tasks} contains only unique persons.
+     * Returns true if {@code Tasks} contains only unique Contacts.
      */
     public boolean areTasksUnique(List<Task> tasks) {
         for (int i = 0; i < tasks.size() - 1; i++) {

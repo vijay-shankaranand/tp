@@ -16,7 +16,7 @@ import seedu.address.model.name.Name;
 import seedu.address.model.tag.Tag;
 
 /**
- * A list of persons that enforces uniqueness between its elements and does not allow nulls.
+ * A list of contacts that enforces uniqueness between its elements and does not allow nulls.
  * A contact is considered unique by comparing using {@code Contact#isSameContact(Contact)}. As such, adding and
  * updating of contacts uses Contact#isSameContact(Contact) for equality to ensure that the contact being added or
  * updated is unique in terms of identity in the UniqueContactList. However, the removal of a contact uses
@@ -120,7 +120,7 @@ public class UniqueContactList implements Iterable<Contact> {
     }
 
     /**
-     * Replaces the contact list to remove {@code tag} from any persons.
+     * Replaces the contact list to remove {@code tag} from any Contacts.
      */
     public void updateTag(Tag tag) {
         for (int i = 0; i < internalList.size(); i++) {

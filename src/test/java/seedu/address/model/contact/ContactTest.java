@@ -9,8 +9,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.contact.TypicalPersons.ALICE;
-import static seedu.address.testutil.contact.TypicalPersons.BOB;
+import static seedu.address.testutil.contact.TypicalContacts.ALICE;
+import static seedu.address.testutil.contact.TypicalContacts.BOB;
 
 import org.junit.jupiter.api.Test;
 
@@ -25,7 +25,7 @@ public class ContactTest {
     }
 
     @Test
-    public void isSamePerson() {
+    public void isSameContact() {
         // same object -> returns true
         assertTrue(ALICE.isSameContact(ALICE));
 

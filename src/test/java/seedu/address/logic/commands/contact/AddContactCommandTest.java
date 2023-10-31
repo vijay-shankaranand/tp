@@ -6,8 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.contact.TypicalPersons.ALICE;
-import static seedu.address.testutil.contact.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.contact.TypicalContacts.ALICE;
+import static seedu.address.testutil.contact.TypicalContacts.getTypicalJobFestGo;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -21,10 +21,10 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.AddressBook;
+import seedu.address.model.JobFestGo;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyJobFestGo;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.contact.Contact;
@@ -38,25 +38,25 @@ import seedu.address.testutil.contact.ContactBuilder;
 
 public class AddContactCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalJobFestGo(), new UserPrefs());
     @Test
-    public void constructor_nullPerson_throwsNullPointerException() {
+    public void constructor_nullContact_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new AddContactCommand(null));
     }
 
     @Test
-    public void execute_personAcceptedByModel_addSuccessful() throws Exception {
-        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
+    public void execute_contactAcceptedByModel_addSuccessful() throws Exception {
+        ModelStubAcceptingContactAdded modelStub = new ModelStubAcceptingContactAdded();
         Contact validContact = new ContactBuilder().build();
 
         CommandResult commandResult = new AddContactCommand(validContact).execute(modelStub);
 
         assertEquals(String.format(AddContactCommand.MESSAGE_SUCCESS, Messages.format(validContact)),
                 commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validContact), modelStub.personsAdded);
+        assertEquals(Arrays.asList(validContact), modelStub.contactsAdded);
     }
     @Test
-    public void addPerson_tagNotPresentInAddressBook_throwsCommandException() {
+    public void addContact_tagNotPresentInJobFestGo_throwsCommandException() {
         //Empty taglist in model
         model.deleteContact(ALICE);
         assertThrows(CommandException.class, "Tag: friends"
@@ -65,7 +65,7 @@ public class AddContactCommandTest {
     }
 
     @Test
-    public void addPerson_tagPresentInAddressBook_doesNotThrowException() {
+    public void addContact_tagPresentInJobFestGo_doesNotThrowException() {
         //Add "friends tag into tag list"
         model.deleteContact(ALICE);
         model.addTag(new Tag("friends"));
@@ -74,12 +74,12 @@ public class AddContactCommandTest {
 
 
     @Test
-    public void execute_duplicatePerson_throwsCommandException() {
+    public void execute_duplicateContact_throwsCommandException() {
         Contact validContact = new ContactBuilder().build();
         AddContactCommand addCommand = new AddContactCommand(validContact);
-        ModelStub modelStub = new ModelStubWithPerson(validContact);
+        ModelStub modelStub = new ModelStubWithContact(validContact);
 
-        assertThrows(CommandException.class, AddContactCommand.MESSAGE_DUPLICATE_PERSON, () ->
+        assertThrows(CommandException.class, AddContactCommand.MESSAGE_DUPLICATE_CONTACT, () ->
                 addCommand.execute(modelStub));
     }
 
@@ -139,12 +139,12 @@ public class AddContactCommandTest {
         }
 
         @Override
-        public Path getAddressBookFilePath() {
+        public Path getJobFestGoFilePath() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void setAddressBookFilePath(Path addressBookFilePath) {
+        public void setJobFestGoFilePath(Path jobFestGoFilePath) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -159,12 +159,12 @@ public class AddContactCommandTest {
         }
 
         @Override
-        public void setAddressBook(ReadOnlyAddressBook newData) {
+        public void setJobFestGo(ReadOnlyJobFestGo newData) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
+        public ReadOnlyJobFestGo getJobFestGo() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -327,10 +327,10 @@ public class AddContactCommandTest {
     /**
      * A Model stub that contains a single contact.
      */
-    private class ModelStubWithPerson extends ModelStub {
+    private class ModelStubWithContact extends ModelStub {
         private final Contact contact;
 
-        ModelStubWithPerson(Contact contact) {
+        ModelStubWithContact(Contact contact) {
             requireNonNull(contact);
             this.contact = contact;
         }
@@ -345,24 +345,26 @@ public class AddContactCommandTest {
     /**
      * A Model stub that always accept the contact being added.
      */
-    private class ModelStubAcceptingPersonAdded extends ModelStub {
-        final ArrayList<Contact> personsAdded = new ArrayList<>();
+    private class ModelStubAcceptingContactAdded extends ModelStub {
+        final ArrayList<Contact> contactsAdded = new ArrayList<>();
 
         @Override
         public boolean hasContact(Contact contact) {
             requireNonNull(contact);
-            return personsAdded.stream().anyMatch(contact::isSameContact);
+
+            return contactsAdded.stream().anyMatch(contact::isSameContact);
+
         }
 
         @Override
         public void addContact(Contact contact) {
             requireNonNull(contact);
-            personsAdded.add(contact);
+            contactsAdded.add(contact);
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
-            return new AddressBook();
+        public ReadOnlyJobFestGo getJobFestGo() {
+            return new JobFestGo();
         }
     }
 }

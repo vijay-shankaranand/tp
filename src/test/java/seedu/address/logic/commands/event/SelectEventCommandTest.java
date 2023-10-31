@@ -21,8 +21,8 @@ import seedu.address.testutil.event.TypicalEvents;
 
 public class SelectEventCommandTest {
 
-    private Model model = new ModelManager(TypicalEvents.getTypicalAddressBook(), new UserPrefs());
-    private Model expectedModel = new ModelManager(TypicalEvents.getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(TypicalEvents.getTypicalJobFestGo(), new UserPrefs());
+    private Model expectedModel = new ModelManager(TypicalEvents.getTypicalJobFestGo(), new UserPrefs());
 
     @Test
     public void constructor_nullIndex_throwsNullPointerException() {

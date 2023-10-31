@@ -8,7 +8,7 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND;
-import static seedu.address.testutil.event.TypicalEvents.getTypicalAddressBook;
+import static seedu.address.testutil.event.TypicalEvents.getTypicalJobFestGo;
 
 import org.junit.jupiter.api.Test;
 
@@ -20,7 +20,7 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.event.Event;
 
 public class DeleteEventCommandTest {
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalJobFestGo(), new UserPrefs());
 
     /**
      * Tests the event in which a null tag is provided. Such a case throws a NullPointer.
@@ -37,7 +37,7 @@ public class DeleteEventCommandTest {
         String expectedMessage = String.format(DeleteEventCommand.MESSAGE_DELETE_EVENT_SUCCESS,
                 Messages.format(eventToDelete));
 
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        ModelManager expectedModel = new ModelManager(model.getJobFestGo(), new UserPrefs());
         expectedModel.deleteEvent(eventToDelete);
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);

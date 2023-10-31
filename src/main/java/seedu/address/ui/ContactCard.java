@@ -12,9 +12,9 @@ import seedu.address.model.contact.Contact;
 /**
  * An UI component that displays information of a {@code Contact}.
  */
-public class PersonCard extends UiPart<Region> {
+public class ContactCard extends UiPart<Region> {
 
-    private static final String FXML = "PersonListCard.fxml";
+    private static final String FXML = "ContactListCard.fxml";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -42,9 +42,9 @@ public class PersonCard extends UiPart<Region> {
     private FlowPane tags;
 
     /**
-     * Creates a {@code PersonCode} with the given {@code Contact} and index to display.
+     * Creates a {@code ContactCode} with the given {@code Contact} and index to display.
      */
-    public PersonCard(Contact contact, int displayedIndex) {
+    public ContactCard(Contact contact, int displayedIndex) {
         super(FXML);
         this.contact = contact;
         id.setText(displayedIndex + ". ");

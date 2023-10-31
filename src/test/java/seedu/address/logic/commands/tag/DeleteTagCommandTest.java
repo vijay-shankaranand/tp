@@ -18,7 +18,7 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.contact.DeleteContactCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyJobFestGo;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.contact.Contact;
 import seedu.address.model.date.Date;
@@ -65,7 +65,7 @@ public class DeleteTagCommandTest {
     @Test
     public void execute_invalidTagToDelete() throws CommandException {
         Tag test1 = new Tag("vendor");
-        Tag test2 = new Tag("personal");
+        Tag test2 = new Tag("Contactal");
         Tag test3 = new Tag("private");
         ModelStubWithTags testModel = new ModelStubWithTags();
         testModel.addTag(test1);
@@ -122,12 +122,12 @@ public class DeleteTagCommandTest {
         }
 
         @Override
-        public Path getAddressBookFilePath() {
+        public Path getJobFestGoFilePath() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void setAddressBookFilePath(Path addressBookFilePath) {
+        public void setJobFestGoFilePath(Path jobFestGoFilePath) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -142,12 +142,12 @@ public class DeleteTagCommandTest {
         }
 
         @Override
-        public void setAddressBook(ReadOnlyAddressBook newData) {
+        public void setJobFestGo(ReadOnlyJobFestGo newData) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
+        public ReadOnlyJobFestGo getJobFestGo() {
             throw new AssertionError("This method should not be called.");
         }
 

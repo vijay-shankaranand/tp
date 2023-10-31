@@ -21,9 +21,9 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.AddressBook;
+import seedu.address.model.JobFestGo;
 import seedu.address.model.Model;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyJobFestGo;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.contact.Contact;
 import seedu.address.model.date.Date;
@@ -113,13 +113,13 @@ public class AddEventCommandTest {
         }
 
         @Override
-        public Path getAddressBookFilePath() {
+        public Path getJobFestGoFilePath() {
 
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void setAddressBookFilePath(Path addressBookFilePath) {
+        public void setJobFestGoFilePath(Path jobFestGoFilePath) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -136,12 +136,12 @@ public class AddEventCommandTest {
         }
 
         @Override
-        public void setAddressBook(ReadOnlyAddressBook newData) {
+        public void setJobFestGo(ReadOnlyJobFestGo newData) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
+        public ReadOnlyJobFestGo getJobFestGo() {
 
             throw new AssertionError("This method should not be called.");
         }
@@ -347,8 +347,8 @@ public class AddEventCommandTest {
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
-            return new AddressBook();
+        public ReadOnlyJobFestGo getJobFestGo() {
+            return new JobFestGo();
         }
     }
 }

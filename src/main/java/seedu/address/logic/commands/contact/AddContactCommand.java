@@ -17,12 +17,12 @@ import seedu.address.model.contact.Contact;
 import seedu.address.model.tag.Tag;
 
 /**
- * Adds a contact to the address book.
+ * Adds a contact to JobFestGo.
  */
 public class AddContactCommand extends Command {
     public static final String COMMAND_WORD = "add_contact";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a contact to the address book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a contact to JobFestGo. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
@@ -38,10 +38,10 @@ public class AddContactCommand extends Command {
             + PREFIX_TAG + "owesMoney";
 
     public static final String MESSAGE_SUCCESS = "New contact added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This contact's name/phone number is already in "
-            + "the address book";
-    public static final String MESSAGE_INVALID_TAG = " is missing in address book. "
-            + "Please use tags already added to address book.";
+    public static final String MESSAGE_DUPLICATE_CONTACT = "This contact's name/phone number is already in "
+            + "JobFestGo";
+    public static final String MESSAGE_INVALID_TAG = " is missing in JobFestGo. "
+            + "Please use tags already added to JobFestGo.";
     private final Contact toAdd;
 
     /**
@@ -57,7 +57,7 @@ public class AddContactCommand extends Command {
         requireNonNull(model);
 
         if (model.hasContact(toAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+            throw new CommandException(MESSAGE_DUPLICATE_CONTACT);
         }
 
         for (Tag tag : toAdd.getTags()) {

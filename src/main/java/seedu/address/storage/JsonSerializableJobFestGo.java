@@ -9,20 +9,20 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.AddressBook;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.JobFestGo;
+import seedu.address.model.ReadOnlyJobFestGo;
 import seedu.address.model.contact.Contact;
 import seedu.address.model.event.Event;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.task.Task;
 
 /**
- * An Immutable AddressBook that is serializable to JSON format.
+ * An Immutable JobFestGo that is serializable to JSON format.
  */
-@JsonRootName(value = "addressbook")
-class JsonSerializableAddressBook {
+@JsonRootName(value = "JobFestGo")
+class JsonSerializableJobFestGo {
 
-    public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate contact(s).";
+    public static final String MESSAGE_DUPLICATE_CONTACT = "Contacts list contains duplicate contact(s).";
 
     public static final String MESSAGE_DUPLICATE_TAG = "Tags list contains duplicate tag(s).";
 
@@ -39,15 +39,15 @@ class JsonSerializableAddressBook {
     private final List<JsonAdaptedTask> taskList = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonSerializableAddressBook} with the given persons, tags, events, tasks.
+     * Constructs a {@code JsonSerializableJobFestGo} with the given Contacts, tags, events, tasks.
      */
     @JsonCreator
-    public JsonSerializableAddressBook(@JsonProperty("contacts") List<JsonAdaptedContact> persons,
+    public JsonSerializableJobFestGo(@JsonProperty("contacts") List<JsonAdaptedContact> contacts,
                                        @JsonProperty("tagList") List<JsonAdaptedTag> tagList,
                                        @JsonProperty("events") List<JsonAdaptedEvent> events,
                                        @JsonProperty("taskList") List<JsonAdaptedTask> taskList
     ) {
-        this.contacts.addAll(persons);
+        this.contacts.addAll(contacts);
         this.tagList.addAll(tagList);
         this.events.addAll(events);
         this.taskList.addAll(taskList);
@@ -55,11 +55,11 @@ class JsonSerializableAddressBook {
 
 
     /**
-     * Converts a given {@code ReadOnlyAddressBook} into this class for Jackson use.
+     * Converts a given {@code ReadOnlyJobFestGo} into this class for Jackson use.
      *
-     * @param source future changes to this will not affect the created {@code JsonSerializableAddressBook}.
+     * @param source future changes to this will not affect the created {@code JsonSerializableJobFestGo}.
      */
-    public JsonSerializableAddressBook(ReadOnlyAddressBook source) {
+    public JsonSerializableJobFestGo(ReadOnlyJobFestGo source) {
         contacts.addAll(source.getContactList().stream().map(JsonAdaptedContact::new).collect(Collectors.toList()));
         tagList.addAll(source.getTagList().stream().map(JsonAdaptedTag::new).collect(Collectors.toList()));
         events.addAll(source.getEventList().stream().map(JsonAdaptedEvent::new).collect(Collectors.toList()));
@@ -67,43 +67,43 @@ class JsonSerializableAddressBook {
     }
 
     /**
-     * Converts this address book into the model's {@code AddressBook} object.
+     * Converts this jobfestgo into the model's {@code JobFestGo} object.
      *
      * @throws IllegalValueException if there were any data constraints violated.
      */
-    public AddressBook toModelType() throws IllegalValueException {
-        AddressBook addressBook = new AddressBook();
-        for (JsonAdaptedContact jsonAdaptedPerson : contacts) {
-            Contact contact = jsonAdaptedPerson.toModelType();
-            if (addressBook.hasPerson(contact)) {
-                throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
+    public JobFestGo toModelType() throws IllegalValueException {
+        JobFestGo jobFestGo = new JobFestGo();
+        for (JsonAdaptedContact jsonAdaptedContact : contacts) {
+            Contact contact = jsonAdaptedContact.toModelType();
+            if (jobFestGo.hasContact(contact)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_CONTACT);
             }
-            addressBook.addPerson(contact);
+            jobFestGo.addContact(contact);
         }
         for (JsonAdaptedTag jsonAdaptedTag : tagList) {
             Tag tag = jsonAdaptedTag.toModelType();
-            if (addressBook.hasTag(tag)) {
+            if (jobFestGo.hasTag(tag)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_TAG);
             }
-            addressBook.addTag(tag);
+            jobFestGo.addTag(tag);
         }
         for (JsonAdaptedEvent jsonAdaptedEvent : events) {
             Event event = jsonAdaptedEvent.toModelType();
-            if (addressBook.hasEvent(event)) {
+            if (jobFestGo.hasEvent(event)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_EVENT);
             }
-            addressBook.addEvent(event);
+            jobFestGo.addEvent(event);
         }
         for (JsonAdaptedTask jsonAdaptedTask : taskList) {
             Task task = jsonAdaptedTask.toModelType();
             task = new Task(task.getDescription(), task.getDate(),
-                    addressBook.getEvent(task.getAssociatedEventName()), task.isCompleted());
-            if (addressBook.hasTask(task)) {
+                    jobFestGo.getEvent(task.getAssociatedEventName()), task.isCompleted());
+            if (jobFestGo.hasTask(task)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_TASK);
             }
-            addressBook.addTask(task);
+            jobFestGo.addTask(task);
         }
-        return addressBook;
+        return jobFestGo;
     }
 
 }

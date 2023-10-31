@@ -13,7 +13,7 @@ import seedu.address.model.name.Name;
 import seedu.address.model.tag.Tag;
 
 /**
- * Represents a Contact in the address book.
+ * Represents a Contact in the JobFestGo.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Contact {
@@ -75,7 +75,7 @@ public class Contact {
 
     /**
      * Returns true if both contacts have the same name or same phone number.
-     * This defines a weaker notion of equality between two persons.
+     * This defines a weaker notion of equality between two contacts.
      */
     public boolean isSameContact(Contact otherContact) {
         if (otherContact == this) {
@@ -89,7 +89,7 @@ public class Contact {
 
     /**
      * Returns true if both contacts have the same identity and data fields.
-     * This defines a stronger notion of equality between two persons.
+     * This defines a stronger notion of equality between two contacts.
      */
     @Override
     public boolean equals(Object other) {
