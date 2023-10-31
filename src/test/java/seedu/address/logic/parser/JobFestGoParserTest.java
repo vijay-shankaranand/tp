@@ -46,8 +46,8 @@ import seedu.address.model.name.Name;
 import seedu.address.model.name.NameContainsKeywordsPredicate;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.contact.ContactBuilder;
-import seedu.address.testutil.contact.EditContactDescriptorBuilder;
 import seedu.address.testutil.contact.ContactUtil;
+import seedu.address.testutil.contact.EditContactDescriptorBuilder;
 import seedu.address.testutil.event.EventBuilder;
 import seedu.address.testutil.event.EventUtil;
 

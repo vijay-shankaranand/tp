@@ -21,7 +21,7 @@
     </columnConstraints>
     <VBox fx:id="contactList" VBox.vgrow="ALWAYS"
           GridPane.columnIndex="1" GridPane.rowIndex="0" GridPane.columnSpan="1">
-        <StackPane fx:id="ContactListPanelPlaceholder" prefHeight="99999" VBox.vgrow="ALWAYS"/>
+        <StackPane fx:id="contactListPanelPlaceholder" prefHeight="99999" VBox.vgrow="ALWAYS"/>
     </VBox>
     <columnConstraints>
         <ColumnConstraints hgrow="ALWAYS" minWidth = "120" prefWidth="120" />

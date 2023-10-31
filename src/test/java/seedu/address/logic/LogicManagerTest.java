@@ -25,7 +25,11 @@ import seedu.address.logic.commands.contact.AddContactCommand;
 import seedu.address.logic.commands.contact.ViewContactsCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.*;
+import seedu.address.model.JobFestGo;
+import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
+import seedu.address.model.ReadOnlyJobFestGo;
+import seedu.address.model.UserPrefs;
 import seedu.address.model.contact.Contact;
 import seedu.address.storage.JsonJobFestGoStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
@@ -44,10 +48,10 @@ public class LogicManagerTest {
 
     @BeforeEach
     public void setUp() {
-        JsonJobFestGoStorage JobFestGoStorage =
+        JsonJobFestGoStorage jobFestGoStorage =
                 new JsonJobFestGoStorage(temporaryFolder.resolve("jobfestgo.json"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
-        StorageManager storage = new StorageManager(JobFestGoStorage, userPrefsStorage);
+        StorageManager storage = new StorageManager(jobFestGoStorage, userPrefsStorage);
         logic = new LogicManager(model, storage);
     }
 
@@ -176,9 +180,9 @@ public class LogicManagerTest {
         Path prefPath = temporaryFolder.resolve("ExceptionUserPrefs.json");
 
         // Inject LogicManager with an JobFestGoStorage that throws the IOException e when saving
-        JsonJobFestGoStorage JobFestGoStorage = new JsonJobFestGoStorage(prefPath) {
+        JsonJobFestGoStorage jobFestGoStorage = new JsonJobFestGoStorage(prefPath) {
             @Override
-            public void saveJobFestGo(ReadOnlyJobFestGo JobFestGo, Path filePath)
+            public void saveJobFestGo(ReadOnlyJobFestGo jobFestGo, Path filePath)
                     throws IOException {
                 throw e;
             }
@@ -186,7 +190,7 @@ public class LogicManagerTest {
 
         JsonUserPrefsStorage userPrefsStorage =
                 new JsonUserPrefsStorage(temporaryFolder.resolve("ExceptionUserPrefs.json"));
-        StorageManager storage = new StorageManager(JobFestGoStorage, userPrefsStorage);
+        StorageManager storage = new StorageManager(jobFestGoStorage, userPrefsStorage);
 
         logic = new LogicManager(model, storage);
 

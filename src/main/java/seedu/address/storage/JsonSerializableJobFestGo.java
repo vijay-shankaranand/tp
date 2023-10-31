@@ -22,7 +22,7 @@ import seedu.address.model.task.Task;
 @JsonRootName(value = "JobFestGo")
 class JsonSerializableJobFestGo {
 
-    public static final String MESSAGE_DUPLICATE_Contact = "Contacts list contains duplicate contact(s).";
+    public static final String MESSAGE_DUPLICATE_CONTACT = "Contacts list contains duplicate contact(s).";
 
     public static final String MESSAGE_DUPLICATE_TAG = "Tags list contains duplicate tag(s).";
 
@@ -42,12 +42,12 @@ class JsonSerializableJobFestGo {
      * Constructs a {@code JsonSerializableJobFestGo} with the given Contacts, tags, events, tasks.
      */
     @JsonCreator
-    public JsonSerializableJobFestGo(@JsonProperty("contacts") List<JsonAdaptedContact> Contacts,
+    public JsonSerializableJobFestGo(@JsonProperty("contacts") List<JsonAdaptedContact> contacts,
                                        @JsonProperty("tagList") List<JsonAdaptedTag> tagList,
                                        @JsonProperty("events") List<JsonAdaptedEvent> events,
                                        @JsonProperty("taskList") List<JsonAdaptedTask> taskList
     ) {
-        this.contacts.addAll(Contacts);
+        this.contacts.addAll(contacts);
         this.tagList.addAll(tagList);
         this.events.addAll(events);
         this.taskList.addAll(taskList);
@@ -72,38 +72,38 @@ class JsonSerializableJobFestGo {
      * @throws IllegalValueException if there were any data constraints violated.
      */
     public JobFestGo toModelType() throws IllegalValueException {
-        JobFestGo JobFestGo = new JobFestGo();
+        JobFestGo jobFestGo = new JobFestGo();
         for (JsonAdaptedContact jsonAdaptedContact : contacts) {
             Contact contact = jsonAdaptedContact.toModelType();
-            if (JobFestGo.hasContact(contact)) {
-                throw new IllegalValueException(MESSAGE_DUPLICATE_Contact);
+            if (jobFestGo.hasContact(contact)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_CONTACT);
             }
-            JobFestGo.addContact(contact);
+            jobFestGo.addContact(contact);
         }
         for (JsonAdaptedTag jsonAdaptedTag : tagList) {
             Tag tag = jsonAdaptedTag.toModelType();
-            if (JobFestGo.hasTag(tag)) {
+            if (jobFestGo.hasTag(tag)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_TAG);
             }
-            JobFestGo.addTag(tag);
+            jobFestGo.addTag(tag);
         }
         for (JsonAdaptedEvent jsonAdaptedEvent : events) {
             Event event = jsonAdaptedEvent.toModelType();
-            if (JobFestGo.hasEvent(event)) {
+            if (jobFestGo.hasEvent(event)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_EVENT);
             }
-            JobFestGo.addEvent(event);
+            jobFestGo.addEvent(event);
         }
         for (JsonAdaptedTask jsonAdaptedTask : taskList) {
             Task task = jsonAdaptedTask.toModelType();
             task = new Task(task.getDescription(), task.getDate(),
-                    JobFestGo.getEvent(task.getAssociatedEventName()), task.isCompleted());
-            if (JobFestGo.hasTask(task)) {
+                    jobFestGo.getEvent(task.getAssociatedEventName()), task.isCompleted());
+            if (jobFestGo.hasTask(task)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_TASK);
             }
-            JobFestGo.addTask(task);
+            jobFestGo.addTask(task);
         }
-        return JobFestGo;
+        return jobFestGo;
     }
 
 }

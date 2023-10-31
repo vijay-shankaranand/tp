@@ -84,12 +84,12 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void hasContact_ContactNotInJobFestGo_returnsFalse() {
+    public void hasContact_contactNotInJobFestGo_returnsFalse() {
         assertFalse(modelManager.hasContact(ALICE));
     }
 
     @Test
-    public void hasContact_ContactInJobFestGo_returnsTrue() throws CommandException {
+    public void hasContact_contactInJobFestGo_returnsTrue() throws CommandException {
         modelManager.addTag(new Tag("friends"));
         modelManager.addContact(ALICE);
         assertTrue(modelManager.hasContact(ALICE));

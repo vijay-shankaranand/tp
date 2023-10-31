@@ -34,7 +34,7 @@ public class MainWindow extends UiPart<Stage> {
     private boolean shouldReturnToHome;
 
     // Independent Ui parts residing in this Ui container
-    private ContactListPanel ContactListPanel;
+    private ContactListPanel contactListPanel;
     private TagListPanel tagListPanel;
     private EventListPanel eventListPanel;
     private EventContactDisplay eventContactDisplay;
@@ -163,13 +163,13 @@ public class MainWindow extends UiPart<Stage> {
      */
     void fillContactListPanel() {
 
-        ContactListPanel = new ContactListPanel(logic.getFilteredContactList());
+        contactListPanel = new ContactListPanel(logic.getFilteredContactList());
 
         if (!listPanelPlaceholder.getChildren().isEmpty()) {
             listPanelPlaceholder.getChildren().clear();
         }
 
-        listPanelPlaceholder.getChildren().add(ContactListPanel.getRoot());
+        listPanelPlaceholder.getChildren().add(contactListPanel.getRoot());
     }
 
     /**
@@ -253,7 +253,7 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     public ContactListPanel getContactListPanel() {
-        return ContactListPanel;
+        return contactListPanel;
     }
 
     public TagListPanel getTagListPanel() {

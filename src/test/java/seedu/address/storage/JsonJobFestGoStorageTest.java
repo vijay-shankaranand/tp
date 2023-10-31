@@ -94,10 +94,10 @@ public class JsonJobFestGoStorageTest {
     /**
      * Saves {@code JobFestGo} at the specified {@code filePath}.
      */
-    private void saveJobFestGo(ReadOnlyJobFestGo JobFestGo, String filePath) {
+    private void saveJobFestGo(ReadOnlyJobFestGo jobFestGo, String filePath) {
         try {
             new JsonJobFestGoStorage(Paths.get(filePath))
-                    .saveJobFestGo(JobFestGo, addToTestDataPathIfNotNull(filePath));
+                    .saveJobFestGo(jobFestGo, addToTestDataPathIfNotNull(filePath));
         } catch (IOException ioe) {
             throw new AssertionError("There should not be an error writing to the file.", ioe);
         }

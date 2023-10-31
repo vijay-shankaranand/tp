@@ -18,9 +18,9 @@ import seedu.address.testutil.tag.TypicalTags;
 public class JsonSerializableJobFestGoTest {
 
     private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonSerializableJobFestGoTest");
-    private static final Path TYPICAL_ContactS_FILE = TEST_DATA_FOLDER.resolve("typicalContactsJobFestGo.json");
-    private static final Path INVALID_Contact_FILE = TEST_DATA_FOLDER.resolve("invalidContactJobFestGo.json");
-    private static final Path DUPLICATE_Contact_FILE = TEST_DATA_FOLDER.resolve("duplicateContactJobFestGo.json");
+    private static final Path TYPICAL_CONTACTS_FILE = TEST_DATA_FOLDER.resolve("typicalContactsJobFestGo.json");
+    private static final Path INVALID_CONTACT_FILE = TEST_DATA_FOLDER.resolve("invalidContactJobFestGo.json");
+    private static final Path DUPLICATE_CONTACT_FILE = TEST_DATA_FOLDER.resolve("duplicateContactJobFestGo.json");
     private static final Path TYPICAL_TAGS_FILE = TEST_DATA_FOLDER.resolve("typicalTagsJobFestGo.json");
     private static final Path INVALID_TAG_FILE = TEST_DATA_FOLDER.resolve("invalidTagJobFestGo.json");
     private static final Path DUPLICATE_TAG_FILE = TEST_DATA_FOLDER.resolve("duplicateTagJobFestGo.json");
@@ -33,7 +33,7 @@ public class JsonSerializableJobFestGoTest {
 
     @Test
     public void toModelType_typicalContactsFile_success() throws Exception {
-        JsonSerializableJobFestGo dataFromFile = JsonUtil.readJsonFile(TYPICAL_ContactS_FILE,
+        JsonSerializableJobFestGo dataFromFile = JsonUtil.readJsonFile(TYPICAL_CONTACTS_FILE,
                 JsonSerializableJobFestGo.class).get();
         JobFestGo jobFestGoFromFile = dataFromFile.toModelType();
         JobFestGo typicalContactsJobFestGo = TypicalContacts.getTypicalJobFestGo();
@@ -42,16 +42,16 @@ public class JsonSerializableJobFestGoTest {
 
     @Test
     public void toModelType_invalidContactFile_throwsIllegalValueException() throws Exception {
-        JsonSerializableJobFestGo dataFromFile = JsonUtil.readJsonFile(INVALID_Contact_FILE,
+        JsonSerializableJobFestGo dataFromFile = JsonUtil.readJsonFile(INVALID_CONTACT_FILE,
                 JsonSerializableJobFestGo.class).get();
         assertThrows(IllegalValueException.class, dataFromFile::toModelType);
     }
 
     @Test
     public void toModelType_duplicateContacts_throwsIllegalValueException() throws Exception {
-        JsonSerializableJobFestGo dataFromFile = JsonUtil.readJsonFile(DUPLICATE_Contact_FILE,
+        JsonSerializableJobFestGo dataFromFile = JsonUtil.readJsonFile(DUPLICATE_CONTACT_FILE,
                 JsonSerializableJobFestGo.class).get();
-        assertThrows(IllegalValueException.class, JsonSerializableJobFestGo.MESSAGE_DUPLICATE_Contact,
+        assertThrows(IllegalValueException.class, JsonSerializableJobFestGo.MESSAGE_DUPLICATE_CONTACT,
                 dataFromFile::toModelType);
     }
 

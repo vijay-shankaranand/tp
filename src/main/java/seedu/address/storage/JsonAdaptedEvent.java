@@ -71,8 +71,8 @@ public class JsonAdaptedEvent {
      */
     public Event toModelType() throws IllegalValueException {
         final List<Contact> eventContacts = new ArrayList<>();
-        for (JsonAdaptedContact Contact : contacts) {
-            eventContacts.add(Contact.toModelType());
+        for (JsonAdaptedContact contact : contacts) {
+            eventContacts.add(contact.toModelType());
         }
         final Set<Contact> modelContacts = new HashSet<>(eventContacts);
 

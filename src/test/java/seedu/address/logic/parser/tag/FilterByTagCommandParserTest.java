@@ -9,8 +9,8 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.contact.ContactIsTaggedPredicate;
 import seedu.address.logic.commands.tag.FilterByTagCommand;
+import seedu.address.model.contact.ContactIsTaggedPredicate;
 import seedu.address.model.tag.Tag;
 
 public class FilterByTagCommandParserTest {

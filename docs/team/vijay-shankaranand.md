@@ -5,7 +5,7 @@ title: "Vijayanandan Shankar Anand's Project Portfolio Page"
 
 ### Project: JobFestGo
 
-JobFestGo is a desktop address book application meant to assist job festival event planners in cold-calling various Contactnel (e.g. vendors, customers). This removes the hassle of having to shuffle through their contact list based on names that they might not remember.
+JobFestGo is a desktop address book application meant to assist job festival event planners in cold-calling various contacts (e.g. vendors, customers). This removes the hassle of having to shuffle through their contact list based on names that they might not remember.
 
 Given below are my contributions to the project.
 

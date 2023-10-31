@@ -74,7 +74,7 @@ public class JobFestGoTest {
     }
 
     @Test
-    public void hasContact_ContactNotInJobFestGo_returnsFalse() {
+    public void hasContact_contactNotInJobFestGo_returnsFalse() {
         assertFalse(jobFestGo.hasContact(ALICE));
     }
 
@@ -85,7 +85,7 @@ public class JobFestGoTest {
     }
 
     @Test
-    public void hasContact_ContactWithSameIdentityFieldsInJobFestGo_returnsTrue() {
+    public void hasContact_contactWithSameIdentityFieldsInJobFestGo_returnsTrue() {
         jobFestGo.addContact(ALICE);
         Contact editedAlice = new ContactBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();

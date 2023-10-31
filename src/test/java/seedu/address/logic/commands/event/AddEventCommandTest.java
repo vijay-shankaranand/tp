@@ -119,7 +119,7 @@ public class AddEventCommandTest {
         }
 
         @Override
-        public void setJobFestGoFilePath(Path JobFestGoFilePath) {
+        public void setJobFestGoFilePath(Path jobFestGoFilePath) {
             throw new AssertionError("This method should not be called.");
         }
 

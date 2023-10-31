@@ -24,9 +24,9 @@ public class StorageManagerTest {
 
     @BeforeEach
     public void setUp() {
-        JsonJobFestGoStorage JobFestGoStorage = new JsonJobFestGoStorage(getTempFilePath("ab"));
+        JsonJobFestGoStorage jobFestGoStorage = new JsonJobFestGoStorage(getTempFilePath("ab"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(getTempFilePath("prefs"));
-        storageManager = new StorageManager(JobFestGoStorage, userPrefsStorage);
+        storageManager = new StorageManager(jobFestGoStorage, userPrefsStorage);
     }
 
     private Path getTempFilePath(String fileName) {
@@ -48,7 +48,7 @@ public class StorageManagerTest {
     }
 
     @Test
-    public void JobFestGoReadSave() throws Exception {
+    public void jobFestGoReadSave() throws Exception {
         /*
          * Note: This is an integration test that verifies the StorageManager is properly wired to the
          * {@link JsonJobFestGoStorage} class.

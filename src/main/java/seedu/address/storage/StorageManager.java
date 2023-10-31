@@ -16,14 +16,14 @@ import seedu.address.model.UserPrefs;
  */
 public class StorageManager implements Storage {
     private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
-    private JobFestGoStorage JobFestGoStorage;
+    private JobFestGoStorage jobFestGoStorage;
     private UserPrefsStorage userPrefsStorage;
 
     /**
      * Creates a {@code StorageManager} with the given {@code JobFestGoStorage} and {@code UserPrefStorage}.
      */
-    public StorageManager(JobFestGoStorage JobFestGoStorage, UserPrefsStorage userPrefsStorage) {
-        this.JobFestGoStorage = JobFestGoStorage;
+    public StorageManager(JobFestGoStorage jobFestGoStorage, UserPrefsStorage userPrefsStorage) {
+        this.jobFestGoStorage = jobFestGoStorage;
         this.userPrefsStorage = userPrefsStorage;
     }
 
@@ -49,29 +49,29 @@ public class StorageManager implements Storage {
 
     @Override
     public Path getJobFestGoFilePath() {
-        return JobFestGoStorage.getJobFestGoFilePath();
+        return jobFestGoStorage.getJobFestGoFilePath();
     }
 
     @Override
     public Optional<ReadOnlyJobFestGo> readJobFestGo() throws DataLoadingException {
-        return readJobFestGo(JobFestGoStorage.getJobFestGoFilePath());
+        return readJobFestGo(jobFestGoStorage.getJobFestGoFilePath());
     }
 
     @Override
     public Optional<ReadOnlyJobFestGo> readJobFestGo(Path filePath) throws DataLoadingException {
         logger.fine("Attempting to read data from file: " + filePath);
-        return JobFestGoStorage.readJobFestGo(filePath);
+        return jobFestGoStorage.readJobFestGo(filePath);
     }
 
     @Override
-    public void saveJobFestGo(ReadOnlyJobFestGo JobFestGo) throws IOException {
-        saveJobFestGo(JobFestGo, JobFestGoStorage.getJobFestGoFilePath());
+    public void saveJobFestGo(ReadOnlyJobFestGo jobFestGo) throws IOException {
+        saveJobFestGo(jobFestGo, jobFestGoStorage.getJobFestGoFilePath());
     }
 
     @Override
-    public void saveJobFestGo(ReadOnlyJobFestGo JobFestGo, Path filePath) throws IOException {
+    public void saveJobFestGo(ReadOnlyJobFestGo jobFestGo, Path filePath) throws IOException {
         logger.fine("Attempting to write to data file: " + filePath);
-        JobFestGoStorage.saveJobFestGo(JobFestGo, filePath);
+        jobFestGoStorage.saveJobFestGo(jobFestGo, filePath);
     }
 
 }

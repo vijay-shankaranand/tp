@@ -60,8 +60,8 @@ public class JsonJobFestGoStorage implements JobFestGoStorage {
     }
 
     @Override
-    public void saveJobFestGo(ReadOnlyJobFestGo JobFestGo) throws IOException {
-        saveJobFestGo(JobFestGo, filePath);
+    public void saveJobFestGo(ReadOnlyJobFestGo jobFestGo) throws IOException {
+        saveJobFestGo(jobFestGo, filePath);
     }
 
     /**
@@ -69,12 +69,12 @@ public class JsonJobFestGoStorage implements JobFestGoStorage {
      *
      * @param filePath location of the data. Cannot be null.
      */
-    public void saveJobFestGo(ReadOnlyJobFestGo JobFestGo, Path filePath) throws IOException {
-        requireNonNull(JobFestGo);
+    public void saveJobFestGo(ReadOnlyJobFestGo jobFestGo, Path filePath) throws IOException {
+        requireNonNull(jobFestGo);
         requireNonNull(filePath);
 
         FileUtil.createIfMissing(filePath);
-        JsonUtil.saveJsonFile(new JsonSerializableJobFestGo(JobFestGo), filePath);
+        JsonUtil.saveJsonFile(new JsonSerializableJobFestGo(jobFestGo), filePath);
     }
 
 }

@@ -31,18 +31,18 @@ public class UniqueContactListTest {
     }
 
     @Test
-    public void contains_ContactNotInList_returnsFalse() {
+    public void contains_contactNotInList_returnsFalse() {
         assertFalse(uniqueContactList.contains(ALICE));
     }
 
     @Test
-    public void contains_ContactInList_returnsTrue() {
+    public void contains_contactInList_returnsTrue() {
         uniqueContactList.add(ALICE);
         assertTrue(uniqueContactList.contains(ALICE));
     }
 
     @Test
-    public void contains_ContactWithSameIdentityFieldsInList_returnsTrue() {
+    public void contains_contactWithSameIdentityFieldsInList_returnsTrue() {
         uniqueContactList.add(ALICE);
         Contact editedAlice = new ContactBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
@@ -119,7 +119,7 @@ public class UniqueContactListTest {
     }
 
     @Test
-    public void remove_ContactDoesNotExist_throwsContactNotFoundException() {
+    public void remove_contactDoesNotExist_throwsContactNotFoundException() {
         assertThrows(ContactNotFoundException.class, () -> uniqueContactList.remove(ALICE));
     }
 

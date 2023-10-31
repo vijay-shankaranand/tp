@@ -15,7 +15,12 @@ import seedu.address.commons.util.ConfigUtil;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Logic;
 import seedu.address.logic.LogicManager;
-import seedu.address.model.*;
+import seedu.address.model.JobFestGo;
+import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
+import seedu.address.model.ReadOnlyJobFestGo;
+import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.UserPrefs;
 import seedu.address.model.util.SampleDataUtil;
 import seedu.address.storage.JobFestGoStorage;
 import seedu.address.storage.JsonJobFestGoStorage;
@@ -52,8 +57,8 @@ public class MainApp extends Application {
 
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
-        JobFestGoStorage JobFestGoStorage = new JsonJobFestGoStorage(userPrefs.getJobFestGoFilePath());
-        storage = new StorageManager(JobFestGoStorage, userPrefsStorage);
+        JobFestGoStorage jobFestGoStorage = new JsonJobFestGoStorage(userPrefs.getJobFestGoFilePath());
+        storage = new StorageManager(jobFestGoStorage, userPrefsStorage);
 
         model = initModelManager(storage, userPrefs);
 

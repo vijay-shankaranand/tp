@@ -27,6 +27,6 @@ public interface Storage extends JobFestGoStorage, UserPrefsStorage {
     Optional<ReadOnlyJobFestGo> readJobFestGo() throws DataLoadingException;
 
     @Override
-    void saveJobFestGo(ReadOnlyJobFestGo JobFestGo) throws IOException;
+    void saveJobFestGo(ReadOnlyJobFestGo jobFestGo) throws IOException;
 
 }

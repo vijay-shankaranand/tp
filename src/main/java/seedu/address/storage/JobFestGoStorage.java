@@ -32,14 +32,14 @@ public interface JobFestGoStorage {
 
     /**
      * Saves the given {@link ReadOnlyJobFestGo} to the storage.
-     * @param JobFestGo cannot be null.
+     * @param jobFestGo cannot be null.
      * @throws IOException if there was any problem writing to the file.
      */
-    void saveJobFestGo(ReadOnlyJobFestGo JobFestGo) throws IOException;
+    void saveJobFestGo(ReadOnlyJobFestGo jobFestGo) throws IOException;
 
     /**
      * @see #saveJobFestGo(ReadOnlyJobFestGo)
      */
-    void saveJobFestGo(ReadOnlyJobFestGo JobFestGo, Path filePath) throws IOException;
+    void saveJobFestGo(ReadOnlyJobFestGo jobFestGo, Path filePath) throws IOException;
 
 }

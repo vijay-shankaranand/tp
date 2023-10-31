@@ -21,7 +21,12 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.*;
+import seedu.address.model.JobFestGo;
+import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
+import seedu.address.model.ReadOnlyJobFestGo;
+import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.UserPrefs;
 import seedu.address.model.contact.Contact;
 import seedu.address.model.date.Date;
 import seedu.address.model.event.Event;
@@ -40,7 +45,7 @@ public class AddContactCommandTest {
     }
 
     @Test
-    public void execute_ContactAcceptedByModel_addSuccessful() throws Exception {
+    public void execute_contactAcceptedByModel_addSuccessful() throws Exception {
         ModelStubAcceptingContactAdded modelStub = new ModelStubAcceptingContactAdded();
         Contact validContact = new ContactBuilder().build();
 
@@ -48,7 +53,7 @@ public class AddContactCommandTest {
 
         assertEquals(String.format(AddContactCommand.MESSAGE_SUCCESS, Messages.format(validContact)),
                 commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validContact), modelStub.ContactsAdded);
+        assertEquals(Arrays.asList(validContact), modelStub.contactsAdded);
     }
     @Test
     public void addContact_tagNotPresentInJobFestGo_throwsCommandException() {
@@ -139,7 +144,7 @@ public class AddContactCommandTest {
         }
 
         @Override
-        public void setJobFestGoFilePath(Path JobFestGoFilePath) {
+        public void setJobFestGoFilePath(Path jobFestGoFilePath) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -341,20 +346,20 @@ public class AddContactCommandTest {
      * A Model stub that always accept the contact being added.
      */
     private class ModelStubAcceptingContactAdded extends ModelStub {
-        final ArrayList<Contact> ContactsAdded = new ArrayList<>();
+        final ArrayList<Contact> contactsAdded = new ArrayList<>();
 
         @Override
         public boolean hasContact(Contact contact) {
             requireNonNull(contact);
 
-            return ContactsAdded.stream().anyMatch(contact::isSameContact);
+            return contactsAdded.stream().anyMatch(contact::isSameContact);
 
         }
 
         @Override
         public void addContact(Contact contact) {
             requireNonNull(contact);
-            ContactsAdded.add(contact);
+            contactsAdded.add(contact);
         }
 
         @Override

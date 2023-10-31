@@ -26,7 +26,7 @@ public class EventContactDisplay extends UiPart<Region> {
     private Logic logic;
 
     //Independent Ui parts residing in this Ui container
-    private ContactListPanel ContactListPanel;
+    private ContactListPanel contactListPanel;
     private EventListPanel eventListPanel;
     private ReminderListPanel reminderListPanel;
     private TaskListPanel taskListPanel;
@@ -35,7 +35,7 @@ public class EventContactDisplay extends UiPart<Region> {
     private GridPane eventContactDisplay;
 
     @FXML
-    private StackPane ContactListPanelPlaceholder;
+    private StackPane contactListPanelPlaceholder;
 
     @FXML
     private StackPane eventListPanelPlaceholder;
@@ -51,7 +51,7 @@ public class EventContactDisplay extends UiPart<Region> {
         this.logic = logic;
 
         // Disable mouse events for all panels
-        ContactListPanelPlaceholder.addEventFilter(MouseEvent.ANY, handler);
+        contactListPanelPlaceholder.addEventFilter(MouseEvent.ANY, handler);
         eventListPanelPlaceholder.addEventFilter(MouseEvent.ANY, handler);
         taskPanelPlaceholder.addEventFilter(MouseEvent.ANY, handler);
 
@@ -66,8 +66,8 @@ public class EventContactDisplay extends UiPart<Region> {
      */
     private void fillInnerParts() {
 
-        ContactListPanel = new ContactListPanel(logic.getFilteredContactList());
-        ContactListPanelPlaceholder.getChildren().add(ContactListPanel.getRoot());
+        contactListPanel = new ContactListPanel(logic.getFilteredContactList());
+        contactListPanelPlaceholder.getChildren().add(contactListPanel.getRoot());
 
 
         eventListPanel = new EventListPanel(logic.getFilteredEventList());
@@ -93,8 +93,8 @@ public class EventContactDisplay extends UiPart<Region> {
      */
     public void fillInnerPartsAfterReset() {
 
-        ContactListPanel = new ContactListPanel(logic.getUnfilteredContactList());
-        ContactListPanelPlaceholder.getChildren().add(ContactListPanel.getRoot());
+        contactListPanel = new ContactListPanel(logic.getUnfilteredContactList());
+        contactListPanelPlaceholder.getChildren().add(contactListPanel.getRoot());
 
         eventListPanel = new EventListPanel(logic.getUnfilteredEventList());
         eventListPanelPlaceholder.getChildren().add(eventListPanel.getRoot());

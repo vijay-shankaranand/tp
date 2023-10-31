@@ -59,8 +59,8 @@ public class EditContactCommandTest {
         Index indexLastContact = Index.fromOneBased(model.getFilteredContactList().size());
         Contact lastContact = model.getFilteredContactList().get(indexLastContact.getZeroBased());
 
-        ContactBuilder ContactInList = new ContactBuilder(lastContact);
-        Contact editedContact = ContactInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
+        ContactBuilder contactInList = new ContactBuilder(lastContact);
+        Contact editedContact = contactInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
                 .withTags(VALID_TAG_HUSBAND).build();
 
         EditContactDescriptor descriptor = new EditContactDescriptorBuilder().withName(VALID_NAME_BOB)
@@ -163,8 +163,8 @@ public class EditContactCommandTest {
         Index indexLastContact = Index.fromOneBased(model.getFilteredContactList().size());
         Contact lastContact = model.getFilteredContactList().get(indexLastContact.getZeroBased());
 
-        ContactBuilder ContactInList = new ContactBuilder(lastContact);
-        Contact editedContact = ContactInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
+        ContactBuilder contactInList = new ContactBuilder(lastContact);
+        Contact editedContact = contactInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
                 .withTags(VALID_TAG_HUSBAND).build();
 
         EditContactDescriptor descriptor = new EditContactDescriptorBuilder().withName(VALID_NAME_BOB)
@@ -185,8 +185,8 @@ public class EditContactCommandTest {
         Index indexLastContact = Index.fromOneBased(model.getFilteredContactList().size());
         Contact lastContact = model.getFilteredContactList().get(indexLastContact.getZeroBased());
 
-        ContactBuilder ContactInList = new ContactBuilder(lastContact);
-        Contact editedContact = ContactInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
+        ContactBuilder contactInList = new ContactBuilder(lastContact);
+        Contact editedContact = contactInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
                 .withTags(VALID_TAG_HUSBAND).build();
 
         EditContactDescriptor descriptor = new EditContactDescriptorBuilder().withName(VALID_NAME_BOB)

@@ -51,12 +51,12 @@ public interface Model {
     /**
      * Sets the user prefs' JobFestGo file path.
      */
-    void setJobFestGoFilePath(Path JobFestGoFilePath);
+    void setJobFestGoFilePath(Path jobFestGoFilePath);
 
     /**
      * Replaces JobFestGo data with the data in {@code JobFestGo}.
      */
-    void setJobFestGo(ReadOnlyJobFestGo JobFestGo);
+    void setJobFestGo(ReadOnlyJobFestGo jobFestGo);
 
     /** Returns the JobFestGo */
     ReadOnlyJobFestGo getJobFestGo();

@@ -18,15 +18,15 @@ public class ContactListPanel extends UiPart<Region> {
     private final Logger logger = LogsCenter.getLogger(ContactListPanel.class);
 
     @FXML
-    private ListView<Contact> ContactListView;
+    private ListView<Contact> contactListView;
 
     /**
      * Creates a {@code ContactListPanel} with the given {@code ObservableList}.
      */
     public ContactListPanel(ObservableList<Contact> contactList) {
         super(FXML);
-        ContactListView.setItems(contactList);
-        ContactListView.setCellFactory(listView -> new ContactListViewCell());
+        contactListView.setItems(contactList);
+        contactListView.setCellFactory(listView -> new ContactListViewCell());
     }
 
     /**
