@@ -79,7 +79,7 @@ public class Event {
      *     and {@code false} otherwise.
      */
     public boolean isLinkedToContact(Contact contact) {
-        return contacts.stream().anyMatch(contact::isSamePerson);
+        return contacts.stream().anyMatch(contact::isSameContact);
     }
 
     /**

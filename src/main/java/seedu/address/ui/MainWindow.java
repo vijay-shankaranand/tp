@@ -162,7 +162,7 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up the contact list panel with the contacts in the filtered contact list.
      */
     void fillContactListPanel() {
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
+        personListPanel = new PersonListPanel(logic.getFilteredContactList());
 
         if (!listPanelPlaceholder.getChildren().isEmpty()) {
             listPanelPlaceholder.getChildren().clear();

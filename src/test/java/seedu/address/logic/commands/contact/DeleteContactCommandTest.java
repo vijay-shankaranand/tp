@@ -29,10 +29,10 @@ public class DeleteContactCommandTest {
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
-        Contact contactToDelete = model.getFilteredPersonList().get(INDEX_FIRST.getZeroBased());
+        Contact contactToDelete = model.getFilteredContactList().get(INDEX_FIRST.getZeroBased());
         DeleteContactCommand deleteCommand = new DeleteContactCommand(INDEX_FIRST);
 
-        String expectedMessage = String.format(DeleteContactCommand.MESSAGE_DELETE_PERSON_SUCCESS,
+        String expectedMessage = String.format(DeleteContactCommand.MESSAGE_DELETE_CONTACT_SUCCESS,
                 Messages.format(contactToDelete));
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
@@ -43,7 +43,7 @@ public class DeleteContactCommandTest {
 
     @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
-        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
+        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredContactList().size() + 1);
         DeleteContactCommand deleteCommand = new DeleteContactCommand(outOfBoundIndex);
 
         assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
@@ -53,10 +53,10 @@ public class DeleteContactCommandTest {
     public void execute_validIndexFilteredList_success() {
         showPersonAtIndex(model, INDEX_FIRST);
 
-        Contact contactToDelete = model.getFilteredPersonList().get(INDEX_FIRST.getZeroBased());
+        Contact contactToDelete = model.getFilteredContactList().get(INDEX_FIRST.getZeroBased());
         DeleteContactCommand deleteCommand = new DeleteContactCommand(INDEX_FIRST);
 
-        String expectedMessage = String.format(DeleteContactCommand.MESSAGE_DELETE_PERSON_SUCCESS,
+        String expectedMessage = String.format(DeleteContactCommand.MESSAGE_DELETE_CONTACT_SUCCESS,
                 Messages.format(contactToDelete));
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
@@ -113,8 +113,8 @@ public class DeleteContactCommandTest {
      * Updates {@code model}'s filtered list to show no one.
      */
     private void showNoPerson(Model model) {
-        model.updateFilteredPersonList(p -> false);
+        model.updateFilteredContactList(p -> false);
 
-        assertTrue(model.getFilteredPersonList().isEmpty());
+        assertTrue(model.getFilteredContactList().isEmpty());
     }
 }

@@ -50,7 +50,7 @@ public class SelectEventCommand extends Command {
         Event eventToBeSelected = lastShownEventList.get(targetIndex.getZeroBased());
         PersonIsInEventPredicate predicate = new PersonIsInEventPredicate(eventToBeSelected);
         TaskIsInEventPredicate taskPredicate = new TaskIsInEventPredicate(eventToBeSelected);
-        model.updateFilteredPersonList(predicate);
+        model.updateFilteredContactList(predicate);
         model.updateFilteredTaskList(taskPredicate);
         return new CommandResult(String.format(MESSAGE_SELECT_EVENT_SUCCESS,
             Messages.format(eventToBeSelected)), eventToBeSelected);

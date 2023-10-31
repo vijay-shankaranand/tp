@@ -24,9 +24,9 @@ import seedu.address.model.contact.PersonIsTaggedPredicate;
 import seedu.address.model.tag.Tag;
 
 /**
- * Contains integration tests (interaction with the Model) for {@code FilterCommand}.
+ * Contains integration tests (interaction with the Model) for {@code FilterByTagCommand}.
  */
-public class FilterCommandTest {
+public class FilterByTagCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
@@ -35,14 +35,14 @@ public class FilterCommandTest {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
         PersonIsTaggedPredicate predicate =
                 new PersonIsTaggedPredicate(new ArrayList<>());
-        FilterCommand command = new FilterCommand(new ArrayList<>(), predicate);
-        expectedModel.updateFilteredPersonList(predicate);
+        FilterByTagCommand command = new FilterByTagCommand(new ArrayList<>(), predicate);
+        expectedModel.updateFilteredContactList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Collections.emptyList(), model.getFilteredPersonList());
+        assertEquals(Collections.emptyList(), model.getFilteredContactList());
     }
 
     @Test
-    public void execute_multipleTags_multiplePersonsFound() {
+    public void execute_multipleTags_multipleContactsFound() {
         Tag firstTag = new Tag("friends");
         Tag secondTag = new Tag("owesMoney");
 
@@ -53,23 +53,23 @@ public class FilterCommandTest {
         PersonIsTaggedPredicate predicate = new PersonIsTaggedPredicate(tagList);
 
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
-        FilterCommand command = new FilterCommand(tagList, predicate);
-        expectedModel.updateFilteredPersonList(predicate);
+        FilterByTagCommand command = new FilterByTagCommand(tagList, predicate);
+        expectedModel.updateFilteredContactList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(ALICE, BENSON, DANIEL), model.getFilteredPersonList());
+        assertEquals(Arrays.asList(ALICE, BENSON, DANIEL), model.getFilteredContactList());
     }
 
     @Test
-    public void execute_singleTag_singlePersonsFound() {
+    public void execute_singleTag_singleContactsFound() {
         List<Tag> tagList = new ArrayList<>();
         tagList.add(new Tag("owesMoney"));
         PersonIsTaggedPredicate predicate = new PersonIsTaggedPredicate(tagList);
 
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
-        FilterCommand command = new FilterCommand(tagList, predicate);
-        expectedModel.updateFilteredPersonList(predicate);
+        FilterByTagCommand command = new FilterByTagCommand(tagList, predicate);
+        expectedModel.updateFilteredContactList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(BENSON), model.getFilteredPersonList());
+        assertEquals(Arrays.asList(BENSON), model.getFilteredContactList());
     }
 
     @Test
@@ -89,14 +89,14 @@ public class FilterCommandTest {
         PersonIsTaggedPredicate secondPredicate =
                 new PersonIsTaggedPredicate(secondTagList);
 
-        FilterCommand firstFilterCommand = new FilterCommand(firstTagList, firstPredicate);
-        FilterCommand secondFilterCommand = new FilterCommand(secondTagList, secondPredicate);
+        FilterByTagCommand firstFilterCommand = new FilterByTagCommand(firstTagList, firstPredicate);
+        FilterByTagCommand secondFilterCommand = new FilterByTagCommand(secondTagList, secondPredicate);
 
         // same object -> returns true
         assertTrue(firstFilterCommand.equals(firstFilterCommand));
 
         // same values -> returns true
-        FilterCommand firstFilterCommandCopy = new FilterCommand(firstTagList, firstPredicate);
+        FilterByTagCommand firstFilterCommandCopy = new FilterByTagCommand(firstTagList, firstPredicate);
         assertTrue(firstFilterCommand.equals(firstFilterCommandCopy));
 
         // different types -> returns false
@@ -120,9 +120,9 @@ public class FilterCommandTest {
 
         PersonIsTaggedPredicate predicate = new PersonIsTaggedPredicate(tagList);
 
-        FilterCommand command = new FilterCommand(tagList, predicate);
+        FilterByTagCommand command = new FilterByTagCommand(tagList, predicate);
 
-        String expected = FilterCommand.class.getCanonicalName() + "{predicate=" + predicate + "}";
+        String expected = FilterByTagCommand.class.getCanonicalName() + "{predicate=" + predicate + "}";
         assertEquals(expected, command.toString());
     }
 }

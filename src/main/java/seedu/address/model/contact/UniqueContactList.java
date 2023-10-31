@@ -17,17 +17,16 @@ import seedu.address.model.tag.Tag;
 
 /**
  * A list of persons that enforces uniqueness between its elements and does not allow nulls.
- * A contact is considered unique by comparing using {@code Contact#isSamePerson(Contact)}. As such, adding and updating
- * of contacts uses Contact#isSamePerson(Contact) for equality to ensure that the contact being added or updated is
- * unique in terms of identity in the UniqueContactList. However, the removal of a contact uses Contact#equals(Object)
- * to ensure that the contact with exactly the same fields will be removed.
+ * A contact is considered unique by comparing using {@code Contact#isSameContact(Contact)}. As such, adding and
+ * updating of contacts uses Contact#isSameContact(Contact) for equality to ensure that the contact being added or
+ * updated is unique in terms of identity in the UniqueContactList. However, the removal of a contact uses
+ * Contact#equals(Object) to ensure that the contact with exactly the same fields will be removed.
  *
  * Supports a minimal set of list operations.
  *
- * @see Contact#isSamePerson(Contact)
+ * @see Contact#isSameContact(Contact)
  */
 public class UniqueContactList implements Iterable<Contact> {
-
     private final ObservableList<Contact> internalList = FXCollections.observableArrayList();
     private final ObservableList<Contact> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
@@ -37,7 +36,7 @@ public class UniqueContactList implements Iterable<Contact> {
      */
     public boolean contains(Contact toCheck) {
         requireNonNull(toCheck);
-        return internalList.stream().anyMatch(toCheck::isSamePerson);
+        return internalList.stream().anyMatch(toCheck::isSameContact);
     }
 
     /**
@@ -76,7 +75,7 @@ public class UniqueContactList implements Iterable<Contact> {
      * {@code target} must exist in the list.
      * The contact identity of {@code editedContact} must not be the same as another existing contact in the list.
      */
-    public void setPerson(Contact target, Contact editedContact) {
+    public void setContact(Contact target, Contact editedContact) {
         requireAllNonNull(target, editedContact);
 
         int index = internalList.indexOf(target);
@@ -84,7 +83,7 @@ public class UniqueContactList implements Iterable<Contact> {
             throw new ContactNotFoundException();
         }
 
-        if (!target.isSamePerson(editedContact) && contains(editedContact)) {
+        if (!target.isSameContact(editedContact) && contains(editedContact)) {
             throw new DuplicateContactException();
         }
 
@@ -102,7 +101,7 @@ public class UniqueContactList implements Iterable<Contact> {
         }
     }
 
-    public void setPersons(UniqueContactList replacement) {
+    public void setContacts(UniqueContactList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
     }
@@ -111,9 +110,9 @@ public class UniqueContactList implements Iterable<Contact> {
      * Replaces the contents of this list with {@code contacts}.
      * {@code contacts} must not contain duplicate contacts.
      */
-    public void setPersons(List<Contact> contacts) {
+    public void setContacts(List<Contact> contacts) {
         requireAllNonNull(contacts);
-        if (!arePersonsUnique(contacts)) {
+        if (!areContactsUnique(contacts)) {
             throw new DuplicateContactException();
         }
 
@@ -183,10 +182,10 @@ public class UniqueContactList implements Iterable<Contact> {
     /**
      * Returns true if {@code contacts} contains only unique contacts.
      */
-    private boolean arePersonsUnique(List<Contact> contacts) {
+    private boolean areContactsUnique(List<Contact> contacts) {
         for (int i = 0; i < contacts.size() - 1; i++) {
             for (int j = i + 1; j < contacts.size(); j++) {
-                if (contacts.get(i).isSamePerson(contacts.get(j))) {
+                if (contacts.get(i).isSameContact(contacts.get(j))) {
                     return false;
                 }
             }

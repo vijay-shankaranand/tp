@@ -32,7 +32,6 @@ import seedu.address.testutil.tag.TagBuilder;
 import seedu.address.testutil.task.TaskBuilder;
 
 public class AddressBookTest {
-
     private final AddressBook addressBook = new AddressBook();
 
     @Test
