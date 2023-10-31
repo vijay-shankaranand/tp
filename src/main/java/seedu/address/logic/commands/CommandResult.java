@@ -5,7 +5,9 @@ import static java.util.Objects.requireNonNull;
 import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.contact.ViewContactsCommand;
+import seedu.address.logic.commands.event.DeleteEventCommand;
 import seedu.address.logic.commands.event.ViewEventsCommand;
 import seedu.address.logic.commands.tag.ViewTagsCommand;
 import seedu.address.logic.commands.task.MarkCommand;
@@ -28,6 +30,9 @@ public class CommandResult {
 
     /** Event selected by the user through command. */
     private Event selectedEvent = null;
+
+    /** Boolean that represents whether the event passed through is being deleted */
+    private boolean isEventDeleted = false;
 
     /** Description of task marked/unmarked by user through command. */
     private TaskDescription taskDescription = null;
@@ -56,11 +61,12 @@ public class CommandResult {
      * Constructs a {@code CommandResult} with the specified {@code feedbackToUser},
      * and {@code Event} selected by the user.
      */
-    public CommandResult(String feedbackToUser, Event eventSelected) {
+    public CommandResult(String feedbackToUser, Event eventSelected, boolean isEventDeleted) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = false;
         this.exit = false;
         this.selectedEvent = eventSelected;
+        this.isEventDeleted = isEventDeleted;
     }
 
     /**
@@ -135,12 +141,27 @@ public class CommandResult {
     }
 
     /**
+     * Returns true if the event passed through is being deleted.
+     * @return true if the event passed through is being deleted
+     */
+    public boolean isDeleteEvent() {
+        return isEventDeleted;
+    }
+
+    /**
      * Returns true if the home panel should be displayed to the user, else false.
      * @return true if the home panel should be displayed to the user, else false
      */
     public boolean shouldReturnToHome() {
         if (feedbackToUser.equals(HomeCommand.MESSAGE_SUCCESS)) {
             return true;
+        }
+        if (selectedEvent != null) {
+            String deleteFeedback = String.format(DeleteEventCommand.MESSAGE_DELETE_EVENT_SUCCESS,
+                Messages.format(selectedEvent));
+            if (feedbackToUser.equals(deleteFeedback)) {
+                return true;
+            }
         }
         return false;
     }

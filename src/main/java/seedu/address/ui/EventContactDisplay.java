@@ -107,7 +107,7 @@ public class EventContactDisplay extends UiPart<Region> {
      */
     public void setFeedbackToUser(CommandResult commandResult) {
         Event selectedEvent = commandResult.getSelectedEvent();
-        if (selectedEvent != null) {
+        if (selectedEvent != null && !commandResult.isDeleteEvent()) {
             eventListPanel.selectEvent(selectedEvent);
             this.fillTaskList();
         }

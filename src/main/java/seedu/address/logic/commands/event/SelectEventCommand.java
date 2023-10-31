@@ -53,7 +53,7 @@ public class SelectEventCommand extends Command {
         model.updateFilteredContactList(predicate);
         model.updateFilteredTaskList(taskPredicate);
         return new CommandResult(String.format(MESSAGE_SELECT_EVENT_SUCCESS,
-            Messages.format(eventToBeSelected)), eventToBeSelected);
+            Messages.format(eventToBeSelected)), eventToBeSelected, false);
     }
 
     @Override
