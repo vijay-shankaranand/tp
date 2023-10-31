@@ -186,6 +186,12 @@ public class ModelManager implements Model {
         addressBook.setEvent(target, editedEvent);
     }
 
+    @Override
+    public void linkContactToEvent(Contact contact, Event event) {
+        requireAllNonNull(contact, event);
+        addressBook.linkContactToEvent(contact, event);
+    }
+
     //=========== Tasks ======================================================================================
     @Override
     public boolean hasTask(Task task) {

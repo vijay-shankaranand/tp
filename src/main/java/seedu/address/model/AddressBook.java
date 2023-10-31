@@ -244,6 +244,13 @@ public class AddressBook implements ReadOnlyAddressBook {
         return events.getByName(name);
     }
 
+    /**
+     * Links the given contact to the given event.
+     */
+    public void linkContactToEvent(Contact contact, Event event) {
+        events.linkContactToEvent(contact, event);
+    }
+
     @Override
     public ObservableList<Event> getEventList() {
         return events.asUnmodifiableObservableList().sorted(new EventSortByDateComparator());

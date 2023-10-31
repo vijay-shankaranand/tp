@@ -165,6 +165,11 @@ public interface Model {
      */
     void setEvent(Event target, Event editedEvent);
 
+    /**
+     * Links the given contact to the given event.
+     */
+    void linkContactToEvent(Contact contact, Event event);
+
     /** Returns an unmodifiable view of the filtered event list */
     ObservableList<Event> getFilteredEventList();
 

@@ -83,14 +83,6 @@ public class Event {
     }
 
     /**
-     * Links the given {@code Contact} to this {@code Event}.
-     * @param toLink The {@code Contact} to be linked to this {@code Event}.
-     */
-    public void linkContact(Contact toLink) {
-        contacts.add(toLink);
-    }
-
-    /**
      * Returns true if both events have the same name.
      * This defines a weaker notion of equality between two events.
      */

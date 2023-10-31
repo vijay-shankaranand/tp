@@ -36,53 +36,33 @@ public class LinkCommandTest {
 
     @Test
     public void execute_validSingleContact_success() {
-        Event event = new EventBuilder().withName("JobFest 2023")
-                .withDate("2023-12-12")
-                .withEventAddress("3 Temasek Blvd, Singapore 038983")
-                .withEventContacts(ALICE, BOB)
-                .build();
-        Event expectedEvent = new EventBuilder().withName("JobFest 2023")
-                .withDate("2023-12-12")
-                .withEventAddress("3 Temasek Blvd, Singapore 038983")
-                .withEventContacts(ALICE, BOB, CARL)
-                .build();
-
         Set<Name> contactNameList = new HashSet<>();
         contactNameList.add(CARL.getName());
-
-        LinkCommand command = new LinkCommand(event.getName(), contactNameList);
+        model.addEvent(JOBFEST);
+        expectedModel.addEvent(JOBFEST);
+        LinkCommand command = new LinkCommand(JOBFEST.getName(), contactNameList);
         String expectedNameList = "[" + CARL.getName() + "]";
-        String expectedMessage = String.format(LinkCommand.MESSAGE_SUCCESS, expectedNameList, event.getName());
-        model.addEvent(event);
-        expectedModel.addEvent(expectedEvent);
+        String expectedMessage = String.format(LinkCommand.MESSAGE_SUCCESS, expectedNameList, JOBFEST.getName());
+        expectedModel.linkContactToEvent(CARL, JOBFEST);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(expectedEvent.getContacts(), event.getContacts());
     }
 
     @Test
-    public void execute_validMultipleContact_success() {
-        Event event = new EventBuilder().withName("JobFest 2023")
-                .withDate("2023-12-12")
-                .withEventAddress("3 Temasek Blvd, Singapore 038983")
-                .withEventContacts(ALICE, BOB)
-                .build();
+    public void execute_validMultipleContacts_success() {
         Event expectedEvent = new EventBuilder().withName("JobFest 2023")
                 .withDate("2023-12-12")
                 .withEventAddress("3 Temasek Blvd, Singapore 038983")
                 .withEventContacts(ALICE, BOB, CARL, BENSON)
                 .build();
-
         Set<Name> contactNameList = new HashSet<>();
         contactNameList.add(CARL.getName());
         contactNameList.add(BENSON.getName());
-
-        LinkCommand command = new LinkCommand(event.getName(), contactNameList);
-        String expectedNameList = "[" + CARL.getName() + ", " + BENSON.getName() + "]";
-        String expectedMessage = String.format(LinkCommand.MESSAGE_SUCCESS, expectedNameList, event.getName());
-        model.addEvent(event);
+        model.addEvent(JOBFEST);
         expectedModel.addEvent(expectedEvent);
+        LinkCommand command = new LinkCommand(JOBFEST.getName(), contactNameList);
+        String expectedNameList = "[" + CARL.getName() + ", " + BENSON.getName() + "]";
+        String expectedMessage = String.format(LinkCommand.MESSAGE_SUCCESS, expectedNameList, JOBFEST.getName());
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(expectedEvent.getContacts(), event.getContacts());
     }
 
     @Test

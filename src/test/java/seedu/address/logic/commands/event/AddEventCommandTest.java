@@ -240,6 +240,11 @@ public class AddEventCommandTest {
         }
 
         @Override
+        public void linkContactToEvent(Contact contact, Event event) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void updateFilteredEventList(Predicate<Event> predicate) {
             throw new AssertionError("This method should not be called.");
         }
