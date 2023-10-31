@@ -23,7 +23,7 @@ import seedu.address.model.task.UniqueTaskList;
 
 /**
  * Wraps all data at the address-book level
- * Duplicates are not allowed (by .isSamePerson comparison)
+ * Duplicates are not allowed (by .isSameContact comparison)
  */
 public class AddressBook implements ReadOnlyAddressBook {
     private final UniqueContactList contacts;
@@ -64,7 +64,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * {@code contacts} must not contain duplicate contacts.
      */
     public void setContacts(List<Contact> contacts) {
-        this.contacts.setPersons(contacts);
+        this.contacts.setContacts(contacts);
     }
 
     /**
@@ -137,7 +137,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void setPerson(Contact target, Contact editedContact) {
         requireNonNull(editedContact);
-        contacts.setPerson(target, editedContact);
+        contacts.setContact(target, editedContact);
     }
 
     /**
