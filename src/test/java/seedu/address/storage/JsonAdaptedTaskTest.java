@@ -45,7 +45,7 @@ public class JsonAdaptedTaskTest {
 
     @Test
     public void toModelType_invalidDate_throwsIllegalValueException() {
-        JsonAdaptedTask task = new JsonAdaptedTask("Book venue", "2022-10-10", "", "false");
+        JsonAdaptedTask task = new JsonAdaptedTask("Book venue", "2022-13-10", "test", "false");
         String expectedMessage = Date.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, task::toModelType);
     }
@@ -95,7 +95,7 @@ public class JsonAdaptedTaskTest {
 
     @Test
     public void toModelTypeForEvent_invalidDate_throwsIllegalValueException() {
-        JsonAdaptedTask task = new JsonAdaptedTask("Book venue", "2022-10-10", "", "false");
+        JsonAdaptedTask task = new JsonAdaptedTask("Book venue", "2022-21-10", "", "false");
         String expectedMessage = Date.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, () -> task.toModelTypeForEvent(JOBFEST));
     }
