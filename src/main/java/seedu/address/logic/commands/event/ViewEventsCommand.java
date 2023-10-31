@@ -9,7 +9,7 @@ import seedu.address.model.Model;
 /**
  * Lists all events in the JobFestGo to the user.
  */
-public class ViewEventsCommand extends Commandxxx {
+public class ViewEventsCommand extends Command {
     public static final String COMMAND_WORD = "view_events";
 
     public static final String MESSAGE_SUCCESS = "Listed all events";
