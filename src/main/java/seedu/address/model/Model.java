@@ -92,10 +92,10 @@ public interface Model {
     void setContact(Contact target, Contact editedContact);
 
     /** Returns an unmodifiable view of the filtered contact list */
-    ObservableList<Contact> getFilteredPersonList();
+    ObservableList<Contact> getFilteredContactList();
 
     /** Returns an unmodifiable view of the unfiltered contact list */
-    ObservableList<Contact> getUnfilteredPersonList();
+    ObservableList<Contact> getUnfilteredContactList();
 
     /**
      * Updates the filter of the filtered contact list to filter by the given {@code predicate}.

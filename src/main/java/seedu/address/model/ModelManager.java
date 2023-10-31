@@ -238,12 +238,12 @@ public class ModelManager implements Model {
      * {@code versionedAddressBook}
      */
     @Override
-    public ObservableList<Contact> getFilteredPersonList() {
+    public ObservableList<Contact> getFilteredContactList() {
         return filteredContacts;
     }
 
     @Override
-    public ObservableList<Contact> getUnfilteredPersonList() {
+    public ObservableList<Contact> getUnfilteredContactList() {
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return filteredContacts;
     }

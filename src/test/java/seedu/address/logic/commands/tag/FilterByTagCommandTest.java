@@ -38,7 +38,7 @@ public class FilterByTagCommandTest {
         FilterByTagCommand command = new FilterByTagCommand(new ArrayList<>(), predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Collections.emptyList(), model.getFilteredPersonList());
+        assertEquals(Collections.emptyList(), model.getFilteredContactList());
     }
 
     @Test
@@ -56,7 +56,7 @@ public class FilterByTagCommandTest {
         FilterByTagCommand command = new FilterByTagCommand(tagList, predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(ALICE, BENSON, DANIEL), model.getFilteredPersonList());
+        assertEquals(Arrays.asList(ALICE, BENSON, DANIEL), model.getFilteredContactList());
     }
 
     @Test
@@ -69,7 +69,7 @@ public class FilterByTagCommandTest {
         FilterByTagCommand command = new FilterByTagCommand(tagList, predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(BENSON), model.getFilteredPersonList());
+        assertEquals(Arrays.asList(BENSON), model.getFilteredContactList());
     }
 
     @Test

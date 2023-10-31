@@ -44,7 +44,7 @@ public class EditContactCommandTest {
         String expectedMessage = String.format(EditContactCommand.MESSAGE_EDIT_CONTACT_SUCCESS,
                 Messages.format(editedContact));
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setContact(model.getFilteredPersonList().get(0), editedContact);
+        expectedModel.setContact(model.getFilteredContactList().get(0), editedContact);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
@@ -53,8 +53,8 @@ public class EditContactCommandTest {
     public void execute_someFieldsSpecifiedUnfilteredList_success() {
 
         model.addTag(new Tag(VALID_TAG_HUSBAND));
-        Index indexLastPerson = Index.fromOneBased(model.getFilteredPersonList().size());
-        Contact lastContact = model.getFilteredPersonList().get(indexLastPerson.getZeroBased());
+        Index indexLastPerson = Index.fromOneBased(model.getFilteredContactList().size());
+        Contact lastContact = model.getFilteredContactList().get(indexLastPerson.getZeroBased());
 
         ContactBuilder personInList = new ContactBuilder(lastContact);
         Contact editedContact = personInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
@@ -79,7 +79,7 @@ public class EditContactCommandTest {
 
         model.addTag(new Tag("friends"));
         EditContactCommand editCommand = new EditContactCommand(INDEX_FIRST, new EditPersonDescriptor());
-        Contact editedContact = model.getFilteredPersonList().get(INDEX_FIRST.getZeroBased());
+        Contact editedContact = model.getFilteredContactList().get(INDEX_FIRST.getZeroBased());
 
         String expectedMessage = String.format(EditContactCommand.MESSAGE_EDIT_CONTACT_SUCCESS,
                 Messages.format(editedContact));
@@ -93,7 +93,7 @@ public class EditContactCommandTest {
     public void execute_filteredList_success() {
         showPersonAtIndex(model, INDEX_FIRST);
         model.addTag(new Tag("friends"));
-        Contact contactInFilteredList = model.getFilteredPersonList().get(INDEX_FIRST.getZeroBased());
+        Contact contactInFilteredList = model.getFilteredContactList().get(INDEX_FIRST.getZeroBased());
         Contact editedContact = new ContactBuilder(contactInFilteredList).withName(VALID_NAME_BOB).build();
 
         EditContactCommand editCommand = new EditContactCommand(INDEX_FIRST,
@@ -101,14 +101,14 @@ public class EditContactCommandTest {
         String expectedMessage = String.format(EditContactCommand.MESSAGE_EDIT_CONTACT_SUCCESS,
                 Messages.format(editedContact));
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setContact(model.getFilteredPersonList().get(0), editedContact);
+        expectedModel.setContact(model.getFilteredContactList().get(0), editedContact);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_duplicatePersonUnfilteredList_failure() {
-        Contact firstContact = model.getFilteredPersonList().get(INDEX_FIRST.getZeroBased());
+        Contact firstContact = model.getFilteredContactList().get(INDEX_FIRST.getZeroBased());
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(firstContact).build();
         EditContactCommand editCommand = new EditContactCommand(INDEX_SECOND, descriptor);
 
@@ -129,7 +129,7 @@ public class EditContactCommandTest {
 
     @Test
     public void execute_invalidPersonIndexUnfilteredList_failure() {
-        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
+        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredContactList().size() + 1);
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build();
         EditContactCommand editCommand = new EditContactCommand(outOfBoundIndex, descriptor);
 
@@ -156,8 +156,8 @@ public class EditContactCommandTest {
     @Test
     public void execute_tagNotPresentInAddressBook_throwsCommandException() {
 
-        Index indexLastPerson = Index.fromOneBased(model.getFilteredPersonList().size());
-        Contact lastContact = model.getFilteredPersonList().get(indexLastPerson.getZeroBased());
+        Index indexLastPerson = Index.fromOneBased(model.getFilteredContactList().size());
+        Contact lastContact = model.getFilteredContactList().get(indexLastPerson.getZeroBased());
 
         ContactBuilder personInList = new ContactBuilder(lastContact);
         Contact editedContact = personInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
@@ -177,8 +177,8 @@ public class EditContactCommandTest {
     @Test
     public void execute_tagPresentInAddressBook_doesNotThrowException() {
         model.addTag(new Tag(VALID_TAG_HUSBAND));
-        Index indexLastPerson = Index.fromOneBased(model.getFilteredPersonList().size());
-        Contact lastContact = model.getFilteredPersonList().get(indexLastPerson.getZeroBased());
+        Index indexLastPerson = Index.fromOneBased(model.getFilteredContactList().size());
+        Contact lastContact = model.getFilteredContactList().get(indexLastPerson.getZeroBased());
 
         ContactBuilder personInList = new ContactBuilder(lastContact);
         Contact editedContact = personInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
