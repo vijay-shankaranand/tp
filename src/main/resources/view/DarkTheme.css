@@ -339,7 +339,7 @@
     -fx-text-fill: white;
 }
 
-#filterField, #ContactListPanel, #ContactWebpage {
+#filterField, #contactListPanel, #contactWebpage {
     -fx-effect: innershadow(gaussian, black, 10, 0, 0, 0);
 }
 

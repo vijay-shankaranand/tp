@@ -21,7 +21,7 @@ import seedu.address.model.task.TaskDescription;
 import seedu.address.model.task.TaskInReminderPredicate;
 
 /**
- * Represents the in-memory model of the Job Fest Go data.
+ * Represents the in-memory model of the JobFestGo data.
  */
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
