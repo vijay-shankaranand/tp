@@ -24,9 +24,10 @@ import seedu.address.model.contact.ContactIsTaggedPredicate;
 import seedu.address.model.tag.Tag;
 
 /**
- * Contains integration tests (interaction with the Model) for {@code FilterCommand}.
+ * Contains integration tests (interaction with the Model) for {@code FilterByTagCommand}.
  */
-public class FilterCommandTest {
+public class FilterByTagCommandTest {
+
     private Model model = new ModelManager(getTypicalJobFestGo(), new UserPrefs());
     private Model expectedModel = new ModelManager(getTypicalJobFestGo(), new UserPrefs());
 
@@ -35,7 +36,7 @@ public class FilterCommandTest {
         String expectedMessage = String.format(MESSAGE_CONTACTS_LISTED_OVERVIEW, 0);
         ContactIsTaggedPredicate predicate =
                 new ContactIsTaggedPredicate(new ArrayList<>());
-        FilterCommand command = new FilterCommand(new ArrayList<>(), predicate);
+        FilterByTagCommand command = new FilterByTagCommand(new ArrayList<>(), predicate);
         expectedModel.updateFilteredContactList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Collections.emptyList(), model.getFilteredContactList());
@@ -53,7 +54,7 @@ public class FilterCommandTest {
         ContactIsTaggedPredicate predicate = new ContactIsTaggedPredicate(tagList);
 
         String expectedMessage = String.format(MESSAGE_CONTACTS_LISTED_OVERVIEW, 3);
-        FilterCommand command = new FilterCommand(tagList, predicate);
+        FilterByTagCommand command = new FilterByTagCommand(tagList, predicate);
         expectedModel.updateFilteredContactList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(ALICE, BENSON, DANIEL), model.getFilteredContactList());
@@ -64,9 +65,8 @@ public class FilterCommandTest {
         List<Tag> tagList = new ArrayList<>();
         tagList.add(new Tag("owesMoney"));
         ContactIsTaggedPredicate predicate = new ContactIsTaggedPredicate(tagList);
-
         String expectedMessage = String.format(MESSAGE_CONTACTS_LISTED_OVERVIEW, 1);
-        FilterCommand command = new FilterCommand(tagList, predicate);
+        FilterByTagCommand command = new FilterByTagCommand(tagList, predicate);
         expectedModel.updateFilteredContactList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(BENSON), model.getFilteredContactList());
@@ -89,14 +89,14 @@ public class FilterCommandTest {
         ContactIsTaggedPredicate secondPredicate =
                 new ContactIsTaggedPredicate(secondTagList);
 
-        FilterCommand firstFilterCommand = new FilterCommand(firstTagList, firstPredicate);
-        FilterCommand secondFilterCommand = new FilterCommand(secondTagList, secondPredicate);
+        FilterByTagCommand firstFilterCommand = new FilterByTagCommand(firstTagList, firstPredicate);
+        FilterByTagCommand secondFilterCommand = new FilterByTagCommand(secondTagList, secondPredicate);
 
         // same object -> returns true
         assertTrue(firstFilterCommand.equals(firstFilterCommand));
 
         // same values -> returns true
-        FilterCommand firstFilterCommandCopy = new FilterCommand(firstTagList, firstPredicate);
+        FilterByTagCommand firstFilterCommandCopy = new FilterByTagCommand(firstTagList, firstPredicate);
         assertTrue(firstFilterCommand.equals(firstFilterCommandCopy));
 
         // different types -> returns false
@@ -120,9 +120,9 @@ public class FilterCommandTest {
 
         ContactIsTaggedPredicate predicate = new ContactIsTaggedPredicate(tagList);
 
-        FilterCommand command = new FilterCommand(tagList, predicate);
+        FilterByTagCommand command = new FilterByTagCommand(tagList, predicate);
 
-        String expected = FilterCommand.class.getCanonicalName() + "{predicate=" + predicate + "}";
+        String expected = FilterByTagCommand.class.getCanonicalName() + "{predicate=" + predicate + "}";
         assertEquals(expected, command.toString());
     }
 }

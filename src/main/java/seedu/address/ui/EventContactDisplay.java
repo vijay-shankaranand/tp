@@ -65,8 +65,10 @@ public class EventContactDisplay extends UiPart<Region> {
      * Fills up all the placeholders of this window.
      */
     private void fillInnerParts() {
+
         ContactListPanel = new ContactListPanel(logic.getFilteredContactList());
         ContactListPanelPlaceholder.getChildren().add(ContactListPanel.getRoot());
+
 
         eventListPanel = new EventListPanel(logic.getFilteredEventList());
         eventListPanelPlaceholder.getChildren().add(eventListPanel.getRoot());
@@ -90,6 +92,7 @@ public class EventContactDisplay extends UiPart<Region> {
      * Fills up all the placeholders of this window after reset.
      */
     public void fillInnerPartsAfterReset() {
+
         ContactListPanel = new ContactListPanel(logic.getUnfilteredContactList());
         ContactListPanelPlaceholder.getChildren().add(ContactListPanel.getRoot());
 

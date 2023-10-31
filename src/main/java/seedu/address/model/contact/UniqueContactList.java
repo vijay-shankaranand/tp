@@ -16,18 +16,25 @@ import seedu.address.model.name.Name;
 import seedu.address.model.tag.Tag;
 
 /**
+<<<<<<< HEAD
  * A list of Contacts that enforces uniqueness between its elements and does not allow nulls.
  * A contact is considered unique by comparing using {@code Contact#isSameContact(Contact)}. As such, adding and updating
  * of contacts uses Contact#isSameContact(Contact) for equality to ensure that the contact being added or updated is
  * unique in terms of identity in the UniqueContactList. However, the removal of a contact uses Contact#equals(Object)
  * to ensure that the contact with exactly the same fields will be removed.
+=======
+ * A list of persons that enforces uniqueness between its elements and does not allow nulls.
+ * A contact is considered unique by comparing using {@code Contact#isSameContact(Contact)}. As such, adding and
+ * updating of contacts uses Contact#isSameContact(Contact) for equality to ensure that the contact being added or
+ * updated is unique in terms of identity in the UniqueContactList. However, the removal of a contact uses
+ * Contact#equals(Object) to ensure that the contact with exactly the same fields will be removed.
+>>>>>>> master
  *
  * Supports a minimal set of list operations.
  *
  * @see Contact#isSameContact(Contact)
  */
 public class UniqueContactList implements Iterable<Contact> {
-
     private final ObservableList<Contact> internalList = FXCollections.observableArrayList();
     private final ObservableList<Contact> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);

@@ -27,7 +27,7 @@ import seedu.address.logic.commands.contact.AddContactCommand;
 import seedu.address.logic.commands.contact.DeleteContactCommand;
 import seedu.address.logic.commands.contact.EditContactCommand;
 import seedu.address.logic.commands.contact.EditContactCommand.EditContactDescriptor;
-import seedu.address.logic.commands.contact.FindCommand;
+import seedu.address.logic.commands.contact.FindContactCommand;
 import seedu.address.logic.commands.contact.ViewContactsCommand;
 import seedu.address.logic.commands.event.AddEventCommand;
 import seedu.address.logic.commands.event.LinkCommand;
@@ -35,7 +35,7 @@ import seedu.address.logic.commands.event.SelectEventCommand;
 import seedu.address.logic.commands.event.ViewEventsCommand;
 import seedu.address.logic.commands.tag.AddTagCommand;
 import seedu.address.logic.commands.tag.DeleteTagCommand;
-import seedu.address.logic.commands.tag.FilterCommand;
+import seedu.address.logic.commands.tag.FilterByTagCommand;
 import seedu.address.logic.commands.tag.ViewTagsCommand;
 import seedu.address.logic.commands.task.AddTaskCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -91,9 +91,9 @@ public class JobFestGoParserTest {
         tagList.add(tag);
         ContactIsTaggedPredicate predicate = new ContactIsTaggedPredicate(tagList);
 
-        FilterCommand command = (FilterCommand) parser.parseCommand(FilterCommand.COMMAND_WORD
+        FilterByTagCommand command = (FilterByTagCommand) parser.parseCommand(FilterByTagCommand.COMMAND_WORD
                 + " " + "friends");
-        assertEquals(new FilterCommand(tagList, predicate), command);
+        assertEquals(new FilterByTagCommand(tagList, predicate), command);
     }
 
     @Test
@@ -150,9 +150,9 @@ public class JobFestGoParserTest {
     @Test
     public void parseCommand_find() throws Exception {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
-        FindCommand command = (FindCommand) parser.parseCommand(
-                FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords)), command);
+        FindContactCommand command = (FindContactCommand) parser.parseCommand(
+                FindContactCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
+        assertEquals(new FindContactCommand(new NameContainsKeywordsPredicate(keywords)), command);
     }
 
     @Test

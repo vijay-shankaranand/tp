@@ -31,6 +31,7 @@ import seedu.address.testutil.event.EventBuilder;
 import seedu.address.testutil.tag.TagBuilder;
 import seedu.address.testutil.task.TaskBuilder;
 
+
 public class JobFestGoTest {
 
     private final JobFestGo jobFestGo = new JobFestGo();

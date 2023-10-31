@@ -346,7 +346,9 @@ public class AddContactCommandTest {
         @Override
         public boolean hasContact(Contact contact) {
             requireNonNull(contact);
+
             return ContactsAdded.stream().anyMatch(contact::isSameContact);
+
         }
 
         @Override

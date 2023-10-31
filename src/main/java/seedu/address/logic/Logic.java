@@ -33,10 +33,11 @@ public interface Logic {
      */
     ReadOnlyJobFestGo getJobFestGo();
 
-    /** Returns an unmodifiable view of the filtered list of Contacts */
+    /** Returns an unmodifiable view of the filtered list of contacts */
     ObservableList<Contact> getFilteredContactList();
 
-    /** Returns an unmodifiable view of the unfiltered list of Contacts */
+    /** Returns an unmodifiable view of the unfiltered list of contacts */
+
     ObservableList<Contact> getUnfilteredContactList();
 
     /** Returns an unmodifiable view of the filtered list of tags */

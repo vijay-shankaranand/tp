@@ -14,12 +14,13 @@ import seedu.address.model.contact.ContactIsTaggedPredicate;
 import seedu.address.model.tag.Tag;
 
 /**
- * Filters Contacts in JobFestGo by {@code Tag}.
+ * Filters contacts in JobFestGo by {@code Tag}.
  */
-public class FilterCommand extends Command {
-    public static final String COMMAND_WORD = "filter";
+public class FilterByTagCommand extends Command {
+    public static final String COMMAND_WORD = "filter_by_tag";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": filters and displays all Contacts who "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": filters and displays all contacts who "
+
             + " are tagged with the input tag.\n"
             + "Parameters: "
             + PREFIX_TAG + "TAG\n"
@@ -32,7 +33,8 @@ public class FilterCommand extends Command {
     /**
      * Creates a FilterCommand to filter Contacts in JobFestGo.
      */
-    public FilterCommand(List<Tag> tags, ContactIsTaggedPredicate predicate) {
+    public FilterByTagCommand(List<Tag> tags, ContactIsTaggedPredicate predicate) {
+
         this.tags = tags;
         this.predicate = predicate;
     }
@@ -43,6 +45,7 @@ public class FilterCommand extends Command {
         model.updateFilteredContactList(predicate);
         return new CommandResult(
                 String.format(Messages.MESSAGE_CONTACTS_LISTED_OVERVIEW, model.getFilteredContactList().size()));
+
     }
 
     @Override
@@ -52,11 +55,11 @@ public class FilterCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof FilterCommand)) {
+        if (!(other instanceof FilterByTagCommand)) {
             return false;
         }
 
-        FilterCommand otherFilterCommand = (FilterCommand) other;
+        FilterByTagCommand otherFilterCommand = (FilterByTagCommand) other;
         return tags.equals(otherFilterCommand.tags) && predicate.equals(otherFilterCommand.predicate);
     }
 

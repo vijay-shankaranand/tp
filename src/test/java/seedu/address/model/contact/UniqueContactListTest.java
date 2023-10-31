@@ -62,6 +62,7 @@ public class UniqueContactListTest {
 
     @Test
     public void setContact_nullTargetContact_throwsNullPointerException() {
+
         assertThrows(NullPointerException.class, () -> uniqueContactList.setContact(null, ALICE));
     }
 
@@ -72,6 +73,7 @@ public class UniqueContactListTest {
 
     @Test
     public void setContact_targetContactNotInList_throwsContactNotFoundException() {
+
         assertThrows(ContactNotFoundException.class, () -> uniqueContactList.setContact(ALICE, ALICE));
     }
 
@@ -131,6 +133,7 @@ public class UniqueContactListTest {
 
     @Test
     public void setContacts_nullUniqueContactList_throwsNullPointerException() {
+
         assertThrows(NullPointerException.class, () -> uniqueContactList.setContacts((UniqueContactList) null));
     }
 

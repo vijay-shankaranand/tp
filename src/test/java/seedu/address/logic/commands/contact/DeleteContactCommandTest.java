@@ -32,7 +32,7 @@ public class DeleteContactCommandTest {
         Contact contactToDelete = model.getFilteredContactList().get(INDEX_FIRST.getZeroBased());
         DeleteContactCommand deleteCommand = new DeleteContactCommand(INDEX_FIRST);
 
-        String expectedMessage = String.format(DeleteContactCommand.MESSAGE_DELETE_Contact_SUCCESS,
+        String expectedMessage = String.format(DeleteContactCommand.MESSAGE_DELETE_CONTACT_SUCCESS,
                 Messages.format(contactToDelete));
 
         ModelManager expectedModel = new ModelManager(model.getJobFestGo(), new UserPrefs());
@@ -56,7 +56,8 @@ public class DeleteContactCommandTest {
         Contact contactToDelete = model.getFilteredContactList().get(INDEX_FIRST.getZeroBased());
         DeleteContactCommand deleteCommand = new DeleteContactCommand(INDEX_FIRST);
 
-        String expectedMessage = String.format(DeleteContactCommand.MESSAGE_DELETE_Contact_SUCCESS,
+
+        String expectedMessage = String.format(DeleteContactCommand.MESSAGE_DELETE_CONTACT_SUCCESS,
                 Messages.format(contactToDelete));
 
         Model expectedModel = new ModelManager(model.getJobFestGo(), new UserPrefs());
@@ -113,6 +114,7 @@ public class DeleteContactCommandTest {
      * Updates {@code model}'s filtered list to show no one.
      */
     private void showNoContact(Model model) {
+
         model.updateFilteredContactList(p -> false);
 
         assertTrue(model.getFilteredContactList().isEmpty());

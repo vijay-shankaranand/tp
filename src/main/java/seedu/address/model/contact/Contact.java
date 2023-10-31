@@ -74,8 +74,13 @@ public class Contact {
     }
 
     /**
+<<<<<<< HEAD
      * Returns true if both Contacts have the same name or same phone number.
      * This defines a weaker notion of equality between two Contacts.
+=======
+     * Returns true if both contacts have the same name or same phone number.
+     * This defines a weaker notion of equality between two persons.
+>>>>>>> master
      */
     public boolean isSameContact(Contact otherContact) {
         if (otherContact == this) {
@@ -88,8 +93,13 @@ public class Contact {
     }
 
     /**
+<<<<<<< HEAD
      * Returns true if both Contacts have the same identity and data fields.
      * This defines a stronger notion of equality between two Contacts.
+=======
+     * Returns true if both contacts have the same identity and data fields.
+     * This defines a stronger notion of equality between two persons.
+>>>>>>> master
      */
     @Override
     public boolean equals(Object other) {

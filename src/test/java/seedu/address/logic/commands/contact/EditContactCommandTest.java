@@ -41,9 +41,11 @@ public class EditContactCommandTest {
         Contact editedContact = new ContactBuilder().build();
         EditContactDescriptor descriptor = new EditContactDescriptorBuilder(editedContact).build();
         EditContactCommand editCommand = new EditContactCommand(INDEX_FIRST, descriptor);
-        String expectedMessage = String.format(EditContactCommand.MESSAGE_EDIT_Contact_SUCCESS,
+
+        String expectedMessage = String.format(EditContactCommand.MESSAGE_EDIT_CONTACT_SUCCESS,
                 Messages.format(editedContact));
         Model expectedModel = new ModelManager(new JobFestGo(model.getJobFestGo()), new UserPrefs());
+
         expectedModel.setContact(model.getFilteredContactList().get(0), editedContact);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
@@ -53,6 +55,7 @@ public class EditContactCommandTest {
     public void execute_someFieldsSpecifiedUnfilteredList_success() {
 
         model.addTag(new Tag(VALID_TAG_HUSBAND));
+
         Index indexLastContact = Index.fromOneBased(model.getFilteredContactList().size());
         Contact lastContact = model.getFilteredContactList().get(indexLastContact.getZeroBased());
 
@@ -65,7 +68,7 @@ public class EditContactCommandTest {
 
         EditContactCommand editCommand = new EditContactCommand(indexLastContact, descriptor);
 
-        String expectedMessage = String.format(EditContactCommand.MESSAGE_EDIT_Contact_SUCCESS,
+        String expectedMessage = String.format(EditContactCommand.MESSAGE_EDIT_CONTACT_SUCCESS,
                 Messages.format(editedContact));
 
         Model expectedModel = new ModelManager(new JobFestGo(model.getJobFestGo()), new UserPrefs());
@@ -78,10 +81,11 @@ public class EditContactCommandTest {
     public void execute_noFieldSpecifiedUnfilteredList_success() {
 
         model.addTag(new Tag("friends"));
+
         EditContactCommand editCommand = new EditContactCommand(INDEX_FIRST, new EditContactDescriptor());
         Contact editedContact = model.getFilteredContactList().get(INDEX_FIRST.getZeroBased());
 
-        String expectedMessage = String.format(EditContactCommand.MESSAGE_EDIT_Contact_SUCCESS,
+        String expectedMessage = String.format(EditContactCommand.MESSAGE_EDIT_CONTACT_SUCCESS,
                 Messages.format(editedContact));
 
         Model expectedModel = new ModelManager(new JobFestGo(model.getJobFestGo()), new UserPrefs());
@@ -98,7 +102,7 @@ public class EditContactCommandTest {
 
         EditContactCommand editCommand = new EditContactCommand(INDEX_FIRST,
                 new EditContactDescriptorBuilder().withName(VALID_NAME_BOB).build());
-        String expectedMessage = String.format(EditContactCommand.MESSAGE_EDIT_Contact_SUCCESS,
+        String expectedMessage = String.format(EditContactCommand.MESSAGE_EDIT_CONTACT_SUCCESS,
                 Messages.format(editedContact));
         Model expectedModel = new ModelManager(new JobFestGo(model.getJobFestGo()), new UserPrefs());
         expectedModel.setContact(model.getFilteredContactList().get(0), editedContact);
@@ -111,7 +115,6 @@ public class EditContactCommandTest {
         Contact firstContact = model.getFilteredContactList().get(INDEX_FIRST.getZeroBased());
         EditContactDescriptor descriptor = new EditContactDescriptorBuilder(firstContact).build();
         EditContactCommand editCommand = new EditContactCommand(INDEX_SECOND, descriptor);
-
         assertCommandFailure(editCommand, model, EditContactCommand.MESSAGE_DUPLICATE_CONTACT);
     }
 
@@ -131,6 +134,7 @@ public class EditContactCommandTest {
     public void execute_invalidContactIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredContactList().size() + 1);
         EditContactDescriptor descriptor = new EditContactDescriptorBuilder().withName(VALID_NAME_BOB).build();
+
         EditContactCommand editCommand = new EditContactCommand(outOfBoundIndex, descriptor);
 
         assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_CONTACT_DISPLAYED_INDEX);
@@ -177,6 +181,7 @@ public class EditContactCommandTest {
     @Test
     public void execute_tagPresentInJobFestGo_doesNotThrowException() {
         model.addTag(new Tag(VALID_TAG_HUSBAND));
+
         Index indexLastContact = Index.fromOneBased(model.getFilteredContactList().size());
         Contact lastContact = model.getFilteredContactList().get(indexLastContact.getZeroBased());
 
@@ -187,8 +192,10 @@ public class EditContactCommandTest {
         EditContactDescriptor descriptor = new EditContactDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withTags(VALID_TAG_HUSBAND).build();
 
+
         EditContactCommand editCommand = new EditContactCommand(indexLastContact, descriptor);
-        String expectedMessage = String.format(EditContactCommand.MESSAGE_EDIT_Contact_SUCCESS,
+        String expectedMessage = String.format(EditContactCommand.MESSAGE_EDIT_CONTACT_SUCCESS,
+
                 Messages.format(editedContact));
         Model expectedModel = new ModelManager(new JobFestGo(model.getJobFestGo()), new UserPrefs());
         expectedModel.setContact(lastContact, editedContact);

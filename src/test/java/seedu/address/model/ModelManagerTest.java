@@ -97,11 +97,14 @@ public class ModelManagerTest {
 
     @Test
     public void getFilteredContactList_modifyList_throwsUnsupportedOperationException() {
+
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredContactList().remove(0));
     }
 
     @Test
+
     public void getUnfilteredContactList_modifyList_throwsUnsupportedOperationException() {
+
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getUnfilteredContactList().remove(0));
     }
 
@@ -305,7 +308,9 @@ public class ModelManagerTest {
         // different filteredList -> returns false
         String[] keywords = ALICE.getName().fullName.split("\\s+");
         modelManager.updateFilteredContactList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
+
         assertFalse(modelManager.equals(new ModelManager(jobFestGo, userPrefs)));
+
 
         // resets modelManager to initial state for upcoming tests
         modelManager.updateFilteredContactList(PREDICATE_SHOW_ALL_CONTACTS);

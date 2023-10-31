@@ -117,6 +117,7 @@ public class CommandTestUtil {
 
         assertThrows(CommandException.class, expectedMessage, () -> command.execute(actualModel));
         assertEquals(expectedJobFestGo, actualModel.getJobFestGo());
+
         assertEquals(expectedFilteredList, actualModel.getFilteredContactList());
     }
     /**
@@ -124,6 +125,7 @@ public class CommandTestUtil {
      * {@code model}'s JobFestGo.
      */
     public static void showContactAtIndex(Model model, Index targetIndex) {
+
         assertTrue(targetIndex.getZeroBased() < model.getFilteredContactList().size());
 
         Contact contact = model.getFilteredContactList().get(targetIndex.getZeroBased());
