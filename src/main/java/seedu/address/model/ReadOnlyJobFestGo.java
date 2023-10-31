@@ -7,13 +7,13 @@ import seedu.address.model.tag.Tag;
 import seedu.address.model.task.Task;
 
 /**
- * Unmodifiable view of an address book
+ * Unmodifiable view of a JobFestGo
  */
-public interface ReadOnlyAddressBook {
+public interface ReadOnlyJobFestGo {
 
     /**
-     * Returns an unmodifiable view of the persons list.
-     * This list will not contain any duplicate persons.
+     * Returns an unmodifiable view of the Contacts list.
+     * This list will not contain any duplicate Contacts.
      */
     ObservableList<Contact> getContactList();
 

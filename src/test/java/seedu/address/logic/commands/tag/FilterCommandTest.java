@@ -3,12 +3,12 @@ package seedu.address.logic.commands.tag;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
+import static seedu.address.logic.Messages.MESSAGE_CONTACTS_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.contact.TypicalPersons.ALICE;
-import static seedu.address.testutil.contact.TypicalPersons.BENSON;
-import static seedu.address.testutil.contact.TypicalPersons.DANIEL;
-import static seedu.address.testutil.contact.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.contact.TypicalContacts.ALICE;
+import static seedu.address.testutil.contact.TypicalContacts.BENSON;
+import static seedu.address.testutil.contact.TypicalContacts.DANIEL;
+import static seedu.address.testutil.contact.TypicalContacts.getTypicalJobFestGo;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -20,29 +20,29 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.contact.PersonIsTaggedPredicate;
+import seedu.address.model.contact.ContactIsTaggedPredicate;
 import seedu.address.model.tag.Tag;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FilterCommand}.
  */
 public class FilterCommandTest {
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalJobFestGo(), new UserPrefs());
+    private Model expectedModel = new ModelManager(getTypicalJobFestGo(), new UserPrefs());
 
     @Test
-    public void execute_zeroTags_noPersonFound() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
-        PersonIsTaggedPredicate predicate =
-                new PersonIsTaggedPredicate(new ArrayList<>());
+    public void execute_zeroTags_noContactFound() {
+        String expectedMessage = String.format(MESSAGE_CONTACTS_LISTED_OVERVIEW, 0);
+        ContactIsTaggedPredicate predicate =
+                new ContactIsTaggedPredicate(new ArrayList<>());
         FilterCommand command = new FilterCommand(new ArrayList<>(), predicate);
-        expectedModel.updateFilteredPersonList(predicate);
+        expectedModel.updateFilteredContactList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Collections.emptyList(), model.getFilteredPersonList());
+        assertEquals(Collections.emptyList(), model.getFilteredContactList());
     }
 
     @Test
-    public void execute_multipleTags_multiplePersonsFound() {
+    public void execute_multipleTags_multipleContactsFound() {
         Tag firstTag = new Tag("friends");
         Tag secondTag = new Tag("owesMoney");
 
@@ -50,26 +50,26 @@ public class FilterCommandTest {
         tagList.add(firstTag);
         tagList.add(secondTag);
 
-        PersonIsTaggedPredicate predicate = new PersonIsTaggedPredicate(tagList);
+        ContactIsTaggedPredicate predicate = new ContactIsTaggedPredicate(tagList);
 
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
+        String expectedMessage = String.format(MESSAGE_CONTACTS_LISTED_OVERVIEW, 3);
         FilterCommand command = new FilterCommand(tagList, predicate);
-        expectedModel.updateFilteredPersonList(predicate);
+        expectedModel.updateFilteredContactList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(ALICE, BENSON, DANIEL), model.getFilteredPersonList());
+        assertEquals(Arrays.asList(ALICE, BENSON, DANIEL), model.getFilteredContactList());
     }
 
     @Test
-    public void execute_singleTag_singlePersonsFound() {
+    public void execute_singleTag_singleContactsFound() {
         List<Tag> tagList = new ArrayList<>();
         tagList.add(new Tag("owesMoney"));
-        PersonIsTaggedPredicate predicate = new PersonIsTaggedPredicate(tagList);
+        ContactIsTaggedPredicate predicate = new ContactIsTaggedPredicate(tagList);
 
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
+        String expectedMessage = String.format(MESSAGE_CONTACTS_LISTED_OVERVIEW, 1);
         FilterCommand command = new FilterCommand(tagList, predicate);
-        expectedModel.updateFilteredPersonList(predicate);
+        expectedModel.updateFilteredContactList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(BENSON), model.getFilteredPersonList());
+        assertEquals(Arrays.asList(BENSON), model.getFilteredContactList());
     }
 
     @Test
@@ -84,10 +84,10 @@ public class FilterCommandTest {
         secondTagList.add(firstTag);
         secondTagList.add(secondTag);
 
-        PersonIsTaggedPredicate firstPredicate =
-                new PersonIsTaggedPredicate(firstTagList);
-        PersonIsTaggedPredicate secondPredicate =
-                new PersonIsTaggedPredicate(secondTagList);
+        ContactIsTaggedPredicate firstPredicate =
+                new ContactIsTaggedPredicate(firstTagList);
+        ContactIsTaggedPredicate secondPredicate =
+                new ContactIsTaggedPredicate(secondTagList);
 
         FilterCommand firstFilterCommand = new FilterCommand(firstTagList, firstPredicate);
         FilterCommand secondFilterCommand = new FilterCommand(secondTagList, secondPredicate);
@@ -118,7 +118,7 @@ public class FilterCommandTest {
         tagList.add(firstTag);
         tagList.add(secondTag);
 
-        PersonIsTaggedPredicate predicate = new PersonIsTaggedPredicate(tagList);
+        ContactIsTaggedPredicate predicate = new ContactIsTaggedPredicate(tagList);
 
         FilterCommand command = new FilterCommand(tagList, predicate);
 

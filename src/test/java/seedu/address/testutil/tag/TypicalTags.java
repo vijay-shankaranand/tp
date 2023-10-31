@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import seedu.address.model.AddressBook;
+import seedu.address.model.JobFestGo;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -34,8 +34,8 @@ public class TypicalTags {
         ));
     }
 
-    public static AddressBook getTypicalAddressBook() {
-        AddressBook ab = new AddressBook();
+    public static JobFestGo getTypicalJobFestGo() {
+        JobFestGo ab = new JobFestGo();
         for (Tag tag : getTypicalTags()) {
             ab.addTag(tag);
         }

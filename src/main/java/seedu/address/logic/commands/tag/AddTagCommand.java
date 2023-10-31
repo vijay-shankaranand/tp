@@ -11,7 +11,7 @@ import seedu.address.model.Model;
 import seedu.address.model.tag.Tag;
 
 /**
- * Adds a tag to the address book.
+ * Adds a tag to the JobFestGo.
  */
 public class AddTagCommand extends Command {
     public static final String COMMAND_WORD = "add_tag";

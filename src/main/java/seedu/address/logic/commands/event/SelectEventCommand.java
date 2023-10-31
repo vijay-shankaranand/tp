@@ -11,12 +11,12 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.contact.PersonIsInEventPredicate;
+import seedu.address.model.contact.ContactIsInEventPredicate;
 import seedu.address.model.event.Event;
 import seedu.address.model.task.TaskIsInEventPredicate;
 
 /**
- * Selects an event identified using its displayed index from the address book.
+ * Selects an event identified using its displayed index from the JobFestGo.
  */
 public class SelectEventCommand extends Command {
     public static final String COMMAND_WORD = "select_event";
@@ -48,9 +48,9 @@ public class SelectEventCommand extends Command {
         }
 
         Event eventToBeSelected = lastShownEventList.get(targetIndex.getZeroBased());
-        PersonIsInEventPredicate predicate = new PersonIsInEventPredicate(eventToBeSelected);
+        ContactIsInEventPredicate predicate = new ContactIsInEventPredicate(eventToBeSelected);
         TaskIsInEventPredicate taskPredicate = new TaskIsInEventPredicate(eventToBeSelected);
-        model.updateFilteredPersonList(predicate);
+        model.updateFilteredContactList(predicate);
         model.updateFilteredTaskList(taskPredicate);
         return new CommandResult(String.format(MESSAGE_SELECT_EVENT_SUCCESS,
             Messages.format(eventToBeSelected)), eventToBeSelected);

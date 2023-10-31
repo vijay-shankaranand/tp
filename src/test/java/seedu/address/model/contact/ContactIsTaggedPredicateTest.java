@@ -23,16 +23,16 @@ public class ContactIsTaggedPredicateTest {
         secondTagList.add(firstTag);
         secondTagList.add(secondTag);
 
-        PersonIsTaggedPredicate firstPredicate =
-                new PersonIsTaggedPredicate(firstTagList);
-        PersonIsTaggedPredicate secondPredicate =
-                new PersonIsTaggedPredicate(secondTagList);
+        ContactIsTaggedPredicate firstPredicate =
+                new ContactIsTaggedPredicate(firstTagList);
+        ContactIsTaggedPredicate secondPredicate =
+                new ContactIsTaggedPredicate(secondTagList);
 
         // same object -> returns true
         assertTrue(firstPredicate.equals(firstPredicate));
 
         // same values -> returns true
-        PersonIsTaggedPredicate firstPredicateCopy = new PersonIsTaggedPredicate(firstTagList);
+        ContactIsTaggedPredicate firstPredicateCopy = new ContactIsTaggedPredicate(firstTagList);
         assertTrue(firstPredicate.equals(firstPredicateCopy));
 
         // different types -> returns false

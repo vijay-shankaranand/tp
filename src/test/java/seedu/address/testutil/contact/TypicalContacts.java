@@ -15,13 +15,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import seedu.address.model.AddressBook;
+import seedu.address.model.JobFestGo;
 import seedu.address.model.contact.Contact;
 
 /**
  * A utility class containing a list of {@code Contact} objects to be used in tests.
  */
-public class TypicalPersons {
+public class TypicalContacts {
 
     public static final Contact ALICE = new ContactBuilder().withName("Alice Pauline")
             .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
@@ -57,20 +57,20 @@ public class TypicalPersons {
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 
-    private TypicalPersons() {} // prevents instantiation
+    private TypicalContacts() {} // prevents instantiation
 
     /**
-     * Returns an {@code AddressBook} with all the typical persons.
+     * Returns an {@code JobFestGo} with all the typical Contacts.
      */
-    public static AddressBook getTypicalAddressBook() {
-        AddressBook ab = new AddressBook();
-        for (Contact contact : getTypicalPersons()) {
-            ab.addPerson(contact);
+    public static JobFestGo getTypicalJobFestGo() {
+        JobFestGo ab = new JobFestGo();
+        for (Contact contact : getTypicalContacts()) {
+            ab.addContact(contact);
         }
         return ab;
     }
 
-    public static List<Contact> getTypicalPersons() {
+    public static List<Contact> getTypicalContacts() {
         return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
     }
 }

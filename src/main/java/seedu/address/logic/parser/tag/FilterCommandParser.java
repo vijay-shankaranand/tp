@@ -8,7 +8,7 @@ import seedu.address.logic.commands.tag.FilterCommand;
 import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.contact.PersonIsTaggedPredicate;
+import seedu.address.model.contact.ContactIsTaggedPredicate;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -35,6 +35,6 @@ public class FilterCommandParser implements Parser<FilterCommand> {
         };
 
         return new FilterCommand(Arrays.asList(tags),
-                new PersonIsTaggedPredicate(Arrays.asList(tags)));
+                new ContactIsTaggedPredicate(Arrays.asList(tags)));
     }
 }

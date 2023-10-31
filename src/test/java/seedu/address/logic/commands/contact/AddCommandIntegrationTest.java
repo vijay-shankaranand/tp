@@ -2,7 +2,7 @@ package seedu.address.logic.commands.contact;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.contact.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.contact.TypicalContacts.getTypicalJobFestGo;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -23,14 +23,14 @@ public class AddCommandIntegrationTest {
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        model = new ModelManager(getTypicalJobFestGo(), new UserPrefs());
     }
 
     @Test
-    public void execute_newPerson_success() {
+    public void execute_newContact_success() {
         Contact validContact = new ContactBuilder().build();
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getJobFestGo(), new UserPrefs());
         expectedModel.addContact(validContact);
 
         assertCommandSuccess(new AddContactCommand(validContact), model,
@@ -39,10 +39,10 @@ public class AddCommandIntegrationTest {
     }
 
     @Test
-    public void execute_duplicatePerson_throwsCommandException() {
-        Contact contactInList = model.getAddressBook().getContactList().get(0);
+    public void execute_duplicateContact_throwsCommandException() {
+        Contact contactInList = model.getJobFestGo().getContactList().get(0);
         assertCommandFailure(new AddContactCommand(contactInList), model,
-                AddContactCommand.MESSAGE_DUPLICATE_PERSON);
+                AddContactCommand.MESSAGE_DUPLICATE_CONTACT);
     }
 
 }

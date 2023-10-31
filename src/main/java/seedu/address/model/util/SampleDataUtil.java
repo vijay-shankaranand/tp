@@ -5,8 +5,8 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import seedu.address.model.AddressBook;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.JobFestGo;
+import seedu.address.model.ReadOnlyJobFestGo;
 import seedu.address.model.address.Address;
 import seedu.address.model.contact.Contact;
 import seedu.address.model.contact.Email;
@@ -19,15 +19,15 @@ import seedu.address.model.task.Task;
 import seedu.address.model.task.TaskDescription;
 
 /**
- * Contains utility methods for populating {@code AddressBook} with sample data.
+ * Contains utility methods for populating {@code JobFestGo} with sample data.
  */
 public class SampleDataUtil {
 
     /**
-     * Returns an array of sample persons.
-     * @return an array of sample persons
+     * Returns an array of sample Contacts.
+     * @return an array of sample Contacts
      */
-    public static Contact[] getSamplePersons() {
+    public static Contact[] getSampleContacts() {
         return new Contact[] {
             new Contact(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
                 new Address("Blk 30 Geylang Street 29, #06-40"),
@@ -80,7 +80,7 @@ public class SampleDataUtil {
      * @return an array of sample events
      */
     public static Event[] getSampleEvents() {
-        Contact[] sampleContacts = getSamplePersons();
+        Contact[] sampleContacts = getSampleContacts();
 
         Set<Contact> sampleContactSet1 = new HashSet<>();
         sampleContactSet1.add(sampleContacts[0]);
@@ -112,13 +112,13 @@ public class SampleDataUtil {
     }
 
     /**
-     * Returns an {@code AddressBook} with sample data.
-     * @return sample readOnlyAddressBook
+     * Returns an {@code JobFestGo} with sample data.
+     * @return sample readOnlyJobFestGo
      */
-    public static ReadOnlyAddressBook getSampleAddressBook() {
-        AddressBook sampleAb = new AddressBook();
-        for (Contact sampleContact : getSamplePersons()) {
-            sampleAb.addPerson(sampleContact);
+    public static ReadOnlyJobFestGo getSampleJobFestGo() {
+        JobFestGo sampleAb = new JobFestGo();
+        for (Contact sampleContact : getSampleContacts()) {
+            sampleAb.addContact(sampleContact);
         }
         for (Tag sampleTag : getSampleTags()) {
             sampleAb.addTag(sampleTag);
@@ -140,7 +140,7 @@ public class SampleDataUtil {
                 .map(Tag::new)
                 .collect(Collectors.toSet());
     }
-    public static Set<Contact> getPersonSet(Contact... contacts) {
+    public static Set<Contact> getContactSet(Contact... contacts) {
         return Arrays.stream(contacts).collect(Collectors.toSet());
     }
 

@@ -18,7 +18,8 @@ import seedu.address.model.UserPrefs;
 
 public class JsonUserPrefsStorageTest {
 
-    private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonUserPrefsStorageTest");
+    private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data",
+            "JsonUserPrefsStorageTest");
 
     @TempDir
     public Path testFolder;
@@ -73,7 +74,7 @@ public class JsonUserPrefsStorageTest {
     private UserPrefs getTypicalUserPrefs() {
         UserPrefs userPrefs = new UserPrefs();
         userPrefs.setGuiSettings(new GuiSettings(1000, 500, 300, 100));
-        userPrefs.setAddressBookFilePath(Paths.get("addressbook.json"));
+        userPrefs.setJobFestGoFilePath(Paths.get("data/jobfestgo.json"));
         return userPrefs;
     }
 
@@ -85,7 +86,8 @@ public class JsonUserPrefsStorageTest {
 
     @Test
     public void savePrefs_nullPrefs_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> saveUserPrefs(null, "SomeFile.json"));
+        assertThrows(NullPointerException.class, () -> saveUserPrefs(null,
+                "SomeFile.json"));
     }
 
     @Test

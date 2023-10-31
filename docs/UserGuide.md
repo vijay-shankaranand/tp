@@ -6,7 +6,7 @@
 
 # JobFestGo User Guide
 
-JobFestGo is a **desktop app for managing contacts and tasks, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). It is an task management tool meant to assist you as job festival event planners in cold-calling various personnel (e.g. vendors, customers) and other event-related tasks. This removes the hassle of having to shuffle through your contact list based on names that you might not remember and organise your tasks neatly.
+JobFestGo is a **desktop app for managing contacts and tasks, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). It is an task management tool meant to assist you as job festival event planners in cold-calling various Contactnel (e.g. vendors, customers) and other event-related tasks. This removes the hassle of having to shuffle through your contact list based on names that you might not remember and organise your tasks neatly.
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -143,7 +143,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only the name is searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
+* Contacts matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
@@ -180,7 +180,7 @@ Deletes the specified tag from JobFestGo.
 Format: `delete_tag t/TAG_NAME`
 
 * Deletes the tag with the specified tag name `TAG_NAME`.
-* The tag name **must be an existing tag** vendor, personal, customer, …​
+* The tag name **must be an existing tag** vendor, Contactal, customer, …​
 * The command must contain `/t` for the command to be valid.
 * The tag name must be specified in the command.
 

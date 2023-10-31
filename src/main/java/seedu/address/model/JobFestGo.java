@@ -23,9 +23,9 @@ import seedu.address.model.task.UniqueTaskList;
 
 /**
  * Wraps all data at the address-book level
- * Duplicates are not allowed (by .isSamePerson comparison)
+ * Duplicates are not allowed (by .isSameContact comparison)
  */
-public class AddressBook implements ReadOnlyAddressBook {
+public class JobFestGo implements ReadOnlyJobFestGo {
     private final UniqueContactList contacts;
 
     private final UniqueTagList tags;
@@ -47,12 +47,12 @@ public class AddressBook implements ReadOnlyAddressBook {
         tasks = new UniqueTaskList();
     }
 
-    public AddressBook() {}
+    public JobFestGo() {}
 
     /**
-     * Creates an AddressBook using the Persons in the {@code toBeCopied}
+     * Creates an JobFestGo using the Contacts in the {@code toBeCopied}
      */
-    public AddressBook(ReadOnlyAddressBook toBeCopied) {
+    public JobFestGo(ReadOnlyJobFestGo toBeCopied) {
         this();
         resetData(toBeCopied);
     }
@@ -64,7 +64,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * {@code contacts} must not contain duplicate contacts.
      */
     public void setContacts(List<Contact> contacts) {
-        this.contacts.setPersons(contacts);
+        this.contacts.setContacts(contacts);
     }
 
     /**
@@ -92,9 +92,9 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Resets the existing data of this {@code AddressBook} with {@code newData}.
+     * Resets the existing data of this {@code JobFestGo} with {@code newData}.
      */
-    public void resetData(ReadOnlyAddressBook newData) {
+    public void resetData(ReadOnlyJobFestGo newData) {
         requireNonNull(newData);
 
         setContacts(newData.getContactList());
@@ -107,44 +107,44 @@ public class AddressBook implements ReadOnlyAddressBook {
     //==== contact-level operations ==================================================================
 
     /**
-     * Returns true if a contact with the same identity as {@code contact} exists in the address book.
+     * Returns true if a contact with the same identity as {@code contact} exists in the JobFestGo.
      */
-    public boolean hasPerson(Contact contact) {
+    public boolean hasContact(Contact contact) {
         requireNonNull(contact);
         return contacts.contains(contact);
     }
 
     /**
-     * Adds a contact to the address book.
-     * The contact must not already exist in the address book.
+     * Adds a contact to the JobFestGo.
+     * The contact must not already exist in the JobFestGo.
      */
-    public void addPerson(Contact p) {
+    public void addContact(Contact p) {
         contacts.add(p);
     }
 
     /**
      * Returns the {@code Contact} with given name.
      */
-    public Contact getPerson(Name name) {
+    public Contact getContact(Name name) {
         return contacts.getByName(name);
     }
 
     /**
      * Replaces the given contact {@code target} in the list with {@code editedContact}.
-     * {@code target} must exist in the address book.
+     * {@code target} must exist in the JobFestGo.
      * The contact identity of {@code editedContact} must not be the same as another existing contact in the address
      * book.
      */
-    public void setPerson(Contact target, Contact editedContact) {
+    public void setContact(Contact target, Contact editedContact) {
         requireNonNull(editedContact);
-        contacts.setPerson(target, editedContact);
+        contacts.setContact(target, editedContact);
     }
 
     /**
-     * Removes {@code key} from this {@code AddressBook}.
-     * {@code key} must exist in the address book.
+     * Removes {@code key} from this {@code JobFestGo}.
+     * {@code key} must exist in the JobFestGo.
      */
-    public void removePerson(Contact key) {
+    public void removeContact(Contact key) {
         contacts.remove(key);
         events.updateContacts(key);
     }
@@ -159,7 +159,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     //======Tag Operations=======================================================================
 
     /**
-     * Returns true if a tag with the same identity as {@code tag} exists in the address book.
+     * Returns true if a tag with the same identity as {@code tag} exists in the JobFestGo.
      */
     public boolean hasTag(Tag tag) {
         requireNonNull(tag);
@@ -167,15 +167,15 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Adds a tag to the address book.
-     * The tag must not already exist in the address book.
+     * Adds a tag to the JobFestGo.
+     * The tag must not already exist in the JobFestGo.
      */
     public void addTag(Tag p) {
         tags.add(p);
     }
 
     /**
-     * Deletes a {@code tag} from the address book.
+     * Deletes a {@code tag} from the JobFestGo.
      * Deletes the tag from contacts using it as well.
      */
     public void deleteTag(Tag tagToBeDeleted) {
@@ -185,8 +185,8 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     /**
      * Replaces the given tag {@code target} in the list with {@code editedTag}.
-     * {@code target} must exist in the address book.
-     * The tag identity of {@code editedTag} must not be the same as another existing tag in the address book.
+     * {@code target} must exist in the JobFestGo.
+     * The tag identity of {@code editedTag} must not be the same as another existing tag in JobFestGo.
      */
     public void setTag(Tag target, Tag editedTag) {
         requireNonNull(editedTag);
@@ -202,7 +202,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     //======Event Operations=======================================================================
 
     /**
-     * Returns true if an event with the same identity as {@code event} exists in the address book.
+     * Returns true if an event with the same identity as {@code event} exists in JobFestGo.
      */
     public boolean hasEvent(Event event) {
         requireNonNull(event);
@@ -210,7 +210,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Deletes a {@code event} from the address book.
+     * Deletes a {@code event} from JobFestGo.
      * Deletes the event from contacts using it as well.
      */
     public void deleteEvent(Event eventToDelete) {
@@ -219,8 +219,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Adds an event to the address book.
-     * The event must not already exist in the address book.
+     * Adds an event to JobFestGo.
+     * The event must not already exist in JobFestGo.
      */
     public void addEvent(Event eventToAdd) {
         events.add(eventToAdd);
@@ -228,8 +228,8 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     /**
      * Replaces the given event {@code target} in the list with {@code editedEvent}.
-     * {@code target} must exist in the address book.
-     * The event identity of {@code editedEvent} must not be the same as another existing event in the address book.
+     * {@code target} must exist in JobFestGo.
+     * The event identity of {@code editedEvent} must not be the same as another existing event in JobFestGo.
      */
     public void setEvent(Event target, Event editedEvent) {
         requireNonNull(editedEvent);
@@ -252,7 +252,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     //======Task Operations=======================================================================
 
     /**
-     * Returns true if a task with the same identity as {@code task} exists in the address book.
+     * Returns true if a task with the same identity as {@code task} exists in JobFestGo.
      */
     public boolean hasTask(Task task) {
         requireNonNull(task);
@@ -269,7 +269,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Adds a task to the address book.
+     * Adds a task to JobFestGo.
      * The task must not already exist in JobFestGo.
      */
     public void addTask(Task taskToAdd) {
@@ -289,8 +289,8 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     /**
      * Replaces the given task {@code target} in the list with {@code editedTask}.
-     * {@code target} must exist in the address book.
-     * The event identity of {@code editedEvent} must not be the same as another existing event in the address book.
+     * {@code target} must exist in JobFestGo.
+     * The event identity of {@code editedEvent} must not be the same as another existing event in JobFestGo.
      */
     public void setTask(Task target, Task editedTask) {
         requireNonNull(editedTask);
@@ -342,12 +342,12 @@ public class AddressBook implements ReadOnlyAddressBook {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof AddressBook)) {
+        if (!(other instanceof JobFestGo)) {
             return false;
         }
 
-        AddressBook otherAddressBook = (AddressBook) other;
-        return contacts.equals(otherAddressBook.contacts);
+        JobFestGo otherJobFestGo = (JobFestGo) other;
+        return contacts.equals(otherJobFestGo.contacts);
     }
 
     @Override

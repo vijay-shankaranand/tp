@@ -9,10 +9,10 @@ import seedu.address.model.tag.Tag;
 /**
  * Tests that a {@code Contact} is tagged by any of the given tags.
  */
-public class PersonIsTaggedPredicate implements Predicate<Contact> {
+public class ContactIsTaggedPredicate implements Predicate<Contact> {
     private final List<Tag> tags;
 
-    public PersonIsTaggedPredicate(List<Tag> tags) {
+    public ContactIsTaggedPredicate(List<Tag> tags) {
         this.tags = tags;
     }
 
@@ -28,12 +28,12 @@ public class PersonIsTaggedPredicate implements Predicate<Contact> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof PersonIsTaggedPredicate)) {
+        if (!(other instanceof ContactIsTaggedPredicate)) {
             return false;
         }
 
-        PersonIsTaggedPredicate otherPersonIsTaggedPredicate = (PersonIsTaggedPredicate) other;
-        return tags.equals(otherPersonIsTaggedPredicate.tags);
+        ContactIsTaggedPredicate otherContactIsTaggedPredicate = (ContactIsTaggedPredicate) other;
+        return tags.equals(otherContactIsTaggedPredicate.tags);
     }
 
     @Override

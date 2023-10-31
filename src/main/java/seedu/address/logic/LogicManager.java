@@ -11,10 +11,10 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.parser.AddressBookParser;
+import seedu.address.logic.parser.JobFestGoParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyJobFestGo;
 import seedu.address.model.contact.Contact;
 import seedu.address.model.event.Event;
 import seedu.address.model.tag.Tag;
@@ -34,7 +34,7 @@ public class LogicManager implements Logic {
 
     private final Model model;
     private final Storage storage;
-    private final AddressBookParser addressBookParser;
+    private final JobFestGoParser jobFestGoParser;
 
     /**
      * Constructs a {@code LogicManager} with the given {@code Model} and {@code Storage}.
@@ -42,7 +42,7 @@ public class LogicManager implements Logic {
     public LogicManager(Model model, Storage storage) {
         this.model = model;
         this.storage = storage;
-        addressBookParser = new AddressBookParser();
+        jobFestGoParser = new JobFestGoParser();
     }
 
     @Override
@@ -50,11 +50,11 @@ public class LogicManager implements Logic {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
 
         CommandResult commandResult;
-        Command command = addressBookParser.parseCommand(commandText);
+        Command command = jobFestGoParser.parseCommand(commandText);
         commandResult = command.execute(model);
 
         try {
-            storage.saveAddressBook(model.getAddressBook());
+            storage.saveJobFestGo(model.getJobFestGo());
         } catch (AccessDeniedException e) {
             throw new CommandException(String.format(FILE_OPS_PERMISSION_ERROR_FORMAT, e.getMessage()), e);
         } catch (IOException ioe) {
@@ -65,18 +65,18 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public ReadOnlyAddressBook getAddressBook() {
-        return model.getAddressBook();
+    public ReadOnlyJobFestGo getJobFestGo() {
+        return model.getJobFestGo();
     }
 
     @Override
-    public ObservableList<Contact> getFilteredPersonList() {
-        return model.getFilteredPersonList();
+    public ObservableList<Contact> getFilteredContactList() {
+        return model.getFilteredContactList();
     }
 
     @Override
-    public ObservableList<Contact> getUnfilteredPersonList() {
-        return model.getUnfilteredPersonList();
+    public ObservableList<Contact> getUnfilteredContactList() {
+        return model.getUnfilteredContactList();
     }
 
     @Override
@@ -105,8 +105,8 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public Path getAddressBookFilePath() {
-        return model.getAddressBookFilePath();
+    public Path getJobFestGoFilePath() {
+        return model.getJobFestGoFilePath();
     }
 
     @Override

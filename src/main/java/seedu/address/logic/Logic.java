@@ -7,7 +7,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyJobFestGo;
 import seedu.address.model.contact.Contact;
 import seedu.address.model.event.Event;
 import seedu.address.model.tag.Tag;
@@ -27,17 +27,17 @@ public interface Logic {
     CommandResult execute(String commandText) throws CommandException, ParseException;
 
     /**
-     * Returns the AddressBook.
+     * Returns the JobFestGo.
      *
-     * @see seedu.address.model.Model#getAddressBook()
+     * @see seedu.address.model.Model#getJobFestGo()
      */
-    ReadOnlyAddressBook getAddressBook();
+    ReadOnlyJobFestGo getJobFestGo();
 
-    /** Returns an unmodifiable view of the filtered list of persons */
-    ObservableList<Contact> getFilteredPersonList();
+    /** Returns an unmodifiable view of the filtered list of Contacts */
+    ObservableList<Contact> getFilteredContactList();
 
-    /** Returns an unmodifiable view of the unfiltered list of persons */
-    ObservableList<Contact> getUnfilteredPersonList();
+    /** Returns an unmodifiable view of the unfiltered list of Contacts */
+    ObservableList<Contact> getUnfilteredContactList();
 
     /** Returns an unmodifiable view of the filtered list of tags */
     ObservableList<Tag> getFilteredTagList();
@@ -55,9 +55,9 @@ public interface Logic {
     ObservableList<Task> getTasksDueSoonList();
 
     /**
-     * Returns the user prefs' address book file path.
+     * Returns the user prefs' JobFestGo file path.
      */
-    Path getAddressBookFilePath();
+    Path getJobFestGoFilePath();
 
     /**
      * Returns the user prefs' GUI settings.

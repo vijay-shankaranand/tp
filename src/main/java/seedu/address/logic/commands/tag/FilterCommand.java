@@ -10,16 +10,16 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.model.Model;
-import seedu.address.model.contact.PersonIsTaggedPredicate;
+import seedu.address.model.contact.ContactIsTaggedPredicate;
 import seedu.address.model.tag.Tag;
 
 /**
- * Filters persons in JobFestGo by {@code Tag}.
+ * Filters Contacts in JobFestGo by {@code Tag}.
  */
 public class FilterCommand extends Command {
     public static final String COMMAND_WORD = "filter";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": filters and displays all persons who "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": filters and displays all Contacts who "
             + " are tagged with the input tag.\n"
             + "Parameters: "
             + PREFIX_TAG + "TAG\n"
@@ -27,12 +27,12 @@ public class FilterCommand extends Command {
             + PREFIX_TAG + "vendor ";
 
     private final List<Tag> tags;
-    private final PersonIsTaggedPredicate predicate;
+    private final ContactIsTaggedPredicate predicate;
 
     /**
-     * Creates a FilterCommand to filter persons in JobFestGo.
+     * Creates a FilterCommand to filter Contacts in JobFestGo.
      */
-    public FilterCommand(List<Tag> tags, PersonIsTaggedPredicate predicate) {
+    public FilterCommand(List<Tag> tags, ContactIsTaggedPredicate predicate) {
         this.tags = tags;
         this.predicate = predicate;
     }
@@ -40,9 +40,9 @@ public class FilterCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.updateFilteredPersonList(predicate);
+        model.updateFilteredContactList(predicate);
         return new CommandResult(
-                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
+                String.format(Messages.MESSAGE_CONTACTS_LISTED_OVERVIEW, model.getFilteredContactList().size()));
     }
 
     @Override

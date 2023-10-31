@@ -6,8 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.contact.TypicalPersons.ALICE;
-import static seedu.address.testutil.contact.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.contact.TypicalContacts.ALICE;
+import static seedu.address.testutil.contact.TypicalContacts.getTypicalJobFestGo;
 import static seedu.address.testutil.event.TypicalEvents.JOBFEST;
 import static seedu.address.testutil.tag.TypicalTags.VENUES;
 import static seedu.address.testutil.task.TypicalTasks.BOOK_VENUE;
@@ -31,28 +31,28 @@ import seedu.address.testutil.event.EventBuilder;
 import seedu.address.testutil.tag.TagBuilder;
 import seedu.address.testutil.task.TaskBuilder;
 
-public class AddressBookTest {
+public class JobFestGoTest {
 
-    private final AddressBook addressBook = new AddressBook();
+    private final JobFestGo jobFestGo = new JobFestGo();
 
     @Test
     public void constructor() {
-        assertEquals(Collections.emptyList(), addressBook.getContactList());
-        assertEquals(Collections.emptyList(), addressBook.getTagList());
-        assertEquals(Collections.emptyList(), addressBook.getEventList());
-        assertEquals(Collections.emptyList(), addressBook.getTaskList());
+        assertEquals(Collections.emptyList(), jobFestGo.getContactList());
+        assertEquals(Collections.emptyList(), jobFestGo.getTagList());
+        assertEquals(Collections.emptyList(), jobFestGo.getEventList());
+        assertEquals(Collections.emptyList(), jobFestGo.getTaskList());
     }
 
     @Test
     public void resetData_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> addressBook.resetData(null));
+        assertThrows(NullPointerException.class, () -> jobFestGo.resetData(null));
     }
 
     @Test
-    public void resetData_withValidReadOnlyAddressBook_replacesData() {
-        AddressBook newData = getTypicalAddressBook();
-        addressBook.resetData(newData);
-        assertEquals(newData, addressBook);
+    public void resetData_withValidReadOnlyJobFestGo_replacesData() {
+        JobFestGo newData = getTypicalJobFestGo();
+        jobFestGo.resetData(newData);
+        assertEquals(newData, jobFestGo);
     }
 
     @Test
@@ -62,62 +62,62 @@ public class AddressBookTest {
                 .build();
         List<Contact> newContacts = Arrays.asList(ALICE, editedAlice);
         List<Tag> tags = Arrays.asList(VENUES);
-        AddressBookStub newData = new AddressBookStub(newContacts, tags);
+        JobFestGoStub newData = new JobFestGoStub(newContacts, tags);
 
-        assertThrows(DuplicateContactException.class, () -> addressBook.resetData(newData));
+        assertThrows(DuplicateContactException.class, () -> jobFestGo.resetData(newData));
     }
 
     @Test
-    public void hasPerson_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> addressBook.hasPerson(null));
+    public void hasContact_nullContact_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> jobFestGo.hasContact(null));
     }
 
     @Test
-    public void hasPerson_personNotInAddressBook_returnsFalse() {
-        assertFalse(addressBook.hasPerson(ALICE));
+    public void hasContact_ContactNotInJobFestGo_returnsFalse() {
+        assertFalse(jobFestGo.hasContact(ALICE));
     }
 
     @Test
-    public void hasContact_contactInAddressBook_returnsTrue() {
-        addressBook.addPerson(ALICE);
-        assertTrue(addressBook.hasPerson(ALICE));
+    public void hasContact_contactInJobFestGo_returnsTrue() {
+        jobFestGo.addContact(ALICE);
+        assertTrue(jobFestGo.hasContact(ALICE));
     }
 
     @Test
-    public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
-        addressBook.addPerson(ALICE);
+    public void hasContact_ContactWithSameIdentityFieldsInJobFestGo_returnsTrue() {
+        jobFestGo.addContact(ALICE);
         Contact editedAlice = new ContactBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
-        assertTrue(addressBook.hasPerson(editedAlice));
+        assertTrue(jobFestGo.hasContact(editedAlice));
     }
 
     @Test
     public void getContactList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> addressBook.getContactList().remove(0));
+        assertThrows(UnsupportedOperationException.class, () -> jobFestGo.getContactList().remove(0));
     }
 
     @Test
     public void hasTag_nullTag_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> addressBook.hasTag(null));
+        assertThrows(NullPointerException.class, () -> jobFestGo.hasTag(null));
     }
 
     @Test
-    public void hasTag_tagNotInAddressBook_returnsFalse() {
-        assertFalse(addressBook.hasTag(VENUES));
+    public void hasTag_tagNotInJobFestGo_returnsFalse() {
+        assertFalse(jobFestGo.hasTag(VENUES));
     }
 
     @Test
-    public void hasTag_tagInAddressBook_returnsTrue() {
-        addressBook.addTag(VENUES);
-        assertTrue(addressBook.hasTag(VENUES));
+    public void hasTag_tagInJobFestGo_returnsTrue() {
+        jobFestGo.addTag(VENUES);
+        assertTrue(jobFestGo.hasTag(VENUES));
     }
 
     @Test
-    public void hasTag_tagWithSameIdentityFieldsInAddressBook_returnsTrue() {
-        addressBook.addTag(VENUES);
+    public void hasTag_tagWithSameIdentityFieldsInJobFestGo_returnsTrue() {
+        jobFestGo.addTag(VENUES);
         Tag editedVenues = new TagBuilder().withTag(VENUES.getTagName())
                 .build();
-        assertTrue(addressBook.hasTag(editedVenues));
+        assertTrue(jobFestGo.hasTag(editedVenues));
     }
 
     @Test
@@ -127,153 +127,153 @@ public class AddressBookTest {
             .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
             .withPhone("94351253")
             .build();
-        addressBook.addPerson(initialAlice);
+        jobFestGo.addContact(initialAlice);
         Tag tag = new Tag("vendor");
-        addressBook.addTag(tag);
-        addressBook.deleteTag(tag);
-        assertTrue(!addressBook.hasTag(tag));
-        assertTrue(addressBook.hasPerson(editedAlice));
+        jobFestGo.addTag(tag);
+        jobFestGo.deleteTag(tag);
+        assertTrue(!jobFestGo.hasTag(tag));
+        assertTrue(jobFestGo.hasContact(editedAlice));
     }
 
     @Test
     public void getTagsList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> addressBook.getTagList().remove(0));
+        assertThrows(UnsupportedOperationException.class, () -> jobFestGo.getTagList().remove(0));
     }
 
     @Test
     public void addEvent_successful_returnsTrue() {
-        addressBook.addEvent(JOBFEST);
-        assertTrue(addressBook.hasEvent(JOBFEST));
+        jobFestGo.addEvent(JOBFEST);
+        assertTrue(jobFestGo.hasEvent(JOBFEST));
     }
 
     @Test
     public void setEvent_nullTargetEvent_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> addressBook.setEvent(null, JOBFEST));
+        assertThrows(NullPointerException.class, () -> jobFestGo.setEvent(null, JOBFEST));
     }
 
     @Test
     public void setEvent_successful_returnsTrue() {
-        addressBook.addEvent(JOBFEST);
+        jobFestGo.addEvent(JOBFEST);
         Event editedEvent = new EventBuilder(JOBFEST)
                 .withDate("2023-12-01")
                 .build();
-        addressBook.setEvent(JOBFEST, editedEvent);
-        assertTrue(addressBook.hasEvent(editedEvent));
+        jobFestGo.setEvent(JOBFEST, editedEvent);
+        assertTrue(jobFestGo.hasEvent(editedEvent));
     }
 
     @Test
     public void hasEvent_nullEvent_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> addressBook.hasEvent(null));
+        assertThrows(NullPointerException.class, () -> jobFestGo.hasEvent(null));
     }
 
     @Test
-    public void hasEvent_eventNotInAddressBook_returnsFalse() {
-        assertFalse(addressBook.hasEvent(JOBFEST));
+    public void hasEvent_eventNotInJobFestGo_returnsFalse() {
+        assertFalse(jobFestGo.hasEvent(JOBFEST));
     }
 
     @Test
-    public void hasEvent_eventInAddressBook_returnsTrue() {
-        addressBook.addEvent(JOBFEST);
-        assertTrue(addressBook.hasEvent(JOBFEST));
+    public void hasEvent_eventInJobFestGo_returnsTrue() {
+        jobFestGo.addEvent(JOBFEST);
+        assertTrue(jobFestGo.hasEvent(JOBFEST));
     }
 
     @Test
-    public void hasEvent_eventWithSameIdentityFieldsInAddressBook_returnsTrue() {
-        addressBook.addEvent(JOBFEST);
+    public void hasEvent_eventWithSameIdentityFieldsInJobFestGo_returnsTrue() {
+        jobFestGo.addEvent(JOBFEST);
         Event editedEvent = new EventBuilder(JOBFEST)
                 .withDate("2023-12-01")
                 .build();
-        assertTrue(addressBook.hasEvent(editedEvent));
+        assertTrue(jobFestGo.hasEvent(editedEvent));
     }
 
     @Test
     public void deleteEvent_successful_returnsTrue() {
         Event editedEvent = new EventBuilder(JOBFEST).withEventTasks(BOOK_VENUE).build();
-        addressBook.addEvent(editedEvent);
-        addressBook.addTask(BOOK_VENUE);
-        addressBook.deleteEvent(editedEvent);
-        assertFalse(addressBook.hasEvent(editedEvent));
-        assertFalse(addressBook.hasTask(BOOK_VENUE));
+        jobFestGo.addEvent(editedEvent);
+        jobFestGo.addTask(BOOK_VENUE);
+        jobFestGo.deleteEvent(editedEvent);
+        assertFalse(jobFestGo.hasEvent(editedEvent));
+        assertFalse(jobFestGo.hasTask(BOOK_VENUE));
     }
 
     @Test
     public void getEventList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> addressBook.getEventList().remove(0));
+        assertThrows(UnsupportedOperationException.class, () -> jobFestGo.getEventList().remove(0));
     }
 
     @Test
     public void addTask_successful_returnsTrue() {
-        addressBook.addTask(BOOK_VENUE);
-        assertTrue(addressBook.hasTask(BOOK_VENUE));
+        jobFestGo.addTask(BOOK_VENUE);
+        assertTrue(jobFestGo.hasTask(BOOK_VENUE));
     }
 
     @Test
     public void setTask_nullTargetTask_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> addressBook.setTask(null, BOOK_VENUE));
+        assertThrows(NullPointerException.class, () -> jobFestGo.setTask(null, BOOK_VENUE));
     }
 
     @Test
     public void setTask_successful_returnsTrue() {
-        addressBook.addTask(BOOK_VENUE);
+        jobFestGo.addTask(BOOK_VENUE);
         Task editedTask = new TaskBuilder(BOOK_VENUE)
                 .withDate("2023-12-01")
                 .build();
-        addressBook.setTask(BOOK_VENUE, editedTask);
-        assertTrue(addressBook.hasTask(editedTask));
+        jobFestGo.setTask(BOOK_VENUE, editedTask);
+        assertTrue(jobFestGo.hasTask(editedTask));
     }
 
     @Test
     public void hasTask_nullTask_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> addressBook.hasTask(null));
+        assertThrows(NullPointerException.class, () -> jobFestGo.hasTask(null));
     }
 
     @Test
-    public void hasTask_taskNotInAddressBook_returnsFalse() {
-        assertFalse(addressBook.hasTask(BOOK_VENUE));
+    public void hasTask_taskNotInJobFestGo_returnsFalse() {
+        assertFalse(jobFestGo.hasTask(BOOK_VENUE));
     }
 
     @Test
-    public void hasTask_taskInAddressBook_returnsTrue() {
-        addressBook.addTask(BOOK_VENUE);
-        assertTrue(addressBook.hasTask(BOOK_VENUE));
+    public void hasTask_taskInJobFestGo_returnsTrue() {
+        jobFestGo.addTask(BOOK_VENUE);
+        assertTrue(jobFestGo.hasTask(BOOK_VENUE));
     }
 
     @Test
-    public void hasTask_taskWithSameIdentityFieldsInAddressBook_returnsTrue() {
-        addressBook.addTask(BOOK_VENUE);
+    public void hasTask_taskWithSameIdentityFieldsInJobFestGo_returnsTrue() {
+        jobFestGo.addTask(BOOK_VENUE);
         Task editedTask = new TaskBuilder(BOOK_VENUE)
                 .withDate("2023-12-01")
                 .build();
-        assertTrue(addressBook.hasTask(editedTask));
+        assertTrue(jobFestGo.hasTask(editedTask));
     }
 
     @Test
     public void deleteTask_successful_returnsTrue() {
-        addressBook.addTask(BOOK_VENUE);
-        addressBook.deleteTask(BOOK_VENUE.getDescription(), BOOK_VENUE.getAssociatedEventName());
-        assertFalse(addressBook.hasTask(BOOK_VENUE));
+        jobFestGo.addTask(BOOK_VENUE);
+        jobFestGo.deleteTask(BOOK_VENUE.getDescription(), BOOK_VENUE.getAssociatedEventName());
+        assertFalse(jobFestGo.hasTask(BOOK_VENUE));
     }
 
     @Test
     public void getTaskList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> addressBook.getTaskList().remove(0));
+        assertThrows(UnsupportedOperationException.class, () -> jobFestGo.getTaskList().remove(0));
     }
 
     @Test
     public void toStringMethod() {
-        String expected = AddressBook.class.getCanonicalName() + "{contacts=" + addressBook.getContactList()
+        String expected = JobFestGo.class.getCanonicalName() + "{contacts=" + jobFestGo.getContactList()
                 +
-                ", tags=" + addressBook.getTagList()
-                + ", events=" + addressBook.getEventList()
-                + ", tasks=" + addressBook.getTaskList()
+                ", tags=" + jobFestGo.getTagList()
+                + ", events=" + jobFestGo.getEventList()
+                + ", tasks=" + jobFestGo.getTaskList()
                 + "}";
-        assertEquals(expected, addressBook.toString());
+        assertEquals(expected, jobFestGo.toString());
     }
 
     /**
-     * A stub ReadOnlyAddressBook whose contacts list can violate interface constraints.
+     * A stub ReadOnlyJobFestGo whose contacts list can violate interface constraints.
      */
-    private static class AddressBookStub implements ReadOnlyAddressBook {
+    private static class JobFestGoStub implements ReadOnlyJobFestGo {
         private final ObservableList<Contact> contacts = FXCollections.observableArrayList();
 
         private final ObservableList<Tag> tags = FXCollections.observableArrayList();
@@ -282,7 +282,7 @@ public class AddressBookTest {
         private final ObservableList<Task> tasks = FXCollections.observableArrayList();
 
 
-        AddressBookStub(Collection<Contact> contacts, Collection<Tag> tags) {
+        JobFestGoStub(Collection<Contact> contacts, Collection<Tag> tags) {
             this.contacts.setAll(contacts);
             this.tags.setAll(tags);
             this.events.setAll(events);

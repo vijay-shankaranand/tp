@@ -177,7 +177,7 @@ Recall from the User Guide that the `edit` command has the format: `edit INDEX [
 
 1. Stepping through the method shows that it calls `ArgumentTokenizer#tokenize()` and `ParserUtil#parseIndex()` to obtain the arguments and index required.
 
-1. The rest of the method seems to exhaustively check for the existence of each possible parameter of the `edit` command and store any possible changes in an `EditPersonDescriptor`. Recall that we can verify the contents of `editPersonDesciptor` through the 'Variables' window.<br>
+1. The rest of the method seems to exhaustively check for the existence of each possible parameter of the `edit` command and store any possible changes in an `EditContactDescriptor`. Recall that we can verify the contents of `editContactDesciptor` through the 'Variables' window.<br>
    ![EditCommand](../images/tracing/EditCommand.png)
 
 1. As you just traced through some code involved in parsing a command, you can take a look at this class diagram to see where the various parsing-related classes you encountered fit into the design of the `Logic` component.
@@ -195,20 +195,20 @@ Recall from the User Guide that the `edit` command has the format: `edit INDEX [
    @Override
    public CommandResult execute(Model model) throws CommandException {
        ...
-       Person contactToEdit = lastShownList.get(index.getZeroBased());
-       Person editedContact = createEditedPerson(contactToEdit, editPersonDescriptor);
-       if (!contactToEdit.isSamePerson(editedContact) && model.hasPerson(editedContact)) {
-           throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+       Contact contactToEdit = lastShownList.get(index.getZeroBased());
+       Contact editedContact = createEditedContact(contactToEdit, editContactDescriptor);
+       if (!contactToEdit.isSameContact(editedContact) && model.hasContact(editedContact)) {
+           throw new CommandException(MESSAGE_DUPLICATE_Contact);
        }
-       model.setPerson(contactToEdit, editedContact);
-       model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-       return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedContact));
+       model.setContact(contactToEdit, editedContact);
+       model.updateFilteredContactList(PREDICATE_SHOW_ALL_CONTACTS);
+       return new CommandResult(String.format(MESSAGE_EDIT_Contact_SUCCESS, editedContact));
    }
    ```
 
 1. As suspected, `command#execute()` does indeed make changes to the `model` object. Specifically,
-   * it uses the `setPerson()` method (defined in the interface `Model` and implemented in `ModelManager` as per the usual pattern) to update the contact data.
-   * it uses the `updateFilteredPersonList` method to ask the `Model` to populate the 'filtered list' with _all_ contacts.<br>
+   * it uses the `setContact()` method (defined in the interface `Model` and implemented in `ModelManager` as per the usual pattern) to update the contact data.
+   * it uses the `updateFilteredContactList` method to ask the `Model` to populate the 'filtered list' with _all_ contacts.<br>
      FYI, The 'filtered list' is the list of contacts resulting from the most recent operation that will be shown to the user immediately after. For the `edit` command, we populate it with all the contacts so that the user can see the edited contact along with all other contacts. If this was a `find` command, we would be setting that list to contain the search results instead.<br>
      To provide some context, given below is the class diagram of the `Model` component. See if you can figure out where the 'filtered list' of contacts is being tracked.
      <puml src="../diagrams/ModelClassDiagram.puml" width="450" /><br>
@@ -241,14 +241,14 @@ Recall from the User Guide that the `edit` command has the format: `edit INDEX [
      */
     public JsonSerializableAddressBook(ReadOnlyAddressBook source) {
         contacts.addAll(
-            source.getPersonList()
+            source.getContactList()
                   .stream()
-                  .map(JsonAdaptedPerson::new)
+                  .map(JsonAdaptedContact::new)
                   .collect(Collectors.toList()));
     }
     ```
 
-1. It appears that a `JsonAdaptedPerson` is created for each `Person` and then added to the `JsonSerializableAddressBook`.
+1. It appears that a `JsonAdaptedContact` is created for each `Contact` and then added to the `JsonSerializableAddressBook`.
    This is because regular Java objects need to go through an _adaptation_ for them to be suitable to be saved in JSON format.
 
 1. While you are stepping through the classes in the `Storage` component, here is the component's class diagram to help you understand how those classes fit into the structure of the component.<br>
@@ -306,6 +306,6 @@ Here are some quick questions you can try to answer based on your execution path
 
     4.  Add a new command
 
-    5.  Add a new field to `Person`
+    5.  Add a new field to `Contact`
 
     6.  Add a new entity to the address book
