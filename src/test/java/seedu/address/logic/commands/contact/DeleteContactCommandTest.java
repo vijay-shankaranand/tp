@@ -113,7 +113,7 @@ public class DeleteContactCommandTest {
      * Updates {@code model}'s filtered list to show no one.
      */
     private void showNoPerson(Model model) {
-        model.updateFilteredPersonList(p -> false);
+        model.updateFilteredContactList(p -> false);
 
         assertTrue(model.getFilteredContactList().isEmpty());
     }

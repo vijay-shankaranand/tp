@@ -18,7 +18,7 @@ import seedu.address.model.task.TaskDescription;
  */
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
-    Predicate<Contact> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+    Predicate<Contact> PREDICATE_SHOW_ALL_CONTACTS = unused -> true;
     Predicate<Tag> PREDICATE_SHOW_ALL_TAGS = unused -> true;
     Predicate<Event> PREDICATE_SHOW_ALL_EVENTS = unused -> true;
     Predicate<Task> PREDICATE_SHOW_ALL_TASKS = unused -> true;
@@ -101,7 +101,7 @@ public interface Model {
      * Updates the filter of the filtered contact list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
-    void updateFilteredPersonList(Predicate<Contact> predicate);
+    void updateFilteredContactList(Predicate<Contact> predicate);
 
     /**
      * Returns true if an existing tag with the same identity as {@code tag} exists in the tag list.

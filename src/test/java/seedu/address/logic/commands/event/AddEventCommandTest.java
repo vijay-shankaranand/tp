@@ -174,7 +174,7 @@ public class AddEventCommandTest {
         }
 
         @Override
-        public void updateFilteredPersonList(Predicate<Contact> predicate) {
+        public void updateFilteredContactList(Predicate<Contact> predicate) {
             throw new AssertionError("This method should not be called.");
         }
 

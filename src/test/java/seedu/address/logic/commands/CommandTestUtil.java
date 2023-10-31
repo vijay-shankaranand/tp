@@ -128,7 +128,7 @@ public class CommandTestUtil {
 
         Contact contact = model.getFilteredContactList().get(targetIndex.getZeroBased());
         final String[] splitName = contact.getName().fullName.split("\\s+");
-        model.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
+        model.updateFilteredContactList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
         assertEquals(1, model.getFilteredContactList().size());
     }
