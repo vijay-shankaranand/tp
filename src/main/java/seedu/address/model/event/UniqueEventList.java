@@ -57,7 +57,7 @@ public class UniqueEventList implements Iterable<Event> {
     /**
      * Links a contact to the given event.
      * @throws EventIsAlreadyLinkedToContactException If the given contact is
-     * already linked to the event.
+     *     already linked to the event.
      */
     public void linkContactToEvent(Contact contact, Event event) throws EventIsAlreadyLinkedToContactException {
         if (event.isLinkedToContact(contact)) {
