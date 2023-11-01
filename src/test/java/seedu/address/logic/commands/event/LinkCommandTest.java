@@ -42,6 +42,7 @@ public class LinkCommandTest {
         model.addEvent(JOBFEST);
         expectedModel.addEvent(JOBFEST);
         LinkCommand command = new LinkCommand(JOBFEST.getName(), contactNameList);
+        assertEquals(JOBFEST, model.getEvent(JOBFEST.getName()));
         String expectedNameList = "[" + CARL.getName() + "]";
         String expectedMessage = String.format(LinkCommand.MESSAGE_SUCCESS, expectedNameList, JOBFEST.getName());
         expectedModel.linkContactToEvent(CARL, JOBFEST);

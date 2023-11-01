@@ -7,7 +7,7 @@
 
 <VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
   <HBox alignment="CENTER" styleClass="only-bottom-primary-border">
-    <Label fx:id="reminderListTitle" styleClass="label-header-3" text="Task Reminders"/>
+    <Label fx:id="reminderListTitle" styleClass="label-header-3" text="Tasks Due"/>
   </HBox>
   <ListView fx:id="reminderListView" VBox.vgrow="ALWAYS" />
 </VBox>
