@@ -191,7 +191,7 @@ public class ModelManager implements Model {
     @Override
     public void linkContactToEvent(Contact contact, Event event) {
         requireAllNonNull(contact, event);
-        addressBook.linkContactToEvent(contact, event);
+        jobFestGo.linkContactToEvent(contact, event);
     }
 
     //=========== Tasks ======================================================================================
