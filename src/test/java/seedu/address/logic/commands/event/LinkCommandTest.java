@@ -5,11 +5,11 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.contact.TypicalPersons.ALICE;
-import static seedu.address.testutil.contact.TypicalPersons.BENSON;
-import static seedu.address.testutil.contact.TypicalPersons.BOB;
-import static seedu.address.testutil.contact.TypicalPersons.CARL;
-import static seedu.address.testutil.contact.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.contact.TypicalContacts.ALICE;
+import static seedu.address.testutil.contact.TypicalContacts.BENSON;
+import static seedu.address.testutil.contact.TypicalContacts.BOB;
+import static seedu.address.testutil.contact.TypicalContacts.CARL;
+import static seedu.address.testutil.contact.TypicalContacts.getTypicalJobFestGo;
 import static seedu.address.testutil.event.TypicalEvents.JOBFEST;
 import static seedu.address.testutil.event.TypicalEvents.NTU;
 
@@ -31,8 +31,8 @@ import seedu.address.testutil.event.EventBuilder;
  * Contains integration tests (interaction with the Model) for {@code LinkCommand}.
  */
 public class LinkCommandTest {
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalJobFestGo(), new UserPrefs());
+    private Model expectedModel = new ModelManager(getTypicalJobFestGo(), new UserPrefs());
 
     @Test
     public void execute_validSingleContact_success() {

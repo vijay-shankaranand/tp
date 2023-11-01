@@ -6,7 +6,7 @@
 
 # JobFestGo User Guide
 
-JobFestGo is a **desktop app for managing contacts and tasks, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). It is an task management tool meant to assist you as job festival event planners in cold-calling various personnel (e.g. vendors, customers) and other event-related tasks. This removes the hassle of having to shuffle through your contact list based on names that you might not remember and organise your tasks neatly.
+JobFestGo is a **desktop app for managing contacts and tasks, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). It is an task management tool meant to assist you as job festival event planners in cold-calling various contacts (e.g. vendors, customers) and other event-related tasks. This removes the hassle of having to shuffle through your contact list based on names that you might not remember and organise your tasks neatly.
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -113,8 +113,8 @@ Format: `delete_contact INDEX`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list` followed by `delete_contact 2` deletes the 2nd contact in JobFestGo.
-* `find Betsy` followed by `delete_contact 1` deletes the 1st contact in the results of the `find` command.
+* `view_contact` followed by `delete_contact 2` deletes the 2nd contact in JobFestGo.
+* `find_contact Betsy` followed by `delete_contact 1` deletes the 1st contact in the results of the `find_contact` command.
 
 ### Editing a contact : `edit_contact`
 
@@ -133,24 +133,24 @@ Examples:
 *  `edit_contact 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st contact to be `91234567` and `johndoe@example.com` respectively.
 *  `edit_contact 2 n/Betsy Crower t/` Edits the name of the 2nd contact to be `Betsy Crower` and clears all existing tags.
 
-### Locating contacts by name: `find`
+### Locating contacts by name: `find_contact`
 
 Finds contacts whose names contain any of the given keywords.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Format: `find_contact KEYWORD [MORE_KEYWORDS]`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only the name is searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
+* Contacts matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
+* `find_contact John` returns `john` and `John Doe`
+* `find_contact alex david` returns `Alex Yeoh`, `David Li`<br>
 
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+  ![result for 'find_contact alex david'](images/findAlexDavidResult.png)
 
 ### Adding a tag : `add_tag`
 
@@ -191,7 +191,7 @@ Examples:
 
 Displays contacts tagged by any of the given tags.
 
-Format: `filter TAG_NAME [MORE_TAG_NAMES]`
+Format: `filter_by_tag TAG_NAME [MORE_TAG_NAMES]`
 
 * Tag names are case-insensitive. e.g `Vendor` will match `vendor`
 * Only full words will be matched e.g. `ven` will not match `vendor`
@@ -200,8 +200,8 @@ Format: `filter TAG_NAME [MORE_TAG_NAMES]`
  all contacts tagged by `customer`
 
 Examples:
-* `filter vendor` returns all contacts tagged by the tag: vendor in JobFestGo.
-* `filter vendor customer` returns all contacts tagged by the tag: vendor and
+* `filter_by_tag vendor` returns all contacts tagged by the tag: vendor in JobFestGo.
+* `filter_by_tag vendor customer` returns all contacts tagged by the tag: vendor and
   all contacts tagged by the tag: customer in JobFestGo.
 
 
@@ -346,11 +346,11 @@ Action     | Format, Examples
 **Add Contact**    | `add_contact n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g. `add_contact n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 12346658 t/friend t/colleague`
 **Delete Contact** | `delete_contact INDEX`<br> e.g. `delete_contact 3`
 **Edit Contact**   | `edit_contact INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g. `edit_contact 2 n/James Lee e/jameslee@example.com`
-**Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g. `find James Jake`
+**Find contact**   | `find_contact KEYWORD [MORE_KEYWORDS]`<br> e.g. `find_contact James Jake`
 **View Contacts**   | `view_contacts`
 **Add Tag** | `add_tag t/TAG_NAME` <br> e.g. `add_tag t/vendor`
 **Delete Tag** | `delete_tag t/TAG_NAME` <br> e.g. `delete_tag t/vendor`
-**Filter** | `filter TAG_NAME [MORE_TAGNAMESS]` <br> e.g. `filter vendor`
+**Filter by tag** | `filter_by_tag TAG_NAME [MORE_TAGNAMESS]` <br> e.g. `filter_by_tag vendor`
 **View Tags** | `view_tags`
 **Add Event** | `add_event n/NAME d/DATE a/ADDRESS` <br> e.g. `add_event n/NUS Career Fest 2023 d/2023-12-23 a/NUS`
 **Delete Event** | `delete_event INDEX` <br> e.g. `delete_event 1`

@@ -3,10 +3,10 @@ package seedu.address.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CONTACTS;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.contact.TypicalPersons.ALICE;
-import static seedu.address.testutil.contact.TypicalPersons.BENSON;
+import static seedu.address.testutil.contact.TypicalContacts.ALICE;
+import static seedu.address.testutil.contact.TypicalContacts.BENSON;
 import static seedu.address.testutil.event.TypicalEvents.JOBFEST;
 import static seedu.address.testutil.tag.TypicalTags.VENUES;
 import static seedu.address.testutil.task.TypicalTasks.BOOK_VENUE;
@@ -23,7 +23,7 @@ import seedu.address.model.event.exceptions.EventNotFoundException;
 import seedu.address.model.name.NameContainsKeywordsPredicate;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.task.exceptions.TaskNotFoundException;
-import seedu.address.testutil.AddressBookBuilder;
+import seedu.address.testutil.JobFestGoBuilder;
 
 public class ModelManagerTest {
     private ModelManager modelManager = new ModelManager();
@@ -32,7 +32,7 @@ public class ModelManagerTest {
     public void constructor() {
         assertEquals(new UserPrefs(), modelManager.getUserPrefs());
         assertEquals(new GuiSettings(), modelManager.getGuiSettings());
-        assertEquals(new AddressBook(), new AddressBook(modelManager.getAddressBook()));
+        assertEquals(new JobFestGo(), new JobFestGo(modelManager.getJobFestGo()));
     }
 
     @Test
@@ -43,14 +43,14 @@ public class ModelManagerTest {
     @Test
     public void setUserPrefs_validUserPrefs_copiesUserPrefs() {
         UserPrefs userPrefs = new UserPrefs();
-        userPrefs.setAddressBookFilePath(Paths.get("address/book/file/path"));
+        userPrefs.setJobFestGoFilePath(Paths.get("address/book/file/path"));
         userPrefs.setGuiSettings(new GuiSettings(1, 2, 3, 4));
         modelManager.setUserPrefs(userPrefs);
         assertEquals(userPrefs, modelManager.getUserPrefs());
 
         // Modifying userPrefs should not modify modelManager's userPrefs
         UserPrefs oldUserPrefs = new UserPrefs(userPrefs);
-        userPrefs.setAddressBookFilePath(Paths.get("new/address/book/file/path"));
+        userPrefs.setJobFestGoFilePath(Paths.get("new/address/book/file/path"));
         assertEquals(oldUserPrefs, modelManager.getUserPrefs());
     }
 
@@ -67,42 +67,45 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void setAddressBookFilePath_nullPath_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> modelManager.setAddressBookFilePath(null));
+    public void setJobFestGoFilePath_nullPath_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.setJobFestGoFilePath(null));
     }
 
     @Test
-    public void setAddressBookFilePath_validPath_setsAddressBookFilePath() {
+    public void setJobFestGoFilePath_validPath_setsJobFestGoFilePath() {
         Path path = Paths.get("address/book/file/path");
-        modelManager.setAddressBookFilePath(path);
-        assertEquals(path, modelManager.getAddressBookFilePath());
+        modelManager.setJobFestGoFilePath(path);
+        assertEquals(path, modelManager.getJobFestGoFilePath());
     }
 
     @Test
-    public void hasPerson_nullPerson_throwsNullPointerException() {
+    public void hasContact_nullContact_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> modelManager.hasContact(null));
     }
 
     @Test
-    public void hasPerson_personNotInAddressBook_returnsFalse() {
+    public void hasContact_contactNotInJobFestGo_returnsFalse() {
         assertFalse(modelManager.hasContact(ALICE));
     }
 
     @Test
-    public void hasPerson_personInAddressBook_returnsTrue() throws CommandException {
+    public void hasContact_contactInJobFestGo_returnsTrue() throws CommandException {
         modelManager.addTag(new Tag("friends"));
         modelManager.addContact(ALICE);
         assertTrue(modelManager.hasContact(ALICE));
     }
 
     @Test
-    public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredPersonList().remove(0));
+    public void getFilteredContactList_modifyList_throwsUnsupportedOperationException() {
+
+        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredContactList().remove(0));
     }
 
     @Test
-    public void getUnfilteredPersonList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> modelManager.getUnfilteredPersonList().remove(0));
+
+    public void getUnfilteredContactList_modifyList_throwsUnsupportedOperationException() {
+
+        assertThrows(UnsupportedOperationException.class, () -> modelManager.getUnfilteredContactList().remove(0));
     }
 
     @Test
@@ -119,12 +122,12 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void hasTag_tagNotInAddressBook_returnsFalse() {
+    public void hasTag_tagNotInJobFestGo_returnsFalse() {
         assertFalse(modelManager.hasTag(VENUES));
     }
 
     @Test
-    public void hasTag_tagInAddressBook_returnsTrue() {
+    public void hasTag_tagInJobFestGo_returnsTrue() {
         modelManager.addTag(VENUES);
         assertTrue(modelManager.hasTag(VENUES));
     }
@@ -165,12 +168,12 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void hasEvent_eventNotInAddressBook_returnsFalse() {
+    public void hasEvent_eventNotInJobFestGo_returnsFalse() {
         assertFalse(modelManager.hasEvent(JOBFEST));
     }
 
     @Test
-    public void hasEvent_eventInAddressBook_returnsTrue() {
+    public void hasEvent_eventInJobFestGo_returnsTrue() {
         modelManager.addEvent(JOBFEST);
         assertTrue(modelManager.hasEvent(JOBFEST));
     }
@@ -186,7 +189,7 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void setEvent_targetEventNotInAddressBook_throwsCommandException() {
+    public void setEvent_targetEventNotInJobFestGo_throwsCommandException() {
         assertThrows(EventNotFoundException.class, () -> modelManager.setEvent(JOBFEST, JOBFEST));
     }
 
@@ -218,12 +221,12 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void hasTask_taskNotInAddressBook_returnsFalse() {
+    public void hasTask_taskNotInJobFestGo_returnsFalse() {
         assertFalse(modelManager.hasTask(BOOK_VENUE));
     }
 
     @Test
-    public void hasTask_taskInAddressBook_returnsTrue() {
+    public void hasTask_taskInJobFestGo_returnsTrue() {
         modelManager.addTask(BOOK_VENUE);
         assertTrue(modelManager.hasTask(BOOK_VENUE));
     }
@@ -239,7 +242,7 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void setTask_targetTaskNotInAddressBook_throwsCommandException() {
+    public void setTask_targetTaskNotInJobFestGo_throwsCommandException() {
         assertThrows(TaskNotFoundException.class, () -> modelManager.setTask(BOOK_VENUE, BOOK_VENUE));
     }
 
@@ -281,13 +284,13 @@ public class ModelManagerTest {
 
     @Test
     public void equals() {
-        AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
-        AddressBook differentAddressBook = new AddressBook();
+        JobFestGo jobFestGo = new JobFestGoBuilder().withContact(ALICE).withContact(BENSON).build();
+        JobFestGo differentJobFestGo = new JobFestGo();
         UserPrefs userPrefs = new UserPrefs();
 
         // same values -> returns true
-        modelManager = new ModelManager(addressBook, userPrefs);
-        ModelManager modelManagerCopy = new ModelManager(addressBook, userPrefs);
+        modelManager = new ModelManager(jobFestGo, userPrefs);
+        ModelManager modelManagerCopy = new ModelManager(jobFestGo, userPrefs);
         assertTrue(modelManager.equals(modelManagerCopy));
 
         // same object -> returns true
@@ -299,21 +302,23 @@ public class ModelManagerTest {
         // different types -> returns false
         assertFalse(modelManager.equals(5));
 
-        // different addressBook -> returns false
-        assertFalse(modelManager.equals(new ModelManager(differentAddressBook, userPrefs)));
+        // different JobFestGo -> returns false
+        assertFalse(modelManager.equals(new ModelManager(differentJobFestGo, userPrefs)));
 
         // different filteredList -> returns false
         String[] keywords = ALICE.getName().fullName.split("\\s+");
-        modelManager.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
-        assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
+        modelManager.updateFilteredContactList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
+
+        assertFalse(modelManager.equals(new ModelManager(jobFestGo, userPrefs)));
+
 
         // resets modelManager to initial state for upcoming tests
-        modelManager.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        modelManager.updateFilteredContactList(PREDICATE_SHOW_ALL_CONTACTS);
 
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();
-        differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));
-        assertFalse(modelManager.equals(new ModelManager(addressBook, differentUserPrefs)));
+        differentUserPrefs.setJobFestGoFilePath(Paths.get("differentFilePath"));
+        assertFalse(modelManager.equals(new ModelManager(jobFestGo, differentUserPrefs)));
     }
 
 

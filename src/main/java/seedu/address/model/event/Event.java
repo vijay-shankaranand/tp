@@ -15,7 +15,7 @@ import seedu.address.model.name.Name;
 import seedu.address.model.task.Task;
 
 /**
- * Represents an Event in the address book.
+ * Represents an Event in the JobFestGo.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Event {
@@ -79,7 +79,7 @@ public class Event {
      *     and {@code false} otherwise.
      */
     public boolean isLinkedToContact(Contact contact) {
-        return contacts.stream().anyMatch(contact::isSamePerson);
+        return contacts.stream().anyMatch(contact::isSameContact);
     }
 
     /**

@@ -275,7 +275,7 @@ public class UniqueEventList implements Iterable<Event> {
     }
 
     /**
-     * Returns true if {@code events} contains only unique persons.
+     * Returns true if {@code events} contains only unique Contacts.
      */
     private boolean areEventsUnique(List<Event> events) {
         for (int i = 0; i < events.size() - 1; i++) {

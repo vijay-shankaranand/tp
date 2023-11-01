@@ -17,12 +17,12 @@ import java.util.List;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.contact.EditContactCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.AddressBook;
+import seedu.address.model.JobFestGo;
 import seedu.address.model.Model;
 import seedu.address.model.contact.Contact;
 import seedu.address.model.name.NameContainsKeywordsPredicate;
 import seedu.address.testutil.contact.ContactBuilder;
-import seedu.address.testutil.contact.EditPersonDescriptorBuilder;
+import seedu.address.testutil.contact.EditContactDescriptorBuilder;
 
 /**
  * Contains helper methods for testing commands.
@@ -60,8 +60,8 @@ public class CommandTestUtil {
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
-    public static final EditContactCommand.EditPersonDescriptor DESC_AMY;
-    public static final EditContactCommand.EditPersonDescriptor DESC_BOB;
+    public static final EditContactCommand.EditContactDescriptor DESC_AMY;
+    public static final EditContactCommand.EditContactDescriptor DESC_BOB;
 
     public static final String VALID_EVENT_NAME = "Job Fest 2023";
     public static final String VALID_EVENT_DATE = "2023-12-23";
@@ -69,10 +69,10 @@ public class CommandTestUtil {
     public static final Contact VALID_EVENT_CONTACT = new ContactBuilder().build();
 
     static {
-        DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
+        DESC_AMY = new EditContactDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
                 .withTags(VALID_TAG_FRIEND).build();
-        DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
+        DESC_BOB = new EditContactDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
     }
@@ -107,29 +107,31 @@ public class CommandTestUtil {
      * Executes the given {@code command}, confirms that <br>
      * - a {@code CommandException} is thrown <br>
      * - the CommandException message matches {@code expectedMessage} <br>
-     * - the address book, filtered contact list and selected contact in {@code actualModel} remain unchanged
+     * - the JobFestGo, filtered contact list and selected contact in {@code actualModel} remain unchanged
      */
     public static void assertCommandFailure(Command command, Model actualModel, String expectedMessage) {
         // we are unable to defensively copy the model for comparison later, so we can
         // only do so by copying its components.
-        AddressBook expectedAddressBook = new AddressBook(actualModel.getAddressBook());
-        List<Contact> expectedFilteredList = new ArrayList<>(actualModel.getFilteredPersonList());
+        JobFestGo expectedJobFestGo = new JobFestGo(actualModel.getJobFestGo());
+        List<Contact> expectedFilteredList = new ArrayList<>(actualModel.getFilteredContactList());
 
         assertThrows(CommandException.class, expectedMessage, () -> command.execute(actualModel));
-        assertEquals(expectedAddressBook, actualModel.getAddressBook());
-        assertEquals(expectedFilteredList, actualModel.getFilteredPersonList());
+        assertEquals(expectedJobFestGo, actualModel.getJobFestGo());
+
+        assertEquals(expectedFilteredList, actualModel.getFilteredContactList());
     }
     /**
      * Updates {@code model}'s filtered list to show only the contact at the given {@code targetIndex} in the
-     * {@code model}'s address book.
+     * {@code model}'s JobFestGo.
      */
-    public static void showPersonAtIndex(Model model, Index targetIndex) {
-        assertTrue(targetIndex.getZeroBased() < model.getFilteredPersonList().size());
+    public static void showContactAtIndex(Model model, Index targetIndex) {
 
-        Contact contact = model.getFilteredPersonList().get(targetIndex.getZeroBased());
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredContactList().size());
+
+        Contact contact = model.getFilteredContactList().get(targetIndex.getZeroBased());
         final String[] splitName = contact.getName().fullName.split("\\s+");
-        model.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
+        model.updateFilteredContactList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
-        assertEquals(1, model.getFilteredPersonList().size());
+        assertEquals(1, model.getFilteredContactList().size());
     }
 }

@@ -1,14 +1,14 @@
 package seedu.address.logic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_CONTACT_DISPLAYED_INDEX;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.contact.TypicalPersons.AMY;
+import static seedu.address.testutil.contact.TypicalContacts.AMY;
 
 import java.io.IOException;
 import java.nio.file.AccessDeniedException;
@@ -25,13 +25,13 @@ import seedu.address.logic.commands.contact.AddContactCommand;
 import seedu.address.logic.commands.contact.ViewContactsCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.AddressBook;
+import seedu.address.model.JobFestGo;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyJobFestGo;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.contact.Contact;
-import seedu.address.storage.JsonAddressBookStorage;
+import seedu.address.storage.JsonJobFestGoStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.StorageManager;
 import seedu.address.testutil.contact.ContactBuilder;
@@ -48,10 +48,10 @@ public class LogicManagerTest {
 
     @BeforeEach
     public void setUp() {
-        JsonAddressBookStorage addressBookStorage =
-                new JsonAddressBookStorage(temporaryFolder.resolve("addressBook.json"));
+        JsonJobFestGoStorage jobFestGoStorage =
+                new JsonJobFestGoStorage(temporaryFolder.resolve("jobfestgo.json"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
-        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        StorageManager storage = new StorageManager(jobFestGoStorage, userPrefsStorage);
         logic = new LogicManager(model, storage);
     }
 
@@ -64,7 +64,7 @@ public class LogicManagerTest {
     @Test
     public void execute_commandExecutionError_throwsCommandException() {
         String deleteCommand = "delete_contact 9";
-        assertCommandException(deleteCommand, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandException(deleteCommand, MESSAGE_INVALID_CONTACT_DISPLAYED_INDEX);
     }
 
     @Test
@@ -86,13 +86,15 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredPersonList().remove(0));
+    public void getFilteredContactList_modifyList_throwsUnsupportedOperationException() {
+
+        assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredContactList().remove(0));
     }
 
     @Test
-    public void getUnfilteredPersonList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> logic.getUnfilteredPersonList().remove(0));
+    public void getUnfilteredContactList_modifyList_throwsUnsupportedOperationException() {
+
+        assertThrows(UnsupportedOperationException.class, () -> logic.getUnfilteredContactList().remove(0));
     }
 
     @Test
@@ -151,7 +153,7 @@ public class LogicManagerTest {
      */
     private void assertCommandFailure(String inputCommand, Class<? extends Throwable> expectedException,
             String expectedMessage) {
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getJobFestGo(), new UserPrefs());
         assertCommandFailure(inputCommand, expectedException, expectedMessage, expectedModel);
     }
 
@@ -177,10 +179,10 @@ public class LogicManagerTest {
     private void assertCommandFailureForExceptionFromStorage(IOException e, String expectedMessage) {
         Path prefPath = temporaryFolder.resolve("ExceptionUserPrefs.json");
 
-        // Inject LogicManager with an AddressBookStorage that throws the IOException e when saving
-        JsonAddressBookStorage addressBookStorage = new JsonAddressBookStorage(prefPath) {
+        // Inject LogicManager with an JobFestGoStorage that throws the IOException e when saving
+        JsonJobFestGoStorage jobFestGoStorage = new JsonJobFestGoStorage(prefPath) {
             @Override
-            public void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath)
+            public void saveJobFestGo(ReadOnlyJobFestGo jobFestGo, Path filePath)
                     throws IOException {
                 throw e;
             }
@@ -188,11 +190,11 @@ public class LogicManagerTest {
 
         JsonUserPrefsStorage userPrefsStorage =
                 new JsonUserPrefsStorage(temporaryFolder.resolve("ExceptionUserPrefs.json"));
-        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        StorageManager storage = new StorageManager(jobFestGoStorage, userPrefsStorage);
 
         logic = new LogicManager(model, storage);
 
-        // Triggers the saveAddressBook method by executing an add command
+        // Triggers the saveJobFestGo method by executing an add command
         String addCommand = AddContactCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY
                 + EMAIL_DESC_AMY + ADDRESS_DESC_AMY;
         Contact expectedContact = new ContactBuilder(AMY).withTags().build();
@@ -202,17 +204,17 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void getAddressBook_validAddressBook_success() {
-        ReadOnlyAddressBook sampleAddressBook = new AddressBook();
-        model.setAddressBook(sampleAddressBook); // Set the model's address book to the sample address book
-        assertEquals(sampleAddressBook, logic.getAddressBook());
+    public void getJobFestGo_validJobFestGo_success() {
+        ReadOnlyJobFestGo sampleJobFestGo = new JobFestGo();
+        model.setJobFestGo(sampleJobFestGo); // Set the model's JobFestGo to the sample JobFestGo
+        assertEquals(sampleJobFestGo, logic.getJobFestGo());
     }
 
     @Test
-    public void getAddressBookFilePath_validFilePath_success() {
-        Path validFilePath = Paths.get("data/addressBook.json");
-        model.setAddressBookFilePath(validFilePath);
-        assertEquals(validFilePath, logic.getAddressBookFilePath());
+    public void getJobFestGoFilePath_validFilePath_success() {
+        Path validFilePath = Paths.get("data/jobfestgo.json");
+        model.setJobFestGoFilePath(validFilePath);
+        assertEquals(validFilePath, logic.getJobFestGoFilePath());
     }
 
     @Test

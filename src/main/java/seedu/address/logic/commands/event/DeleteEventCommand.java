@@ -44,7 +44,9 @@ public class DeleteEventCommand extends Command {
         }
         Event eventToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deleteEvent(eventToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_EVENT_SUCCESS, Messages.format(eventToDelete)));
+        model.updateFilteredTaskList(Model.PREDICATE_SHOW_ALL_TASKS);
+        return new CommandResult(String.format(MESSAGE_DELETE_EVENT_SUCCESS, Messages.format(eventToDelete)),
+                eventToDelete, true);
     }
 
     @Override

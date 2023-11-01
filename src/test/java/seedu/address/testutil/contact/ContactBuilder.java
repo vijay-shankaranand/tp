@@ -27,7 +27,7 @@ public class ContactBuilder {
     private Set<Tag> tags;
 
     /**
-     * Creates a {@code PersonBuilder} with the default details.
+     * Creates a {@code ContactBuilder} with the default details.
      */
     public ContactBuilder() {
         name = new Name(DEFAULT_NAME);
@@ -38,7 +38,7 @@ public class ContactBuilder {
     }
 
     /**
-     * Initializes the PersonBuilder with the data of {@code contactToCopy}.
+     * Initializes the ContactBuilder with the data of {@code contactToCopy}.
      */
     public ContactBuilder(Contact contactToCopy) {
         name = contactToCopy.getName();

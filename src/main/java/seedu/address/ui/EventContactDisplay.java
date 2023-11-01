@@ -26,7 +26,7 @@ public class EventContactDisplay extends UiPart<Region> {
     private Logic logic;
 
     //Independent Ui parts residing in this Ui container
-    private PersonListPanel personListPanel;
+    private ContactListPanel contactListPanel;
     private EventListPanel eventListPanel;
     private ReminderListPanel reminderListPanel;
     private TaskListPanel taskListPanel;
@@ -35,7 +35,7 @@ public class EventContactDisplay extends UiPart<Region> {
     private GridPane eventContactDisplay;
 
     @FXML
-    private StackPane personListPanelPlaceholder;
+    private StackPane contactListPanelPlaceholder;
 
     @FXML
     private StackPane eventListPanelPlaceholder;
@@ -51,7 +51,7 @@ public class EventContactDisplay extends UiPart<Region> {
         this.logic = logic;
 
         // Disable mouse events for all panels
-        personListPanelPlaceholder.addEventFilter(MouseEvent.ANY, handler);
+        contactListPanelPlaceholder.addEventFilter(MouseEvent.ANY, handler);
         eventListPanelPlaceholder.addEventFilter(MouseEvent.ANY, handler);
         taskPanelPlaceholder.addEventFilter(MouseEvent.ANY, handler);
 
@@ -65,8 +65,10 @@ public class EventContactDisplay extends UiPart<Region> {
      * Fills up all the placeholders of this window.
      */
     private void fillInnerParts() {
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+
+        contactListPanel = new ContactListPanel(logic.getFilteredContactList());
+        contactListPanelPlaceholder.getChildren().add(contactListPanel.getRoot());
+
 
         eventListPanel = new EventListPanel(logic.getFilteredEventList());
         eventListPanelPlaceholder.getChildren().add(eventListPanel.getRoot());
@@ -90,8 +92,9 @@ public class EventContactDisplay extends UiPart<Region> {
      * Fills up all the placeholders of this window after reset.
      */
     public void fillInnerPartsAfterReset() {
-        personListPanel = new PersonListPanel(logic.getUnfilteredPersonList());
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+
+        contactListPanel = new ContactListPanel(logic.getUnfilteredContactList());
+        contactListPanelPlaceholder.getChildren().add(contactListPanel.getRoot());
 
         eventListPanel = new EventListPanel(logic.getUnfilteredEventList());
         eventListPanelPlaceholder.getChildren().add(eventListPanel.getRoot());
@@ -107,7 +110,7 @@ public class EventContactDisplay extends UiPart<Region> {
      */
     public void setFeedbackToUser(CommandResult commandResult) {
         Event selectedEvent = commandResult.getSelectedEvent();
-        if (selectedEvent != null) {
+        if (selectedEvent != null && !commandResult.isDeleteEvent()) {
             eventListPanel.selectEvent(selectedEvent);
             this.fillTaskList();
         }
