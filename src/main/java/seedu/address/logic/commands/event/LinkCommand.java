@@ -12,10 +12,12 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.contact.Contact;
+import seedu.address.model.contact.ContactIsInEventPredicate;
 import seedu.address.model.contact.exceptions.ContactNotFoundException;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.exceptions.EventNotFoundException;
 import seedu.address.model.name.Name;
+import seedu.address.model.task.TaskIsInEventPredicate;
 
 /**
  * Links a contact to a specific event.
@@ -64,7 +66,11 @@ public class LinkCommand extends Command {
                 eventToLink.linkContact(contactToLink);
             }
 
-            return new CommandResult(String.format(MESSAGE_SUCCESS, contactNameListToLink, eventNameToLink));
+            model.updateFilteredContactList(new ContactIsInEventPredicate(eventToLink));
+            model.updateFilteredTaskList(new TaskIsInEventPredicate(eventToLink));
+
+            return new CommandResult(String.format(MESSAGE_SUCCESS, contactNameListToLink, eventNameToLink),
+                    model.getEvent(eventNameToLink), false);
         } catch (EventNotFoundException enfe) {
             throw new CommandException(String.format(MESSAGE_NO_SUCH_EVENT, eventNameToLink));
         } catch (ContactNotFoundException pnfe) {
