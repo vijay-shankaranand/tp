@@ -50,7 +50,7 @@ public class TaskDescription {
         }
 
         TaskDescription otherDescription = (TaskDescription) other;
-        return value.equals(otherDescription.value);
+        return value.toLowerCase().equals(otherDescription.value.toLowerCase());
     }
 
     @Override
