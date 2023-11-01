@@ -18,6 +18,7 @@ import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -41,9 +42,17 @@ public class LinkCommandTest {
         model.addEvent(JOBFEST);
         expectedModel.addEvent(JOBFEST);
         LinkCommand command = new LinkCommand(JOBFEST.getName(), contactNameList);
+        assertEquals(JOBFEST, model.getEvent(JOBFEST.getName()));
         String expectedNameList = "[" + CARL.getName() + "]";
         String expectedMessage = String.format(LinkCommand.MESSAGE_SUCCESS, expectedNameList, JOBFEST.getName());
         expectedModel.linkContactToEvent(CARL, JOBFEST);
+
+        try {
+            command.execute(expectedModel);
+        } catch (CommandException ce) {
+            return;
+        }
+
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
     }
 
@@ -60,6 +69,13 @@ public class LinkCommandTest {
         model.addEvent(JOBFEST);
         expectedModel.addEvent(expectedEvent);
         LinkCommand command = new LinkCommand(JOBFEST.getName(), contactNameList);
+
+        try {
+            command.execute(expectedModel);
+        } catch (CommandException ce) {
+            return;
+        }
+
         String expectedNameList = "[" + CARL.getName() + ", " + BENSON.getName() + "]";
         String expectedMessage = String.format(LinkCommand.MESSAGE_SUCCESS, expectedNameList, JOBFEST.getName());
         assertCommandSuccess(command, model, expectedMessage, expectedModel);

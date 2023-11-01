@@ -10,10 +10,7 @@ import seedu.address.logic.commands.contact.ViewContactsCommand;
 import seedu.address.logic.commands.event.DeleteEventCommand;
 import seedu.address.logic.commands.event.ViewEventsCommand;
 import seedu.address.logic.commands.tag.ViewTagsCommand;
-import seedu.address.logic.commands.task.MarkTaskCommand;
-import seedu.address.logic.commands.task.UnmarkTaskCommand;
 import seedu.address.model.event.Event;
-import seedu.address.model.name.Name;
 import seedu.address.model.task.TaskDescription;
 
 /**
@@ -31,14 +28,14 @@ public class CommandResult {
     /** Event selected by the user through command. */
     private Event selectedEvent = null;
 
-    /** Boolean that represents whether the event passed through is being deleted */
+    /** Boolean that represents whether the event passed through is being deleted. */
     private boolean isEventDeleted = false;
 
     /** Description of task marked/unmarked by user through command. */
     private TaskDescription taskDescription = null;
 
-    /** Name of event of task that was marked/unmarked by user through command. */
-    private Name associatedEventName = null;
+    /** Boolean that represents whether the UI should go to a Select Event screen. */
+    private boolean isSelectScreen = false;
 
     /**
      * Constructs a {@code CommandResult} with the specified fields.
@@ -71,15 +68,17 @@ public class CommandResult {
 
     /**
      * Constructs a {@code CommandResult} with the specified {@code feedbackToUser},
-     * and {@code TaskDescription} and {@code Name} of {@code Event} associated with task.
-     * Used for marking/unmarking tasks.
+     * and {@code TaskDescription} and {@code Name} of {@code Event} associated with task,
+     * as well as {@code isSelectScreen} to determine whether to go to Select Event screen.
+     * Used for the respective task commands.
      */
-    public CommandResult(String feedbackToUser, TaskDescription desc, Name eventName) {
+    public CommandResult(String feedbackToUser, TaskDescription desc, Event event, boolean isSelectScreen) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = false;
         this.exit = false;
         this.taskDescription = desc;
-        this.associatedEventName = eventName;
+        this.selectedEvent = event;
+        this.isSelectScreen = isSelectScreen;
 
     }
 
@@ -171,20 +170,7 @@ public class CommandResult {
      * @return true if the current screen should remain displayed, else false
      */
     public boolean shouldStayOnScreen() {
-        String markFeedback = String.format(MarkTaskCommand.MESSAGE_SUCCESS,
-            taskDescription, associatedEventName);
-
-        String unmarkFeedback = String.format(UnmarkTaskCommand.MESSAGE_SUCCESS,
-            taskDescription, associatedEventName);
-        if (feedbackToUser.equals(markFeedback)) {
-            return true;
-        }
-
-        if (feedbackToUser.equals(unmarkFeedback)) {
-            return true;
-        }
-
-        return false;
+        return this.isSelectScreen;
     }
 
     @Override
