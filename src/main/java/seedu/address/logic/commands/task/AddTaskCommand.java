@@ -71,6 +71,7 @@ public class AddTaskCommand extends Command {
             }
 
             model.addTask(taskToAdd);
+            model.updateFilteredContactList(Model.PREDICATE_SHOW_ALL_CONTACTS);
             return new CommandResult(String.format(MESSAGE_SUCCESS,
                     taskDescription, taskDeadline, eventToAddIn.getName()));
         } catch (EventNotFoundException enfe) {

@@ -50,6 +50,7 @@ public class DeleteTaskCommand extends Command {
         }
 
         model.deleteTask(taskDescription, associatedEventName);
+        model.updateFilteredContactList(Model.PREDICATE_SHOW_ALL_CONTACTS);
         return new CommandResult(String.format(MESSAGE_SUCCESS, taskDescription, associatedEventName));
     }
 
