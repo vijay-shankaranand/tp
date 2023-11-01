@@ -296,12 +296,43 @@ Deletes the task specified by the task description from its associated event in 
 Format: `delete_task td/TASK_DESCRIPTION ev/EVENT_NAME`
 
 * Deletes the task specified by the `TASK_DESCRIPTION` from the event specified by the `EVENT_NAME` of JobFestGo.
-* The index refers to the index number shown in the displayed event list.
-* The index` **must be a positive integer** 1, 2, 3, …​
-* The index must be specified in the command.
+* Both the `TASK_DESCRIPTION` and the `EVENT_NAME` are case-insensitive.
+ e.g. `delete_task td/Book Venue ev/NUS Career Fair 2023` and `delete_task td/book venue ev/nus Career FAIR 2023`
+ will perform the same operation.
+* Warnings will be sent if the specified event does not exist or the event does not have the specified task.
+ If such situation happens, you may double-check the task description and the event name and reenter valid inputs.
 
 Examples:
 * `delete_task td/Book Venue ev/NUS Career Fair 2023` deletes task `Book Venue` from the task list of the event `NUS Career Fair 2023`.
+
+### Marking a task: `mark`
+
+Marks the task specified by the task description and its associated event name in JobFestGo as completed.
+
+Format: `mark td/TASK_DESCRIPTION ev/EVENT_NAME`
+
+* Marks the task specified by the `TASK_DESCRIPTION` from the event specified by the `EVENT_NAME` of JobFestGo as completed.
+ A label indicating the status of the task will be shown next to its description in the task list.
+* Both the `TASK_DESCRIPTION` and the `EVENT_NAME` are case-insensitive.
+  e.g. `mark td/Book Venue ev/NUS Career Fair 2023` and `mark td/book venue ev/nus Career FAIR 2023`
+  will perform the same operation.
+* Warnings will be sent if the specified event does not exist or the event does not have the specified task.
+  If such situation happens, you may double-check the task description and the event name and reenter valid inputs.
+
+Examples:
+* `mark td/Book Venue ev/NUS Career Fair 2023` marks the task `Book Venue` from the task list of the event `NUS Career Fair 2023` as completed.
+
+### Unmarking a task: `unmark`
+
+Marks the task specified by the task description and its associated event name in JobFestGo as not completed.
+
+Format: `unmark td/TASK_DESCRIPTION ev/EVENT_NAME`
+
+* It works exactly the same way as `mark` except for the fact that `unmark` marks a completed task as not completed.
+* You may `unmark` a task when you realize that you have not completed the task but have wrongly marked it as completed.
+
+Examples:
+* `unmark td/Book Venue ev/NUS Career Fair 2023` marks the task `Book Venue` from the task list of the event `NUS Career Fair 2023` as not completed.
 
 ### Clearing all entries : `clear`
 
