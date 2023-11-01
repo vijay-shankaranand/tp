@@ -35,6 +35,8 @@ that you might not remember and organise your tasks neatly.
     * [Clear entries `clear`](#clearing-all-entries--clear)
     * [Returning to home page `home`](#returning-to-home-page--home)
     * [Exit program `exit`](#exiting-the-program--exit)
+    * [Saving the data](#saving-the-data)
+    * [Editing the data file](#editing-the-data-file)
 * [FAQ](#faq)
 * [Known Issues](#known-issues)
 * [Command Summary](#command-summary)
