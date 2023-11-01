@@ -245,7 +245,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Links the given contact to the given event.
+     * Links the given {@code contact} to the given {@code event}.
      */
     public void linkContactToEvent(Contact contact, Event event) {
         events.linkContactToEvent(contact, event);

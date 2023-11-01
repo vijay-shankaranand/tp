@@ -166,7 +166,7 @@ public interface Model {
     void setEvent(Event target, Event editedEvent);
 
     /**
-     * Links the given contact to the given event.
+     * Links the given {@code contact} to the given {@code event}.
      */
     void linkContactToEvent(Contact contact, Event event);
 
