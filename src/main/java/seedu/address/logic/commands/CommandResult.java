@@ -10,8 +10,8 @@ import seedu.address.logic.commands.contact.ViewContactsCommand;
 import seedu.address.logic.commands.event.DeleteEventCommand;
 import seedu.address.logic.commands.event.ViewEventsCommand;
 import seedu.address.logic.commands.tag.ViewTagsCommand;
-import seedu.address.logic.commands.task.MarkCommand;
-import seedu.address.logic.commands.task.UnmarkCommand;
+import seedu.address.logic.commands.task.MarkTaskCommand;
+import seedu.address.logic.commands.task.UnmarkTaskCommand;
 import seedu.address.model.event.Event;
 import seedu.address.model.name.Name;
 import seedu.address.model.task.TaskDescription;
@@ -171,10 +171,10 @@ public class CommandResult {
      * @return true if the current screen should remain displayed, else false
      */
     public boolean shouldStayOnScreen() {
-        String markFeedback = String.format(MarkCommand.MESSAGE_SUCCESS,
+        String markFeedback = String.format(MarkTaskCommand.MESSAGE_SUCCESS,
             taskDescription, associatedEventName);
 
-        String unmarkFeedback = String.format(UnmarkCommand.MESSAGE_SUCCESS,
+        String unmarkFeedback = String.format(UnmarkTaskCommand.MESSAGE_SUCCESS,
             taskDescription, associatedEventName);
         if (feedbackToUser.equals(markFeedback)) {
             return true;

@@ -16,8 +16,8 @@ import seedu.address.model.task.TaskDescription;
 /**
  * Marks the specified task as completed.
  */
-public class MarkCommand extends Command {
-    public static final String COMMAND_WORD = "mark";
+public class MarkTaskCommand extends Command {
+    public static final String COMMAND_WORD = "mark_task";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks a task as completed. "
             + "Parameters: "
@@ -35,7 +35,7 @@ public class MarkCommand extends Command {
     /**
      * Creates a MarkCommand to delete the specified {@code task}.
      */
-    public MarkCommand(TaskDescription taskDescription, Name associatedEventName) {
+    public MarkTaskCommand(TaskDescription taskDescription, Name associatedEventName) {
         requireAllNonNull(taskDescription, associatedEventName);
         this.taskDescription = taskDescription;
         this.associatedEventName = associatedEventName;
@@ -60,13 +60,13 @@ public class MarkCommand extends Command {
             return true;
         }
 
-        if (!(other instanceof MarkCommand)) {
+        if (!(other instanceof MarkTaskCommand)) {
             return false;
         }
 
-        MarkCommand otherMarkCommand = (MarkCommand) other;
-        return taskDescription.equals(otherMarkCommand.taskDescription)
-                && associatedEventName.equals(otherMarkCommand.associatedEventName);
+        MarkTaskCommand otherMarkTaskCommand = (MarkTaskCommand) other;
+        return taskDescription.equals(otherMarkTaskCommand.taskDescription)
+                && associatedEventName.equals(otherMarkTaskCommand.associatedEventName);
     }
 
     @Override

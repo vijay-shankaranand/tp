@@ -29,8 +29,8 @@ import seedu.address.logic.commands.tag.FilterByTagCommand;
 import seedu.address.logic.commands.tag.ViewTagsCommand;
 import seedu.address.logic.commands.task.AddTaskCommand;
 import seedu.address.logic.commands.task.DeleteTaskCommand;
-import seedu.address.logic.commands.task.MarkCommand;
-import seedu.address.logic.commands.task.UnmarkCommand;
+import seedu.address.logic.commands.task.MarkTaskCommand;
+import seedu.address.logic.commands.task.UnmarkTaskCommand;
 import seedu.address.logic.parser.contact.AddContactCommandParser;
 import seedu.address.logic.parser.contact.DeleteContactCommandParser;
 import seedu.address.logic.parser.contact.EditContactCommandParser;
@@ -133,10 +133,10 @@ public class JobFestGoParser {
         case DeleteTaskCommand.COMMAND_WORD:
             return new DeleteTaskCommandParser().parse(arguments);
 
-        case MarkCommand.COMMAND_WORD:
+        case MarkTaskCommand.COMMAND_WORD:
             return new MarkCommandParser().parse(arguments);
 
-        case UnmarkCommand.COMMAND_WORD:
+        case UnmarkTaskCommand.COMMAND_WORD:
             return new UnmarkCommandParser().parse(arguments);
 
         case HomeCommand.COMMAND_WORD:
