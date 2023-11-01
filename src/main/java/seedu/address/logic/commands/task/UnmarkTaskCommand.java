@@ -16,8 +16,8 @@ import seedu.address.model.task.TaskDescription;
 /**
  * Marks the specified task as not completed.
  */
-public class UnmarkCommand extends Command {
-    public static final String COMMAND_WORD = "unmark";
+public class UnmarkTaskCommand extends Command {
+    public static final String COMMAND_WORD = "unmark_task";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks a task as not completed. "
             + "Parameters: "
@@ -35,7 +35,7 @@ public class UnmarkCommand extends Command {
     /**
      * Creates a UnmarkCommand to delete the specified {@code task}.
      */
-    public UnmarkCommand(TaskDescription taskDescription, Name associatedEventName) {
+    public UnmarkTaskCommand(TaskDescription taskDescription, Name associatedEventName) {
         requireAllNonNull(taskDescription, associatedEventName);
         this.taskDescription = taskDescription;
         this.associatedEventName = associatedEventName;
@@ -60,13 +60,13 @@ public class UnmarkCommand extends Command {
             return true;
         }
 
-        if (!(other instanceof UnmarkCommand)) {
+        if (!(other instanceof UnmarkTaskCommand)) {
             return false;
         }
 
-        UnmarkCommand otherUnmarkCommand = (UnmarkCommand) other;
-        return taskDescription.equals(otherUnmarkCommand.taskDescription)
-                && associatedEventName.equals(otherUnmarkCommand.associatedEventName);
+        UnmarkTaskCommand otherUnmarkTaskCommand = (UnmarkTaskCommand) other;
+        return taskDescription.equals(otherUnmarkTaskCommand.taskDescription)
+                && associatedEventName.equals(otherUnmarkTaskCommand.associatedEventName);
     }
 
     @Override
