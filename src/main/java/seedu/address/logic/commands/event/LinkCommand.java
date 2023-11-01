@@ -14,6 +14,7 @@ import seedu.address.model.Model;
 import seedu.address.model.contact.Contact;
 import seedu.address.model.contact.exceptions.ContactNotFoundException;
 import seedu.address.model.event.Event;
+import seedu.address.model.event.exceptions.EventIsAlreadyLinkedToContactException;
 import seedu.address.model.event.exceptions.EventNotFoundException;
 import seedu.address.model.name.Name;
 
@@ -54,21 +55,19 @@ public class LinkCommand extends Command {
         requireNonNull(model);
 
         try {
-            Event eventToLink = model.getEvent(eventNameToLink);
-
             for (Name contactName : contactNameListToLink) {
+                Event eventToLink = model.getEvent(eventNameToLink);
                 Contact contactToLink = model.getContact(contactName);
-                if (eventToLink.isLinkedToContact(contactToLink)) {
-                    throw new CommandException(String.format(MESSAGE_LINKED_CONTACT, contactName, eventNameToLink));
-                }
-                eventToLink.linkContact(contactToLink);
+                model.linkContactToEvent(contactToLink, eventToLink);
             }
-
             return new CommandResult(String.format(MESSAGE_SUCCESS, contactNameListToLink, eventNameToLink));
         } catch (EventNotFoundException enfe) {
             throw new CommandException(String.format(MESSAGE_NO_SUCH_EVENT, eventNameToLink));
-        } catch (ContactNotFoundException pnfe) {
-            throw new CommandException(String.format(MESSAGE_NO_SUCH_CONTACT, pnfe.getName()));
+        } catch (ContactNotFoundException cnfe) {
+            throw new CommandException(String.format(MESSAGE_NO_SUCH_CONTACT, cnfe.getName()));
+        } catch (EventIsAlreadyLinkedToContactException eialte) {
+            throw new CommandException(
+                    String.format(MESSAGE_LINKED_CONTACT, eialte.getContact().getName(), eventNameToLink));
         }
     }
 

@@ -12,6 +12,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.contact.Contact;
 import seedu.address.model.event.exceptions.DuplicateEventException;
+import seedu.address.model.event.exceptions.EventIsAlreadyLinkedToContactException;
 import seedu.address.model.event.exceptions.EventNotFoundException;
 import seedu.address.model.name.Name;
 import seedu.address.model.task.Task;
@@ -51,6 +52,24 @@ public class UniqueEventList implements Iterable<Event> {
             throw new DuplicateEventException();
         }
         internalList.add(toAdd);
+    }
+
+    /**
+     * Links a contact to the given event.
+     * @throws EventIsAlreadyLinkedToContactException If the given contact is
+     *     already linked to the event.
+     */
+    public void linkContactToEvent(Contact contact, Event event) throws EventIsAlreadyLinkedToContactException {
+        if (event.isLinkedToContact(contact)) {
+            throw new EventIsAlreadyLinkedToContactException(contact);
+        }
+
+        Set<Contact> newContacts = new HashSet<>();
+        newContacts.addAll(event.getContacts());
+        newContacts.add(contact);
+        Event updatedEvent = new Event(event.getName(), event.getDate(), event.getAddress(),
+                newContacts, event.getTasks());
+        setEvent(event, updatedEvent);
     }
 
     /**

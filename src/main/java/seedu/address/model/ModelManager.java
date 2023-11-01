@@ -188,6 +188,12 @@ public class ModelManager implements Model {
         jobFestGo.setEvent(target, editedEvent);
     }
 
+    @Override
+    public void linkContactToEvent(Contact contact, Event event) {
+        requireAllNonNull(contact, event);
+        jobFestGo.linkContactToEvent(contact, event);
+    }
+
     //=========== Tasks ======================================================================================
     @Override
     public boolean hasTask(Task task) {

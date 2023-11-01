@@ -244,6 +244,13 @@ public class JobFestGo implements ReadOnlyJobFestGo {
         return events.getByName(name);
     }
 
+    /**
+     * Links the given {@code contact} to the given {@code event}.
+     */
+    public void linkContactToEvent(Contact contact, Event event) {
+        events.linkContactToEvent(contact, event);
+    }
+
     @Override
     public ObservableList<Event> getEventList() {
         return events.asUnmodifiableObservableList().sorted(new EventSortByDateComparator());
