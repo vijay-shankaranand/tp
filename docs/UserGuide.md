@@ -235,6 +235,7 @@ Format: `delete_event INDEX`
 * The index refers to the index number shown in the displayed event list.
 * The index` **must be a positive integer** 1, 2, 3, …​
 * The index must be specified in the command.
+* All the tasks associated to the event will be deleted as well.
 
 Examples:
 * `delete_event` followed by `1` deletes the 1st event in the displayed event list.
@@ -287,6 +288,20 @@ Format: `add_task td/TASK_DESCRIPTION d/DEADLINE ev/EVENT_NAME`
 
 Examples:
 * `add_task td/Book Venue d/2023-12-23 ev/NUS Career Fair 2023` adds a `Book Venue` by `2023-12-23` task to the event `NUS Career Fair 2023`
+
+### Deleting a task: `delete_task`
+
+Deletes the task specified by the task description from its associated event in JobFestGo.
+
+Format: `delete_task td/TASK_DESCRIPTION ev/EVENT_NAME`
+
+* Deletes the task specified by the `TASK_DESCRIPTION` from the event specified by the `EVENT_NAME` of JobFestGo.
+* The index refers to the index number shown in the displayed event list.
+* The index` **must be a positive integer** 1, 2, 3, …​
+* The index must be specified in the command.
+
+Examples:
+* `delete_task td/Book Venue ev/NUS Career Fair 2023` deletes task `Book Venue` from the task list of the event `NUS Career Fair 2023`.
 
 ### Clearing all entries : `clear`
 
