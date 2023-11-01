@@ -387,6 +387,11 @@ public class AddTaskCommandTest {
         }
 
         @Override
+        public void updateFilteredTaskList(Predicate<Task> predicate) {
+            requireNonNull(predicate);
+        }
+
+        @Override
         public void addEvent(Event event) {
             requireNonNull(event);
             eventsAdded.add(event);

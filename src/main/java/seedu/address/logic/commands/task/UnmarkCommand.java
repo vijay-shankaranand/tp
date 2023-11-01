@@ -51,7 +51,7 @@ public class UnmarkCommand extends Command {
 
         model.unmarkTask(taskDescription, associatedEventName);
         return new CommandResult(String.format(MESSAGE_SUCCESS, taskDescription, associatedEventName),
-                taskDescription, associatedEventName);
+                taskDescription, model.getEvent(associatedEventName), true);
     }
 
     @Override

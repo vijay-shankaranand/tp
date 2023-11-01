@@ -10,8 +10,11 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.contact.ContactIsInEventPredicate;
+import seedu.address.model.event.Event;
 import seedu.address.model.name.Name;
 import seedu.address.model.task.TaskDescription;
+import seedu.address.model.task.TaskIsInEventPredicate;
 
 /**
  * Adds the specified task from its associated event.
@@ -49,9 +52,14 @@ public class DeleteTaskCommand extends Command {
             throw new CommandException(MESSAGE_MISSING_TASK);
         }
 
+        Event eventToDeleteTask = model.getEvent(associatedEventName);
+
         model.deleteTask(taskDescription, associatedEventName);
-        model.updateFilteredContactList(Model.PREDICATE_SHOW_ALL_CONTACTS);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, taskDescription, associatedEventName));
+        model.updateFilteredContactList(new ContactIsInEventPredicate(eventToDeleteTask));
+        model.updateFilteredTaskList(new TaskIsInEventPredicate(eventToDeleteTask));
+
+        return new CommandResult(String.format(MESSAGE_SUCCESS, taskDescription, associatedEventName),
+                taskDescription, model.getEvent(associatedEventName), true);
     }
 
     @Override

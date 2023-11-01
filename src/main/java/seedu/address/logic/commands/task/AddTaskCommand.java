@@ -12,12 +12,14 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.contact.ContactIsInEventPredicate;
 import seedu.address.model.date.Date;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.exceptions.EventNotFoundException;
 import seedu.address.model.name.Name;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.TaskDescription;
+import seedu.address.model.task.TaskIsInEventPredicate;
 
 /**
  * Adds a task to the event.
@@ -71,9 +73,12 @@ public class AddTaskCommand extends Command {
             }
 
             model.addTask(taskToAdd);
-            model.updateFilteredContactList(Model.PREDICATE_SHOW_ALL_CONTACTS);
+            model.updateFilteredContactList(new ContactIsInEventPredicate(eventToAddIn));
+            model.updateFilteredTaskList(new TaskIsInEventPredicate(eventToAddIn));
+
             return new CommandResult(String.format(MESSAGE_SUCCESS,
-                    taskDescription, taskDeadline, eventToAddIn.getName()));
+                    taskDescription, taskDeadline, eventToAddIn.getName()),
+                    taskDescription, model.getEvent(associatedEventName), true);
         } catch (EventNotFoundException enfe) {
             throw new CommandException(String.format(MESSAGE_NO_SUCH_EVENT, associatedEventName));
         }
