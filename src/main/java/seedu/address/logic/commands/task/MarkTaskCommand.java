@@ -14,12 +14,12 @@ import seedu.address.model.name.Name;
 import seedu.address.model.task.TaskDescription;
 
 /**
- * Marks the specified task as not completed.
+ * Marks the specified task as completed.
  */
-public class UnmarkCommand extends Command {
-    public static final String COMMAND_WORD = "unmark";
+public class MarkTaskCommand extends Command {
+    public static final String COMMAND_WORD = "mark_task";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks a task as not completed. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks a task as completed. "
             + "Parameters: "
             + PREFIX_TASK_DESCRIPTION + "TASK_DESCRIPTION "
             + PREFIX_EVENT + "EVENT \n"
@@ -27,15 +27,15 @@ public class UnmarkCommand extends Command {
             + PREFIX_TASK_DESCRIPTION + "Book Venue "
             + PREFIX_EVENT + "NUS Career Fair 2023";
 
-    public static final String MESSAGE_SUCCESS = "Unmarked task: %1$s from event: %2$s";
+    public static final String MESSAGE_SUCCESS = "Marked task: %1$s from event: %2$s as completed";
     public static final String MESSAGE_MISSING_TASK = "This task does not exist";
     private final TaskDescription taskDescription;
     private final Name associatedEventName;
 
     /**
-     * Creates a UnmarkCommand to delete the specified {@code task}.
+     * Creates a MarkCommand to delete the specified {@code task}.
      */
-    public UnmarkCommand(TaskDescription taskDescription, Name associatedEventName) {
+    public MarkTaskCommand(TaskDescription taskDescription, Name associatedEventName) {
         requireAllNonNull(taskDescription, associatedEventName);
         this.taskDescription = taskDescription;
         this.associatedEventName = associatedEventName;
@@ -49,7 +49,7 @@ public class UnmarkCommand extends Command {
             throw new CommandException(MESSAGE_MISSING_TASK);
         }
 
-        model.unmarkTask(taskDescription, associatedEventName);
+        model.markTask(taskDescription, associatedEventName);
         return new CommandResult(String.format(MESSAGE_SUCCESS, taskDescription, associatedEventName),
                 taskDescription, model.getEvent(associatedEventName), true);
     }
@@ -60,19 +60,19 @@ public class UnmarkCommand extends Command {
             return true;
         }
 
-        if (!(other instanceof UnmarkCommand)) {
+        if (!(other instanceof MarkTaskCommand)) {
             return false;
         }
 
-        UnmarkCommand otherUnmarkCommand = (UnmarkCommand) other;
-        return taskDescription.equals(otherUnmarkCommand.taskDescription)
-                && associatedEventName.equals(otherUnmarkCommand.associatedEventName);
+        MarkTaskCommand otherMarkTaskCommand = (MarkTaskCommand) other;
+        return taskDescription.equals(otherMarkTaskCommand.taskDescription)
+                && associatedEventName.equals(otherMarkTaskCommand.associatedEventName);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("toUnmark", taskDescription)
+                .add("toMark", taskDescription)
                 .add("associatedEvent", associatedEventName)
                 .toString();
     }

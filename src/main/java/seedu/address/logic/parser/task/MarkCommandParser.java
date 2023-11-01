@@ -6,7 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_DESCRIPTION;
 
 import java.util.stream.Stream;
 
-import seedu.address.logic.commands.task.MarkCommand;
+import seedu.address.logic.commands.task.MarkTaskCommand;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
 import seedu.address.logic.parser.Parser;
@@ -19,17 +19,17 @@ import seedu.address.model.task.TaskDescription;
 /**
  * Parses input arguments and creates a new MarkCommand object
  */
-public class MarkCommandParser implements Parser<MarkCommand> {
+public class MarkCommandParser implements Parser<MarkTaskCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the MarkCommand
      * and returns an MarkCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    public MarkCommand parse(String args) throws ParseException {
+    public MarkTaskCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_TASK_DESCRIPTION, PREFIX_EVENT);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_TASK_DESCRIPTION, PREFIX_EVENT)) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkTaskCommand.MESSAGE_USAGE));
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_TASK_DESCRIPTION, PREFIX_EVENT);
@@ -37,7 +37,7 @@ public class MarkCommandParser implements Parser<MarkCommand> {
                 PREFIX_TASK_DESCRIPTION).get());
         Name associatedEventName = ParserUtil.parseName(argMultimap.getValue(PREFIX_EVENT).get());
 
-        return new MarkCommand(taskDescription, associatedEventName);
+        return new MarkTaskCommand(taskDescription, associatedEventName);
     }
 
     /**
