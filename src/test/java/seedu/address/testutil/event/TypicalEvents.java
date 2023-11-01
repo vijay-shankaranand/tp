@@ -1,13 +1,13 @@
 package seedu.address.testutil.event;
 
-import static seedu.address.testutil.contact.TypicalPersons.ALICE;
-import static seedu.address.testutil.contact.TypicalPersons.BOB;
+import static seedu.address.testutil.contact.TypicalContacts.ALICE;
+import static seedu.address.testutil.contact.TypicalContacts.BOB;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import seedu.address.model.AddressBook;
+import seedu.address.model.JobFestGo;
 import seedu.address.model.event.Event;
 
 
@@ -29,8 +29,8 @@ public class TypicalEvents {
 
     private TypicalEvents() {}
 
-    public static AddressBook getTypicalAddressBook() {
-        AddressBook ab = new AddressBook();
+    public static JobFestGo getTypicalJobFestGo() {
+        JobFestGo ab = new JobFestGo();
         for (Event event : getTypicalEvents()) {
             ab.addEvent(event);
         }

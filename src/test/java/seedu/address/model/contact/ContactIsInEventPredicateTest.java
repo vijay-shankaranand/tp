@@ -25,14 +25,14 @@ public class ContactIsInEventPredicateTest {
             new Address("NUS"), new HashSet<Contact>(), new HashSet<Task>());
 
 
-        PersonIsInEventPredicate firstPredicate = new PersonIsInEventPredicate(firstEvent);
-        PersonIsInEventPredicate secondPredicate = new PersonIsInEventPredicate(secondEvent);
+        ContactIsInEventPredicate firstPredicate = new ContactIsInEventPredicate(firstEvent);
+        ContactIsInEventPredicate secondPredicate = new ContactIsInEventPredicate(secondEvent);
 
         // same object -> returns true
         assertTrue(firstPredicate.equals(firstPredicate));
 
         // same values -> returns true
-        PersonIsInEventPredicate firstPredicateCopy = new PersonIsInEventPredicate(firstEvent);
+        ContactIsInEventPredicate firstPredicateCopy = new ContactIsInEventPredicate(firstEvent);
         assertTrue(firstPredicate.equals(firstPredicateCopy));
 
         // different types -> returns false
@@ -51,7 +51,7 @@ public class ContactIsInEventPredicateTest {
         Event firstEvent = new Event(new Name("Job Fest 2023"), new Date("2023-12-23"),
             new Address("NUS"), new HashSet<Contact>(), new HashSet<Task>());
 
-        PersonIsInEventPredicate firstPredicate = new PersonIsInEventPredicate(firstEvent);
+        ContactIsInEventPredicate firstPredicate = new ContactIsInEventPredicate(firstEvent);
         String expected = new ToStringBuilder(firstPredicate).add("event", firstEvent).toString();
         assertTrue(firstPredicate.toString().equals(expected));
     }

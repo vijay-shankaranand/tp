@@ -26,7 +26,7 @@ import seedu.address.logic.commands.HomeCommand;
 import seedu.address.logic.commands.contact.AddContactCommand;
 import seedu.address.logic.commands.contact.DeleteContactCommand;
 import seedu.address.logic.commands.contact.EditContactCommand;
-import seedu.address.logic.commands.contact.EditContactCommand.EditPersonDescriptor;
+import seedu.address.logic.commands.contact.EditContactCommand.EditContactDescriptor;
 import seedu.address.logic.commands.contact.FindContactCommand;
 import seedu.address.logic.commands.contact.ViewContactsCommand;
 import seedu.address.logic.commands.event.AddEventCommand;
@@ -40,25 +40,25 @@ import seedu.address.logic.commands.tag.ViewTagsCommand;
 import seedu.address.logic.commands.task.AddTaskCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.contact.Contact;
-import seedu.address.model.contact.PersonIsTaggedPredicate;
+import seedu.address.model.contact.ContactIsTaggedPredicate;
 import seedu.address.model.event.Event;
 import seedu.address.model.name.Name;
 import seedu.address.model.name.NameContainsKeywordsPredicate;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.contact.ContactBuilder;
-import seedu.address.testutil.contact.EditPersonDescriptorBuilder;
-import seedu.address.testutil.contact.PersonUtil;
+import seedu.address.testutil.contact.ContactUtil;
+import seedu.address.testutil.contact.EditContactDescriptorBuilder;
 import seedu.address.testutil.event.EventBuilder;
 import seedu.address.testutil.event.EventUtil;
 
-public class AddressBookParserTest {
+public class JobFestGoParserTest {
 
-    private final AddressBookParser parser = new AddressBookParser();
+    private final JobFestGoParser parser = new JobFestGoParser();
 
     @Test
     public void parseCommand_add() throws Exception {
         Contact contact = new ContactBuilder().build();
-        AddContactCommand command = (AddContactCommand) parser.parseCommand(PersonUtil.getAddCommand(contact));
+        AddContactCommand command = (AddContactCommand) parser.parseCommand(ContactUtil.getAddCommand(contact));
         assertEquals(new AddContactCommand(contact), command);
     }
 
@@ -78,9 +78,9 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_edit() throws Exception {
         Contact contact = new ContactBuilder().build();
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(contact).build();
+        EditContactDescriptor descriptor = new EditContactDescriptorBuilder(contact).build();
         EditContactCommand command = (EditContactCommand) parser.parseCommand(EditContactCommand.COMMAND_WORD + " "
-                + INDEX_FIRST.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
+                + INDEX_FIRST.getOneBased() + " " + ContactUtil.getEditContactDescriptorDetails(descriptor));
         assertEquals(new EditContactCommand(INDEX_FIRST, descriptor), command);
     }
 
@@ -89,7 +89,7 @@ public class AddressBookParserTest {
         Tag tag = new Tag("friends");
         List<Tag> tagList = new ArrayList<>();
         tagList.add(tag);
-        PersonIsTaggedPredicate predicate = new PersonIsTaggedPredicate(tagList);
+        ContactIsTaggedPredicate predicate = new ContactIsTaggedPredicate(tagList);
 
         FilterByTagCommand command = (FilterByTagCommand) parser.parseCommand(FilterByTagCommand.COMMAND_WORD
                 + " " + "friends");

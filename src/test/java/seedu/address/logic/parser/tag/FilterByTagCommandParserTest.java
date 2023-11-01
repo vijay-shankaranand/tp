@@ -10,7 +10,7 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.tag.FilterByTagCommand;
-import seedu.address.model.contact.PersonIsTaggedPredicate;
+import seedu.address.model.contact.ContactIsTaggedPredicate;
 import seedu.address.model.tag.Tag;
 
 public class FilterByTagCommandParserTest {
@@ -31,8 +31,9 @@ public class FilterByTagCommandParserTest {
         tagList.add(firstTag);
         tagList.add(secondTag);
 
-        PersonIsTaggedPredicate predicate = new PersonIsTaggedPredicate(tagList);
+        ContactIsTaggedPredicate predicate = new ContactIsTaggedPredicate(tagList);
         FilterByTagCommand expectedFilterCommand = new FilterByTagCommand(tagList, predicate);
+
 
         // no leading and trailing whitespaces
         assertParseSuccess(parser, "friends owesmoney", expectedFilterCommand);

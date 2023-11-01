@@ -1,9 +1,9 @@
 package seedu.address.logic.commands.contact;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
+import static seedu.address.logic.commands.CommandTestUtil.showContactAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
-import static seedu.address.testutil.contact.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.contact.TypicalContacts.getTypicalJobFestGo;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -22,8 +22,8 @@ public class ViewContactsCommandTest {
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        model = new ModelManager(getTypicalJobFestGo(), new UserPrefs());
+        expectedModel = new ModelManager(model.getJobFestGo(), new UserPrefs());
     }
 
     @Test
@@ -33,7 +33,7 @@ public class ViewContactsCommandTest {
 
     @Test
     public void execute_listIsFiltered_showsEverything() {
-        showPersonAtIndex(model, INDEX_FIRST);
+        showContactAtIndex(model, INDEX_FIRST);
         assertCommandSuccess(new ViewContactsCommand(), model, ViewContactsCommand.MESSAGE_SUCCESS, expectedModel);
     }
 }

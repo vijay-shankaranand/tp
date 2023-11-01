@@ -81,7 +81,7 @@ public class EventBuilder {
      * Parses the {@code contacts} into a {@code Set<Contact>} and set it to the {@code Event} that we are building.
      */
     public EventBuilder withEventContacts(Contact... contacts) {
-        this.contacts = SampleDataUtil.getPersonSet(contacts);
+        this.contacts = SampleDataUtil.getContactSet(contacts);
         return this;
     }
     /**

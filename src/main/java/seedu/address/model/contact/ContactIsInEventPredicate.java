@@ -8,11 +8,11 @@ import seedu.address.model.event.Event;
 /**
  * Tests that a {@code Contact} is linked to the given event.
  */
-public class PersonIsInEventPredicate implements Predicate<Contact> {
+public class ContactIsInEventPredicate implements Predicate<Contact> {
     //Event to check if Contact is involved.
     private final Event event;
 
-    public PersonIsInEventPredicate(Event event) {
+    public ContactIsInEventPredicate(Event event) {
         this.event = event;
     }
 
@@ -28,12 +28,12 @@ public class PersonIsInEventPredicate implements Predicate<Contact> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof PersonIsInEventPredicate)) {
+        if (!(other instanceof ContactIsInEventPredicate)) {
             return false;
         }
 
-        PersonIsInEventPredicate otherPersonIsInEventPredicate = (PersonIsInEventPredicate) other;
-        return event.equals(otherPersonIsInEventPredicate.event);
+        ContactIsInEventPredicate otherContactIsInEventPredicate = (ContactIsInEventPredicate) other;
+        return event.equals(otherContactIsInEventPredicate.event);
     }
 
     @Override

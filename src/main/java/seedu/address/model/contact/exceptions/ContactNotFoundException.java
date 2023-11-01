@@ -9,7 +9,7 @@ public class ContactNotFoundException extends RuntimeException {
     private final Name name;
 
     /**
-     * Constructs a new PersonNotFoundException for a non-existent contact referred by index.
+     * Constructs a new ContactNotFoundException for a non-existent contact referred by index.
      */
     public ContactNotFoundException() {
         super("Index out of bound.");
@@ -17,7 +17,7 @@ public class ContactNotFoundException extends RuntimeException {
     }
 
     /**
-     * Constructs a new PersonNotFoundException for a non-existent contact referred by name.
+     * Constructs a new ContactNotFoundException for a non-existent contact referred by name.
      */
     public ContactNotFoundException(Name name) {
         super("Contact not found: " + name);
