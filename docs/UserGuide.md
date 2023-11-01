@@ -76,7 +76,7 @@ that you might not remember and organise your tasks neatly.
 
 ## Features
 
-<box type="info" seamless>
+<box type="info" seamless></box>
 
 **Notes about the command format:**<br>
 
@@ -242,7 +242,7 @@ Format: `add_event n/NAME d/DATE a/ADDRESS`
 * Date should **not** be before the current date.
 
 Examples:
-* `add_event n/CS2103T Presentataion d/2023-11-10 a/311, Clementi Ave 2, #02-25` adds an event named `CS2103T Presentation` to JobFestGo. <br><br>
+* `add_event n/CS2103T Presentation d/2023-11-10 a/311, Clementi Ave 2, #02-25` adds an event named `CS2103T Presentation` to JobFestGo. <br><br>
 
     ![result for 'add_event'](images/addEventResult.png)
 
@@ -289,7 +289,7 @@ Format: `link ev/EVENT_NAME c/CONTACT_NAME [c/MORE_CONTACT_NAMES]`
 
 ### Selecting an event : `select_event`
 
-Selects a event at the specified index from JobFestGo. The relevant contacts and tasks will be displayed.
+Selects an event at the specified index from JobFestGo. The relevant contacts and tasks will be displayed.
 
 Format: `select_event INDEX`
 
@@ -323,6 +323,7 @@ Shows a message explaining how to access the help page.
 ![help message](images/helpMessage.png)
 
 Format: `help`
+
 ### Clearing all entries : `clear`
 
 Clears all entries from JobFestGo.
@@ -349,7 +350,7 @@ JobFestGo data are saved in the hard disk automatically after any command that c
 
 JobFestGo data are saved automatically as a JSON file `[JAR file location]/data/jobfestgo.json`. Advanced users are welcome to update data directly by editing that data file.
 
-<box type="warning" seamless>
+<box type="warning" seamless></box>
 
 **Caution:**
 If your changes to the data file makes its format invalid, JobFestGo will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.
