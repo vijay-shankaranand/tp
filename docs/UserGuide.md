@@ -11,11 +11,11 @@ while still having the benefits of a Graphical User Interface (GUI). It is a tas
 meant to assist you as job festival event planners in cold-calling various contacts (e.g. vendors, customers) and
 other event-related tasks. This removes the hassle of having to shuffle through your contact list based on names
 that you might not remember and organise your tasks neatly.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ### Table of Contents
 - [JobFestGo User Guide](#jobfestgo-user-guide)
-  - [that you might not remember and organise your tasks neatly.](#that-you-might-not-remember-and-organise-your-tasks-neatly)
     - [Table of Contents](#table-of-contents)
   - [Quick start](#quick-start)
   - [Features](#features)
@@ -47,7 +47,6 @@ that you might not remember and organise your tasks neatly.
     - [Archiving data files `[coming in v2.0]`](#archiving-data-files-coming-in-v20)
     - [Progress bar for completed tasks of an event `[coming in v2.0]`](#progress-bar-for-completed-tasks-of-an-event-coming-in-v20)
   - [FAQ](#faq)
-  - [can download it here](#can-download-it-here)
   - [Known issues](#known-issues)
   - [Command summary](#command-summary)
 
@@ -139,7 +138,7 @@ Displays a list of all contacts in JobFestGo.
 
 Format: `view_contacts`<br><br>
 
-      ![result for 'view_contacts'](images/viewContactsResult.png)
+  ![result for 'view_contacts'](images/viewContactsResults.png)
 
 ### Deleting a contact : `delete_contact`
 
@@ -443,7 +442,7 @@ _Details coming soon ..._
 
 ## FAQ
 
-**Q**: How do I transfer my data to another Computer?<br>
+**Q**: How do I transfer my data to another computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous JobFestGo home folder.
 
 **Q**: What do I do if the clicking of the JobFestGo JAR file does not work? <br>
@@ -452,11 +451,12 @@ _Details coming soon ..._
 1. Open the command prompt
 1. Navigate to the directory where the JAR file is located using cd [JAR file location]
 1. Type java -jar jobfestgo.jar and press enter
-1. jobFestGo should launch
+1. JobFestGo should launch
 
-**Q**: How can i check my java version?<br>
+**Q**: How can I check my Java version?<br>
 **A**: Open a command prompt and type `java -version` . If you do not have Java installed, you
-can download it [here](https://www.oracle.com/java/technologies/downloads/#java11)
+can download it [here](https://www.oracle.com/java/technologies/downloads/#java11).
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Known issues
