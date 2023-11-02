@@ -44,11 +44,6 @@ public class DeleteContactCommand extends Command {
         Contact contactToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deleteContact(contactToDelete);
 
-        // Update the respective filtered lists to show the correct lists.
-        // The flow of the command should be returning to home page after deleting a contact.
-        model.updateFilteredContactList(Model.PREDICATE_SHOW_ALL_CONTACTS);
-        model.updateFilteredTaskList(Model.PREDICATE_SHOW_ALL_TASKS);
-
         return new CommandResult(String.format(MESSAGE_DELETE_CONTACT_SUCCESS, Messages.format(contactToDelete)));
 
     }

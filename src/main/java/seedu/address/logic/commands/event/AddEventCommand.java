@@ -53,12 +53,6 @@ public class AddEventCommand extends Command {
             throw new CommandException(Date.MESSAGE_CONSTRAINTS);
         }
         model.addEvent(toAdd);
-
-        // Update the relevant filtered lists to display the correct list.
-        // Flow of command should be after adding event, it goes to main dashboard.
-        model.updateFilteredContactList(Model.PREDICATE_SHOW_ALL_CONTACTS);
-        model.updateFilteredTaskList(Model.PREDICATE_SHOW_ALL_TASKS);
-
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
 

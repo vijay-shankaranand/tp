@@ -37,9 +37,6 @@ public class CommandResult {
     /** Boolean that represents whether the UI should go to a Select Event screen. */
     private boolean isSelectScreen = false;
 
-    /** Boolean that represents whether the UI should remain on the same screen. */
-    private boolean shouldRemainOnScreen = false;
-
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
@@ -83,17 +80,6 @@ public class CommandResult {
         this.selectedEvent = event;
         this.isSelectScreen = isSelectScreen;
 
-    }
-
-    /**
-     * Constructs a {@code CommandResult} with the specified {@code feedbackToUser},
-     * and {@code remainOnScreen} to determine whether to remain on the current screen.
-     */
-    public CommandResult(String feedbackToUser, boolean remainOnScreen) {
-        this.feedbackToUser = requireNonNull(feedbackToUser);
-        this.showHelp = false;
-        this.exit = false;
-        this.shouldRemainOnScreen = remainOnScreen;
     }
 
     public String getFeedbackToUser() {
@@ -184,7 +170,7 @@ public class CommandResult {
      * @return true if the current screen should remain displayed, else false
      */
     public boolean shouldStayOnScreen() {
-        return this.isSelectScreen || this.shouldRemainOnScreen;
+        return this.isSelectScreen;
     }
 
     @Override

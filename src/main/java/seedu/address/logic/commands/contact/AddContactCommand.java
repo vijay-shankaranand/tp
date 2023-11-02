@@ -67,12 +67,6 @@ public class AddContactCommand extends Command {
         }
 
         model.addContact(toAdd);
-
-        // Update the respective filtered lists to show the relevant components
-        // Flow of adding contact should result in it returning to main dashboard
-        model.updateFilteredContactList(Model.PREDICATE_SHOW_ALL_CONTACTS);
-        model.updateFilteredTaskList(Model.PREDICATE_SHOW_ALL_TASKS);
-
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
 

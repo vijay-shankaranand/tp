@@ -328,11 +328,6 @@ public class AddTaskCommandTest {
         public ObservableList<Task> getTasksDueSoonList() {
             throw new AssertionError("This method should not be called.");
         }
-
-        @Override
-        public Predicate<Contact> getContactListPredicate() {
-            throw new AssertionError("This method should not be called.");
-        }
     }
 
     /**

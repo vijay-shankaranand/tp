@@ -47,17 +47,11 @@ public class SelectEventCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
         }
 
-        // Get the event to be selected.
         Event eventToBeSelected = lastShownEventList.get(targetIndex.getZeroBased());
-
-        // Get the predicates necessary for the respective filtered lists.
         ContactIsInEventPredicate predicate = new ContactIsInEventPredicate(eventToBeSelected);
         TaskIsInEventPredicate taskPredicate = new TaskIsInEventPredicate(eventToBeSelected);
-
-        // Update the respective filtered lists to show the components within the event.
         model.updateFilteredContactList(predicate);
         model.updateFilteredTaskList(taskPredicate);
-
         return new CommandResult(String.format(MESSAGE_SELECT_EVENT_SUCCESS,
             Messages.format(eventToBeSelected)), eventToBeSelected, false);
     }
