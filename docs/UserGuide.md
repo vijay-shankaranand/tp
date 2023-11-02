@@ -13,10 +13,10 @@ other event-related tasks. This removes the hassle of having to shuffle through 
 that you might not remember and organise your tasks neatly.
 --------------------------------------------------------------------------------------------------------------------
 
-## Table of Contents
+### Table of Contents
 - [JobFestGo User Guide](#jobfestgo-user-guide)
   - [that you might not remember and organise your tasks neatly.](#that-you-might-not-remember-and-organise-your-tasks-neatly)
-  - [Table of Contents](#table-of-contents)
+    - [Table of Contents](#table-of-contents)
   - [Quick start](#quick-start)
   - [Features](#features)
     - [Adding a contact : `add_contact`](#adding-a-contact--add_contact)
@@ -193,7 +193,7 @@ Examples:
 
   ![result for 'find_contact alex david'](images/findAlexDavidResult.png)
 
-* `find_contacts doe` after `find_contacts john` will return `John Doe` and not `john` who was originally in the results.
+* `find_contacts doe` after `find_contacts john` will return `John Doe` and not `john` who was originally in the result.
 
 ### Adding a tag : `add_tag`
 
