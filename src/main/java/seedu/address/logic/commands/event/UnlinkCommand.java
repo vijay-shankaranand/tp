@@ -15,7 +15,6 @@ import seedu.address.model.contact.Contact;
 import seedu.address.model.contact.ContactIsInEventPredicate;
 import seedu.address.model.contact.exceptions.ContactNotFoundException;
 import seedu.address.model.event.Event;
-import seedu.address.model.event.exceptions.EventIsAlreadyLinkedToContactException;
 import seedu.address.model.event.exceptions.EventIsNotLinkedToContactException;
 import seedu.address.model.event.exceptions.EventNotFoundException;
 import seedu.address.model.name.Name;
