@@ -337,6 +337,16 @@ public class AddTagCommandTest {
         }
 
         @Override
+        public void updateFilteredContactList(Predicate<Contact> predicate) {
+            requireNonNull(predicate);
+        }
+
+        @Override
+        public void updateFilteredTaskList(Predicate<Task> predicate) {
+            requireNonNull(predicate);
+        }
+
+        @Override
         public ReadOnlyJobFestGo getJobFestGo() {
             return new JobFestGo();
         }

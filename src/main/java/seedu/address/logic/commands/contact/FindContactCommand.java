@@ -30,9 +30,14 @@ public class FindContactCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
+
+        // Update the filtered lists accordingly.
+        // Flow of command returns back to the main dashboard.
         model.updateFilteredContactList(predicate);
+        model.updateFilteredTaskList(Model.PREDICATE_SHOW_ALL_TASKS);
         return new CommandResult(
-                String.format(Messages.MESSAGE_CONTACTS_LISTED_OVERVIEW, model.getFilteredContactList().size()));
+                String.format(Messages.MESSAGE_CONTACTS_LISTED_OVERVIEW,
+                model.getFilteredContactList().size()), false);
     }
 
     @Override
