@@ -21,6 +21,7 @@ public class CommandResultTest {
         assertEquals(commandResult.shouldDisplayTagsPanel(), false);
         assertEquals(commandResult.shouldDisplayEventsPanel(), false);
         assertEquals(commandResult.shouldReturnToHome(), false);
+        assertEquals(commandResult.shouldStayOnScreen(), false);
 
         // same object -> returns true
         assertTrue(commandResult.equals(commandResult));

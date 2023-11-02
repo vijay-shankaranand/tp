@@ -50,7 +50,7 @@ The bulk of the app's work is done by the following four components:
 
 **How the architecture components interact with each other**
 
-The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
+The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete_contact 1`.
 
 <puml src="diagrams/ArchitectureSequenceDiagram.puml" width="574" />
 
@@ -71,7 +71,7 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/se-
 
 <puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `ContactListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 
@@ -80,7 +80,7 @@ The `UI` component,
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+* depends on some classes in the `Model` component, as it displays `Contact` object residing in the `Model`.
 
 ### Logic component
 
@@ -90,9 +90,9 @@ Here's a (partial) class diagram of the `Logic` component:
 
 <puml src="diagrams/LogicClassDiagram.puml" width="550"/>
 
-The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API call as an example.
+The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete_contact 1")` API call as an example.
 
-<puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `delete 1` Command" />
+<puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `delete_contact 1` Command" />
 
 <box type="info" seamless>
 
@@ -103,7 +103,7 @@ How the `Logic` component works:
 
 1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to delete a person).
+1. The command can communicate with the `Model` when it is executed (e.g. to delete a contact).
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
@@ -122,14 +122,14 @@ How the parsing works:
 
 The `Model` component,
 
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the JobFestGo data i.e., all `Contact` objects (which are contained in a `UniqueContactList` object).
+* stores the currently 'selected' `Contact` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Contact>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
 <box type="info" seamless>
 
-**Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
+**Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Contact` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Contact` needing their own `Tag` objects.<br>
 
 <puml src="diagrams/BetterModelClassDiagram.puml" width="450" />
 
@@ -143,13 +143,13 @@ The `Model` component,
 <puml src="diagrams/StorageClassDiagram.puml" width="550" />
 
 The `Storage` component,
-* can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
-* inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
+* can save both JobFestGo data and user preference data in JSON format, and read them back into corresponding objects.
+* inherits from both `JobFestGoStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
 ### Common classes
 
-Classes used by multiple components are in the `seedu.addressbook.commons` package.
+Classes used by multiple components are in the `seedu.address.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -175,11 +175,11 @@ Step 1. The user launches the application for the first time. The `VersionedAddr
 
 <puml src="diagrams/UndoRedoState0.puml" alt="UndoRedoState0" />
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+Step 2. The user executes `delete_contact 5` command to delete the 5th contact in the address book. The `delete_contact` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete_contact 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
 
 <puml src="diagrams/UndoRedoState1.puml" alt="UndoRedoState1" />
 
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+Step 3. The user executes `add_contact n/David …​` to add a new contact. The `add_contact` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
 
 <puml src="diagrams/UndoRedoState2.puml" alt="UndoRedoState2" />
 
@@ -189,7 +189,7 @@ Step 3. The user executes `add n/David …​` to add a new person. The `add` co
 
 </box>
 
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+Step 4. The user now decides that adding the contact was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
 
 <puml src="diagrams/UndoRedoState3.puml" alt="UndoRedoState3" />
 
@@ -219,11 +219,11 @@ The `redo` command does the opposite — it calls `Model#redoAddressBook()`,
 
 </box>
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
+Step 5. The user then decides to execute the command `view_contacts`. Commands that do not modify the address book, such as `view_contacts`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
 
 <puml src="diagrams/UndoRedoState4.puml" alt="UndoRedoState4" />
 
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
+Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add_contact n/David …​` command. This is the behavior that most modern desktop applications follow.
 
 <puml src="diagrams/UndoRedoState5.puml" alt="UndoRedoState5" />
 
@@ -241,7 +241,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 * **Alternative 2:** Individual command knows how to undo/redo by
   itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
+  * Pros: Will use less memory (e.g. for `delete_contact`, just save the contact being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
 
 _{more aspects and alternatives to be added}_
@@ -269,32 +269,38 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 * is a job festival event planner
-* has a need to manage a significant number of contacts of different types (e.g. vendors, customers)
+* has a need to manage a significant number of contacts of different types (e.g. vendors, customers) and tasks for different events
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: Each event planner has multiple events, each of which can have a large number of contacts associated and searching for contact would be a hassle. Our product provides a centralised system that would help job event planners organise their contact information for quick and easy access.
+**Value proposition**: Each event planner has multiple events, each of which can have a large number of contacts and tasks associated and searching for contact would be a hassle. Our product provides a centralised system that would help job event planners organise their contact information and tasks for quick and easy access.
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                 | So that I can…​                                                        |
-|----------|--------------------------------------------|------------------------------|------------------------------------------------------------------------|
-| `* * *`  | job fest event planner                     | see usage instructions       | refer to instructions when I forget how to use the App                 |
-| `* * *`  | job fest event planner                     | add a new person             |                                                                        |
-| `* * *`  | user                                       | delete a person              | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name        | locate details of persons without having to go through the entire list |
-| `* * *`  | job fest event planner                     | view the entire contact list |                                                                        |
-| `* *`    | user                                       | hide private contact details | minimize chance of someone else seeing them by accident                |
-| `* *`    | job fest event planner                     | add tags                     | add to the pool of use categories already available    |
-| `* *`    | job fest event planner                     | view all tags | remember contacts of a certain category to contact them for events                |
-| `* *`     | job fest event planner                    | be able to delete tags | can easily identify who I should be cold calling among my contacts without unnecessary tags     |
-| `* *`    | job fest event planner                        | be able to delete events | remove events I no longer need                                          |
-| `* *`    | job fest event planner                        | add a new task for a event | remember the tasks I need to do for the event                         |
-| `*`      | user with many persons in the address book | sort persons by name         | locate a person easily                                                 |
+| Priority | As a …​                                    | I want to …​                 | So that I can…​                                                                             |
+|----------|--------------------------------------------|------------------------------|---------------------------------------------------------------------------------------------|
+| `* * *`  | job fest event planner                     | see usage instructions       | refer to instructions when I forget how to use JobFestGo                                    |
+| `* * *`  | job fest event planner                     | add a new contact             |                                                                                             |
+| `* * *`  | job fest event planner                                       | delete a contact              | remove entries that I no longer need                                                        |
+| `* * *`  | job fest event planner                                       | find a contact by name        | locate details of contacts without having to go through the entire list                      |
+| `* * *`  | job fest event planner                     | view the entire contact list |                                                                                             |
+| `* *`    | job fest event planner                                       | hide private contact details | minimize chance of someone else seeing them by accident                                     |
+| `* *`    | job fest event planner                     | add tags                     | add to the pool of use categories already available                                         |
+| `* *`    | job fest event planner                     | view all tags                | remember contacts of a certain category to contact them for events                          |
+| `* *`     | job fest event planner                     | be able to delete tags       | can easily identify who I should be cold calling among my contacts without unnecessary tags |
+| `* *`     | job fest event planner                     | filter contacts by tags      | conveniently view all the contacts tagged by specific tags                                  |
+| `* *`    | job fest event planner                        | add a new event              | keep track of the events I have to plan                                                     |
+| `* *`     | job fest event planner                     | view all events              | remember all the events I am involved in so far                                             |
+| `* *`    | job fest event planner                        | be able to delete events     | remove events I no longer need                                                              |
+| `* *`     | job fest event planner                     | be able to select events     | can easily view the contacts and tasks to do for each particular event                      |
+| `* *`     | job fest event planner                     | link contacts to events      | remember which event the specific contacts are involved in                                  |
+| `* *`    | job fest event planner                        | add a new task for an event  | remember the tasks I need to do for the event                                               |
+| `* *`      | job fest event planner | return to the home page      |                                                                                             |
+| `*`      | job fest event planner | sort contacts by name         | locate a contact easily                                                                      |
 
 
 *{More to be added}*
@@ -304,13 +310,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 (For all use cases below, the **System** is the `JobFestGo` and the **Actor** is the `user`, unless specified otherwise)
 
 
-**Use case: Add a person**
+**Use case: Add a contact**
 
 **MSS**
 
-1.  User requests to add person and specifies details of person
-2.  JobFestGo adds the person to list of persons
-3.  JobFestGo shows updated list of persons
+1.  User requests to add contact and specifies details of contact
+2.  JobFestGo adds the contact to list of contacts
+3.  JobFestGo shows updated list of contacts
 
     Use case ends.
 
@@ -346,14 +352,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Use case: Delete a person**
+**Use case: Delete a contact**
 
 **MSS**
 
-1.  User requests to list persons
-2.  JobFestGo shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  JobFestGo deletes the person
+1.  User requests to list contacts
+2.  JobFestGo shows a list of contacts
+3.  User requests to delete a specific contact in the list
+4.  JobFestGo deletes the contact
 
    Use case ends.
 
@@ -371,12 +377,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-**Use case: List all persons**
+**Use case: List all contacts**
 
 **MSS**
 
-1.  User requests to list all persons
-2.  JobFestGo shows a list of all persons
+1.  User requests to list all contacts
+2.  JobFestGo shows a list of all contacts
 
     Use case ends.
 
@@ -412,7 +418,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 1. User requests to list tags
-2. JobFestGo shows a list of tags that are currently in use in the contacts list
+2. JobFestGo shows a list of all tags
 
    Use case ends.
 
@@ -451,6 +457,66 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
+**Use case: Filter contacts by tag**
+
+**MSS**
+1. User requests to filter contacts by tags
+2. JobFestGo shows a list of contacts tagged by specified tags
+
+   Use case ends.
+
+**Extensions**
+* 1a. The given tag name is invalid.
+
+    * 1a1. JobFestGo shows an error message.
+
+      Use case resumes at step 1.
+
+**Use case: Add an event**
+
+**MSS**
+
+1. User requests to add event
+2. User specifies the details of the event
+3. JobFestGo adds the event to collection of events
+4. JobFestGo shows updated list of events
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. Any of the mandatory fields not specified
+
+    * 1a1. JobFestGo informs user that mandatory fields not specified
+
+      Use case ends.
+
+* 1b. Event name already exists.
+
+    * 1b1. JobFestGo informs user that event name already exists.
+
+      Use case ends.
+
+* 1c. Date is in incorrect format.
+
+    * 1c1. JobFestGo informs user that date is in wrong format.
+
+      Use case ends.
+
+* 1d. Date is before current date.
+
+    * 1d1. JobFestGo informs user that date is before current date.
+
+      Use case ends.
+
+**Use case: View all events**
+
+**MSS**
+1. User requests to list events
+2. JobFestGo shows a list of all events
+
+   Use case ends.
+
 **Use case: Delete an event**
 
 **MSS**
@@ -480,6 +546,58 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
+**Use case: Select an event**
+
+**MSS**
+
+1. User requests to select an event
+2. JobFestGo displays the contacts and tasks related to the event
+3. User <u>adds a task</u> or <u>deletes a task</u> or <u>marks a task</u> or <u>unmarks a task</u>.
+
+      Use case ends.
+
+
+**Extensions**
+
+* 1a. The given index is invalid.
+
+    * 1a1. JobFestGo shows an error message.
+
+      Use case resumes at step 1.
+
+* 1b. Missing index.
+
+    * 1b1. JobFestGo shows an error message.
+
+      Use case resumes at step 1.
+
+**Use case: Link contacts to an event**
+
+**MSS**
+1. User requests to link specified contacts to a specified event.
+2. JobFestGo links the contacts to the event.
+
+   Use case ends.
+
+**Extensions**
+* 1a. The given event does not exist.
+
+    * 1a1. JobFestGo shows an error message.
+
+      Use case resumes at step 1.
+
+* 1b. One of the given contacts does not exist.
+
+    * 1b1. JobFestGo shows an error message.
+
+      Use case resumes at step 1.
+
+* 1a. One of the given contacts is already linked to the given event.
+
+    * 1a1. JobFestGo shows an error message.
+
+      Use case resumes at step 1.
+
 **Use case: Add a task**
 
 **MSS**
@@ -498,18 +616,33 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   * 1a1. JobFestGo informs user that mandatory fields not specified
 
     Use case ends.
-    
+
 * 1b. Date is invalid.
 
     * 1b1. JobFestGo informs user that date is invalid.
 
       Use case ends.
-      
+
 * 1c. Event does not already exist.
-     
+
     * 1c1. JobFestGo informs user that event does not already exist.
 
       Use case ends.
+
+**Use case: Return to the home page**
+
+**MSS**
+1. User is on any page
+2. User requests to return to the home page
+3. JobFestGo returns user to the home page
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. The user is already on the home page
+
+   Use case ends.
 
 *{More to be added}*
 
@@ -518,7 +651,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. Environment requirement:
 * Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2. Scalability:
-* Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+* Should be able to hold up to 1000 contacts without a noticeable sluggishness in performance for typical usage.
 3. Usability:
 * A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 * The user interface should be intuitive for event planners to use, for non-tech savy job event planners
@@ -562,19 +695,19 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
-### Deleting a person
+### Deleting a contact
 
-1. Deleting a person while all persons are being shown
+1. Deleting a contact while all contacts are being shown
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   1. Prerequisites: List all contacts using the `view_contacts` command. Multiple contacts in the list.
 
-   1. Test case: `delete 1`<br>
+   1. Test case: `delete_contact 1`<br>
       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+   1. Test case: `delete_contact 0`<br>
+      Expected: No contact is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   1. Other incorrect delete commands to try: `delete_contact`, `delete_contact x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
 1. _{ more test cases …​ }_

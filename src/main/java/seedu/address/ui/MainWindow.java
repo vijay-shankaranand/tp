@@ -34,7 +34,7 @@ public class MainWindow extends UiPart<Stage> {
     private boolean shouldReturnToHome;
 
     // Independent Ui parts residing in this Ui container
-    private PersonListPanel personListPanel;
+    private ContactListPanel contactListPanel;
     private TagListPanel tagListPanel;
     private EventListPanel eventListPanel;
     private EventContactDisplay eventContactDisplay;
@@ -66,7 +66,7 @@ public class MainWindow extends UiPart<Stage> {
         this.primaryStage = primaryStage;
         this.logic = logic;
         this.shouldDisplayTags = false;
-        this.shouldDisplayContacts = false;
+        this.shouldDisplayEvents = false;
         this.shouldDisplayContacts = false;
         this.shouldReturnToHome = false;
 
@@ -151,7 +151,7 @@ public class MainWindow extends UiPart<Stage> {
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
-        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
+        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getJobFestGoFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
@@ -162,13 +162,14 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up the contact list panel with the contacts in the filtered contact list.
      */
     void fillContactListPanel() {
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
+
+        contactListPanel = new ContactListPanel(logic.getFilteredContactList());
 
         if (!listPanelPlaceholder.getChildren().isEmpty()) {
             listPanelPlaceholder.getChildren().clear();
         }
 
-        listPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        listPanelPlaceholder.getChildren().add(contactListPanel.getRoot());
     }
 
     /**
@@ -251,8 +252,8 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
-    public PersonListPanel getPersonListPanel() {
-        return personListPanel;
+    public ContactListPanel getContactListPanel() {
+        return contactListPanel;
     }
 
     public TagListPanel getTagListPanel() {
@@ -344,7 +345,9 @@ public class MainWindow extends UiPart<Stage> {
             setReturnToHomeStatus(shouldReturnHome);
 
             if (commandResult.shouldHideAllPanels()) {
-                handleElse();
+                if (!commandResult.shouldStayOnScreen()) {
+                    handleElse();
+                }
                 // to display that an event is selected
                 eventContactDisplay.setFeedbackToUser(commandResult);
             }

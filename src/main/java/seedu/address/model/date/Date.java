@@ -7,7 +7,7 @@ import java.time.DateTimeException;
 import java.time.LocalDate;
 
 /**
- * Represents an Event's date in the address book.
+ * Represents an Event's date in the JobFestGo.
  * Guarantees: immutable; is valid as declared in {@link #isValidDate(String)}
  */
 public class Date {
@@ -34,28 +34,84 @@ public class Date {
      * Returns true if a given string is a valid date.
      */
     public static boolean isValidDate(String testDate) {
-        LocalDate date;
         if (testDate.matches(VALIDATION_REGEX)) {
-            try {
-                date = LocalDate.parse(testDate);
-            } catch (DateTimeException e) {
-                return false;
-            }
+            return isParsable(testDate);
         } else {
             return false;
         }
-        return isDateTodayOrAfter(date);
+    }
+
+    /**
+     * Returns true if a given string is parsable.
+     */
+    public static boolean isParsable(String testDate) {
+        try {
+            LocalDate.parse(testDate);
+        } catch (DateTimeException e) {
+            return false;
+        }
+        return true;
     }
 
     /**
      * Returns true if a given date is today or after today.
      */
-    public static boolean isDateTodayOrAfter(LocalDate date) {
+    public static boolean isDateTodayOrAfter(Date date) {
         LocalDate today = LocalDate.now();
-        if (date.isBefore(today)) {
+        LocalDate taskDue = LocalDate.parse(date.date);
+        if (taskDue.isBefore(today)) {
             return false;
         }
         return true;
+    }
+
+    /**
+     * Compares two EventDates by date.
+     * @param secondEventDate second EventDate to compare
+     * @return -1 if first EventDate is before second EventDate, 0 if equal, 1 if first EventDate is after
+     */
+    public int compareTo(Date secondEventDate) {
+        LocalDate firstDate;
+        LocalDate secondDate;
+
+        firstDate = LocalDate.parse(this.date);
+        secondDate = LocalDate.parse(secondEventDate.date);
+
+        return firstDate.compareTo(secondDate);
+    }
+
+    /**
+     * Returns true if the date is within 3 days from today.
+     * @return true if date is within 3 days from today, false, otherwise.
+     */
+    public boolean isWithinThreeDays() {
+        LocalDate taskDue = LocalDate.parse(this.date);
+
+        if (taskDue.isBefore(fourDaysFromNow())) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Returns the date four days after today's date.
+     * @return date four days after today's date.
+     */
+    public LocalDate fourDaysFromNow() {
+        LocalDate today = LocalDate.now();
+        return today.plusDays(4);
+    }
+
+    /**
+     * Returns true if the date is before today's date.
+     * @return true if date is before today's date, false otherwise.
+     */
+    public boolean isOverdue() {
+        LocalDate today = LocalDate.now();
+        LocalDate taskDue = LocalDate.parse(this.date);
+
+        return taskDue.isBefore(today);
     }
 
     @Override
@@ -82,6 +138,8 @@ public class Date {
     public int hashCode() {
         return date.hashCode();
     }
+
+
 
 
 }

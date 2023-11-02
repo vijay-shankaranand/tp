@@ -12,6 +12,7 @@ public class HomeCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) {
+        model.updateFilteredTaskList(Model.PREDICATE_SHOW_ALL_TASKS);
         return new CommandResult(MESSAGE_SUCCESS, false, false);
     }
 }

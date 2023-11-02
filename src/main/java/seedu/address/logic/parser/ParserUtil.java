@@ -9,13 +9,11 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.address.Address;
+import seedu.address.model.contact.Email;
+import seedu.address.model.contact.Phone;
 import seedu.address.model.date.Date;
-import seedu.address.model.event.EventAddress;
-import seedu.address.model.event.EventName;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
+import seedu.address.model.name.Name;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.task.TaskDescription;
 
@@ -25,6 +23,8 @@ import seedu.address.model.task.TaskDescription;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_CONTAINS_MORE_THAN_ONE_WHITE_SPACE =
+            "%1$s contains more than one white space.";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -50,6 +50,9 @@ public class ParserUtil {
         String trimmedName = name.trim();
         if (!Name.isValidName(trimmedName)) {
             throw new ParseException(Name.MESSAGE_CONSTRAINTS);
+        }
+        if (isContainsMoreThanOneWhiteSpace(trimmedName)) {
+            throw new ParseException(String.format(MESSAGE_CONTAINS_MORE_THAN_ONE_WHITE_SPACE, "Name"));
         }
         return new Name(trimmedName);
     }
@@ -80,6 +83,9 @@ public class ParserUtil {
         String trimmedAddress = address.trim();
         if (!Address.isValidAddress(trimmedAddress)) {
             throw new ParseException(Address.MESSAGE_CONSTRAINTS);
+        }
+        if (isContainsMoreThanOneWhiteSpace(trimmedAddress)) {
+            throw new ParseException(String.format(MESSAGE_CONTAINS_MORE_THAN_ONE_WHITE_SPACE, "Address"));
         }
         return new Address(trimmedAddress);
     }
@@ -127,25 +133,10 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String eventName} into an {@code EventName}.
+     * Parses a {@code String Date} into an {@code Date}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code eventName} is invalid.
-     */
-    public static EventName parseEventName(String eventName) throws ParseException {
-        requireNonNull(eventName);
-        String trimmedEventName = eventName.trim();
-        if (!EventName.isValidName(trimmedEventName)) {
-            throw new ParseException(EventName.MESSAGE_CONSTRAINTS);
-        }
-        return new EventName(trimmedEventName);
-    }
-
-    /**
-     * Parses a {@code String eventDate} into an {@code EventDate}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code eventDate} is invalid.
+     * @throws ParseException if the given {@code Date} is invalid.
      */
     public static Date parseDate(String eventDate) throws ParseException {
         requireNonNull(eventDate);
@@ -156,20 +147,6 @@ public class ParserUtil {
         return new Date(trimmedEventDate);
     }
 
-    /**
-     * Parses a {@code String eventAddress} into an {@code EventAddress}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code eventAddress} is invalid.
-     */
-    public static EventAddress parseEventAddress(String eventAddress) throws ParseException {
-        requireNonNull(eventAddress);
-        String trimmedEventAddress = eventAddress.trim();
-        if (!EventAddress.isValidAddress(trimmedEventAddress)) {
-            throw new ParseException(EventAddress.MESSAGE_CONSTRAINTS);
-        }
-        return new EventAddress(trimmedEventAddress);
-    }
 
     /**
      * Parses {@code Collection<String> contactNames} into a {@code Set<Name>}.
@@ -195,8 +172,19 @@ public class ParserUtil {
         if (!TaskDescription.isValidDescription(trimmedTaskDescription)) {
             throw new ParseException(TaskDescription.MESSAGE_CONSTRAINTS);
         }
+        if (isContainsMoreThanOneWhiteSpace(trimmedTaskDescription)) {
+            throw new ParseException(String.format(MESSAGE_CONTAINS_MORE_THAN_ONE_WHITE_SPACE, "Task Description"));
+        }
         return new TaskDescription(trimmedTaskDescription);
     }
 
+    /**
+     * Parses input to check if thw input contains more than one white space.
+     * @param input Input string to check.
+     * @return true if input contains more than one white space, false otherwise.
+     */
+    public static boolean isContainsMoreThanOneWhiteSpace(String input) {
+        return input.matches(".*\\s{2,}.*");
+    }
 
 }

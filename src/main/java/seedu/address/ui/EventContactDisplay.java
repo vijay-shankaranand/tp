@@ -2,7 +2,9 @@ package seedu.address.ui;
 
 import java.util.logging.Logger;
 
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
@@ -19,23 +21,27 @@ public class EventContactDisplay extends UiPart<Region> {
 
     private static final Logger logger = LogsCenter.getLogger(EventContactDisplay.class);
 
+    private static final EventHandler<MouseEvent> handler = MouseEvent::consume;
+
     private Logic logic;
 
     //Independent Ui parts residing in this Ui container
-    private PersonListPanel personListPanel;
+    private ContactListPanel contactListPanel;
     private EventListPanel eventListPanel;
+    private ReminderListPanel reminderListPanel;
+    private TaskListPanel taskListPanel;
 
     @FXML
     private GridPane eventContactDisplay;
 
     @FXML
-    private StackPane personListPanelPlaceholder;
+    private StackPane contactListPanelPlaceholder;
 
     @FXML
     private StackPane eventListPanelPlaceholder;
 
     @FXML
-    private StackPane eventCardPlaceholder;
+    private StackPane taskPanelPlaceholder;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Logic}.
@@ -43,6 +49,12 @@ public class EventContactDisplay extends UiPart<Region> {
     public EventContactDisplay(Logic logic, boolean shouldReset) {
         super(FXML);
         this.logic = logic;
+
+        // Disable mouse events for all panels
+        contactListPanelPlaceholder.addEventFilter(MouseEvent.ANY, handler);
+        eventListPanelPlaceholder.addEventFilter(MouseEvent.ANY, handler);
+        taskPanelPlaceholder.addEventFilter(MouseEvent.ANY, handler);
+
         if (shouldReset) {
             fillInnerPartsAfterReset();
         } else {
@@ -53,22 +65,42 @@ public class EventContactDisplay extends UiPart<Region> {
      * Fills up all the placeholders of this window.
      */
     private void fillInnerParts() {
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+
+        contactListPanel = new ContactListPanel(logic.getFilteredContactList());
+        contactListPanelPlaceholder.getChildren().add(contactListPanel.getRoot());
+
 
         eventListPanel = new EventListPanel(logic.getFilteredEventList());
         eventListPanelPlaceholder.getChildren().add(eventListPanel.getRoot());
+
+        reminderListPanel = new ReminderListPanel(logic.getTasksDueSoonList());
+        taskPanelPlaceholder.getChildren().add(reminderListPanel.getRoot());
+    }
+
+    /**
+     * Fills up the task list panel with the filtered task list when an event is selected.
+     */
+    private void fillTaskList() {
+        taskListPanel = new TaskListPanel(logic.getFilteredTaskList());
+        if (!taskPanelPlaceholder.getChildren().isEmpty()) {
+            taskPanelPlaceholder.getChildren().clear();
+        }
+        taskPanelPlaceholder.getChildren().add(taskListPanel.getRoot());
     }
 
     /**
      * Fills up all the placeholders of this window after reset.
      */
     public void fillInnerPartsAfterReset() {
-        personListPanel = new PersonListPanel(logic.getUnfilteredPersonList());
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+
+        contactListPanel = new ContactListPanel(logic.getUnfilteredContactList());
+        contactListPanelPlaceholder.getChildren().add(contactListPanel.getRoot());
 
         eventListPanel = new EventListPanel(logic.getUnfilteredEventList());
         eventListPanelPlaceholder.getChildren().add(eventListPanel.getRoot());
+
+        reminderListPanel = new ReminderListPanel(logic.getTasksDueSoonList());
+        taskPanelPlaceholder.getChildren().add(reminderListPanel.getRoot());
     }
 
     /**
@@ -78,8 +110,9 @@ public class EventContactDisplay extends UiPart<Region> {
      */
     public void setFeedbackToUser(CommandResult commandResult) {
         Event selectedEvent = commandResult.getSelectedEvent();
-        if (selectedEvent != null) {
+        if (selectedEvent != null && (commandResult.shouldStayOnScreen() || !commandResult.isDeleteEvent())) {
             eventListPanel.selectEvent(selectedEvent);
+            this.fillTaskList();
         }
     }
 }

@@ -4,18 +4,18 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyJobFestGo;
 
 public class SampleDataUtilTest {
     @Test
-    public void getSampleAddressBook_hasPersonList_success() {
-        ReadOnlyAddressBook ab = SampleDataUtil.getSampleAddressBook();
-        assertTrue(!ab.getPersonList().isEmpty());
+    public void getSampleJobFestGo_hasContactList_success() {
+        ReadOnlyJobFestGo ab = SampleDataUtil.getSampleJobFestGo();
+        assertTrue(!ab.getContactList().isEmpty());
     }
 
     @Test
-    public void getSampleAddressBook_hasTagList_success() {
-        ReadOnlyAddressBook ab = SampleDataUtil.getSampleAddressBook();
+    public void getSampleJobFestGo_hasTagList_success() {
+        ReadOnlyJobFestGo ab = SampleDataUtil.getSampleJobFestGo();
         assertTrue(!ab.getTagList().isEmpty());
     }
 }

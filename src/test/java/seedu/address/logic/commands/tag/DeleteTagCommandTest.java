@@ -8,7 +8,6 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -16,15 +15,15 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.contact.DeleteContactCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.commands.person.DeleteCommand;
 import seedu.address.model.Model;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyJobFestGo;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.contact.Contact;
+import seedu.address.model.date.Date;
 import seedu.address.model.event.Event;
-import seedu.address.model.event.EventName;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
+import seedu.address.model.name.Name;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.TaskDescription;
@@ -66,7 +65,7 @@ public class DeleteTagCommandTest {
     @Test
     public void execute_invalidTagToDelete() throws CommandException {
         Tag test1 = new Tag("vendor");
-        Tag test2 = new Tag("personal");
+        Tag test2 = new Tag("Contactal");
         Tag test3 = new Tag("private");
         ModelStubWithTags testModel = new ModelStubWithTags();
         testModel.addTag(test1);
@@ -86,7 +85,7 @@ public class DeleteTagCommandTest {
         testModel.addTag(test);
         DeleteTagCommand same1 = new DeleteTagCommand(test);
         DeleteTagCommand same2 = new DeleteTagCommand(test);
-        DeleteCommand diffCommand = new DeleteCommand(INDEX_FIRST);
+        DeleteContactCommand diffCommand = new DeleteContactCommand(INDEX_FIRST);
         assertEquals(same1, same2);
         assertEquals(same1, same1);
         assertFalse(same1.equals(diffCommand));
@@ -123,62 +122,62 @@ public class DeleteTagCommandTest {
         }
 
         @Override
-        public Path getAddressBookFilePath() {
+        public Path getJobFestGoFilePath() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void setAddressBookFilePath(Path addressBookFilePath) {
+        public void setJobFestGoFilePath(Path jobFestGoFilePath) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void addPerson(Person person) {
+        public void addContact(Contact contact) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public Person getPerson(Name name) {
+        public Contact getContact(Name name) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void setAddressBook(ReadOnlyAddressBook newData) {
+        public void setJobFestGo(ReadOnlyJobFestGo newData) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
+        public ReadOnlyJobFestGo getJobFestGo() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public boolean hasPerson(Person person) {
+        public boolean hasContact(Contact contact) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void deletePerson(Person target) {
+        public void deleteContact(Contact target) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void setPerson(Person target, Person editedPerson) {
+        public void setContact(Contact target, Contact editedContact) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ObservableList<Person> getFilteredPersonList() {
+        public ObservableList<Contact> getFilteredContactList() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ObservableList<Person> getUnfilteredPersonList() {
+        public ObservableList<Contact> getUnfilteredContactList() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void updateFilteredPersonList(Predicate<Person> predicate) {
+        public void updateFilteredContactList(Predicate<Contact> predicate) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -218,7 +217,7 @@ public class DeleteTagCommandTest {
         }
 
         @Override
-        public Event getEvent(EventName name) {
+        public Event getEvent(Name name) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -238,12 +237,32 @@ public class DeleteTagCommandTest {
         }
 
         @Override
+        public void linkContactToEvent(Contact contact, Event event) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void unlinkContactFromEvent(Contact contact, Event event) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void updateFilteredEventList(Predicate<Event> predicate) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public boolean hasTask(Task task) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasTask(TaskDescription taskDescription, Name associatedEventName) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteTask(TaskDescription taskDescription, Name associatedEventName) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -259,6 +278,16 @@ public class DeleteTagCommandTest {
 
         @Override
         public void setTask(Task target, Task editedTask) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void markTask(TaskDescription taskDescription, Name associatedEventName) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void unmarkTask(TaskDescription taskDescription, Name associatedEventName) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -279,6 +308,16 @@ public class DeleteTagCommandTest {
 
         @Override
         public ObservableList<Event> getUnfilteredEventList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Task> getTasksDueSoonList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Predicate<Contact> getContactListPredicate() {
             throw new AssertionError("This method should not be called.");
         }
     }
@@ -318,6 +357,16 @@ public class DeleteTagCommandTest {
             if (hasTag(tag)) {
                 tags.remove(tag);
             }
+        }
+
+        @Override
+        public void updateFilteredContactList(Predicate<Contact> predicate) {
+            requireNonNull(predicate);
+        }
+
+        @Override
+        public void updateFilteredTaskList(Predicate<Task> predicate) {
+            requireNonNull(predicate);
         }
     }
 }

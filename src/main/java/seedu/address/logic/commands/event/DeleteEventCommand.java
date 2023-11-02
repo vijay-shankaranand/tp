@@ -44,7 +44,14 @@ public class DeleteEventCommand extends Command {
         }
         Event eventToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deleteEvent(eventToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_EVENT_SUCCESS, Messages.format(eventToDelete)));
+
+        // Update the respective filtered lists to show the correct lists.
+        // Flow of the command should be after deleting an event, goes back to main dashboard.
+        model.updateFilteredTaskList(Model.PREDICATE_SHOW_ALL_TASKS);
+        model.updateFilteredContactList(Model.PREDICATE_SHOW_ALL_CONTACTS);
+
+        return new CommandResult(String.format(MESSAGE_DELETE_EVENT_SUCCESS, Messages.format(eventToDelete)),
+                eventToDelete, true);
     }
 
     @Override

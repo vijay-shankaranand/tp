@@ -26,6 +26,7 @@
           </minWidth>
         </Label>
         <Label fx:id="name" text="\$first" styleClass="cell_big_label" />
+        <Label fx:id="completed" text="\$completed" />
       </HBox>
       <FlowPane fx:id="events" />
       <Label fx:id="date" styleClass="cell_small_label" text="\$date" />

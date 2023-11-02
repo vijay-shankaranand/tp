@@ -7,10 +7,11 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyJobFestGo;
+import seedu.address.model.contact.Contact;
 import seedu.address.model.event.Event;
-import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.task.Task;
 
 /**
  * API of the Logic component
@@ -26,17 +27,18 @@ public interface Logic {
     CommandResult execute(String commandText) throws CommandException, ParseException;
 
     /**
-     * Returns the AddressBook.
+     * Returns the JobFestGo.
      *
-     * @see seedu.address.model.Model#getAddressBook()
+     * @see seedu.address.model.Model#getJobFestGo()
      */
-    ReadOnlyAddressBook getAddressBook();
+    ReadOnlyJobFestGo getJobFestGo();
 
-    /** Returns an unmodifiable view of the filtered list of persons */
-    ObservableList<Person> getFilteredPersonList();
+    /** Returns an unmodifiable view of the filtered list of contacts */
+    ObservableList<Contact> getFilteredContactList();
 
-    /** Returns an unmodifiable view of the unfiltered list of persons */
-    ObservableList<Person> getUnfilteredPersonList();
+    /** Returns an unmodifiable view of the unfiltered list of contacts */
+
+    ObservableList<Contact> getUnfilteredContactList();
 
     /** Returns an unmodifiable view of the filtered list of tags */
     ObservableList<Tag> getFilteredTagList();
@@ -47,10 +49,16 @@ public interface Logic {
     /** Returns an unmodifiable view of the unfiltered list of events */
     ObservableList<Event> getUnfilteredEventList();
 
+    /** Returns an unmodifiable view of the filtered list of tasks */
+    ObservableList<Task> getFilteredTaskList();
+
+    /** Returns an unmodifiable view of the tasks due soon */
+    ObservableList<Task> getTasksDueSoonList();
+
     /**
-     * Returns the user prefs' address book file path.
+     * Returns the user prefs' JobFestGo file path.
      */
-    Path getAddressBookFilePath();
+    Path getJobFestGoFilePath();
 
     /**
      * Returns the user prefs' GUI settings.

@@ -16,11 +16,11 @@ import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.address.Address;
+import seedu.address.model.contact.Contact;
 import seedu.address.model.date.Date;
 import seedu.address.model.event.Event;
-import seedu.address.model.event.EventAddress;
-import seedu.address.model.event.EventName;
-import seedu.address.model.person.Person;
+import seedu.address.model.name.Name;
 import seedu.address.model.task.Task;
 
 /**
@@ -42,10 +42,12 @@ public class AddEventCommandParser implements Parser<AddEventCommand> {
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_DATE, PREFIX_ADDRESS);
-        EventName name = ParserUtil.parseEventName(argMultimap.getValue(PREFIX_NAME).get());
+
+        Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         Date date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
-        EventAddress address = ParserUtil.parseEventAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
-        Set<Person> contacts = new HashSet<>();
+        Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
+
+        Set<Contact> contacts = new HashSet<>();
         Set<Task> tasks = new HashSet<>();
 
         Event event = new Event(name, date, address, contacts, tasks);

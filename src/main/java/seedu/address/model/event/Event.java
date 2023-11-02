@@ -8,59 +8,64 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.address.Address;
+import seedu.address.model.contact.Contact;
 import seedu.address.model.date.Date;
-import seedu.address.model.person.Person;
+import seedu.address.model.name.Name;
 import seedu.address.model.task.Task;
 
 /**
- * Represents an Event in the address book.
+ * Represents an Event in the JobFestGo.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Event {
 
     // Identity fields
-    private final EventName name;
+    private final Name eventName;
 
     // Data fields
-    private final Date date;
-    private final EventAddress address;
-    private final Set<Person> contacts = new HashSet<>();
+    private final Address address;
+    private final Date eventDate;
+
+    private final Set<Contact> contacts = new HashSet<>();
     private final Set<Task> tasks = new HashSet<>();
 
     /**
      * Constructs a {@code Event}.
      *
-     * @param name A valid name.
-     * @param date A valid date.
+     * @param eventName A valid name.
+     * @param eventDate A valid date.
      * @param address A valid address.
      * @param contacts A valid set of contacts.
      */
-    public Event(EventName name, Date date, EventAddress address, Set<Person> contacts, Set<Task> tasks) {
-        requireAllNonNull(name, date, address, contacts, tasks);
-        this.name = name;
-        this.date = date;
+    public Event(Name eventName, Date eventDate, Address address, Set<Contact> contacts, Set<Task> tasks) {
+        requireAllNonNull(eventName, eventDate, address, contacts, tasks);
+
+        this.eventName = eventName;
+        this.eventDate = eventDate;
         this.address = address;
         this.contacts.addAll(contacts);
         this.tasks.addAll(tasks);
     }
 
-    public EventAddress getAddress() {
+    public Address getAddress() {
         return address;
     }
 
-    public EventName getName() {
-        return name;
+    public Name getName() {
+        return eventName;
     }
 
     public Date getDate() {
-        return date;
+        return eventDate;
     }
+
 
     /**
      * Returns an immutable contacts set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
-    public Set<Person> getContacts() {
+    public Set<Contact> getContacts() {
         return Collections.unmodifiableSet(contacts);
     }
     public Set<Task> getTasks() {
@@ -68,21 +73,13 @@ public class Event {
     }
 
     /**
-     * Checks whether this {@code Event} is linked to the given {@code Person}.
-     * @param contact The {@code Person} to be checked with.
-     * @return {@code true} if this {@code Event} is linked to the given {@code Person}
+     * Checks whether this {@code Event} is linked to the given {@code Contact}.
+     * @param contact The {@code Contact} to be checked with.
+     * @return {@code true} if this {@code Event} is linked to the given {@code Contact}
      *     and {@code false} otherwise.
      */
-    public boolean isLinkedToContact(Person contact) {
-        return contacts.stream().anyMatch(contact::isSamePerson);
-    }
-
-    /**
-     * Links the given {@code Person} to this {@code Event}.
-     * @param toLink The {@code Person} to be linked to this {@code Event}.
-     */
-    public void linkContact(Person toLink) {
-        contacts.add(toLink);
+    public boolean isLinkedToContact(Contact contact) {
+        return contacts.stream().anyMatch(contact::isSameContact);
     }
 
     /**
@@ -96,6 +93,14 @@ public class Event {
 
         return otherEvent != null
                 && (otherEvent.getName().equals(getName()));
+    }
+
+    /**
+     * Checks if the event has concluded.
+     * @return true if the event date is past, false otherwise.
+     */
+    public boolean isCompleted() {
+        return this.eventDate.isOverdue();
     }
 
     /**
@@ -114,8 +119,8 @@ public class Event {
         }
 
         Event otherEvent = (Event) other;
-        return name.equals(otherEvent.name)
-                && date.equals(otherEvent.date)
+        return eventName.equals(otherEvent.eventName)
+                && eventDate.equals(otherEvent.eventDate)
                 && address.equals(otherEvent.address)
                 && contacts.equals(otherEvent.contacts)
                 && tasks.equals(otherEvent.tasks);
@@ -124,14 +129,14 @@ public class Event {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, date, address, contacts, tasks);
+        return Objects.hash(eventName, eventDate, address, contacts, tasks);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("name", name)
-                .add("date", date)
+                .add("name", eventName)
+                .add("date", eventDate)
                 .add("address", address)
                 .add("contacts", contacts)
                 .add("tasks", tasks)

@@ -11,14 +11,14 @@ import seedu.address.model.Model;
 import seedu.address.model.tag.Tag;
 
 /**
- * Adds a tag to the address book.
+ * Adds a tag to the JobFestGo.
  */
 public class AddTagCommand extends Command {
     public static final String COMMAND_WORD = "add_tag";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a tag to the tag list. "
             + "Parameters: "
-            + PREFIX_TAG + "TAG\n"
+            + PREFIX_TAG + "TAG_NAME\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_TAG + "vendor ";
 
@@ -43,6 +43,12 @@ public class AddTagCommand extends Command {
         }
 
         model.addTag(toAdd);
+
+        // Update filtered lists accordingly.
+        // The flow of command returns back to the main dashboard.
+        model.updateFilteredContactList(Model.PREDICATE_SHOW_ALL_CONTACTS);
+        model.updateFilteredTaskList(Model.PREDICATE_SHOW_ALL_TASKS);
+
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
 

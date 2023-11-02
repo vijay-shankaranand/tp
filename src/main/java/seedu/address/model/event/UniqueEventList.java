@@ -10,17 +10,20 @@ import java.util.Set;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.contact.Contact;
 import seedu.address.model.event.exceptions.DuplicateEventException;
+import seedu.address.model.event.exceptions.EventIsAlreadyLinkedToContactException;
+import seedu.address.model.event.exceptions.EventIsNotLinkedToContactException;
 import seedu.address.model.event.exceptions.EventNotFoundException;
-import seedu.address.model.person.Person;
+import seedu.address.model.name.Name;
 import seedu.address.model.task.Task;
 
 /**
  * A list of events that enforces uniqueness between its elements and does not allow nulls.
  * An event is considered unique by comparing using {@code Event#isSameEvent(Event)}. As such, adding and updating of
- * event uses Event#isSameEvent(Event) for equality so as to ensure that the event being added or updated is
- * unique in terms of identity in the UniqueEventList. However, the removal of a Event uses Event#equals(Object) so
- * as to ensure that the event with exactly the same fields will be removed.
+ * event uses Event#isSameEvent(Event) for equality to ensure that the event being added or updated is
+ * unique in terms of identity in the UniqueEventList. However, the removal of a Event uses Event#equals(Object) to
+ * ensure that the event with exactly the same fields will be removed.
  *
  * Supports a minimal set of list operations.
  *
@@ -42,7 +45,7 @@ public class UniqueEventList implements Iterable<Event> {
 
     /**
      * Adds an Event to the list.
-     * The person must not already exist in the list.
+     * The contact must not already exist in the list.
      */
     public void add(Event toAdd) {
         requireNonNull(toAdd);
@@ -50,6 +53,42 @@ public class UniqueEventList implements Iterable<Event> {
             throw new DuplicateEventException();
         }
         internalList.add(toAdd);
+    }
+
+    /**
+     * Links a contact to the given event.
+     * @throws EventIsAlreadyLinkedToContactException If the given contact is
+     *     already linked to the event.
+     */
+    public void linkContactToEvent(Contact contact, Event event) throws EventIsAlreadyLinkedToContactException {
+        if (event.isLinkedToContact(contact)) {
+            throw new EventIsAlreadyLinkedToContactException(contact);
+        }
+
+        Set<Contact> newContacts = new HashSet<>();
+        newContacts.addAll(event.getContacts());
+        newContacts.add(contact);
+        Event updatedEvent = new Event(event.getName(), event.getDate(), event.getAddress(),
+                newContacts, event.getTasks());
+        setEvent(event, updatedEvent);
+    }
+
+    /**
+     * Unlinks a contact from the given event.
+     * @throws EventIsNotLinkedToContactException If the given contact is
+     *     not currently linked to the event.
+     */
+    public void unlinkContactFromEvent(Contact contact, Event event) throws EventIsNotLinkedToContactException {
+        if (!event.isLinkedToContact(contact)) {
+            throw new EventIsNotLinkedToContactException(contact);
+        }
+
+        Set<Contact> newContacts = new HashSet<>();
+        newContacts.addAll(event.getContacts());
+        newContacts.remove(contact);
+        Event updatedEvent = new Event(event.getName(), event.getDate(), event.getAddress(),
+                newContacts, event.getTasks());
+        setEvent(event, updatedEvent);
     }
 
     /**
@@ -72,10 +111,71 @@ public class UniqueEventList implements Iterable<Event> {
     }
 
     /**
+     * Deletes the specified task from the event.
+     * @param taskToDelete The task to be deleted.
+     */
+    public void deleteTaskFromEvent(Task taskToDelete) {
+        for (int i = 0; i < internalList.size(); i++) {
+            Event curr = internalList.get(i);
+            Set<Task> updatedTasks = new HashSet<>();
+            if (curr.getName().equals(taskToDelete.getAssociatedEventName())) {
+                updatedTasks.addAll(curr.getTasks());
+                updatedTasks.remove(taskToDelete);
+                Event updatedEvent = new Event(curr.getName(), curr.getDate(), curr.getAddress(),
+                        curr.getContacts(), updatedTasks);
+                setEvent(curr, updatedEvent);
+                return;
+            }
+        }
+    }
+
+    /**
+     * Marks the specified task as completed.
+     */
+    public void markTask(Task taskTobeMarked) {
+        for (int i = 0; i < internalList.size(); i++) {
+            Event curr = internalList.get(i);
+            Set<Task> updatedTasks = new HashSet<>();
+            if (curr.getName().equals(taskTobeMarked.getAssociatedEventName())) {
+                updatedTasks.addAll(curr.getTasks());
+                updatedTasks.remove(taskTobeMarked);
+                Task markedTask = new Task(taskTobeMarked.getDescription(), taskTobeMarked.getDate(),
+                        taskTobeMarked.getAssociatedEvent(), true);
+                updatedTasks.add(markedTask);
+                Event updatedEvent = new Event(curr.getName(), curr.getDate(), curr.getAddress(),
+                        curr.getContacts(), updatedTasks);
+                setEvent(curr, updatedEvent);
+                return;
+            }
+        }
+    }
+
+    /**
+     * Marks the specified task as not completed.
+     */
+    public void unmarkTask(Task taskTobeUnmarked) {
+        for (int i = 0; i < internalList.size(); i++) {
+            Event curr = internalList.get(i);
+            Set<Task> updatedTasks = new HashSet<>();
+            if (curr.getName().equals(taskTobeUnmarked.getAssociatedEventName())) {
+                updatedTasks.addAll(curr.getTasks());
+                updatedTasks.remove(taskTobeUnmarked);
+                Task unmarkedTask = new Task(taskTobeUnmarked.getDescription(), taskTobeUnmarked.getDate(),
+                        taskTobeUnmarked.getAssociatedEvent(), false);
+                updatedTasks.add(unmarkedTask);
+                Event updatedEvent = new Event(curr.getName(), curr.getDate(), curr.getAddress(),
+                        curr.getContacts(), updatedTasks);
+                setEvent(curr, updatedEvent);
+                return;
+            }
+        }
+    }
+
+    /**
      * Returns the {@code Event} with given name from the list.
      * @param name The name of the desired {@code Event}.
      */
-    public Event getByName(EventName name) throws EventNotFoundException {
+    public Event getByName(Name name) throws EventNotFoundException {
         Event toGet = null;
         for (int i = 0; i < internalList.size(); i++) {
             Event thisEvent = internalList.get(i);
@@ -134,16 +234,16 @@ public class UniqueEventList implements Iterable<Event> {
     }
 
     /**
-     * Replaces the event list to remove {@code person} from contact list.
+     * Replaces the event list to remove {@code contact} from contact list.
      */
-    public void updateContacts(Person person) {
+    public void updateContacts(Contact contact) {
         for (int i = 0; i < internalList.size(); i++) {
             Event curr = internalList.get(i);
-            Set<Person> contactsList = curr.getContacts();
-            Set<Person> updatedContactsList = new HashSet<>();
-            if (contactsList.contains(person)) {
-                for (Person p : contactsList) {
-                    if (!p.equals(person)) {
+            Set<Contact> contactsList = curr.getContacts();
+            Set<Contact> updatedContactsList = new HashSet<>();
+            if (contactsList.contains(contact)) {
+                for (Contact p : contactsList) {
+                    if (!p.equals(contact)) {
                         updatedContactsList.add(p);
                     }
                 }
@@ -194,7 +294,7 @@ public class UniqueEventList implements Iterable<Event> {
     }
 
     /**
-     * Returns true if {@code events} contains only unique persons.
+     * Returns true if {@code events} contains only unique Contacts.
      */
     private boolean areEventsUnique(List<Event> events) {
         for (int i = 0; i < events.size() - 1; i++) {

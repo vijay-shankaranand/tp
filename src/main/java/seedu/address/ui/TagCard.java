@@ -29,7 +29,7 @@ public class TagCard extends UiPart<Region> {
     private Label tagName;
 
     /**
-     * Creates a {@code TagCode} with the given {@code Person} and index to display.
+     * Creates a {@code TagCode} with the given {@code Contact} and index to display.
      */
     public TagCard(Tag tag) {
         super(FXML);

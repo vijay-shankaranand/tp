@@ -1,15 +1,14 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
-import java.util.Date;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.contact.Contact;
+import seedu.address.model.date.Date;
 import seedu.address.model.event.Event;
-import seedu.address.model.event.EventName;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
+import seedu.address.model.name.Name;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.TaskDescription;
@@ -19,9 +18,10 @@ import seedu.address.model.task.TaskDescription;
  */
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
-    Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+    Predicate<Contact> PREDICATE_SHOW_ALL_CONTACTS = unused -> true;
     Predicate<Tag> PREDICATE_SHOW_ALL_TAGS = unused -> true;
     Predicate<Event> PREDICATE_SHOW_ALL_EVENTS = unused -> true;
+    Predicate<Task> PREDICATE_SHOW_ALL_TASKS = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -44,63 +44,67 @@ public interface Model {
     void setGuiSettings(GuiSettings guiSettings);
 
     /**
-     * Returns the user prefs' address book file path.
+     * Returns the user prefs' JobFestGo file path.
      */
-    Path getAddressBookFilePath();
+    Path getJobFestGoFilePath();
 
     /**
-     * Sets the user prefs' address book file path.
+     * Sets the user prefs' JobFestGo file path.
      */
-    void setAddressBookFilePath(Path addressBookFilePath);
+    void setJobFestGoFilePath(Path jobFestGoFilePath);
 
     /**
-     * Replaces address book data with the data in {@code addressBook}.
+     * Replaces JobFestGo data with the data in {@code JobFestGo}.
      */
-    void setAddressBook(ReadOnlyAddressBook addressBook);
+    void setJobFestGo(ReadOnlyJobFestGo jobFestGo);
 
-    /** Returns the AddressBook */
-    ReadOnlyAddressBook getAddressBook();
+    /** Returns the JobFestGo */
+    ReadOnlyJobFestGo getJobFestGo();
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Returns true if a contact with the same identity as {@code contact} exists in JobFestGo.
      */
-    boolean hasPerson(Person person);
+    boolean hasContact(Contact contact);
 
     /**
-     * Deletes the given person.
-     * The person must exist in the address book.
+     * Deletes the given contact.
+     * The contact must exist in JobFestGo.
      */
-    void deletePerson(Person target);
+    void deleteContact(Contact target);
 
     /**
-     * Adds the given person.
-     * {@code person} must not already exist in the address book.
+     * Adds the given contact.
+     * {@code contact} must not already exist in JobFestGo.
      */
-    void addPerson(Person person);
+    void addContact(Contact contact);
 
     /**
-     * Returns the {@code Person} with given name.
+     * Returns the {@code Contact} with given name.
      */
-    Person getPerson(Name name);
+    Contact getContact(Name name);
 
     /**
-     * Replaces the given person {@code target} with {@code editedPerson}.
-     * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+     * Replaces the given contact {@code target} with {@code editedContact}.
+     * {@code target} must exist in JobFestGo.
+     * The contact identity of {@code editedContact} must not be the same as another existing contact in the address
+     * book.
      */
-    void setPerson(Person target, Person editedPerson);
+    void setContact(Contact target, Contact editedContact);
 
-    /** Returns an unmodifiable view of the filtered person list */
-    ObservableList<Person> getFilteredPersonList();
+    /** Returns an unmodifiable view of the filtered contact list */
+    ObservableList<Contact> getFilteredContactList();
 
-    /** Returns an unmodifiable view of the unfiltered person list */
-    ObservableList<Person> getUnfilteredPersonList();
+    /** Returns an unmodifiable view of the unfiltered contact list */
+    ObservableList<Contact> getUnfilteredContactList();
 
     /**
-     * Updates the filter of the filtered person list to filter by the given {@code predicate}.
+     * Updates the filter of the filtered contact list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
-    void updateFilteredPersonList(Predicate<Person> predicate);
+    void updateFilteredContactList(Predicate<Contact> predicate);
+
+    /** Returns the predicate used previously on the task list */
+    Predicate<Contact> getContactListPredicate();
 
     /**
      * Returns true if an existing tag with the same identity as {@code tag} exists in the tag list.
@@ -142,7 +146,7 @@ public interface Model {
 
     /**
      * Deletes the given event.
-     * The event must exist in the address book.
+     * The event must exist in JobFestGo.
      */
     void deleteEvent(Event target);
 
@@ -155,7 +159,7 @@ public interface Model {
     /**
      * Returns the {@code Event} with given name.
      */
-    Event getEvent(EventName name);
+    Event getEvent(Name name);
 
     /**
      * Replaces the given event {@code target} with {@code editedEvent}.
@@ -163,6 +167,16 @@ public interface Model {
      * The event identity of {@code editedEvent} must not be the same as another existing event in the event list.
      */
     void setEvent(Event target, Event editedEvent);
+
+    /**
+     * Links the given {@code contact} to the given {@code event}.
+     */
+    void linkContactToEvent(Contact contact, Event event);
+
+    /**
+     * Unlinks the given {@code contact} from the given {@code event}.
+     */
+    void unlinkContactFromEvent(Contact contact, Event event);
 
     /** Returns an unmodifiable view of the filtered event list */
     ObservableList<Event> getFilteredEventList();
@@ -182,6 +196,18 @@ public interface Model {
     boolean hasTask(Task task);
 
     /**
+     * Returns true if an existing event has the given {@code taskDescription} exists in
+     * the event specified by the given {@code associatedEventName}.
+     */
+    boolean hasTask(TaskDescription taskDescription, Name associatedEventName);
+
+    /**
+     * Deletes the task specified by the task description from its associated event.
+     * The task must exist in JobFestGo.
+     */
+    void deleteTask(TaskDescription taskDescription, Name associatedEventName);
+
+    /**
      * Adds the given task.
      * {@code event} must not already exist in the task.
      */
@@ -199,8 +225,21 @@ public interface Model {
      */
     void setTask(Task target, Task editedTask);
 
+    /**
+     * Marks the specified task as completed.
+     */
+    void markTask(TaskDescription taskDescription, Name associatedEventName);
+
+    /**
+     * Marks the specified task as not completed.
+     */
+    void unmarkTask(TaskDescription taskDescription, Name associatedEventName);
+
     /** Returns an unmodifiable view of the filtered tasks in an event */
     ObservableList<Task> getFilteredTaskList();
+
+    /** Returns an unmodifiable view of the tasks due soon */
+    ObservableList<Task> getTasksDueSoonList();
 
     /**
      * Updates the filter of the filtered task list to filter by the given {@code predicate}.

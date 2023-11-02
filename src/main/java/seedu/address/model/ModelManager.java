@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
-import java.util.Date;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -12,46 +11,47 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.contact.Contact;
+import seedu.address.model.date.Date;
 import seedu.address.model.event.Event;
-import seedu.address.model.event.EventName;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
+import seedu.address.model.name.Name;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.TaskDescription;
+import seedu.address.model.task.TaskInReminderPredicate;
 
 /**
- * Represents the in-memory model of the address book data.
+ * Represents the in-memory model of the JobFestGo data.
  */
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final AddressBook addressBook;
+    private final JobFestGo jobFestGo;
     private final UserPrefs userPrefs;
-    private final FilteredList<Person> filteredPersons;
+    private final FilteredList<Contact> filteredContacts;
     private final FilteredList<Tag> filteredTags;
     private final FilteredList<Event> filteredEvents;
     private final FilteredList<Task> filteredTasks;
 
 
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a ModelManager with the given jobfestgo and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
-        requireAllNonNull(addressBook, userPrefs);
+    public ModelManager(ReadOnlyJobFestGo jobFestGo, ReadOnlyUserPrefs userPrefs) {
+        requireAllNonNull(jobFestGo, userPrefs);
 
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with job fest go: " + jobFestGo + " and user prefs " + userPrefs);
 
-        this.addressBook = new AddressBook(addressBook);
+        this.jobFestGo = new JobFestGo(jobFestGo);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
-        filteredTags = new FilteredList<>(this.addressBook.getTagList());
-        filteredEvents = new FilteredList<>(this.addressBook.getEventList());
-        filteredTasks = new FilteredList<>(this.addressBook.getTaskList());
+        filteredContacts = new FilteredList<>(this.jobFestGo.getContactList());
+        filteredTags = new FilteredList<>(this.jobFestGo.getTagList());
+        filteredEvents = new FilteredList<>(this.jobFestGo.getEventList());
+        filteredTasks = new FilteredList<>(this.jobFestGo.getTaskList());
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new JobFestGo(), new UserPrefs());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -79,56 +79,57 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Path getAddressBookFilePath() {
-        return userPrefs.getAddressBookFilePath();
+    public Path getJobFestGoFilePath() {
+        return userPrefs.getJobFestGoFilePath();
     }
 
     @Override
-    public void setAddressBookFilePath(Path addressBookFilePath) {
-        requireNonNull(addressBookFilePath);
-        userPrefs.setAddressBookFilePath(addressBookFilePath);
+    public void setJobFestGoFilePath(Path jobFestGoFilePath) {
+        requireNonNull(jobFestGoFilePath);
+        userPrefs.setJobFestGoFilePath(jobFestGoFilePath);
     }
 
-    //=========== AddressBook ================================================================================
+    //=========== JobFestGo ================================================================================
 
-    //=========== Persons ====================================================================================
+    //=========== Contacts ====================================================================================
     @Override
-    public void setAddressBook(ReadOnlyAddressBook addressBook) {
-        this.addressBook.resetData(addressBook);
-    }
-
-    @Override
-    public ReadOnlyAddressBook getAddressBook() {
-        return addressBook;
+    public void setJobFestGo(ReadOnlyJobFestGo jobFestGo) {
+        this.jobFestGo.resetData(jobFestGo);
     }
 
     @Override
-    public boolean hasPerson(Person person) {
-        requireNonNull(person);
-        return addressBook.hasPerson(person);
+    public ReadOnlyJobFestGo getJobFestGo() {
+        return jobFestGo;
     }
 
     @Override
-    public void deletePerson(Person target) {
-        addressBook.removePerson(target);
+    public boolean hasContact(Contact contact) {
+        requireNonNull(contact);
+        return jobFestGo.hasContact(contact);
     }
 
     @Override
-    public void addPerson(Person person) {
-        addressBook.addPerson(person);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    public void deleteContact(Contact target) {
+        jobFestGo.removeContact(target);
     }
 
     @Override
-    public Person getPerson(Name name) {
-        return addressBook.getPerson(name);
+    public void addContact(Contact contact) {
+
+        jobFestGo.addContact(contact);
+
+        updateFilteredContactList(PREDICATE_SHOW_ALL_CONTACTS);
     }
 
     @Override
-    public void setPerson(Person target, Person editedPerson) {
-        requireAllNonNull(target, editedPerson);
+    public Contact getContact(Name name) {
+        return jobFestGo.getContact(name);
+    }
 
-        addressBook.setPerson(target, editedPerson);
+    @Override
+    public void setContact(Contact target, Contact editedContact) {
+        requireAllNonNull(target, editedContact);
+        jobFestGo.setContact(target, editedContact);
     }
 
     //=========== Tags =======================================================================================
@@ -136,25 +137,25 @@ public class ModelManager implements Model {
     @Override
     public boolean hasTag(Tag tag) {
         requireNonNull(tag);
-        return addressBook.hasTag(tag);
+        return jobFestGo.hasTag(tag);
     }
 
     @Override
     public void deleteTag(Tag tag) {
-        addressBook.deleteTag(tag);
+        jobFestGo.deleteTag(tag);
         updateFilteredTagList(PREDICATE_SHOW_ALL_TAGS);
     }
 
     @Override
     public void addTag(Tag tag) {
-        addressBook.addTag(tag);
+        jobFestGo.addTag(tag);
         updateFilteredTagList(PREDICATE_SHOW_ALL_TAGS);
     }
 
     @Override
     public void setTag(Tag target, Tag editedTag) {
         requireAllNonNull(target, editedTag);
-        addressBook.setTag(target, editedTag);
+        jobFestGo.setTag(target, editedTag);
     }
 
     //=========== Events =======================================================================================
@@ -162,76 +163,116 @@ public class ModelManager implements Model {
     @Override
     public boolean hasEvent(Event event) {
         requireNonNull(event);
-        return addressBook.hasEvent(event);
+        return jobFestGo.hasEvent(event);
     }
     @Override
     public void deleteEvent(Event eventToDelete) {
-        addressBook.deleteEvent(eventToDelete);
+        jobFestGo.deleteEvent(eventToDelete);
         updateFilteredEventList(PREDICATE_SHOW_ALL_EVENTS);
     }
 
     @Override
     public void addEvent(Event eventToAdd) {
-        addressBook.addEvent(eventToAdd);
+        jobFestGo.addEvent(eventToAdd);
         updateFilteredEventList(PREDICATE_SHOW_ALL_EVENTS);
     }
 
     @Override
-    public Event getEvent(EventName name) {
-        return addressBook.getEvent(name);
+    public Event getEvent(Name name) {
+        return jobFestGo.getEvent(name);
     }
 
     @Override
     public void setEvent(Event target, Event editedEvent) {
         requireAllNonNull(target, editedEvent);
-        addressBook.setEvent(target, editedEvent);
+        jobFestGo.setEvent(target, editedEvent);
+    }
+
+    @Override
+    public void linkContactToEvent(Contact contact, Event event) {
+        requireAllNonNull(contact, event);
+        jobFestGo.linkContactToEvent(contact, event);
+    }
+
+    @Override
+    public void unlinkContactFromEvent(Contact contact, Event event) {
+        requireAllNonNull(contact, event);
+        jobFestGo.unlinkContactFromEvent(contact, event);
     }
 
     //=========== Tasks ======================================================================================
     @Override
     public boolean hasTask(Task task) {
         requireNonNull(task);
-        return addressBook.hasTask(task);
+        return jobFestGo.hasTask(task);
+    }
+
+    @Override
+    public boolean hasTask(TaskDescription taskDescription, Name associatedEventName) {
+        requireAllNonNull(taskDescription, associatedEventName);
+        return jobFestGo.hasTask(taskDescription, associatedEventName);
+    }
+
+    @Override
+    public void deleteTask(TaskDescription taskDescription, Name associatedEventName) {
+        jobFestGo.deleteTask(taskDescription, associatedEventName);
     }
 
     @Override
     public void addTask(Task task) {
         requireNonNull(task);
-        addressBook.addTask(task);
+        jobFestGo.addTask(task);
     }
 
     @Override
     public Task getTask(TaskDescription description, Date date, Event event) {
-        return addressBook.getTask(description, date, event);
+        return jobFestGo.getTask(description, date, event);
     }
 
     @Override
     public void setTask(Task target, Task editedTask) {
         requireAllNonNull(target, editedTask);
-        addressBook.setTask(target, editedTask);
+        jobFestGo.setTask(target, editedTask);
     }
 
-    //=========== Filtered Person List Accessors =============================================================
+    @Override
+    public void markTask(TaskDescription taskDescription, Name associatedEventName) {
+        jobFestGo.markTask(taskDescription, associatedEventName);
+    }
+
+    @Override
+    public void unmarkTask(TaskDescription taskDescription, Name associatedEventName) {
+        jobFestGo.unmarkTask(taskDescription, associatedEventName);
+    }
+
+    //=========== Filtered Contact List Accessors =============================================================
 
     /**
-     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
-     * {@code versionedAddressBook}
+     * Returns an unmodifiable view of the list of {@code Contact} backed by the internal list of
+     * {@code versionedJobFestGo}
      */
     @Override
-    public ObservableList<Person> getFilteredPersonList() {
-        return filteredPersons;
+    public ObservableList<Contact> getFilteredContactList() {
+        return filteredContacts;
     }
 
     @Override
-    public ObservableList<Person> getUnfilteredPersonList() {
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return filteredPersons;
+    public ObservableList<Contact> getUnfilteredContactList() {
+        updateFilteredContactList(PREDICATE_SHOW_ALL_CONTACTS);
+        return filteredContacts;
     }
 
     @Override
-    public void updateFilteredPersonList(Predicate<Person> predicate) {
+    public void updateFilteredContactList(Predicate<Contact> predicate) {
         requireNonNull(predicate);
-        filteredPersons.setPredicate(predicate);
+        filteredContacts.setPredicate(predicate);
+    }
+
+    @SuppressWarnings("unchecked")
+    @Override
+    public Predicate<Contact> getContactListPredicate() {
+        // Since the predicate is always of type Predicate<Contact>, we can safely cast it
+        return (Predicate<Contact>) filteredContacts.getPredicate();
     }
 
     //======== Filtered Tag List Accessors ===============================================================
@@ -266,11 +307,20 @@ public class ModelManager implements Model {
         filteredEvents.setPredicate(predicate);
     }
 
-    //======== Filtered Event List Accessors ===============================================================
+    //======== Filtered Task List Accessors ===============================================================
 
     @Override
     public ObservableList<Task> getFilteredTaskList() {
         return filteredTasks;
+    }
+
+    @Override
+    public ObservableList<Task> getTasksDueSoonList() {
+        // Creation of a new filtered list to prevent the original filtered list
+        // from not showing accurately when filtered further
+        FilteredList<Task> taskDueSoonList = new FilteredList<>(filteredTasks);
+        taskDueSoonList.setPredicate(new TaskInReminderPredicate());
+        return taskDueSoonList;
     }
 
     @Override
@@ -291,9 +341,9 @@ public class ModelManager implements Model {
         }
 
         ModelManager otherModelManager = (ModelManager) other;
-        return addressBook.equals(otherModelManager.addressBook)
+        return jobFestGo.equals(otherModelManager.jobFestGo)
                 && userPrefs.equals(otherModelManager.userPrefs)
-                && filteredPersons.equals(otherModelManager.filteredPersons)
+                && filteredContacts.equals(otherModelManager.filteredContacts)
                 && filteredTags.equals(otherModelManager.filteredTags)
                 && filteredEvents.equals(otherModelManager.filteredEvents);
     }

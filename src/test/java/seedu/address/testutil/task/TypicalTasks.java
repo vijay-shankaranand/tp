@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import seedu.address.model.AddressBook;
+import seedu.address.model.JobFestGo;
 import seedu.address.model.task.Task;
 
 /**
@@ -26,8 +26,8 @@ public class TypicalTasks {
 
     private TypicalTasks() {}
 
-    public static AddressBook getTypicalAddressBook() {
-        AddressBook ab = new AddressBook();
+    public static JobFestGo getTypicalJobFestGo() {
+        JobFestGo ab = new JobFestGo();
         for (Task task : getTypicalTasks()) {
             ab.addTask(task);
         }

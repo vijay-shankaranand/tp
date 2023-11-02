@@ -1,0 +1,18 @@
+{
+  "contacts": [ ],
+  "tagList" : [ ],
+  "events" : [ {
+    "name" : "NUS",
+    "date" : "2024-01-23",
+    "address" : "311, Clementi Ave 2, #02-25",
+    "contacts" : [ ],
+    "tasks" : [ ]
+  } , {
+      "name" : "NUS",
+      "date" : "2024-01-23",
+      "address" : "311, Clementi Ave 2, #02-25",
+      "contacts" : [ ],
+      "tasks" : [ ]
+  }],
+  "taskList" : [ ]
+}

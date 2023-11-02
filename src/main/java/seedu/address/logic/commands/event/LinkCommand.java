@@ -11,12 +11,14 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.contact.Contact;
+import seedu.address.model.contact.ContactIsInEventPredicate;
+import seedu.address.model.contact.exceptions.ContactNotFoundException;
 import seedu.address.model.event.Event;
-import seedu.address.model.event.EventName;
+import seedu.address.model.event.exceptions.EventIsAlreadyLinkedToContactException;
 import seedu.address.model.event.exceptions.EventNotFoundException;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.exceptions.PersonNotFoundException;
+import seedu.address.model.name.Name;
+import seedu.address.model.task.TaskIsInEventPredicate;
 
 /**
  * Links a contact to a specific event.
@@ -26,8 +28,8 @@ public class LinkCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Links a contact to a specific event. "
             + "Parameters: "
-            + PREFIX_EVENT + "EVENT NAME "
-            + PREFIX_CONTACT + "CONTACT NAME\n"
+            + PREFIX_EVENT + "EVENT_NAME "
+            + PREFIX_CONTACT + "CONTACT_NAME\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_EVENT + "NUS Career Fair 2023 "
             + PREFIX_CONTACT + "John Doe";
@@ -35,17 +37,17 @@ public class LinkCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Linked contact: %1$s to event: %2$s";
     public static final String MESSAGE_NO_SUCH_EVENT = "The event: %1$s does not exist in the event list. "
             + "Please add it in first.";
-    public static final String MESSAGE_NO_SUCH_CONTACT = "The person: %1$s does not exist in JobFestGo. "
+    public static final String MESSAGE_NO_SUCH_CONTACT = "The contact: %1$s does not exist in JobFestGo. "
             + "Please add it in first.";
     public static final String MESSAGE_LINKED_CONTACT = "The contact: %1$s is already linked to the event: %2$s";
 
-    private final EventName eventNameToLink;
+    private final Name eventNameToLink;
     private final Set<Name> contactNameListToLink;
 
     /**
-     * Creates a LinkCommand to link the person specified by the name to the event specified by the name.
+     * Creates a LinkCommand to link the contact specified by the name to the event specified by the name.
      */
-    public LinkCommand(EventName eventNameToLink, Set<Name> contactNameListToLink) {
+    public LinkCommand(Name eventNameToLink, Set<Name> contactNameListToLink) {
         this.eventNameToLink = eventNameToLink;
         this.contactNameListToLink = contactNameListToLink;
     }
@@ -55,21 +57,30 @@ public class LinkCommand extends Command {
         requireNonNull(model);
 
         try {
-            Event eventToLink = model.getEvent(eventNameToLink);
-
             for (Name contactName : contactNameListToLink) {
-                Person contactToLink = model.getPerson(contactName);
-                if (eventToLink.isLinkedToContact(contactToLink)) {
-                    throw new CommandException(String.format(MESSAGE_LINKED_CONTACT, contactName, eventNameToLink));
-                }
-                eventToLink.linkContact(contactToLink);
+                Event eventToLink = model.getEvent(eventNameToLink);
+                Contact contactToLink = model.getContact(contactName);
+                model.linkContactToEvent(contactToLink, eventToLink);
             }
 
-            return new CommandResult(String.format(MESSAGE_SUCCESS, contactNameListToLink, eventNameToLink));
+            // Get the event after linking contact.
+            Event eventToLink = model.getEvent(eventNameToLink);
+
+            // Update the respective filtered lists to show the components within the event
+            // Flow of command should be after linking a contact to an event,
+            // it goes to the selected event.
+            model.updateFilteredContactList(new ContactIsInEventPredicate(eventToLink));
+            model.updateFilteredTaskList(new TaskIsInEventPredicate(eventToLink));
+
+            return new CommandResult(String.format(MESSAGE_SUCCESS, contactNameListToLink, eventNameToLink),
+                    model.getEvent(eventNameToLink), false);
         } catch (EventNotFoundException enfe) {
             throw new CommandException(String.format(MESSAGE_NO_SUCH_EVENT, eventNameToLink));
-        } catch (PersonNotFoundException pnfe) {
-            throw new CommandException(String.format(MESSAGE_NO_SUCH_CONTACT, pnfe.getName()));
+        } catch (ContactNotFoundException cnfe) {
+            throw new CommandException(String.format(MESSAGE_NO_SUCH_CONTACT, cnfe.getName()));
+        } catch (EventIsAlreadyLinkedToContactException eialte) {
+            throw new CommandException(
+                    String.format(MESSAGE_LINKED_CONTACT, eialte.getContact().getName(), eventNameToLink));
         }
     }
 

@@ -11,11 +11,12 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.contact.ContactIsInEventPredicate;
 import seedu.address.model.event.Event;
-import seedu.address.model.person.PersonIsInEventPredicate;
+import seedu.address.model.task.TaskIsInEventPredicate;
 
 /**
- * Selects an event identified using its displayed index from the address book.
+ * Selects an event identified using its displayed index from the JobFestGo.
  */
 public class SelectEventCommand extends Command {
     public static final String COMMAND_WORD = "select_event";
@@ -46,11 +47,19 @@ public class SelectEventCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
         }
 
+        // Get the event to be selected.
         Event eventToBeSelected = lastShownEventList.get(targetIndex.getZeroBased());
-        PersonIsInEventPredicate predicate = new PersonIsInEventPredicate(eventToBeSelected);
-        model.updateFilteredPersonList(predicate);
+
+        // Get the predicates necessary for the respective filtered lists.
+        ContactIsInEventPredicate predicate = new ContactIsInEventPredicate(eventToBeSelected);
+        TaskIsInEventPredicate taskPredicate = new TaskIsInEventPredicate(eventToBeSelected);
+
+        // Update the respective filtered lists to show the components within the event.
+        model.updateFilteredContactList(predicate);
+        model.updateFilteredTaskList(taskPredicate);
+
         return new CommandResult(String.format(MESSAGE_SELECT_EVENT_SUCCESS,
-            Messages.format(eventToBeSelected)), eventToBeSelected);
+            Messages.format(eventToBeSelected)), eventToBeSelected, false);
     }
 
     @Override
