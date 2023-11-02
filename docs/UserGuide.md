@@ -85,7 +85,7 @@ that you might not remember and organise your tasks neatly.
 
 ## Features
 
-<box type="info" seamless></box>
+<box type="info" seamless>
 
 **Notes about the command format:**<br>
 
@@ -188,11 +188,10 @@ Format: `find_contact KEYWORD [MORE_KEYWORDS]`
 Examples:
 * `find_contact John` returns `john` and `John Doe`.
 * `find_contact alex david` returns `Alex Yeoh`, `David Li`.
+* `find_contacts doe` after `find_contacts john` will return `John Doe` and not `john` who was originally in the result.
 <br><br>
 
   ![result for 'find_contact alex david'](images/findAlexDavidResult.png)
-
-* `find_contacts doe` after `find_contacts john` will return `John Doe` and not `john` who was originally in the result.
 
 ### Adding a tag : `add_tag`
 
@@ -201,7 +200,7 @@ Adds a tag with the specified name to JobFestGo.
 Format: `add_tag t/TAG_NAME`
 
 * The tag name **must not already exist** in JobFestGo.
-* The tag name` must be alphanumeric, i.e, should consist only of alphabets and numbers, and no other characters.
+* The tag name must be alphanumeric, i.e, should consist only of alphabets and numbers, and no other characters.
 
 Examples:
 * `add_tag t/vendor`
@@ -220,7 +219,7 @@ Deletes the specified tag name from JobFestGo.
 
 Format: `delete_tag t/TAG_NAME`
 
-* The tag name **must be an existing tag** vendor, personal, customer, …​
+* The tag name **must be an existing tag**. e.g. vendor, personal, customer, …​
 
 Examples:
 * `delete_tag` followed by `t/vendor` deletes the tag: `vendor` in JobFestGo.
@@ -231,17 +230,17 @@ Displays contacts tagged by any of the specified tags.
 
 Format: `filter_by_tag TAG_NAME [MORE_TAG_NAMES]`
 
-* Tag names are case-insensitive. e.g `Vendor` will match `vendor`.
+* Tag names are case-insensitive. e.g. `Vendor` will match `vendor`.
 * Only full words will be matched e.g. `ven` will not match `vendor`.
-* Contacts tagged by at least one of the given tags  will be returned (i.e. `OR` search).
+* Contacts tagged by at least one of the given tags will be returned (i.e. `OR` search).
   e.g. `vendor customer` will return all contacts tagged by `vendor` and
  all contacts tagged by `customer`.
-* The contacts found will be based on the list that is currently displayed e.g If the current event that is selected is not linked to `Hans` who is tagged by `vendor`, `filter_by_tags vendor` will not display `Hans` in the result.
+* The contacts found will be based on the list that is currently displayed e.g. If the current event that is selected is not linked to `Hans` who is tagged by `vendor`, `filter_by_tags vendor` will not display `Hans` in the result.
   
 Examples:
 * `filter_by_tag vendor` returns all contacts tagged by the tag: vendor in JobFestGo.
-* `filter_by_tag vendor customer` returns all contacts tagged by the tag: vendor and
-  all contacts tagged by the tag: customer in JobFestGo. The image below illustrates the result of this command.<br><br>
+* `filter_by_tag vendor customer` returns all contacts tagged by the tag: `vendor` and
+  all contacts tagged by the tag: `customer` in JobFestGo. The image below illustrates the result of this command.<br><br>
 
     ![result for 'filter_by_tag vendors customers'](images/filterByRoleResult.png)
 
@@ -276,7 +275,7 @@ Format: `delete_event INDEX`
 
 * Deletes the event specified at the `INDEX` from the list of events of JobFestGo.
 * The index refers to the index number shown in the displayed event list.
-* The index` **must be a positive integer** 1, 2, 3, …
+* The index **must be a positive integer** 1, 2, 3, …
 
 Examples:
 * `delete_event` followed by `1` deletes the 1st event in the displayed event list.
@@ -345,14 +344,6 @@ Format: `add_task td/TASK_DESCRIPTION d/DEADLINE ev/EVENT_NAME`
 Examples:
 * `add_task td/Book Venue d/2023-12-23 ev/NUS Career Fair 2023` adds a `Book Venue` by `2023-12-23` task to the event `NUS Career Fair 2023`.
 
-### Viewing help : `help`
-
-Shows a message explaining how to access the help page.
-
-![help message](images/helpMessage.png)
-
-Format: `help`
-
 ### Deleting a task: `delete_task`
 
 Deletes the task specified by the task description from its associated event in JobFestGo.
@@ -382,6 +373,7 @@ Format: `mark_task td/TASK_DESCRIPTION ev/EVENT_NAME`
   will perform the same operation.
 * Errors will be raised if the specified event does not exist or the event does not have the specified task.
   If such situation happens, you may double-check the task description and the event name and reenter valid inputs.
+* Errors will also be raised if the specified task has already been marked as completed.
 
 Examples:
 * `mark_task td/Book Venue ev/NUS Career Fair 2023` marks the task `Book Venue` from the task list of the event `NUS Career Fair 2023` as completed.
@@ -394,9 +386,18 @@ Format: `unmark_task td/TASK_DESCRIPTION ev/EVENT_NAME`
 
 * It works exactly the same way as `mark_task` except for the fact that `unmark_task` marks a completed task as not completed.
 * You may `unmark_task` a task when you realize that you have not completed the task but have wrongly marked it as completed.
+* Errors will be raised if the specified task has already been marked as completed.
 
 Examples:
 * `unmark_task td/Book Venue ev/NUS Career Fair 2023` marks the task `Book Venue` from the task list of the event `NUS Career Fair 2023` as not completed.
+
+### Viewing help : `help`
+
+Shows a message explaining how to access the help page.
+
+![help message](images/helpMessage.png)
+
+Format: `help`
 
 ### Clearing all entries : `clear`
 
@@ -424,7 +425,7 @@ JobFestGo data are saved in the hard disk automatically after any command that c
 
 JobFestGo data are saved automatically as a JSON file `[JAR file location]/data/jobfestgo.json`. Advanced users are welcome to update data directly by editing that data file.
 
-<box type="warning" seamless></box>
+<box type="warning" seamless>
 
 **Caution:**
 If your changes to the data file makes its format invalid, JobFestGo will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.
@@ -450,7 +451,7 @@ _Details coming soon ..._
 <br>
 1. Open the command prompt
 1. Navigate to the directory where the JAR file is located using cd [JAR file location]
-1. Type java -jar jobfestgo.jar and press enter
+1. Type `java -jar jobfestgo.jar` and press enter
 1. JobFestGo should launch
 
 **Q**: How can I check my Java version?<br>
@@ -476,18 +477,18 @@ Action     | Format, Examples
 **View Contacts**   | `view_contacts`
 **Add Tag** | `add_tag t/TAG_NAME` <br> e.g. `add_tag t/vendor`
 **Delete Tag** | `delete_tag t/TAG_NAME` <br> e.g. `delete_tag t/vendor`
-**Filter by tag** | `filter_by_tag TAG_NAME [MORE_TAGNAMESS]` <br> e.g. `filter_by_tag vendor`
+**Filter by tag** | `filter_by_tag TAG_NAME [MORE_TAGNAMES]` <br> e.g. `filter_by_tag vendor`
 **View Tags** | `view_tags`
 **Add Event** | `add_event n/NAME d/DATE a/ADDRESS` <br> e.g. `add_event n/NUS Career Fest 2023 d/2023-12-23 a/NUS`
 **Delete Event** | `delete_event INDEX` <br> e.g. `delete_event 1`
-**Link** | `link ev/EVENT_NAME C/CONTACT [C/MORE_CONTACTS]` <br> e.g. `link ev/NUS Career Fest c/Alice Black`
-**Unlink** | `unlink ev/EVENT_NAME C/CONTACT [C/MORE_CONTACTS]` <br> e.g. `unlink ev/NUS Career Fest c/Alice Black`
+**Link** | `link ev/EVENT_NAME C/CONTACT_NAME [C/MORE_CONTACT_NAMES]` <br> e.g. `link ev/NUS Career Fest c/Alice Black`
+**Unlink** | `unlink ev/EVENT_NAME C/CONTACT_NAME [C/MORE_CONTACT_NAMES]` <br> e.g. `unlink ev/NUS Career Fest c/Alice Black`
 **Select Event** | `select_event INDEX` <br> e.g. `select_event 1`
 **View Events** | `view_events`
-**Add Task** | `add_task td/TASK_DESCRIPTION d/DEADLINE ev/EVENT_NAME` <br> e.g. `add_task n/Book Venue d/2023-12-23 ev/NUS Career Fair 2023`
-**Delete Task** | `delete_task td/TASK_DESCRIPTION ev/EVENT_NAME` <br> e.g. `delete_task n/Book Venue ev/NUS Career Fair 2023`
-**Mark Task** | `mark_task td/TASK_DESCRIPTION ev/EVENT_NAME` <br> e.g. `mark_task n/Book Venue ev/NUS Career Fair 2023`
-**Unmark Task** | `unmark_task td/TASK_DESCRIPTION ev/EVENT_NAME` <br> e.g. `unmark_task n/Book Venue ev/NUS Career Fair 2023`
+**Add Task** | `add_task td/TASK_DESCRIPTION d/DEADLINE ev/EVENT_NAME` <br> e.g. `add_task td/Book Venue d/2023-12-23 ev/NUS Career Fair 2023`
+**Delete Task** | `delete_task td/TASK_DESCRIPTION ev/EVENT_NAME` <br> e.g. `delete_task td/Book Venue ev/NUS Career Fair 2023`
+**Mark Task** | `mark_task td/TASK_DESCRIPTION ev/EVENT_NAME` <br> e.g. `mark_task td/Book Venue ev/NUS Career Fair 2023`
+**Unmark Task** | `unmark_task td/TASK_DESCRIPTION ev/EVENT_NAME` <br> e.g. `unmark_task td/Book Venue ev/NUS Career Fair 2023`
 **Clear**  | `clear`
 **Help**   | `help`
 **Home**   | `home`
