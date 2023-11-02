@@ -302,10 +302,10 @@ Format: `link ev/EVENT_NAME c/CONTACT_NAME [c/MORE_CONTACT_NAMES]`
  c/John Doe c/Bob Dylan` will link `Alice Black` to the event `NUS Career Fest` while
   `John Doe` and `Bob Dylan` will not be linked.
 
-\\
+
 ### Unlinking contacts from an event: `unlink`
 
-Unlinking specified contacts from the specified event.
+Unlinks specified contacts from the specified event.
 
 Format: `unlink ev/EVENT_NAME c/CONTACT_NAME [c/MORE_CONTACT_NAMES]`
 
