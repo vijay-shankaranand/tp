@@ -60,7 +60,7 @@ public class MarkTaskCommand extends Command {
         // Update the respective filtered lists to show the components within the event
         model.updateFilteredTaskList(new TaskIsInEventPredicate(selectedEvent));
         model.updateFilteredContactList(new ContactIsInEventPredicate(selectedEvent));
-        
+
         return new CommandResult(String.format(MESSAGE_SUCCESS, taskDescription, associatedEventName),
                 taskDescription, selectedEvent, true);
     }

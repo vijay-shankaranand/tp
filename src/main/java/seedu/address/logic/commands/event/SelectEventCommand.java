@@ -57,7 +57,7 @@ public class SelectEventCommand extends Command {
         // Update the respective filtered lists to show the components within the event.
         model.updateFilteredContactList(predicate);
         model.updateFilteredTaskList(taskPredicate);
-        
+
         return new CommandResult(String.format(MESSAGE_SELECT_EVENT_SUCCESS,
             Messages.format(eventToBeSelected)), eventToBeSelected, false);
     }
