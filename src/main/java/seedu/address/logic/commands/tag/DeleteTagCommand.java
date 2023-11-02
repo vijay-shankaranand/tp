@@ -43,12 +43,12 @@ public class DeleteTagCommand extends Command {
         }
 
         model.deleteTag(toDelete);
-        
+
         // Update the filtered lists accordingly.
         // Flow of command returns back to the main dashboard.
         model.updateFilteredContactList(Model.PREDICATE_SHOW_ALL_CONTACTS);
         model.updateFilteredTaskList(Model.PREDICATE_SHOW_ALL_TASKS);
-        
+
         return new CommandResult(String.format(MESSAGE_SUCCESS, toDelete));
     }
 
