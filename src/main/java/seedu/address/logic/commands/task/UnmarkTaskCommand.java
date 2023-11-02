@@ -14,8 +14,8 @@ import seedu.address.model.contact.ContactIsInEventPredicate;
 import seedu.address.model.event.Event;
 import seedu.address.model.name.Name;
 import seedu.address.model.task.TaskDescription;
-import seedu.address.model.task.exceptions.TaskNotCompletedException;
 import seedu.address.model.task.TaskIsInEventPredicate;
+import seedu.address.model.task.exceptions.TaskNotCompletedException;
 
 /**
  * Marks the specified task as not completed.
