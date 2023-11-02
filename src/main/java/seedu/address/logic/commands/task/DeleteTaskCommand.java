@@ -52,17 +52,14 @@ public class DeleteTaskCommand extends Command {
             throw new CommandException(MESSAGE_MISSING_TASK);
         }
 
-        model.deleteTask(taskDescription, associatedEventName);
-
-        // Get the selected event after deleting task
         Event eventToDeleteTask = model.getEvent(associatedEventName);
 
-        // Update the respective filtered lists to show the components within the event
+        model.deleteTask(taskDescription, associatedEventName);
         model.updateFilteredContactList(new ContactIsInEventPredicate(eventToDeleteTask));
         model.updateFilteredTaskList(new TaskIsInEventPredicate(eventToDeleteTask));
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, taskDescription, associatedEventName),
-                taskDescription, eventToDeleteTask, true);
+                taskDescription, model.getEvent(associatedEventName), true);
     }
 
     @Override

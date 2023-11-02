@@ -318,11 +318,6 @@ public class AddEventCommandTest {
         public ObservableList<Task> getTasksDueSoonList() {
             throw new AssertionError("This method should not be called.");
         }
-
-        @Override
-        public Predicate<Contact> getContactListPredicate() {
-            throw new AssertionError("This method should not be called.");
-        }
     }
 
     /**
@@ -359,16 +354,6 @@ public class AddEventCommandTest {
         public void addEvent(Event event) {
             requireNonNull(event);
             eventsAdded.add(event);
-        }
-
-        @Override
-        public void updateFilteredContactList(Predicate<Contact> predicate) {
-            requireNonNull(predicate);
-        }
-
-        @Override
-        public void updateFilteredTaskList(Predicate<Task> predicate) {
-            requireNonNull(predicate);
         }
 
         @Override

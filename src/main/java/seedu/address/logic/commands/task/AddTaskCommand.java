@@ -73,17 +73,12 @@ public class AddTaskCommand extends Command {
             }
 
             model.addTask(taskToAdd);
-
-            // Event is updated, thus need additional step to get the event.
-            Event selectedEvent = model.getEvent(associatedEventName);
-
-            // Update the respective filtered lists to show the components within the event.
             model.updateFilteredContactList(new ContactIsInEventPredicate(eventToAddIn));
             model.updateFilteredTaskList(new TaskIsInEventPredicate(eventToAddIn));
 
             return new CommandResult(String.format(MESSAGE_SUCCESS,
                     taskDescription, taskDeadline, eventToAddIn.getName()),
-                    taskDescription, selectedEvent, true);
+                    taskDescription, model.getEvent(associatedEventName), true);
         } catch (EventNotFoundException enfe) {
             throw new CommandException(String.format(MESSAGE_NO_SUCH_EVENT, associatedEventName));
         }
