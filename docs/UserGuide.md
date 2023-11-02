@@ -188,7 +188,7 @@ Format: `find_contact KEYWORD [MORE_KEYWORDS]`
 Examples:
 * `find_contact John` returns `john` and `John Doe`.
 * `find_contact alex david` returns `Alex Yeoh`, `David Li`.
-* `find_contacts doe` after `find_contacts john` will return `John Doe` and not `john` who was originally in the result.
+* `find_contact doe` after `find_contact john` will return `John Doe` and not `john` who was originally in the result.
 <br><br>
 
   ![result for 'find_contact alex david'](images/findAlexDavidResult.png)
@@ -473,7 +473,7 @@ Action     | Format, Examples
 **Add Contact**    | `add_contact n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g. `add_contact n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 12346658 t/friend t/colleague`
 **Delete Contact** | `delete_contact INDEX`<br> e.g. `delete_contact 3`
 **Edit Contact**   | `edit_contact INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g. `edit_contact 2 n/James Lee e/jameslee@example.com`
-**Find contact**   | `find_contact KEYWORD [MORE_KEYWORDS]`<br> e.g. `find_contact James Jake`
+**Find Contact**   | `find_contact KEYWORD [MORE_KEYWORDS]`<br> e.g. `find_contact James Jake`
 **View Contacts**   | `view_contacts`
 **Add Tag** | `add_tag t/TAG_NAME` <br> e.g. `add_tag t/vendor`
 **Delete Tag** | `delete_tag t/TAG_NAME` <br> e.g. `delete_tag t/vendor`
