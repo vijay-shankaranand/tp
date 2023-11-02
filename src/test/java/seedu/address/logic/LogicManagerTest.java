@@ -69,8 +69,8 @@ public class LogicManagerTest {
 
     @Test
     public void execute_validCommand_success() throws Exception {
-        String listCommand = ViewContactsCommand.COMMAND_WORD;
-        assertCommandSuccess(listCommand, ViewContactsCommand.MESSAGE_SUCCESS, model);
+        String viewContactsCommand = ViewContactsCommand.COMMAND_WORD;
+        assertCommandSuccess(viewContactsCommand, ViewContactsCommand.MESSAGE_SUCCESS, model);
     }
 
     @Test
@@ -87,13 +87,11 @@ public class LogicManagerTest {
 
     @Test
     public void getFilteredContactList_modifyList_throwsUnsupportedOperationException() {
-
         assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredContactList().remove(0));
     }
 
     @Test
     public void getUnfilteredContactList_modifyList_throwsUnsupportedOperationException() {
-
         assertThrows(UnsupportedOperationException.class, () -> logic.getUnfilteredContactList().remove(0));
     }
 
