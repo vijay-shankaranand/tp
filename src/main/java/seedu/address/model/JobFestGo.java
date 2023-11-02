@@ -251,6 +251,13 @@ public class JobFestGo implements ReadOnlyJobFestGo {
         events.linkContactToEvent(contact, event);
     }
 
+    /**
+     * Unlinks the given {@code contact} from the given {@code event}.
+     */
+    public void unlinkContactFromEvent(Contact contact, Event event) {
+        events.unlinkContactFromEvent(contact, event);
+    }
+
     @Override
     public ObservableList<Event> getEventList() {
         return events.asUnmodifiableObservableList().sorted(new EventSortByDateComparator());

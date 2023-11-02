@@ -22,6 +22,7 @@ import seedu.address.logic.commands.event.AddEventCommand;
 import seedu.address.logic.commands.event.DeleteEventCommand;
 import seedu.address.logic.commands.event.LinkCommand;
 import seedu.address.logic.commands.event.SelectEventCommand;
+import seedu.address.logic.commands.event.UnlinkCommand;
 import seedu.address.logic.commands.event.ViewEventsCommand;
 import seedu.address.logic.commands.tag.AddTagCommand;
 import seedu.address.logic.commands.tag.DeleteTagCommand;
@@ -39,6 +40,7 @@ import seedu.address.logic.parser.event.AddEventCommandParser;
 import seedu.address.logic.parser.event.DeleteEventCommandParser;
 import seedu.address.logic.parser.event.LinkCommandParser;
 import seedu.address.logic.parser.event.SelectEventCommandParser;
+import seedu.address.logic.parser.event.UnlinkCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.logic.parser.tag.AddTagCommandParser;
 import seedu.address.logic.parser.tag.DeleteTagCommandParser;
@@ -126,6 +128,9 @@ public class JobFestGoParser {
 
         case LinkCommand.COMMAND_WORD:
             return new LinkCommandParser().parse(arguments);
+
+        case UnlinkCommand.COMMAND_WORD:
+            return new UnlinkCommandParser().parse(arguments);
 
         case AddTaskCommand.COMMAND_WORD:
             return new AddTaskCommandParser().parse(arguments);
