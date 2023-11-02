@@ -103,6 +103,9 @@ public interface Model {
      */
     void updateFilteredContactList(Predicate<Contact> predicate);
 
+    /** Returns the predicate used previously on the task list */
+    Predicate<Contact> getContactListPredicate();
+
     /**
      * Returns true if an existing tag with the same identity as {@code tag} exists in the tag list.
      */

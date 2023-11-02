@@ -4,12 +4,14 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.List;
+import java.util.function.Predicate;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.model.Model;
+import seedu.address.model.contact.Contact;
 import seedu.address.model.contact.ContactIsTaggedPredicate;
 import seedu.address.model.tag.Tag;
 
@@ -44,12 +46,18 @@ public class FilterByTagCommand extends Command {
         requireNonNull(model);
 
         // Update the filtered lists accordingly.
-        // Flow of command returns back to the main dashboard.
-        model.updateFilteredContactList(predicate);
-        model.updateFilteredTaskList(Model.PREDICATE_SHOW_ALL_TASKS);
+        // If list has already been filtered, it will be filtered upon the previous predicate.
+        Predicate<? super Contact> prevContactPred = model.getContactListPredicate();
+
+        if (prevContactPred != null) {
+            model.updateFilteredContactList(predicate.and(prevContactPred));
+        } else {
+            model.updateFilteredContactList(predicate);
+        }
+
         return new CommandResult(
                 String.format(Messages.MESSAGE_CONTACTS_LISTED_OVERVIEW, model.getFilteredContactList().size()),
-                false);
+                true);
 
     }
 

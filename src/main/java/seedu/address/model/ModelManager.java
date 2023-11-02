@@ -262,6 +262,13 @@ public class ModelManager implements Model {
         filteredContacts.setPredicate(predicate);
     }
 
+    @SuppressWarnings("unchecked")
+    @Override
+    public Predicate<Contact> getContactListPredicate() {
+        // Since the predicate is always of type Predicate<Contact>, we can safely cast it
+        return (Predicate<Contact>) filteredContacts.getPredicate();
+    }
+
     //======== Filtered Tag List Accessors ===============================================================
 
     @Override
