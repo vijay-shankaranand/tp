@@ -10,9 +10,12 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.contact.ContactIsInEventPredicate;
+import seedu.address.model.event.Event;
 import seedu.address.model.name.Name;
 import seedu.address.model.task.TaskDescription;
 import seedu.address.model.task.exceptions.TaskNotCompletedException;
+import seedu.address.model.task.TaskIsInEventPredicate;
 
 /**
  * Marks the specified task as not completed.
@@ -57,8 +60,15 @@ public class UnmarkTaskCommand extends Command {
             throw new CommandException(MESSAGE_INCOMPLETED_TASK);
         }
 
+        // Get event after unmarking task
+        Event selectedEvent = model.getEvent(associatedEventName);
+
+        // Update the respective filtered lists to show the components within the event
+        model.updateFilteredContactList(new ContactIsInEventPredicate(selectedEvent));
+        model.updateFilteredTaskList(new TaskIsInEventPredicate(selectedEvent));
+
         return new CommandResult(String.format(MESSAGE_SUCCESS, taskDescription, associatedEventName),
-                taskDescription, model.getEvent(associatedEventName), true);
+                taskDescription, selectedEvent, true);
     }
 
     @Override

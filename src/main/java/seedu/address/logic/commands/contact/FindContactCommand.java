@@ -2,11 +2,14 @@ package seedu.address.logic.commands.contact;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.function.Predicate;
+
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.model.Model;
+import seedu.address.model.contact.Contact;
 import seedu.address.model.name.NameContainsKeywordsPredicate;
 
 /**
@@ -30,9 +33,23 @@ public class FindContactCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.updateFilteredContactList(predicate);
+
+        // Update the filtered lists accordingly.
+        // Flow of command returns back to the main dashboard.
+        Predicate<? super Contact> prevContactPred = model.getContactListPredicate();
+
+        if (prevContactPred != null) {
+
+            model.updateFilteredContactList(predicate.and(prevContactPred));
+
+        } else {
+
+            model.updateFilteredContactList(predicate);
+        }
+
         return new CommandResult(
-                String.format(Messages.MESSAGE_CONTACTS_LISTED_OVERVIEW, model.getFilteredContactList().size()));
+                String.format(Messages.MESSAGE_CONTACTS_LISTED_OVERVIEW,
+                model.getFilteredContactList().size()), true);
     }
 
     @Override

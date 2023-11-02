@@ -10,9 +10,10 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.contact.ContactIsInEventPredicate;
+import seedu.address.model.event.Event;
 import seedu.address.model.name.Name;
 import seedu.address.model.task.TaskDescription;
-import seedu.address.model.task.exceptions.TaskIsCompletedException;
 
 /**
  * Marks the specified task as completed.
@@ -51,14 +52,9 @@ public class MarkTaskCommand extends Command {
             throw new CommandException(MESSAGE_MISSING_TASK);
         }
 
-        try {
-            model.markTask(taskDescription, associatedEventName);
-        } catch (TaskIsCompletedException tice) {
-            throw new CommandException(MESSAGE_COMPLETED_TASK);
-        }
-
+        model.markTask(taskDescription, associatedEventName);
         return new CommandResult(String.format(MESSAGE_SUCCESS, taskDescription, associatedEventName),
-                taskDescription, model.getEvent(associatedEventName), true);
+                taskDescription, selectedEvent, true);
     }
 
     @Override

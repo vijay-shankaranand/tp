@@ -315,6 +315,11 @@ public class DeleteTagCommandTest {
         public ObservableList<Task> getTasksDueSoonList() {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public Predicate<Contact> getContactListPredicate() {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**
@@ -352,6 +357,16 @@ public class DeleteTagCommandTest {
             if (hasTag(tag)) {
                 tags.remove(tag);
             }
+        }
+
+        @Override
+        public void updateFilteredContactList(Predicate<Contact> predicate) {
+            requireNonNull(predicate);
+        }
+
+        @Override
+        public void updateFilteredTaskList(Predicate<Task> predicate) {
+            requireNonNull(predicate);
         }
     }
 }

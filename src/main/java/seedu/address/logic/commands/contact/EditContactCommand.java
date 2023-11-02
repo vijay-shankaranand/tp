@@ -93,7 +93,10 @@ public class EditContactCommand extends Command {
         }
 
         model.setContact(contactToEdit, editedContact);
+
+        // Update relevant filtered lists to show the correct lists.
         model.updateFilteredContactList(PREDICATE_SHOW_ALL_CONTACTS);
+        model.updateFilteredTaskList(Model.PREDICATE_SHOW_ALL_TASKS);
 
         return new CommandResult(String.format(MESSAGE_EDIT_CONTACT_SUCCESS, Messages.format(editedContact)));
 
