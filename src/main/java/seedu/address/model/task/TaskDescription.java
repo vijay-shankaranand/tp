@@ -9,9 +9,12 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class TaskDescription {
 
-    public static final String MESSAGE_CONSTRAINTS = "Task descriptions can take any values with spaces, hyphen and brackets."
-            + " It should not be blank";
-    public static final String VALIDATION_REGEX = "[-()\\s]*[^\\s][-()\\s]*";
+    public static final String MESSAGE_CONSTRAINTS = "Task description should only contain "
+            + "alphanumeric characters and spaces. Can contain hyphen, comma, brackets and full stops."
+            + " Should not be blank.";
+
+    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum}-,() ]*";
+
 
     public final String value;
 
