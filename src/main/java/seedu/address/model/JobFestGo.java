@@ -20,6 +20,8 @@ import seedu.address.model.task.Task;
 import seedu.address.model.task.TaskDescription;
 import seedu.address.model.task.TaskSortByDateAndCompletionComparator;
 import seedu.address.model.task.UniqueTaskList;
+import seedu.address.model.task.exceptions.TaskIsCompletedException;
+import seedu.address.model.task.exceptions.TaskNotCompletedException;
 
 /**
  * Wraps all data at the address-book level
@@ -328,8 +330,12 @@ public class JobFestGo implements ReadOnlyJobFestGo {
     /**
      * Marks the specified task as completed.
      */
-    public void markTask(TaskDescription taskDescription, Name associatedEventName) {
+    public void markTask(TaskDescription taskDescription, Name associatedEventName)
+            throws TaskIsCompletedException {
         Task taskToMark = tasks.getByValues(taskDescription, associatedEventName);
+        if (taskToMark.isCompleted()) {
+            throw new TaskIsCompletedException();
+        }
         tasks.mark(taskToMark);
         events.markTask(taskToMark);
     }
@@ -337,8 +343,12 @@ public class JobFestGo implements ReadOnlyJobFestGo {
     /**
      * Marks the specified task as not completed.
      */
-    public void unmarkTask(TaskDescription taskDescription, Name associatedEventName) {
+    public void unmarkTask(TaskDescription taskDescription, Name associatedEventName)
+            throws TaskNotCompletedException {
         Task taskToUnmark = tasks.getByValues(taskDescription, associatedEventName);
+        if (!taskToUnmark.isCompleted()) {
+            throw new TaskNotCompletedException();
+        }
         tasks.unmark(taskToUnmark);
         events.unmarkTask(taskToUnmark);
     }

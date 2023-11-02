@@ -12,6 +12,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.name.Name;
 import seedu.address.model.task.TaskDescription;
+import seedu.address.model.task.exceptions.TaskNotCompletedException;
 
 /**
  * Marks the specified task as not completed.
@@ -29,6 +30,7 @@ public class UnmarkTaskCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Unmarked task: %1$s from event: %2$s";
     public static final String MESSAGE_MISSING_TASK = "This task does not exist";
+    public static final String MESSAGE_INCOMPLETED_TASK = "This task has not been marked as completed.";
     private final TaskDescription taskDescription;
     private final Name associatedEventName;
 
@@ -49,7 +51,12 @@ public class UnmarkTaskCommand extends Command {
             throw new CommandException(MESSAGE_MISSING_TASK);
         }
 
-        model.unmarkTask(taskDescription, associatedEventName);
+        try {
+            model.unmarkTask(taskDescription, associatedEventName);
+        } catch (TaskNotCompletedException tnce) {
+            throw new CommandException(MESSAGE_INCOMPLETED_TASK);
+        }
+
         return new CommandResult(String.format(MESSAGE_SUCCESS, taskDescription, associatedEventName),
                 taskDescription, model.getEvent(associatedEventName), true);
     }

@@ -12,6 +12,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.name.Name;
 import seedu.address.model.task.TaskDescription;
+import seedu.address.model.task.exceptions.TaskIsCompletedException;
 
 /**
  * Marks the specified task as completed.
@@ -29,6 +30,7 @@ public class MarkTaskCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Marked task: %1$s from event: %2$s as completed";
     public static final String MESSAGE_MISSING_TASK = "This task does not exist";
+    public static final String MESSAGE_COMPLETED_TASK = "This task has already been completed.";
     private final TaskDescription taskDescription;
     private final Name associatedEventName;
 
@@ -49,7 +51,12 @@ public class MarkTaskCommand extends Command {
             throw new CommandException(MESSAGE_MISSING_TASK);
         }
 
-        model.markTask(taskDescription, associatedEventName);
+        try {
+            model.markTask(taskDescription, associatedEventName);
+        } catch (TaskIsCompletedException tice) {
+            throw new CommandException(MESSAGE_COMPLETED_TASK);
+        }
+
         return new CommandResult(String.format(MESSAGE_SUCCESS, taskDescription, associatedEventName),
                 taskDescription, model.getEvent(associatedEventName), true);
     }
