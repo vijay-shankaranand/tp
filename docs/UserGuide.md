@@ -302,6 +302,8 @@ Format: `link ev/EVENT_NAME c/CONTACT_NAME [c/MORE_CONTACT_NAMES]`
  c/John Doe c/Bob Dylan` will link `Alice Black` to the event `NUS Career Fest` while
   `John Doe` and `Bob Dylan` will not be linked.
 
+Examples:
+* `link ev/NUS Career Fest c/Alice Black` links `Alice Black` to the event `NUS Career Fest` if `Alice Black` is not linked to `NUS Career Fest`.
 
 ### Unlinking contacts from an event: `unlink`
 
@@ -311,6 +313,9 @@ Format: `unlink ev/EVENT_NAME c/CONTACT_NAME [c/MORE_CONTACT_NAMES]`
 
 * It functions similarly to `link` except for the fact that the input contacts and event for `unlink`
  must be currently linked. Otherwise, an error will be raised.
+
+Examples:
+* `unlink ev/NUS Career Fest c/Alice Black` unlinks `Alice Black` from the event `NUS Career Fest` if `Alice Black` is linked to `NUS Career Fest`.
 
 ### Selecting an event: `select_event`
 
