@@ -14,6 +14,8 @@ import seedu.address.model.contact.ContactIsInEventPredicate;
 import seedu.address.model.event.Event;
 import seedu.address.model.name.Name;
 import seedu.address.model.task.TaskDescription;
+import seedu.address.model.task.exceptions.TaskIsCompletedException;
+import seedu.address.model.task.TaskIsInEventPredicate;
 
 /**
  * Marks the specified task as completed.
@@ -52,7 +54,19 @@ public class MarkTaskCommand extends Command {
             throw new CommandException(MESSAGE_MISSING_TASK);
         }
 
-        model.markTask(taskDescription, associatedEventName);
+        try {
+            model.markTask(taskDescription, associatedEventName);
+        } catch (TaskIsCompletedException tice) {
+            throw new CommandException(MESSAGE_COMPLETED_TASK);
+        }
+
+        // Get the selected event after marking task
+        Event selectedEvent = model.getEvent(associatedEventName);
+
+        // Update the respective filtered lists to show the components within the event
+        model.updateFilteredTaskList(new TaskIsInEventPredicate(selectedEvent));
+        model.updateFilteredContactList(new ContactIsInEventPredicate(selectedEvent));
+
         return new CommandResult(String.format(MESSAGE_SUCCESS, taskDescription, associatedEventName),
                 taskDescription, selectedEvent, true);
     }

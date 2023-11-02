@@ -36,7 +36,7 @@ public class FindContactCommand extends Command {
 
         // Update the filtered lists accordingly.
         // Flow of command returns back to the main dashboard.
-        Predicate<? super Contact> prevContactPred = model.getContactListPredicate();
+        Predicate<Contact> prevContactPred = model.getContactListPredicate();
 
         if (prevContactPred != null) {
 
