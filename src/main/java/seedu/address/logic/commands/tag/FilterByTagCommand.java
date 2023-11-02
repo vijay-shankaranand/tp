@@ -22,7 +22,7 @@ public class FilterByTagCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": filters and displays all contacts who "
 
-            + " are tagged with the input tag.\n"
+            + " are tagged with the input tags.\n"
             + "Parameters: "
             + "TAG\n"
             + "Example: " + COMMAND_WORD + " "
