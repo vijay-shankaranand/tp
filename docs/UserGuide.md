@@ -262,7 +262,7 @@ Format: `delete_event INDEX`
 
 * Deletes the event specified at the `INDEX` from the list of events of JobFestGo.
 * The index refers to the index number shown in the displayed event list.
-* The index` **must be a positive integer** 1, 2, 3, …​
+* The index` **must be a positive integer** 1, 2, 3, …
 
 Examples:
 * `delete_event` followed by `1` deletes the 1st event in the displayed event list.
@@ -287,7 +287,17 @@ Format: `link ev/EVENT_NAME c/CONTACT_NAME [c/MORE_CONTACT_NAMES]`
  c/John Doe c/Bob Dylan` will link `Alice Black` to the event `NUS Career Fest` while
   `John Doe` and `Bob Dylan` will not be linked.
 
-### Selecting an event : `select_event`
+\\
+### Unlinking contacts from an event: `unlink`
+
+Unlinking specified contacts from the specified event.
+
+Format: `unlink ev/EVENT_NAME c/CONTACT_NAME [c/MORE_CONTACT_NAMES]`
+
+* It functions similarly to `link` except for the fact that the input contacts and event for `unlink`
+ must be currently linked. Otherwise, an error will be raised.
+
+### Selecting an event: `select_event`
 
 Selects an event at the specified index from JobFestGo. The relevant contacts and tasks will be displayed.
 
@@ -323,6 +333,51 @@ Shows a message explaining how to access the help page.
 ![help message](images/helpMessage.png)
 
 Format: `help`
+
+### Deleting a task: `delete_task`
+
+Deletes the task specified by the task description from its associated event in JobFestGo.
+
+Format: `delete_task td/TASK_DESCRIPTION ev/EVENT_NAME`
+
+* Deletes the task specified by the `TASK_DESCRIPTION` from the event specified by the `EVENT_NAME` of JobFestGo.
+* Both the `TASK_DESCRIPTION` and the `EVENT_NAME` are case-insensitive.
+ e.g. `delete_task td/Book Venue ev/NUS Career Fair 2023` and `delete_task td/book venue ev/nus Career FAIR 2023`
+ will perform the same operation.
+* Errors will be raised if the specified event does not exist or the event does not have the specified task.
+ If such situation happens, you may double-check the task description and the event name and reenter valid inputs.
+
+Examples:
+* `delete_task td/Book Venue ev/NUS Career Fair 2023` deletes task `Book Venue` from the task list of the event `NUS Career Fair 2023`.
+
+### Marking a task: `mark_task`
+
+Marks the task specified by the task description and its associated event name in JobFestGo as completed.
+
+Format: `mark_task td/TASK_DESCRIPTION ev/EVENT_NAME`
+
+* Marks the task specified by the `TASK_DESCRIPTION` from the event specified by the `EVENT_NAME` of JobFestGo as completed.
+ A label indicating the status of the task will be shown next to its description in the task list.
+* Both the `TASK_DESCRIPTION` and the `EVENT_NAME` are case-insensitive.
+  e.g. `mark_task td/Book Venue ev/NUS Career Fair 2023` and `mark_task td/book venue ev/nus Career FAIR 2023`
+  will perform the same operation.
+* Errors will be raised if the specified event does not exist or the event does not have the specified task.
+  If such situation happens, you may double-check the task description and the event name and reenter valid inputs.
+
+Examples:
+* `mark_task td/Book Venue ev/NUS Career Fair 2023` marks the task `Book Venue` from the task list of the event `NUS Career Fair 2023` as completed.
+
+### Unmarking a task: `unmark_task`
+
+Marks the task specified by the task description and its associated event name in JobFestGo as not completed.
+
+Format: `unmark_task td/TASK_DESCRIPTION ev/EVENT_NAME`
+
+* It works exactly the same way as `mark_task` except for the fact that `unmark_task` marks a completed task as not completed.
+* You may `unmark_task` a task when you realize that you have not completed the task but have wrongly marked it as completed.
+
+Examples:
+* `unmark_task td/Book Venue ev/NUS Career Fair 2023` marks the task `Book Venue` from the task list of the event `NUS Career Fair 2023` as not completed.
 
 ### Clearing all entries : `clear`
 
@@ -406,9 +461,13 @@ Action     | Format, Examples
 **Add Event** | `add_event n/NAME d/DATE a/ADDRESS` <br> e.g. `add_event n/NUS Career Fest 2023 d/2023-12-23 a/NUS`
 **Delete Event** | `delete_event INDEX` <br> e.g. `delete_event 1`
 **Link** | `link ev/EVENT_NAME C/CONTACT [C/MORE_CONTACTS]` <br> e.g. `link ev/NUS Career Fest c/Alice Black`
+**Unlink** | `unlink ev/EVENT_NAME C/CONTACT [C/MORE_CONTACTS]` <br> e.g. `unlink ev/NUS Career Fest c/Alice Black`
 **Select Event** | `select_event INDEX` <br> e.g. `select_event 1`
 **View Events** | `view_events`
-**Add Task** | `add_task td/TASK_DESCRIPTION d/DEADLINE ev/EVENT_NAME` <br> e.g. `add_task td/Book Venue d/2023-12-23 ev/NUS Career Fair 2023`
+**Add Task** | `add_task td/TASK_DESCRIPTION d/DEADLINE ev/EVENT_NAME` <br> e.g. `add_task n/Book Venue d/2023-12-23 ev/NUS Career Fair 2023`
+**Delete Task** | `delete_task td/TASK_DESCRIPTION ev/EVENT_NAME` <br> e.g. `delete_task n/Book Venue ev/NUS Career Fair 2023`
+**Mark Task** | `mark_task td/TASK_DESCRIPTION ev/EVENT_NAME` <br> e.g. `mark_task n/Book Venue ev/NUS Career Fair 2023`
+**Unmark Task** | `unmark_task td/TASK_DESCRIPTION ev/EVENT_NAME` <br> e.g. `unmark_task n/Book Venue ev/NUS Career Fair 2023`
 **Clear**  | `clear`
 **Help**   | `help`
 **Home**   | `home`
