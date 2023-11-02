@@ -6,10 +6,10 @@
 
 # JobFestGo User Guide
 
-JobFestGo is a **desktop app for managing contacts and tasks, optimized for use via a Command Line Interface** (CLI) 
-while still having the benefits of a Graphical User Interface (GUI). It is a task management tool 
-meant to assist you as job festival event planners in cold-calling various contacts (e.g. vendors, customers) and 
-other event-related tasks. This removes the hassle of having to shuffle through your contact list based on names 
+JobFestGo is a **desktop app for managing contacts and tasks, optimized for use via a Command Line Interface** (CLI)
+while still having the benefits of a Graphical User Interface (GUI). It is a task management tool
+meant to assist you as job festival event planners in cold-calling various contacts (e.g. vendors, customers) and
+other event-related tasks. This removes the hassle of having to shuffle through your contact list based on names
 that you might not remember and organise your tasks neatly.
 --------------------------------------------------------------------------------------------------------------------
 
@@ -128,7 +128,7 @@ Examples:
 Displays a list of all contacts in JobFestGo.
 
 Format: `view_contacts`<br><br>
-    
+
       ![result for 'view_contacts'](images/viewContactsResult.png)
 
 ### Deleting a contact : `delete_contact`
