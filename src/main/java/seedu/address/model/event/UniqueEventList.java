@@ -13,6 +13,7 @@ import javafx.collections.ObservableList;
 import seedu.address.model.contact.Contact;
 import seedu.address.model.event.exceptions.DuplicateEventException;
 import seedu.address.model.event.exceptions.EventIsAlreadyLinkedToContactException;
+import seedu.address.model.event.exceptions.EventIsNotLinkedToContactException;
 import seedu.address.model.event.exceptions.EventNotFoundException;
 import seedu.address.model.name.Name;
 import seedu.address.model.task.Task;
@@ -67,6 +68,24 @@ public class UniqueEventList implements Iterable<Event> {
         Set<Contact> newContacts = new HashSet<>();
         newContacts.addAll(event.getContacts());
         newContacts.add(contact);
+        Event updatedEvent = new Event(event.getName(), event.getDate(), event.getAddress(),
+                newContacts, event.getTasks());
+        setEvent(event, updatedEvent);
+    }
+
+    /**
+     * Unlinks a contact from the given event.
+     * @throws EventIsNotLinkedToContactException If the given contact is
+     *     not currently linked to the event.
+     */
+    public void unlinkContactFromEvent(Contact contact, Event event) throws EventIsNotLinkedToContactException {
+        if (!event.isLinkedToContact(contact)) {
+            throw new EventIsNotLinkedToContactException(contact);
+        }
+
+        Set<Contact> newContacts = new HashSet<>();
+        newContacts.addAll(event.getContacts());
+        newContacts.remove(contact);
         Event updatedEvent = new Event(event.getName(), event.getDate(), event.getAddress(),
                 newContacts, event.getTasks());
         setEvent(event, updatedEvent);

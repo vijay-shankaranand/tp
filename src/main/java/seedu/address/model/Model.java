@@ -173,6 +173,11 @@ public interface Model {
      */
     void linkContactToEvent(Contact contact, Event event);
 
+    /**
+     * Unlinks the given {@code contact} from the given {@code event}.
+     */
+    void unlinkContactFromEvent(Contact contact, Event event);
+
     /** Returns an unmodifiable view of the filtered event list */
     ObservableList<Event> getFilteredEventList();
 

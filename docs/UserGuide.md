@@ -13,33 +13,43 @@ other event-related tasks. This removes the hassle of having to shuffle through 
 that you might not remember and organise your tasks neatly.
 --------------------------------------------------------------------------------------------------------------------
 
-## Table of Contents
-* [Quick Start](#quick-start)
-* [Features](#features)
-    * [Adding a contact `add_contact`](#adding-a-contact--addcontact)
-    * [Listing all contacts `view_contacts`](#listing-all-contacts--viewcontacts)
-    * [Deleting a contact `delete_contact`](#deleting-a-contact--deletecontact)
-    * [Editing a contact `edit_contact`](#editing-a-contact--editcontact)
-    * [Locating contacts by name `find_contact`](#locating-contacts-by-name--findcontact)
-    * [Adding a tag `add_tag`](#adding-a-tag--addtag)
-    * [Viewing all tags `view_tags`](#viewing-all-tags--viewtags)
-    * [Deleting a tag `delete_tag`](#deleting-a-tag--deletetag)
-    * [Filtering contacts by tag `filter_by_tag`](#filtering-contacts-by-tag--filterbytag)
-    * [Adding an event `add_event`](#adding-an-event--addevent)
-    * [Viewing all events `view_events`](#viewing-all-events--viewevents)
-    * [Deleting an event `delete_event`](#deleting-an-event--deleteevent)
-    * [Linking contacts to an event `link`](#linking-contacts-to-an-event--link)
-    * [Selecting an event `select_event`](#selecting-an-event--selectevent)
-    * [Adding a task `add_task`](#adding-a-task--addtask)
-    * [Viewing help `help`](#viewing-help--help)
-    * [Clear entries `clear`](#clearing-all-entries--clear)
-    * [Returning to home page `home`](#returning-to-home-page--home)
-    * [Exit program `exit`](#exiting-the-program--exit)
-    * [Saving the data](#saving-the-data)
-    * [Editing the data file](#editing-the-data-file)
-* [FAQ](#faq)
-* [Known Issues](#known-issues)
-* [Command Summary](#command-summary)
+### Table of Contents
+- [JobFestGo User Guide](#jobfestgo-user-guide)
+  - [that you might not remember and organise your tasks neatly.](#that-you-might-not-remember-and-organise-your-tasks-neatly)
+    - [Table of Contents](#table-of-contents)
+  - [Quick start](#quick-start)
+  - [Features](#features)
+    - [Adding a contact : `add_contact`](#adding-a-contact--add_contact)
+    - [Listing all contacts : `view_contacts`](#listing-all-contacts--view_contacts)
+    - [Deleting a contact : `delete_contact`](#deleting-a-contact--delete_contact)
+    - [Editing a contact : `edit_contact`](#editing-a-contact--edit_contact)
+    - [Locating contacts by name : `find_contact`](#locating-contacts-by-name--find_contact)
+    - [Adding a tag : `add_tag`](#adding-a-tag--add_tag)
+    - [Viewing all tags : `view_tags`](#viewing-all-tags--view_tags)
+    - [Deleting a tag : `delete_tag`](#deleting-a-tag--delete_tag)
+    - [Filtering contacts by tag : `filter_by_tag`](#filtering-contacts-by-tag--filter_by_tag)
+    - [Adding an event : `add_event`](#adding-an-event--add_event)
+    - [Viewing all events : `view_events`](#viewing-all-events--view_events)
+    - [Deleting an event : `delete_event`](#deleting-an-event--delete_event)
+    - [Linking contacts to an event : `link`](#linking-contacts-to-an-event--link)
+    - [Unlinking contacts from an event: `unlink`](#unlinking-contacts-from-an-event-unlink)
+    - [Selecting an event: `select_event`](#selecting-an-event-select_event)
+    - [Adding a task : `add_task`](#adding-a-task--add_task)
+    - [Viewing help : `help`](#viewing-help--help)
+    - [Deleting a task: `delete_task`](#deleting-a-task-delete_task)
+    - [Marking a task: `mark_task`](#marking-a-task-mark_task)
+    - [Unmarking a task: `unmark_task`](#unmarking-a-task-unmark_task)
+    - [Clearing all entries : `clear`](#clearing-all-entries--clear)
+    - [Returning to home page : `home`](#returning-to-home-page--home)
+    - [Exiting the program : `exit`](#exiting-the-program--exit)
+    - [Saving the data](#saving-the-data)
+    - [Editing the data file](#editing-the-data-file)
+    - [Archiving data files `[coming in v2.0]`](#archiving-data-files-coming-in-v20)
+    - [Progress bar for completed tasks of an event `[coming in v2.0]`](#progress-bar-for-completed-tasks-of-an-event-coming-in-v20)
+  - [FAQ](#faq)
+  - [can download it here](#can-download-it-here)
+  - [Known issues](#known-issues)
+  - [Command summary](#command-summary)
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -174,12 +184,16 @@ Format: `find_contact KEYWORD [MORE_KEYWORDS]`
 * Only full words will be matched e.g. `Han` will not match `Hans`
 * Contacts matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* The contacts found will be based on the list that is currently displayed e.g If the current event that is selected is not linked to `Hans`, `find_contact Hans` will not have any results even though `Hans` is in the contact list
 
 Examples:
 * `find_contact John` returns `john` and `John Doe`.
-* `find_contact alex david` returns `Alex Yeoh`, `David Li`.<br><br>
+* `find_contact alex david` returns `Alex Yeoh`, `David Li`.
+<br><br>
 
   ![result for 'find_contact alex david'](images/findAlexDavidResult.png)
+
+* `find_contacts doe` after `find_contacts john` will return `John Doe` and not `john` who was originally in the result.
 
 ### Adding a tag : `add_tag`
 
@@ -223,7 +237,8 @@ Format: `filter_by_tag TAG_NAME [MORE_TAG_NAMES]`
 * Contacts tagged by at least one of the given tags  will be returned (i.e. `OR` search).
   e.g. `vendor customer` will return all contacts tagged by `vendor` and
  all contacts tagged by `customer`.
-
+* The contacts found will be based on the list that is currently displayed e.g If the current event that is selected is not linked to `Hans` who is tagged by `vendor`, `filter_by_tags vendor` will not display `Hans` in the result.
+  
 Examples:
 * `filter_by_tag vendor` returns all contacts tagged by the tag: vendor in JobFestGo.
 * `filter_by_tag vendor customer` returns all contacts tagged by the tag: vendor and
@@ -262,7 +277,7 @@ Format: `delete_event INDEX`
 
 * Deletes the event specified at the `INDEX` from the list of events of JobFestGo.
 * The index refers to the index number shown in the displayed event list.
-* The index` **must be a positive integer** 1, 2, 3, …​
+* The index` **must be a positive integer** 1, 2, 3, …
 
 Examples:
 * `delete_event` followed by `1` deletes the 1st event in the displayed event list.
@@ -287,7 +302,22 @@ Format: `link ev/EVENT_NAME c/CONTACT_NAME [c/MORE_CONTACT_NAMES]`
  c/John Doe c/Bob Dylan` will link `Alice Black` to the event `NUS Career Fest` while
   `John Doe` and `Bob Dylan` will not be linked.
 
-### Selecting an event : `select_event`
+Examples:
+* `link ev/NUS Career Fest c/Alice Black` links `Alice Black` to the event `NUS Career Fest` if `Alice Black` is not linked to `NUS Career Fest`.
+
+### Unlinking contacts from an event: `unlink`
+
+Unlinks specified contacts from the specified event.
+
+Format: `unlink ev/EVENT_NAME c/CONTACT_NAME [c/MORE_CONTACT_NAMES]`
+
+* It functions similarly to `link` except for the fact that the input contacts and event for `unlink`
+ must be currently linked. Otherwise, an error will be raised.
+
+Examples:
+* `unlink ev/NUS Career Fest c/Alice Black` unlinks `Alice Black` from the event `NUS Career Fest` if `Alice Black` is linked to `NUS Career Fest`.
+
+### Selecting an event: `select_event`
 
 Selects an event at the specified index from JobFestGo. The relevant contacts and tasks will be displayed.
 
@@ -323,6 +353,51 @@ Shows a message explaining how to access the help page.
 ![help message](images/helpMessage.png)
 
 Format: `help`
+
+### Deleting a task: `delete_task`
+
+Deletes the task specified by the task description from its associated event in JobFestGo.
+
+Format: `delete_task td/TASK_DESCRIPTION ev/EVENT_NAME`
+
+* Deletes the task specified by the `TASK_DESCRIPTION` from the event specified by the `EVENT_NAME` of JobFestGo.
+* Both the `TASK_DESCRIPTION` and the `EVENT_NAME` are case-insensitive.
+ e.g. `delete_task td/Book Venue ev/NUS Career Fair 2023` and `delete_task td/book venue ev/nus Career FAIR 2023`
+ will perform the same operation.
+* Errors will be raised if the specified event does not exist or the event does not have the specified task.
+ If such situation happens, you may double-check the task description and the event name and reenter valid inputs.
+
+Examples:
+* `delete_task td/Book Venue ev/NUS Career Fair 2023` deletes task `Book Venue` from the task list of the event `NUS Career Fair 2023`.
+
+### Marking a task: `mark_task`
+
+Marks the task specified by the task description and its associated event name in JobFestGo as completed.
+
+Format: `mark_task td/TASK_DESCRIPTION ev/EVENT_NAME`
+
+* Marks the task specified by the `TASK_DESCRIPTION` from the event specified by the `EVENT_NAME` of JobFestGo as completed.
+ A label indicating the status of the task will be shown next to its description in the task list.
+* Both the `TASK_DESCRIPTION` and the `EVENT_NAME` are case-insensitive.
+  e.g. `mark_task td/Book Venue ev/NUS Career Fair 2023` and `mark_task td/book venue ev/nus Career FAIR 2023`
+  will perform the same operation.
+* Errors will be raised if the specified event does not exist or the event does not have the specified task.
+  If such situation happens, you may double-check the task description and the event name and reenter valid inputs.
+
+Examples:
+* `mark_task td/Book Venue ev/NUS Career Fair 2023` marks the task `Book Venue` from the task list of the event `NUS Career Fair 2023` as completed.
+
+### Unmarking a task: `unmark_task`
+
+Marks the task specified by the task description and its associated event name in JobFestGo as not completed.
+
+Format: `unmark_task td/TASK_DESCRIPTION ev/EVENT_NAME`
+
+* It works exactly the same way as `mark_task` except for the fact that `unmark_task` marks a completed task as not completed.
+* You may `unmark_task` a task when you realize that you have not completed the task but have wrongly marked it as completed.
+
+Examples:
+* `unmark_task td/Book Venue ev/NUS Career Fair 2023` marks the task `Book Venue` from the task list of the event `NUS Career Fair 2023` as not completed.
 
 ### Clearing all entries : `clear`
 
@@ -406,9 +481,13 @@ Action     | Format, Examples
 **Add Event** | `add_event n/NAME d/DATE a/ADDRESS` <br> e.g. `add_event n/NUS Career Fest 2023 d/2023-12-23 a/NUS`
 **Delete Event** | `delete_event INDEX` <br> e.g. `delete_event 1`
 **Link** | `link ev/EVENT_NAME C/CONTACT [C/MORE_CONTACTS]` <br> e.g. `link ev/NUS Career Fest c/Alice Black`
+**Unlink** | `unlink ev/EVENT_NAME C/CONTACT [C/MORE_CONTACTS]` <br> e.g. `unlink ev/NUS Career Fest c/Alice Black`
 **Select Event** | `select_event INDEX` <br> e.g. `select_event 1`
 **View Events** | `view_events`
-**Add Task** | `add_task td/TASK_DESCRIPTION d/DEADLINE ev/EVENT_NAME` <br> e.g. `add_task td/Book Venue d/2023-12-23 ev/NUS Career Fair 2023`
+**Add Task** | `add_task td/TASK_DESCRIPTION d/DEADLINE ev/EVENT_NAME` <br> e.g. `add_task n/Book Venue d/2023-12-23 ev/NUS Career Fair 2023`
+**Delete Task** | `delete_task td/TASK_DESCRIPTION ev/EVENT_NAME` <br> e.g. `delete_task n/Book Venue ev/NUS Career Fair 2023`
+**Mark Task** | `mark_task td/TASK_DESCRIPTION ev/EVENT_NAME` <br> e.g. `mark_task n/Book Venue ev/NUS Career Fair 2023`
+**Unmark Task** | `unmark_task td/TASK_DESCRIPTION ev/EVENT_NAME` <br> e.g. `unmark_task n/Book Venue ev/NUS Career Fair 2023`
 **Clear**  | `clear`
 **Help**   | `help`
 **Home**   | `home`

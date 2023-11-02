@@ -47,7 +47,7 @@ public class FilterByTagCommand extends Command {
 
         // Update the filtered lists accordingly.
         // If list has already been filtered, it will be filtered upon the previous predicate.
-        Predicate<? super Contact> prevContactPred = model.getContactListPredicate();
+        Predicate<Contact> prevContactPred = model.getContactListPredicate();
 
         if (prevContactPred != null) {
             model.updateFilteredContactList(predicate.and(prevContactPred));
