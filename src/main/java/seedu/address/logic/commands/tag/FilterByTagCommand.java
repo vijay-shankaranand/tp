@@ -1,7 +1,6 @@
 package seedu.address.logic.commands.tag;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.List;
 import java.util.function.Predicate;
@@ -21,13 +20,13 @@ import seedu.address.model.tag.Tag;
 public class FilterByTagCommand extends Command {
     public static final String COMMAND_WORD = "filter_by_tag";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": filters and displays all contacts who "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Filters and displays all contacts who"
 
-            + " are tagged with the input tag.\n"
+            + " are tagged with the input tags.\n"
             + "Parameters: "
-            + PREFIX_TAG + "TAG\n"
+            + "TAG_NAME [MORE_TAG_NAMES]...\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_TAG + "vendor ";
+            + "vendor ";
 
     private final List<Tag> tags;
     private final ContactIsTaggedPredicate predicate;

@@ -18,7 +18,7 @@ public class DeleteTagCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": deletes an existing tag from the tag list. "
             + "Parameters: "
-            + PREFIX_TAG + "TAG\n"
+            + PREFIX_TAG + "TAG_NAME\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_TAG + "vendor ";
 

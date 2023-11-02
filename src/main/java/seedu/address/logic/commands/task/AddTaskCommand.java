@@ -31,7 +31,7 @@ public class AddTaskCommand extends Command {
             + "Parameters: "
             + PREFIX_TASK_DESCRIPTION + "TASK_DESCRIPTION "
             + PREFIX_DATE + "TASK_DEADLINE "
-            + PREFIX_EVENT + "EVENT \n"
+            + PREFIX_EVENT + "EVENT_NAME \n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_TASK_DESCRIPTION + "Book Venue "
             + PREFIX_DATE + "2023-12-23 "

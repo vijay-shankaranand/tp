@@ -18,7 +18,7 @@ public class AddTagCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a tag to the tag list. "
             + "Parameters: "
-            + PREFIX_TAG + "TAG\n"
+            + PREFIX_TAG + "TAG_NAME\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_TAG + "vendor ";
 
