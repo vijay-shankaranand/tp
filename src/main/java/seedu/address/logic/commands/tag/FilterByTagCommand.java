@@ -1,7 +1,6 @@
 package seedu.address.logic.commands.tag;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.List;
 import java.util.function.Predicate;
