@@ -260,6 +260,15 @@ Format: `link ev/EVENT_NAME c/CONTACT_NAME [c/MORE_CONTACT_NAMES]`
  c/John Doe c/Bob Dylan` will link `Alice Black` to the event `NUS Career Fest` while
   `John Doe` and `Bob Dylan` will not be linked.
 
+### Unlinking contacts from an event: `unlink`
+
+Unlinking specified contacts from the specified event.
+
+Format: `unlink ev/EVENT_NAME c/CONTACT_NAME [c/MORE_CONTACT_NAMES]`
+
+* It functions similarly to `link` except for the fact that the input contacts and event for `unlink`
+ must be currently linked. Otherwise, an error will be raised.
+
 ### Selecting an event: `select_event`
 
 Selects a specified event from JobFestGo. The relevant contacts and tasks will be displayed.
@@ -401,9 +410,13 @@ Action     | Format, Examples
 **Add Event** | `add_event n/NAME d/DATE a/ADDRESS` <br> e.g. `add_event n/NUS Career Fest 2023 d/2023-12-23 a/NUS`
 **Delete Event** | `delete_event INDEX` <br> e.g. `delete_event 1`
 **Link** | `link ev/EVENT_NAME C/CONTACT [C/MORE_CONTACTS]` <br> e.g. `link ev/NUS Career Fest c/Alice Black`
+**Unlink** | `unlink ev/EVENT_NAME C/CONTACT [C/MORE_CONTACTS]` <br> e.g. `unlink ev/NUS Career Fest c/Alice Black`
 **Select Event** | `select_event INDEX` <br> e.g. `select_event 1`
 **View Events** | `view_events`
 **Add Task** | `add_task td/TASK_DESCRIPTION d/DEADLINE ev/EVENT_NAME` <br> e.g. `add_task n/Book Venue d/2023-12-23 ev/NUS Career Fair 2023`
+**Delete Task** | `delete_task td/TASK_DESCRIPTION ev/EVENT_NAME` <br> e.g. `delete_task n/Book Venue ev/NUS Career Fair 2023`
+**Mark Task** | `mark_task td/TASK_DESCRIPTION ev/EVENT_NAME` <br> e.g. `mark_task n/Book Venue ev/NUS Career Fair 2023`
+**Unmark Task** | `unmark_task td/TASK_DESCRIPTION ev/EVENT_NAME` <br> e.g. `unmark_task n/Book Venue ev/NUS Career Fair 2023`
 **Clear**  | `clear`
 **Help**   | `help`
 **Home**   | `home`
