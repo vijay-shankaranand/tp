@@ -25,6 +25,7 @@ Optimized for use via a **Command Line Interface (CLI)** while still having the 
 
 ### Table of Contents
   - [Quick start](#quick-start)
+  - [Navigating the GUI](#navigating-the-gui)
   - [Features](#features)
     - [Adding a contact : `add_contact`](#adding-a-contact-add-contact)
     - [Listing all contacts : `view_contacts`](#listing-all-contacts-view-contacts)
@@ -61,9 +62,12 @@ Optimized for use via a **Command Line Interface (CLI)** while still having the 
 
 ## Quick start
 
-1. Ensure you have Java `11` or above installed in your Computer. You may download it [here](https://www.oracle.com/java/technologies/downloads/#java11).
+1. Ensure you have Java `11` or above installed in your Computer. 
+   - [How do I check my Java version?](#faq)
 
 1. Download the latest `jobfestgo.jar` from [here](https://github.com/AY2324S1-CS2103T-T09-1/tp/releases).
+    
+    ![download jar](images/downloadJar.png)
 
 1. Copy the file to the folder you want to use as the _home folder_ for your JobFestGo.
 
@@ -81,11 +85,23 @@ Optimized for use via a **Command Line Interface (CLI)** while still having the 
 
    * `delete_contact 3` : Deletes the 3rd contact shown in the current list.
 
-   * `clear` : Deletes all contacts.
+   * `clear` : Deletes all entries from JobFestGo.
 
    * `exit` : Exits the app.
 
 1. Refer to the [Features](#features) below for details of each command.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Navigating the GUI
+
+JobFestGo comes with a GUI (Graphical User Interface) that is designed to be intuitive and easy to use for a pleasant visual experience for our users. Here's a quick rundown of what each section is for:
+
+![GUI](images/GUI.png)
+
+<box type="warning" seamless>
+
+**PLEASE NOTE** : If there is ellpisis (...) at the end of a text field in any section of JobFestGo, please extend the window fully so the full text can be seen.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -131,6 +147,9 @@ Format: `add_contact n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 * A contact cannot be added if their phone number already exists
 * A contact cannot be added if their name already exists
 
+<box type="warning" seamless>
+
+**WARNING** : Please ensure there is no more than **one** whitespace in-between each word for the contact name!
 
 Examples:
 * `add_contact n/John Doe p/98765432 e/johndtr@example.com a/John street, block 123, #01-01`
@@ -151,6 +170,10 @@ Format: `view_contacts`<br><br>
 Deletes the contact at the specified index from JobFestGo.
 
 Format: `delete_contact INDEX`
+
+<box type="warning" seamless>
+
+**WARNING**: This command is destructive. Once a contact is deleted, it cannot be recovered.
 
 * Deletes the contact at the specified `INDEX`.
 * The index refers to the index number shown in the displayed contact list.
@@ -209,7 +232,7 @@ Format: `add_tag t/TAG_NAME`
 * The tag name must be alphanumeric, i.e, should consist only of alphabets and numbers, and no other characters.
 
 Examples:
-* `add_tag t/vendor`
+* `add_tag t/vendors`
 
 ### Viewing all tags : `view_tags`
 
@@ -223,12 +246,14 @@ Format: `view_tags` <br><br>
 
 Deletes the specified tag name from JobFestGo.
 
+**WARNING**: This command is destructive. Once a tag is deleted, no contacts can be associated with the tag.
+
 Format: `delete_tag t/TAG_NAME`
 
 * The tag name **must be an existing tag**. e.g. vendor, personal, customer, …​
 
 Examples:
-* `delete_tag` followed by `t/vendor` deletes the tag: `vendor` in JobFestGo.
+* `delete_tag` followed by `t/vendors` deletes the tag: `vendors` in JobFestGo.
 
 ### Filtering contacts by tag : `filter_by_tag`
 
@@ -236,17 +261,17 @@ Displays contacts tagged by any of the specified tags.
 
 Format: `filter_by_tag TAG_NAME [MORE_TAG_NAMES]`
 
-* Tag names are case-insensitive. e.g. `Vendor` will match `vendor`.
-* Only full words will be matched e.g. `ven` will not match `vendor`.
+* Tag names are case-insensitive. e.g. `Vendors` will match `vendors`.
+* Only full words will be matched e.g. `ven` will not match `vendors`.
 * Contacts tagged by at least one of the given tags will be returned (i.e. `OR` search).
-  e.g. `vendor customer` will return all contacts tagged by `vendor` and
- all contacts tagged by `customer`.
+  e.g. `vendors customers` will return all contacts tagged by `vendors` and
+ all contacts tagged by `customers`.
 * The contacts found will be based on the list that is currently displayed e.g. If the current event that is selected is not linked to `Hans` who is tagged by `vendor`, `filter_by_tags vendor` will not display `Hans` in the result.
   
 Examples:
-* `filter_by_tag vendor` returns all contacts tagged by the tag: vendor in JobFestGo.
-* `filter_by_tag vendor customer` returns all contacts tagged by the tag: `vendor` and
-  all contacts tagged by the tag: `customer` in JobFestGo. The image below illustrates the result of this command.<br><br>
+* `filter_by_tag vendors` returns all contacts tagged by the tag: vendor in JobFestGo.
+* `filter_by_tag vendors customers` returns all contacts tagged by the tag: `vendors` and
+  all contacts tagged by the tag: `customers` in JobFestGo. The image below illustrates the result of this command.<br><br>
 
     ![result for 'filter_by_tag vendors customers'](images/filterByRoleResult.png)
 
@@ -256,9 +281,11 @@ Adds an event to JobFestGo.
 
 Format: `add_event n/NAME d/DATE a/ADDRESS`
 
+* An event must have a mandatory name, date and address.
 * The event name **must not already exist** in JobFestGo.
 * Date must be valid and should be in the appropriate (YYYY-MM-DD) format.
 * Date should **not** be before the current date.
+* Past the date of the event, the event will be labelled as completed next to its name in event list.
 
 Examples:
 * `add_event n/CS2103T Presentation d/2023-11-10 a/311, Clementi Ave 2, #02-25` adds an event named `CS2103T Presentation` to JobFestGo. <br><br>
@@ -276,6 +303,8 @@ Format: `view_events`<br><br>
 ### Deleting an event : `delete_event`
 
 Deletes the event specified at the index from JobFestGo.
+
+**WARNING**: This command is destructive. Once an event is deleted, all tasks associated with the event will be deleted.
 
 Format: `delete_event INDEX`
 
@@ -342,10 +371,12 @@ Adds a task to an event in JobFestGo.
 
 Format: `add_task td/TASK_DESCRIPTION d/DEADLINE ev/EVENT_NAME`
 
-* Task Description can take any value, no limit to the type of characters.
+* A task must have a mandatory task description, deadline and event name.
+* Task Description can take any alphanumeric value, alongside hyphen, comma, brackets and full stops.
 * Deadline is a date in the format YYYY-MM-DD.
 * Deadline should not be before today's date.
 * Event name should be the **name of an already existing event**.
+* Reminder will be shown on the home page of JobFestGo for tasks due less than 4 days from the deadline.
 
 Examples:
 * `add_task td/Book Venue d/2023-12-23 ev/NUS Career Fair 2023` adds a `Book Venue` by `2023-12-23` task to the event `NUS Career Fair 2023`.
@@ -354,6 +385,8 @@ Examples:
 
 Deletes the task specified by the task description from its associated event in JobFestGo.
 
+**WARNING**: This command is destructive. Once a task is deleted, it cannot be recovered.
+
 Format: `delete_task td/TASK_DESCRIPTION ev/EVENT_NAME`
 
 * Deletes the task specified by the `TASK_DESCRIPTION` from the event specified by the `EVENT_NAME` of JobFestGo.
@@ -361,7 +394,7 @@ Format: `delete_task td/TASK_DESCRIPTION ev/EVENT_NAME`
  e.g. `delete_task td/Book Venue ev/NUS Career Fair 2023` and `delete_task td/book venue ev/nus Career FAIR 2023`
  will perform the same operation.
 * Errors will be raised if the specified event does not exist or the event does not have the specified task.
- If such situation happens, you may double-check the task description and the event name and reenter valid inputs.
+ If such situation happens, you may double-check the task description and the event name and re-enter valid inputs.
 
 Examples:
 * `delete_task td/Book Venue ev/NUS Career Fair 2023` deletes task `Book Venue` from the task list of the event `NUS Career Fair 2023`.
@@ -378,11 +411,13 @@ Format: `mark_task td/TASK_DESCRIPTION ev/EVENT_NAME`
   e.g. `mark_task td/Book Venue ev/NUS Career Fair 2023` and `mark_task td/book venue ev/nus Career FAIR 2023`
   will perform the same operation.
 * Errors will be raised if the specified event does not exist or the event does not have the specified task.
-  If such situation happens, you may double-check the task description and the event name and reenter valid inputs.
+  If such situation happens, you may double-check the task description and the event name and re-enter valid inputs.
 * Errors will also be raised if the specified task has already been marked as completed.
 
 Examples:
-* `mark_task td/Book Venue ev/NUS Career Fair 2023` marks the task `Book Venue` from the task list of the event `NUS Career Fair 2023` as completed.
+* `mark_task td/Book Venue ev/NUS Career Fair 2023` marks the task `Book Venue` from the task list of the event `NUS Career Fair 2023` as completed.<br><br>
+
+    ![result for 'mark_task'](images/markTaskResult.png)
 
 ### Unmarking a task: `unmark_task`
 
@@ -392,7 +427,7 @@ Format: `unmark_task td/TASK_DESCRIPTION ev/EVENT_NAME`
 
 * It works exactly the same way as `mark_task` except for the fact that `unmark_task` marks a completed task as not completed.
 * You may `unmark_task` a task when you realize that you have not completed the task but have wrongly marked it as completed.
-* Errors will be raised if the specified task has already been marked as completed.
+* Errors will be raised if the specified task has already been unmarked.
 
 Examples:
 * `unmark_task td/Book Venue ev/NUS Career Fair 2023` marks the task `Book Venue` from the task list of the event `NUS Career Fair 2023` as not completed.
@@ -410,6 +445,13 @@ Format: `help`
 Clears all entries from JobFestGo.
 
 Format: `clear`
+
+<box type="warning" seamless>
+
+**WARNING**
+This command will delete all contacts, events and tasks from JobFestGo.
+This command cannot be undone. Proceed with caution.
+
 
 ### Returning to home page : `home`
 
@@ -453,7 +495,7 @@ _Details coming soon ..._
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous JobFestGo home folder.
 
 **Q**: What do I do if the clicking of the JobFestGo JAR file does not work? <br>
-**A**: Given below are the steps to launch JobFestGo using CLI.
+**A**: Given below are the steps to launch JobFestGo using CLI:
 <br>
 1. Open the command prompt
 1. Navigate to the directory where the JAR file is located using cd [JAR file location]
