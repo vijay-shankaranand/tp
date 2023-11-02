@@ -14,32 +14,42 @@ that you might not remember and organise your tasks neatly.
 --------------------------------------------------------------------------------------------------------------------
 
 ## Table of Contents
-* [Quick Start](#quick-start)
-* [Features](#features)
-    * [Adding a contact `add_contact`](#adding-a-contact--addcontact)
-    * [Listing all contacts `view_contacts`](#listing-all-contacts--viewcontacts)
-    * [Deleting a contact `delete_contact`](#deleting-a-contact--deletecontact)
-    * [Editing a contact `edit_contact`](#editing-a-contact--editcontact)
-    * [Locating contacts by name `find_contact`](#locating-contacts-by-name--findcontact)
-    * [Adding a tag `add_tag`](#adding-a-tag--addtag)
-    * [Viewing all tags `view_tags`](#viewing-all-tags--viewtags)
-    * [Deleting a tag `delete_tag`](#deleting-a-tag--deletetag)
-    * [Filtering contacts by tag `filter_by_tag`](#filtering-contacts-by-tag--filterbytag)
-    * [Adding an event `add_event`](#adding-an-event--addevent)
-    * [Viewing all events `view_events`](#viewing-all-events--viewevents)
-    * [Deleting an event `delete_event`](#deleting-an-event--deleteevent)
-    * [Linking contacts to an event `link`](#linking-contacts-to-an-event--link)
-    * [Selecting an event `select_event`](#selecting-an-event--selectevent)
-    * [Adding a task `add_task`](#adding-a-task--addtask)
-    * [Viewing help `help`](#viewing-help--help)
-    * [Clear entries `clear`](#clearing-all-entries--clear)
-    * [Returning to home page `home`](#returning-to-home-page--home)
-    * [Exit program `exit`](#exiting-the-program--exit)
-    * [Saving the data](#saving-the-data)
-    * [Editing the data file](#editing-the-data-file)
-* [FAQ](#faq)
-* [Known Issues](#known-issues)
-* [Command Summary](#command-summary)
+- [JobFestGo User Guide](#jobfestgo-user-guide)
+  - [that you might not remember and organise your tasks neatly.](#that-you-might-not-remember-and-organise-your-tasks-neatly)
+  - [Table of Contents](#table-of-contents)
+  - [Quick start](#quick-start)
+  - [Features](#features)
+    - [Adding a contact : `add_contact`](#adding-a-contact--add_contact)
+    - [Listing all contacts : `view_contacts`](#listing-all-contacts--view_contacts)
+    - [Deleting a contact : `delete_contact`](#deleting-a-contact--delete_contact)
+    - [Editing a contact : `edit_contact`](#editing-a-contact--edit_contact)
+    - [Locating contacts by name : `find_contact`](#locating-contacts-by-name--find_contact)
+    - [Adding a tag : `add_tag`](#adding-a-tag--add_tag)
+    - [Viewing all tags : `view_tags`](#viewing-all-tags--view_tags)
+    - [Deleting a tag : `delete_tag`](#deleting-a-tag--delete_tag)
+    - [Filtering contacts by tag : `filter_by_tag`](#filtering-contacts-by-tag--filter_by_tag)
+    - [Adding an event : `add_event`](#adding-an-event--add_event)
+    - [Viewing all events : `view_events`](#viewing-all-events--view_events)
+    - [Deleting an event : `delete_event`](#deleting-an-event--delete_event)
+    - [Linking contacts to an event : `link`](#linking-contacts-to-an-event--link)
+    - [Unlinking contacts from an event: `unlink`](#unlinking-contacts-from-an-event-unlink)
+    - [Selecting an event: `select_event`](#selecting-an-event-select_event)
+    - [Adding a task : `add_task`](#adding-a-task--add_task)
+    - [Viewing help : `help`](#viewing-help--help)
+    - [Deleting a task: `delete_task`](#deleting-a-task-delete_task)
+    - [Marking a task: `mark_task`](#marking-a-task-mark_task)
+    - [Unmarking a task: `unmark_task`](#unmarking-a-task-unmark_task)
+    - [Clearing all entries : `clear`](#clearing-all-entries--clear)
+    - [Returning to home page : `home`](#returning-to-home-page--home)
+    - [Exiting the program : `exit`](#exiting-the-program--exit)
+    - [Saving the data](#saving-the-data)
+    - [Editing the data file](#editing-the-data-file)
+    - [Archiving data files `[coming in v2.0]`](#archiving-data-files-coming-in-v20)
+    - [Progress bar for completed tasks of an event `[coming in v2.0]`](#progress-bar-for-completed-tasks-of-an-event-coming-in-v20)
+  - [FAQ](#faq)
+  - [can download it here](#can-download-it-here)
+  - [Known issues](#known-issues)
+  - [Command summary](#command-summary)
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -174,12 +184,16 @@ Format: `find_contact KEYWORD [MORE_KEYWORDS]`
 * Only full words will be matched e.g. `Han` will not match `Hans`
 * Contacts matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* The contacts found will be based on the list that is currently displayed e.g If the current event that is selected is not linked to `Hans`, `find_contact Hans` will not have any results even though `Hans` is in the contact list
 
 Examples:
 * `find_contact John` returns `john` and `John Doe`.
-* `find_contact alex david` returns `Alex Yeoh`, `David Li`.<br><br>
+* `find_contact alex david` returns `Alex Yeoh`, `David Li`.
+<br><br>
 
   ![result for 'find_contact alex david'](images/findAlexDavidResult.png)
+
+* `find_contacts doe` after `find_contacts john` will return `John Doe` and not `john` who was originally in the results.
 
 ### Adding a tag : `add_tag`
 
@@ -223,7 +237,8 @@ Format: `filter_by_tag TAG_NAME [MORE_TAG_NAMES]`
 * Contacts tagged by at least one of the given tags  will be returned (i.e. `OR` search).
   e.g. `vendor customer` will return all contacts tagged by `vendor` and
  all contacts tagged by `customer`.
-
+* The contacts found will be based on the list that is currently displayed e.g If the current event that is selected is not linked to `Hans` who is tagged by `vendor`, `filter_by_tags vendor` will not display `Hans` in the result.
+  
 Examples:
 * `filter_by_tag vendor` returns all contacts tagged by the tag: vendor in JobFestGo.
 * `filter_by_tag vendor customer` returns all contacts tagged by the tag: vendor and
