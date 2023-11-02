@@ -470,7 +470,7 @@ can download it [here](https://www.oracle.com/java/technologies/downloads/#java1
 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add Contact**    | `add_contact n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g. `add_contact n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 12346658 t/friend t/colleague`
+**Add Contact**    | `add_contact n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g. `add_contact n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 12346658 t/client t/vendor`
 **Delete Contact** | `delete_contact INDEX`<br> e.g. `delete_contact 3`
 **Edit Contact**   | `edit_contact INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g. `edit_contact 2 n/James Lee e/jameslee@example.com`
 **Find Contact**   | `find_contact KEYWORD [MORE_KEYWORDS]`<br> e.g. `find_contact James Jake`
