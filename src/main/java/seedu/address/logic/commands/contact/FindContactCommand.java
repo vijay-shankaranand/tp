@@ -39,11 +39,8 @@ public class FindContactCommand extends Command {
         Predicate<Contact> prevContactPred = model.getContactListPredicate();
 
         if (prevContactPred != null) {
-
             model.updateFilteredContactList(predicate.and(prevContactPred));
-
         } else {
-
             model.updateFilteredContactList(predicate);
         }
 
