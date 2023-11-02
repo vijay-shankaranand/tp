@@ -9,7 +9,6 @@ import seedu.address.model.contact.Contact;
  *     {@code JobFestGo ab = new JobFestGoBuilder().withContact("John", "Doe").build();}
  */
 public class JobFestGoBuilder {
-
     private JobFestGo jobFestGo;
 
     public JobFestGoBuilder() {

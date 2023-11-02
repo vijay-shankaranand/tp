@@ -14,7 +14,6 @@ import seedu.address.model.event.Event;
 import seedu.address.model.name.Name;
 import seedu.address.model.task.Task;
 
-
 public class ContactIsInEventPredicateTest {
     @Test
     public void equals() {

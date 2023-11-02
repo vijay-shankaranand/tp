@@ -16,7 +16,6 @@ import seedu.address.model.tag.Tag;
  * A utility class to help with building EditContactDescriptor objects.
  */
 public class EditContactDescriptorBuilder {
-
     private EditContactDescriptor descriptor;
 
     public EditContactDescriptorBuilder() {

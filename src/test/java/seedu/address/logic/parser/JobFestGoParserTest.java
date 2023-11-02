@@ -58,7 +58,7 @@ public class JobFestGoParserTest {
     @Test
     public void parseCommand_add() throws Exception {
         Contact contact = new ContactBuilder().build();
-        AddContactCommand command = (AddContactCommand) parser.parseCommand(ContactUtil.getAddCommand(contact));
+        AddContactCommand command = (AddContactCommand) parser.parseCommand(ContactUtil.getAddContactCommand(contact));
         assertEquals(new AddContactCommand(contact), command);
     }
 
@@ -85,7 +85,7 @@ public class JobFestGoParserTest {
     }
 
     @Test
-    public void parseCommand_filter() throws Exception {
+    public void parseCommand_filterByTag() throws Exception {
         Tag tag = new Tag("friends");
         List<Tag> tagList = new ArrayList<>();
         tagList.add(tag);
@@ -148,7 +148,7 @@ public class JobFestGoParserTest {
     }
 
     @Test
-    public void parseCommand_find() throws Exception {
+    public void parseCommand_findContact() throws Exception {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
         FindContactCommand command = (FindContactCommand) parser.parseCommand(
                 FindContactCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
@@ -161,7 +161,7 @@ public class JobFestGoParserTest {
     }
 
     @Test
-    public void parseCommand_viewtag() throws Exception {
+    public void parseCommand_viewTag() throws Exception {
         assertTrue(parser.parseCommand(ViewTagsCommand.COMMAND_WORD) instanceof ViewTagsCommand);
         assertTrue(parser.parseCommand(ViewTagsCommand.COMMAND_WORD + " 3") instanceof ViewTagsCommand);
     }

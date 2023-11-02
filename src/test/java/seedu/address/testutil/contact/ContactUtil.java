@@ -17,11 +17,10 @@ import seedu.address.model.tag.Tag;
  * A utility class for Contact.
  */
 public class ContactUtil {
-
     /**
-     * Returns an add command string for adding the {@code contact}.
+     * Returns an add contact command string for adding the {@code contact}.
      */
-    public static String getAddCommand(Contact contact) {
+    public static String getAddContactCommand(Contact contact) {
         return AddContactCommand.COMMAND_WORD + " " + getContactDetails(contact);
     }
 
