@@ -20,11 +20,11 @@ import seedu.address.model.tag.Tag;
 public class FilterByTagCommand extends Command {
     public static final String COMMAND_WORD = "filter_by_tag";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": filters and displays all contacts who"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Filters and displays all contacts who"
 
             + " are tagged with the input tags.\n"
             + "Parameters: "
-            + "TAG\n"
+            + "TAG_NAME [MORE_TAG_NAMES]...\n"
             + "Example: " + COMMAND_WORD + " "
             + "vendor ";
 

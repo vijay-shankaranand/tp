@@ -26,7 +26,7 @@ public class UnmarkTaskCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks a task as not completed. "
             + "Parameters: "
             + PREFIX_TASK_DESCRIPTION + "TASK_DESCRIPTION "
-            + PREFIX_EVENT + "EVENT \n"
+            + PREFIX_EVENT + "EVENT_NAME \n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_TASK_DESCRIPTION + "Book Venue "
             + PREFIX_EVENT + "NUS Career Fair 2023";

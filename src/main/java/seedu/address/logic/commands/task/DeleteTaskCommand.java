@@ -25,7 +25,7 @@ public class DeleteTaskCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes an existing task from the specified event. "
             + "Parameters: "
             + PREFIX_TASK_DESCRIPTION + "TASK_DESCRIPTION "
-            + PREFIX_EVENT + "EVENT \n"
+            + PREFIX_EVENT + "EVENT_NAME \n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_TASK_DESCRIPTION + "Book Venue "
             + PREFIX_EVENT + "NUS Career Fair 2023";

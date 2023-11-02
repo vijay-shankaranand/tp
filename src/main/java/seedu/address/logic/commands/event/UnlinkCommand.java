@@ -28,8 +28,8 @@ public class UnlinkCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Unlinks a contact from a specific event. "
             + "Parameters: "
-            + PREFIX_EVENT + "EVENT NAME "
-            + PREFIX_CONTACT + "CONTACT NAME\n"
+            + PREFIX_EVENT + "EVENT_NAME "
+            + PREFIX_CONTACT + "CONTACT_NAME\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_EVENT + "NUS Career Fair 2023 "
             + PREFIX_CONTACT + "John Doe";
