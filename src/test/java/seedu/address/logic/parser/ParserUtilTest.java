@@ -281,12 +281,4 @@ public class ParserUtilTest {
         TaskDescription expectedTaskDescription = new TaskDescription("test");
         assertEquals(expectedTaskDescription, ParserUtil.parseTaskDescription(taskDescriptionWithWhitespace));
     }
-
-    @Test
-    public void parseTaskDescriptions_validValueWithSpecialCharacter_returnsTrimmedTaskDescription() throws Exception {
-        String taskDescriptionWithSpecialCharacter = WHITESPACE + "test@#$%^&*()" + WHITESPACE;
-        TaskDescription expectedTaskDescription = new TaskDescription("test@#$%^&*()");
-        assertEquals(expectedTaskDescription, ParserUtil.parseTaskDescription(taskDescriptionWithSpecialCharacter));
-    }
-
 }

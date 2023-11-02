@@ -6,6 +6,9 @@ import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.parser.ParserUtil;
+import seedu.address.logic.parser.exceptions.ParseException;
+
 public class TaskDescriptionTest {
 
     @Test
@@ -28,9 +31,8 @@ public class TaskDescriptionTest {
 
         assertTrue(TaskDescription.isValidDescription("Do CS2103T tutorial"));
         assertTrue(TaskDescription.isValidDescription("Do CS2103T tutorial 2"));
-        assertTrue(TaskDescription.isValidDescription("Do CS2103T tutorial 2!"));
-        assertTrue(TaskDescription.isValidDescription("Do CS2103T tutorial 2!!"));
-        assertTrue(TaskDescription.isValidDescription("Do CS2103T tutorial 2!!!"));
+        assertThrows(ParseException.class, String.format(TaskDescription.MESSAGE_CONSTRAINTS), () ->
+                ParserUtil.parseTaskDescription("Do CS2103T tutorial 2!"));
     }
 
     @Test

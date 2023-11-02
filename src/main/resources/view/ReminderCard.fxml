@@ -26,8 +26,8 @@
           </minWidth>
         </Label>
         <Label fx:id="description" text="\$first" styleClass="cell_big_label" />
-        <Label fx:id="eventName" text="\$eventName" />
       </HBox>
+      <Label fx:id="eventName" text="\$eventName" />
       <Label fx:id="deadline" styleClass="cell_small_label" text="\$deadline" />
     </VBox>
   </GridPane>

@@ -39,6 +39,11 @@ public class Messages {
      */
     public static String format(Contact contact) {
         final StringBuilder builder = new StringBuilder();
+
+        String tagString = contact.getTags().stream()
+                .map(Tag::toString)
+                .collect(Collectors.joining(", "));
+
         builder.append(contact.getName())
                 .append("; Phone: ")
                 .append(contact.getPhone())
@@ -46,10 +51,12 @@ public class Messages {
                 .append(contact.getEmail())
                 .append("; Address: ")
                 .append(contact.getAddress())
-                .append("; Tags: ");
-        contact.getTags().forEach(builder::append);
+                .append("; Tags: ")
+                .append(tagString);
+
         return builder.toString();
     }
+
     /**
      * Formats the {@code tag} for display to the user.
      */
