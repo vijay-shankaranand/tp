@@ -43,6 +43,12 @@ public class AddTagCommand extends Command {
         }
 
         model.addTag(toAdd);
+
+        // Update filtered lists accordingly.
+        // The flow of command returns back to the main dashboard.
+        model.updateFilteredContactList(Model.PREDICATE_SHOW_ALL_CONTACTS);
+        model.updateFilteredTaskList(Model.PREDICATE_SHOW_ALL_TASKS);
+
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
 
