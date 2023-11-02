@@ -25,9 +25,9 @@ public class FilterByTagCommand extends Command {
 
             + " are tagged with the input tag.\n"
             + "Parameters: "
-            + PREFIX_TAG + "TAG\n"
+            + "TAG\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_TAG + "vendor ";
+            + "vendor ";
 
     private final List<Tag> tags;
     private final ContactIsTaggedPredicate predicate;
