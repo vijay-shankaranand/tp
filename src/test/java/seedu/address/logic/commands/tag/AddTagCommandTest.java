@@ -303,6 +303,11 @@ public class AddTagCommandTest {
         public ObservableList<Task> getTasksDueSoonList() {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public Predicate<Contact> getContactListPredicate() {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**
@@ -339,6 +344,16 @@ public class AddTagCommandTest {
         public void addTag(Tag tag) {
             requireNonNull(tag);
             tagsAdded.add(tag);
+        }
+
+        @Override
+        public void updateFilteredContactList(Predicate<Contact> predicate) {
+            requireNonNull(predicate);
+        }
+
+        @Override
+        public void updateFilteredTaskList(Predicate<Task> predicate) {
+            requireNonNull(predicate);
         }
 
         @Override
