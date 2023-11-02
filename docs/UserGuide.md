@@ -138,7 +138,7 @@ Displays a list of all contacts in JobFestGo.
 
 Format: `view_contacts`<br><br>
 
-      ![result for 'view_contacts'](images/viewContactsResults.png)
+  ![result for 'view_contacts'](images/viewContactsResults.png)
 
 ### Deleting a contact : `delete_contact`
 
