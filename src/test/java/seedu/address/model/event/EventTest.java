@@ -15,7 +15,6 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.testutil.event.EventBuilder;
 
-
 public class EventTest {
     @Test
     public void constructor_null_throwsNullPointerException() {
