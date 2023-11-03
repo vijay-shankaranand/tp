@@ -98,7 +98,7 @@ JobFestGo comes with a GUI (Graphical User Interface) that is designed to be int
 
 ![GUI](images/GUI.png)
 
-<box type="warning" seamless>
+<box type="warning">
 
 **PLEASE NOTE** : If there is ellpisis (...) at the end of a text field in any section of JobFestGo, please extend the window fully so the full text can be seen.
 </box>
@@ -145,7 +145,7 @@ Format: `add_contact n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 * A contact cannot be added if their phone number already exists
 * A contact cannot be added if their name already exists
 
-<box type="warning" seamless>
+<box type="warning">
 
 **WARNING** : Please ensure there is no more than **one** whitespace in-between each word for `NAME`!
 </box>
@@ -169,7 +169,7 @@ Deletes the contact at the specified index from JobFestGo.
 
 Format: `delete_contact INDEX`
 
-<box type="warning" seamless>
+<box type="warning">
 
 **WARNING**: This command is destructive. Once a contact is deleted, it cannot be recovered.
 </box>
@@ -476,7 +476,7 @@ JobFestGo data are saved in the hard disk automatically after any command that c
 
 JobFestGo data are saved automatically as a JSON file `[JAR file location]/data/jobfestgo.json`. Advanced users are welcome to update data directly by editing that data file.
 
-<box type="warning" seamless>
+<box type="warning">
 
 **Caution:**
 If your changes to the data file makes its format invalid, JobFestGo will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.
