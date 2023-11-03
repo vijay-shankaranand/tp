@@ -14,7 +14,7 @@ JobFestGo is a **desktop application** built for job event planners to manage co
 Here’s an **overview** of how JobFestGo can help you with your event planning:
 - Store information about your events and their associated contacts
 - Track status of your event tasks
-- Keep track of upcoming deadlines
+- Keep track of upcoming task deadlines
 - Search for contacts by name or tag
 
 Optimized for use via a **Command Line Interface (CLI)** while still having the benefits of a **Graphical User Interface (GUI)**, it is a task management tool meant to assist you as job festival event planners in tracking event-specific tasks and contacts. This removes the hassle of having to shuffle through your contact list based on names that you might not remember and organise your tasks according to events while obtaining your information **efficiently**.
@@ -138,7 +138,7 @@ Adds a contact to JobFestGo.
 
 Format: `add_contact n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
-
+* Event name can take any alphanumeric values only.
 * A contact can have any number of tags
 * Email should be in the appropriate (@xxx.com) format
 * Phone number should be in appropriate (8-digit numeric) format
@@ -148,7 +148,7 @@ Format: `add_contact n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
 <box type="warning" seamless>
 
-**WARNING** : Please ensure there is no more than **one** whitespace in-between each word for the contact name!
+**WARNING** : Please ensure there is no more than **one** whitespace in-between each word for `NAME`!
 
 Examples:
 * `add_contact n/John Doe p/98765432 e/johndtr@example.com a/John street, block 123, #01-01`
@@ -280,6 +280,7 @@ Adds an event to JobFestGo.
 
 Format: `add_event n/NAME d/DATE a/ADDRESS`
 
+* Event name can take any alphanumeric values only.
 * The event name **must not already exist** in JobFestGo.
 * Date must be valid and should be in the appropriate (YYYY-MM-DD) format.
 * Date should **not** be before the current date.
@@ -373,7 +374,7 @@ Format: `add_task td/TASK_DESCRIPTION d/DEADLINE ev/EVENT_NAME`
 * Deadline is a date in the format YYYY-MM-DD.
 * Deadline should not be before today's date.
 * Event name should be the **name of an already existing event**.
-* Reminder will be shown on the home page of JobFestGo for tasks due less than 4 days from the deadline.
+* Reminder will be shown on the home page of JobFestGo for tasks within 3 days of the deadline.
 
 Examples:
 * `add_task td/Book Venue d/2023-12-23 ev/NUS Career Fair 2023` adds a `Book Venue` by `2023-12-23` task to the event `NUS Career Fair 2023`.
