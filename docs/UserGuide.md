@@ -4,9 +4,11 @@
 
 ---
 
-### JobFestGo User Guide
+# User Guide 
 
-**Job Fest event planning has never been easier!**
+### Welcome to JobFestGo 
+
+**Your one-stop solution for job event planning!**
 
 JobFestGo is a **desktop application** built for job event planners to manage contacts and tasks for their events.
 
