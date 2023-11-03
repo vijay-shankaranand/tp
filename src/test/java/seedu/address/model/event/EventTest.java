@@ -44,7 +44,12 @@ public class EventTest {
         // different name, all other attributes same -> returns false
         editedEvent = new EventBuilder(NTU).withName(VALID_EVENT_NAME).build();
         assertFalse(NTU.isSameEvent(editedEvent));
+    }
 
+    @Test
+    public void isCompletedForNonCompletedEvent_returnsFalse() {
+        assertFalse(NTU.isCompleted());
+        assertFalse(JOBFEST.isCompleted());
     }
 
 
