@@ -140,7 +140,6 @@ Format: `add_contact n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
 
 * A contact can have any number of tags
-* A contact must have mandatory fields name, phone number, email and address
 * Email should be in the appropriate (@xxx.com) format
 * Phone number should be in appropriate (8-digit numeric) format
 * Only tags from tags list can be used for tagging a contact
@@ -281,7 +280,6 @@ Adds an event to JobFestGo.
 
 Format: `add_event n/NAME d/DATE a/ADDRESS`
 
-* An event must have a mandatory name, date and address.
 * The event name **must not already exist** in JobFestGo.
 * Date must be valid and should be in the appropriate (YYYY-MM-DD) format.
 * Date should **not** be before the current date.
@@ -371,7 +369,6 @@ Adds a task to an event in JobFestGo.
 
 Format: `add_task td/TASK_DESCRIPTION d/DEADLINE ev/EVENT_NAME`
 
-* A task must have a mandatory task description, deadline and event name.
 * Task Description can take any alphanumeric value, alongside hyphen, comma, brackets and full stops.
 * Deadline is a date in the format YYYY-MM-DD.
 * Deadline should not be before today's date.
