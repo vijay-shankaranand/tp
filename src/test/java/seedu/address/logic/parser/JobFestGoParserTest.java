@@ -38,6 +38,9 @@ import seedu.address.logic.commands.tag.DeleteTagCommand;
 import seedu.address.logic.commands.tag.FilterByTagCommand;
 import seedu.address.logic.commands.tag.ViewTagsCommand;
 import seedu.address.logic.commands.task.AddTaskCommand;
+import seedu.address.logic.commands.task.DeleteTaskCommand;
+import seedu.address.logic.commands.task.MarkTaskCommand;
+import seedu.address.logic.commands.task.UnmarkTaskCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.contact.Contact;
 import seedu.address.model.contact.ContactIsTaggedPredicate;
@@ -52,11 +55,10 @@ import seedu.address.testutil.event.EventBuilder;
 import seedu.address.testutil.event.EventUtil;
 
 public class JobFestGoParserTest {
-
     private final JobFestGoParser parser = new JobFestGoParser();
 
     @Test
-    public void parseCommand_add() throws Exception {
+    public void parseCommand_addContact() throws Exception {
         Contact contact = new ContactBuilder().build();
         AddContactCommand command = (AddContactCommand) parser.parseCommand(ContactUtil.getAddContactCommand(contact));
         assertEquals(new AddContactCommand(contact), command);
@@ -69,14 +71,14 @@ public class JobFestGoParserTest {
     }
 
     @Test
-    public void parseCommand_delete() throws Exception {
+    public void parseCommand_deleteContact() throws Exception {
         DeleteContactCommand command = (DeleteContactCommand) parser.parseCommand(
                 DeleteContactCommand.COMMAND_WORD + " " + INDEX_FIRST.getOneBased());
         assertEquals(new DeleteContactCommand(INDEX_FIRST), command);
     }
 
     @Test
-    public void parseCommand_edit() throws Exception {
+    public void parseCommand_editContact() throws Exception {
         Contact contact = new ContactBuilder().build();
         EditContactDescriptor descriptor = new EditContactDescriptorBuilder(contact).build();
         EditContactCommand command = (EditContactCommand) parser.parseCommand(EditContactCommand.COMMAND_WORD + " "
@@ -161,7 +163,7 @@ public class JobFestGoParserTest {
     }
 
     @Test
-    public void parseCommand_viewTag() throws Exception {
+    public void parseCommand_viewTags() throws Exception {
         assertTrue(parser.parseCommand(ViewTagsCommand.COMMAND_WORD) instanceof ViewTagsCommand);
         assertTrue(parser.parseCommand(ViewTagsCommand.COMMAND_WORD + " 3") instanceof ViewTagsCommand);
     }
@@ -182,7 +184,7 @@ public class JobFestGoParserTest {
     }
 
     @Test
-    public void parseCommand_list() throws Exception {
+    public void parseCommand_viewContacts() throws Exception {
         assertTrue(parser.parseCommand(ViewContactsCommand.COMMAND_WORD) instanceof ViewContactsCommand);
         assertTrue(parser.parseCommand(ViewContactsCommand.COMMAND_WORD + " 3") instanceof ViewContactsCommand);
     }
@@ -192,6 +194,25 @@ public class JobFestGoParserTest {
         assertTrue(parser.parseCommand(AddTaskCommand.COMMAND_WORD + " " + PREFIX_TASK_DESCRIPTION + "Task 1 "
                 + PREFIX_DATE + "2024-01-12 " + PREFIX_EVENT + "NUS") instanceof AddTaskCommand);
     }
+
+    @Test
+    public void parseCommand_deleteTask() throws Exception {
+        assertTrue(parser.parseCommand(DeleteTaskCommand.COMMAND_WORD + " " + PREFIX_TASK_DESCRIPTION + "Task 1 "
+                + PREFIX_EVENT + "NUS") instanceof DeleteTaskCommand);
+    }
+
+    @Test
+    public void parseCommand_markTask() throws Exception {
+        assertTrue(parser.parseCommand(MarkTaskCommand.COMMAND_WORD + " " + PREFIX_TASK_DESCRIPTION + "Task 1 "
+                + PREFIX_EVENT + "NUS") instanceof MarkTaskCommand);
+    }
+
+    @Test
+    public void parseCommand_unmarkTask() throws Exception {
+        assertTrue(parser.parseCommand(UnmarkTaskCommand.COMMAND_WORD + " " + PREFIX_TASK_DESCRIPTION + "Task 1 "
+                + PREFIX_EVENT + "NUS") instanceof UnmarkTaskCommand);
+    }
+
 
     @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {
