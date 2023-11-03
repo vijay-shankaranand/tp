@@ -4,10 +4,11 @@
 
 ---
 
-# JobFestGo User Guide
+# User Guide 
 
+### Welcome to JobFestGo 
 
-**Job Fest event planning has never been easier!**
+**Your one-stop solution for job event planning!**
 
 JobFestGo is a **desktop application** built for job event planners to manage contacts and tasks for their events.
 
@@ -63,7 +64,7 @@ Optimized for use via a **Command Line Interface (CLI)** while still having the 
 ## Quick start
 
 1. Ensure you have Java `11` or above installed in your Computer. 
-   - [How do I check my Java version?](#faq)
+- [How do I check my Java version?](#faq)
 
 1. Download the latest `jobfestgo.jar` from [here](https://github.com/AY2324S1-CS2103T-T09-1/tp/releases).
     
@@ -99,10 +100,10 @@ JobFestGo comes with a GUI (Graphical User Interface) that is designed to be int
 
 ![GUI](images/GUI.png)
 
-<box type="warning" seamless>
+<box type="warning">
 
 **PLEASE NOTE** : If there is ellpisis (...) at the end of a text field in any section of JobFestGo, please extend the window fully so the full text can be seen.
-
+</box>
 --------------------------------------------------------------------------------------------------------------------
 
 ## Features
@@ -146,10 +147,10 @@ Format: `add_contact n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 * A contact cannot be added if their phone number already exists
 * A contact cannot be added if their name already exists
 
-<box type="warning" seamless>
+<box type="warning">
 
 **WARNING** : Please ensure there is no more than **one** whitespace in-between each word for `NAME`!
-
+</box>
 Examples:
 * `add_contact n/John Doe p/98765432 e/johndtr@example.com a/John street, block 123, #01-01`
 * `add_contact n/Johnny t/suppliers e/johnd@example.com a/311, Clementi Ave 2, #02-25 p/98765435`<br><br>
@@ -170,10 +171,10 @@ Deletes the contact at the specified index from JobFestGo.
 
 Format: `delete_contact INDEX`
 
-<box type="warning" seamless>
+<box type="warning">
 
 **WARNING**: This command is destructive. Once a contact is deleted, it cannot be recovered.
-
+</box>
 * Deletes the contact at the specified `INDEX`.
 * The index refers to the index number shown in the displayed contact list.
 * The index **must be a positive integer** 1, 2, 3, …​
@@ -245,7 +246,9 @@ Format: `view_tags` <br><br>
 
 Deletes the specified tag name from JobFestGo.
 
-**WARNING**: This command is destructive. Once a tag is deleted, no contacts can be associated with the tag.
+<box type="warning">
+**WARNING**: This command is destructive. Once a tag is deleted, no contacts can be associated with the tag name.
+</box>
 
 Format: `delete_tag t/TAG_NAME`
 
@@ -303,7 +306,9 @@ Format: `view_events`<br><br>
 
 Deletes the event specified at the index from JobFestGo.
 
+<box type="warning">
 **WARNING**: This command is destructive. Once an event is deleted, all tasks associated with the event will be deleted.
+</box>
 
 Format: `delete_event INDEX`
 
@@ -383,7 +388,9 @@ Examples:
 
 Deletes the task specified by the task description from its associated event in JobFestGo.
 
+<box type="warning">
 **WARNING**: This command is destructive. Once a task is deleted, it cannot be recovered.
+</box>
 
 Format: `delete_task td/TASK_DESCRIPTION ev/EVENT_NAME`
 
@@ -444,12 +451,12 @@ Clears all entries from JobFestGo.
 
 Format: `clear`
 
-<box type="warning" seamless>
+<box type="warning">
 
 **WARNING**
 This command will delete all contacts, events and tasks from JobFestGo.
 This command cannot be undone. Proceed with caution.
-
+</box>
 
 ### Returning to home page : `home`
 
@@ -471,7 +478,7 @@ JobFestGo data are saved in the hard disk automatically after any command that c
 
 JobFestGo data are saved automatically as a JSON file `[JAR file location]/data/jobfestgo.json`. Advanced users are welcome to update data directly by editing that data file.
 
-<box type="warning" seamless>
+<box type="warning">
 
 **Caution:**
 If your changes to the data file makes its format invalid, JobFestGo will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.
