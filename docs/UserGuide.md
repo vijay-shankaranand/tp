@@ -102,7 +102,7 @@ JobFestGo comes with a GUI (Graphical User Interface) that is designed to be int
 
 <box type="warning">
 
-**PLEASE NOTE** : If there is ellpisis (...) at the end of a text field in any section of JobFestGo, please extend the window fully so the full text can be seen.
+**PLEASE NOTE** : If there is an ellipsis (...) at the end of a text field in any section of JobFestGo, please extend the window fully so the full text can be seen.
 </box>
 --------------------------------------------------------------------------------------------------------------------
 
@@ -139,18 +139,19 @@ Adds a contact to JobFestGo.
 
 Format: `add_contact n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
-* Event name can take any alphanumeric values only.
-* A contact can have any number of tags
-* Email should be in the appropriate (@xxx.com) format
-* Phone number should be in appropriate (8-digit numeric) format
-* Only tags from tags list can be used for tagging a contact
-* A contact cannot be added if their phone number already exists
-* A contact cannot be added if their name already exists
+* Contact name can only take alphanumeric values.
+* A contact can have any number of tags.
+* Email should be in the appropriate (@xxx.com) format.
+* Phone number should be in appropriate (8-digit numeric) format.
+* Only tags from tags list can be used for tagging a contact.
+* A contact cannot be added if their phone number already exists.
+* A contact cannot be added if their name already exists.
 
 <box type="warning">
 
 **WARNING** : Please ensure there is no more than **one** whitespace in-between each word for `NAME`!
 </box>
+
 Examples:
 * `add_contact n/John Doe p/98765432 e/johndtr@example.com a/John street, block 123, #01-01`
 * `add_contact n/Johnny t/suppliers e/johnd@example.com a/311, Clementi Ave 2, #02-25 p/98765435`<br><br>
