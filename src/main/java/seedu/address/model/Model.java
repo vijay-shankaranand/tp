@@ -6,6 +6,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.contact.Contact;
+import seedu.address.model.contact.Phone;
 import seedu.address.model.date.Date;
 import seedu.address.model.event.Event;
 import seedu.address.model.name.Name;
@@ -65,6 +66,7 @@ public interface Model {
      * Returns true if a contact with the same identity as {@code contact} exists in JobFestGo.
      */
     boolean hasContact(Contact contact);
+
 
     /**
      * Deletes the given contact.
@@ -246,4 +248,6 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredTaskList(Predicate<Task> predicate);
+
+
 }

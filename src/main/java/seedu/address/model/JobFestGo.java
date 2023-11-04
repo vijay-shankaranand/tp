@@ -8,6 +8,7 @@ import java.util.List;
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.contact.Contact;
+import seedu.address.model.contact.Phone;
 import seedu.address.model.contact.UniqueContactList;
 import seedu.address.model.date.Date;
 import seedu.address.model.event.Event;
@@ -211,6 +212,7 @@ public class JobFestGo implements ReadOnlyJobFestGo {
         return events.contains(event);
     }
 
+
     /**
      * Deletes a {@code event} from JobFestGo.
      * Deletes the event from contacts using it as well.
@@ -388,4 +390,7 @@ public class JobFestGo implements ReadOnlyJobFestGo {
     public int hashCode() {
         return contacts.hashCode();
     }
+
+
+
 }
