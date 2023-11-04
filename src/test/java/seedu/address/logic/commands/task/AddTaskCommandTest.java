@@ -72,7 +72,7 @@ public class AddTaskCommandTest {
     }
 
     @Test
-    public void execute_duplicateTag_throwsCommandException() {
+    public void execute_duplicateTask_throwsCommandException() {
 
         Task validTask = new TaskBuilder().withEvent(NTU).build();
         ModelStub modelStub = new ModelStubWithTask(validTask);
