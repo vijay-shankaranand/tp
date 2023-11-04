@@ -50,10 +50,11 @@ public class EventContactDisplay extends UiPart<Region> {
         super(FXML);
         this.logic = logic;
 
-        // Disable mouse events for all panels
-        contactListPanelPlaceholder.addEventFilter(MouseEvent.ANY, handler);
-        eventListPanelPlaceholder.addEventFilter(MouseEvent.ANY, handler);
-        taskPanelPlaceholder.addEventFilter(MouseEvent.ANY, handler);
+        // Disable mouse press events for all panels
+        // Still allows clicking and dragging of scroll bars
+        contactListPanelPlaceholder.addEventFilter(MouseEvent.MOUSE_PRESSED, handler);
+        eventListPanelPlaceholder.addEventFilter(MouseEvent.MOUSE_PRESSED, handler);
+        taskPanelPlaceholder.addEventFilter(MouseEvent.MOUSE_PRESSED, handler);
 
         if (shouldReset) {
             fillInnerPartsAfterReset();
