@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.task.DeleteTaskCommand.MESSAGE_MISSING_TASK;
+import static seedu.address.logic.commands.task.MarkTaskCommand.MESSAGE_MISSING_TASK;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.event.TypicalEvents.JOBFEST;
 import static seedu.address.testutil.event.TypicalEvents.NTU;
@@ -22,9 +22,9 @@ import seedu.address.model.task.Task;
 import seedu.address.testutil.task.TaskBuilder;
 
 /**
- * Contains integration tests (interaction with the Model) for {@code DeleteTaskCommand}.
+ * Contains integration tests (interaction with the Model) for {@code MarkTaskCommand}.
  */
-public class DeleteTaskCommandTest {
+public class MarkTaskCommandTest {
     private Model model = new ModelManager(getTypicalJobFestGo(), new UserPrefs());
     private Model expectedModel = new ModelManager(getTypicalJobFestGo(), new UserPrefs());
 
@@ -35,9 +35,9 @@ public class DeleteTaskCommandTest {
     public void execute_validTask_success() {
         model.addTask(BOOK_VENUE);
         expectedModel.addTask(BOOK_VENUE);
-        DeleteTaskCommand command = new DeleteTaskCommand(BOOK_VENUE.getDescription(), JOBFEST.getName());
+        MarkTaskCommand command = new MarkTaskCommand(BOOK_VENUE.getDescription(), JOBFEST.getName());
         expectedModel.deleteTask(BOOK_VENUE.getDescription(), JOBFEST.getName());
-        String expectedMessage = String.format(DeleteTaskCommand.MESSAGE_SUCCESS,
+        String expectedMessage = String.format(MarkTaskCommand.MESSAGE_SUCCESS,
                 BOOK_VENUE.getDescription(), JOBFEST.getName());
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
     }
@@ -48,7 +48,7 @@ public class DeleteTaskCommandTest {
     @Test
     public void execute_taskDoesNotExist_throwsException() {
         model.addTask(ORDER_FOOD);
-        DeleteTaskCommand command = new DeleteTaskCommand(BOOK_VENUE.getDescription(), JOBFEST.getName());
+        MarkTaskCommand command = new MarkTaskCommand(BOOK_VENUE.getDescription(), JOBFEST.getName());
         assertThrows(CommandException.class, MESSAGE_MISSING_TASK, () -> command.execute(model));
     }
 
@@ -63,51 +63,51 @@ public class DeleteTaskCommandTest {
                 .withDescription("Book venue")
                 .build();
         model.addTask(TaskWithSameDescription);
-        DeleteTaskCommand command = new DeleteTaskCommand(BOOK_VENUE.getDescription(), JOBFEST.getName());
+        MarkTaskCommand command = new MarkTaskCommand(BOOK_VENUE.getDescription(), JOBFEST.getName());
         assertThrows(CommandException.class, MESSAGE_MISSING_TASK, () -> command.execute(model));
     }
-    
+
     @Test
     public void equals() {
-        DeleteTaskCommand firstDeleteTaskCommand =
-                new DeleteTaskCommand(BOOK_VENUE.getDescription(), JOBFEST.getName());
-        DeleteTaskCommand secondDeleteTaskCommand =
-                new DeleteTaskCommand(BOOK_VENUE.getDescription(), NTU.getName());
-        DeleteTaskCommand thirdDeleteTaskCommand =
-                new DeleteTaskCommand(ORDER_FOOD.getDescription(), JOBFEST.getName());
-        DeleteTaskCommand fourthDeleteTaskCommand =
-                new DeleteTaskCommand(ORDER_FOOD.getDescription(), NTU.getName());
+        MarkTaskCommand firstMarkTaskCommand =
+                new MarkTaskCommand(BOOK_VENUE.getDescription(), JOBFEST.getName());
+        MarkTaskCommand secondMarkTaskCommand =
+                new MarkTaskCommand(BOOK_VENUE.getDescription(), NTU.getName());
+        MarkTaskCommand thirdMarkTaskCommand =
+                new MarkTaskCommand(ORDER_FOOD.getDescription(), JOBFEST.getName());
+        MarkTaskCommand fourthMarkTaskCommand =
+                new MarkTaskCommand(ORDER_FOOD.getDescription(), NTU.getName());
 
         // same object -> returns true
-        assertTrue(firstDeleteTaskCommand.equals(firstDeleteTaskCommand));
+        assertTrue(firstMarkTaskCommand.equals(firstMarkTaskCommand));
 
         // same values -> returns true
-        DeleteTaskCommand firstDeleteTaskCommandCopy =
-                new DeleteTaskCommand(BOOK_VENUE.getDescription(), JOBFEST.getName());
-        assertTrue(firstDeleteTaskCommand.equals(firstDeleteTaskCommandCopy));
+        MarkTaskCommand firstMarkTaskCommandCopy =
+                new MarkTaskCommand(BOOK_VENUE.getDescription(), JOBFEST.getName());
+        assertTrue(firstMarkTaskCommand.equals(firstMarkTaskCommandCopy));
 
         // different types -> returns false
-        assertFalse(firstDeleteTaskCommand.equals(1));
+        assertFalse(firstMarkTaskCommand.equals(1));
 
         // null -> returns false
-        assertFalse(firstDeleteTaskCommand.equals(null));
+        assertFalse(firstMarkTaskCommand.equals(null));
 
         // different task description and different event name -> returns false
-        assertFalse(firstDeleteTaskCommand.equals(secondDeleteTaskCommand));
+        assertFalse(firstMarkTaskCommand.equals(secondMarkTaskCommand));
 
         // same event name but different task description -> returns false
-        assertFalse(firstDeleteTaskCommand.equals(thirdDeleteTaskCommand));
+        assertFalse(firstMarkTaskCommand.equals(thirdMarkTaskCommand));
 
         // same task description but different event name -> returns false
-        assertFalse(firstDeleteTaskCommand.equals(fourthDeleteTaskCommand));
+        assertFalse(firstMarkTaskCommand.equals(fourthMarkTaskCommand));
     }
 
     @Test
     public void toStringMethod() {
-        DeleteTaskCommand command =
-                new DeleteTaskCommand(BOOK_VENUE.getDescription(), JOBFEST.getName());
+        MarkTaskCommand command =
+                new MarkTaskCommand(BOOK_VENUE.getDescription(), JOBFEST.getName());
 
-        String expected = DeleteTaskCommand.class.getCanonicalName()
+        String expected = MarkTaskCommand.class.getCanonicalName()
                 + "{toDelete=" + BOOK_VENUE.getDescription() + ", "
                 + "associatedEvent=" + JOBFEST.getName() + "}";
 
