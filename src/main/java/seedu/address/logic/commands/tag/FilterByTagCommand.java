@@ -26,7 +26,7 @@ public class FilterByTagCommand extends Command {
             + "Parameters: "
             + "TAG_NAME [MORE_TAG_NAMES]...\n"
             + "Example: " + COMMAND_WORD + " "
-            + "vendor ";
+            + "vendors ";
 
     private final List<Tag> tags;
     private final ContactIsTaggedPredicate predicate;

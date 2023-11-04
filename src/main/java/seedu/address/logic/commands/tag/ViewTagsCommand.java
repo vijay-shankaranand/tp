@@ -12,7 +12,7 @@ import seedu.address.model.Model;
 public class ViewTagsCommand extends Command {
     public static final String COMMAND_WORD = "view_tags";
 
-    public static final String MESSAGE_SUCCESS = "Listed all tags currently in use";
+    public static final String MESSAGE_SUCCESS = "Listed all tags";
 
     @Override
     public CommandResult execute(Model model) {
