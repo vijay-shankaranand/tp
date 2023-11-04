@@ -4,8 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.task.MarkTaskCommand.MESSAGE_COMPLETED_TASK;
-import static seedu.address.logic.commands.task.MarkTaskCommand.MESSAGE_MISSING_TASK;
+import static seedu.address.logic.commands.task.UnmarkTaskCommand.MESSAGE_INCOMPLETED_TASK;
+import static seedu.address.logic.commands.task.UnmarkTaskCommand.MESSAGE_MISSING_TASK;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.event.TypicalEvents.JOBFEST;
 import static seedu.address.testutil.event.TypicalEvents.NTU;
@@ -23,9 +23,9 @@ import seedu.address.model.task.Task;
 import seedu.address.testutil.task.TaskBuilder;
 
 /**
- * Contains integration tests (interaction with the Model) for {@code MarkTaskCommand}.
+ * Contains integration tests (interaction with the Model) for {@code UnmarkTaskCommand}.
  */
-public class MarkTaskCommandTest {
+public class UnmarkTaskCommandTest {
     private Model model = new ModelManager(getTypicalJobFestGo(), new UserPrefs());
     private Model expectedModel = new ModelManager(getTypicalJobFestGo(), new UserPrefs());
 
@@ -35,10 +35,10 @@ public class MarkTaskCommandTest {
     @Test
     public void execute_validTask_success() {
         Task markedTask = new TaskBuilder(BOOK_VENUE).withIsCompleted(true).build();
-        model.addTask(BOOK_VENUE);
-        expectedModel.addTask(markedTask);
-        MarkTaskCommand command = new MarkTaskCommand(BOOK_VENUE.getDescription(), JOBFEST.getName());
-        String expectedMessage = String.format(MarkTaskCommand.MESSAGE_SUCCESS,
+        model.addTask(markedTask);
+        expectedModel.addTask(BOOK_VENUE);
+        UnmarkTaskCommand command = new UnmarkTaskCommand(BOOK_VENUE.getDescription(), JOBFEST.getName());
+        String expectedMessage = String.format(UnmarkTaskCommand.MESSAGE_SUCCESS,
                 BOOK_VENUE.getDescription(), JOBFEST.getName());
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
     }
@@ -48,8 +48,9 @@ public class MarkTaskCommandTest {
      */
     @Test
     public void execute_taskDoesNotExist_throwsException() {
-        model.addTask(ORDER_FOOD);
-        MarkTaskCommand command = new MarkTaskCommand(BOOK_VENUE.getDescription(), JOBFEST.getName());
+        Task markedTask = new TaskBuilder(ORDER_FOOD).withIsCompleted(true).build();
+        model.addTask(markedTask);
+        UnmarkTaskCommand command = new UnmarkTaskCommand(BOOK_VENUE.getDescription(), JOBFEST.getName());
         assertThrows(CommandException.class, MESSAGE_MISSING_TASK, () -> command.execute(model));
     }
 
@@ -62,65 +63,65 @@ public class MarkTaskCommandTest {
         Task TaskWithSameDescription = new TaskBuilder().withEvent(NTU)
                 .withDate("2023-12-10")
                 .withDescription("Book venue")
+                .withIsCompleted(true)
                 .build();
         model.addTask(TaskWithSameDescription);
-        MarkTaskCommand command = new MarkTaskCommand(BOOK_VENUE.getDescription(), JOBFEST.getName());
+        UnmarkTaskCommand command = new UnmarkTaskCommand(BOOK_VENUE.getDescription(), JOBFEST.getName());
         assertThrows(CommandException.class, MESSAGE_MISSING_TASK, () -> command.execute(model));
     }
 
     /**
-     * Tests when the task is already marked as completed.
+     * Tests when the task has not been marked as completed.
      */
     @Test
-    public void execute_taskIsCompleted_throwsException() {
-        Task markedTask = new TaskBuilder(BOOK_VENUE).withIsCompleted(true).build();
-        model.addTask(markedTask);
-        MarkTaskCommand command = new MarkTaskCommand(BOOK_VENUE.getDescription(), JOBFEST.getName());
-        assertThrows(CommandException.class, MESSAGE_COMPLETED_TASK, () -> command.execute(model));
+    public void execute_taskIsNotCompleted_throwsException() {
+        model.addTask(BOOK_VENUE);
+        UnmarkTaskCommand command = new UnmarkTaskCommand(BOOK_VENUE.getDescription(), JOBFEST.getName());
+        assertThrows(CommandException.class, MESSAGE_INCOMPLETED_TASK, () -> command.execute(model));
     }
 
     @Test
     public void equals() {
-        MarkTaskCommand firstMarkTaskCommand =
-                new MarkTaskCommand(BOOK_VENUE.getDescription(), JOBFEST.getName());
-        MarkTaskCommand secondMarkTaskCommand =
-                new MarkTaskCommand(BOOK_VENUE.getDescription(), NTU.getName());
-        MarkTaskCommand thirdMarkTaskCommand =
-                new MarkTaskCommand(ORDER_FOOD.getDescription(), JOBFEST.getName());
-        MarkTaskCommand fourthMarkTaskCommand =
-                new MarkTaskCommand(ORDER_FOOD.getDescription(), NTU.getName());
+        UnmarkTaskCommand firstUnmarkTaskCommand =
+                new UnmarkTaskCommand(BOOK_VENUE.getDescription(), JOBFEST.getName());
+        UnmarkTaskCommand secondUnmarkTaskCommand =
+                new UnmarkTaskCommand(BOOK_VENUE.getDescription(), NTU.getName());
+        UnmarkTaskCommand thirdUnmarkTaskCommand =
+                new UnmarkTaskCommand(ORDER_FOOD.getDescription(), JOBFEST.getName());
+        UnmarkTaskCommand fourthUnmarkTaskCommand =
+                new UnmarkTaskCommand(ORDER_FOOD.getDescription(), NTU.getName());
 
         // same object -> returns true
-        assertTrue(firstMarkTaskCommand.equals(firstMarkTaskCommand));
+        assertTrue(firstUnmarkTaskCommand.equals(firstUnmarkTaskCommand));
 
         // same values -> returns true
-        MarkTaskCommand firstMarkTaskCommandCopy =
-                new MarkTaskCommand(BOOK_VENUE.getDescription(), JOBFEST.getName());
-        assertTrue(firstMarkTaskCommand.equals(firstMarkTaskCommandCopy));
+        UnmarkTaskCommand firstUnmarkTaskCommandCopy =
+                new UnmarkTaskCommand(BOOK_VENUE.getDescription(), JOBFEST.getName());
+        assertTrue(firstUnmarkTaskCommand.equals(firstUnmarkTaskCommandCopy));
 
         // different types -> returns false
-        assertFalse(firstMarkTaskCommand.equals(1));
+        assertFalse(firstUnmarkTaskCommand.equals(1));
 
         // null -> returns false
-        assertFalse(firstMarkTaskCommand.equals(null));
+        assertFalse(firstUnmarkTaskCommand.equals(null));
 
         // different task description and different event name -> returns false
-        assertFalse(firstMarkTaskCommand.equals(secondMarkTaskCommand));
+        assertFalse(firstUnmarkTaskCommand.equals(secondUnmarkTaskCommand));
 
         // same event name but different task description -> returns false
-        assertFalse(firstMarkTaskCommand.equals(thirdMarkTaskCommand));
+        assertFalse(firstUnmarkTaskCommand.equals(thirdUnmarkTaskCommand));
 
         // same task description but different event name -> returns false
-        assertFalse(firstMarkTaskCommand.equals(fourthMarkTaskCommand));
+        assertFalse(firstUnmarkTaskCommand.equals(fourthUnmarkTaskCommand));
     }
 
     @Test
     public void toStringMethod() {
-        MarkTaskCommand command =
-                new MarkTaskCommand(BOOK_VENUE.getDescription(), JOBFEST.getName());
+        UnmarkTaskCommand command =
+                new UnmarkTaskCommand(BOOK_VENUE.getDescription(), JOBFEST.getName());
 
-        String expected = MarkTaskCommand.class.getCanonicalName()
-                + "{toMark=" + BOOK_VENUE.getDescription() + ", "
+        String expected = UnmarkTaskCommand.class.getCanonicalName()
+                + "{toUnmark=" + BOOK_VENUE.getDescription() + ", "
                 + "associatedEvent=" + JOBFEST.getName() + "}";
 
         assertEquals(expected, command.toString());
