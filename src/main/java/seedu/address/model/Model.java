@@ -92,7 +92,7 @@ public interface Model {
     void setContact(Contact target, Contact editedContact);
 
     /**
-     * Verifies that the {@code editedContact} is valid and does not contain any repeated names
+     * Verifies that the {@code editedContact} is valid and does not contain any repeated name
      * or phone number, apart from that of {@code target}.
      * Returns true if the {@code editedContact} is valid.
      */
