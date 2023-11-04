@@ -25,36 +25,32 @@ Optimized for use via a **Command Line Interface (CLI)** while still having the 
 --------------------------------------------------------------------------------------------------------------------
 
 ### Table of Contents
-- [User Guide](#user-guide)
-    - [Welcome to JobFestGo](#welcome-to-jobfestgo)
-    - [Table of Contents](#table-of-contents)
   - [Quick start](#quick-start)
   - [Navigating the GUI](#navigating-the-gui)
-  - [](#)
   - [Features](#features)
-    - [Returning to home page : `home`](#returning-to-home-page--home)
-    - [Adding a contact : `add_contact`](#adding-a-contact--add_contact)
-    - [Listing all contacts : `view_contacts`](#listing-all-contacts--view_contacts)
-    - [Deleting a contact : `delete_contact`](#deleting-a-contact--delete_contact)
-    - [Editing a contact : `edit_contact`](#editing-a-contact--edit_contact)
-    - [Locating contacts by name : `find_contact`](#locating-contacts-by-name--find_contact)
-    - [Adding a tag : `add_tag`](#adding-a-tag--add_tag)
-    - [Viewing all tags : `view_tags`](#viewing-all-tags--view_tags)
-    - [Deleting a tag : `delete_tag`](#deleting-a-tag--delete_tag)
-    - [Filtering contacts by tag : `filter_by_tag`](#filtering-contacts-by-tag--filter_by_tag)
-    - [Adding an event : `add_event`](#adding-an-event--add_event)
-    - [Viewing all events : `view_events`](#viewing-all-events--view_events)
-    - [Deleting an event : `delete_event`](#deleting-an-event--delete_event)
-    - [Linking contacts to an event : `link`](#linking-contacts-to-an-event--link)
+    - [Adding a contact : `add_contact`](#adding-a-contact-add-contact)
+    - [Listing all contacts : `view_contacts`](#listing-all-contacts-view-contacts)
+    - [Deleting a contact : `delete_contact`](#deleting-a-contact-delete-contact)
+    - [Editing a contact : `edit_contact`](#editing-a-contact-edit-contact)
+    - [Locating contacts by name : `find_contact`](#locating-contacts-by-name-find-contact)
+    - [Adding a tag : `add_tag`](#adding-a-tag-add-tag)
+    - [Viewing all tags : `view_tags`](#viewing-all-tags-view-tags)
+    - [Deleting a tag : `delete_tag`](#deleting-a-tag-delete-tag)
+    - [Filtering contacts by tag : `filter_by_tag`](#filtering-contacts-by-tag-filter-by-tag)
+    - [Adding an event : `add_event`](#adding-an-event-add-event)
+    - [Viewing all events : `view_events`](#viewing-all-events-view-events)
+    - [Deleting an event : `delete_event`](#deleting-an-event-delete-event)
+    - [Linking contacts to an event : `link`](#linking-contacts-to-an-event-link)
     - [Unlinking contacts from an event: `unlink`](#unlinking-contacts-from-an-event-unlink)
-    - [Selecting an event: `select_event`](#selecting-an-event-select_event)
-    - [Adding a task : `add_task`](#adding-a-task--add_task)
-    - [Deleting a task: `delete_task`](#deleting-a-task-delete_task)
-    - [Marking a task: `mark_task`](#marking-a-task-mark_task)
-    - [Unmarking a task: `unmark_task`](#unmarking-a-task-unmark_task)
-    - [Viewing help : `help`](#viewing-help--help)
-    - [Clearing all entries : `clear`](#clearing-all-entries--clear)
-    - [Exiting the program : `exit`](#exiting-the-program--exit)
+    - [Selecting an event: `select_event`](#selecting-an-event-select-event)
+    - [Adding a task : `add_task`](#adding-a-task-add-task)
+    - [Viewing help : `help`](#viewing-help-help)
+    - [Deleting a task: `delete_task`](#deleting-a-task-delete-task)
+    - [Marking a task: `mark_task`](#marking-a-task-mark-task)
+    - [Unmarking a task: `unmark_task`](#unmarking-a-task-unmark-task)
+    - [Clearing all entries : `clear`](#clearing-all-entries-clear)
+    - [Returning to home page : `home`](#returning-to-home-page-home)
+    - [Exiting the program : `exit`](#exiting-the-program-exit)
     - [Saving the data](#saving-the-data)
     - [Editing the data file](#editing-the-data-file)
     - [Archiving data files `[coming in v2.0]`](#archiving-data-files-coming-in-v20)
@@ -137,13 +133,7 @@ JobFestGo comes with a GUI (Graphical User Interface) that is designed to be int
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
 
-### Returning to home page : `home`
-
-Returns to the home page of JobFestGo regardless of what screen the user is currently on.
-
-Format: `home`
-
-### Adding a contact : `add_contact`
+## Adding a contact : `add_contact`
 
 Adds a contact to JobFestGo.
 
@@ -468,6 +458,12 @@ Format: `clear`
 This command will delete all contacts, events and tasks from JobFestGo.
 This command cannot be undone. Proceed with caution.
 </box>
+
+### Returning to home page : `home`
+
+Returns to the home page of JobFestGo regardless of what screen the user is currently on.
+
+Format: `home`
 
 ### Exiting the program : `exit`
 
