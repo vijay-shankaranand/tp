@@ -384,7 +384,7 @@ Adds a task to an event in JobFestGo.
 
 Format: `add_task td/TASK_DESCRIPTION d/DEADLINE ev/EVENT_NAME`
 
-* Task Description can take any alphanumeric value, alongside hyphen, comma, brackets and full stops.
+* Task Description can take any alphanumeric value, spaces and any of the following characters: -,./()
 * Deadline is a date in the format YYYY-MM-DD.
 * Deadline should not be before today's date.
 * Event name should be the **name of an already existing event**.
