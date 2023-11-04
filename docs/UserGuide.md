@@ -254,6 +254,7 @@ Format: `view_tags` <br><br>
 Deletes the specified tag name from JobFestGo.
 
 <box type="warning">
+
 **WARNING**: This command is destructive. Once a tag is deleted, no contacts can be associated with the tag name.
 </box>
 
