@@ -168,7 +168,7 @@ Examples:
 
 Displays a list of all contacts in JobFestGo.
 
-Format: `view_contacts`<br><br>
+Format: `view_contacts`
 
   ![result for 'view_contacts'](images/viewContactsResults.png)
 
@@ -245,7 +245,7 @@ Examples:
 
 Views all existing tags that have been created by the user.
 
-Format: `view_tags` <br><br>
+Format: `view_tags`
 
   ![result for 'view_tags'](images/viewTagsResult.png)
 
@@ -306,7 +306,7 @@ Examples:
 
 Displays a list of all existing events.
 
-Format: `view_events`<br><br>
+Format: `view_events`
 
 ![result for 'view_events'](images/viewEventsResult.png)
 
@@ -447,7 +447,8 @@ Examples:
 
 ### Viewing help : `help`
 
-Shows a message explaining how to access the help page.
+Shows a link to the user guide which will contain all the details required to use the app appropriately. You can click on the `Copy URL` button and paste
+the URL into your browser's address bar.
 
 ![help message](images/helpMessage.png)
 
