@@ -37,6 +37,10 @@ public class ContactTest {
                 .withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND).build();
         assertTrue(ALICE.isSameContact(editedAlice));
 
+        // different name, phone number same -> returns true
+        editedAlice = new ContactBuilder(ALICE).withName(VALID_NAME_BOB).build();
+        assertTrue(ALICE.isSameContact(editedAlice));
+
         // different phone number & name, all other attributes same -> returns false
         editedAlice = new ContactBuilder(ALICE).withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB).build();
         assertFalse(ALICE.isSameContact(editedAlice));
@@ -45,6 +49,10 @@ public class ContactTest {
         Contact editedBob = new ContactBuilder(BOB).withName(VALID_NAME_BOB.toLowerCase()).build();
         assertTrue(BOB.isSameContact(editedBob));
 
+        // name has trailing spaces, all other attributes same -> returns true
+        String nameWithTrailingSpaces = VALID_NAME_BOB + " ";
+        editedBob = new ContactBuilder(BOB).withName(nameWithTrailingSpaces).build();
+        assertTrue(BOB.isSameContact(editedBob));
     }
 
     @Test
