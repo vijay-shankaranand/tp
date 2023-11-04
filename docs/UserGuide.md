@@ -315,6 +315,7 @@ Format: `view_events`
 Deletes the event specified at the index from JobFestGo.
 
 <box type="warning">
+
 **WARNING**: This command is destructive. Once an event is deleted, all tasks associated with the event will be deleted.
 </box>
 
@@ -397,6 +398,7 @@ Examples:
 Deletes the task specified by the task description from its associated event in JobFestGo.
 
 <box type="warning">
+
 **WARNING**: This command is destructive. Once a task is deleted, it cannot be recovered.
 </box>
 
