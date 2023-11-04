@@ -101,6 +101,26 @@ public class UniqueContactList implements Iterable<Contact> {
         }
     }
 
+    /**
+     * Verifies that the {@code editedContact} is valid and does not contain any repeated names
+     * or phone number apart from {@code contact}.
+     * @return true if the {@code editedContact} is valid, false otherwise.
+     */
+    public boolean verifyContact(Contact target, Contact editedContact) {
+        requireAllNonNull(target, editedContact);
+        ObservableList<Contact> currList = FXCollections.observableArrayList(internalList);
+        try {
+            currList.remove(target);
+        } catch (ContactNotFoundException e) {
+            return true;
+        }
+        if (currList.stream().anyMatch(editedContact::isSameContact)) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
     public void setContacts(UniqueContactList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);

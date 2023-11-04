@@ -91,6 +91,13 @@ public interface Model {
      */
     void setContact(Contact target, Contact editedContact);
 
+    /**
+     * Verifies that the {@code editedContact} is valid and does not contain any repeated names
+     * or phone number, apart from that of {@code target}.
+     * Returns true if the {@code editedContact} is valid.
+     */
+    boolean verifyContact(Contact target, Contact editedContact);
+
     /** Returns an unmodifiable view of the filtered contact list */
     ObservableList<Contact> getFilteredContactList();
 

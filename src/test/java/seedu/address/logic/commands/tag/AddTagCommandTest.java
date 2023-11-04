@@ -308,6 +308,11 @@ public class AddTagCommandTest {
         public Predicate<Contact> getContactListPredicate() {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public boolean verifyContact(Contact target, Contact editedContact) {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**

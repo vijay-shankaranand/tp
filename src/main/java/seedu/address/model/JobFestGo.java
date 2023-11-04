@@ -151,6 +151,15 @@ public class JobFestGo implements ReadOnlyJobFestGo {
         events.updateContacts(key);
     }
 
+    /**
+     * Returns true if the {@code editedContact} is valid with no repeated name or phone number
+     * apart from {@code target} that already exists in JobFestGo.
+     * Returns false otherwise.
+     */
+    public boolean verifyContact(Contact target, Contact editedContact) {
+        return contacts.verifyContact(target, editedContact);
+    }
+
     //// util methods
 
     @Override
