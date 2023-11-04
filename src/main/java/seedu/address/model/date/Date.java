@@ -87,7 +87,7 @@ public class Date {
     public boolean isWithinThreeDays() {
         LocalDate taskDue = LocalDate.parse(this.date);
 
-        if (taskDue.isBefore(fourDaysFromNow())) {
+        if (taskDue.isBefore(fourDaysFromNow()) && !this.isOverdue()) {
             return true;
         } else {
             return false;
@@ -138,8 +138,4 @@ public class Date {
     public int hashCode() {
         return date.hashCode();
     }
-
-
-
-
 }

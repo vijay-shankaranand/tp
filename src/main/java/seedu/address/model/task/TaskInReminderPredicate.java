@@ -13,7 +13,7 @@ public class TaskInReminderPredicate implements Predicate<Task> {
     }
     @Override
     public boolean test(Task task) {
-        return task.isDueWithinThreeDays();
+        return task.isDueWithinThreeDays() || task.isOverdue();
     }
 
     @Override
