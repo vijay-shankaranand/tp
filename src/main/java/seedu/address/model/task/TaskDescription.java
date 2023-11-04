@@ -10,10 +10,10 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class TaskDescription {
 
     public static final String MESSAGE_CONSTRAINTS = "Task description should only contain "
-            + "alphanumeric characters, spaces and any of the following characters: -,.()"
+            + "alphanumeric characters, spaces and any of the following characters: -,./()"
             + "\nIt should not be blank.";
 
-    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum}-,.() ]*";
+    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum}-,./() ]*";
 
 
     public final String value;
