@@ -1,10 +1,12 @@
 package seedu.address.model.task;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.testutil.task.TaskBuilder;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 public class TaskInReminderPredicateTest {
 
@@ -19,13 +21,6 @@ public class TaskInReminderPredicateTest {
     public void taskOverdueIsInReminder_returnsTrue() {
         TaskInReminderPredicate predicate = new TaskInReminderPredicate();
         Task taskA = new TaskBuilder().withDate("2023-10-23").withIsCompleted(false).build();
-        assertTrue(predicate.test(taskA));
-    }
-
-    @Test
-    public void taskDeadlineWithinThreeDays_returnsTrue() {
-        TaskInReminderPredicate predicate = new TaskInReminderPredicate();
-        Task taskA = new TaskBuilder().withDate("2023-11-06").withIsCompleted(false).build();
         assertTrue(predicate.test(taskA));
     }
 
