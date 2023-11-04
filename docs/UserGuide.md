@@ -133,7 +133,13 @@ JobFestGo comes with a GUI (Graphical User Interface) that is designed to be int
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
 
-## Adding a contact : `add_contact`
+### Returning to home page : `home`
+
+Returns to the home page of JobFestGo regardless of what screen the user is currently on.
+
+Format: `home`
+
+### Adding a contact : `add_contact`
 
 Adds a contact to JobFestGo.
 
@@ -458,12 +464,6 @@ Format: `clear`
 This command will delete all contacts, events and tasks from JobFestGo.
 This command cannot be undone. Proceed with caution.
 </box>
-
-### Returning to home page : `home`
-
-Returns to the home page of JobFestGo regardless of what screen the user is currently on.
-
-Format: `home`
 
 ### Exiting the program : `exit`
 
