@@ -132,6 +132,12 @@ public class ModelManager implements Model {
         jobFestGo.setContact(target, editedContact);
     }
 
+    @Override
+    public boolean verifyContact(Contact target, Contact editedContact) {
+        requireAllNonNull(target, editedContact);
+        return jobFestGo.verifyContact(target, editedContact);
+    }
+
     //=========== Tags =======================================================================================
 
     @Override
