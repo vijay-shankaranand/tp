@@ -18,13 +18,14 @@ import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.contact.Contact;
+import seedu.address.model.contact.ContactIsInEventPredicate;
 import seedu.address.model.event.Event;
 import seedu.address.model.name.Name;
+import seedu.address.model.task.TaskIsInEventPredicate;
 import seedu.address.testutil.contact.ContactBuilder;
 import seedu.address.testutil.event.EventBuilder;
 
@@ -37,102 +38,93 @@ public class LinkCommandTest {
 
     @Test
     public void execute_validSingleContact_success() {
+        Event expectedEvent = new EventBuilder(JOBFEST).withEventContacts(ALICE, BOB, CARL).build();
+        model.addEvent(JOBFEST);
+        expectedModel.addEvent(expectedEvent);
         Set<Name> contactNameList = new HashSet<>();
         contactNameList.add(CARL.getName());
-        model.addEvent(JOBFEST);
-        expectedModel.addEvent(JOBFEST);
         LinkCommand command = new LinkCommand(JOBFEST.getName(), contactNameList);
-        assertEquals(JOBFEST, model.getEvent(JOBFEST.getName()));
+
         String expectedNameList = "[" + CARL.getName() + "]";
         String expectedMessage = String.format(LinkCommand.MESSAGE_SUCCESS, expectedNameList, JOBFEST.getName());
-        expectedModel.linkContactToEvent(CARL, JOBFEST);
-
-        try {
-            command.execute(expectedModel);
-        } catch (CommandException ce) {
-            return;
-        }
+        expectedModel.updateFilteredContactList(new ContactIsInEventPredicate(expectedEvent));
+        expectedModel.updateFilteredTaskList(new TaskIsInEventPredicate(expectedEvent));
 
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(expectedEvent, model.getEvent(JOBFEST.getName()));
     }
 
     @Test
     public void execute_validMultipleContacts_success() {
-        Event expectedEvent = new EventBuilder().withName("JobFest 2023")
-                .withDate("2023-12-12")
-                .withEventAddress("3 Temasek Blvd, Singapore 038983")
-                .withEventContacts(ALICE, BOB, CARL, BENSON)
-                .build();
+        Event expectedEvent = new EventBuilder(JOBFEST).withEventContacts(ALICE, BOB, CARL, BENSON).build();
+        model.addEvent(JOBFEST);
+        expectedModel.addEvent(expectedEvent);
         Set<Name> contactNameList = new HashSet<>();
         contactNameList.add(CARL.getName());
         contactNameList.add(BENSON.getName());
-        model.addEvent(JOBFEST);
-        expectedModel.addEvent(expectedEvent);
         LinkCommand command = new LinkCommand(JOBFEST.getName(), contactNameList);
-
-        try {
-            command.execute(expectedModel);
-        } catch (CommandException ce) {
-            return;
-        }
 
         String expectedNameList = "[" + CARL.getName() + ", " + BENSON.getName() + "]";
         String expectedMessage = String.format(LinkCommand.MESSAGE_SUCCESS, expectedNameList, JOBFEST.getName());
+        expectedModel.updateFilteredContactList(new ContactIsInEventPredicate(expectedEvent));
+        expectedModel.updateFilteredTaskList(new TaskIsInEventPredicate(expectedEvent));
+
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(expectedEvent, model.getEvent(JOBFEST.getName()));
     }
 
     @Test
-    public void execute_eventAlreadyLinkedToContact_throwsCommandException() {
-        Event event = new EventBuilder().withName("JobFest 2023")
-                .withDate("2023-12-12")
-                .withEventAddress("3 Temasek Blvd, Singapore 038983")
-                .withEventContacts(ALICE, BOB)
-                .build();
+    public void execute_mixedValidAndInvalidContacts_throwsCommandException() {
+        model.addEvent(JOBFEST);
 
         Set<Name> contactNameList = new HashSet<>();
         contactNameList.add(ALICE.getName());
+        contactNameList.add(BENSON.getName());
+        LinkCommand command = new LinkCommand(JOBFEST.getName(), contactNameList);
 
-        LinkCommand command = new LinkCommand(event.getName(), contactNameList);
-        String expectedMessage = String.format(LinkCommand.MESSAGE_LINKED_CONTACT, ALICE.getName(), event.getName());
-        model.addEvent(event);
+        String expectedMessage = String.format(LinkCommand.MESSAGE_LINKED_CONTACT,
+                ALICE.getName(), JOBFEST.getName());
         assertCommandFailure(command, model, expectedMessage);
+        assertEquals(JOBFEST, model.getEvent(JOBFEST.getName()));
+    }
+
+    @Test
+    public void execute_eventLinkedToContact_throwsCommandException() {
+        model.addEvent(JOBFEST);
+        Set<Name> contactNameList = new HashSet<>();
+        contactNameList.add(ALICE.getName());
+        LinkCommand command = new LinkCommand(JOBFEST.getName(), contactNameList);
+
+        String expectedMessage = String.format(LinkCommand.MESSAGE_LINKED_CONTACT,
+                ALICE.getName(), JOBFEST.getName());
+        assertCommandFailure(command, model, expectedMessage);
+        assertEquals(JOBFEST, model.getEvent(JOBFEST.getName()));
     }
 
     @Test
     public void execute_eventNotInTheList_throwsCommandException() {
-        Event event = new EventBuilder().withName("JobFest 2023")
-                .withDate("2023-12-12")
-                .withEventAddress("3 Temasek Blvd, Singapore 038983")
-                .withEventContacts(ALICE, BOB)
-                .build();
-
         Set<Name> contactNameList = new HashSet<>();
         contactNameList.add(ALICE.getName());
 
-        LinkCommand command = new LinkCommand(event.getName(), contactNameList);
-        String expectedMessage = String.format(LinkCommand.MESSAGE_NO_SUCH_EVENT, event.getName());
+        LinkCommand command = new LinkCommand(JOBFEST.getName(), contactNameList);
+        String expectedMessage = String.format(LinkCommand.MESSAGE_NO_SUCH_EVENT, JOBFEST.getName());
         assertCommandFailure(command, model, expectedMessage);
     }
 
     @Test
     public void execute_contactNotInTheList_throwsCommandException() {
-        Event event = new EventBuilder().withName("JobFest 2023")
-                .withDate("2023-12-12")
-                .withEventAddress("3 Temasek Blvd, Singapore 038983")
-                .withEventContacts(ALICE, BOB)
-                .build();
         Contact contact = new ContactBuilder().withName("Li Mei")
                 .withAddress("123, East Coast Ave 6, #08-382").withEmail("limei@example.com")
                 .withPhone("97292222")
                 .withTags("friends").build();
-
+        model.addEvent(JOBFEST);
         Set<Name> contactNameList = new HashSet<>();
         contactNameList.add(contact.getName());
 
-        LinkCommand command = new LinkCommand(event.getName(), contactNameList);
-        model.addEvent(event);
+        LinkCommand command = new LinkCommand(JOBFEST.getName(), contactNameList);
         String expectedMessage = String.format(LinkCommand.MESSAGE_NO_SUCH_CONTACT, contact.getName());
         assertCommandFailure(command, model, expectedMessage);
+        assertEquals(JOBFEST, model.getEvent(JOBFEST.getName()));
     }
 
     @Test

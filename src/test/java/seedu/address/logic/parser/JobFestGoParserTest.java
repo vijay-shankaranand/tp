@@ -32,6 +32,7 @@ import seedu.address.logic.commands.contact.ViewContactsCommand;
 import seedu.address.logic.commands.event.AddEventCommand;
 import seedu.address.logic.commands.event.LinkCommand;
 import seedu.address.logic.commands.event.SelectEventCommand;
+import seedu.address.logic.commands.event.UnlinkCommand;
 import seedu.address.logic.commands.event.ViewEventsCommand;
 import seedu.address.logic.commands.tag.AddTagCommand;
 import seedu.address.logic.commands.tag.DeleteTagCommand;
@@ -107,6 +108,17 @@ public class JobFestGoParserTest {
 
         LinkCommand command = (LinkCommand) parser.parseCommand(EventUtil.getLinkCommand(name, contactName));
         assertEquals(new LinkCommand(name, contactNameList), command);
+    }
+
+    @Test
+    public void parseCommand_unlink() throws Exception {
+        Name name = new Name("NUS Career Fair");
+        Name contactName = new Name("Li Mei");
+        Set<Name> contactNameList = new HashSet<>();
+        contactNameList.add(contactName);
+
+        UnlinkCommand command = (UnlinkCommand) parser.parseCommand(EventUtil.getUnlinkCommand(name, contactName));
+        assertEquals(new UnlinkCommand(name, contactNameList), command);
     }
 
     @Test

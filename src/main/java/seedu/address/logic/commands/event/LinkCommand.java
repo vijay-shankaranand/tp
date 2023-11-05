@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CONTACT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
@@ -34,7 +35,7 @@ public class LinkCommand extends Command {
             + PREFIX_EVENT + "NUS Career Fair 2023 "
             + PREFIX_CONTACT + "John Doe";
 
-    public static final String MESSAGE_SUCCESS = "Linked contact: %1$s to event: %2$s";
+    public static final String MESSAGE_SUCCESS = "Linked contact(s): %1$s to event: %2$s";
     public static final String MESSAGE_NO_SUCH_EVENT = "The event: %1$s does not exist in the event list. "
             + "Please add it in first.";
     public static final String MESSAGE_NO_SUCH_CONTACT = "The contact: %1$s does not exist in JobFestGo. "
@@ -57,14 +58,25 @@ public class LinkCommand extends Command {
         requireNonNull(model);
 
         try {
+            Event eventToLink = model.getEvent(eventNameToLink);
+            Set<Contact> contactsToLink = new HashSet<>();
+
             for (Name contactName : contactNameListToLink) {
-                Event eventToLink = model.getEvent(eventNameToLink);
                 Contact contactToLink = model.getContact(contactName);
-                model.linkContactToEvent(contactToLink, eventToLink);
+                if (model.isContactLinkedToEvent(contactToLink, eventToLink)) {
+                    throw new CommandException(
+                            String.format(MESSAGE_LINKED_CONTACT, contactName, eventNameToLink));
+                };
+                contactsToLink.add(contactToLink);
+            }
+
+            for (Contact contact : contactsToLink) {
+                eventToLink = model.getEvent(eventNameToLink);
+                model.linkContactToEvent(contact, eventToLink);
             }
 
             // Get the event after linking contact.
-            Event eventToLink = model.getEvent(eventNameToLink);
+            eventToLink = model.getEvent(eventNameToLink);
 
             // Update the respective filtered lists to show the components within the event
             // Flow of command should be after linking a contact to an event,

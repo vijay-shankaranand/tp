@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CONTACT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
@@ -34,7 +35,7 @@ public class UnlinkCommand extends Command {
             + PREFIX_EVENT + "NUS Career Fair 2023 "
             + PREFIX_CONTACT + "John Doe";
 
-    public static final String MESSAGE_SUCCESS = "Unlinked contact: %1$s from event: %2$s";
+    public static final String MESSAGE_SUCCESS = "Unlinked contact(s): %1$s from event: %2$s";
     public static final String MESSAGE_NO_SUCH_EVENT = "The event: %1$s does not exist in JobFestGo.";
     public static final String MESSAGE_NO_SUCH_CONTACT = "The contact: %1$s does not exist in JobFestGo.";
     public static final String MESSAGE_UNLINKED_CONTACT = "The contact: %1$s is not linked to the event: %2$s";
@@ -55,13 +56,24 @@ public class UnlinkCommand extends Command {
         requireNonNull(model);
 
         try {
+            Event eventToUnlink = model.getEvent(eventNameToUnlink);
+            Set<Contact> contactsToUnlink = new HashSet<>();
+
             for (Name contactName : contactNameListToUnlink) {
-                Event eventToUnlink = model.getEvent(eventNameToUnlink);
                 Contact contactToUnlink = model.getContact(contactName);
-                model.unlinkContactFromEvent(contactToUnlink, eventToUnlink);
+                if (!model.isContactLinkedToEvent(contactToUnlink, eventToUnlink)) {
+                    throw new CommandException(
+                            String.format(MESSAGE_UNLINKED_CONTACT, contactName, eventNameToUnlink));
+                };
+                contactsToUnlink.add(contactToUnlink);
             }
 
-            Event eventToUnlink = model.getEvent(eventNameToUnlink);
+            for (Contact contact : contactsToUnlink) {
+                eventToUnlink = model.getEvent(eventNameToUnlink);
+                model.unlinkContactFromEvent(contact, eventToUnlink);
+            }
+
+            eventToUnlink = model.getEvent(eventNameToUnlink);
             model.updateFilteredContactList(new ContactIsInEventPredicate(eventToUnlink));
             model.updateFilteredTaskList(new TaskIsInEventPredicate(eventToUnlink));
 

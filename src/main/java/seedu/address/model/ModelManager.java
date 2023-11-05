@@ -189,6 +189,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean isContactLinkedToEvent(Contact contact, Event event) {
+        requireAllNonNull(contact, event);
+        return jobFestGo.isContactLinkedToEvent(contact, event);
+    }
+
+    @Override
     public void linkContactToEvent(Contact contact, Event event) {
         requireAllNonNull(contact, event);
         jobFestGo.linkContactToEvent(contact, event);

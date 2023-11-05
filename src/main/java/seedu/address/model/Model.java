@@ -169,6 +169,11 @@ public interface Model {
     void setEvent(Event target, Event editedEvent);
 
     /**
+     * Checks whether the given {@code contact} is linked to the given {@code event}.
+     */
+    boolean isContactLinkedToEvent(Contact contact, Event event);
+
+    /**
      * Links the given {@code contact} to the given {@code event}.
      */
     void linkContactToEvent(Contact contact, Event event);

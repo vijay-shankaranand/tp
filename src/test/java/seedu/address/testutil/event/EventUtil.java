@@ -8,6 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
 import seedu.address.logic.commands.event.AddEventCommand;
 import seedu.address.logic.commands.event.LinkCommand;
+import seedu.address.logic.commands.event.UnlinkCommand;
 import seedu.address.model.event.Event;
 import seedu.address.model.name.Name;
 
@@ -22,6 +23,15 @@ public class EventUtil {
      */
     public static String getLinkCommand(Name name, Name contactName) {
         return LinkCommand.COMMAND_WORD + " "
+                + getName(name)
+                + getContactName(contactName);
+    }
+
+    /**
+     * Returns a unlink command string for linking the {@code contact} to the {@code Event}.
+     */
+    public static String getUnlinkCommand(Name name, Name contactName) {
+        return UnlinkCommand.COMMAND_WORD + " "
                 + getName(name)
                 + getContactName(contactName);
     }
