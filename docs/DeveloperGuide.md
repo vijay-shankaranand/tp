@@ -157,6 +157,46 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Select Event Feature
+
+#### Implementation
+
+The select event mechanism is facilitated by `JobFestGo` as well as its observable lists for `Contact`, `Event`, as well as `Task`.
+
+The mechanism interacts with both the UI and the lists stored within `JobFestGo`, particularly `filteredContacts`, `filteredEvents`, and `filteredTasks`.
+
+Given below is an example usage scenario and how the select event mechanism behaves at each step.
+
+**Step 1.** The user launches the application for the first time. The `JobFestGo` will be initialized with the initial address book state.
+
+**Step 2.** The user executes `select_event 1` command to select the 1st event in JobFestGo. The `select_event` command calls upon the creation of `ContactIsInEventPredicate` and `TaskIsInEventPredicate` to update the respective filtered lists.
+
+The following sequence diagram shows how the select event operation works:
+
+<puml src="diagrams/SelectEventSequenceDiagram.puml" alt="SelectEventSequenceDiagram" />
+
+<box type="info" seamless>
+
+**Note:** The lifelines for `SelectEventCommand` and `SelectEventCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</box>
+
+The following activity diagram summarizes what happens when a user executes the select event command:
+
+<puml src="diagrams/SelectEventActivityDiagram.puml" width="250" />
+
+#### Design considerations:
+
+**Aspect: How select event executes:**
+
+* **Alternative 1 (current choice):** Highlights the event selected. 
+  * Pros: Visually appealing. 
+  * Cons: Slightly harder to implement.
+
+* **Alternative 2:** Event list gets updated to only show the selected event.
+  * Pros: Easy to implement.
+  * Cons: Users will have to consistently execute home command to view the other events.
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
