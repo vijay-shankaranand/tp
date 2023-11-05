@@ -66,7 +66,7 @@ public class DeleteTaskCommandTest {
         DeleteTaskCommand command = new DeleteTaskCommand(BOOK_VENUE.getDescription(), JOBFEST.getName());
         assertThrows(CommandException.class, MESSAGE_MISSING_TASK, () -> command.execute(model));
     }
-    
+
     @Test
     public void equals() {
         DeleteTaskCommand firstDeleteTaskCommand =
