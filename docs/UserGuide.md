@@ -269,6 +269,17 @@ Examples:
 
 Displays contacts tagged by any of the specified tags.
 
+<box type="warning">
+
+**WARNING**
+This command is accumulative. The contacts found will be based on the list that is currently displayed.
+
+For e.g, imagine we have a contact `Hans` in JobFestGo who is tagged by `vendor`.
+If you have selected a particular event and this event is not linked to `Hans`, `filter_by_tags vendor` will not display `Hans` in the result.
+
+Repeatedly using this command will result in the list being successively filtered.
+</box>
+
 Format: `filter_by_tag TAG_NAME [MORE_TAG_NAMES]`
 
 * Tag names are case-insensitive. e.g. `Vendors` will match `vendors`.
@@ -276,7 +287,6 @@ Format: `filter_by_tag TAG_NAME [MORE_TAG_NAMES]`
 * Contacts tagged by at least one of the given tags will be returned (i.e. `OR` search).
   e.g. `vendors customers` will return all contacts tagged by `vendors` and
  all contacts tagged by `customers`.
-* The contacts found will be based on the list that is currently displayed e.g. If the current event that is selected is not linked to `Hans` who is tagged by `vendor`, `filter_by_tags vendor` will not display `Hans` in the result.
 
 Examples:
 * `filter_by_tag vendors` returns all contacts tagged by the tag: vendor in JobFestGo.
