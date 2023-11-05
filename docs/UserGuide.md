@@ -4,9 +4,9 @@
 
 ---
 
-# User Guide 
+# User Guide
 
-### Welcome to JobFestGo 
+### Welcome to JobFestGo
 
 **Your one-stop solution for job event planning!**
 
@@ -63,11 +63,11 @@ Optimized for use via a **Command Line Interface (CLI)** while still having the 
 
 ## Quick start
 
-1. Ensure you have Java `11` or above installed in your Computer. 
+1. Ensure you have Java `11` or above installed in your Computer.
 - [How do I check my Java version?](#faq)
 
 1. Download the latest `jobfestgo.jar` from [here](https://github.com/AY2324S1-CS2103T-T09-1/tp/releases).
-    
+
     ![download jar](images/downloadJar.png)
 
 1. Copy the file to the folder you want to use as the _home folder_ for your JobFestGo.
@@ -277,7 +277,7 @@ Format: `filter_by_tag TAG_NAME [MORE_TAG_NAMES]`
   e.g. `vendors customers` will return all contacts tagged by `vendors` and
  all contacts tagged by `customers`.
 * The contacts found will be based on the list that is currently displayed e.g. If the current event that is selected is not linked to `Hans` who is tagged by `vendor`, `filter_by_tags vendor` will not display `Hans` in the result.
-  
+
 Examples:
 * `filter_by_tag vendors` returns all contacts tagged by the tag: vendor in JobFestGo.
 * `filter_by_tag vendors customers` returns all contacts tagged by the tag: `vendors` and

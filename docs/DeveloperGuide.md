@@ -189,8 +189,8 @@ The following activity diagram summarizes what happens when a user executes the 
 
 **Aspect: How select event executes:**
 
-* **Alternative 1 (current choice):** Highlights the event selected. 
-  * Pros: Visually appealing. 
+* **Alternative 1 (current choice):** Highlights the event selected.
+  * Pros: Visually appealing.
   * Cons: Slightly harder to implement.
 
 * **Alternative 2:** Event list gets updated to only show the selected event.
