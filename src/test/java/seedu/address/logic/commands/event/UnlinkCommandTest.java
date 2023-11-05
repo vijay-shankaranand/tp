@@ -9,9 +9,9 @@ import static seedu.address.testutil.contact.TypicalContacts.ALICE;
 import static seedu.address.testutil.contact.TypicalContacts.BENSON;
 import static seedu.address.testutil.contact.TypicalContacts.BOB;
 import static seedu.address.testutil.contact.TypicalContacts.CARL;
-import static seedu.address.testutil.contact.TypicalContacts.getTypicalJobFestGo;
 import static seedu.address.testutil.event.TypicalEvents.JOBFEST;
 import static seedu.address.testutil.event.TypicalEvents.NTU;
+import static seedu.address.testutil.event.TypicalEvents.getTypicalJobFestGo;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -38,14 +38,12 @@ public class UnlinkCommandTest {
     @Test
     public void execute_validSingleContact_success() {
         Set<Name> contactNameList = new HashSet<>();
-        contactNameList.add(CARL.getName());
-        model.addEvent(JOBFEST);
-        expectedModel.addEvent(JOBFEST);
+        contactNameList.add(ALICE.getName());
         UnlinkCommand command = new UnlinkCommand(JOBFEST.getName(), contactNameList);
-        assertEquals(JOBFEST, model.getEvent(JOBFEST.getName()));
-        String expectedNameList = "[" + CARL.getName() + "]";
+        String expectedNameList = "[" + ALICE.getName() + "]";
         String expectedMessage = String.format(UnlinkCommand.MESSAGE_SUCCESS, expectedNameList, JOBFEST.getName());
-        expectedModel.linkContactToEvent(CARL, JOBFEST);
+        Event unlinkedEvent = new EventBuilder(JOBFEST).withEventContacts(BOB).build();
+        expectedModel.unlinkContactFromEvent(ALICE, JOBFEST);
 
         try {
             command.execute(expectedModel);
@@ -54,20 +52,18 @@ public class UnlinkCommandTest {
         }
 
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(unlinkedEvent, model.getEvent(JOBFEST.getName()));
     }
 
     @Test
     public void execute_validMultipleContacts_success() {
-        Event expectedEvent = new EventBuilder().withName("JobFest 2023")
-                .withDate("2023-12-12")
-                .withEventAddress("3 Temasek Blvd, Singapore 038983")
-                .withEventContacts(ALICE, BOB, CARL, BENSON)
-                .build();
         Set<Name> contactNameList = new HashSet<>();
-        contactNameList.add(CARL.getName());
-        contactNameList.add(BENSON.getName());
-        model.addEvent(JOBFEST);
-        expectedModel.addEvent(expectedEvent);
+        contactNameList.add(ALICE.getName());
+        contactNameList.add(BOB.getName());
+        expectedModel.unlinkContactFromEvent(ALICE, JOBFEST);
+        Event unlinkedEvent = new EventBuilder(JOBFEST).withEventContacts(BOB).build();
+        expectedModel.unlinkContactFromEvent(BOB, unlinkedEvent);
+        Event expectedEvent = new EventBuilder(JOBFEST).withEventContacts().build();
         UnlinkCommand command = new UnlinkCommand(JOBFEST.getName(), contactNameList);
 
         try {
@@ -76,41 +72,32 @@ public class UnlinkCommandTest {
             return;
         }
 
-        String expectedNameList = "[" + CARL.getName() + ", " + BENSON.getName() + "]";
+        String expectedNameList = "[" + ALICE.getName() + ", " + BOB.getName() + "]";
         String expectedMessage = String.format(UnlinkCommand.MESSAGE_SUCCESS, expectedNameList, JOBFEST.getName());
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(expectedEvent, model.getEvent(JOBFEST.getName()));
     }
 
     @Test
-    public void execute_eventAlreadyLinkedToContact_throwsCommandException() {
-        Event event = new EventBuilder().withName("JobFest 2023")
-                .withDate("2023-12-12")
-                .withEventAddress("3 Temasek Blvd, Singapore 038983")
-                .withEventContacts(ALICE, BOB)
-                .build();
-
+    public void execute_eventNotLinkedToContact_throwsCommandException() {
         Set<Name> contactNameList = new HashSet<>();
-        contactNameList.add(ALICE.getName());
+        contactNameList.add(BENSON.getName());
+        model.addContact(BENSON);
 
-        UnlinkCommand command = new UnlinkCommand(event.getName(), contactNameList);
-        String expectedMessage = String.format(UnlinkCommand.MESSAGE_LINKED_CONTACT, ALICE.getName(), event.getName());
-        model.addEvent(event);
+        UnlinkCommand command = new UnlinkCommand(JOBFEST.getName(), contactNameList);
+        String expectedMessage = String.format(UnlinkCommand.MESSAGE_UNLINKED_CONTACT,
+                BENSON.getName(), JOBFEST.getName());
         assertCommandFailure(command, model, expectedMessage);
     }
 
     @Test
     public void execute_eventNotInTheList_throwsCommandException() {
-        Event event = new EventBuilder().withName("JobFest 2023")
-                .withDate("2023-12-12")
-                .withEventAddress("3 Temasek Blvd, Singapore 038983")
-                .withEventContacts(ALICE, BOB)
-                .build();
-
         Set<Name> contactNameList = new HashSet<>();
         contactNameList.add(ALICE.getName());
+        model.deleteEvent(JOBFEST);
 
-        UnlinkCommand command = new UnlinkCommand(event.getName(), contactNameList);
-        String expectedMessage = String.format(UnlinkCommand.MESSAGE_NO_SUCH_EVENT, event.getName());
+        UnlinkCommand command = new UnlinkCommand(JOBFEST.getName(), contactNameList);
+        String expectedMessage = String.format(UnlinkCommand.MESSAGE_NO_SUCH_EVENT, JOBFEST.getName());
         assertCommandFailure(command, model, expectedMessage);
     }
 
