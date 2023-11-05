@@ -4,11 +4,17 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.testutil.event.TypicalEvents.NTU;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.Messages;
+import seedu.address.logic.commands.contact.ViewContactsCommand;
+import seedu.address.logic.commands.event.DeleteEventCommand;
 import seedu.address.logic.commands.event.ViewEventsCommand;
 import seedu.address.logic.commands.tag.ViewTagsCommand;
+import seedu.address.model.event.Event;
+import seedu.address.testutil.event.EventBuilder;
 
 public class CommandResultTest {
     @Test
@@ -66,6 +72,72 @@ public class CommandResultTest {
 
         // different exit value -> returns different hashcode
         assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", false, true).hashCode());
+    }
+
+    @Test
+    public void getSelectedEvent_returnsTrue() {
+        CommandResult commandResult = new CommandResult("feedback", NTU, false);
+        assertEquals(commandResult.getSelectedEvent(), NTU);
+
+        // different event but with same name -> returns false
+        Event ntuCopy = new EventBuilder().withName("NTU").build();
+        assertNotEquals(commandResult.getSelectedEvent(), ntuCopy);
+    }
+
+    @Test
+    public void isDeleteEvent_returnsTrue() {
+        CommandResult commandResult1 = new CommandResult("feedback", NTU, false);
+        assertFalse(commandResult1.isDeleteEvent());
+
+        CommandResult commandResult2 = new CommandResult("feedback", NTU, true);
+        assertTrue(commandResult2.isDeleteEvent());
+    }
+
+    @Test
+    public void shouldDisplayContactsPanel_returnsTrue() {
+        CommandResult commandResult = new CommandResult("feedback");
+        assertFalse(commandResult.shouldDisplayContactsPanel());
+
+        CommandResult viewContactCommandResult = new CommandResult(ViewContactsCommand.MESSAGE_SUCCESS);
+        assertTrue(viewContactCommandResult.shouldDisplayContactsPanel());
+    }
+
+    @Test
+    public void shouldHideAllPanels_returnsTrue() {
+        CommandResult commandResult = new CommandResult("feedback");
+        assertTrue(commandResult.shouldHideAllPanels());
+
+        CommandResult viewContactCommandResult = new CommandResult(ViewContactsCommand.MESSAGE_SUCCESS);
+        assertFalse(viewContactCommandResult.shouldHideAllPanels());
+
+        CommandResult viewTagCommandResult = new CommandResult(ViewTagsCommand.MESSAGE_SUCCESS);
+        assertFalse(viewTagCommandResult.shouldHideAllPanels());
+
+        CommandResult viewEventCommandResult = new CommandResult(ViewEventsCommand.MESSAGE_SUCCESS);
+        assertFalse(viewEventCommandResult.shouldHideAllPanels());
+    }
+
+    @Test
+    public void shouldReturnToHome_returnsTrue() {
+        // no selected event and not home command -> returns false
+        CommandResult commandResult = new CommandResult("feedback");
+        assertFalse(commandResult.shouldReturnToHome());
+
+        CommandResult homeCommandResult = new CommandResult(HomeCommand.MESSAGE_SUCCESS);
+        assertTrue(homeCommandResult.shouldReturnToHome());
+
+        CommandResult commandResultWithSelectedEvent1 = new CommandResult("feedback", NTU, false);
+        assertFalse(commandResultWithSelectedEvent1.shouldReturnToHome());
+
+        CommandResult commandResultWithSelectedEvent2 = new CommandResult(
+                DeleteEventCommand.MESSAGE_DELETE_EVENT_SUCCESS, NTU, false);
+        assertFalse(commandResultWithSelectedEvent2.shouldReturnToHome());
+
+        String correctedDeletedEventSuccessMsg = String.format(DeleteEventCommand.MESSAGE_DELETE_EVENT_SUCCESS,
+                Messages.format(NTU));
+        CommandResult commandResultWithCorrectedMsg = new CommandResult(
+                correctedDeletedEventSuccessMsg, NTU, false);
+        assertTrue(commandResultWithCorrectedMsg.shouldReturnToHome());
     }
 
     @Test
