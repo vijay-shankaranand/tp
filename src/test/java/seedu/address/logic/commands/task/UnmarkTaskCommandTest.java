@@ -60,12 +60,12 @@ public class UnmarkTaskCommandTest {
      */
     @Test
     public void execute_taskWithSameDescriptionButDifferentEvent_throwsException() {
-        Task TaskWithSameDescription = new TaskBuilder().withEvent(NTU)
+        Task taskWithSameDescription = new TaskBuilder().withEvent(NTU)
                 .withDate("2023-12-10")
                 .withDescription("Book venue")
                 .withIsCompleted(true)
                 .build();
-        model.addTask(TaskWithSameDescription);
+        model.addTask(taskWithSameDescription);
         UnmarkTaskCommand command = new UnmarkTaskCommand(BOOK_VENUE.getDescription(), JOBFEST.getName());
         assertThrows(CommandException.class, MESSAGE_MISSING_TASK, () -> command.execute(model));
     }

@@ -2,8 +2,6 @@ package seedu.address.testutil.event;
 
 import static seedu.address.testutil.contact.TypicalContacts.ALICE;
 import static seedu.address.testutil.contact.TypicalContacts.BOB;
-import static seedu.address.testutil.task.TypicalTasks.BOOK_VENUE;
-import static seedu.address.testutil.task.TypicalTasks.ORDER_FOOD;
 
 import java.util.ArrayList;
 import java.util.Arrays;
