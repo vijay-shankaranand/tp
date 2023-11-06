@@ -72,7 +72,7 @@ public class AddTaskCommandTest {
     }
 
     @Test
-    public void execute_duplicateTag_throwsCommandException() {
+    public void execute_duplicateTask_throwsCommandException() {
 
         Task validTask = new TaskBuilder().withEvent(NTU).build();
         ModelStub modelStub = new ModelStubWithTask(validTask);
@@ -246,6 +246,11 @@ public class AddTaskCommandTest {
 
         @Override
         public void setEvent(Event target, Event editedEvent) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean isContactLinkedToEvent(Contact contact, Event event) {
             throw new AssertionError("This method should not be called.");
         }
 

@@ -256,6 +256,13 @@ public class JobFestGo implements ReadOnlyJobFestGo {
     }
 
     /**
+     * Checks whether the given {@code contact} is linked to the given {@code event}.
+     */
+    public boolean isContactLinkedToEvent(Contact contact, Event event) {
+        return events.isContactLinkedToEvent(contact, event);
+    }
+
+    /**
      * Links the given {@code contact} to the given {@code event}.
      */
     public void linkContactToEvent(Contact contact, Event event) {

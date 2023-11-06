@@ -254,6 +254,11 @@ public class AddContactCommandTest {
         }
 
         @Override
+        public boolean isContactLinkedToEvent(Contact contact, Event event) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void linkContactToEvent(Contact contact, Event event) {
             throw new AssertionError("This method should not be called.");
         }
