@@ -158,6 +158,7 @@ Format: `add_contact n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 * A contact can have any number of tags.
 * Email should be in the appropriate (@xxx.com) format.
 * Phone number should be in appropriate (8-digit numeric) format.
+* Phone number does not provide support for special characters, such as `+` and `-`, as it is more targeted for job fest event planners in Singapore.
 * Only tags from tags list can be used for tagging a contact.
 * A contact cannot be added if their phone number already exists.
 * A contact cannot be added if their name already exists.
@@ -192,6 +193,7 @@ Deletes the contact at the specified index from JobFestGo.
 Format: `delete_contact INDEX`
 
 * Deletes the contact at the specified `INDEX`.
+* After the contact is deleted, JobFestGo will automatically return to the home page. This is regardless of whether the contact is linked to an event or not.
 * The index refers to the index number shown in the displayed contact list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
@@ -292,7 +294,7 @@ Format: `delete_tag t/TAG_NAME`
 * The tag name **must be an existing tag**. e.g. vendor, personal, customer, …​
 
 Examples:
-* `delete_tag` followed by `t/vendors` deletes the tag: `vendors` in JobFestGo.
+* `delete_tag t/vendors` deletes the tag `vendors` in JobFestGo.
 
 ### Filtering contacts by tag : `filter_by_tag`
 
@@ -374,7 +376,7 @@ Format: `delete_event INDEX`
 * The index **must be a positive integer** 1, 2, 3, …
 
 Examples:
-* `delete_event` followed by `1` deletes the 1st event in the displayed event list.
+* `delete_event 1` deletes the 1st event in the displayed event list.
 
 ### Linking contacts to an event : `link`
 <box type="info" style="background-color:#1e90ff; color: white;">
@@ -444,6 +446,7 @@ Format: `add_task td/TASK_DESCRIPTION d/DEADLINE ev/EVENT_NAME`
 * Deadline is a date in the format YYYY-MM-DD.
 * Deadline should not be before today's date.
 * Event name should be the **name of an already existing event**.
+* Tasks with a deadline after the event's date are allowed to be created to accommodate post-event related tasks such as After-Action Review.
 * Reminder will be shown on the home page of JobFestGo for tasks within 3 days of the deadline.
 
 Examples:
