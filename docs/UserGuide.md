@@ -100,7 +100,7 @@ JobFestGo comes with a GUI (Graphical User Interface) that is designed to be int
 
 ![GUI](images/GUI.png)
 
-<box type="warning" >
+<box type="warning">
 
 **PLEASE NOTE** : If there is an ellipsis (...) at the end of a text field in any section of JobFestGo, please extend the window fully so the full text can be seen.
 </box>
