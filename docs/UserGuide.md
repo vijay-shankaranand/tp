@@ -134,14 +134,23 @@ JobFestGo comes with a GUI (Graphical User Interface) that is designed to be int
 </box>
 
 ### Returning to home page : `home`
-
+<box type="info" style="background-color:#1e90ff; color: white;">
+<span slot="icon" style="color: white;"><md>:fas-address-book:</md></span>
 Returns to the home page of JobFestGo regardless of what screen the user is currently on.
+</box>
 
 Format: `home`
 
 ### Adding a contact : `add_contact`
-
+<box type="info" style="background-color:#1e90ff; color: white;">
+<span slot="icon" style="color: white;"><md>:fas-address-book:</md></span>
 Adds a contact to JobFestGo.
+</box>
+
+<box type="warning" style="background-color: #C73852; color: white;">
+
+**WARNING** : Please ensure there is no more than **one** whitespace in-between each word for `NAME`!
+</box>
 
 Format: `add_contact n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
@@ -153,11 +162,6 @@ Format: `add_contact n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 * A contact cannot be added if their phone number already exists.
 * A contact cannot be added if their name already exists.
 
-<box type="warning">
-
-**WARNING** : Please ensure there is no more than **one** whitespace in-between each word for `NAME`!
-</box>
-
 Examples:
 * `add_contact n/John Doe p/98765432 e/johndtr@example.com a/John street, block 123, #01-01`
 * `add_contact n/Johnny t/suppliers e/johnd@example.com a/311, Clementi Ave 2, #02-25 p/98765435`<br><br>
@@ -165,23 +169,28 @@ Examples:
   ![result for 'add_contact'](images/addContactResult.png)
 
 ### Listing all contacts : `view_contacts`
-
+<box type="info" style="background-color:#1e90ff; color: white;">
+<span slot="icon" style="color: white;"><md>:fas-address-book:</md></span>
 Displays a list of all contacts in JobFestGo.
+</box>
 
 Format: `view_contacts`
 
   ![result for 'view_contacts'](images/viewContactsResults.png)
 
 ### Deleting a contact : `delete_contact`
-
+<box type="info" style="background-color:#1e90ff; color: white;">
+<span slot="icon" style="color: white;"><md>:fas-address-book:</md></span>
 Deletes the contact at the specified index from JobFestGo.
+</box>
 
-Format: `delete_contact INDEX`
-
-<box type="warning">
+<box type="warning" style="background-color: #C73852; color: white;">
 
 **WARNING**: This command is destructive. Once a contact is deleted, it cannot be recovered.
 </box>
+
+Format: `delete_contact INDEX`
+
 * Deletes the contact at the specified `INDEX`.
 * The index refers to the index number shown in the displayed contact list.
 * The index **must be a positive integer** 1, 2, 3, …​
@@ -191,8 +200,10 @@ Examples:
 * `find_contact Betsy` followed by `delete_contact 1` deletes the 1st contact in the results of the `find_contact` command.
 
 ### Editing a contact : `edit_contact`
-
+<box type="info" style="background-color:#1e90ff; color: white;">
+<span slot="icon" style="color: white;"><md>:fas-address-book:</md></span>
 Edits an existing contact at the specified index in JobFestGo.
+</box>
 
 Format: `edit_contact INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
@@ -208,8 +219,21 @@ Examples:
 *  `edit_contact 2 n/Betsy Crower t/` Edits the name of the 2nd contact to be `Betsy Crower` and clears all existing tags.
 
 ### Locating contacts by name : `find_contact`
-
+<box type="info" style="background-color:#1e90ff; color: white;">
+<span slot="icon" style="color: white;"><md>:fas-address-book:</md></span>
 Finds contacts whose names contain any of the given keywords.
+</box>
+
+<box type="warning" style="background-color: #C73852; color: white">
+
+**WARNING**:
+This command is cumulative. The contacts found will be based on the list that is currently displayed.
+
+Imagine we have a contact `Hans` in JobFestGo.
+If you have selected a particular event and this event is not linked to `Hans`, `find_contact Hans` will not have any results.
+
+Repeatedly using this command will result in the list being successively filtered.
+</box>
 
 Format: `find_contact KEYWORD [MORE_KEYWORDS]`
 
@@ -219,7 +243,6 @@ Format: `find_contact KEYWORD [MORE_KEYWORDS]`
 * Only full words will be matched e.g. `Han` will not match `Hans`
 * Contacts matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-* The contacts found will be based on the list that is currently displayed e.g If the current event that is selected is not linked to `Hans`, `find_contact Hans` will not have any results even though `Hans` is in the contact list
 
 Examples:
 * `find_contact John` returns `john` and `John Doe`.
@@ -230,8 +253,10 @@ Examples:
   ![result for 'find_contact alex david'](images/findAlexDavidResult.png)
 
 ### Adding a tag : `add_tag`
-
+<box type="info" style="background-color:#1e90ff; color: white;">
+<span slot="icon" style="color: white;"><md>:fas-address-book:</md></span>
 Adds a tag with the specified name to JobFestGo.
+</box>
 
 Format: `add_tag t/TAG_NAME`
 
@@ -242,18 +267,22 @@ Examples:
 * `add_tag t/vendors`
 
 ### Viewing all tags : `view_tags`
-
+<box type="info" style="background-color:#1e90ff; color: white;">
+<span slot="icon" style="color: white;"><md>:fas-address-book:</md></span>
 Views all existing tags that have been created by the user.
+</box>
 
 Format: `view_tags`
 
   ![result for 'view_tags'](images/viewTagsResult.png)
 
 ### Deleting a tag : `delete_tag`
-
+<box type="info" style="background-color:#1e90ff; color: white;">
+<span slot="icon" style="color: white;"><md>:fas-address-book:</md></span>
 Deletes the specified tag name from JobFestGo.
+</box>
 
-<box type="warning">
+<box type="warning" style="background-color: #C73852; color: white;">
 
 **WARNING**: This command is destructive. Once a tag is deleted, no contacts can be associated with the tag name.
 </box>
@@ -267,7 +296,21 @@ Examples:
 
 ### Filtering contacts by tag : `filter_by_tag`
 
+<box type="info" style="background-color:#1e90ff; color: white;">
+<span slot="icon" style="color: white;"><md>:fas-address-book:</md></span>
 Displays contacts tagged by any of the specified tags.
+</box>
+
+<box type="warning" style="background-color: #C73852; color: white">
+
+**WARNING**:
+This command is cumulative. The contacts found will be based on the list that is currently displayed.
+
+Imagine we have a contact `Hans` in JobFestGo who is tagged by `vendor`.
+If you have selected a particular event and this event is not linked to `Hans`, `filter_by_tags vendor` will not display `Hans` in the result.
+
+Repeatedly using this command will result in the list being successively filtered.
+</box>
 
 Format: `filter_by_tag TAG_NAME [MORE_TAG_NAMES]`
 
@@ -276,18 +319,19 @@ Format: `filter_by_tag TAG_NAME [MORE_TAG_NAMES]`
 * Contacts tagged by at least one of the given tags will be returned (i.e. `OR` search).
   e.g. `vendors customers` will return all contacts tagged by `vendors` and
  all contacts tagged by `customers`.
-* The contacts found will be based on the list that is currently displayed e.g. If the current event that is selected is not linked to `Hans` who is tagged by `vendor`, `filter_by_tags vendor` will not display `Hans` in the result.
 
 Examples:
 * `filter_by_tag vendors` returns all contacts tagged by the tag: vendor in JobFestGo.
 * `filter_by_tag vendors customers` returns all contacts tagged by the tag: `vendors` and
-  all contacts tagged by the tag: `customers` in JobFestGo. The image below illustrates the result of this command.<br><br>
+  all contacts tagged by the tag: `customers` in JobFestGo. The image below illustrates the result of this command.
 
     ![result for 'filter_by_tag vendors customers'](images/filterByRoleResult.png)
 
 ### Adding an event : `add_event`
-
+<box type="info" style="background-color:#1e90ff; color: white;">
+<span slot="icon" style="color: white;"><md>:fas-address-book:</md></span>
 Adds an event to JobFestGo.
+</box>
 
 Format: `add_event n/NAME d/DATE a/ADDRESS`
 
@@ -303,18 +347,22 @@ Examples:
     ![result for 'add_event'](images/addEventResult.png)
 
 ### Viewing all events : `view_events`
-
+<box type="info" style="background-color:#1e90ff; color: white;">
+<span slot="icon" style="color: white;"><md>:fas-address-book:</md></span>
 Displays a list of all existing events.
+</box>
 
 Format: `view_events`
 
 ![result for 'view_events'](images/viewEventsResult.png)
 
 ### Deleting an event : `delete_event`
-
+<box type="info" style="background-color:#1e90ff; color: white;">
+<span slot="icon" style="color: white;"><md>:fas-address-book:</md></span>
 Deletes the event specified at the index from JobFestGo.
+</box>
 
-<box type="warning">
+<box type="warning" style="background-color: #C73852; color: white;">
 
 **WARNING**: This command is destructive. Once an event is deleted, all tasks associated with the event will be deleted.
 </box>
@@ -329,8 +377,10 @@ Examples:
 * `delete_event` followed by `1` deletes the 1st event in the displayed event list.
 
 ### Linking contacts to an event : `link`
-
+<box type="info" style="background-color:#1e90ff; color: white;">
+<span slot="icon" style="color: white;"><md>:fas-address-book:</md></span>
 Links specified contacts to the specified event.
+</box>
 
 Format: `link ev/EVENT_NAME c/CONTACT_NAME [c/MORE_CONTACT_NAMES]`
 
@@ -352,8 +402,10 @@ Examples:
 * `link ev/NUS Career Fest c/Alice Black` links `Alice Black` to the event `NUS Career Fest` if `Alice Black` is not linked to `NUS Career Fest`.
 
 ### Unlinking contacts from an event: `unlink`
-
+<box type="info" style="background-color:#1e90ff; color: white;">
+<span slot="icon" style="color: white;"><md>:fas-address-book:</md></span>
 Unlinks specified contacts from the specified event.
+</box>
 
 Format: `unlink ev/EVENT_NAME c/CONTACT_NAME [c/MORE_CONTACT_NAMES]`
 
@@ -364,8 +416,10 @@ Examples:
 * `unlink ev/NUS Career Fest c/Alice Black` unlinks `Alice Black` from the event `NUS Career Fest` if `Alice Black` is linked to `NUS Career Fest`.
 
 ### Selecting an event: `select_event`
-
+<box type="info" style="background-color:#1e90ff; color: white;">
+<span slot="icon" style="color: white;"><md>:fas-address-book:</md></span>
 Selects an event at the specified index from JobFestGo. The relevant contacts and tasks will be displayed.
+</box>
 
 Format: `select_event INDEX`
 
@@ -379,8 +433,10 @@ Examples:
     ![result for 'select_event 3'](images/selectEventResult.png)
 
 ### Adding a task : `add_task`
-
+<box type="info" style="background-color:#1e90ff; color: white;">
+<span slot="icon" style="color: white;"><md>:fas-address-book:</md></span>
 Adds a task to an event in JobFestGo.
+</box>
 
 Format: `add_task td/TASK_DESCRIPTION d/DEADLINE ev/EVENT_NAME`
 
@@ -394,10 +450,12 @@ Examples:
 * `add_task td/Book Venue d/2023-12-23 ev/NUS Career Fair 2023` adds a `Book Venue` by `2023-12-23` task to the event `NUS Career Fair 2023`.
 
 ### Deleting a task: `delete_task`
-
+<box type="info" style="background-color:#1e90ff; color: white;">
+<span slot="icon" style="color: white;"><md>:fas-address-book:</md></span>
 Deletes the task specified by the task description from its associated event in JobFestGo.
+</box>
 
-<box type="warning">
+<box type="warning" style="background-color: #C73852; color: white">
 
 **WARNING**: This command is destructive. Once a task is deleted, it cannot be recovered.
 </box>
@@ -415,8 +473,10 @@ Examples:
 * `delete_task td/Book Venue ev/NUS Career Fair 2023` deletes task `Book Venue` from the task list of the event `NUS Career Fair 2023`.
 
 ### Marking a task: `mark_task`
-
+<box type="info" style="background-color:#1e90ff; color: white;">
+<span slot="icon" style="color: white;"><md>:fas-address-book:</md></span>
 Marks the task specified by the task description and its associated event name in JobFestGo as completed.
+</box>
 
 Format: `mark_task td/TASK_DESCRIPTION ev/EVENT_NAME`
 
@@ -435,8 +495,10 @@ Examples:
     ![result for 'mark_task'](images/markTaskResult.png)
 
 ### Unmarking a task: `unmark_task`
-
+<box type="info" style="background-color:#1e90ff; color: white;">
+<span slot="icon" style="color: white;"><md>:fas-address-book:</md></span>
 Marks the task specified by the task description and its associated event name in JobFestGo as not completed.
+</box>
 
 Format: `unmark_task td/TASK_DESCRIPTION ev/EVENT_NAME`
 
@@ -448,30 +510,36 @@ Examples:
 * `unmark_task td/Book Venue ev/NUS Career Fair 2023` marks the task `Book Venue` from the task list of the event `NUS Career Fair 2023` as not completed.
 
 ### Viewing help : `help`
-
-Shows a link to the user guide which will contain all the details required to use the app appropriately. You can click on the `Copy URL` button and paste
+<box type="info" style="background-color:#1e90ff; color: white;">
+<span slot="icon" style="color: white;"><md>:fas-address-book:</md></span>
+Shows a link to the user guide which will contain all the details required to use the app appropriately. You can click on the 'Copy URL' button and paste
 the URL into your browser's address bar.
+</box>
 
 ![help message](images/helpMessage.png)
 
 Format: `help`
 
 ### Clearing all entries : `clear`
-
+<box type="info" style="background-color:#1e90ff; color: white;">
+<span slot="icon" style="color: white;"><md>:fas-address-book:</md></span>
 Clears all entries from JobFestGo.
+</box>
 
-Format: `clear`
-
-<box type="warning">
+<box type="warning" style="background-color: #C73852; color: white">
 
 **WARNING**
 This command will delete all contacts, events and tasks from JobFestGo.
 This command cannot be undone. Proceed with caution.
 </box>
 
-### Exiting the program : `exit`
+Format: `clear`
 
+### Exiting the program : `exit`
+<box type="info" style="background-color:#1e90ff; color: white;">
+<span slot="icon" style="color: white;"><md>:fas-address-book:</md></span>
 Exits the program.
+</box>
 
 Format: `exit`
 
