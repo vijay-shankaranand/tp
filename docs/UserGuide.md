@@ -224,6 +224,17 @@ Examples:
 Finds contacts whose names contain any of the given keywords.
 </box>
 
+<box type="warning" style="background-color: #C73852; color: white">
+
+**WARNING**:
+This command is cumulative. The contacts found will be based on the list that is currently displayed.
+
+Imagine we have a contact `Hans` in JobFestGo.
+If you have selected a particular event and this event is not linked to `Hans`, `find_contact Hans` will not have any results.
+
+Repeatedly using this command will result in the list being successively filtered.
+</box>
+
 Format: `find_contact KEYWORD [MORE_KEYWORDS]`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
@@ -232,7 +243,6 @@ Format: `find_contact KEYWORD [MORE_KEYWORDS]`
 * Only full words will be matched e.g. `Han` will not match `Hans`
 * Contacts matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-* The contacts found will be based on the list that is currently displayed e.g If the current event that is selected is not linked to `Hans`, `find_contact Hans` will not have any results even though `Hans` is in the contact list
 
 Examples:
 * `find_contact John` returns `john` and `John Doe`.
@@ -294,7 +304,7 @@ Displays contacts tagged by any of the specified tags.
 <box type="warning" style="background-color: #C73852; color: white">
 
 **WARNING**:
-This command is accumulative. The contacts found will be based on the list that is currently displayed.
+This command is cumulative. The contacts found will be based on the list that is currently displayed.
 
 Imagine we have a contact `Hans` in JobFestGo who is tagged by `vendor`.
 If you have selected a particular event and this event is not linked to `Hans`, `filter_by_tags vendor` will not display `Hans` in the result.
