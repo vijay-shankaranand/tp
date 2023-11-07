@@ -6,6 +6,7 @@ import static seedu.address.testutil.event.TypicalEvents.JOBFEST;
 import static seedu.address.testutil.event.TypicalEvents.NTU;
 
 import org.junit.jupiter.api.Test;
+
 public class TaskIsInEventPredicateTest {
     @Test
     public void equals() {
