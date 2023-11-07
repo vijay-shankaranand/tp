@@ -234,5 +234,4 @@ public class UniqueTaskListTest {
         List<Task> listWithDuplicate = List.of(BOOK_VENUE, BOOK_VENUE);
         assertFalse(uniqueTaskList.areTasksUnique(listWithDuplicate));
     }
-
 }
