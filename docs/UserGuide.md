@@ -18,7 +18,7 @@ Here’s an **overview** of how JobFestGo can help you with your event planning:
 - Keep track of upcoming task deadlines
 - Search for contacts by name or tag
 
-Optimized for use via a **Command Line Interface (CLI)** while still having the benefits of a **Graphical User Interface (GUI)**, it is a task management tool meant to assist you as job festival event planners in tracking event-specific tasks and contacts. This removes the hassle of having to shuffle through your contact list based on names that you might not remember and organise your tasks according to events while obtaining your information **efficiently**.
+Optimized for use via a **Command Line Interface (CLI)** while still having the benefits of a **Graphical User Interface (GUI)**, it is a task management tool meant to assist you as a job festival event planner in tracking event-specific tasks and contacts. This removes the hassle of having to shuffle through your contact list based on names that you might not remember and organise your tasks according to events while obtaining your information **efficiently**.
 
 **If you are new here**, visit our [quick start](#quick-start) guide to get started with JobFestGo!
 
@@ -66,18 +66,22 @@ Optimized for use via a **Command Line Interface (CLI)** while still having the 
 1. Ensure you have Java `11` or above installed in your Computer.
 - [How do I check my Java version?](#faq)
 
-1. Download the latest `jobfestgo.jar` from [here](https://github.com/AY2324S1-CS2103T-T09-1/tp/releases).
+2. Download the latest `jobfestgo.jar` from [here](https://github.com/AY2324S1-CS2103T-T09-1/tp/releases).
 
     ![download jar](images/downloadJar.png)
 
-1. Copy the file to the folder you want to use as the _home folder_ for your JobFestGo.
+3. Copy the file to the folder you want to use as the _home folder_ for your JobFestGo.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar jobfestgo.jar` command to run the application.<br>
+4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar jobfestgo.jar` command to run the application.
+   <br>
+
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
 
    ![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.
+   <br>
+
    Some example commands you can try:
 
    * `view_contacts` : Lists all contacts.
@@ -90,7 +94,7 @@ Optimized for use via a **Command Line Interface (CLI)** while still having the 
 
    * `exit` : Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
+6. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -116,7 +120,7 @@ JobFestGo comes with a GUI (Graphical User Interface) that is designed to be int
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items not in square brackets are compulsory.<br>
-  e.g. `add_contact n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS` requires the `NAME`, `PHONE_NUMBER`, `EMAIL` and `ADDRESS` together with their prefixes(if any) to be supplied by the user.
+  e.g. `add_contact n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS` requires the `NAME`, `PHONE_NUMBER`, `EMAIL` and `ADDRESS` together with their prefixes (if any) to be supplied by the user.
 
 * Items in square brackets are optional.<br>
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
@@ -249,6 +253,7 @@ Examples:
 * `find_contact John` returns `john` and `John Doe`.
 * `find_contact doe` after `find_contact john` will return `John Doe` and not `john` who was originally in the result.
 * `find_contact alex david` returns `Alex Yeoh`, `David Li`.
+<br></br>
 
   ![result for 'find_contact alex david'](images/findAlexDavidResult.png)
 
@@ -335,7 +340,7 @@ Adds an event to JobFestGo.
 
 Format: `add_event n/NAME d/DATE a/ADDRESS`
 
-* Event name can take any alphanumeric values only.
+* Event name can only take alphanumeric values.
 * The event name **must not already exist** in JobFestGo.
 * Event name and address should not have more than one whitespace in-between each word.
 * If the event name is very long and cannot be viewed fully, enter `view_events` to see the full text.
@@ -463,8 +468,8 @@ Deletes the task specified by the task description from its associated event in 
 
 Format: `delete_task td/TASK_DESCRIPTION ev/EVENT_NAME`
 
-* Task Description and Event Name should not have more than one whitespace in-between each word.
 * Deletes the task specified by the `TASK_DESCRIPTION` from the event specified by the `EVENT_NAME` of JobFestGo.
+* Task description and event name should not have more than one whitespace in-between each word.
 * Both the `TASK_DESCRIPTION` and the `EVENT_NAME` are case-insensitive.
  e.g. `delete_task td/Book Venue ev/NUS Career Fair 2023` and `delete_task td/book venue ev/nus Career FAIR 2023`
  will perform the same operation.
@@ -482,9 +487,9 @@ Marks the task specified by the task description and its associated event name i
 
 Format: `mark_task td/TASK_DESCRIPTION ev/EVENT_NAME`
 
-* Task Description and Event Name should not have more than one whitespace in-between each word.
 * Marks the task specified by the `TASK_DESCRIPTION` from the event specified by the `EVENT_NAME` of JobFestGo as completed.
- A label indicating the status of the task will be shown next to its description in the task list.
+* Task description and event name should not have more than one whitespace in-between each word.
+* A label indicating the status of the task will be shown next to its description in the task list.
 * Both the `TASK_DESCRIPTION` and the `EVENT_NAME` are case-insensitive.
   e.g. `mark_task td/Book Venue ev/NUS Career Fair 2023` and `mark_task td/book venue ev/nus Career FAIR 2023`
   will perform the same operation.
