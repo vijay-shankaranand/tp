@@ -212,6 +212,9 @@ public class UniqueEventListTest {
         list.add(JOBFEST);
         list.add(NTU);
         assertTrue(list.equals(list));
+
+        // null -> returns false
+        assertFalse(list.equals(null));
     }
 
 
