@@ -12,9 +12,17 @@ public class TaskInReminderPredicateTest {
 
     @Test
     public void equals() {
+
+        // same object -> returns true
         TaskInReminderPredicate pred1 = new TaskInReminderPredicate();
+        assertTrue(pred1.equals(pred1));
+
+        // null -> returns false
+        assertFalse(pred1.equals(null));
+
+        // different objects -> returns true
         TaskInReminderPredicate pred2 = new TaskInReminderPredicate();
-        assertEquals(pred1, pred2);
+        assertTrue(pred1.equals(pred2));
     }
 
     @Test
