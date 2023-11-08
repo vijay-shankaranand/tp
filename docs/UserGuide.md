@@ -147,18 +147,14 @@ Format: `home`
 Adds a contact to JobFestGo.
 </box>
 
-<box type="warning" style="background-color: #C73852; color: white;">
-
-**WARNING** : Please ensure there is no more than **one** whitespace in-between each word for `NAME`!
-</box>
-
 Format: `add_contact n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
 * Contact name can only take alphanumeric values.
-* A contact can have any number of tags.
-* Email should be in the appropriate (@xxx.com) format.
+* Contact name and Address should not have more than one whitespace in-between each word.
 * Phone number should be in appropriate (8-digit numeric) format.
-* Phone number does not provide support for special characters, such as `+` and `-`, as it is more targeted for job fest event planners in Singapore.
+* Phone number does not provide support for special characters, such as `+` and `-`, as it is more targeted for job fest event planners in **Singapore**.
+* Email should be in the appropriate (@xxx.com) format.
+* A contact can have any number of tags.
 * Only tags from tags list can be used for tagging a contact.
 * A contact cannot be added if their phone number already exists.
 * A contact cannot be added if their name already exists.
@@ -215,6 +211,7 @@ Format: `edit_contact INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…�
 * When editing tags, the existing tags of the contact will be removed i.e adding of tags is not cumulative.
 * You can remove all the contact’s tags by typing `t/` without
     specifying any tags after it.
+* This command will follow all the notes specified under [`add_contact`](#adding-a-contact-add-contact) feature.
 
 Examples:
 *  `edit_contact 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st contact to be `91234567` and `johndoe@example.com` respectively.
@@ -234,7 +231,7 @@ This command is cumulative. The contacts found will be based on the list that is
 Imagine we have a contact `Hans` in JobFestGo.
 If you have selected a particular event and this event is not linked to `Hans`, `find_contact Hans` will not have any results.
 
-Repeatedly using this command will result in the list being successively filtered.
+Repeatedly using this command will result in the list being successively filtered. The examples below illustrate this.
 </box>
 
 Format: `find_contact KEYWORD [MORE_KEYWORDS]`
@@ -263,7 +260,7 @@ Adds a tag with the specified name to JobFestGo.
 Format: `add_tag t/TAG_NAME`
 
 * The tag name **must not already exist** in JobFestGo.
-* The tag name must be alphanumeric, i.e, should consist only of alphabets and numbers, and no other characters.
+* The tag name must be alphanumeric, i.e, should consist only of alphabets and numbers, and no other characters (including whitespace).
 
 Examples:
 * `add_tag t/vendors`
@@ -311,7 +308,7 @@ This command is cumulative. The contacts found will be based on the list that is
 Imagine we have a contact `Hans` in JobFestGo who is tagged by `vendor`.
 If you have selected a particular event and this event is not linked to `Hans`, `filter_by_tags vendor` will not display `Hans` in the result.
 
-Repeatedly using this command will result in the list being successively filtered.
+Repeatedly using this command will result in the list being successively filtered. The examples below illustrate this.
 </box>
 
 Format: `filter_by_tag TAG_NAME [MORE_TAG_NAMES]`
@@ -339,6 +336,7 @@ Format: `add_event n/NAME d/DATE a/ADDRESS`
 
 * Event name can take any alphanumeric values only.
 * The event name **must not already exist** in JobFestGo.
+* Event name and address should not have more than one whitespace in-between each word.
 * Date must be valid and should be in the appropriate (YYYY-MM-DD) format.
 * Date should **not** be before the current date.
 * Past the date of the event, the event will be labelled as completed next to its name in event list.
@@ -386,6 +384,7 @@ Links specified contacts to the specified event.
 
 Format: `link ev/EVENT_NAME c/CONTACT_NAME [c/MORE_CONTACT_NAMES]`
 
+* Event name and contact name should not have more than one whitespace in-between each word.
 * Only existing contacts and events in JobFestGo can be linked.
 * Contacts that are already linked to the specified event cannot be linked again.
 * Only full words will be matched e.g. `NUS Career Fest` will not match `NUS Career Fest 2023`,
@@ -393,12 +392,7 @@ Format: `link ev/EVENT_NAME c/CONTACT_NAME [c/MORE_CONTACT_NAMES]`
 * The order of the input does not matter. e.g. `link ev/NUS Career Fest c/Alice Black`
  and `link c/Alice Black ev/NUS Career Fest` are both valid commands and will perform
  the same task.
-* If there are invalid contacts in the input (e.g. non-existent contacts,
- contacts that are already linked to the specified event), the contacts entered
- before the first invalid contact will be linked while those after will not be linked.
- e.g. if `John Doe` is an invalid contact, `link ev/NUS Career Fest c/Alice Black
- c/John Doe c/Bob Dylan` will link `Alice Black` to the event `NUS Career Fest` while
-  `John Doe` and `Bob Dylan` will not be linked.
+* The command will only succeed if all contacts and events keyed in are valid and are existing contacts and events in JobFestGo.
 
 Examples:
 * `link ev/NUS Career Fest c/Alice Black` links `Alice Black` to the event `NUS Career Fest` if `Alice Black` is not linked to `NUS Career Fest`.
@@ -411,6 +405,7 @@ Unlinks specified contacts from the specified event.
 
 Format: `unlink ev/EVENT_NAME c/CONTACT_NAME [c/MORE_CONTACT_NAMES]`
 
+* Event name and contact name should not have more than one whitespace in-between each word.
 * It functions similarly to `link` except for the fact that the input contacts and event for `unlink`
  must be currently linked. Otherwise, an error will be raised.
 
@@ -443,6 +438,7 @@ Adds a task to an event in JobFestGo.
 Format: `add_task td/TASK_DESCRIPTION d/DEADLINE ev/EVENT_NAME`
 
 * Task Description can take any alphanumeric value, spaces and any of the following characters: -,./()
+* Task Description and Event Name should not have more than one whitespace in-between each word.
 * Deadline is a date in the format YYYY-MM-DD.
 * Deadline should not be before today's date.
 * Event name should be the **name of an already existing event**.
@@ -465,6 +461,7 @@ Deletes the task specified by the task description from its associated event in 
 
 Format: `delete_task td/TASK_DESCRIPTION ev/EVENT_NAME`
 
+* Task Description and Event Name should not have more than one whitespace in-between each word.
 * Deletes the task specified by the `TASK_DESCRIPTION` from the event specified by the `EVENT_NAME` of JobFestGo.
 * Both the `TASK_DESCRIPTION` and the `EVENT_NAME` are case-insensitive.
  e.g. `delete_task td/Book Venue ev/NUS Career Fair 2023` and `delete_task td/book venue ev/nus Career FAIR 2023`
@@ -483,6 +480,7 @@ Marks the task specified by the task description and its associated event name i
 
 Format: `mark_task td/TASK_DESCRIPTION ev/EVENT_NAME`
 
+* Task Description and Event Name should not have more than one whitespace in-between each word.
 * Marks the task specified by the `TASK_DESCRIPTION` from the event specified by the `EVENT_NAME` of JobFestGo as completed.
  A label indicating the status of the task will be shown next to its description in the task list.
 * Both the `TASK_DESCRIPTION` and the `EVENT_NAME` are case-insensitive.
@@ -505,6 +503,7 @@ Marks the task specified by the task description and its associated event name i
 
 Format: `unmark_task td/TASK_DESCRIPTION ev/EVENT_NAME`
 
+* Task Description and Event Name should not have more than one whitespace in-between each word.
 * It works exactly the same way as `mark_task` except for the fact that `unmark_task` marks a completed task as not completed.
 * You may `unmark_task` a task when you realize that you have not completed the task but have wrongly marked it as completed.
 * Errors will be raised if the specified task has already been unmarked.
