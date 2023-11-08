@@ -157,6 +157,12 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Return to home page feature
+
+The following activity diagram summarizes what happens when a user executes the home command:
+
+<puml src="diagrams/HomeActivityDiagram.puml" width="325" />
+
 ### Select Event Feature
 
 #### Implementation

@@ -115,9 +115,7 @@ public class ModelManager implements Model {
 
     @Override
     public void addContact(Contact contact) {
-
         jobFestGo.addContact(contact);
-
         updateFilteredContactList(PREDICATE_SHOW_ALL_CONTACTS);
     }
 

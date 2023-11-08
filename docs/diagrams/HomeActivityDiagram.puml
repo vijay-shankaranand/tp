@@ -1,0 +1,15 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+start
+:User executes home command;
+
+:Filtered contact list is updated to show all contacts;
+
+:Filtered task list is updated to show all tasks;
+
+:System is back to the home screen;
+
+stop
+@enduml

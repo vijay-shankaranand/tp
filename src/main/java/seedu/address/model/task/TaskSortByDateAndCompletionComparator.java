@@ -13,7 +13,6 @@ public class TaskSortByDateAndCompletionComparator implements Comparator<Task> {
      * Compares {@code taskA} and {@code taskB} by date.
      */
     public int compare(Task taskA, Task taskB) {
-
         Date firstDate = taskA.getDate();
         Date secondDate = taskB.getDate();
 
@@ -40,7 +39,6 @@ public class TaskSortByDateAndCompletionComparator implements Comparator<Task> {
      *     0 otherwise.
      */
     public int compareCompletion(Task taskA, Task taskB) {
-
         boolean firstTaskCompleted = taskA.isCompleted();
         boolean secondTaskCompleted = taskB.isCompleted();
 

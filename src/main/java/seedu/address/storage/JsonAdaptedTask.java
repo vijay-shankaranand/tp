@@ -79,8 +79,7 @@ public class JsonAdaptedTask {
                     "status"));
         }
 
-        final boolean isCompleted = status == Task.TASK_IS_COMPLETED ? true : false;
-
+        final boolean isCompleted = status.equals(Task.TASK_IS_COMPLETED);
         return new Task(modelDescription, modelDate, modelEvent, isCompleted);
     }
 
@@ -113,7 +112,7 @@ public class JsonAdaptedTask {
                     "status"));
         }
 
-        final boolean isCompleted = status == Task.TASK_IS_COMPLETED ? true : false;
+        final boolean isCompleted = status.equals(Task.TASK_IS_COMPLETED);
         return new Task(modelDescription, modelDate, event, isCompleted);
     }
 }
