@@ -102,7 +102,7 @@ JobFestGo comes with a GUI (Graphical User Interface) that is designed to be int
 
 <box type="warning">
 
-**PLEASE NOTE** : If there is an ellipsis (...) at the end of a text field in any section of JobFestGo, please extend the window fully so the full text can be seen.
+**PLEASE NOTE:** If there is an ellipsis (...) at the end of a text field in any section of JobFestGo, please extend the window fully so the full text can be seen.
 </box>
 --------------------------------------------------------------------------------------------------------------------
 
@@ -149,8 +149,8 @@ Adds a contact to JobFestGo.
 
 Format: `add_contact n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
-* Contact name can only take alphanumeric values.
-* Contact name and Address should not have more than one whitespace in-between each word.
+* Contact name can only take alphanumeric values (i.e should consist only of alphabets and numbers).
+* Contact name and address should not have more than one whitespace in-between each word.
 * Phone number should be in appropriate (8-digit numeric) format.
 * Phone number does not provide support for special characters, such as `+` and `-`, as it is more targeted for job fest event planners in **Singapore**.
 * Email should be in the appropriate (@xxx.com) format.
@@ -183,13 +183,14 @@ Deletes the contact at the specified index from JobFestGo.
 
 <box type="warning" style="background-color: #C73852; color: white;">
 
-**WARNING**: This command is destructive. Once a contact is deleted, it cannot be recovered.
+**WARNING:** This command is destructive. Once a contact is deleted, it cannot be recovered.
 </box>
 
 Format: `delete_contact INDEX`
 
 * Deletes the contact at the specified `INDEX`.
-* After the contact is deleted, JobFestGo will automatically return to the home page. This is regardless of whether the contact is linked to an event or not.
+* After the contact is deleted, JobFestGo will automatically return to the home page. 
+  This is regardless of whether the contact is linked to an event or not.
 * The index refers to the index number shown in the displayed contact list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
@@ -205,12 +206,13 @@ Edits an existing contact at the specified index in JobFestGo.
 
 Format: `edit_contact INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
-* Edits the contact at the specified `INDEX`. The index refers to the index number shown in the displayed contact list. The index **must be a positive integer** 1, 2, 3, …​
+* Edits the contact at the specified `INDEX`.
+* The index refers to the index number shown in the displayed contact list.
+* The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the contact will be removed i.e adding of tags is not cumulative.
-* You can remove all the contact’s tags by typing `t/` without
-    specifying any tags after it.
+* When editing tags, the existing tags of the contact will be removed (i.e adding of tags is not cumulative).
+* You can remove all the contact’s tags by typing `t/` without specifying any tags after it.
 * This command will follow all the notes specified under [`add_contact`](#adding-a-contact-add-contact) feature.
 
 Examples:
@@ -225,7 +227,7 @@ Finds contacts whose names contain any of the given keywords.
 
 <box type="warning" style="background-color: #C73852; color: white">
 
-**WARNING**:
+**WARNING:**
 This command is cumulative. The contacts found will be based on the list that is currently displayed.
 
 Imagine we have a contact `Hans` in JobFestGo.
@@ -247,7 +249,6 @@ Examples:
 * `find_contact John` returns `john` and `John Doe`.
 * `find_contact alex david` returns `Alex Yeoh`, `David Li`.
 * `find_contact doe` after `find_contact john` will return `John Doe` and not `john` who was originally in the result.
-<br><br>
 
   ![result for 'find_contact alex david'](images/findAlexDavidResult.png)
 
@@ -260,7 +261,7 @@ Adds a tag with the specified name to JobFestGo.
 Format: `add_tag t/TAG_NAME`
 
 * The tag name **must not already exist** in JobFestGo.
-* The tag name must be alphanumeric, i.e, should consist only of alphabets and numbers, and no other characters (including whitespace).
+* The tag name must be strictly alphanumeric. No other characters (including whitespace) are allowed.
 
 Examples:
 * `add_tag t/vendors`
@@ -283,7 +284,7 @@ Deletes the specified tag name from JobFestGo.
 
 <box type="warning" style="background-color: #C73852; color: white;">
 
-**WARNING**: This command is destructive. Once a tag is deleted, no contacts can be associated with the tag name.
+**WARNING:** This command is destructive. Once a tag is deleted, no contacts can be associated with the tag name.
 </box>
 
 Format: `delete_tag t/TAG_NAME`
@@ -302,7 +303,7 @@ Displays contacts tagged by any of the specified tags.
 
 <box type="warning" style="background-color: #C73852; color: white">
 
-**WARNING**:
+**WARNING:**
 This command is cumulative. The contacts found will be based on the list that is currently displayed.
 
 Imagine we have a contact `Hans` in JobFestGo who is tagged by `vendor`.
@@ -337,6 +338,7 @@ Format: `add_event n/NAME d/DATE a/ADDRESS`
 * Event name can take any alphanumeric values only.
 * The event name **must not already exist** in JobFestGo.
 * Event name and address should not have more than one whitespace in-between each word.
+* If the event name is very long and cannot be viewed fully, enter `view_events` to see the full text.
 * Date must be valid and should be in the appropriate (YYYY-MM-DD) format.
 * Date should **not** be before the current date.
 * Past the date of the event, the event will be labelled as completed next to its name in event list.
@@ -364,7 +366,7 @@ Deletes the event specified at the index from JobFestGo.
 
 <box type="warning" style="background-color: #C73852; color: white;">
 
-**WARNING**: This command is destructive. Once an event is deleted, all tasks associated with the event will be deleted.
+**WARNING:** This command is destructive. Once an event is deleted, all tasks associated with the event will be deleted.
 </box>
 
 Format: `delete_event INDEX`
@@ -437,7 +439,7 @@ Adds a task to an event in JobFestGo.
 
 Format: `add_task td/TASK_DESCRIPTION d/DEADLINE ev/EVENT_NAME`
 
-* Task Description can take any alphanumeric value, spaces and any of the following characters: -,./()
+* Task Description can take any alphanumeric value, spaces and any of the following characters: `-`, `,`, `.`, `/`, `(`, `)`
 * Task Description and Event Name should not have more than one whitespace in-between each word.
 * Deadline is a date in the format YYYY-MM-DD.
 * Deadline should not be before today's date.
@@ -456,7 +458,7 @@ Deletes the task specified by the task description from its associated event in 
 
 <box type="warning" style="background-color: #C73852; color: white">
 
-**WARNING**: This command is destructive. Once a task is deleted, it cannot be recovered.
+**WARNING:** This command is destructive. Once a task is deleted, it cannot be recovered.
 </box>
 
 Format: `delete_task td/TASK_DESCRIPTION ev/EVENT_NAME`
@@ -514,8 +516,8 @@ Examples:
 ### Viewing help : `help`
 <box type="info" style="background-color:#1e90ff; color: white;">
 <span slot="icon" style="color: white;"><md>:fas-address-book:</md></span>
-Shows a link to the user guide which will contain all the details required to use the app appropriately. You can click on the 'Copy URL' button and paste
-the URL into your browser's address bar.
+Shows a link to the user guide which will contain all the details required to use the app appropriately.
+You can click on the 'Copy URL' button and paste the URL into your browser's address bar.
 </box>
 
 ![help message](images/helpMessage.png)
@@ -530,7 +532,7 @@ Clears all entries from JobFestGo.
 
 <box type="warning" style="background-color: #C73852; color: white">
 
-**WARNING**
+**WARNING:**
 This command will delete all contacts, events and tasks from JobFestGo.
 This command cannot be undone. Proceed with caution.
 </box>
