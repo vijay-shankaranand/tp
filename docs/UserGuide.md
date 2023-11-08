@@ -392,12 +392,7 @@ Format: `link ev/EVENT_NAME c/CONTACT_NAME [c/MORE_CONTACT_NAMES]`
 * The order of the input does not matter. e.g. `link ev/NUS Career Fest c/Alice Black`
  and `link c/Alice Black ev/NUS Career Fest` are both valid commands and will perform
  the same task.
-* If there are invalid contacts in the input (e.g. non-existent contacts,
- contacts that are already linked to the specified event), the contacts entered
- before the first invalid contact will be linked while those after will not be linked.
- e.g. if `John Doe` is an invalid contact, `link ev/NUS Career Fest c/Alice Black
- c/John Doe c/Bob Dylan` will link `Alice Black` to the event `NUS Career Fest` while
-  `John Doe` and `Bob Dylan` will not be linked.
+* The command will only succeed if all contacts and events keyed in are valid and are existing contacts and events in JobFestGo.
 
 Examples:
 * `link ev/NUS Career Fest c/Alice Black` links `Alice Black` to the event `NUS Career Fest` if `Alice Black` is not linked to `NUS Career Fest`.
