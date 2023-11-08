@@ -27,7 +27,6 @@ public class JsonAdaptedEvent {
     private final String date;
     private final String address;
     private final List<JsonAdaptedContact> contacts = new ArrayList<>();
-    private final List<JsonAdaptedTask> tasks = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedEvent} with the given event details.
@@ -35,16 +34,12 @@ public class JsonAdaptedEvent {
     @JsonCreator
     public JsonAdaptedEvent(@JsonProperty("name") String name, @JsonProperty("date") String date,
                             @JsonProperty("address") String address,
-                             @JsonProperty("contacts") List<JsonAdaptedContact> contacts,
-                            @JsonProperty("tasks") List<JsonAdaptedTask> tasks) {
+                             @JsonProperty("contacts") List<JsonAdaptedContact> contacts) {
         this.name = name;
         this.date = date;
         this.address = address;
         if (contacts != null) {
             this.contacts.addAll(contacts);
-        }
-        if (tasks != null) {
-            this.tasks.addAll(tasks);
         }
     }
 
@@ -58,9 +53,6 @@ public class JsonAdaptedEvent {
         address = source.getAddress().value;
         contacts.addAll(source.getContacts().stream()
                 .map(JsonAdaptedContact::new)
-                .collect(Collectors.toList()));
-        tasks.addAll(source.getTasks().stream()
-                .map(JsonAdaptedTask::new)
                 .collect(Collectors.toList()));
     }
 
@@ -104,10 +96,6 @@ public class JsonAdaptedEvent {
         final Address modelAddress = new Address(address);
 
         Set<Task> modelTasks = new HashSet<>();
-        Event tempEvent = new Event(modelName, modelDate, modelAddress, modelContacts, modelTasks);
-        for (JsonAdaptedTask task : tasks) {
-            modelTasks.add(task.toModelTypeForEvent(tempEvent));
-        }
 
         return new Event(modelName, modelDate, modelAddress, modelContacts, modelTasks);
     }
