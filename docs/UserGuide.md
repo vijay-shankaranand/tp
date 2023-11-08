@@ -97,6 +97,7 @@ Optimized for use via a **Command Line Interface (CLI)** while still having the 
 6. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## Navigating the GUI
 
@@ -108,6 +109,7 @@ JobFestGo comes with a GUI (Graphical User Interface) that is designed to be int
 
 **PLEASE NOTE:** If there is an ellipsis (...) at the end of a text field in any section of JobFestGo, please extend the window fully so the full text can be seen.
 </box>
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Features
@@ -170,6 +172,8 @@ Examples:
 
 ![result for 'add_contact'](images/addContactResult.png)
 
+<div style="page-break-after: always;"></div>
+
 ### Listing all contacts : `view_contacts`
 <box type="info" style="background-color:#1e90ff; color: white;">
 <span slot="icon" style="color: white;"><md>:fas-address-book:</md></span>
@@ -179,6 +183,8 @@ Displays a list of all contacts in JobFestGo.
 Format: `view_contacts`
 
   ![result for 'view_contacts'](images/viewContactsResults.png)
+
+<div style="page-break-after: always;"></div>
 
 ### Deleting a contact : `delete_contact`
 <box type="info" style="background-color:#1e90ff; color: white;">
@@ -272,6 +278,8 @@ Format: `add_tag t/TAG_NAME`
 Examples:
 * `add_tag t/vendors`
 
+<div style="page-break-after: always;"></div>
+
 ### Viewing all tags : `view_tags`
 <box type="info" style="background-color:#1e90ff; color: white;">
 <span slot="icon" style="color: white;"><md>:fas-address-book:</md></span>
@@ -281,6 +289,8 @@ Views all existing tags that have been created by the user.
 Format: `view_tags`
 
   ![result for 'view_tags'](images/viewTagsResult.png)
+
+<div style="page-break-after: always;"></div>
 
 ### Deleting a tag : `delete_tag`
 <box type="info" style="background-color:#1e90ff; color: white;">
@@ -365,6 +375,8 @@ Format: `view_events`
 
 ![result for 'view_events'](images/viewEventsResult.png)
 
+<div style="page-break-after: always;"></div>
+
 ### Deleting an event : `delete_event`
 <box type="info" style="background-color:#1e90ff; color: white;">
 <span slot="icon" style="color: white;"><md>:fas-address-book:</md></span>
@@ -405,6 +417,8 @@ Format: `link ev/EVENT_NAME c/CONTACT_NAME [c/MORE_CONTACT_NAMES]`
 
 Examples:
 * `link ev/NUS Career Fest c/Alice Black` links `Alice Black` to the event `NUS Career Fest` if `Alice Black` is not linked to `NUS Career Fest`.
+
+<div style="page-break-after: always;"></div>
 
 ### Unlinking contacts from an event: `unlink`
 <box type="info" style="background-color:#1e90ff; color: white;">
