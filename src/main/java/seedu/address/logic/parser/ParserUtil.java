@@ -179,12 +179,11 @@ public class ParserUtil {
     }
 
     /**
-     * Parses input to check if thw input contains more than one white space.
+     * Parses input to check if the input contains more than one white space.
      * @param input Input string to check.
      * @return true if input contains more than one white space, false otherwise.
      */
     public static boolean isContainsMoreThanOneWhiteSpace(String input) {
         return input.matches(".*\\s{2,}.*");
     }
-
 }
