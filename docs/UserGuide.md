@@ -216,8 +216,8 @@ Format: `edit_contact INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]â€¦â
 * This command will follow all the notes specified under [`add_contact`](#adding-a-contact-add-contact) feature.
 
 Examples:
-*  `edit_contact 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st contact to be `91234567` and `johndoe@example.com` respectively.
-*  `edit_contact 2 n/Betsy Crower t/` Edits the name of the 2nd contact to be `Betsy Crower` and clears all existing tags.
+*  `edit_contact 1 p/91234567 e/johndoe@example.com` edits the phone number and email address of the 1st contact to be `91234567` and `johndoe@example.com` respectively.
+*  `edit_contact 2 n/Betsy Crower t/` edits the name of the 2nd contact to be `Betsy Crower` and clears all existing tags.
 
 ### Locating contacts by name : `find_contact`
 <box type="info" style="background-color:#1e90ff; color: white;">
@@ -238,9 +238,9 @@ Repeatedly using this command will result in the list being successively filtere
 
 Format: `find_contact KEYWORD [MORE_KEYWORDS]`
 
+* Only the name of a contact can be searched.
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`
 * Contacts matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
@@ -489,7 +489,7 @@ Format: `mark_task td/TASK_DESCRIPTION ev/EVENT_NAME`
   e.g. `mark_task td/Book Venue ev/NUS Career Fair 2023` and `mark_task td/book venue ev/nus Career FAIR 2023`
   will perform the same operation.
 * Errors will be raised if the specified event does not exist or the event does not have the specified task.
-  If such situation happens, you may double-check the task description and the event name and re-enter valid inputs.
+  If such a situation happens, you may double-check the task description and the event name and re-enter valid inputs.
 * Errors will also be raised if the specified task has already been marked as completed.
 
 Examples:
