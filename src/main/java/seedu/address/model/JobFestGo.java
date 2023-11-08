@@ -337,13 +337,6 @@ public class JobFestGo implements ReadOnlyJobFestGo {
     }
 
     /**
-     * Returns the {@code Task} with given arguments.
-     */
-    public Task getTask(TaskDescription description, Name eventName) {
-        return tasks.getByValues(description, eventName);
-    }
-
-    /**
      * Marks the specified task as completed.
      */
     public void markTask(TaskDescription taskDescription, Name associatedEventName)

@@ -66,7 +66,7 @@ public class LinkCommand extends Command {
                 if (model.isContactLinkedToEvent(contactToLink, eventToLink)) {
                     throw new CommandException(
                             String.format(MESSAGE_LINKED_CONTACT, contactName, eventNameToLink));
-                };
+                }
                 contactsToLink.add(contactToLink);
             }
 

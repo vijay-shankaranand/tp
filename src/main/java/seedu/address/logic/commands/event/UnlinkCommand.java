@@ -64,7 +64,7 @@ public class UnlinkCommand extends Command {
                 if (!model.isContactLinkedToEvent(contactToUnlink, eventToUnlink)) {
                     throw new CommandException(
                             String.format(MESSAGE_UNLINKED_CONTACT, contactName, eventNameToUnlink));
-                };
+                }
                 contactsToUnlink.add(contactToUnlink);
             }
 

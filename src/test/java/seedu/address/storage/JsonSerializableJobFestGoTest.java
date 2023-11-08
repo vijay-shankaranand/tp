@@ -96,6 +96,14 @@ public class JsonSerializableJobFestGoTest {
     }
 
     @Test
+    public void toModelType_duplicateEvent_throwsIllegalValueException() throws Exception {
+        JsonSerializableJobFestGo dataFromFile = JsonUtil.readJsonFile(DUPLICATE_EVENT_FILE,
+                JsonSerializableJobFestGo.class).get();
+        assertThrows(IllegalValueException.class, JsonSerializableJobFestGo.MESSAGE_DUPLICATE_EVENT,
+                dataFromFile::toModelType);
+    }
+
+    @Test
     public void toModelType_typicalTasksFile_success() throws Exception {
         JsonSerializableJobFestGo dataFromFile = JsonUtil.readJsonFile(TYPICAL_TASKS_FILE,
                 JsonSerializableJobFestGo.class).get();
