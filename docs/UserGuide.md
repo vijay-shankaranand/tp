@@ -18,7 +18,7 @@ Here’s an **overview** of how JobFestGo can help you with your event planning:
 - Keep track of upcoming task deadlines
 - Search for contacts by name or tag
 
-Optimized for use via a **Command Line Interface (CLI)** while still having the benefits of a **Graphical User Interface (GUI)**, it is a task management tool meant to assist you as job festival event planners in tracking event-specific tasks and contacts. This removes the hassle of having to shuffle through your contact list based on names that you might not remember and organise your tasks according to events while obtaining your information **efficiently**.
+Optimized for use via a **Command Line Interface (CLI)** while still having the benefits of a **Graphical User Interface (GUI)**, it is a task management tool meant to assist you as a job festival event planner in tracking event-specific tasks and contacts. This removes the hassle of having to shuffle through your contact list based on names that you might not remember and organise your tasks according to events while obtaining your information **efficiently**.
 
 **If you are new here**, visit our [quick start](#quick-start) guide to get started with JobFestGo!
 
@@ -66,18 +66,22 @@ Optimized for use via a **Command Line Interface (CLI)** while still having the 
 1. Ensure you have Java `11` or above installed in your Computer.
 - [How do I check my Java version?](#faq)
 
-1. Download the latest `jobfestgo.jar` from [here](https://github.com/AY2324S1-CS2103T-T09-1/tp/releases).
+2. Download the latest `jobfestgo.jar` from [here](https://github.com/AY2324S1-CS2103T-T09-1/tp/releases).
 
     ![download jar](images/downloadJar.png)
 
-1. Copy the file to the folder you want to use as the _home folder_ for your JobFestGo.
+3. Copy the file to the folder you want to use as the _home folder_ for your JobFestGo.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar jobfestgo.jar` command to run the application.<br>
+4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar jobfestgo.jar` command to run the application.
+   <br>
+
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
 
    ![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.
+   <br>
+
    Some example commands you can try:
 
    * `view_contacts` : Lists all contacts.
@@ -90,7 +94,7 @@ Optimized for use via a **Command Line Interface (CLI)** while still having the 
 
    * `exit` : Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
+6. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -102,7 +106,7 @@ JobFestGo comes with a GUI (Graphical User Interface) that is designed to be int
 
 <box type="warning">
 
-**PLEASE NOTE** : If there is an ellipsis (...) at the end of a text field in any section of JobFestGo, please extend the window fully so the full text can be seen.
+**PLEASE NOTE:** If there is an ellipsis (...) at the end of a text field in any section of JobFestGo, please extend the window fully so the full text can be seen.
 </box>
 --------------------------------------------------------------------------------------------------------------------
 
@@ -116,7 +120,7 @@ JobFestGo comes with a GUI (Graphical User Interface) that is designed to be int
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items not in square brackets are compulsory.<br>
-  e.g. `add_contact n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS` requires the `NAME`, `PHONE_NUMBER`, `EMAIL` and `ADDRESS` together with their prefixes(if any) to be supplied by the user.
+  e.g. `add_contact n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS` requires the `NAME`, `PHONE_NUMBER`, `EMAIL` and `ADDRESS` together with their prefixes (if any) to be supplied by the user.
 
 * Items in square brackets are optional.<br>
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
@@ -147,18 +151,14 @@ Format: `home`
 Adds a contact to JobFestGo.
 </box>
 
-<box type="warning" style="background-color: #C73852; color: white;">
-
-**WARNING** : Please ensure there is no more than **one** whitespace in-between each word for `NAME`!
-</box>
-
 Format: `add_contact n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
-* Contact name can only take alphanumeric values.
-* A contact can have any number of tags.
-* Email should be in the appropriate (@xxx.com) format.
+* Contact name can only take alphanumeric values (i.e should consist only of alphabets and numbers).
+* Contact name and address should not have more than one whitespace in-between each word.
 * Phone number should be in appropriate (8-digit numeric) format.
-* Phone number does not provide support for special characters, such as `+` and `-`, as it is more targeted for job fest event planners in Singapore.
+* Phone number does not provide support for special characters, such as `+` and `-`, as it is more targeted for job fest event planners in **Singapore**.
+* Email should be in the appropriate (@xxx.com) format.
+* A contact can have any number of tags.
 * Only tags from tags list can be used for tagging a contact.
 * A contact cannot be added if their phone number already exists.
 * A contact cannot be added if their name already exists.
@@ -187,13 +187,14 @@ Deletes the contact at the specified index from JobFestGo.
 
 <box type="warning" style="background-color: #C73852; color: white;">
 
-**WARNING**: This command is destructive. Once a contact is deleted, it cannot be recovered.
+**WARNING:** This command is destructive. Once a contact is deleted, it cannot be recovered.
 </box>
 
 Format: `delete_contact INDEX`
 
 * Deletes the contact at the specified `INDEX`.
-* After the contact is deleted, JobFestGo will automatically return to the home page. This is regardless of whether the contact is linked to an event or not.
+* After the contact is deleted, JobFestGo will automatically return to the home page. 
+  This is regardless of whether the contact is linked to an event or not.
 * The index refers to the index number shown in the displayed contact list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
@@ -209,16 +210,18 @@ Edits an existing contact at the specified index in JobFestGo.
 
 Format: `edit_contact INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
-* Edits the contact at the specified `INDEX`. The index refers to the index number shown in the displayed contact list. The index **must be a positive integer** 1, 2, 3, …​
+* Edits the contact at the specified `INDEX`.
+* The index refers to the index number shown in the displayed contact list.
+* The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the contact will be removed i.e adding of tags is not cumulative.
-* You can remove all the contact’s tags by typing `t/` without
-    specifying any tags after it.
+* When editing tags, the existing tags of the contact will be removed (i.e adding of tags is not cumulative).
+* You can remove all the contact’s tags by typing `t/` without specifying any tags after it.
+* This command will follow all the notes specified under [`add_contact`](#adding-a-contact-add-contact) feature.
 
 Examples:
-*  `edit_contact 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st contact to be `91234567` and `johndoe@example.com` respectively.
-*  `edit_contact 2 n/Betsy Crower t/` Edits the name of the 2nd contact to be `Betsy Crower` and clears all existing tags.
+*  `edit_contact 1 p/91234567 e/johndoe@example.com` edits the phone number and email address of the 1st contact to be `91234567` and `johndoe@example.com` respectively.
+*  `edit_contact 2 n/Betsy Crower t/` edits the name of the 2nd contact to be `Betsy Crower` and clears all existing tags.
 
 ### Locating contacts by name : `find_contact`
 <box type="info" style="background-color:#1e90ff; color: white;">
@@ -228,29 +231,29 @@ Finds contacts whose names contain any of the given keywords.
 
 <box type="warning" style="background-color: #C73852; color: white">
 
-**WARNING**:
+**WARNING:**
 This command is cumulative. The contacts found will be based on the list that is currently displayed.
 
 Imagine we have a contact `Hans` in JobFestGo.
 If you have selected a particular event and this event is not linked to `Hans`, `find_contact Hans` will not have any results.
 
-Repeatedly using this command will result in the list being successively filtered.
+Repeatedly using this command will result in the list being successively filtered. The examples below illustrate this.
 </box>
 
 Format: `find_contact KEYWORD [MORE_KEYWORDS]`
 
+* Only the name of a contact can be searched.
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`
 * Contacts matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
 * `find_contact John` returns `john` and `John Doe`.
-* `find_contact alex david` returns `Alex Yeoh`, `David Li`.
 * `find_contact doe` after `find_contact john` will return `John Doe` and not `john` who was originally in the result.
-<br><br>
+* `find_contact alex david` returns `Alex Yeoh`, `David Li`.
+<br></br>
 
   ![result for 'find_contact alex david'](images/findAlexDavidResult.png)
 
@@ -263,7 +266,7 @@ Adds a tag with the specified name to JobFestGo.
 Format: `add_tag t/TAG_NAME`
 
 * The tag name **must not already exist** in JobFestGo.
-* The tag name must be alphanumeric, i.e, should consist only of alphabets and numbers, and no other characters.
+* The tag name must be strictly alphanumeric. No other characters (including whitespace) are allowed.
 
 Examples:
 * `add_tag t/vendors`
@@ -286,7 +289,7 @@ Deletes the specified tag name from JobFestGo.
 
 <box type="warning" style="background-color: #C73852; color: white;">
 
-**WARNING**: This command is destructive. Once a tag is deleted, no contacts can be associated with the tag name.
+**WARNING:** This command is destructive. Once a tag is deleted, no contacts can be associated with the tag name.
 </box>
 
 Format: `delete_tag t/TAG_NAME`
@@ -305,13 +308,13 @@ Displays contacts tagged by any of the specified tags.
 
 <box type="warning" style="background-color: #C73852; color: white">
 
-**WARNING**:
+**WARNING:**
 This command is cumulative. The contacts found will be based on the list that is currently displayed.
 
 Imagine we have a contact `Hans` in JobFestGo who is tagged by `vendor`.
 If you have selected a particular event and this event is not linked to `Hans`, `filter_by_tags vendor` will not display `Hans` in the result.
 
-Repeatedly using this command will result in the list being successively filtered.
+Repeatedly using this command will result in the list being successively filtered. The examples below illustrate this.
 </box>
 
 Format: `filter_by_tag TAG_NAME [MORE_TAG_NAMES]`
@@ -337,8 +340,10 @@ Adds an event to JobFestGo.
 
 Format: `add_event n/NAME d/DATE a/ADDRESS`
 
-* Event name can take any alphanumeric values only.
+* Event name can only take alphanumeric values.
 * The event name **must not already exist** in JobFestGo.
+* Event name and address should not have more than one whitespace in-between each word.
+* If the event name is very long and cannot be viewed fully, enter `view_events` to see the full text.
 * Date must be valid and should be in the appropriate (YYYY-MM-DD) format.
 * Date should **not** be before the current date.
 * Past the date of the event, the event will be labelled as completed next to its name in event list.
@@ -366,7 +371,7 @@ Deletes the event specified at the index from JobFestGo.
 
 <box type="warning" style="background-color: #C73852; color: white;">
 
-**WARNING**: This command is destructive. Once an event is deleted, all tasks associated with the event will be deleted.
+**WARNING:** This command is destructive. Once an event is deleted, all tasks associated with the event will be deleted.
 </box>
 
 Format: `delete_event INDEX`
@@ -386,6 +391,7 @@ Links specified contacts to the specified event.
 
 Format: `link ev/EVENT_NAME c/CONTACT_NAME [c/MORE_CONTACT_NAMES]`
 
+* Event name and contact name should not have more than one whitespace in-between each word.
 * Only existing contacts and events in JobFestGo can be linked.
 * Contacts that are already linked to the specified event cannot be linked again.
 * Only full words will be matched e.g. `NUS Career Fest` will not match `NUS Career Fest 2023`,
@@ -393,12 +399,7 @@ Format: `link ev/EVENT_NAME c/CONTACT_NAME [c/MORE_CONTACT_NAMES]`
 * The order of the input does not matter. e.g. `link ev/NUS Career Fest c/Alice Black`
  and `link c/Alice Black ev/NUS Career Fest` are both valid commands and will perform
  the same task.
-* If there are invalid contacts in the input (e.g. non-existent contacts,
- contacts that are already linked to the specified event), the contacts entered
- before the first invalid contact will be linked while those after will not be linked.
- e.g. if `John Doe` is an invalid contact, `link ev/NUS Career Fest c/Alice Black
- c/John Doe c/Bob Dylan` will link `Alice Black` to the event `NUS Career Fest` while
-  `John Doe` and `Bob Dylan` will not be linked.
+* The command will only succeed if all contacts and events keyed in are valid and are existing contacts and events in JobFestGo.
 
 Examples:
 * `link ev/NUS Career Fest c/Alice Black` links `Alice Black` to the event `NUS Career Fest` if `Alice Black` is not linked to `NUS Career Fest`.
@@ -411,6 +412,7 @@ Unlinks specified contacts from the specified event.
 
 Format: `unlink ev/EVENT_NAME c/CONTACT_NAME [c/MORE_CONTACT_NAMES]`
 
+* Event name and contact name should not have more than one whitespace in-between each word.
 * It functions similarly to `link` except for the fact that the input contacts and event for `unlink`
  must be currently linked. Otherwise, an error will be raised.
 
@@ -442,7 +444,8 @@ Adds a task to an event in JobFestGo.
 
 Format: `add_task td/TASK_DESCRIPTION d/DEADLINE ev/EVENT_NAME`
 
-* Task Description can take any alphanumeric value, spaces and any of the following characters: -,./()
+* Task Description can take any alphanumeric value, spaces and any of the following characters: `-`, `,`, `.`, `/`, `(`, `)`
+* Task Description and Event Name should not have more than one whitespace in-between each word.
 * Deadline is a date in the format YYYY-MM-DD.
 * Deadline should not be before today's date.
 * Event name should be the **name of an already existing event**.
@@ -460,12 +463,13 @@ Deletes the task specified by the task description from its associated event in 
 
 <box type="warning" style="background-color: #C73852; color: white">
 
-**WARNING**: This command is destructive. Once a task is deleted, it cannot be recovered.
+**WARNING:** This command is destructive. Once a task is deleted, it cannot be recovered.
 </box>
 
 Format: `delete_task td/TASK_DESCRIPTION ev/EVENT_NAME`
 
 * Deletes the task specified by the `TASK_DESCRIPTION` from the event specified by the `EVENT_NAME` of JobFestGo.
+* Task description and event name should not have more than one whitespace in-between each word.
 * Both the `TASK_DESCRIPTION` and the `EVENT_NAME` are case-insensitive.
  e.g. `delete_task td/Book Venue ev/NUS Career Fair 2023` and `delete_task td/book venue ev/nus Career FAIR 2023`
  will perform the same operation.
@@ -484,12 +488,13 @@ Marks the task specified by the task description and its associated event name i
 Format: `mark_task td/TASK_DESCRIPTION ev/EVENT_NAME`
 
 * Marks the task specified by the `TASK_DESCRIPTION` from the event specified by the `EVENT_NAME` of JobFestGo as completed.
- A label indicating the status of the task will be shown next to its description in the task list.
+* Task description and event name should not have more than one whitespace in-between each word.
+* A label indicating the status of the task will be shown next to its description in the task list.
 * Both the `TASK_DESCRIPTION` and the `EVENT_NAME` are case-insensitive.
   e.g. `mark_task td/Book Venue ev/NUS Career Fair 2023` and `mark_task td/book venue ev/nus Career FAIR 2023`
   will perform the same operation.
 * Errors will be raised if the specified event does not exist or the event does not have the specified task.
-  If such situation happens, you may double-check the task description and the event name and re-enter valid inputs.
+  If such a situation happens, you may double-check the task description and the event name and re-enter valid inputs.
 * Errors will also be raised if the specified task has already been marked as completed.
 
 Examples:
@@ -505,6 +510,7 @@ Marks the task specified by the task description and its associated event name i
 
 Format: `unmark_task td/TASK_DESCRIPTION ev/EVENT_NAME`
 
+* Task Description and Event Name should not have more than one whitespace in-between each word.
 * It works exactly the same way as `mark_task` except for the fact that `unmark_task` marks a completed task as not completed.
 * You may `unmark_task` a task when you realize that you have not completed the task but have wrongly marked it as completed.
 * Errors will be raised if the specified task has already been unmarked.
@@ -515,8 +521,8 @@ Examples:
 ### Viewing help : `help`
 <box type="info" style="background-color:#1e90ff; color: white;">
 <span slot="icon" style="color: white;"><md>:fas-address-book:</md></span>
-Shows a link to the user guide which will contain all the details required to use the app appropriately. You can click on the 'Copy URL' button and paste
-the URL into your browser's address bar.
+Shows a link to the user guide which will contain all the details required to use the app appropriately.
+You can click on the 'Copy URL' button and paste the URL into your browser's address bar.
 </box>
 
 ![help message](images/helpMessage.png)
@@ -531,7 +537,7 @@ Clears all entries from JobFestGo.
 
 <box type="warning" style="background-color: #C73852; color: white">
 
-**WARNING**
+**WARNING:**
 This command will delete all contacts, events and tasks from JobFestGo.
 This command cannot be undone. Proceed with caution.
 </box>
