@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.contact.TypicalContacts.*;
 import static seedu.address.testutil.event.TypicalEvents.JOBFEST;
 import static seedu.address.testutil.event.TypicalEvents.NTU;
 
@@ -166,10 +167,27 @@ public class UniqueEventListTest {
     }
 
     @Test
+    public void updateContacts_contactInList_removesContact() {
+        uniqueEventList.add(JOBFEST);
+        uniqueEventList.updateContacts(ALICE);
+        Event expectedEvent = new EventBuilder(JOBFEST).withEventContacts(BOB).build();
+        assertEquals(expectedEvent, uniqueEventList.getByName(JOBFEST.getName()));
+    }
+
+    @Test
+    public void updateContacts_contactNotInList_doesNotRemoveContact() {
+        uniqueEventList.add(JOBFEST);
+        uniqueEventList.updateContacts(CARL);
+        Event expectedEvent = new EventBuilder(JOBFEST).build();
+        assertEquals(expectedEvent, uniqueEventList.getByName(JOBFEST.getName()));
+    }
+
+    @Test
     public void asUnmodifiableObservableList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, ()
                 -> uniqueEventList.asUnmodifiableObservableList().remove(0));
     }
+
 
     @Test
     public void iterator_iteration_success() {

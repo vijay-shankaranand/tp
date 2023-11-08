@@ -73,6 +73,7 @@ public class LinkCommandTest {
         assertEquals(expectedEvent, model.getEvent(JOBFEST.getName()));
     }
 
+
     @Test
     public void execute_mixedValidAndInvalidContacts_throwsCommandException() {
         model.addEvent(JOBFEST);
