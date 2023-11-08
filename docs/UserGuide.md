@@ -1,7 +1,7 @@
 ---
   layout: default.md
   title: "User Guide"
-
+  pageNav: 3
 ---
 
 # User Guide
@@ -165,9 +165,10 @@ Format: `add_contact n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
 Examples:
 * `add_contact n/John Doe p/98765432 e/johndtr@example.com a/John street, block 123, #01-01`
-* `add_contact n/Johnny t/suppliers e/johnd@example.com a/311, Clementi Ave 2, #02-25 p/98765435`<br><br>
+* `add_contact n/Johnny t/suppliers e/johnd@example.com a/311, Clementi Ave 2, #02-25 p/98765435`
 
-  ![result for 'add_contact'](images/addContactResult.png)
+
+![result for 'add_contact'](images/addContactResult.png)
 
 ### Listing all contacts : `view_contacts`
 <box type="info" style="background-color:#1e90ff; color: white;">
@@ -252,10 +253,10 @@ Format: `find_contact KEYWORD [MORE_KEYWORDS]`
 Examples:
 * `find_contact John` returns `john` and `John Doe`.
 * `find_contact doe` after `find_contact john` will return `John Doe` and not `john` who was originally in the result.
-* `find_contact alex david` returns `Alex Yeoh`, `David Li`.
-<br></br>
+* `find_contact alex david` returns `Alex Yeoh`, `David Li`
 
-  ![result for 'find_contact alex david'](images/findAlexDavidResult.png)
+
+![result for 'find_contact alex david'](images/findAlexDavidResult.png)
 
 ### Adding a tag : `add_tag`
 <box type="info" style="background-color:#1e90ff; color: white;">
@@ -330,7 +331,8 @@ Examples:
 * `filter_by_tag vendors customers` returns all contacts tagged by the tag: `vendors` and
   all contacts tagged by the tag: `customers` in JobFestGo. The image below illustrates the result of this command.
 
-    ![result for 'filter_by_tag vendors customers'](images/filterByRoleResult.png)
+
+![result for 'filter_by_tag vendors customers'](images/filterByRoleResult.png)
 
 ### Adding an event : `add_event`
 <box type="info" style="background-color:#1e90ff; color: white;">
@@ -605,6 +607,7 @@ can download it [here](https://www.oracle.com/java/technologies/downloads/#java1
 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+**Home**   | `home`
 **Add Contact**    | `add_contact n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g. `add_contact n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 12346658 t/client t/vendor`
 **Delete Contact** | `delete_contact INDEX`<br> e.g. `delete_contact 3`
 **Edit Contact**   | `edit_contact INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g. `edit_contact 2 n/James Lee e/jameslee@example.com`
@@ -626,4 +629,3 @@ Action     | Format, Examples
 **Unmark Task** | `unmark_task td/TASK_DESCRIPTION ev/EVENT_NAME` <br> e.g. `unmark_task td/Book Venue ev/NUS Career Fair 2023`
 **Clear**  | `clear`
 **Help**   | `help`
-**Home**   | `home`
