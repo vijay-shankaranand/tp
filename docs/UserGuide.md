@@ -247,8 +247,8 @@ Format: `find_contact KEYWORD [MORE_KEYWORDS]`
 
 Examples:
 * `find_contact John` returns `john` and `John Doe`.
-* `find_contact alex david` returns `Alex Yeoh`, `David Li`.
 * `find_contact doe` after `find_contact john` will return `John Doe` and not `john` who was originally in the result.
+* `find_contact alex david` returns `Alex Yeoh`, `David Li`.
 
   ![result for 'find_contact alex david'](images/findAlexDavidResult.png)
 
