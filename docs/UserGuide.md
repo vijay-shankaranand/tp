@@ -1,7 +1,7 @@
 ---
   layout: default.md
   title: "User Guide"
-
+  pageNav: 3
 ---
 
 # User Guide
@@ -97,6 +97,7 @@ Optimized for use via a **Command Line Interface (CLI)** while still having the 
 6. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## Navigating the GUI
 
@@ -108,6 +109,7 @@ JobFestGo comes with a GUI (Graphical User Interface) that is designed to be int
 
 **PLEASE NOTE:** If there is an ellipsis (...) at the end of a text field in any section of JobFestGo, please extend the window fully so the full text can be seen.
 </box>
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Features
@@ -165,9 +167,12 @@ Format: `add_contact n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
 Examples:
 * `add_contact n/John Doe p/98765432 e/johndtr@example.com a/John street, block 123, #01-01`
-* `add_contact n/Johnny t/suppliers e/johnd@example.com a/311, Clementi Ave 2, #02-25 p/98765435`<br><br>
+* `add_contact n/Johnny t/suppliers e/johnd@example.com a/311, Clementi Ave 2, #02-25 p/98765435`
 
-  ![result for 'add_contact'](images/addContactResult.png)
+
+![result for 'add_contact'](images/addContactResult.png)
+
+<div style="page-break-after: always;"></div>
 
 ### Listing all contacts : `view_contacts`
 <box type="info" style="background-color:#1e90ff; color: white;">
@@ -178,6 +183,8 @@ Displays a list of all contacts in JobFestGo.
 Format: `view_contacts`
 
   ![result for 'view_contacts'](images/viewContactsResults.png)
+
+<div style="page-break-after: always;"></div>
 
 ### Deleting a contact : `delete_contact`
 <box type="info" style="background-color:#1e90ff; color: white;">
@@ -252,10 +259,10 @@ Format: `find_contact KEYWORD [MORE_KEYWORDS]`
 Examples:
 * `find_contact John` returns `john` and `John Doe`.
 * `find_contact doe` after `find_contact john` will return `John Doe` and not `john` who was originally in the result.
-* `find_contact alex david` returns `Alex Yeoh`, `David Li`.
-<br></br>
+* `find_contact alex david` returns `Alex Yeoh`, `David Li`
 
-  ![result for 'find_contact alex david'](images/findAlexDavidResult.png)
+
+![result for 'find_contact alex david'](images/findAlexDavidResult.png)
 
 ### Adding a tag : `add_tag`
 <box type="info" style="background-color:#1e90ff; color: white;">
@@ -271,6 +278,8 @@ Format: `add_tag t/TAG_NAME`
 Examples:
 * `add_tag t/vendors`
 
+<div style="page-break-after: always;"></div>
+
 ### Viewing all tags : `view_tags`
 <box type="info" style="background-color:#1e90ff; color: white;">
 <span slot="icon" style="color: white;"><md>:fas-address-book:</md></span>
@@ -280,6 +289,8 @@ Views all existing tags that have been created by the user.
 Format: `view_tags`
 
   ![result for 'view_tags'](images/viewTagsResult.png)
+
+<div style="page-break-after: always;"></div>
 
 ### Deleting a tag : `delete_tag`
 <box type="info" style="background-color:#1e90ff; color: white;">
@@ -330,7 +341,8 @@ Examples:
 * `filter_by_tag vendors customers` returns all contacts tagged by the tag: `vendors` and
   all contacts tagged by the tag: `customers` in JobFestGo. The image below illustrates the result of this command.
 
-    ![result for 'filter_by_tag vendors customers'](images/filterByRoleResult.png)
+
+![result for 'filter_by_tag vendors customers'](images/filterByRoleResult.png)
 
 ### Adding an event : `add_event`
 <box type="info" style="background-color:#1e90ff; color: white;">
@@ -362,6 +374,8 @@ Displays a list of all existing events.
 Format: `view_events`
 
 ![result for 'view_events'](images/viewEventsResult.png)
+
+<div style="page-break-after: always;"></div>
 
 ### Deleting an event : `delete_event`
 <box type="info" style="background-color:#1e90ff; color: white;">
@@ -403,6 +417,8 @@ Format: `link ev/EVENT_NAME c/CONTACT_NAME [c/MORE_CONTACT_NAMES]`
 
 Examples:
 * `link ev/NUS Career Fest c/Alice Black` links `Alice Black` to the event `NUS Career Fest` if `Alice Black` is not linked to `NUS Career Fest`.
+
+<div style="page-break-after: always;"></div>
 
 ### Unlinking contacts from an event: `unlink`
 <box type="info" style="background-color:#1e90ff; color: white;">
@@ -605,6 +621,7 @@ can download it [here](https://www.oracle.com/java/technologies/downloads/#java1
 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+**Home**   | `home`
 **Add Contact**    | `add_contact n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g. `add_contact n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 12346658 t/client t/vendor`
 **Delete Contact** | `delete_contact INDEX`<br> e.g. `delete_contact 3`
 **Edit Contact**   | `edit_contact INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g. `edit_contact 2 n/James Lee e/jameslee@example.com`
@@ -626,4 +643,3 @@ Action     | Format, Examples
 **Unmark Task** | `unmark_task td/TASK_DESCRIPTION ev/EVENT_NAME` <br> e.g. `unmark_task td/Book Venue ev/NUS Career Fair 2023`
 **Clear**  | `clear`
 **Help**   | `help`
-**Home**   | `home`
