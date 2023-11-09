@@ -75,7 +75,7 @@ public class CommandResultTest {
     }
 
     @Test
-    public void getSelectedEvent_returnsTrue() {
+    public void getSelectedEvent() {
         CommandResult commandResult = new CommandResult("feedback", NTU, false);
         assertEquals(commandResult.getSelectedEvent(), NTU);
 
@@ -85,7 +85,7 @@ public class CommandResultTest {
     }
 
     @Test
-    public void isDeleteEvent_returnsTrue() {
+    public void isDeleteEvent() {
         CommandResult commandResult1 = new CommandResult("feedback", NTU, false);
         assertFalse(commandResult1.isDeleteEvent());
 
@@ -94,16 +94,18 @@ public class CommandResultTest {
     }
 
     @Test
-    public void shouldDisplayContactsPanel_returnsTrue() {
-        CommandResult commandResult = new CommandResult("feedback");
-        assertFalse(commandResult.shouldDisplayContactsPanel());
-
+    public void shouldDisplayContactsPanel_correctFeedbackToUser_returnsTrue() {
         CommandResult viewContactCommandResult = new CommandResult(ViewContactsCommand.MESSAGE_SUCCESS);
         assertTrue(viewContactCommandResult.shouldDisplayContactsPanel());
     }
+    @Test
+    public void shouldDisplayContactsPanel_wrongFeedbackToUser_returnsFalse() {
+        CommandResult commandResult = new CommandResult("feedback");
+        assertFalse(commandResult.shouldDisplayContactsPanel());
+    }
 
     @Test
-    public void shouldHideAllPanels_returnsTrue() {
+    public void shouldHideAllPanels() {
         CommandResult commandResult = new CommandResult("feedback");
         assertTrue(commandResult.shouldHideAllPanels());
 
@@ -118,21 +120,25 @@ public class CommandResultTest {
     }
 
     @Test
-    public void shouldReturnToHome_returnsTrue() {
+    public void shouldReturnToHome() {
         // no selected event and not home command -> returns false
         CommandResult commandResult = new CommandResult("feedback");
         assertFalse(commandResult.shouldReturnToHome());
 
+        // home command -> returns true
         CommandResult homeCommandResult = new CommandResult(HomeCommand.MESSAGE_SUCCESS);
         assertTrue(homeCommandResult.shouldReturnToHome());
 
+        // selected event but not deleted event -> returns false
         CommandResult commandResultWithSelectedEvent1 = new CommandResult("feedback", NTU, false);
         assertFalse(commandResultWithSelectedEvent1.shouldReturnToHome());
 
+        // incorrect delete event success message -> returns false
         CommandResult commandResultWithSelectedEvent2 = new CommandResult(
                 DeleteEventCommand.MESSAGE_DELETE_EVENT_SUCCESS, NTU, false);
         assertFalse(commandResultWithSelectedEvent2.shouldReturnToHome());
 
+        // correct delete event success message -> returns true
         String correctedDeletedEventSuccessMsg = String.format(DeleteEventCommand.MESSAGE_DELETE_EVENT_SUCCESS,
                 Messages.format(NTU));
         CommandResult commandResultWithCorrectedMsg = new CommandResult(

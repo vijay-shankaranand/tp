@@ -89,24 +89,24 @@ public class FilterByTagCommandTest {
         ContactIsTaggedPredicate secondPredicate =
                 new ContactIsTaggedPredicate(secondTagList);
 
-        FilterByTagCommand firstFilterCommand = new FilterByTagCommand(firstTagList, firstPredicate);
-        FilterByTagCommand secondFilterCommand = new FilterByTagCommand(secondTagList, secondPredicate);
+        FilterByTagCommand firstFilterByTagCommand = new FilterByTagCommand(firstTagList, firstPredicate);
+        FilterByTagCommand secondFilterByTagCommand = new FilterByTagCommand(secondTagList, secondPredicate);
 
         // same object -> returns true
-        assertTrue(firstFilterCommand.equals(firstFilterCommand));
+        assertTrue(firstFilterByTagCommand.equals(firstFilterByTagCommand));
 
         // same values -> returns true
         FilterByTagCommand firstFilterCommandCopy = new FilterByTagCommand(firstTagList, firstPredicate);
-        assertTrue(firstFilterCommand.equals(firstFilterCommandCopy));
+        assertTrue(firstFilterByTagCommand.equals(firstFilterCommandCopy));
 
         // different types -> returns false
-        assertFalse(firstFilterCommand.equals(1));
+        assertFalse(firstFilterByTagCommand.equals(1));
 
         // null -> returns false
-        assertFalse(firstFilterCommand.equals(null));
+        assertFalse(firstFilterByTagCommand.equals(null));
 
         // different contact -> returns false
-        assertFalse(firstFilterCommand.equals(secondFilterCommand));
+        assertFalse(firstFilterByTagCommand.equals(secondFilterByTagCommand));
     }
 
     @Test
