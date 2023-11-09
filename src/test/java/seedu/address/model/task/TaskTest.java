@@ -27,6 +27,9 @@ public class TaskTest {
 
         Task completedTask = new TaskBuilder().withDate("2020-01-01").withIsCompleted(true).build();
         assertFalse(completedTask.isOverdue());
+
+        Task notCompletedTask2 = new TaskBuilder().withDate("2020-01-01").withIsCompleted(false).build();
+        assertTrue(notCompletedTask2.isOverdue());
     }
 
     @Test
