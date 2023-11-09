@@ -260,25 +260,37 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseTaskDescriptions_null_throwsNullPointerException() {
+    public void parseTaskDescription_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> ParserUtil.parseTaskDescription(null));
     }
 
     @Test
-    public void parseTaskDescriptions_invalidValue_throwsParseException() {
+    public void parseTaskDescription_invalidValue_throwsParseException() {
         assertThrows(ParseException.class, () -> ParserUtil.parseTaskDescription(""));
+        assertThrows(ParseException.class, () -> ParserUtil.parseTaskDescription("Task?"));
+        assertThrows(ParseException.class, () -> ParserUtil.parseTaskDescription("(?)"));
     }
 
     @Test
-    public void parseTaskDescriptions_validValueWithoutWhitespace_returnsTaskDescription() throws Exception {
+    public void parseTaskDescription_validValueWithoutWhitespace_returnsTaskDescription() throws Exception {
         TaskDescription expectedTaskDescription = new TaskDescription("test");
         assertEquals(expectedTaskDescription, ParserUtil.parseTaskDescription("test"));
     }
 
     @Test
-    public void parseTaskDescriptions_validValueWithWhitespace_returnsTrimmedTaskDescription() throws Exception {
+    public void parseTaskDescription_validValueWithWhitespace_returnsTrimmedTaskDescription() throws Exception {
         String taskDescriptionWithWhitespace = WHITESPACE + "test" + WHITESPACE;
         TaskDescription expectedTaskDescription = new TaskDescription("test");
         assertEquals(expectedTaskDescription, ParserUtil.parseTaskDescription(taskDescriptionWithWhitespace));
+    }
+
+    @Test
+    public void parseTaskDescription_validValueWithMoreThanOneWhitespace_throwsParseException() {
+        String taskDescriptionWithMoreThanOneWhitespace = "test  1";
+        String expectedErrorMsg = String.format(MESSAGE_CONTAINS_MORE_THAN_ONE_WHITE_SPACE, "Task Description");
+
+        assertThrows(ParseException.class, expectedErrorMsg, () -> {
+            ParserUtil.parseTaskDescription(taskDescriptionWithMoreThanOneWhitespace);
+        });
     }
 }
