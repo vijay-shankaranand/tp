@@ -14,7 +14,10 @@ import seedu.address.commons.core.GuiSettings;
 public class UserPrefs implements ReadOnlyUserPrefs {
 
     private GuiSettings guiSettings = new GuiSettings();
-    private Path addressBookFilePath = Paths.get("data" , "addressbook.json");
+    private Path jobFestGoFilePath = Paths.get("data" , "jobfestgo.json");
+    private Path tagListFilePath = Paths.get("data", "taglist.json");
+    private Path eventListFilePath = Paths.get("data", "eventlist.json");
+    private Path taskListFilePath = Paths.get("data", "taskList.json");
 
     /**
      * Creates a {@code UserPrefs} with default values.
@@ -35,7 +38,10 @@ public class UserPrefs implements ReadOnlyUserPrefs {
     public void resetData(ReadOnlyUserPrefs newUserPrefs) {
         requireNonNull(newUserPrefs);
         setGuiSettings(newUserPrefs.getGuiSettings());
-        setAddressBookFilePath(newUserPrefs.getAddressBookFilePath());
+        setJobFestGoFilePath(newUserPrefs.getJobFestGoFilePath());
+        setTagListFilePath(newUserPrefs.getTagListFilePath());
+        setEventListFilePath(newUserPrefs.getEventListFilePath());
+        setTaskListFilePath(newUserPrefs.getTaskListFilePath());
     }
 
     public GuiSettings getGuiSettings() {
@@ -47,13 +53,38 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         this.guiSettings = guiSettings;
     }
 
-    public Path getAddressBookFilePath() {
-        return addressBookFilePath;
+    public Path getJobFestGoFilePath() {
+        return jobFestGoFilePath;
     }
 
-    public void setAddressBookFilePath(Path addressBookFilePath) {
-        requireNonNull(addressBookFilePath);
-        this.addressBookFilePath = addressBookFilePath;
+    public void setJobFestGoFilePath(Path jobFestGoFilePath) {
+        requireNonNull(jobFestGoFilePath);
+        this.jobFestGoFilePath = jobFestGoFilePath;
+    }
+
+    public Path getTagListFilePath() {
+        return tagListFilePath;
+    }
+
+    public void setTagListFilePath(Path tagListFilePath) {
+        requireNonNull(tagListFilePath);
+        this.tagListFilePath = tagListFilePath;
+    }
+
+    public Path getEventListFilePath() {
+        return eventListFilePath;
+    }
+
+    public void setEventListFilePath(Path eventListFilePath) {
+        requireNonNull(eventListFilePath);
+        this.eventListFilePath = eventListFilePath;
+    }
+    public Path getTaskListFilePath() {
+        return taskListFilePath;
+    }
+    public void setTaskListFilePath(Path taskListFilePath) {
+        requireNonNull(taskListFilePath);
+        this.taskListFilePath = taskListFilePath;
     }
 
     @Override
@@ -69,19 +100,23 @@ public class UserPrefs implements ReadOnlyUserPrefs {
 
         UserPrefs otherUserPrefs = (UserPrefs) other;
         return guiSettings.equals(otherUserPrefs.guiSettings)
-                && addressBookFilePath.equals(otherUserPrefs.addressBookFilePath);
+                && jobFestGoFilePath.equals(otherUserPrefs.jobFestGoFilePath)
+                && tagListFilePath.equals(otherUserPrefs.tagListFilePath)
+                && eventListFilePath.equals(otherUserPrefs.eventListFilePath);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(guiSettings, addressBookFilePath);
+        return Objects.hash(guiSettings, jobFestGoFilePath, tagListFilePath, eventListFilePath);
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("Gui Settings : " + guiSettings);
-        sb.append("\nLocal data file location : " + addressBookFilePath);
+        sb.append("\nLocal jobfestgo data file location : " + jobFestGoFilePath);
+        sb.append("\nLocal tag list file location : " + tagListFilePath);
+        sb.append("\nLocal event list file location : " + eventListFilePath);
         return sb.toString();
     }
 

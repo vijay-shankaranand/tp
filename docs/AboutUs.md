@@ -11,51 +11,51 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Khaleelur Rahman
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/khaleelur-rahman.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/Khaleelur-Rahman)]
+[[portfolio](team/khaleelur-rahman.md)]
 
-* Role: Project Advisor
+* Role: ?
+* Responsibilities: ?
 
-### Jane Doe
+### Tong Xinyao
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/xyt-t.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/xyT-T)] [[portfolio](team/xyt-t.md)]
 
-* Role: Team Lead
-* Responsibilities: UI
+* Role: ?
+* Responsibilities: ?
 
-### Johnny Doe
+### Jaryl Goh Jun Zhong
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/rionshocker.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/rionshocker)]
+[[portfolio](team/rionshocker.md)]
 
-* Role: Developer
-* Responsibilities: Data
+* Role: ?
+* Responsibilities: ?
 
-### Jean Doe
+### Shankar Anand
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/vijay-shankaranand.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/vijay-shankaranand)]
+[[portfolio](team/vijay-shankaranand.md)]
 
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Role: UI Expert
+* Responsibilities: Scheduling and tracking, UI
 
-### James Doe
+### Choo Tze Jie
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/tjch-o.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/tjch-o)]
+[[portfolio](team/tjch-o.md)]
 
-* Role: Developer
-* Responsibilities: UI
+* Role: ?
+* Responsibilities: ?

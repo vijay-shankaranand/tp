@@ -11,8 +11,15 @@ Class UiManager
 Class MainWindow
 Class HelpWindow
 Class ResultDisplay
-Class PersonListPanel
-Class PersonCard
+Class EventContactDisplay
+Class ContactListPanel
+Class ContactCard
+Class TagListPanel
+Class TagCard
+Class EventListPanel
+Class EventCard
+Class TaskListPanel
+Class TaskCard
 Class StatusBarFooter
 Class CommandBox
 }
@@ -32,26 +39,43 @@ UiManager .left.|> Ui
 UiManager -down-> "1" MainWindow
 MainWindow *-down->  "1" CommandBox
 MainWindow *-down-> "1" ResultDisplay
-MainWindow *-down-> "1" PersonListPanel
+MainWindow *-down-> "1" EventContactDisplay
+MainWindow *-down-> "1" ContactListPanel
 MainWindow *-down-> "1" StatusBarFooter
+MainWindow *-down-> "1" TagListPanel
+MainWindow *-down-> "1" EventListPanel
 MainWindow --> "0..1" HelpWindow
 
-PersonListPanel -down-> "*" PersonCard
+EventContactDisplay -down-> "1" ContactListPanel
+EventContactDisplay -down-> "1" EventListPanel
+EventContactDisplay -down-> "1" TaskListPanel
+
+ContactListPanel -down-> "*" ContactCard
+TagListPanel -down-> "*" TagCard
+EventListPanel -down-> "*" EventCard
+TaskListPanel -down-> "*" TaskCard
 
 MainWindow -left-|> UiPart
 
 ResultDisplay --|> UiPart
+EventContactDisplay --|> UiPart
 CommandBox --|> UiPart
-PersonListPanel --|> UiPart
-PersonCard --|> UiPart
+ContactListPanel --|> UiPart
+ContactCard --|> UiPart
+TagListPanel --|> UiPart
+EventListPanel --|> UiPart
+TaskListPanel --|> UiPart
 StatusBarFooter --|> UiPart
 HelpWindow --|> UiPart
 
-PersonCard ..> Model
+ContactCard ..> Model
+TagCard ..> Model
+EventCard ..> Model
+TaskCard ..> Model
 UiManager -right-> Logic
 MainWindow -left-> Logic
 
-PersonListPanel -[hidden]left- HelpWindow
+ContactListPanel -[hidden]left- HelpWindow
 HelpWindow -[hidden]left- CommandBox
 CommandBox -[hidden]left- ResultDisplay
 ResultDisplay -[hidden]left- StatusBarFooter

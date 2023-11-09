@@ -11,6 +11,11 @@ public interface ReadOnlyUserPrefs {
 
     GuiSettings getGuiSettings();
 
-    Path getAddressBookFilePath();
+    Path getJobFestGoFilePath();
+
+    Path getTagListFilePath();
+
+    Path getEventListFilePath();
+    Path getTaskListFilePath();
 
 }
