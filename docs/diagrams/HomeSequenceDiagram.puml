@@ -43,11 +43,9 @@ Model --> HomeCommand
 
 deactivate Model
 
-HomeCommand --> JobFestGoParser
+HomeCommand --> LogicManager
 deactivate HomeCommand
-
-JobFestGoParser --> LogicManager
-deactivate JobFestGoParser
+destroy HomeCommand
 
 [<--LogicManager
 deactivate LogicManager
