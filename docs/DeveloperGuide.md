@@ -71,7 +71,7 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/se-
 
 <puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `ContactListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `EventContactDisplay`,`ContactListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 
@@ -102,7 +102,7 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 How the `Logic` component works:
 
 1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
-1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
+1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteContactCommand`) which is executed by the `LogicManager`.
 1. The command can communicate with the `Model` when it is executed (e.g. to delete a contact).
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
@@ -158,6 +158,21 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 This section describes some noteworthy details on how certain features are implemented.
 
 ### Return to home page feature
+
+The home mechanism is facilitated by `JobFestGo` as well as its observable lists for `Contact`, `Event`, as well as `Task`.
+
+The mechanism interacts with both the UI and the lists stored within `JobFestGo`, particularly `unfilteredContacts`, `unfilteredEvents`, and `filteredTasks`.
+
+Given below is an example usage scenario and how the home mechanism behaves at each step.
+
+**Step 1.** The user has input any other command that is not `home`.
+
+**Step 2.** The user executes `home` command to return to the home page. 
+The `home` command calls upon the creation of `TaskInReminderPredicate` while using `PREDICATE_SHOW_ALL_CONTACTS` and `PREDICATE_SHOW_ALL_EVENTS` to update the respective filtered lists.
+
+The following sequence diagram shows how the select event operation works:
+
+<puml src="diagrams/HomeSequenceDiagram.puml" alt="HomeSequenceDiagram" />
 
 The following activity diagram summarizes what happens when a user executes the home command:
 
