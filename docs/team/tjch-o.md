@@ -12,7 +12,6 @@ Given below are my contributions to the project.
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=tjch-o&breakdown=true&sort=groupTitle%20dsc&sortWithin=title&since=2023-09-22&timeframe=commit&mergegroup=&groupSelect=groupByRepos&checkedFileTypes=docs~functional-code~test-code~other)
 
 * **Enhancements implemented**:
-  
   I created 3 new commands to improve user experience.
 
   The first command is the `view_tags` command which displays a list of all existing tags. 
@@ -22,7 +21,6 @@ Given below are my contributions to the project.
   The last command is the `home` command which allows the user to return to the home page from the current screen.
 
 * **Contributions to the UG**:
-
   I have contributed to the sections related to the commands I have created, where I mainly explained how to use the commands. 
 
   I have played a key role in reviewing the user guide, ensuring its logical flow to eliminate potential confusion among users. 
@@ -37,7 +35,6 @@ Given below are my contributions to the project.
   - Added the implementation of the home feature and supplemented the explanation with UML diagrams
 
 * **Contributions to team-based tasks**:
-  
   - Updated the app icon
 
   - Updated the codebase as well as the DG and UG and renamed all methods and variables that previously contained `Person` in their name into `Contact`
@@ -45,7 +42,6 @@ Given below are my contributions to the project.
   - Voluntarily contributed in writing additional test cases for code that I have not authored to ensure more comprehensive test coverage
 
 * **Review/mentoring contributions**:
-  
   I have regularly helped to review the PRs of my team members, helping to flag errors in their code and suggest improvements. This ensures that code quality is maintained and that any new feature introduced will be free of major bugs that could break our application.
 
   Here are some of the numerous PRs I have reviewed:
@@ -58,7 +54,6 @@ Given below are my contributions to the project.
 
 
 * **Contributions beyond the project team**:
-  
   I have assisted in finding multiple bugs for the products of other teams.
 
   Here are some of the bugs I have found while doing extensive testing:

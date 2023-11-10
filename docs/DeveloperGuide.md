@@ -167,7 +167,7 @@ Given below is an example usage scenario and how the home mechanism behaves at e
 
 **Step 1.** The user has input any other command that is not `home`.
 
-**Step 2.** The user executes `home` command to return to the home page. 
+**Step 2.** The user executes `home` command to return to the home page.
 The `home` command calls upon the creation of `TaskInReminderPredicate` while using `PREDICATE_SHOW_ALL_CONTACTS` and `PREDICATE_SHOW_ALL_EVENTS` to update the respective filtered lists.
 
 The following sequence diagram shows how the select event operation works:
