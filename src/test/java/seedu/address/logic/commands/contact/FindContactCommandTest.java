@@ -34,29 +34,28 @@ public class FindContactCommandTest {
         NameContainsKeywordsPredicate secondPredicate =
                 new NameContainsKeywordsPredicate(Collections.singletonList("second"));
 
-        FindContactCommand findFirstCommand = new FindContactCommand(firstPredicate);
-        FindContactCommand findSecondCommand = new FindContactCommand(secondPredicate);
+        FindContactCommand findContactFirstCommand = new FindContactCommand(firstPredicate);
+        FindContactCommand findContactSecondCommand = new FindContactCommand(secondPredicate);
 
         // same object -> returns true
-        assertTrue(findFirstCommand.equals(findFirstCommand));
+        assertTrue(findContactFirstCommand.equals(findContactFirstCommand));
 
         // same values -> returns true
         FindContactCommand findFirstCommandCopy = new FindContactCommand(firstPredicate);
-        assertTrue(findFirstCommand.equals(findFirstCommandCopy));
+        assertTrue(findContactFirstCommand.equals(findFirstCommandCopy));
 
         // different types -> returns false
-        assertFalse(findFirstCommand.equals(1));
+        assertFalse(findContactFirstCommand.equals(1));
 
         // null -> returns false
-        assertFalse(findFirstCommand.equals(null));
+        assertFalse(findContactFirstCommand.equals(null));
 
         // different contact -> returns false
-        assertFalse(findFirstCommand.equals(findSecondCommand));
+        assertFalse(findContactFirstCommand.equals(findContactSecondCommand));
     }
 
     @Test
     public void execute_zeroKeywords_noContactFound() {
-
         String expectedMessage = String.format(MESSAGE_CONTACTS_LISTED_OVERVIEW, 0);
         NameContainsKeywordsPredicate predicate = preparePredicate(" ");
         FindContactCommand command = new FindContactCommand(predicate);

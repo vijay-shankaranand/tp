@@ -21,6 +21,27 @@ public class TaskTest {
     }
 
     @Test
+    public void isOverdue() {
+        Task notCompletedTask = new TaskBuilder().withDate("2020-01-01").build();
+        assertTrue(notCompletedTask.isOverdue());
+
+        Task completedTask = new TaskBuilder().withDate("2020-01-01").withIsCompleted(true).build();
+        assertFalse(completedTask.isOverdue());
+
+        Task notCompletedTask2 = new TaskBuilder().withDate("2020-01-01").withIsCompleted(false).build();
+        assertTrue(notCompletedTask2.isOverdue());
+    }
+
+    @Test
+    public void getIsCompletedString() {
+        Task notCompletedTask = new TaskBuilder().withDate("2020-01-01").build();
+        assertEquals(notCompletedTask.getIsCompletedString(), "hasNotBeenCompleted");
+
+        Task completedTask = new TaskBuilder().withDate("2020-01-01").withIsCompleted(true).build();
+        assertEquals(completedTask.getIsCompletedString(), "isCompleted");
+    }
+
+    @Test
     public void equals() {
         assertTrue(BOOK_VENUE.equals(BOOK_VENUE));
         assertTrue(BOOK_VENUE.equals(new TaskBuilder(BOOK_VENUE).build()));

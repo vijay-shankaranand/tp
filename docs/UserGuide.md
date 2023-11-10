@@ -283,7 +283,7 @@ Examples:
 ### Viewing all tags : `view_tags`
 <box type="info" style="background-color:#1e90ff; color: white;">
 <span slot="icon" style="color: white;"><md>:fas-address-book:</md></span>
-Views all existing tags that have been created by the user.
+Displays a list of all existing tags.
 </box>
 
 Format: `view_tags`

@@ -15,9 +15,29 @@ Given below are my contributions to the project.
 
 * **Project management**:  to be added soon
 
-* **Enhancements to existing features**:  to be added soon
+* **Enhancements implemented**:
+  - Implemented the `filter_by_tag` feature
+      - What it does: allows the user to filter contacts in JobFestGo by their tags.
+      - Justification: This feature improves user experience by enabling the user to quickly access specific groups of contacts, saving their time and effort.
+  - Implemented the `link` and `unlink`feature
+      - What it does: allows the user to associate contacts with specific event or undo the association.
+      - Justification: This feature improves the product by providing the user with an additional way of organizing their network.
+  - Implemented the `delete_task` feature
+      - What it does: allows the user to delete tasks from their associated events in JobFestGo.
+      - Justification: This feature is essential since the user may mistakenly add wrong tasks and would need to delete them.
+  - Implemented the `mark_task` and `unmark_task` feature
+      - What it does: allows the user to mark a task as completed or not completed in JobFestGo.
+      - Justification: This feature improves user experience by enabling the user to easily track the progress of their tasks and plan their work accordingly.
 
-* **Documentation**:  to be added soon
+* **Documentation**:
+- Contributions to the UG
+  - Did up the `filter_by_tag` feature
+  - Did up the `link` and `unlink` feature
+  - Did up the `delete_task` feature
+  - Did up the `mark_task` and `unmark_task` feature
+- Contributions to the DG
+  - Did up the implementation of `link` and `unlink` feature, detailing the thought process
+  - Did up the `filter_by_tag`, `link`, `unlink`, `delete_task`, `mark_task` and `unmark_task` features as well as their use-cases
 
 * **Community**:  to be added soon
 

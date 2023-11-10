@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 
 public class DateTest {
     @Test
-    public void isDateTodayOrAfter_returnsTrue() {
+    public void isDateTodayOrAfter() {
         Date pastDate = new Date("2020-01-01");
         assertEquals(Date.isDateTodayOrAfter(pastDate), false);
 
@@ -20,7 +20,7 @@ public class DateTest {
     }
 
     @Test
-    public void isWithinThreeDays_returnsTrue() {
+    public void isWithinThreeDays() {
         Date twoDaysFromNow = new Date(LocalDate.now().plusDays(2).toString());
         assertEquals(twoDaysFromNow.isWithinThreeDays(), true);
 
@@ -36,8 +36,15 @@ public class DateTest {
 
     @Test
     public void equals() {
-        LocalDate nullDate = null;
         Date date = new Date("2023-11-04");
-        assertEquals(date.equals(nullDate), false);
+
+        // same object -> returns true
+        assertEquals(date.equals(date), true);
+
+        // same values -> returns true
+        assertEquals(date.equals(new Date("2023-11-04")), true);
+
+        // null -> returns false
+        assertEquals(date.equals(null), false);
     }
 }

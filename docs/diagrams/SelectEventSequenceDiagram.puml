@@ -4,29 +4,32 @@ skinparam ArrowFontStyle plain
 
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
-participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":JobFestGoParser" as JobFestGoParser LOGIC_COLOR
 participant ":SelectEventCommandParser" as SelectEventCommandParser LOGIC_COLOR
 participant "se:SelectEventCommand" as SelectEventCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
 end box
 
 box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
 end box
-[-> LogicManager : execute(select_event 1)
+[-> LogicManager : execute("select_event 1")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand(select_event 1)
-activate AddressBookParser
+LogicManager -> JobFestGoParser : parseCommand("select_event 1")
+activate JobFestGoParser
 
 create SelectEventCommandParser
-AddressBookParser -> SelectEventCommandParser
+JobFestGoParser -> SelectEventCommandParser
 activate SelectEventCommandParser
 
-SelectEventCommandParser --> AddressBookParser
+SelectEventCommandParser --> JobFestGoParser
 deactivate SelectEventCommandParser
 
-AddressBookParser -> SelectEventCommandParser : parseIndex("1")
+JobFestGoParser -> SelectEventCommandParser : parse("1")
 activate SelectEventCommandParser
+
+SelectEventCommandParser -> SelectEventCommandParser : parseIndex("1")
 
 create SelectEventCommand
 SelectEventCommandParser -> SelectEventCommand : new SelectEventCommand(1)
@@ -35,12 +38,13 @@ activate SelectEventCommand
 SelectEventCommand --> SelectEventCommandParser
 deactivate SelectEventCommand
 
-SelectEventCommandParser --> AddressBookParser
+SelectEventCommandParser --> JobFestGoParser
 deactivate SelectEventCommandParser
+SelectEventCommandParser -[hidden]-> JobFestGoParser
 destroy SelectEventCommandParser
 
-AddressBookParser --> LogicManager : se
-deactivate AddressBookParser
+JobFestGoParser --> LogicManager : se
+deactivate JobFestGoParser
 
 LogicManager -> SelectEventCommand : execute()
 activate SelectEventCommand
@@ -62,9 +66,16 @@ SelectEventCommand -> Model: updateFilteredTaskList(TaskIsInEvent)
 Model --> SelectEventCommand
 deactivate Model
 
+create CommandResult
+SelectEventCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> SelectEventCommand
+deactivate CommandResult
+
 SelectEventCommand --> LogicManager : result
 deactivate SelectEventCommand
-SelectEventCommand -[hidden]-> LogicManager : result
+SelectEventCommand -[hidden]-> LogicManager
 destroy SelectEventCommand
 
 [<--LogicManager
