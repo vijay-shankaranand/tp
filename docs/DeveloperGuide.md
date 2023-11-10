@@ -71,7 +71,7 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/se-
 
 <puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `EventContactDisplay`,`ContactListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `EventContactDisplay`, `ContactListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 
@@ -178,6 +178,18 @@ The following activity diagram summarizes what happens when a user executes the 
 
 <puml src="diagrams/HomeActivityDiagram.puml" width="325" />
 
+#### Design considerations:
+
+**Aspect: How home is designed**
+
+* **Alternative 1 (current choice):** A home command that users have to type in.
+    * Pros: Easy to remember and type since it is only 4 letters. Easier to implement with JobFestGo being CLI based.
+    * Cons: Not as intuitive to use as Alternative 2.
+    <br></br>
+* **Alternative 2:** A home button in the accessibility bar right beside `File` and `Help`.
+    * Pros: Even easier to use as only one mouse click is required. No typing is needed.
+    * Cons: Harder to implement.
+
 ### Select Event Feature
 
 #### Implementation
@@ -208,12 +220,12 @@ The following activity diagram summarizes what happens when a user executes the 
 
 #### Design considerations:
 
-**Aspect: How select event executes:**
+**Aspect: How select event executes**
 
 * **Alternative 1 (current choice):** Highlights the event selected.
   * Pros: Visually appealing.
   * Cons: Slightly harder to implement.
-
+    <br></br>
 * **Alternative 2:** Event list gets updated to only show the selected event.
   * Pros: Easy to implement.
   * Cons: Users will have to consistently execute home command to view the other events.
