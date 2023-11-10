@@ -6,6 +6,7 @@ box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":JobFestGoParser" as JobFestGoParser LOGIC_COLOR
 participant ":HomeCommand" as HomeCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
 end box
 
 box Model MODEL_COLOR_T1
@@ -42,6 +43,13 @@ HomeCommand -> Model: updateFilteredTaskList()
 Model --> HomeCommand
 
 deactivate Model
+
+create CommandResult
+HomeCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> HomeCommand
+deactivate CommandResult
 
 HomeCommand --> LogicManager
 deactivate HomeCommand
