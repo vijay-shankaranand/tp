@@ -4,7 +4,7 @@ skinparam ArrowFontStyle plain
 
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
-participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":JobFestGoParser" as AddressBookParser LOGIC_COLOR
 participant ":SelectEventCommandParser" as SelectEventCommandParser LOGIC_COLOR
 participant "se:SelectEventCommand" as SelectEventCommand LOGIC_COLOR
 end box
@@ -12,10 +12,10 @@ end box
 box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
 end box
-[-> LogicManager : execute(select_event 1)
+[-> LogicManager : execute("select_event 1")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand(select_event 1)
+LogicManager -> AddressBookParser : parseCommand("select_event 1")
 activate AddressBookParser
 
 create SelectEventCommandParser
@@ -25,8 +25,10 @@ activate SelectEventCommandParser
 SelectEventCommandParser --> AddressBookParser
 deactivate SelectEventCommandParser
 
-AddressBookParser -> SelectEventCommandParser : parseIndex("1")
+AddressBookParser -> SelectEventCommandParser : parse("1")
 activate SelectEventCommandParser
+
+SelectEventCommandParser -> SelectEventCommandParser : parseIndex("1")
 
 create SelectEventCommand
 SelectEventCommandParser -> SelectEventCommand : new SelectEventCommand(1)
@@ -64,7 +66,6 @@ deactivate Model
 
 SelectEventCommand --> LogicManager : result
 deactivate SelectEventCommand
-SelectEventCommand -[hidden]-> LogicManager : result
 destroy SelectEventCommand
 
 [<--LogicManager
