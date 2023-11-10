@@ -4,7 +4,7 @@ skinparam ArrowFontStyle plain
 
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
-participant ":JobFestGoParser" as AddressBookParser LOGIC_COLOR
+participant ":JobFestGoParser" as JobFestGoParser LOGIC_COLOR
 participant ":SelectEventCommandParser" as SelectEventCommandParser LOGIC_COLOR
 participant "se:SelectEventCommand" as SelectEventCommand LOGIC_COLOR
 end box
@@ -15,17 +15,17 @@ end box
 [-> LogicManager : execute("select_event 1")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("select_event 1")
-activate AddressBookParser
+LogicManager -> JobFestGoParser : parseCommand("select_event 1")
+activate JobFestGoParser
 
 create SelectEventCommandParser
-AddressBookParser -> SelectEventCommandParser
+JobFestGoParser -> SelectEventCommandParser
 activate SelectEventCommandParser
 
-SelectEventCommandParser --> AddressBookParser
+SelectEventCommandParser --> JobFestGoParser
 deactivate SelectEventCommandParser
 
-AddressBookParser -> SelectEventCommandParser : parse("1")
+JobFestGoParser -> SelectEventCommandParser : parse("1")
 activate SelectEventCommandParser
 
 SelectEventCommandParser -> SelectEventCommandParser : parseIndex("1")
@@ -37,12 +37,12 @@ activate SelectEventCommand
 SelectEventCommand --> SelectEventCommandParser
 deactivate SelectEventCommand
 
-SelectEventCommandParser --> AddressBookParser
+SelectEventCommandParser --> JobFestGoParser
 deactivate SelectEventCommandParser
 destroy SelectEventCommandParser
 
-AddressBookParser --> LogicManager : se
-deactivate AddressBookParser
+JobFestGoParser --> LogicManager : se
+deactivate JobFestGoParser
 
 LogicManager -> SelectEventCommand : execute()
 activate SelectEventCommand
