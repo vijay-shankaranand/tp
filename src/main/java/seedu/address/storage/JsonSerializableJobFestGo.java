@@ -13,6 +13,7 @@ import seedu.address.model.JobFestGo;
 import seedu.address.model.ReadOnlyJobFestGo;
 import seedu.address.model.contact.Contact;
 import seedu.address.model.event.Event;
+import seedu.address.model.event.exceptions.EventNotFoundException;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.task.Task;
 
@@ -96,12 +97,16 @@ class JsonSerializableJobFestGo {
         }
         for (JsonAdaptedTask jsonAdaptedTask : taskList) {
             Task task = jsonAdaptedTask.toModelType();
+            try {
             task = new Task(task.getDescription(), task.getDate(),
                     jobFestGo.getEvent(task.getAssociatedEventName()), task.isCompleted());
             if (jobFestGo.hasTask(task)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_TASK);
             }
             jobFestGo.addTask(task);
+            } catch (EventNotFoundException enfe) {
+                throw new IllegalValueException("Event not found!");
+            }
         }
         return jobFestGo;
     }

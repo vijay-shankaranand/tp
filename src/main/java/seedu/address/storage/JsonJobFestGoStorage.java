@@ -13,6 +13,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.FileUtil;
 import seedu.address.commons.util.JsonUtil;
 import seedu.address.model.ReadOnlyJobFestGo;
+import seedu.address.model.event.exceptions.EventNotFoundException;
 
 /**
  * A class to access JobFestGo data stored as a json file on the hard disk.
