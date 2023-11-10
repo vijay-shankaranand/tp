@@ -45,6 +45,7 @@ deactivate Model
 
 HomeCommand --> LogicManager
 deactivate HomeCommand
+HomeCommand -[hidden]-> LogicManager
 destroy HomeCommand
 
 [<--LogicManager
