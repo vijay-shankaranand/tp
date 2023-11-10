@@ -30,15 +30,19 @@ Given below are my contributions to the project.
 
   Furthermore, I have dedicated the time to familiarise myself with Markbind's syntax and utilised my CSS and Bootstrap expertise to enhance the user guide's visual appeal. I incorporated custom summary boxes and icons that align with the theme of JobFestGo while improving the look of the warning boxes.
 
-* **Contributions to the DG**: to be added soon
+* **Contributions to the DG**: 
+  - Did up the `view_tags` feature as well as its use-cases
+  - Did up the `view_events` feature as well as its use-cases
+  - Did up the `home` feature as well as its use-cases
+  - Added the implementation of the home feature and supplemented the explanation with UML diagrams
 
 * **Contributions to team-based tasks**: 
   
-  I helped to update the app icon.
+  - Updated the app icon
 
-  I also contributed in updating the codebase and renaming all methods that previously contained `Person` in their name into `Contact`. 
+  - Updated the codebase as well as the DG and UG and renamed all methods and variables that previously contained `Person` in their name into `Contact`
 
-  I have not only written test cases for my own commands, I have also voluntarily contributed in writing test cases for code that I have not authored to ensure more comprehensive test coverage. 
+  - Voluntarily contributed in writing additional test cases for code that I have not authored to ensure more comprehensive test coverage
 
 * **Review/mentoring contributions**: 
   
