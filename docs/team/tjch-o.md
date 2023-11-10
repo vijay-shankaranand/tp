@@ -11,8 +11,7 @@ Given below are my contributions to the project.
 
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=tjch-o&breakdown=true&sort=groupTitle%20dsc&sortWithin=title&since=2023-09-22&timeframe=commit&mergegroup=&groupSelect=groupByRepos&checkedFileTypes=docs~functional-code~test-code~other)
 
-* **Enhancements implemented**: 
-  
+* **Enhancements implemented**:
   I created 3 new commands to improve user experience.
 
   The first command is the `view_tags` command which displays a list of all existing tags. 
@@ -21,8 +20,7 @@ Given below are my contributions to the project.
 
   The last command is the `home` command which allows the user to return to the home page from the current screen.
 
-* **Contributions to the UG**: 
-
+* **Contributions to the UG**:
   I have contributed to the sections related to the commands I have created, where I mainly explained how to use the commands. 
 
   I have played a key role in reviewing the user guide, ensuring its logical flow to eliminate potential confusion among users. 
@@ -30,18 +28,20 @@ Given below are my contributions to the project.
 
   Furthermore, I have dedicated the time to familiarise myself with Markbind's syntax and utilised my CSS and Bootstrap expertise to enhance the user guide's visual appeal. I incorporated custom summary boxes and icons that align with the theme of JobFestGo while improving the look of the warning boxes.
 
-* **Contributions to the DG**: to be added soon
+* **Contributions to the DG**:
+  - Did up the `view_tags` feature as well as its use-cases
+  - Did up the `view_events` feature as well as its use-cases
+  - Did up the `home` feature as well as its use-cases
+  - Added the implementation of the home feature and supplemented the explanation with UML diagrams
 
-* **Contributions to team-based tasks**: 
-  
-  I helped to update the app icon.
+* **Contributions to team-based tasks**:
+  - Updated the app icon
 
-  I also contributed in updating the codebase and renaming all methods that previously contained `Person` in their name into `Contact`. 
+  - Updated the codebase as well as the DG and UG and renamed all methods and variables that previously contained `Person` in their name into `Contact`
 
-  I have not only written test cases for my own commands, I have also voluntarily contributed in writing test cases for code that I have not authored to ensure more comprehensive test coverage. 
+  - Voluntarily contributed in writing additional test cases for code that I have not authored to ensure more comprehensive test coverage
 
-* **Review/mentoring contributions**: 
-  
+* **Review/mentoring contributions**:
   I have regularly helped to review the PRs of my team members, helping to flag errors in their code and suggest improvements. This ensures that code quality is maintained and that any new feature introduced will be free of major bugs that could break our application.
 
   Here are some of the numerous PRs I have reviewed:
@@ -53,8 +53,7 @@ Given below are my contributions to the project.
   - [Pull Request 5](https://github.com/AY2324S1-CS2103T-T09-1/tp/pull/222)
 
 
-* **Contributions beyond the project team**: 
-  
+* **Contributions beyond the project team**:
   I have assisted in finding multiple bugs for the products of other teams.
 
   Here are some of the bugs I have found while doing extensive testing:

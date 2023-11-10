@@ -1,0 +1,61 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":JobFestGoParser" as JobFestGoParser LOGIC_COLOR
+participant ":HomeCommand" as HomeCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+[-> LogicManager : execute("home")
+activate LogicManager
+
+LogicManager -> JobFestGoParser : parseCommand("home")
+activate JobFestGoParser
+
+create HomeCommand
+JobFestGoParser -> HomeCommand
+activate HomeCommand
+
+HomeCommand --> JobFestGoParser
+deactivate HomeCommand
+
+JobFestGoParser --> LogicManager
+deactivate JobFestGoParser
+
+LogicManager -> HomeCommand : execute()
+activate HomeCommand
+
+HomeCommand -> Model : getUnfilteredEventList()
+activate Model
+
+Model --> HomeCommand
+
+HomeCommand -> Model : getUnfilteredContactList()
+Model --> HomeCommand
+
+HomeCommand -> Model: updateFilteredTaskList()
+Model --> HomeCommand
+
+deactivate Model
+
+create CommandResult
+HomeCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> HomeCommand
+deactivate CommandResult
+
+HomeCommand --> LogicManager
+deactivate HomeCommand
+HomeCommand -[hidden]-> LogicManager
+destroy HomeCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

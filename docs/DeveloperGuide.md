@@ -71,7 +71,7 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/se-
 
 <puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `ContactListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `EventContactDisplay`, `ContactListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 
@@ -96,13 +96,13 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 
 <box type="info" seamless>
 
-**Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+**Note:** The lifeline for `DeleteContactCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </box>
 
 How the `Logic` component works:
 
-1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
-1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
+1. When `Logic` is called upon to execute a command, it is passed to an  `JobFestGoParser` object which in turn creates a parser that matches the command (e.g., `DeleteContactCommandParser`) and uses it to parse the command.
+1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteContactCommand`) which is executed by the `LogicManager`.
 1. The command can communicate with the `Model` when it is executed (e.g. to delete a contact).
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
@@ -111,8 +111,8 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 <puml src="diagrams/ParserClasses.puml" width="600"/>
 
 How the parsing works:
-* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
-* All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
+* When called upon to parse a user command, the `JobFestGoParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddContactCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `JobFestGoParser` returns back as a `Command` object.
+* All `XYZCommandParser` classes (e.g., `AddContactCommandParser`, `DeleteContactCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
@@ -157,6 +157,39 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Return to home page feature
+
+The home mechanism is facilitated by `JobFestGo` as well as its observable lists for `Contact`, `Event`, as well as `Task`.
+
+The mechanism interacts with both the UI and the lists stored within `JobFestGo`, particularly `unfilteredContacts`, `unfilteredEvents`, and `filteredTasks`.
+
+Given below is an example usage scenario and how the home mechanism behaves at each step.
+
+**Step 1.** The user has input any other command that is not `home`.
+
+**Step 2.** The user executes `home` command to return to the home page.
+The `home` command calls upon the creation of `TaskInReminderPredicate` while using `PREDICATE_SHOW_ALL_CONTACTS` and `PREDICATE_SHOW_ALL_EVENTS` to update the respective filtered lists.
+
+The following sequence diagram shows how the select event operation works:
+
+<puml src="diagrams/HomeSequenceDiagram.puml" alt="HomeSequenceDiagram" />
+
+The following activity diagram summarizes what happens when a user executes the home command:
+
+<puml src="diagrams/HomeActivityDiagram.puml" width="325" />
+
+#### Design considerations:
+
+**Aspect: How home is designed**
+
+* **Alternative 1 (current choice):** A home command that users have to type in.
+    * Pros: Easy to remember and type since it is only 4 letters. Easier to implement with JobFestGo being CLI based.
+    * Cons: Not as intuitive to use as Alternative 2.
+    <br></br>
+* **Alternative 2:** A home button in the accessibility bar right beside `File` and `Help`.
+    * Pros: Even easier to use as only one mouse click is required. No typing is needed.
+    * Cons: Harder to implement.
+
 ### Select Event Feature
 
 #### Implementation
@@ -187,12 +220,12 @@ The following activity diagram summarizes what happens when a user executes the 
 
 #### Design considerations:
 
-**Aspect: How select event executes:**
+**Aspect: How select event executes**
 
 * **Alternative 1 (current choice):** Highlights the event selected.
   * Pros: Visually appealing.
   * Cons: Slightly harder to implement.
-
+    <br></br>
 * **Alternative 2:** Event list gets updated to only show the selected event.
   * Pros: Easy to implement.
   * Cons: Users will have to consistently execute home command to view the other events.
