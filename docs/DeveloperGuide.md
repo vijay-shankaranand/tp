@@ -1042,7 +1042,7 @@ testers are expected to do more *exploratory* testing.
    1. Relaunch the application.
 
    1. Test case: `data/jobfestgo.json` was deleted.
-      Expected: JobFestGo starts with empty event, contact and task list. All events, contacts and tasks have been deleted.
+      Expected: JobFestGo starts with pre-loaded event, contact and task list.
 
    1. Test case: `data/jobfestgo.json` was corrupted.
       Expected: Similar to previous.
