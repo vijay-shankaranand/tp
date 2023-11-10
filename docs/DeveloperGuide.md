@@ -197,6 +197,65 @@ The following activity diagram summarizes what happens when a user executes the 
   * Pros: Easy to implement.
   * Cons: Users will have to consistently execute home command to view the other events.
 
+### Link/unlink Feature
+
+#### Implementation
+
+The link/unlink mechanism is facilitated by `JobFestGo` as well as its internally stored `UniqueEventList`.
+It implements the following operations:
+
+* `JobFestGo#isContactLinkedToEvent()` — Checks whether a `Contact` is linked to an `Event`.
+* `JobFestGo#linkContactToEvent()` — Links a `Contact` to an `Event`.
+* `JobFestGo#unlinkContactFromEvent()` — Unlinks a `Contact` from an `Event`.
+
+These operations are exposed in the `Model` interface as `Model#isContactLinkedToEvent()`, `Model#linkContactToEvent()` and `Model#unlinkContactFromEvent()` respectively.
+
+Given below is an example usage scenario and how the link/unlink mechanism behaves at each step.
+
+**Step 1.** The user executes `link c/Alice Black c/Bob White ev/NUS Career Fest` command to link the contacts specified by the names "Alice Black" and "Bob White" to the event specified by the name "NUS Career Fest" in JobFestGo. The `link` command initiates a loop to iterate through each input `Contact`.
+
+<box type="info" seamless>
+
+**Note:** If the `Contact` or the `Event` does not exist in JobFestGo, it is not possible to perform the link operation. `Model#getContact()` or `Model#getEvent()` will throw a `ContactNotFoundException` or an `EventNotFoundException` respectively and an error message will be shown to the user.
+
+</box>
+
+**Step 2.** For each `Contact` in the loop, `Model#linkContactToEvent()` is called, adding the `Contact` to the internally stored associated contact list of the `Event`.
+
+<box type="info" seamless>
+
+**Note:** If the `Contact` is already inside the associated contact list of the `Event`, there is no need to perform the link operation again. The `link` command uses `Model#isContactLinkedToEvent()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the undo.
+
+</box>
+
+The `unlink` command does the opposite — it calls `Model#unlinkContactFromEvent()`, which removes the specified `Contact`(s) from the internally stored associated contact list of the specified `Event`.
+
+The following activity diagram summarizes what happens when a user executes a new command:
+
+<puml src="diagrams/CommitActivityDiagram.puml" width="250" />
+
+#### Design considerations:
+
+**Aspect: How link/unlink command gets contacts and event:**
+
+* **Alternative 1 (current choice):** Gets contacts and event by names.
+    * Pros: Clearer for users to execute the command.
+    * Cons: We must devise a new way of getting contacts and event by names since the default implementation is to get by index.
+
+* **Alternative 2:** Gets contacts and event by index.
+    * Pros: Easy to implement.
+    * Cons: Users may be confused by multiple indices.
+
+**Aspect: How a mix of valid and invalid input should be handled:**
+
+* **Alternative 1 (current choice):** Does not perform any link/unlink operations once there is one invalid input encountered.
+    * Pros: Easy to implement.
+    * Cons: Users need to reenter all other input once there is one invalid input.
+
+* **Alternative 2:** Links/Unlinks all valid input contacts while throwing an error for all invalid contacts.
+    * Pros: Users only need to correct the invalid input.
+    * Cons: The exceptions are hard to handle.
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
@@ -232,7 +291,6 @@ Step 3. The user executes `add_contact n/David …​` to add a new contact. The
 Step 4. The user now decides that adding the contact was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
 
 <puml src="diagrams/UndoRedoState3.puml" alt="UndoRedoState3" />
-
 
 <box type="info" seamless>
 
