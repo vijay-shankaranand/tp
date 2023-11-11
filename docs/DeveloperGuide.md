@@ -449,6 +449,20 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `JobFestGo` and the **Actor** is the `user`, unless specified otherwise)
 
+**Use case: Return to the home page**
+
+**MSS**
+1. User is on any page
+2. User requests to return to the home page
+3. JobFestGo returns user to the home page
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. The user is already on the home page
+
+  Use case ends.
 
 **Use case: Add a contact**
 
@@ -950,6 +964,16 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The application loads with the updated json file.
 
+### Returning to home page
+
+1. Returning to home page
+
+    1. Test case: `home`<br>
+       Expected: User returns to the home page. Command success status message shown.
+
+    1. Test case: `home 1`<br>
+       Expected: User returns to the home page. Recognised as a `home` command.
+
 ### Adding a contact
 
 1. Adding a contact while all contacts are being shown
@@ -1001,7 +1025,7 @@ testers are expected to do more *exploratory* testing.
       Expected: All contacts are listed. Command success status message shown.
 
    1. Test case: `view_contacts 1`<br>
-      Expected: All contacts will still be listed. Taken as a `view_contacts` command.
+      Expected: All contacts will still be listed. Recognised as a `view_contacts` command.
 
 ### Deleting a contact
 
@@ -1126,6 +1150,18 @@ testers are expected to do more *exploratory* testing.
    1. Other incorrect delete commands to try: `find_contact @`, `...`<br>
       Expected: Similar to previous.
 
+### Viewing all tags
+
+1. Viewing all tags
+
+    1. Prerequisites: At least one tag has been added to or is already existing in JobFestGo.
+
+    1. Test case: `view_tags`<br>
+       Expected: All tags are listed. Command success status message shown.
+
+    1. Test case: `view_tags 1`<br>
+       Expected: All tags will still be listed. Recognised as a `view_tags` command.
+
 ### Deleting a tag
 
 1. Deleting a tag while all tags are being shown
@@ -1166,6 +1202,18 @@ testers are expected to do more *exploratory* testing.
 
    1. Other incorrect delete tag commands to try: `delete_tag`, `delete_tag x`, `...`<br>
       Expected: Similar to previous.
+
+### Viewing all events
+
+1. Viewing all events
+
+    1. Prerequisites: At least one event has been added to or is already existing in JobFestGo.
+
+    1. Test case: `view_events`<br>
+       Expected: All events are listed. Command success status message shown.
+
+    1. Test case: `view_events 1`<br>
+       Expected: All events will still be listed. Recognised as a `view_events` command.
 
 ### Selecting an event
 
