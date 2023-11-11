@@ -31,6 +31,8 @@ class JsonSerializableJobFestGo {
 
     public static final String MESSAGE_DUPLICATE_TASK = "Tasks list contains duplicate tasks(s).";
 
+    public static final String MESSAGE_EVENT_NOT_FOUND = "Event associated to a task is not found.";
+
     private final List<JsonAdaptedContact> contacts = new ArrayList<>();
 
     private final List<JsonAdaptedTag> tagList = new ArrayList<>();
@@ -105,7 +107,7 @@ class JsonSerializableJobFestGo {
                 }
                 jobFestGo.addTask(task);
             } catch (EventNotFoundException enfe) {
-                throw new IllegalValueException("Event not found!");
+                throw new IllegalValueException(MESSAGE_EVENT_NOT_FOUND);
             }
         }
         return jobFestGo;
