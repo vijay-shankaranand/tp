@@ -41,13 +41,12 @@ Given below are my contributions to the project:
     - **Justification**: This feature improves the product as it provides the user a way to keep track of the tasks for an event with ease.
     - **Highlights**: This enhancement adds a new command along with its classes to JobFestGo. This enhancement was extremely challenging as there was a need to implement the associated classes for both `tasks` and `events`. Multiple bugs arose due to the complexity of the implementation. However, after multiple debugging sessions, the feature was successfully implemented.
 
-
 <br>
 
 * **Contributions to the UG**:
-  - Did up the `add_tag` feature section
-  - Did up the `delete_event` feature section
-  - Did up the `add_task` feature section
+  - Did up the `add_tag` feature
+  - Did up the `delete_event` feature
+  - Did up the `add_task` feature
   - Did up the table of contents section
   - Did up the FAQ section
   - Added screenshots for multiple sections such as `view_events`, `view_contacts` etc.
