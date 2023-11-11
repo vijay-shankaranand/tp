@@ -314,4 +314,3 @@ public class UniqueEventList implements Iterable<Event> {
         return true;
     }
 }
-

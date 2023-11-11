@@ -71,7 +71,7 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/se-
 
 <puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `ContactListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `EventContactDisplay`, `ContactListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 
@@ -96,13 +96,13 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 
 <box type="info" seamless>
 
-**Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+**Note:** The lifeline for `DeleteContactCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </box>
 
 How the `Logic` component works:
 
-1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
-1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
+1. When `Logic` is called upon to execute a command, it is passed to an  `JobFestGoParser` object which in turn creates a parser that matches the command (e.g., `DeleteContactCommandParser`) and uses it to parse the command.
+1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteContactCommand`) which is executed by the `LogicManager`.
 1. The command can communicate with the `Model` when it is executed (e.g. to delete a contact).
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
@@ -111,8 +111,8 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 <puml src="diagrams/ParserClasses.puml" width="600"/>
 
 How the parsing works:
-* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
-* All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
+* When called upon to parse a user command, the `JobFestGoParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddContactCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddContactCommand`) which the `JobFestGoParser` returns back as a `Command` object.
+* All `XYZCommandParser` classes (e.g., `AddContactCommandParser`, `DeleteContactCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
@@ -157,6 +157,39 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Return to home page feature
+
+The home mechanism is facilitated by `JobFestGo` as well as its observable lists for `Contact`, `Event`, as well as `Task`.
+
+The mechanism interacts with both the UI and the lists stored within `JobFestGo`, particularly `unfilteredContacts`, `unfilteredEvents`, and `filteredTasks`.
+
+Given below is an example usage scenario and how the home mechanism behaves at each step.
+
+**Step 1.** The user has input any other command that is not `home`.
+
+**Step 2.** The user executes `home` command to return to the home page.
+The `home` command calls upon the creation of `TaskInReminderPredicate` while using `PREDICATE_SHOW_ALL_CONTACTS` and `PREDICATE_SHOW_ALL_EVENTS` to update the respective filtered lists.
+
+The following sequence diagram shows how the select event operation works:
+
+<puml src="diagrams/HomeSequenceDiagram.puml" alt="HomeSequenceDiagram" />
+
+The following activity diagram summarizes what happens when a user executes the home command:
+
+<puml src="diagrams/HomeActivityDiagram.puml" width="325" />
+
+#### Design considerations:
+
+**Aspect: How home is designed**
+
+* **Alternative 1 (current choice):** A home command that users have to type in.
+    * Pros: Easy to remember and type since it is only 4 letters. Easier to implement with JobFestGo being CLI based.
+    * Cons: Not as intuitive to use as Alternative 2.
+    <br></br>
+* **Alternative 2:** A home button in the accessibility bar right beside `File` and `Help`.
+    * Pros: Even easier to use as only one mouse click is required. No typing is needed.
+    * Cons: Harder to implement.
+
 ### Select Event Feature
 
 #### Implementation
@@ -187,12 +220,12 @@ The following activity diagram summarizes what happens when a user executes the 
 
 #### Design considerations:
 
-**Aspect: How select event executes:**
+**Aspect: How select event executes**
 
 * **Alternative 1 (current choice):** Highlights the event selected.
   * Pros: Visually appealing.
   * Cons: Slightly harder to implement.
-
+    <br></br>
 * **Alternative 2:** Event list gets updated to only show the selected event.
   * Pros: Easy to implement.
   * Cons: Users will have to consistently execute home command to view the other events.
@@ -797,7 +830,65 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+1. Exiting the app
+
+   1. After keying in a few commands, the application can be exited with the `exit` command.
+
+   1. Re-launch the app by double-clicking the jar file.<br>
+       Expected: The application loads with the updated json file.
+
+### Adding a contact
+
+1. Adding a contact while all contacts are being shown
+
+   1. Prerequisites: List all contacts using the `view_contacts` command. Multiple contacts in the list.
+
+   1. Test case: `add_contact n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 t/vendors t/clients`<br>
+      Expected: Contact named John Doe with the respective details created, provided that there is no contact named John Doe or has the phone number 98765432. Returns back to home page.
+
+   1. Test case: `add_contact n/John  Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 t/vendors t/clients`<br>
+      Expected: No contact is added. Error details shown in the status message.
+
+   1. Other incorrect add contact commands to try: `add_contact`, `add_contact` with existing phone number, `...`
+      Expected: Similar to previous.
+
+1. Adding a contact while on the home page
+
+   1. Prerequisites: Be on the home screen using the `home` command. Contact list should be displayed in the middle.
+
+   1. Test case: `add_contact n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 t/vendors t/clients`<br>
+     Expected: Contact named John Doe with the respective details created, provided that there is no contact named John Doe or has the phone number 98765432.
+
+   1. Test case: `add_contact n/John  Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 t/vendors t/clients`<br>
+      Expected: No contact is added. Error details shown in the status message.
+
+   1. Other incorrect add contact commands to try: `add_contact`, `add_contact` with an existing phone number, `...`<br>
+      Expected: Similar to previous.
+
+1. Adding a contact after selecting an event
+
+   1. Prerequisites: Be on the selected event page using the `select_event x` command in which x represents an integer that is smaller than or equal to the event list size.
+
+   1. Test case: `add_contact n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 t/vendors t/clients`<br>
+      Expected: Contact named John Doe with the respective details created, provided that there is no contact named John Doe or has the phone number 98765432. Returns back to home page.
+
+   1. Test case: `add_contact n/John  Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 t/vendors t/clients`<br>
+      Expected: No contact is added. Error details shown in the status message.
+
+   1. Other incorrect add contact commands to try: `add_contact`, `add_contact` with an existing phone number, `...`<br>
+      Expected: Similar to previous.
+
+### Listing all contacts
+
+1. Listing all contacts
+
+   1. Prerequisite: At least one contact has been added to JobFestGo.
+
+   1. Test case: `view_contacts`<br>
+      Expected: All contacts are listed. Command success status message shown.
+
+   1. Test case: `view_contacts 1`<br>
+      Expected: All contacts will still be listed. Taken as a `view_contacts` command.
 
 ### Deleting a contact
 
@@ -806,20 +897,216 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: List all contacts using the `view_contacts` command. Multiple contacts in the list.
 
    1. Test case: `delete_contact 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Returns back to home page.
 
    1. Test case: `delete_contact 0`<br>
-      Expected: No contact is deleted. Error details shown in the status message. Status bar remains the same.
+      Expected: No contact is deleted. Error details shown in the status message. Status bar remains the same. Returns back to home page.
 
    1. Other incorrect delete commands to try: `delete_contact`, `delete_contact x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+1. Deleting a contact while on the home page
+
+   1. Prerequisites: Be on the home screen using the `home` command. Contact list should be displayed in the middle.
+
+   1. Test case: `delete_contact 2`<br>
+      Expected: Second contact is deleted from the list. Details of the deleted contact shown in the status message.
+
+   1. Test case: `delete_contact 0`<br>
+      Expected: No contact is deleted. Error details shown in the status message.
+
+   1. Other incorrect delete commands to try: `delete_contact`, `delete_contact x`, `...` (where x is larger than the list size)<br>
+      Expected: Similar to previous.
+
+1. Deleting a contact after selecting an event
+
+   1. Prerequisites: Be on the selected event page using the `select_event x` command in which x represents an integer that is smaller than or equal to the event list size. Multiple contacts in the list of contacts linked to the event.
+
+   1. Test case: `delete_contact 1`<br>
+      Expected: First contact in the event is deleted from the entire list. Returns back to home page, with the full list showing that the contact has been deleted. Details of the deleted contact shown in the status message.
+
+   1. Test case: `delete_contact 0`<br>
+      Expected: No contact is deleted. Error details shown in the status message.
+
+   1. Other incorrect delete commands to try: `delete_contact`, `delete_contact x`, `...` (where x is larger than the list size)<br>
+      Expected: Similar to previous.
+
+### Editing a contact
+
+1. Editing a contact while all contacts are being shown
+
+   1. Prerequisites: List all contacts using the `view_contacts` command. Multiple contacts in the list.
+
+   1. Test case: `edit_contact 1 n/John Doe`<br>
+      Expected: First contact in the list is edited to have the name John Doe, provided that there is no John Doe in the contact list. Details of the new contact shown in the status message. Returns back to home page.
+    
+   1. Test case: `edit_contact 0 n/John Doe`<br>
+      Expected: No contact is edited. Error details shown in the status message.
+
+   1. Other incorrect edit commands to try: `edit_contact` `edit_contact x n/`, `edit_contact 1 p/999`, `...` (where x is larger than the list size)<br>
+      Expected: Similar to previous.
+
+1. Editing a contact while on the home page
+
+   1. Prerequisites: On the home page using the `home` command. Multiple contacts in the list.
+
+   1. Test case: `edit_contact 1 n/John Doe`<br>
+      Expected: First contact in the list is edited to have the name John Doe, provided that there is no John Doe in the contact list. Details of the new contact shown in the status message.
+
+   1. Test case: `edit_contact 0 n/John Doe`<br>
+      Expected: No contact is edited. Error details shown in the status message.
+
+   1. Other incorrect edit commands to try: `edit_contact` `edit_contact x n/`, `edit_contact 1 p/999`, `...` (where x is larger than the list size)<br>
+      Expected: Similar to previous.
+
+1. Editing a contact after selecting an event
+
+   1. Prerequisites: Be on the selected event page using the `select_event x` command in which x represents an integer that is smaller than or equal to the event list size. Multiple contacts in the list of contacts linked to the event.
+
+   1. Test case: `edit_contact 1 n/John Doe`<br>
+      Expected: First contact in the list is edited to have the name John Doe, provided that there is no John Doe in the full contact list. Details of the new contact shown in the status message. Returns back to home page.
+
+   1. Test case: `edit_contact 0 n/John Doe`<br>
+      Expected: No contact is edited. Error details shown in the status message.
+
+   1. Other incorrect edit commands to try: `edit_contact` `edit_contact x n/`, `edit_contact 1 p/999`, `...` (where x is larger than the list size)<br>
+      Expected: Similar to previous.
+
+### Locating contacts by name
+
+1. Finding a contact while all contacts are being shown
+
+   1. Prerequisites: List all contacts using the `view_contacts` command. Multiple contacts in the list.
+
+   1. Test case: `find_contact alex`<br>
+      Expected: All contacts with the name containing `alex` is filtered and shown. Command success status message shown with the number of contacts listed (can be 0 if no valid contacts found).
+
+   1. Test case: `find_contact`<br>
+      Expected: Error details shown in the status message.
+
+   1. Other incorrect find contact commands to try: `find_contact @`, `...`<br>
+      Expected: Similar to previous.
+
+1. Finding a contact while on the home page
+
+   1. Prerequisites: Be on the home screen using the `home` command. Contact list should be displayed in the middle.
+
+   1. Test case: `find_contact alex`<br>
+      Expected: All contacts with the name containing `alex` is filtered and shown. Command success status message shown with the number of contacts listed (can be 0 if no valid contacts found).
+
+   1. Test case: `find_contact`<br>
+      Expected: Error details shown in the status message.
+
+   1. Other incorrect delete commands to try: `find_contact @`, `...`<br>
+      Expected: Similar to previous.
+
+1. Finding a contact after selecting an event
+
+   1. Prerequisites: Be on the selected event page using the `select_event x` command in which x represents an integer that is smaller than or equal to the event list size. Multiple contacts in the list of contacts linked to the event.
+
+   1. Test case: `find_contact alex`<br>
+      Expected: All contacts in the currently filtered list with the name containing `alex` is filtered and shown. Command success status message shown with the number of contacts listed (can be 0 if no valid contacts found).
+
+   1. Test case: `find_contact`<br>
+      Expected: Error details shown in the status message.
+
+   1. Other incorrect delete commands to try: `find_contact @`, `...`<br>
+      Expected: Similar to previous.
+
+### Deleting a tag
+
+1. Deleting a tag while all tags are being shown
+
+   1. Prerequisites: List all contacts using the `view_tags` command. Multiple tags in the list.
+
+   1. Test case: `delete_tag t/clients`<br>
+      Expected: `clients` tag is deleted. Details of the deleted tag shown in the status message. Returns back to home page.
+
+   1. Test case: `delete_tag t/`<br>
+      Expected: No tag is deleted. Error details shown in the status message. Returns back to home page.
+
+   1. Other incorrect delete tag commands to try: `delete_tag`, `delete_tag x`, `...`<br>
+      Expected: Similar to previous.
+
+1. Deleting a tag while on the home page
+
+   1. Prerequisites: Be on the home screen using the `home` command.
+
+   1. Test case: `delete_tag t/clients`<br>
+      Expected: `clients` tag is deleted. Contacts having the `clients` tag has the tag removed from the. Details of the deleted tag shown in the status message.
+
+   1. Test case: `delete_tag t/`<br>
+      Expected: No tag is deleted. Error details shown in the status message.
+
+   1. Other incorrect delete tag commands to try: `delete_tag`, `delete_tag x`, `...`<br>
+      Expected: Similar to previous.
+
+1. Deleting a tag after selecting an event
+
+   1. Prerequisites: Be on the selected event page using the `select_event x` command in which x represents an integer that is smaller than or equal to the event list size.
+
+   1. Test case: `delete_tag t/clients`<br>
+      Expected: Deletes the `clients` tag. Returns back to home page, and reflects the changes in the entire contact list. Details of the deleted tag shown in the status message.
+
+   1. Test case: `delete_tag t/`<br>
+      Expected: No tag is deleted. Error details shown in the status message.
+
+   1. Other incorrect delete tag commands to try: `delete_tag`, `delete_tag x`, `...`<br>
+      Expected: Similar to previous.
+
+### Selecting an event
+
+1. Selecting an event when all events are shown
+
+   1. Prerequisites: List all events using the `view_events` command. Multiple events in the list.
+
+   1. Test case: `select_event 1`<br>
+      Expected: Selects the first event in the list. Displays the event page, displaying the contacts linked to the event and the tasks of the event. Details of the selected event shown in the status message.
+
+   1. Test case: `select_event 0`<br>
+      Expected: No event is selected. Error details shown in the status message.
+
+   1. Other incorrect select event commands to try: `select_event`, `select_event x`, `...` (where x is an integer larger than the list size)<br>
+      Expected: Similar to previous.
+
+1. Selecting an event at the home page
+
+   1. Prerequisites: At the home page using the `home` command. Multiple events in the list.
+
+   1. Test case: `select_event 1`<br>
+      Expected: Selects the first event in the list. Displays the event page, displaying the contacts linked to the event and the tasks of the event. Details of the selected event shown in the status message.
+
+   1. Test case: `select_event 0`<br>
+      Expected: No event is selected. Error details shown in the status message.
+
+   1. Other incorrect select event commands to try: `select_event`, `select_event x`, `...` (where x is an integer larger than the list size)<br>
+      Expected: Similar to previous.
+
+1. Selecting an event after selecting an event
+
+   1. Prerequisites: Be on the selected event page using the `select_event x` command in which x represents an integer that is smaller than or equal to the event list size.
+
+   1. Test case: `select_event 1`<br>
+      Expected: Selects the first event in the list. Displays the event page, displaying the contacts linked to the event and the tasks of the event. Details of the selected event shown in the status message.
+
+   1. Test case: `select_event 0`<br>
+      Expected: No event is selected. Error details shown in the status message.
+
+   1. Other incorrect select event commands to try: `select_event`, `select_event x`, `...` (where x is an integer larger than the list size)<br>
+      Expected: Similar to previous.
 
 ### Saving data
 
 1. Dealing with missing/corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+   1. Prerequisite: Have opened and closed the application and confirmed that the files `data/jobfestgo.json` have been created in the same directory that JobFestGo was run from.
 
-1. _{ more test cases …​ }_
+   1. Manually edit the file `data/jobfestgo.json` with any text-editing software to break the JSON format or edit the keys in the JSON file. Alternatively, you can delete the file.
+
+   1. Relaunch the application.
+
+   1. Test case: `data/jobfestgo.json` was deleted.
+      Expected: JobFestGo starts with pre-loaded event, contact and task lists.
+
+   1. Test case: `data/jobfestgo.json` was corrupted.
+      Expected: JobFestGo starts with an empty event, contact, and task lists. All events, contacts and tasks are cleared.
