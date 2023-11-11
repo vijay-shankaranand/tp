@@ -239,12 +239,7 @@ Finds contacts whose names contain any of the given keywords.
 <box type="warning" style="background-color: #C73852; color: white">
 
 **WARNING:**
-This command is cumulative. The contacts found will be based on the list that is currently displayed.
-
-Imagine we have a contact `Hans` in JobFestGo.
-If you have selected a particular event and this event is not linked to `Hans`, `find_contact Hans` will not have any results.
-
-Repeatedly using this command will result in the list being successively filtered. The examples below illustrate this.
+This command is cumulative. Repeatedly using this command will result in the list being successively filtered based on the current displayed list. The examples below illustrate this.
 </box>
 
 Format: `find_contact KEYWORD [MORE_KEYWORDS]`
@@ -260,7 +255,8 @@ Examples:
 * `find_contact John` returns `john` and `John Doe`.
 * `find_contact doe` after `find_contact john` will return `John Doe` and not `john` who was originally in the result.
 * `find_contact alex david` returns `Alex Yeoh`, `David Li`
-
+* Suppose we have a contact `Hans` in JobFestGo.
+  `find_contact Hans` will not have any results, if the selected_event is not linked to `Hans`.
 
 ![result for 'find_contact alex david'](images/findAlexDavidResult.png)
 
@@ -320,12 +316,7 @@ Displays contacts tagged by any of the specified tags.
 <box type="warning" style="background-color: #C73852; color: white">
 
 **WARNING:**
-This command is cumulative. The contacts found will be based on the list that is currently displayed.
-
-Imagine we have a contact `Hans` in JobFestGo who is tagged by `vendor`.
-If you have selected a particular event and this event is not linked to `Hans`, `filter_by_tags vendor` will not display `Hans` in the result.
-
-Repeatedly using this command will result in the list being successively filtered. The examples below illustrate this.
+This command is cumulative. Repeatedly using this command will result in the list being successively filtered based on the current displayed list. The examples below illustrate this.
 </box>
 
 Format: `filter_by_tag TAG_NAME [MORE_TAG_NAMES]`
@@ -333,14 +324,14 @@ Format: `filter_by_tag TAG_NAME [MORE_TAG_NAMES]`
 * Tag names are case-insensitive. e.g. `Vendors` will match `vendors`.
 * Only full words will be matched e.g. `ven` will not match `vendors`.
 * Contacts tagged by at least one of the given tags will be returned (i.e. `OR` search).
-  e.g. `vendors customers` will return all contacts tagged by `vendors` and
- all contacts tagged by `customers`.
+  e.g. `vendors customers` will return all contacts tagged by `vendors` and all contacts tagged by `customers`.
 
 Examples:
 * `filter_by_tag vendors` returns all contacts tagged by the tag: vendor in JobFestGo.
 * `filter_by_tag vendors customers` returns all contacts tagged by the tag: `vendors` and
   all contacts tagged by the tag: `customers` in JobFestGo. The image below illustrates the result of this command.
-
+* Suppose we have a contact `Hans` in JobFestGo who is tagged by `vendor`.
+  `filter_by_tags vendor` will not display `Hans` in the result, if `Hans` is not linked to the current selected_event.
 
 ![result for 'filter_by_tag vendors customers'](images/filterByRoleResult.png)
 
@@ -429,7 +420,7 @@ Unlinks specified contacts from the specified event.
 Format: `unlink ev/EVENT_NAME c/CONTACT_NAME [c/MORE_CONTACT_NAMES]`
 
 * Event name and contact name should not have more than one whitespace in-between each word.
-* It functions similarly to `link` except for the fact that the input contacts and event for `unlink`
+* It functions similarly to [`link`](#linking-contacts-to-an-event-link) except for the fact that the input contacts and event for `unlink`
  must be currently linked. Otherwise, an error will be raised.
 
 Examples:
@@ -466,7 +457,7 @@ Format: `add_task td/TASK_DESCRIPTION d/DEADLINE ev/EVENT_NAME`
 * Deadline should not be before today's date.
 * Event name should be the **name of an already existing event**.
 * Tasks with a deadline after the event's date are allowed to be created to accommodate post-event related tasks such as After-Action Review.
-* Reminder will be shown on the home page of JobFestGo for tasks within 3 days of the deadline.
+* Reminders will be shown on the home page of JobFestGo for tasks within 3 days of the deadline.
 
 Examples:
 * `add_task td/Book Venue d/2023-12-23 ev/NUS Career Fair 2023` adds a `Book Venue` by `2023-12-23` task to the event `NUS Career Fair 2023`.
@@ -527,7 +518,7 @@ Marks the task specified by the task description and its associated event name i
 Format: `unmark_task td/TASK_DESCRIPTION ev/EVENT_NAME`
 
 * Task Description and Event Name should not have more than one whitespace in-between each word.
-* It works exactly the same way as `mark_task` except for the fact that `unmark_task` marks a completed task as not completed.
+* It works exactly the same way as [`mark_task`](#marking-a-task-mark-task) except for the fact that `unmark_task` marks a completed task as not completed.
 * You may `unmark_task` a task when you realize that you have not completed the task but have wrongly marked it as completed.
 * Errors will be raised if the specified task has already been unmarked.
 
@@ -554,7 +545,7 @@ Clears all entries from JobFestGo.
 <box type="warning" style="background-color: #C73852; color: white">
 
 **WARNING:**
-This command will delete all contacts, events and tasks from JobFestGo.
+This command is destructive. Once executed, it will delete all contacts, events and tasks from JobFestGo.
 This command cannot be undone. Proceed with caution.
 </box>
 
@@ -580,6 +571,7 @@ JobFestGo data are saved automatically as a JSON file `[JAR file location]/data/
 
 **Caution:**
 If your changes to the data file makes its format invalid, JobFestGo will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.
+
 </box>
 
 ### Archiving data files `[coming in v2.0]`
@@ -641,5 +633,6 @@ Action     | Format, Examples
 **Delete Task** | `delete_task td/TASK_DESCRIPTION ev/EVENT_NAME` <br> e.g. `delete_task td/Book Venue ev/NUS Career Fair 2023`
 **Mark Task** | `mark_task td/TASK_DESCRIPTION ev/EVENT_NAME` <br> e.g. `mark_task td/Book Venue ev/NUS Career Fair 2023`
 **Unmark Task** | `unmark_task td/TASK_DESCRIPTION ev/EVENT_NAME` <br> e.g. `unmark_task td/Book Venue ev/NUS Career Fair 2023`
-**Clear**  | `clear`
 **Help**   | `help`
+**Clear**  | `clear`
+**Exit**   | `exit`
