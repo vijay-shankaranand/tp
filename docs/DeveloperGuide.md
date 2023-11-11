@@ -182,11 +182,11 @@ The following activity diagram summarizes what happens when a user executes the 
 
 **Aspect: How home is designed**
 
-* **Alternative 1 (current choice):** A home command that users have to type in.
+* **Current choice:** A home command that users have to type in.
     * Pros: Easy to remember and type since it is only 4 letters. Easier to implement with JobFestGo being CLI based.
-    * Cons: Not as intuitive to use as Alternative 2.
+    * Cons: Not as intuitive to use as Alternative 1.
     <br></br>
-* **Alternative 2:** A home button in the accessibility bar right beside `File` and `Help`.
+* **Alternative 1:** A home button in the accessibility bar right beside `File` and `Help`.
     * Pros: Even easier to use as only one mouse click is required. No typing is needed.
     * Cons: Harder to implement.
 
@@ -222,11 +222,11 @@ The following activity diagram summarizes what happens when a user executes the 
 
 **Aspect: How select event executes**
 
-* **Alternative 1 (current choice):** Highlights the event selected.
+* **Current choice:** Highlights the event selected.
   * Pros: Visually appealing.
   * Cons: Slightly harder to implement.
     <br></br>
-* **Alternative 2:** Event list gets updated to only show the selected event.
+* **Alternative 1:** Event list gets updated to only show the selected event.
   * Pros: Easy to implement.
   * Cons: Users will have to consistently execute home command to view the other events.
 
@@ -260,11 +260,11 @@ The `AddTagCommand` object will then call `Model#updateFilteredTagList(Predicate
 
 The following sequence diagram shows how the add tag operation works:
 
-<puml src="diagrams/AddTagSequenceDiagram.puml" alt="SelectEventSequenceDiagram" />
+<puml src="diagrams/AddTagSequenceDiagram.puml" alt="AddTagSequenceDiagram" />
 
 <box type="info" seamless>
 
-**Note:** The lifeline for `AddTagCommandParser`, `AddTagCommand`, `CommandResult` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+**Note:** The lifeline for `AddTagCommandParser` and `AddTagCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
 </box>
 
@@ -274,10 +274,10 @@ The following sequence diagram shows how the add tag operation works:
 
 * **Current choice:** Users can input the tags comprising only of alphanumeric characters.
   * Pros: Easy to implement due to lesser parsing involved.
-  * Cons: Users cannot input tags comprising of non-alphanumeric characters, such as spaces and special characters.
+  * Cons: Users cannot input tags comprising non-alphanumeric characters, such as spaces and special characters.
 
-* **Alternative:** Users can input the tags comprising of alphanumeric characters and non-alphanumeric characters.
-  * Pros: Users can input tags comprising of non-alphanumeric characters, such as spaces and special characters.
+* **Alternative:** Users can input the tags comprising alphanumeric characters and non-alphanumeric characters.
+  * Pros: Users can input tags comprising non-alphanumeric characters, such as spaces and special characters.
   * Cons: Lesser uniqueness of tags as users can input tags with the same name but different non-alphanumeric characters.
 
 ### Link/unlink Feature
@@ -327,21 +327,21 @@ The `unlink` command does the opposite — it calls `Model#unlinkContactFrom
 
 **Aspect: How link/unlink command gets contacts and event:**
 
-* **Alternative 1 (current choice):** Gets contacts and event by names.
+* **Current choice:** Gets contacts and event by names.
     * Pros: Clearer for users to execute the command.
     * Cons: We must devise a new way of getting contacts and event by names since the default implementation is to get by index.
 
-* **Alternative 2:** Gets contacts and event by index.
+* **Alternative 1:** Gets contacts and event by index.
     * Pros: Easy to implement.
     * Cons: Users may be confused by multiple indices.
 
 **Aspect: How a mix of valid and invalid input should be handled:**
 
-* **Alternative 1 (current choice):** Does not perform any link/unlink operations once there is one invalid input encountered.
+* **Current choice:** Does not perform any link/unlink operations once there is one invalid input encountered.
     * Pros: Easy to implement.
     * Cons: Users need to reenter all other input once there is one invalid input.
 
-* **Alternative 2:** Links/Unlinks all valid input contacts while throwing an error for all invalid contacts.
+* **Alternative 1:** Links/Unlinks all valid input contacts while throwing an error for all invalid contacts.
     * Pros: Users only need to correct the invalid input.
     * Cons: The exceptions are hard to handle.
 
@@ -422,11 +422,11 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 **Aspect: How undo & redo executes:**
 
-* **Alternative 1 (current choice):** Saves the entire address book.
+* **Current choice:** Saves the entire address book.
   * Pros: Easy to implement.
   * Cons: May have performance issues in terms of memory usage.
 
-* **Alternative 2:** Individual command knows how to undo/redo by
+* **Alternative 1:** Individual command knows how to undo/redo by
   itself.
   * Pros: Will use less memory (e.g. for `delete_contact`, just save the contact being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
