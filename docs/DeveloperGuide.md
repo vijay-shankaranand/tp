@@ -233,7 +233,7 @@ The following activity diagram summarizes what happens when a user executes the 
 
 ### Add Tag Feature
 
-### Implementation
+#### Implementation
 
 The add tag mechanism is facilitated by `JobFestGo` as well as its observable lists for `Tag`.
 
