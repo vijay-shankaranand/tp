@@ -129,7 +129,7 @@ The `Model` component,
 
 <box type="info" seamless>
 
-**Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Contact` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Contact` needing their own `Tag` objects.<br>
+**Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `JobFestGo`, which `Contact` references. This allows `JobFestGo` to only require one `Tag` object per unique tag, instead of each `Contact` needing their own `Tag` objects.<br>
 
 <puml src="diagrams/BetterModelClassDiagram.puml" width="450" />
 
@@ -234,42 +234,42 @@ The following activity diagram summarizes what happens when a user executes the 
 
 #### Proposed Implementation
 
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+The proposed undo/redo mechanism is facilitated by `VersionedJobFestGo`. It extends `JobFestGo` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
 
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
+* `VersionedJobFestGo#commit()` — Saves the current address book state in its history.
+* `VersionedJobFestGo#undo()` — Restores the previous address book state from its history.
+* `VersionedJobFestGo#redo()` — Restores a previously undone address book state from its history.
 
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
+These operations are exposed in the `Model` interface as `Model#commitJobFestGo()`, `Model#undoJobFestGo()` and `Model#redoJobFestGo()` respectively.
 
 Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
 
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
+Step 1. The user launches the application for the first time. The `VersionedJobFestGo` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
 
 <puml src="diagrams/UndoRedoState0.puml" alt="UndoRedoState0" />
 
-Step 2. The user executes `delete_contact 5` command to delete the 5th contact in the address book. The `delete_contact` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete_contact 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+Step 2. The user executes `delete_contact 5` command to delete the 5th contact in the address book. The `delete_contact` command calls `Model#commitJobFestGo()`, causing the modified state of the address book after the `delete_contact 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
 
 <puml src="diagrams/UndoRedoState1.puml" alt="UndoRedoState1" />
 
-Step 3. The user executes `add_contact n/David …​` to add a new contact. The `add_contact` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+Step 3. The user executes `add_contact n/David …​` to add a new contact. The `add_contact` command also calls `Model#commitJobFestGo()`, causing another modified address book state to be saved into the `addressBookStateList`.
 
 <puml src="diagrams/UndoRedoState2.puml" alt="UndoRedoState2" />
 
 <box type="info" seamless>
 
-**Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
+**Note:** If a command fails its execution, it will not call `Model#commitJobFestGo()`, so the address book state will not be saved into the `addressBookStateList`.
 
 </box>
 
-Step 4. The user now decides that adding the contact was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+Step 4. The user now decides that adding the contact was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoJobFestGo()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
 
 <puml src="diagrams/UndoRedoState3.puml" alt="UndoRedoState3" />
 
 
 <box type="info" seamless>
 
-**Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
+**Note:** If the `currentStatePointer` is at index 0, pointing to the initial JobFestGo state, then there are no previous JobFestGo states to restore. The `undo` command uses `Model#canUndoJobFestGo()` to check if this is the case. If so, it will return an error to the user rather
 than attempting to perform the undo.
 
 </box>
@@ -284,19 +284,19 @@ The following sequence diagram shows how the undo operation works:
 
 </box>
 
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
+The `redo` command does the opposite — it calls `Model#redoJobFestGo()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
 
 <box type="info" seamless>
 
-**Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+**Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone JobFestGo states to restore. The `redo` command uses `Model#canRedoJobFestGo()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
 
 </box>
 
-Step 5. The user then decides to execute the command `view_contacts`. Commands that do not modify the address book, such as `view_contacts`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
+Step 5. The user then decides to execute the command `view_contacts`. Commands that do not modify the address book, such as `view_contacts`, will usually not call `Model#commitJobFestGo()`, `Model#undoJobFestGo()` or `Model#redoJobFestGo()`. Thus, the `addressBookStateList` remains unchanged.
 
 <puml src="diagrams/UndoRedoState4.puml" alt="UndoRedoState4" />
 
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add_contact n/David …​` command. This is the behavior that most modern desktop applications follow.
+Step 6. The user executes `clear`, which calls `Model#commitJobFestGo()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add_contact n/David …​` command. This is the behavior that most modern desktop applications follow.
 
 <puml src="diagrams/UndoRedoState5.puml" alt="UndoRedoState5" />
 
@@ -359,21 +359,25 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | job fest event planner                     | see usage instructions       | refer to instructions when I forget how to use JobFestGo                                    |
 | `* * *`  | job fest event planner                     | add a new contact             |                                                                                             |
 | `* * *`  | job fest event planner                                       | delete a contact              | remove entries that I no longer need                                                        |
-| `* * *`  | job fest event planner                                       | find a contact by name        | locate details of contacts without having to go through the entire list                      |
+| `* * *`  | job fest event planner                                       | find a contact by name        | locate details of contacts without having to go through the entire list                     |
 | `* * *`  | job fest event planner                     | view the entire contact list |                                                                                             |
-| `* *`    | job fest event planner                                       | hide private contact details | minimize chance of someone else seeing them by accident                                     |
-| `* *`    | job fest event planner                     | add tags                     | add to the pool of use categories already available                                         |
+| `* *`    | job fest event planner                     | add tags                     | add to the pool of roles already available                                                  |
 | `* *`    | job fest event planner                     | view all tags                | remember contacts of a certain category to contact them for events                          |
-| `* *`     | job fest event planner                     | be able to delete tags       | can easily identify who I should be cold calling among my contacts without unnecessary tags |
+| `* *`     | job fest event planner                     | delete tags       | can easily identify who I should be cold calling among my contacts without unnecessary tags |
 | `* *`     | job fest event planner                     | filter contacts by tags      | conveniently view all the contacts tagged by specific tags                                  |
 | `* *`    | job fest event planner                        | add a new event              | keep track of the events I have to plan                                                     |
 | `* *`     | job fest event planner                     | view all events              | remember all the events I am involved in so far                                             |
-| `* *`    | job fest event planner                        | be able to delete events     | remove events I no longer need                                                              |
-| `* *`     | job fest event planner                     | be able to select events     | can easily view the contacts and tasks to do for each particular event                      |
+| `* *`    | job fest event planner                        | delete events     | remove events I no longer need                                                              |
+| `* *`     | job fest event planner                     | select events     | can easily view the contacts and tasks to do for each particular event                      |
 | `* *`     | job fest event planner                     | link contacts to events      | remember which event the specific contacts are involved in                                  |
 | `* *`    | job fest event planner                        | add a new task for an event  | remember the tasks I need to do for the event                                               |
+| `* *`    | job fest event planner                        | delete a task for an event             | remove the irrelevant and completed tasks from an event |
+| `* *`    | job fest event planner                        | mark a task as completed for an event  | keep track of the completed tasks                                                           |
+| `* *`    | job fest event planner                        | mark a task as incomplete for an event | keep track of the tasks that are not completed                                              |
+| `* *`    | job fest event planner                        | view the tasks due soon                | prioritise the tasks according to its deadline                                              |
+| `* *`    | job fest event planner                        | clear all the data                     | start a new event planning process with new data                                            |
 | `* *`      | job fest event planner | return to the home page      |                                                                                             |
-| `*`      | job fest event planner | sort contacts by name         | locate a contact easily                                                                      |
+| `*`      | job fest event planner | sort contacts by name         | locate a contact easily                                                                     |
 
 
 *{More to be added}*
