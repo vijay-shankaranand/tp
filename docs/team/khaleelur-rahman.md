@@ -57,9 +57,12 @@ Given below are my contributions to the project:
 <br>
 
 * **Contributions to the DG**:
-  - Did up the implementation of `add_tag` feature, detailing the thought process and added use cases
-  - Did up the implementation of `delete_event` feature, detailing the thought process and added use cases
-  - Did up the implementation of `add_task` feature, detailing the thought process and added use cases
+  - Did up the implementation of `add_tag` feature, detailing the thought process and considerations together with a UML diagram
+  - Added user stories for `add_tag`, `delete_event` and `add_task` commands
+  - Amended user stories section to fit the target audience
+  - Added use cases for `add_tag`, `delete_event` and `add_task` commands
+  - Added instructions for manual testing for `add_tag`, `delete_event` and `add_task` commands
+  - Removed instances of AB3 and replaced it with JobFestGo
 
 <br>
 
