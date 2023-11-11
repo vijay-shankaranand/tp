@@ -256,7 +256,7 @@ Examples:
 * `find_contact doe` after `find_contact john` will return `John Doe` and not `john` who was originally in the result.
 * `find_contact alex david` returns `Alex Yeoh`, `David Li`
 * Suppose we have a contact `Hans` in JobFestGo.
-  `find_contact Hans` will not have any results, if the selected_event is not linked to `Hans`.
+  `select_event 1` followed by `find_contact Hans` will not include `Hans`, if `Hans` is not linked to the first event.
 
 ![result for 'find_contact alex david'](images/findAlexDavidResult.png)
 
@@ -331,7 +331,7 @@ Examples:
 * `filter_by_tag vendors customers` returns all contacts tagged by the tag: `vendors` and
   all contacts tagged by the tag: `customers` in JobFestGo. The image below illustrates the result of this command.
 * Suppose we have a contact `Hans` in JobFestGo who is tagged by `vendor`.
-  `filter_by_tags vendor` will not display `Hans` in the result, if `Hans` is not linked to the current selected_event.
+  `select_event 1` followed by `filter_by_tag vendor` will not include `Hans`, if `Hans` is not linked to the first event.
 
 ![result for 'filter_by_tag vendors customers'](images/filterByRoleResult.png)
 
