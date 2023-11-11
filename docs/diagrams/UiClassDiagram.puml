@@ -22,6 +22,8 @@ Class TaskListPanel
 Class TaskCard
 Class StatusBarFooter
 Class CommandBox
+Class ReminderListPanel
+Class ReminderCard
 }
 
 package Model <<Rectangle>> {
@@ -43,6 +45,7 @@ MainWindow *-down-> "1" EventContactDisplay
 MainWindow *-down-> "1" ContactListPanel
 MainWindow *-down-> "1" StatusBarFooter
 MainWindow *-down-> "1" TagListPanel
+MainWindow *-down-> "1" ReminderListPanel
 MainWindow *-down-> "1" EventListPanel
 MainWindow --> "0..1" HelpWindow
 
@@ -54,6 +57,7 @@ ContactListPanel -down-> "*" ContactCard
 TagListPanel -down-> "*" TagCard
 EventListPanel -down-> "*" EventCard
 TaskListPanel -down-> "*" TaskCard
+ReminderListPanel -down-> "*" ReminderCard
 
 MainWindow -left-|> UiPart
 
@@ -72,6 +76,7 @@ ContactCard ..> Model
 TagCard ..> Model
 EventCard ..> Model
 TaskCard ..> Model
+ReminderCard ..> Model
 UiManager -right-> Logic
 MainWindow -left-> Logic
 
