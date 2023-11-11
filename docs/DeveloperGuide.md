@@ -157,7 +157,7 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### Return to home page feature
+### Return to home page Feature
 
 The home mechanism is facilitated by `JobFestGo` as well as its observable lists for `Contact`, `Event`, as well as `Task`.
 
@@ -275,7 +275,7 @@ The following sequence diagram shows how the add tag operation works:
 * **Current choice:** Users can input the tags comprising only of alphanumeric characters.
   * Pros: Easy to implement due to lesser parsing involved.
   * Cons: Users cannot input tags comprising non-alphanumeric characters, such as spaces and special characters.
-
+  <br></br>
 * **Alternative:** Users can input the tags comprising alphanumeric characters and non-alphanumeric characters.
   * Pros: Users can input tags comprising non-alphanumeric characters, such as spaces and special characters.
   * Cons: Lesser uniqueness of tags as users can input tags with the same name but different non-alphanumeric characters.
@@ -330,7 +330,7 @@ The `unlink` command does the opposite — it calls `Model#unlinkContactFrom
 * **Current choice:** Gets contacts and event by names.
     * Pros: Clearer for users to execute the command.
     * Cons: We must devise a new way of getting contacts and event by names since the default implementation is to get by index.
-
+    <br></br>
 * **Alternative 1:** Gets contacts and event by index.
     * Pros: Easy to implement.
     * Cons: Users may be confused by multiple indices.
@@ -340,7 +340,7 @@ The `unlink` command does the opposite — it calls `Model#unlinkContactFrom
 * **Current choice:** Does not perform any link/unlink operations once there is one invalid input encountered.
     * Pros: Easy to implement.
     * Cons: Users need to reenter all other input once there is one invalid input.
-
+    <br></br>
 * **Alternative 1:** Links/Unlinks all valid input contacts while throwing an error for all invalid contacts.
     * Pros: Users only need to correct the invalid input.
     * Cons: The exceptions are hard to handle.
@@ -425,7 +425,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 * **Current choice:** Saves the entire address book.
   * Pros: Easy to implement.
   * Cons: May have performance issues in terms of memory usage.
-
+  <br></br>
 * **Alternative 1:** Individual command knows how to undo/redo by
   itself.
   * Pros: Will use less memory (e.g. for `delete_contact`, just save the contact being deleted).

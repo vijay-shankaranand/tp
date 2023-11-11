@@ -161,7 +161,7 @@ Format: `add_contact n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 * Phone number does not provide support for special characters, such as `+` and `-`, as it is more targeted for job fest event planners in **Singapore**.
 * Email should be in the appropriate (@xxx.com) format.
 * A contact can have any number of tags.
-* Only tags from tags list can be used for tagging a contact.
+* Only tags from the tags list can be used for tagging a contact.
 * A contact cannot be added if their phone number already exists.
 * A contact cannot be added if their name already exists.
 
@@ -411,7 +411,7 @@ Examples:
 
 <div style="page-break-after: always;"></div>
 
-### Unlinking contacts from an event: `unlink`
+### Unlinking contacts from an event : `unlink`
 <box type="info" style="background-color:#1e90ff; color: white;">
 <span slot="icon" style="color: white;"><md>:fas-address-book:</md></span>
 Unlinks specified contacts from the specified event.
@@ -451,8 +451,8 @@ Adds a task to an event in JobFestGo.
 
 Format: `add_task td/TASK_DESCRIPTION d/DEADLINE ev/EVENT_NAME`
 
-* Task Description can take any alphanumeric value, spaces and any of the following characters: `-`, `,`, `.`, `/`, `(`, `)`
-* Task Description and Event Name should not have more than one whitespace in-between each word.
+* Task description can take any alphanumeric value, spaces and any of the following characters: `-`, `,`, `.`, `/`, `(`, `)`
+* Task description and event name should not have more than one whitespace in-between each word.
 * Deadline is a date in the format YYYY-MM-DD.
 * Deadline should not be before today's date.
 * Event name should be the **name of an already existing event**.
@@ -462,7 +462,7 @@ Format: `add_task td/TASK_DESCRIPTION d/DEADLINE ev/EVENT_NAME`
 Examples:
 * `add_task td/Book Venue d/2023-12-23 ev/NUS Career Fair 2023` adds a `Book Venue` by `2023-12-23` task to the event `NUS Career Fair 2023`.
 
-### Deleting a task: `delete_task`
+### Deleting a task : `delete_task`
 <box type="info" style="background-color:#1e90ff; color: white;">
 <span slot="icon" style="color: white;"><md>:fas-address-book:</md></span>
 Deletes the task specified by the task description from its associated event in JobFestGo.
@@ -480,13 +480,19 @@ Format: `delete_task td/TASK_DESCRIPTION ev/EVENT_NAME`
 * Both the `TASK_DESCRIPTION` and the `EVENT_NAME` are case-insensitive.
  e.g. `delete_task td/Book Venue ev/NUS Career Fair 2023` and `delete_task td/book venue ev/nus Career FAIR 2023`
  will perform the same operation.
-* Errors will be raised if the specified event does not exist or the event does not have the specified task.
- If such situation happens, you may double-check the task description and the event name and re-enter valid inputs.
 
 Examples:
 * `delete_task td/Book Venue ev/NUS Career Fair 2023` deletes task `Book Venue` from the task list of the event `NUS Career Fair 2023`.
 
-### Marking a task: `mark_task`
+<box type="warning" style="background-color: #FF6D6A; color: white">
+<span slot="icon" style="color: white;"><md>:fas-close:</md></span>
+
+**Errors:**
+Errors will be raised if the specified event does not exist or the event does not have the specified task.
+If such a situation happens, you may double-check the task description and the event name and re-enter valid inputs.
+</box>
+
+### Marking a task : `mark_task`
 <box type="info" style="background-color:#1e90ff; color: white;">
 <span slot="icon" style="color: white;"><md>:fas-address-book:</md></span>
 Marks the task specified by the task description and its associated event name in JobFestGo as completed.
@@ -509,7 +515,7 @@ Examples:
 
     ![result for 'mark_task'](images/markTaskResult.png)
 
-### Unmarking a task: `unmark_task`
+### Unmarking a task : `unmark_task`
 <box type="info" style="background-color:#1e90ff; color: white;">
 <span slot="icon" style="color: white;"><md>:fas-address-book:</md></span>
 Marks the task specified by the task description and its associated event name in JobFestGo as not completed.
@@ -517,7 +523,7 @@ Marks the task specified by the task description and its associated event name i
 
 Format: `unmark_task td/TASK_DESCRIPTION ev/EVENT_NAME`
 
-* Task Description and Event Name should not have more than one whitespace in-between each word.
+* Task description and event name should not have more than one whitespace in-between each word.
 * It works exactly the same way as [`mark_task`](#marking-a-task-mark-task) except for the fact that `unmark_task` marks a completed task as not completed.
 * You may `unmark_task` a task when you realize that you have not completed the task but have wrongly marked it as completed.
 * Errors will be raised if the specified task has already been unmarked.
@@ -593,7 +599,7 @@ _Details coming soon ..._
 **A**: Given below are the steps to launch JobFestGo using CLI:
 <br>
 1. Open the command prompt
-1. Navigate to the directory where the JAR file is located using cd [JAR file location]
+1. Navigate to the directory where the JAR file is located using `cd [JAR file location]`
 1. Type `java -jar jobfestgo.jar` and press enter
 1. JobFestGo should launch
 
@@ -605,7 +611,7 @@ can download it [here](https://www.oracle.com/java/technologies/downloads/#java1
 
 ## Known issues
 
-1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
+1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy to this issue is to delete the `preferences.json` file created by the application before running the application again.
 
 --------------------------------------------------------------------------------------------------------------------
 
