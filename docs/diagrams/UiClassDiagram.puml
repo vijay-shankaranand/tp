@@ -45,13 +45,13 @@ MainWindow *-down-> "1" EventContactDisplay
 MainWindow *-down-> "1" ContactListPanel
 MainWindow *-down-> "1" StatusBarFooter
 MainWindow *-down-> "1" TagListPanel
-MainWindow *-down-> "1" ReminderListPanel
 MainWindow *-down-> "1" EventListPanel
 MainWindow --> "0..1" HelpWindow
 
 EventContactDisplay -down-> "1" ContactListPanel
 EventContactDisplay -down-> "1" EventListPanel
 EventContactDisplay -down-> "1" TaskListPanel
+EventContactDisplay *-down-> "1" ReminderListPanel
 
 ContactListPanel -down-> "*" ContactCard
 TagListPanel -down-> "*" TagCard
