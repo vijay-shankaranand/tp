@@ -129,7 +129,7 @@ The `Model` component,
 
 <box type="info" seamless>
 
-**Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Contact` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Contact` needing their own `Tag` objects.<br>
+**Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `JobFestGo`, which `Contact` references. This allows `JobFestGo` to only require one `Tag` object per unique tag, instead of each `Contact` needing their own `Tag` objects.<br>
 
 <puml src="diagrams/BetterModelClassDiagram.puml" width="450" />
 
@@ -182,11 +182,11 @@ The following activity diagram summarizes what happens when a user executes the 
 
 **Aspect: How home is designed**
 
-* **Alternative 1 (current choice):** A home command that users have to type in.
+* **Current choice:** A home command that users have to type in.
     * Pros: Easy to remember and type since it is only 4 letters. Easier to implement with JobFestGo being CLI based.
-    * Cons: Not as intuitive to use as Alternative 2.
+    * Cons: Not as intuitive to use as Alternative 1.
     <br></br>
-* **Alternative 2:** A home button in the accessibility bar right beside `File` and `Help`.
+* **Alternative 1:** A home button in the accessibility bar right beside `File` and `Help`.
     * Pros: Even easier to use as only one mouse click is required. No typing is needed.
     * Cons: Harder to implement.
 
@@ -222,13 +222,63 @@ The following activity diagram summarizes what happens when a user executes the 
 
 **Aspect: How select event executes**
 
-* **Alternative 1 (current choice):** Highlights the event selected.
+* **Current choice:** Highlights the event selected.
   * Pros: Visually appealing.
   * Cons: Slightly harder to implement.
     <br></br>
-* **Alternative 2:** Event list gets updated to only show the selected event.
+* **Alternative 1:** Event list gets updated to only show the selected event.
   * Pros: Easy to implement.
   * Cons: Users will have to consistently execute home command to view the other events.
+
+### Add Tag Feature
+
+#### Implementation
+
+The add tag mechanism is facilitated by `JobFestGo` as well as its observable lists for `Tag`.
+
+The mechanism interacts with both the UI and the `filteredTags` list stored within `JobFestGo`.
+
+It includes the following operations in ModelManager which is implemented by Model:
+
+* `Model#addTag(Tag)` — Adds a tag to JobFestGo.
+* `Model#updateFilteredTagList(Predicate)` — Updates the filtered tag list according to the given predicate.
+
+Given below is an example usage scenario and how the add tag mechanism behaves at each step:
+
+**Step 1.** The user launches the application for the first time. The `JobFestGo` will be initialized with the initial address book state.
+
+**Step 2.** The user executes `add_tag t/vendor` command to add a new tag `Vendor`in JobFestGo.
+The parser will parse the command and create a new `AddTagCommand` object, if the entered tag is valid.
+<box type="info" seamless>
+
+**Note:** If the tag entered contains non-alphanumeric characters, `AddTagCommandParser` will throw an error when creating the `AddTagCommand` object.
+
+</box>
+
+**Step 3.** The `AddTagCommand` object, created in step 2, will call `Model#addTag(Tag)` to add the tag to JobFestGo.
+The `AddTagCommand` object will then call `Model#updateFilteredTagList(Predicate)` to update the filtered tag list.
+
+The following sequence diagram shows how the add tag operation works:
+
+<puml src="diagrams/AddTagSequenceDiagram.puml" alt="AddTagSequenceDiagram" />
+
+<box type="info" seamless>
+
+**Note:** The lifeline for `AddTagCommandParser` and `AddTagCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</box>
+
+#### Design considerations:
+
+**Aspect: How the add tag command accepts tag inputs**
+
+* **Current choice:** Users can input the tags comprising only of alphanumeric characters.
+  * Pros: Easy to implement due to lesser parsing involved.
+  * Cons: Users cannot input tags comprising non-alphanumeric characters, such as spaces and special characters.
+
+* **Alternative:** Users can input the tags comprising alphanumeric characters and non-alphanumeric characters.
+  * Pros: Users can input tags comprising non-alphanumeric characters, such as spaces and special characters.
+  * Cons: Lesser uniqueness of tags as users can input tags with the same name but different non-alphanumeric characters.
 
 ### Link/unlink Feature
 
@@ -277,21 +327,21 @@ The `unlink` command does the opposite — it calls `Model#unlinkContactFrom
 
 **Aspect: How link/unlink command gets contacts and event:**
 
-* **Alternative 1 (current choice):** Gets contacts and event by names.
+* **Current choice:** Gets contacts and event by names.
     * Pros: Clearer for users to execute the command.
     * Cons: We must devise a new way of getting contacts and event by names since the default implementation is to get by index.
 
-* **Alternative 2:** Gets contacts and event by index.
+* **Alternative 1:** Gets contacts and event by index.
     * Pros: Easy to implement.
     * Cons: Users may be confused by multiple indices.
 
 **Aspect: How a mix of valid and invalid input should be handled:**
 
-* **Alternative 1 (current choice):** Does not perform any link/unlink operations once there is one invalid input encountered.
+* **Current choice:** Does not perform any link/unlink operations once there is one invalid input encountered.
     * Pros: Easy to implement.
     * Cons: Users need to reenter all other input once there is one invalid input.
 
-* **Alternative 2:** Links/Unlinks all valid input contacts while throwing an error for all invalid contacts.
+* **Alternative 1:** Links/Unlinks all valid input contacts while throwing an error for all invalid contacts.
     * Pros: Users only need to correct the invalid input.
     * Cons: The exceptions are hard to handle.
 
@@ -299,41 +349,41 @@ The `unlink` command does the opposite — it calls `Model#unlinkContactFrom
 
 #### Proposed Implementation
 
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+The proposed undo/redo mechanism is facilitated by `VersionedJobFestGo`. It extends `JobFestGo` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
 
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
+* `VersionedJobFestGo#commit()` — Saves the current address book state in its history.
+* `VersionedJobFestGo#undo()` — Restores the previous address book state from its history.
+* `VersionedJobFestGo#redo()` — Restores a previously undone address book state from its history.
 
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
+These operations are exposed in the `Model` interface as `Model#commitJobFestGo()`, `Model#undoJobFestGo()` and `Model#redoJobFestGo()` respectively.
 
 Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
 
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
+Step 1. The user launches the application for the first time. The `VersionedJobFestGo` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
 
 <puml src="diagrams/UndoRedoState0.puml" alt="UndoRedoState0" />
 
-Step 2. The user executes `delete_contact 5` command to delete the 5th contact in the address book. The `delete_contact` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete_contact 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+Step 2. The user executes `delete_contact 5` command to delete the 5th contact in the address book. The `delete_contact` command calls `Model#commitJobFestGo()`, causing the modified state of the address book after the `delete_contact 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
 
 <puml src="diagrams/UndoRedoState1.puml" alt="UndoRedoState1" />
 
-Step 3. The user executes `add_contact n/David …​` to add a new contact. The `add_contact` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+Step 3. The user executes `add_contact n/David …​` to add a new contact. The `add_contact` command also calls `Model#commitJobFestGo()`, causing another modified address book state to be saved into the `addressBookStateList`.
 
 <puml src="diagrams/UndoRedoState2.puml" alt="UndoRedoState2" />
 
 <box type="info" seamless>
 
-**Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
+**Note:** If a command fails its execution, it will not call `Model#commitJobFestGo()`, so the address book state will not be saved into the `addressBookStateList`.
 
 </box>
 
-Step 4. The user now decides that adding the contact was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+Step 4. The user now decides that adding the contact was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoJobFestGo()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
 
 <puml src="diagrams/UndoRedoState3.puml" alt="UndoRedoState3" />
 
 <box type="info" seamless>
 
-**Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
+**Note:** If the `currentStatePointer` is at index 0, pointing to the initial JobFestGo state, then there are no previous JobFestGo states to restore. The `undo` command uses `Model#canUndoJobFestGo()` to check if this is the case. If so, it will return an error to the user rather
 than attempting to perform the undo.
 
 </box>
@@ -348,19 +398,19 @@ The following sequence diagram shows how the undo operation works:
 
 </box>
 
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
+The `redo` command does the opposite — it calls `Model#redoJobFestGo()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
 
 <box type="info" seamless>
 
-**Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+**Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone JobFestGo states to restore. The `redo` command uses `Model#canRedoJobFestGo()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
 
 </box>
 
-Step 5. The user then decides to execute the command `view_contacts`. Commands that do not modify the address book, such as `view_contacts`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
+Step 5. The user then decides to execute the command `view_contacts`. Commands that do not modify the address book, such as `view_contacts`, will usually not call `Model#commitJobFestGo()`, `Model#undoJobFestGo()` or `Model#redoJobFestGo()`. Thus, the `addressBookStateList` remains unchanged.
 
 <puml src="diagrams/UndoRedoState4.puml" alt="UndoRedoState4" />
 
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add_contact n/David …​` command. This is the behavior that most modern desktop applications follow.
+Step 6. The user executes `clear`, which calls `Model#commitJobFestGo()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add_contact n/David …​` command. This is the behavior that most modern desktop applications follow.
 
 <puml src="diagrams/UndoRedoState5.puml" alt="UndoRedoState5" />
 
@@ -372,11 +422,11 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 **Aspect: How undo & redo executes:**
 
-* **Alternative 1 (current choice):** Saves the entire address book.
+* **Current choice:** Saves the entire address book.
   * Pros: Easy to implement.
   * Cons: May have performance issues in terms of memory usage.
 
-* **Alternative 2:** Individual command knows how to undo/redo by
+* **Alternative 1:** Individual command knows how to undo/redo by
   itself.
   * Pros: Will use less memory (e.g. for `delete_contact`, just save the contact being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
@@ -425,7 +475,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | job fest event planner                                       | delete a contact                | remove entries that I no longer need                                                        |
 | `* * *`  | job fest event planner                                       | find a contact by name          | locate details of contacts without having to go through the entire list                     |
 | `* * *`  | job fest event planner                     | view the entire contact list    |                                                                                             |
-| `* *`    | job fest event planner                                       | hide private contact details    | minimize chance of someone else seeing them by accident                                     |
 | `* *`    | job fest event planner                     | add tags                        | add to the pool of use categories already available                                         |
 | `* *`    | job fest event planner                     | view all tags                   | remember contacts of a certain category to contact them for events                          |
 | `* *`     | job fest event planner                     | be able to delete tags          | can easily identify who I should be cold calling among my contacts without unnecessary tags |
@@ -439,9 +488,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | job fest event planner                        | add a new task for an event     | remember the tasks I need to do for the event                                               |
 | `* *`    | job fest event planner                        | delete a task from an event     | remove tasks that I no longer need                                                          |
 | `* *`    | job fest event planner                        | mark a task as completed or not | easily check the progress of my tasks                                                       |
+| `* *`    | job fest event planner                        | clear all the data                     | start a new event planning process with new data                                            |
 | `* *`      | job fest event planner | return to the home page         |                                                                                             |
 | `*`      | job fest event planner | sort contacts by name           | locate a contact easily                                                                     |
-
 
 *{More to be added}*
 
@@ -552,12 +601,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
    Use case ends.
 
 **Extensions**
-* 2a. Missing `t/` in the command.
+* 2a. Missing tag name.
+
     * 2a1. JobFestGo shows an error message.
 
       Use case resumes at step 2.
 
-* 2b. Missing tag name.
+* 2b. The given tag name contains non-alphanumeric characters.
+
     * 2b1. JobFestGo shows an error message.
 
       Use case resumes at step 2.
@@ -599,15 +650,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-* 3b. Missing `t/` in the command.
+* 3b. Missing tag name.
 
     * 3b1. JobFestGo shows an error message.
-
-      Use case resumes at step 2.
-
-* 3c. Missing tag name.
-
-    * 3c1. JobFestGo shows an error message.
 
       Use case resumes at step 2.
 
@@ -797,15 +842,21 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-* 1b. Date is invalid.
+* 1b. Task description contains non-alphanumeric characters except `-,./() `.
 
-    * 1b1. JobFestGo informs user that date is invalid.
+    * 1b1. JobFestGo informs user that task description contains non-alphanumeric characters.
+
+      Use case ends.
+  
+* 1c. Date is invalid.
+
+    * 1c1. JobFestGo informs user that date is invalid.
 
       Use case ends.
 
 * 1c. Event does not exist.
 
-    * 1c1. JobFestGo informs user that event does not already exist.
+    * 1d1. JobFestGo informs user that event does not already exist.
 
       Use case ends.
 
@@ -1150,6 +1201,47 @@ testers are expected to do more *exploratory* testing.
    1. Other incorrect delete commands to try: `find_contact @`, `...`<br>
       Expected: Similar to previous.
 
+### Adding a tag
+
+1. Adding a tag while all tags are being shown
+
+   1. Prerequisites: List all tags using the `view_tags` command. Multiple tags in the list.
+
+   1. Test case: `add_tag t/clients`<br>
+      Expected: `clients` tag is added. Details of the added tag shown in the status message. Returns back to home page.
+
+   1. Test case: `add_tag t/`<br>
+      Expected: No tag is added. Error details shown in the status message. Returns back to home page.
+
+   1. Other incorrect add tag commands to try: `add_tag`, `add_tag x`, `...`<br>
+      Expected: Similar to previous.
+
+2. Adding a tag while on the home page
+
+   1. Prerequisites: Be on the home screen using the `home` command.
+
+   2. Test case: `add_tag t/clients`<br>
+      Expected: `clients` tag is added. Details of the added tag shown in the status message.
+
+   3. Test case: `add_tag t/`<br>
+      Expected: No tag is added. Error details shown in the status message.
+
+   4. Other incorrect add tag commands to try: `add_tag`, `add_tag x`, `...`<br>
+      Expected: Similar to previous.
+
+3. Adding a tag after selecting an event
+
+   1. Prerequisites: Be on the selected event page using the `select_event x` command in which x represents an integer that is smaller than or equal to the event list size.
+
+   2. Test case: `add_tag t/clients`<br>
+      Expected: `clients` tag is added. Details of the added tag shown in the status message. Returns back to home page.
+
+   3. Test case: `add_tag t/`<br>
+      Expected: No tag is added. Error details shown in the status message. Returns back to home page.
+
+   4. Other incorrect add tag commands to try: `add_tag`, `add_tag x`, `...`<br>
+      Expected: Similar to previous.
+
 ### Viewing all tags
 
 1. Viewing all tags
@@ -1182,7 +1274,7 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: Be on the home screen using the `home` command.
 
    1. Test case: `delete_tag t/clients`<br>
-      Expected: `clients` tag is deleted. Contacts having the `clients` tag has the tag removed from the. Details of the deleted tag shown in the status message.
+      Expected: `clients` tag is deleted. Contacts having the `clients` tag has the tag removed from the list. Details of the deleted tag shown in the status message.
 
    1. Test case: `delete_tag t/`<br>
       Expected: No tag is deleted. Error details shown in the status message.
@@ -1201,6 +1293,47 @@ testers are expected to do more *exploratory* testing.
       Expected: No tag is deleted. Error details shown in the status message.
 
    1. Other incorrect delete tag commands to try: `delete_tag`, `delete_tag x`, `...`<br>
+      Expected: Similar to previous.
+
+### Deleting an event
+
+1. Deleting an event while all events are being shown
+
+   1. Prerequisites: List all events using the `view_events` command. Multiple events in the list.
+
+   2. Test case: `delete_event 1`<br>
+      Expected: First event is deleted from the list. Details of the deleted event shown in the status message. Returns back to home page.
+
+   3. Test case: `delete_event 0`<br>
+      Expected: No event is deleted. Error details shown in the status message. Returns back to home page.
+
+   4. Other incorrect delete event commands to try: `delete_event`, `delete_event x`, `...` (where x is larger than the list size)<br>
+      Expected: Similar to previous.
+
+2. Deleting an event while on the home page
+
+   1. Prerequisites: Be on the home screen using the `home` command. Event list should be displayed on the left.
+
+   2. Test case: `delete_event 2`<br>
+      Expected: Second event is deleted from the list. Details of the deleted event shown in the status message.
+
+   3. Test case: `delete_event 0`<br>
+      Expected: No event is deleted. Error details shown in the status message.
+
+   4. Other incorrect delete event commands to try: `delete_event`, `delete_event x`, `...` (where x is larger than the list size)<br>
+      Expected: Similar to previous.
+
+3. Deleting an event after selecting an event
+
+   1. Prerequisites: Be on the selected event page using the `select_event x` command in which x represents an integer that is smaller than or equal to the event list size.
+
+   2. Test case: `delete_event 1`<br>
+      Expected: First event is deleted from the list. Details of the deleted event shown in the status message. Returns back to home page.
+
+   3. Test case: `delete_event 0`<br>
+      Expected: No event is deleted. Error details shown in the status message.
+
+   4. Other incorrect delete event commands to try: `delete_event`, `delete_event x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
 ### Viewing all events
@@ -1255,6 +1388,34 @@ testers are expected to do more *exploratory* testing.
 
    1. Other incorrect select event commands to try: `select_event`, `select_event x`, `...` (where x is an integer larger than the list size)<br>
       Expected: Similar to previous.
+
+### Adding a task
+
+1. Adding a task while on the home page
+
+    1. Prerequisites: Be on the home screen using the `home` command.
+
+    2. Test case: `add_task td/Book Venue d/2024-10-10 ev/NUS Career Fair 2024`<br>
+       Expected: Book Venue task is added to NUS Career Fair 2024 event. Details of the added task shown in the status message. Goes the respective event page and displays the tasks of the event on the right.
+
+    3. Test case: `add_task td/Book Venue d/2024-10-10`<br>
+       Expected: No task is added. Error details shown in the status message.
+
+    4. Other incorrect add task commands to try: `add_task`, `add_task td/Book Venue d/2024-10-10 ev/`<br>
+       Expected: Similar to previous.
+
+2. Adding a task while on the event page
+
+    1. Prerequisites: Be on the selected event page using the `select_event x` command in which x represents an integer that is smaller than or equal to the event list size.
+
+    2. Test case: `add_task td/Book Venue d/2024-10-10 ev/NUS Career Fair 2024`<br>
+       Expected: Book Venue task is added to NUS Career Fair 2024 event. Details of the added task shown in the status message. Goes the respective event page and displays the tasks of the event on the right.
+
+    3. Test case: `add_task td/Book Venue d/2024-10-10`<br>
+       Expected: No task is added. Error details shown in the status message.
+
+    4. Other incorrect add task commands to try: `add_task`, `add_task td/Book Venue d/2024-10-10 ev/`<br>
+       Expected: Similar to previous.
 
 ### Saving data
 

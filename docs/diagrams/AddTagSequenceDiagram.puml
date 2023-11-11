@@ -1,0 +1,75 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":JobFestGoParser" as JobFestGoParser LOGIC_COLOR
+participant ":AddTagCommandParser" as AddTagCommandParser LOGIC_COLOR
+participant "t:AddTagCommand" as AddTagCommand LOGIC_COLOR
+participant "result:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("add_tag t/vendor")
+activate LogicManager
+
+LogicManager -> JobFestGoParser : parseCommand("add_tag t/vendor")
+activate JobFestGoParser
+
+create AddTagCommandParser
+JobFestGoParser -> AddTagCommandParser
+activate AddTagCommandParser
+
+AddTagCommandParser --> JobFestGoParser
+deactivate AddTagCommandParser
+
+JobFestGoParser -> AddTagCommandParser : parse("t/vendor")
+activate AddTagCommandParser
+
+AddTagCommandParser -> AddTagCommandParser : parseTag("vendor")
+create AddTagCommand
+AddTagCommandParser -> AddTagCommand : new AddTagCommand(tag)
+activate AddTagCommand
+
+AddTagCommand --> AddTagCommandParser
+deactivate AddTagCommand
+
+AddTagCommandParser --> JobFestGoParser
+deactivate AddTagCommandParser
+AddTagCommandParser -[hidden]-> JobFestGoParser
+destroy AddTagCommandParser
+
+JobFestGoParser --> LogicManager : t
+deactivate JobFestGoParser
+
+LogicManager -> AddTagCommand : execute()
+activate AddTagCommand
+
+AddTagCommand -> Model : addTag(tag)
+activate Model
+
+Model --> Model : updateFilteredTagList(TagIsInList)
+
+Model --> AddTagCommand
+deactivate Model
+
+create CommandResult
+AddTagCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> AddTagCommand
+deactivate CommandResult
+CommandResult -[hidden]-> AddTagCommand
+
+AddTagCommand --> LogicManager : result
+deactivate AddTagCommand
+AddTagCommand -[hidden]-> LogicManager
+destroy AddTagCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

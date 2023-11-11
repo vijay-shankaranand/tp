@@ -4,30 +4,23 @@ skinparam arrowThickness 1.1
 skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
-Package Model as ModelPackage <<Rectangle>>{
-Class "<<interface>>\nReadOnlyJobFestGo" as ReadOnlyJobFestGo
-Class "<<interface>>\nReadOnlyUserPrefs" as ReadOnlyUserPrefs
-Class "<<interface>>\nModel" as Model
-Class JobFestGo
-Class ModelManager
-Class UserPrefs
+package Model as ModelPackage <<Rectangle>> {
+  Class "<<interface>>\nReadOnlyJobFestGo" as ReadOnlyJobFestGo
+  Class "<<interface>>\nReadOnlyUserPrefs" as ReadOnlyUserPrefs
+  Class "<<interface>>\nModel" as Model
+  Class JobFestGo
+  Class ModelManager
+  Class UserPrefs
 
-Class UniqueContactList
-Class UniqueTagList
-Class UniqueEventList
-Class UniqueTaskList
-Class Task
-Class Event
-Class Contact
-Class Address
-Class Email
-Class Name
-Class Phone
-Class Tag
-Class Date
-Class TaskDescription
-
-Class I #FFFFFF
+  Class UniqueContactList
+  Class UniqueTagList
+  Class UniqueEventList
+  Class UniqueTaskList
+  Class Task
+  Class Event
+  Class Contact
+  Class Tag
+  Class I #FFFFFF
 }
 
 Class HiddenOutside #FFFFFF
@@ -50,24 +43,12 @@ UniqueEventList --> "~* all" Event
 UniqueTaskList --> "~* all" Task
 UniqueTagList --> "~* all" Tag
 UniqueContactList --> "~* all" Contact
-Contact *--> Name
-Contact *--> Phone
-Contact *--> Email
-Contact *--> Address
-Contact *--> "*" Tag
-Task *--> TaskDescription
-Task *--> Date
-Event *--> Date
-Event *--> Name
-Event *--> "0..*" Contact
 Event "1" <--> "0..*" Task
+Event --> "0..*" Contact
+Contact --> "0..*" Tag
 
 Contact -[hidden]up--> I
 UniqueContactList -[hidden]right-> I
-
-Name -[hidden]right-> Phone
-Phone -[hidden]right-> Address
-Address -[hidden]right-> Email
 
 ModelManager --> "~* filtered" Contact
 ModelManager --> "~* filtered" Event
