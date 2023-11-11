@@ -228,11 +228,17 @@ Given below is an example usage scenario and how the link/unlink mechanism behav
 
 </box>
 
+The following sequence diagram shows how the link operation works:
+
+<puml src="diagrams/LinkSequenceDiagram.puml" alt="LinkSequenceDiagram" />
+
+<box type="info" seamless>
+
+**Note:** The lifeline for `LinkCommand` and `LinkCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</box>
+
 The `unlink` command does the opposite — it calls `Model#unlinkContactFromEvent()`, which removes the specified `Contact`(s) from the internally stored associated contact list of the specified `Event`.
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-<puml src="diagrams/CommitActivityDiagram.puml" width="250" />
 
 #### Design considerations:
 
