@@ -43,7 +43,7 @@ Given below are my contributions to the project.
     - Did up the target audience section of the UG
     - Replaced screenshots to match JobFestGo UI
     - Reviewed and proof-read the UG, checking to see if it appeared as it seems on the website
-  
+
   <br>
 
 * **Contributions to the DG**:
@@ -56,7 +56,7 @@ Given below are my contributions to the project.
 * **Contributions to team-based tasks**:
     - Set up issues on Github and assigned to individuals for issues-tracking
     - Set up milestones on Github for deadline-tracking
-    - Update project notes on v1.2 post mortem 
+    - Update project notes on v1.2 post mortem
     - Updating of developer guide's diagrams
 
 <br>

@@ -939,7 +939,7 @@ testers are expected to do more *exploratory* testing.
 
    1. Test case: `edit_contact 1 n/John Doe`<br>
       Expected: First contact in the list is edited to have the name John Doe, provided that there is no John Doe in the contact list. Details of the new contact shown in the status message. Returns back to home page.
-    
+
    1. Test case: `edit_contact 0 n/John Doe`<br>
       Expected: No contact is edited. Error details shown in the status message.
 
