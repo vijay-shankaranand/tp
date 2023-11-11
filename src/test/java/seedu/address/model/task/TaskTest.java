@@ -8,6 +8,8 @@ import static seedu.address.testutil.event.TypicalEvents.JOBFEST;
 import static seedu.address.testutil.task.TypicalTasks.BOOK_VENUE;
 import static seedu.address.testutil.task.TypicalTasks.ORDER_FOOD;
 
+import java.time.LocalDate;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.name.Name;
@@ -42,6 +44,41 @@ public class TaskTest {
     }
 
     @Test
+    public void isDueWithinThreeDays_taskIsCompleted_returnsFalse() {
+        Task task1 = new TaskBuilder().withDate("2020-01-01").withIsCompleted(true).build();
+        assertFalse(task1.isDueWithinThreeDays());
+    }
+
+    @Test
+    public void isDueWithinThreeDays_taskIsNotCompletedAndNotWithinThreeDays_returnsFalse() {
+        Task task1 = new TaskBuilder().withDate("2020-01-01").withIsCompleted(false).build();
+        assertFalse(task1.isDueWithinThreeDays());
+    }
+
+    @Test
+    public void isDueWithinThreeDays_taskIsNotCompletedAndNotWithinThreeDays_returnsTrue() {
+        LocalDate currentDate = LocalDate.now();
+        Task task1 = new TaskBuilder().withDate(currentDate.toString()).withIsCompleted(false).build();
+        assertTrue(task1.isDueWithinThreeDays());
+    }
+
+    @Test
+    public void isDueSoon_deadlineWithinThreeDays_returnsTrue() {
+        LocalDate currentDate = LocalDate.now();
+        Task task1 = new TaskBuilder().withDate(currentDate.toString()).build();
+        assertTrue(task1.isDueSoon());
+
+        Task task2 = new TaskBuilder().withDate(currentDate.plusDays(3).toString()).build();
+        assertTrue(task2.isDueSoon());
+    }
+
+    @Test
+    public void isDueSoon_deadlineNotWithinThreeDays_returnsFalse() {
+        Task task1 = new TaskBuilder().withDate("2020-01-01").build();
+        assertFalse(task1.isDueSoon());
+    }
+
+    @Test
     public void equals() {
         assertTrue(BOOK_VENUE.equals(BOOK_VENUE));
         assertTrue(BOOK_VENUE.equals(new TaskBuilder(BOOK_VENUE).build()));
@@ -66,6 +103,4 @@ public class TaskTest {
                 + "isCompleted=" + BOOK_VENUE.isCompleted() + "}";
         assertEquals(expected, BOOK_VENUE.toString());
     }
-
-
 }

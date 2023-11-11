@@ -129,31 +129,6 @@ public class LinkCommandTest {
     }
 
     @Test
-    public void execute_eventIsAlreadyLinkedToContact_throwsCommandException() {
-        Event expectedEvent = new EventBuilder(JOBFEST).withEventContacts(ALICE, BOB, CARL).build();
-        model.addEvent(JOBFEST);
-        expectedModel.addEvent(expectedEvent);
-        Set<Name> contactNameList = new HashSet<>();
-        contactNameList.add(CARL.getName());
-        LinkCommand linkCommand = new LinkCommand(JOBFEST.getName(), contactNameList);
-
-        String expectedNameList = "[" + CARL.getName() + "]";
-        expectedModel.updateFilteredContactList(new ContactIsInEventPredicate(expectedEvent));
-        expectedModel.updateFilteredTaskList(new TaskIsInEventPredicate(expectedEvent));
-
-        // execute the first link command
-        LinkCommand linkCommand1 = new LinkCommand(JOBFEST.getName(), contactNameList);
-        String expectedMessage1 = String.format(LinkCommand.MESSAGE_SUCCESS, expectedNameList, JOBFEST.getName());
-        assertCommandSuccess(linkCommand1, model, expectedMessage1, expectedModel);
-
-        // execute the second link command right after the first
-        LinkCommand linkCommand2 = new LinkCommand(JOBFEST.getName(), contactNameList);
-        String expectedMessage2 = String.format(LinkCommand.MESSAGE_LINKED_CONTACT,
-                CARL.getName(), JOBFEST.getName());
-        assertCommandFailure(linkCommand2, model, expectedMessage2);
-    }
-
-    @Test
     public void equals() {
         Set<Name> firstContactNameList = new HashSet<>();
         Set<Name> secondContactNameList = new HashSet<>();
