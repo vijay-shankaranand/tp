@@ -43,14 +43,14 @@ public class LinkCommandTest {
         expectedModel.addEvent(expectedEvent);
         Set<Name> contactNameList = new HashSet<>();
         contactNameList.add(CARL.getName());
-        LinkCommand command = new LinkCommand(JOBFEST.getName(), contactNameList);
+        LinkCommand linkCommand = new LinkCommand(JOBFEST.getName(), contactNameList);
 
         String expectedNameList = "[" + CARL.getName() + "]";
         String expectedMessage = String.format(LinkCommand.MESSAGE_SUCCESS, expectedNameList, JOBFEST.getName());
         expectedModel.updateFilteredContactList(new ContactIsInEventPredicate(expectedEvent));
         expectedModel.updateFilteredTaskList(new TaskIsInEventPredicate(expectedEvent));
 
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertCommandSuccess(linkCommand, model, expectedMessage, expectedModel);
         assertEquals(expectedEvent, model.getEvent(JOBFEST.getName()));
     }
 
@@ -62,14 +62,14 @@ public class LinkCommandTest {
         Set<Name> contactNameList = new HashSet<>();
         contactNameList.add(CARL.getName());
         contactNameList.add(BENSON.getName());
-        LinkCommand command = new LinkCommand(JOBFEST.getName(), contactNameList);
+        LinkCommand linkCommand = new LinkCommand(JOBFEST.getName(), contactNameList);
 
         String expectedNameList = "[" + CARL.getName() + ", " + BENSON.getName() + "]";
         String expectedMessage = String.format(LinkCommand.MESSAGE_SUCCESS, expectedNameList, JOBFEST.getName());
         expectedModel.updateFilteredContactList(new ContactIsInEventPredicate(expectedEvent));
         expectedModel.updateFilteredTaskList(new TaskIsInEventPredicate(expectedEvent));
 
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertCommandSuccess(linkCommand, model, expectedMessage, expectedModel);
         assertEquals(expectedEvent, model.getEvent(JOBFEST.getName()));
     }
 
@@ -81,11 +81,11 @@ public class LinkCommandTest {
         Set<Name> contactNameList = new HashSet<>();
         contactNameList.add(ALICE.getName());
         contactNameList.add(BENSON.getName());
-        LinkCommand command = new LinkCommand(JOBFEST.getName(), contactNameList);
+        LinkCommand linkCommand = new LinkCommand(JOBFEST.getName(), contactNameList);
 
         String expectedMessage = String.format(LinkCommand.MESSAGE_LINKED_CONTACT,
                 ALICE.getName(), JOBFEST.getName());
-        assertCommandFailure(command, model, expectedMessage);
+        assertCommandFailure(linkCommand, model, expectedMessage);
         assertEquals(JOBFEST, model.getEvent(JOBFEST.getName()));
     }
 
@@ -94,11 +94,11 @@ public class LinkCommandTest {
         model.addEvent(JOBFEST);
         Set<Name> contactNameList = new HashSet<>();
         contactNameList.add(ALICE.getName());
-        LinkCommand command = new LinkCommand(JOBFEST.getName(), contactNameList);
+        LinkCommand linkCommand = new LinkCommand(JOBFEST.getName(), contactNameList);
 
         String expectedMessage = String.format(LinkCommand.MESSAGE_LINKED_CONTACT,
                 ALICE.getName(), JOBFEST.getName());
-        assertCommandFailure(command, model, expectedMessage);
+        assertCommandFailure(linkCommand, model, expectedMessage);
         assertEquals(JOBFEST, model.getEvent(JOBFEST.getName()));
     }
 
@@ -107,9 +107,9 @@ public class LinkCommandTest {
         Set<Name> contactNameList = new HashSet<>();
         contactNameList.add(ALICE.getName());
 
-        LinkCommand command = new LinkCommand(JOBFEST.getName(), contactNameList);
+        LinkCommand linkCommand = new LinkCommand(JOBFEST.getName(), contactNameList);
         String expectedMessage = String.format(LinkCommand.MESSAGE_NO_SUCH_EVENT, JOBFEST.getName());
-        assertCommandFailure(command, model, expectedMessage);
+        assertCommandFailure(linkCommand, model, expectedMessage);
     }
 
     @Test
@@ -122,10 +122,35 @@ public class LinkCommandTest {
         Set<Name> contactNameList = new HashSet<>();
         contactNameList.add(contact.getName());
 
-        LinkCommand command = new LinkCommand(JOBFEST.getName(), contactNameList);
+        LinkCommand linkCommand = new LinkCommand(JOBFEST.getName(), contactNameList);
         String expectedMessage = String.format(LinkCommand.MESSAGE_NO_SUCH_CONTACT, contact.getName());
-        assertCommandFailure(command, model, expectedMessage);
+        assertCommandFailure(linkCommand, model, expectedMessage);
         assertEquals(JOBFEST, model.getEvent(JOBFEST.getName()));
+    }
+
+    @Test
+    public void execute_eventIsAlreadyLinkedToContact_throwsCommandException() {
+        Event expectedEvent = new EventBuilder(JOBFEST).withEventContacts(ALICE, BOB, CARL).build();
+        model.addEvent(JOBFEST);
+        expectedModel.addEvent(expectedEvent);
+        Set<Name> contactNameList = new HashSet<>();
+        contactNameList.add(CARL.getName());
+        LinkCommand linkCommand = new LinkCommand(JOBFEST.getName(), contactNameList);
+
+        String expectedNameList = "[" + CARL.getName() + "]";
+        expectedModel.updateFilteredContactList(new ContactIsInEventPredicate(expectedEvent));
+        expectedModel.updateFilteredTaskList(new TaskIsInEventPredicate(expectedEvent));
+
+        // execute the first link command
+        LinkCommand linkCommand1 = new LinkCommand(JOBFEST.getName(), contactNameList);
+        String expectedMessage1 = String.format(LinkCommand.MESSAGE_SUCCESS, expectedNameList, JOBFEST.getName());
+        assertCommandSuccess(linkCommand1, model, expectedMessage1, expectedModel);
+
+        // execute the second link command right after the first
+        LinkCommand linkCommand2 = new LinkCommand(JOBFEST.getName(), contactNameList);
+        String expectedMessage2 = String.format(LinkCommand.MESSAGE_LINKED_CONTACT,
+                CARL.getName(), JOBFEST.getName());
+        assertCommandFailure(linkCommand2, model, expectedMessage2);
     }
 
     @Test
