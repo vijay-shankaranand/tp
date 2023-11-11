@@ -268,8 +268,6 @@ The following sequence diagram shows how the add tag operation works:
 
 </box>
 
-The following activity diagram summarizes what happens when a user executes the add tag command:
-
 #### Design considerations:
 
 **Aspect: How the add tag command accepts tag inputs**
