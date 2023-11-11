@@ -52,7 +52,7 @@ activate AddTagCommand
 AddTagCommand -> Model : addTag(tag)
 activate Model
 
-Model --> Model : updateFilteredTagList(TaskIsInList)
+Model --> Model : updateFilteredTagList(TagIsInList)
 
 Model --> AddTagCommand
 deactivate Model

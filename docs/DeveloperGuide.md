@@ -530,12 +530,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
    Use case ends.
 
 **Extensions**
-* 2a. Missing `t/` in the command.
+* 2a. Missing tag name.
+
     * 2a1. JobFestGo shows an error message.
 
       Use case resumes at step 2.
 
-* 2b. Missing tag name.
+* 2b. The given tag name contains non-alphanumeric characters.
+
     * 2b1. JobFestGo shows an error message.
 
       Use case resumes at step 2.
@@ -577,15 +579,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-* 3b. Missing `t/` in the command.
+* 3b. Missing tag name.
 
     * 3b1. JobFestGo shows an error message.
-
-      Use case resumes at step 2.
-
-* 3c. Missing tag name.
-
-    * 3c1. JobFestGo shows an error message.
 
       Use case resumes at step 2.
 
@@ -749,15 +745,21 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-* 1b. Date is invalid.
+* 1b. Task description contains non-alphanumeric characters except `-,./() `.
 
-    * 1b1. JobFestGo informs user that date is invalid.
+    * 1b1. JobFestGo informs user that task description contains non-alphanumeric characters.
+
+      Use case ends.
+  
+* 1c. Date is invalid.
+
+    * 1c1. JobFestGo informs user that date is invalid.
 
       Use case ends.
 
-* 1c. Event does not already exist.
+* 1d. Event does not already exist.
 
-    * 1c1. JobFestGo informs user that event does not already exist.
+    * 1d1. JobFestGo informs user that event does not already exist.
 
       Use case ends.
 
