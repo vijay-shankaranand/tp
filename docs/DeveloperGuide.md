@@ -687,8 +687,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to select an event
-2. JobFestGo displays the contacts and tasks related to the event
+1. User requests to select an event.
+2. JobFestGo displays the contacts and tasks related to the event.
 3. User <u>adds a task</u> or <u>deletes a task</u> or <u>marks a task</u> or <u>unmarks a task</u>.
 
       Use case ends.
@@ -721,38 +721,64 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 1a1. JobFestGo shows an error message.
 
-      Use case resumes at step 1.
+      Use case ends.
 
 * 1b. One of the given contacts does not exist.
 
     * 1b1. JobFestGo shows an error message.
 
-      Use case resumes at step 1.
+      Use case ends.
 
 * 1a. One of the given contacts is already linked to the given event.
 
     * 1a1. JobFestGo shows an error message.
 
-      Use case resumes at step 1.
+      Use case ends.
+
+**Use case: Unlink contacts from an event**
+
+**MSS**
+1. User requests to unlink specified contacts from a specified event.
+2. JobFestGo unlinks the contacts from the event.
+
+   Use case ends.
+
+**Extensions**
+* 1a. The given event does not exist.
+
+    * 1a1. JobFestGo shows an error message.
+
+      Use case ends.
+
+* 1b. One of the given contacts does not exist.
+
+    * 1b1. JobFestGo shows an error message.
+
+      Use case ends.
+
+* 1a. One of the given contacts is not linked to the given event.
+
+    * 1a1. JobFestGo shows an error message.
+
+      Use case ends.
 
 **Use case: Add a task**
 
 **MSS**
 
-1.  User requests to add task and specifies details of task with the event to be added in
-2.  JobFestGo adds the task to list of tasks
-3.  JobFestGo adds the task to the event specified
-4.  JobFestGo shows updated list of tasks
+1.  User requests to add task and specifies details of task with the event to be added in.
+2.  JobFestGo adds the task to the event specified.
+3.  JobFestGo shows updated list of tasks.
 
     Use case ends.
 
 **Extensions**
 
-* 1a. Any of the mandatory fields not specified
+* 1a. Any of the mandatory fields not specified.
 
-  * 1a1. JobFestGo informs user that mandatory fields not specified
+    * 1a1. JobFestGo informs user that mandatory fields not specified.
 
-    Use case ends.
+      Use case ends.
 
 * 1b. Date is invalid.
 
@@ -763,6 +789,90 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 1c. Event does not already exist.
 
     * 1c1. JobFestGo informs user that event does not already exist.
+
+      Use case ends.
+
+**Use case: Delete a task**
+
+**MSS**
+
+1.  User requests to delete a specified task.
+2.  JobFestGo deletes the task.
+3.  JobFestGo shows updated list of tasks.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. Any of the mandatory fields not specified.
+
+    * 1a1. JobFestGo informs user that mandatory fields not specified.
+
+      Use case ends.
+
+* 1b. Task does not already exist.
+
+    * 1c1. JobFestGo informs user that task does not already exist.
+
+      Use case ends.
+
+**Use case: Marking a task**
+
+**MSS**
+
+1.  User requests to mark a specified task as completed.
+2.  JobFestGo marks the task as completed.
+3.  JobFestGo shows updated status of the task.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. Any of the mandatory fields not specified.
+
+    * 1a1. JobFestGo informs user that mandatory fields not specified.
+
+      Use case ends.
+
+* 1b. Task does not already exist.
+
+    * 1c1. JobFestGo informs user that task does not already exist.
+
+      Use case ends.
+
+* 1c. Task is already marked as completed.
+
+    * 1c1. JobFestGo informs user that task is already marked as completed.
+
+      Use case ends.
+
+**Use case: Unmarking a task**
+
+**MSS**
+
+1.  User requests to unmark a specified completed task as not completed.
+2.  JobFestGo unmarks the task as not completed.
+3.  JobFestGo shows updated status of the task.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. Any of the mandatory fields not specified.
+
+    * 1a1. JobFestGo informs user that mandatory fields not specified.
+
+      Use case ends.
+
+* 1b. Task does not already exist.
+
+    * 1c1. JobFestGo informs user that task does not already exist.
+
+      Use case ends.
+
+* 1c. Task is not marked as completed.
+
+    * 1c1. JobFestGo informs user that task is not marked as completed.
 
       Use case ends.
 
