@@ -200,7 +200,7 @@ Deletes the contact at the specified index from JobFestGo.
 Format: `delete_contact INDEX`
 
 * Deletes the contact at the specified `INDEX`.
-* After the contact is deleted, JobFestGo will automatically return to the home page. 
+* After the contact is deleted, JobFestGo will automatically return to the home page.
   This is regardless of whether the contact is linked to an event or not.
 * The index refers to the index number shown in the displayed contact list.
 * The index **must be a positive integer** 1, 2, 3, …​
