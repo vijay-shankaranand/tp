@@ -867,7 +867,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-* 1b. Task does not already exist.
+* 1b. Task does not exist.
 
     * 1c1. JobFestGo informs user that task does not already exist.
 
