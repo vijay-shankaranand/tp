@@ -230,6 +230,71 @@ The following activity diagram summarizes what happens when a user executes the 
   * Pros: Easy to implement.
   * Cons: Users will have to consistently execute home command to view the other events.
 
+### Link/unlink Feature
+
+#### Implementation
+
+The link/unlink mechanism is facilitated by `JobFestGo` as well as its internally stored `UniqueEventList`.
+It implements the following operations:
+
+* `JobFestGo#isContactLinkedToEvent()` — Checks whether a `Contact` is linked to an `Event`.
+* `JobFestGo#linkContactToEvent()` — Links a `Contact` to an `Event`.
+* `JobFestGo#unlinkContactFromEvent()` — Unlinks a `Contact` from an `Event`.
+
+These operations are exposed in the `Model` interface as `Model#isContactLinkedToEvent()`, `Model#linkContactToEvent()` and `Model#unlinkContactFromEvent()` respectively.
+
+Given below is an example usage scenario and how the link/unlink mechanism behaves at each step.
+
+**Step 1.** The user executes `link c/Alice Black c/Bob White ev/NUS Career Fest` command to link the contacts specified by the names "Alice Black" and "Bob White" to the event specified by the name "NUS Career Fest" in JobFestGo. The `link` command initiates a loop to iterate through each input `Contact`.
+
+<box type="info" seamless>
+
+**Note:** If the `Contact` or the `Event` does not exist in JobFestGo, it is not possible to perform the link operation. `Model#getContact()` or `Model#getEvent()` will throw a `ContactNotFoundException` or an `EventNotFoundException` respectively and an error message will be shown to the user.
+
+</box>
+
+**Step 2.** For each `Contact` in the loop, `Model#linkContactToEvent()` is called, adding the `Contact` to the internally stored associated contact list of the `Event`.
+
+<box type="info" seamless>
+
+**Note:** If the `Contact` is already inside the associated contact list of the `Event`, there is no need to perform the link operation again. The `link` command uses `Model#isContactLinkedToEvent()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the undo.
+
+</box>
+
+The following sequence diagram shows how the link operation works:
+
+<puml src="diagrams/LinkSequenceDiagram.puml" alt="LinkSequenceDiagram" />
+
+<box type="info" seamless>
+
+**Note:** The lifeline for `LinkCommand` and `LinkCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</box>
+
+The `unlink` command does the opposite — it calls `Model#unlinkContactFromEvent()`, which removes the specified `Contact`(s) from the internally stored associated contact list of the specified `Event`.
+
+#### Design considerations:
+
+**Aspect: How link/unlink command gets contacts and event:**
+
+* **Alternative 1 (current choice):** Gets contacts and event by names.
+    * Pros: Clearer for users to execute the command.
+    * Cons: We must devise a new way of getting contacts and event by names since the default implementation is to get by index.
+
+* **Alternative 2:** Gets contacts and event by index.
+    * Pros: Easy to implement.
+    * Cons: Users may be confused by multiple indices.
+
+**Aspect: How a mix of valid and invalid input should be handled:**
+
+* **Alternative 1 (current choice):** Does not perform any link/unlink operations once there is one invalid input encountered.
+    * Pros: Easy to implement.
+    * Cons: Users need to reenter all other input once there is one invalid input.
+
+* **Alternative 2:** Links/Unlinks all valid input contacts while throwing an error for all invalid contacts.
+    * Pros: Users only need to correct the invalid input.
+    * Cons: The exceptions are hard to handle.
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
@@ -265,7 +330,6 @@ Step 3. The user executes `add_contact n/David …​` to add a new contact. The
 Step 4. The user now decides that adding the contact was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
 
 <puml src="diagrams/UndoRedoState3.puml" alt="UndoRedoState3" />
-
 
 <box type="info" seamless>
 
@@ -354,26 +418,29 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                 | So that I can…​                                                                             |
-|----------|--------------------------------------------|------------------------------|---------------------------------------------------------------------------------------------|
-| `* * *`  | job fest event planner                     | see usage instructions       | refer to instructions when I forget how to use JobFestGo                                    |
-| `* * *`  | job fest event planner                     | add a new contact             |                                                                                             |
-| `* * *`  | job fest event planner                                       | delete a contact              | remove entries that I no longer need                                                        |
-| `* * *`  | job fest event planner                                       | find a contact by name        | locate details of contacts without having to go through the entire list                      |
-| `* * *`  | job fest event planner                     | view the entire contact list |                                                                                             |
-| `* *`    | job fest event planner                                       | hide private contact details | minimize chance of someone else seeing them by accident                                     |
-| `* *`    | job fest event planner                     | add tags                     | add to the pool of use categories already available                                         |
-| `* *`    | job fest event planner                     | view all tags                | remember contacts of a certain category to contact them for events                          |
-| `* *`     | job fest event planner                     | be able to delete tags       | can easily identify who I should be cold calling among my contacts without unnecessary tags |
-| `* *`     | job fest event planner                     | filter contacts by tags      | conveniently view all the contacts tagged by specific tags                                  |
-| `* *`    | job fest event planner                        | add a new event              | keep track of the events I have to plan                                                     |
-| `* *`     | job fest event planner                     | view all events              | remember all the events I am involved in so far                                             |
-| `* *`    | job fest event planner                        | be able to delete events     | remove events I no longer need                                                              |
-| `* *`     | job fest event planner                     | be able to select events     | can easily view the contacts and tasks to do for each particular event                      |
-| `* *`     | job fest event planner                     | link contacts to events      | remember which event the specific contacts are involved in                                  |
-| `* *`    | job fest event planner                        | add a new task for an event  | remember the tasks I need to do for the event                                               |
-| `* *`      | job fest event planner | return to the home page      |                                                                                             |
-| `*`      | job fest event planner | sort contacts by name         | locate a contact easily                                                                      |
+| Priority | As a …​                                    | I want to …​                    | So that I can…​                                                                             |
+|----------|--------------------------------------------|---------------------------------|---------------------------------------------------------------------------------------------|
+| `* * *`  | job fest event planner                     | see usage instructions          | refer to instructions when I forget how to use JobFestGo                                    |
+| `* * *`  | job fest event planner                     | add a new contact               |                                                                                             |
+| `* * *`  | job fest event planner                                       | delete a contact                | remove entries that I no longer need                                                        |
+| `* * *`  | job fest event planner                                       | find a contact by name          | locate details of contacts without having to go through the entire list                     |
+| `* * *`  | job fest event planner                     | view the entire contact list    |                                                                                             |
+| `* *`    | job fest event planner                                       | hide private contact details    | minimize chance of someone else seeing them by accident                                     |
+| `* *`    | job fest event planner                     | add tags                        | add to the pool of use categories already available                                         |
+| `* *`    | job fest event planner                     | view all tags                   | remember contacts of a certain category to contact them for events                          |
+| `* *`     | job fest event planner                     | be able to delete tags          | can easily identify who I should be cold calling among my contacts without unnecessary tags |
+| `* *`     | job fest event planner                     | filter contacts by tags         | conveniently view all the contacts tagged by specific tags                                  |
+| `* *`    | job fest event planner                        | add a new event                 | keep track of the events I have to plan                                                     |
+| `* *`     | job fest event planner                     | view all events                 | remember all the events I am involved in so far                                             |
+| `* *`    | job fest event planner                        | be able to delete events        | remove events I no longer need                                                              |
+| `* *`     | job fest event planner                     | be able to select events        | easily view the contacts and tasks to do for each particular event                          |
+| `* *`     | job fest event planner                     | link contacts to events         | remember which event the specific contacts are involved in                                  |
+| `* *`     | job fest event planner                     | unlink contacts from events     | remove the association between contacts and events when they are no longer related          |
+| `* *`    | job fest event planner                        | add a new task for an event     | remember the tasks I need to do for the event                                               |
+| `* *`    | job fest event planner                        | delete a task from an event     | remove tasks that I no longer need                                                          |
+| `* *`    | job fest event planner                        | mark a task as completed or not | easily check the progress of my tasks                                                       |
+| `* *`      | job fest event planner | return to the home page         |                                                                                             |
+| `*`      | job fest event planner | sort contacts by name           | locate a contact easily                                                                     |
 
 
 *{More to be added}*
@@ -637,8 +704,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to select an event
-2. JobFestGo displays the contacts and tasks related to the event
+1. User requests to select an event.
+2. JobFestGo displays the contacts and tasks related to the event.
 3. User <u>adds a task</u> or <u>deletes a task</u> or <u>marks a task</u> or <u>unmarks a task</u>.
 
       Use case ends.
@@ -671,38 +738,64 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 1a1. JobFestGo shows an error message.
 
-      Use case resumes at step 1.
+      Use case ends.
 
 * 1b. One of the given contacts does not exist.
 
     * 1b1. JobFestGo shows an error message.
 
-      Use case resumes at step 1.
+      Use case ends.
 
 * 1a. One of the given contacts is already linked to the given event.
 
     * 1a1. JobFestGo shows an error message.
 
-      Use case resumes at step 1.
+      Use case ends.
+
+**Use case: Unlink contacts from an event**
+
+**MSS**
+1. User requests to unlink specified contacts from a specified event.
+2. JobFestGo unlinks the contacts from the event.
+
+   Use case ends.
+
+**Extensions**
+* 1a. The given event does not exist.
+
+    * 1a1. JobFestGo shows an error message.
+
+      Use case ends.
+
+* 1b. One of the given contacts does not exist.
+
+    * 1b1. JobFestGo shows an error message.
+
+      Use case ends.
+
+* 1a. One of the given contacts is not linked to the given event.
+
+    * 1a1. JobFestGo shows an error message.
+
+      Use case ends.
 
 **Use case: Add a task**
 
 **MSS**
 
-1.  User requests to add task and specifies details of task with the event to be added in
-2.  JobFestGo adds the task to list of tasks
-3.  JobFestGo adds the task to the event specified
-4.  JobFestGo shows updated list of tasks
+1.  User requests to add task and specifies details of task with the event to be added in.
+2.  JobFestGo adds the task to the event specified.
+3.  JobFestGo shows updated list of tasks.
 
     Use case ends.
 
 **Extensions**
 
-* 1a. Any of the mandatory fields not specified
+* 1a. Any of the mandatory fields not specified.
 
-  * 1a1. JobFestGo informs user that mandatory fields not specified
+    * 1a1. JobFestGo informs user that mandatory fields not specified.
 
-    Use case ends.
+      Use case ends.
 
 * 1b. Date is invalid.
 
@@ -710,11 +803,110 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-* 1c. Event does not already exist.
+* 1c. Event does not exist.
 
     * 1c1. JobFestGo informs user that event does not already exist.
 
       Use case ends.
+
+**Use case: Delete a task**
+
+**MSS**
+
+1.  User requests to delete a specified task.
+2.  JobFestGo deletes the task.
+3.  JobFestGo shows updated list of tasks.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. Any of the mandatory fields not specified.
+
+    * 1a1. JobFestGo informs user that mandatory fields not specified.
+
+      Use case ends.
+
+* 1b. Task does not exist.
+
+    * 1c1. JobFestGo informs user that task does not already exist.
+
+      Use case ends.
+
+**Use case: Marking a task**
+
+**MSS**
+
+1.  User requests to mark a specified task as completed.
+2.  JobFestGo marks the task as completed.
+3.  JobFestGo shows updated status of the task.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. Any of the mandatory fields not specified.
+
+    * 1a1. JobFestGo informs user that mandatory fields not specified.
+
+      Use case ends.
+
+* 1b. Task does not exist.
+
+    * 1c1. JobFestGo informs user that task does not already exist.
+
+      Use case ends.
+
+* 1c. Task is already marked as completed.
+
+    * 1c1. JobFestGo informs user that task is already marked as completed.
+
+      Use case ends.
+
+**Use case: Unmarking a task**
+
+**MSS**
+
+1.  User requests to unmark a specified completed task as not completed.
+2.  JobFestGo unmarks the task as not completed.
+3.  JobFestGo shows updated status of the task.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. Any of the mandatory fields not specified.
+
+    * 1a1. JobFestGo informs user that mandatory fields not specified.
+
+      Use case ends.
+
+* 1b. Task does not exist.
+
+    * 1c1. JobFestGo informs user that task does not exist.
+
+      Use case ends.
+
+* 1c. Task is not marked as completed.
+
+    * 1c1. JobFestGo informs user that task is not marked as completed.
+
+      Use case ends.
+
+**Use case: Return to the home page**
+
+**MSS**
+1. User is on any page
+2. User requests to return to the home page
+3. JobFestGo returns user to the home page
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. The user is already on the home page
+
+   Use case ends.
 
 *{More to be added}*
 
@@ -884,7 +1076,7 @@ testers are expected to do more *exploratory* testing.
 
    1. Test case: `edit_contact 1 n/John Doe`<br>
       Expected: First contact in the list is edited to have the name John Doe, provided that there is no John Doe in the contact list. Details of the new contact shown in the status message. Returns back to home page.
-    
+
    1. Test case: `edit_contact 0 n/John Doe`<br>
       Expected: No contact is edited. Error details shown in the status message.
 

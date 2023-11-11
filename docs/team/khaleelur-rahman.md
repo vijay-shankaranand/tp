@@ -20,7 +20,7 @@ Given below are my contributions to the project.
 
 <br>
 
-* **Enhancements implemented**: 
+* **Enhancements implemented**:
   - Improved the `add_tag` feature
     - **What it does**: Allows the user to add tags (which are roles of the contact) into JobFestGo.
     - **Justification**: This feature improves the product as it provides the user a way to associate the contacts with their roles in the event.
@@ -36,7 +36,7 @@ Given below are my contributions to the project.
 
 <br>
 
-* **Contributions to the UG**: 
+* **Contributions to the UG**:
   - Did up the `add_tag` feature
   - Did up the `delete_event` feature
   - Did up the `add_task` feature
@@ -69,5 +69,5 @@ Given below are my contributions to the project.
 
 <br>
 
-* **Contributions beyond the project team**: 
+* **Contributions beyond the project team**:
   - Reviewed a different group's project during PE-D: [PE-D Bugs](https://github.com/Khaleelur-Rahman/ped/issues)

@@ -14,16 +14,16 @@ Given below are my contributions to the project.
 * **Enhancements implemented**:
   I created 3 new commands to improve user experience.
 
-  The first command is the `view_tags` command which displays a list of all existing tags. 
+  The first command is the `view_tags` command which displays a list of all existing tags.
 
-  The second command is the `view_events` command which displays a list of all existing events. 
+  The second command is the `view_events` command which displays a list of all existing events.
 
   The last command is the `home` command which allows the user to return to the home page from the current screen.
 
 * **Contributions to the UG**:
-  I have contributed to the sections related to the commands I have created, where I mainly explained how to use the commands. 
+  I have contributed to the sections related to the commands I have created, where I mainly explained how to use the commands.
 
-  I have played a key role in reviewing the user guide, ensuring its logical flow to eliminate potential confusion among users. 
+  I have played a key role in reviewing the user guide, ensuring its logical flow to eliminate potential confusion among users.
   I have also done meticulous proofreading to avoid grammatical and spelling errors.
 
   Furthermore, I have dedicated the time to familiarise myself with Markbind's syntax and utilised my CSS and Bootstrap expertise to enhance the user guide's visual appeal. I incorporated custom summary boxes and icons that align with the theme of JobFestGo while improving the look of the warning boxes.
