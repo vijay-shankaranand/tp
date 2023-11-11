@@ -230,6 +230,61 @@ The following activity diagram summarizes what happens when a user executes the 
   * Pros: Easy to implement.
   * Cons: Users will have to consistently execute home command to view the other events.
 
+
+### Add Tag Feature
+
+### Implementation
+
+The add tag mechanism is facilitated by `JobFestGo` as well as its observable lists for `Tag`.
+
+The mechanism interacts with both the UI and the `filteredTags` list stored within `JobFestGo`.
+
+It includes the following operations in ModelManager which is implemented by Model:
+
+* `Model#addTag(Tag)` — Adds a tag to JobFestGo.
+* `Model#updateFilteredTagList(Predicate)` — Updates the filtered tag list according to the given predicate.
+
+Given below is an example usage scenario and how the add tag mechanism behaves at each step:
+
+**Step 1.** The user launches the application for the first time. The `JobFestGo` will be initialized with the initial address book state.
+
+**Step 2.** The user executes `add_tag t/vendor` command to add a new tag `Vendor`in JobFestGo.
+The parser will parse the command and create a new `AddTagCommand` object, if the entered tag is valid.
+<box type="info" seamless>
+
+**Note:** If the tag entered contains non-alphanumeric characters, `AddTagCommandParser` will throw an error when creating the `AddTagCommand` object.
+
+</box>
+
+**Step 3.** The `AddTagCommand` object, created in step 2, will call `Model#addTag(Tag)` to add the tag to JobFestGo.
+The `AddTagCommand` object will then call `Model#updateFilteredTagList(Predicate)` to update the filtered tag list.
+
+The following sequence diagram shows how the add tag operation works:
+
+<puml src="diagrams/AddTagSequenceDiagram.puml" alt="SelectEventSequenceDiagram" />
+
+<box type="info" seamless>
+
+**Note:** The lifeline for `AddTagCommandParser`, `AddTagCommand`, `CommandResult` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</box>
+
+The following activity diagram summarizes what happens when a user executes the add tag command:
+
+#### Design considerations:
+
+**Aspect: How the add tag command accepts tag inputs**
+
+* **Current choice:** Users can input the tags comprising only of alphanumeric characters.
+  * Pros: Easy to implement due to lesser parsing involved.
+  * Cons: Users cannot input tags comprising of non-alphanumeric characters, such as spaces and special characters.
+
+* **Alternative:** Users can input the tags comprising of alphanumeric characters and non-alphanumeric characters.
+  * Pros: Users can input tags comprising of non-alphanumeric characters, such as spaces and special characters.
+  * Cons: Lesser uniqueness of tags as users can input tags with the same name but different non-alphanumeric characters.
+
+
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
