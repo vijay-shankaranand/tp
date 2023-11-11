@@ -418,26 +418,29 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                 | So that I can…​                                                                             |
-|----------|--------------------------------------------|------------------------------|---------------------------------------------------------------------------------------------|
-| `* * *`  | job fest event planner                     | see usage instructions       | refer to instructions when I forget how to use JobFestGo                                    |
-| `* * *`  | job fest event planner                     | add a new contact             |                                                                                             |
-| `* * *`  | job fest event planner                                       | delete a contact              | remove entries that I no longer need                                                        |
-| `* * *`  | job fest event planner                                       | find a contact by name        | locate details of contacts without having to go through the entire list                      |
-| `* * *`  | job fest event planner                     | view the entire contact list |                                                                                             |
-| `* *`    | job fest event planner                                       | hide private contact details | minimize chance of someone else seeing them by accident                                     |
-| `* *`    | job fest event planner                     | add tags                     | add to the pool of use categories already available                                         |
-| `* *`    | job fest event planner                     | view all tags                | remember contacts of a certain category to contact them for events                          |
-| `* *`     | job fest event planner                     | be able to delete tags       | can easily identify who I should be cold calling among my contacts without unnecessary tags |
-| `* *`     | job fest event planner                     | filter contacts by tags      | conveniently view all the contacts tagged by specific tags                                  |
-| `* *`    | job fest event planner                        | add a new event              | keep track of the events I have to plan                                                     |
-| `* *`     | job fest event planner                     | view all events              | remember all the events I am involved in so far                                             |
-| `* *`    | job fest event planner                        | be able to delete events     | remove events I no longer need                                                              |
-| `* *`     | job fest event planner                     | be able to select events     | can easily view the contacts and tasks to do for each particular event                      |
-| `* *`     | job fest event planner                     | link contacts to events      | remember which event the specific contacts are involved in                                  |
-| `* *`    | job fest event planner                        | add a new task for an event  | remember the tasks I need to do for the event                                               |
-| `* *`      | job fest event planner | return to the home page      |                                                                                             |
-| `*`      | job fest event planner | sort contacts by name         | locate a contact easily                                                                      |
+| Priority | As a …​                                    | I want to …​                    | So that I can…​                                                                             |
+|----------|--------------------------------------------|---------------------------------|---------------------------------------------------------------------------------------------|
+| `* * *`  | job fest event planner                     | see usage instructions          | refer to instructions when I forget how to use JobFestGo                                    |
+| `* * *`  | job fest event planner                     | add a new contact               |                                                                                             |
+| `* * *`  | job fest event planner                                       | delete a contact                | remove entries that I no longer need                                                        |
+| `* * *`  | job fest event planner                                       | find a contact by name          | locate details of contacts without having to go through the entire list                     |
+| `* * *`  | job fest event planner                     | view the entire contact list    |                                                                                             |
+| `* *`    | job fest event planner                                       | hide private contact details    | minimize chance of someone else seeing them by accident                                     |
+| `* *`    | job fest event planner                     | add tags                        | add to the pool of use categories already available                                         |
+| `* *`    | job fest event planner                     | view all tags                   | remember contacts of a certain category to contact them for events                          |
+| `* *`     | job fest event planner                     | be able to delete tags          | can easily identify who I should be cold calling among my contacts without unnecessary tags |
+| `* *`     | job fest event planner                     | filter contacts by tags         | conveniently view all the contacts tagged by specific tags                                  |
+| `* *`    | job fest event planner                        | add a new event                 | keep track of the events I have to plan                                                     |
+| `* *`     | job fest event planner                     | view all events                 | remember all the events I am involved in so far                                             |
+| `* *`    | job fest event planner                        | be able to delete events        | remove events I no longer need                                                              |
+| `* *`     | job fest event planner                     | be able to select events        | easily view the contacts and tasks to do for each particular event                          |
+| `* *`     | job fest event planner                     | link contacts to events         | remember which event the specific contacts are involved in                                  |
+| `* *`     | job fest event planner                     | unlink contacts from events     | remove the association between contacts and events when they are no longer related          |
+| `* *`    | job fest event planner                        | add a new task for an event     | remember the tasks I need to do for the event                                               |
+| `* *`    | job fest event planner                        | delete a task from an event     | remove tasks that I no longer need                                                          |
+| `* *`    | job fest event planner                        | mark a task as completed or not | easily check the progress of my tasks                                                       |
+| `* *`      | job fest event planner | return to the home page         |                                                                                             |
+| `*`      | job fest event planner | sort contacts by name           | locate a contact easily                                                                     |
 
 
 *{More to be added}*
