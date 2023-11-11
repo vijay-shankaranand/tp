@@ -13,6 +13,7 @@ import seedu.address.model.JobFestGo;
 import seedu.address.model.ReadOnlyJobFestGo;
 import seedu.address.model.contact.Contact;
 import seedu.address.model.event.Event;
+import seedu.address.model.event.exceptions.EventNotFoundException;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.task.Task;
 
@@ -29,6 +30,8 @@ class JsonSerializableJobFestGo {
     public static final String MESSAGE_DUPLICATE_EVENT = "Events list contains duplicate event(s).";
 
     public static final String MESSAGE_DUPLICATE_TASK = "Tasks list contains duplicate tasks(s).";
+
+    public static final String MESSAGE_EVENT_NOT_FOUND = "Event associated to a task is not found.";
 
     private final List<JsonAdaptedContact> contacts = new ArrayList<>();
 
@@ -96,12 +99,16 @@ class JsonSerializableJobFestGo {
         }
         for (JsonAdaptedTask jsonAdaptedTask : taskList) {
             Task task = jsonAdaptedTask.toModelType();
-            task = new Task(task.getDescription(), task.getDate(),
-                    jobFestGo.getEvent(task.getAssociatedEventName()), task.isCompleted());
-            if (jobFestGo.hasTask(task)) {
-                throw new IllegalValueException(MESSAGE_DUPLICATE_TASK);
+            try {
+                task = new Task(task.getDescription(), task.getDate(),
+                        jobFestGo.getEvent(task.getAssociatedEventName()), task.isCompleted());
+                if (jobFestGo.hasTask(task)) {
+                    throw new IllegalValueException(MESSAGE_DUPLICATE_TASK);
+                }
+                jobFestGo.addTask(task);
+            } catch (EventNotFoundException enfe) {
+                throw new IllegalValueException(MESSAGE_EVENT_NOT_FOUND);
             }
-            jobFestGo.addTask(task);
         }
         return jobFestGo;
     }
