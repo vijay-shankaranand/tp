@@ -1010,6 +1010,47 @@ testers are expected to do more *exploratory* testing.
    1. Other incorrect delete commands to try: `find_contact @`, `...`<br>
       Expected: Similar to previous.
 
+### Adding a tag
+
+1. Adding a tag while all tags are being shown
+
+   1. Prerequisites: List all tags using the `view_tags` command. Multiple tags in the list.
+
+   1. Test case: `add_tag t/clients`<br>
+      Expected: `clients` tag is added. Details of the added tag shown in the status message. Returns back to home page.
+
+   1. Test case: `add_tag t/`<br>
+      Expected: No tag is added. Error details shown in the status message. Returns back to home page.
+
+   1. Other incorrect add tag commands to try: `add_tag`, `add_tag x`, `...`<br>
+      Expected: Similar to previous.
+
+2. Adding a tag while on the home page
+
+   1. Prerequisites: Be on the home screen using the `home` command.
+
+   2. Test case: `add_tag t/clients`<br>
+      Expected: `clients` tag is added. Details of the added tag shown in the status message.
+
+   3. Test case: `add_tag t/`<br>
+      Expected: No tag is added. Error details shown in the status message.
+
+   4. Other incorrect add tag commands to try: `add_tag`, `add_tag x`, `...`<br>
+      Expected: Similar to previous.
+
+3. Adding a tag after selecting an event
+
+   1. Prerequisites: Be on the selected event page using the `select_event x` command in which x represents an integer that is smaller than or equal to the event list size.
+
+   2. Test case: `add_tag t/clients`<br>
+      Expected: `clients` tag is added. Details of the added tag shown in the status message. Returns back to home page.
+
+   3. Test case: `add_tag t/`<br>
+      Expected: No tag is added. Error details shown in the status message. Returns back to home page.
+
+   4. Other incorrect add tag commands to try: `add_tag`, `add_tag x`, `...`<br>
+      Expected: Similar to previous.
+
 ### Deleting a tag
 
 1. Deleting a tag while all tags are being shown
@@ -1030,7 +1071,7 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: Be on the home screen using the `home` command.
 
    1. Test case: `delete_tag t/clients`<br>
-      Expected: `clients` tag is deleted. Contacts having the `clients` tag has the tag removed from the. Details of the deleted tag shown in the status message.
+      Expected: `clients` tag is deleted. Contacts having the `clients` tag has the tag removed from the list. Details of the deleted tag shown in the status message.
 
    1. Test case: `delete_tag t/`<br>
       Expected: No tag is deleted. Error details shown in the status message.
@@ -1049,6 +1090,47 @@ testers are expected to do more *exploratory* testing.
       Expected: No tag is deleted. Error details shown in the status message.
 
    1. Other incorrect delete tag commands to try: `delete_tag`, `delete_tag x`, `...`<br>
+      Expected: Similar to previous.
+
+### Deleting an event
+
+1. Deleting an event while all events are being shown
+
+   1. Prerequisites: List all events using the `view_events` command. Multiple events in the list.
+
+   2. Test case: `delete_event 1`<br>
+      Expected: First event is deleted from the list. Details of the deleted event shown in the status message. Returns back to home page.
+
+   3. Test case: `delete_event 0`<br>
+      Expected: No event is deleted. Error details shown in the status message. Returns back to home page.
+
+   4. Other incorrect delete event commands to try: `delete_event`, `delete_event x`, `...` (where x is larger than the list size)<br>
+      Expected: Similar to previous.
+
+2. Deleting an event while on the home page
+
+   1. Prerequisites: Be on the home screen using the `home` command. Event list should be displayed on the left.
+
+   2. Test case: `delete_event 2`<br>
+      Expected: Second event is deleted from the list. Details of the deleted event shown in the status message.
+
+   3. Test case: `delete_event 0`<br>
+      Expected: No event is deleted. Error details shown in the status message.
+
+   4. Other incorrect delete event commands to try: `delete_event`, `delete_event x`, `...` (where x is larger than the list size)<br>
+      Expected: Similar to previous.
+
+3. Deleting an event after selecting an event
+
+   1. Prerequisites: Be on the selected event page using the `select_event x` command in which x represents an integer that is smaller than or equal to the event list size.
+
+   2. Test case: `delete_event 1`<br>
+      Expected: First event is deleted from the list. Details of the deleted event shown in the status message. Returns back to home page.
+
+   3. Test case: `delete_event 0`<br>
+      Expected: No event is deleted. Error details shown in the status message.
+
+   4. Other incorrect delete event commands to try: `delete_event`, `delete_event x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
 ### Selecting an event
@@ -1091,6 +1173,34 @@ testers are expected to do more *exploratory* testing.
 
    1. Other incorrect select event commands to try: `select_event`, `select_event x`, `...` (where x is an integer larger than the list size)<br>
       Expected: Similar to previous.
+
+### Adding a task
+
+1. Adding a task while on the home page
+
+    1. Prerequisites: Be on the home screen using the `home` command.
+
+    2. Test case: `add_task td/Book Venue d/2024-10-10 ev/NUS Career Fair 2024`<br>
+       Expected: Book Venue task is added to NUS Career Fair 2024 event. Details of the added task shown in the status message. Goes the respective event page and displays the tasks of the event on the right.
+
+    3. Test case: `add_task td/Book Venue d/2024-10-10`<br>
+       Expected: No task is added. Error details shown in the status message.
+
+    4. Other incorrect add task commands to try: `add_task`, `add_task td/Book Venue d/2024-10-10 ev/`<br>
+       Expected: Similar to previous.
+
+2. Adding a task while on the event page
+
+    1. Prerequisites: Be on the selected event page using the `select_event x` command in which x represents an integer that is smaller than or equal to the event list size.
+
+    2. Test case: `add_task td/Book Venue d/2024-10-10 ev/NUS Career Fair 2024`<br>
+       Expected: Book Venue task is added to NUS Career Fair 2024 event. Details of the added task shown in the status message. Goes the respective event page and displays the tasks of the event on the right.
+
+    3. Test case: `add_task td/Book Venue d/2024-10-10`<br>
+       Expected: No task is added. Error details shown in the status message.
+
+    4. Other incorrect add task commands to try: `add_task`, `add_task td/Book Venue d/2024-10-10 ev/`<br>
+       Expected: Similar to previous.
 
 ### Saving data
 
