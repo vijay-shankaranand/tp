@@ -1432,3 +1432,44 @@ testers are expected to do more *exploratory* testing.
 
    1. Test case: `data/jobfestgo.json` was corrupted.
       Expected: JobFestGo starts with an empty event, contact, and task lists. All events, contacts and tasks are cleared.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix: Planned Enhancements**
+
+Given below are the planned enhancements for the app for future releases.
+
+1. **Make error messages more useful**
+
+   Currently, the error messages for certain commands are not very useful.
+   For example, if the user enters an invalid date such as `2024-04-31` `add_task`,
+   the error message is `Date should be valid and in format YYYY-MM-DD not before today's date`.
+   This is not very useful as the user does not know why the date is wrong.
+   The error message should be more specific, such as `Entered date is invalid. April 2024 should have DD between 1 and 30 inclusive`.
+
+2. **Allow emails to have top-level domains (TLDs) other than `.com`**
+
+   The email field only allows `.com` TLD in the current implementation.
+   This should be changed to allow other TLDs such as `.org`, `.edu`, `.net`, etc.
+
+3. **Allow special characters to be entered in `EventName` and `ContactName`**
+
+    Currently, special characters other than spaces are not allowed in `EventName` and `ContactName`.
+    This should be changed to allow these characters to allow more valid names to be entered.
+
+4. **Upon deletion of a tag, the GUI should remain on `view_tags` screen**
+
+    With the current implementation, when a tag is deleted, the GUI returns to the home page.
+    This should be changed to remain on the `view_tags` screen for ease of use and verification of the delete transaction.
+
+5. **Raise error when the same details of a contact is entered in `edit_contact` command**
+    
+    Currently, when the same details of a contact is entered in `edit_contact` command, the contact is still edited.
+    This should be changed to raise an error to inform the user that the edited contact details is the same as the original contact details, to prevent redundant edits.
+
+6. **Use index number instead of event name for commands such as `link` and `add_task`**
+
+    The current implementation of JobFestGo requires the user has to enter the event name for commands such as `link` and `add_task`.
+    This should be changed to allow the user to enter the index number of the event instead, to allow for faster input.
+    For example, currently, the user has to enter `link n/John Doe ev/NUS Career Fair 2024` to link John Doe to the event NUS Career Fair 2024.
+    With the enhancement, the user can enter `link n/John Doe ev/1` to link John Doe to the first event in the event list.
