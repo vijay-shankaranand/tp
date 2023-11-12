@@ -192,7 +192,7 @@ Format: `view_contacts`
 Deletes the contact at the specified index from JobFestGo.
 </box>
 
-<box type="warning" style="background-color: #C73852; color: white;">
+<box type="warning" style="background-color: #FFAA33; color: white;">
 
 **WARNING:** This command is destructive. Once a contact is deleted, it cannot be recovered.
 </box>
@@ -236,7 +236,7 @@ Examples:
 Finds contacts whose names contain any of the given keywords.
 </box>
 
-<box type="warning" style="background-color: #C73852; color: white">
+<box type="warning" style="background-color: #FFAA33; color: white">
 
 **WARNING:**
 This command is cumulative. Repeatedly using this command will result in the list being successively filtered based on the current displayed list. The examples below illustrate this.
@@ -294,7 +294,7 @@ Format: `view_tags`
 Deletes the specified tag name from JobFestGo.
 </box>
 
-<box type="warning" style="background-color: #C73852; color: white;">
+<box type="warning" style="background-color: #FFAA33; color: white;">
 
 **WARNING:** This command is destructive. Once a tag is deleted, no contacts can be associated with the tag name.
 </box>
@@ -313,7 +313,7 @@ Examples:
 Displays contacts tagged by any of the specified tags.
 </box>
 
-<box type="warning" style="background-color: #C73852; color: white">
+<box type="warning" style="background-color: #FFAA33; color: white">
 
 **WARNING:**
 This command is cumulative. Repeatedly using this command will result in the list being successively filtered based on the current displayed list. The examples below illustrate this.
@@ -346,13 +346,13 @@ Format: `add_event n/NAME d/DATE a/ADDRESS`
 * Event name can only take alphanumeric values.
 * The event name **must not already exist** in JobFestGo.
 * Event name and address should not have more than one whitespace in-between each word.
-* If the event name is very long and cannot be viewed fully, enter `view_events` to see the full text.
+* If the event name is very long and cannot be viewed fully, enter [`view_events`](#viewing-all-events-view-events) to see the full text.
 * Date must be valid and should be in the appropriate (YYYY-MM-DD) format.
 * Date should **not** be before the current date.
 * Past the date of the event, the event will be labelled as completed next to its name in event list.
 
 Examples:
-* `add_event n/CS2103T Presentation d/2023-11-10 a/311, Clementi Ave 2, #02-25` adds an event named `CS2103T Presentation` to JobFestGo. <br><br>
+* `add_event n/CS2103T Presentation d/2023-11-10 a/311, Clementi Ave 2, #02-25` adds an event named `CS2103T Presentation` to JobFestGo. 
 
     ![result for 'add_event'](images/addEventResult.png)
 
@@ -374,7 +374,7 @@ Format: `view_events`
 Deletes the event specified at the index from JobFestGo.
 </box>
 
-<box type="warning" style="background-color: #C73852; color: white;">
+<box type="warning" style="background-color: #FFAA33; color: white;">
 
 **WARNING:** This command is destructive. Once an event is deleted, all tasks associated with the event will be deleted.
 </box>
@@ -404,12 +404,18 @@ Format: `link ev/EVENT_NAME c/CONTACT_NAME [c/MORE_CONTACT_NAMES]`
 * The order of the input does not matter. e.g. `link ev/NUS Career Fest c/Alice Black`
  and `link c/Alice Black ev/NUS Career Fest` are both valid commands and will perform
  the same task.
-* The command will only succeed if all contacts and events keyed in are valid and are existing contacts and events in JobFestGo.
 
 Examples:
 * `link ev/NUS Career Fest c/Alice Black` links `Alice Black` to the event `NUS Career Fest` if `Alice Black` is not linked to `NUS Career Fest`.
 
 <div style="page-break-after: always;"></div>
+
+<box type="warning" style="background-color: #C73852; color: white">
+<span slot="icon" style="color: white;"><md>:fas-close:</md></span>
+
+**Errors:**
+If any of the contacts or events keyed in are not valid and do not exist in JobFestGo, an error will be thrown.
+</box>
 
 ### Unlinking contacts from an event : `unlink`
 <box type="info" style="background-color:#1e90ff; color: white;">
@@ -420,11 +426,18 @@ Unlinks specified contacts from the specified event.
 Format: `unlink ev/EVENT_NAME c/CONTACT_NAME [c/MORE_CONTACT_NAMES]`
 
 * Event name and contact name should not have more than one whitespace in-between each word.
-* It functions similarly to [`link`](#linking-contacts-to-an-event-link) except for the fact that the input contacts and event for `unlink`
- must be currently linked. Otherwise, an error will be raised.
 
 Examples:
 * `unlink ev/NUS Career Fest c/Alice Black` unlinks `Alice Black` from the event `NUS Career Fest` if `Alice Black` is linked to `NUS Career Fest`.
+
+<box type="warning" style="background-color: #C73852; color: white">
+<span slot="icon" style="color: white;"><md>:fas-close:</md></span>
+
+**Errors:**
+Similar to [`link`](#linking-contacts-to-an-event-link), if any of the contacts or events keyed in are not valid and do not exist in JobFestGo, an error will be thrown.
+
+If the input contacts and event for `unlink` are not currently linked, an error will also be thrown.
+</box>
 
 ### Selecting an event: `select_event`
 <box type="info" style="background-color:#1e90ff; color: white;">
@@ -439,7 +452,7 @@ Format: `select_event INDEX`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `select_event 3` selects the third event in the displayed events list.<br><br>
+* `select_event 3` selects the third event in the displayed events list.
 
     ![result for 'select_event 3'](images/selectEventResult.png)
 
@@ -468,7 +481,7 @@ Examples:
 Deletes the task specified by the task description from its associated event in JobFestGo.
 </box>
 
-<box type="warning" style="background-color: #C73852; color: white">
+<box type="warning" style="background-color: #FFAA33; color: white">
 
 **WARNING:** This command is destructive. Once a task is deleted, it cannot be recovered.
 </box>
@@ -484,11 +497,11 @@ Format: `delete_task td/TASK_DESCRIPTION ev/EVENT_NAME`
 Examples:
 * `delete_task td/Book Venue ev/NUS Career Fair 2023` deletes task `Book Venue` from the task list of the event `NUS Career Fair 2023`.
 
-<box type="warning" style="background-color: #FF6D6A; color: white">
+<box type="warning" style="background-color: #C73852; color: white">
 <span slot="icon" style="color: white;"><md>:fas-close:</md></span>
 
 **Errors:**
-Errors will be raised if the specified event does not exist or the event does not have the specified task.
+If the specified event does not exist or the event does not have the specified task, an error will be thrown.
 If such a situation happens, you may double-check the task description and the event name and re-enter valid inputs.
 </box>
 
@@ -506,14 +519,22 @@ Format: `mark_task td/TASK_DESCRIPTION ev/EVENT_NAME`
 * Both the `TASK_DESCRIPTION` and the `EVENT_NAME` are case-insensitive.
   e.g. `mark_task td/Book Venue ev/NUS Career Fair 2023` and `mark_task td/book venue ev/nus Career FAIR 2023`
   will perform the same operation.
-* Errors will be raised if the specified event does not exist or the event does not have the specified task.
-  If such a situation happens, you may double-check the task description and the event name and re-enter valid inputs.
-* Errors will also be raised if the specified task has already been marked as completed.
 
 Examples:
-* `mark_task td/Book Venue ev/NUS Career Fair 2023` marks the task `Book Venue` from the task list of the event `NUS Career Fair 2023` as completed.<br><br>
+* `mark_task td/Book Venue ev/NUS Career Fair 2023` marks the task `Book Venue` from the task list of the event `NUS Career Fair 2023` as completed.
 
-    ![result for 'mark_task'](images/markTaskResult.png)
+<box type="warning" style="background-color: #C73852; color: white">
+<span slot="icon" style="color: white;"><md>:fas-close:</md></span>
+
+**Errors:**
+If the specified event does not exist or the event does not have the specified task, an error will be thrown.
+If such a situation happens, you may double-check the task description and the event name and re-enter valid inputs.
+
+
+If the specified task has already been marked as completed, an error will also be thrown.
+</box>
+
+   ![result for 'mark_task'](images/markTaskResult.png)
 
 ### Unmarking a task : `unmark_task`
 <box type="info" style="background-color:#1e90ff; color: white;">
@@ -526,10 +547,19 @@ Format: `unmark_task td/TASK_DESCRIPTION ev/EVENT_NAME`
 * Task description and event name should not have more than one whitespace in-between each word.
 * It works exactly the same way as [`mark_task`](#marking-a-task-mark-task) except for the fact that `unmark_task` marks a completed task as not completed.
 * You may `unmark_task` a task when you realize that you have not completed the task but have wrongly marked it as completed.
-* Errors will be raised if the specified task has already been unmarked.
 
 Examples:
 * `unmark_task td/Book Venue ev/NUS Career Fair 2023` marks the task `Book Venue` from the task list of the event `NUS Career Fair 2023` as not completed.
+
+<box type="warning" style="background-color: #C73852; color: white">
+<span slot="icon" style="color: white;"><md>:fas-close:</md></span>
+
+**Errors:**
+If the specified event does not exist or the event does not have the specified task, an error will be thrown.
+If such a situation happens, you may double-check the task description and the event name and re-enter valid inputs.
+
+If the specified task has already been unmarked, an error will be thrown.
+</box>
 
 ### Viewing help : `help`
 <box type="info" style="background-color:#1e90ff; color: white;">
@@ -548,7 +578,7 @@ Format: `help`
 Clears all entries from JobFestGo.
 </box>
 
-<box type="warning" style="background-color: #C73852; color: white">
+<box type="warning" style="background-color: #FFAA33; color: white">
 
 **WARNING:**
 This command is destructive. Once executed, it will delete all contacts, events and tasks from JobFestGo.
