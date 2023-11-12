@@ -185,6 +185,19 @@ public class UniqueContactListTest {
     }
 
     @Test
+    public void updateTag_sameTagList_success() {
+        uniqueContactList.add(ALICE);
+        uniqueContactList.updateTag(new Tag("family"));
+        uniqueContactList.updateTag(new Tag("friends"));
+        uniqueContactList.updateTag(new Tag("friends"));
+        Contact editedAlice = new ContactBuilder().withName("Alice Pauline")
+            .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
+            .withPhone("94351253")
+            .build();
+        assertTrue(uniqueContactList.contains(editedAlice));
+    }
+
+    @Test
     public void iterator_iteration_success() {
         UniqueContactList list = new UniqueContactList();
         list.add(ALICE);
