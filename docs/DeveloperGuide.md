@@ -6,8 +6,46 @@
 
 # JobFestGo Developer Guide
 
-<!-- * Table of Contents -->
-<page-nav-print />
+## **Table of Content**
+ - [Acknowledgements](#acknowledgements)
+ - [Setting up, getting started](#setting-up-getting-started)
+ - [Design](#design)
+    - [Architecture](#architecture)
+    - [UI component](#ui-component)
+    - [Logic component](#logic-component)
+    - [Model component](#model-component)
+    - [Storage component](#storage-component)
+    - [Common classes](#common-classes)
+ - [Implementation](#implementation)
+    - [Return to home page feature](#return-to-home-page-feature)
+    - [Select Event Feature](#select-event-feature)
+    - [Add Tag Feature](#add-tag-feature)
+    - [Link/unlink Feature](#link-unlink-feature)
+    - [[Proposed] Undo/redo feature](#proposed-undo-redo-feature)
+    - [[Proposed] Data archiving](#proposed-data-archiving)
+ - [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
+ - [Appendix: Requirements](#appendix-requirements)
+    - [Product scope](#product-scope)
+    - [User stories](#user-stories)
+    - [Use cases](#use-cases)
+    - [Non-Functional Requirements](#non-functional-requirements)
+    - [Glossary](#glossary)
+ - [Appendix: Instructions for manual testing](#appendix-instructions-for-manual-testing)
+    - [Launch and shutdown](#launch-and-shutdown)
+    - [Returning to home page](#returning-to-home-page)
+    - [Adding a contact](#adding-a-contact)
+    - [Listing all contacts](#listing-all-contacts)
+    - [Deleting a contact](#deleting-a-contact)
+    - [Editing a contact](#editing-a-contact)
+    - [Locating contacts by name](#locating-contacts-by-name)
+    - [Adding a tag](#adding-a-tag)
+    - [Viewing all tags](#viewing-all-tags)
+    - [Deleting a tag](#deleting-a-tag)
+    - [Deleting an event](#deleting-an-event)
+    - [Viewing all events](#viewing-all-events)
+    - [Selecting an event](#selecting-an-event)
+    - [Adding a task](#adding-a-task)
+    - [Saving data](#saving-data)
 
 --------------------------------------------------------------------------------------------------------------------
 
