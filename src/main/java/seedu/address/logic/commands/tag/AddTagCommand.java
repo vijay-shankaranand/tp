@@ -44,6 +44,11 @@ public class AddTagCommand extends Command {
 
         model.addTag(toAdd);
 
+        // Update model to depict which screen it is on currently.
+        model.switchToContactsScreen(false);
+        model.switchToEventsScreen(false);
+        model.switchToTagsScreen(false);
+
         // Update filtered lists accordingly.
         // The flow of command returns back to the main dashboard.
         model.updateFilteredContactList(Model.PREDICATE_SHOW_ALL_CONTACTS);

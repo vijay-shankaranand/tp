@@ -39,11 +39,21 @@ public class DeleteEventCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Event> lastShownList = model.getFilteredEventList();
+
+        if (model.isOnContactsScreen() || model.isOnTagsScreen()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_EVENT_NOT_DISPLAYED);
+        }
+
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
         }
         Event eventToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deleteEvent(eventToDelete);
+
+        // Update model to depict which screen it is on currently.
+        model.switchToContactsScreen(false);
+        model.switchToEventsScreen(false);
+        model.switchToTagsScreen(false);
 
         // Update the respective filtered lists to show the correct lists.
         // Flow of the command should be after deleting an event, goes back to main dashboard.

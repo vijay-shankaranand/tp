@@ -22,6 +22,9 @@ public class ViewTagsCommandTest {
 
     @Test
     public void execute_listIsNotFiltered_showsSameList() {
+        expectedModel.switchToTagsScreen(true);
+        expectedModel.switchToContactsScreen(false);
+        expectedModel.switchToEventsScreen(false);
         assertCommandSuccess(new ViewTagsCommand(), model, ViewTagsCommand.MESSAGE_SUCCESS, expectedModel);
     }
 }

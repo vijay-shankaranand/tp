@@ -44,6 +44,11 @@ public class DeleteTagCommand extends Command {
 
         model.deleteTag(toDelete);
 
+        // Update model to depict which screen it is on currently.
+        model.switchToContactsScreen(false);
+        model.switchToEventsScreen(false);
+        model.switchToTagsScreen(false);
+
         // Update the filtered lists accordingly.
         // Flow of command returns back to the main dashboard.
         model.updateFilteredContactList(Model.PREDICATE_SHOW_ALL_CONTACTS);

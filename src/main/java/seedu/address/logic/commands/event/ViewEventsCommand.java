@@ -17,6 +17,9 @@ public class ViewEventsCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
+        model.switchToContactsScreen(false);
+        model.switchToEventsScreen(true);
+        model.switchToTagsScreen(false);
         model.updateFilteredEventList(Model.PREDICATE_SHOW_ALL_EVENTS);
         return new CommandResult(MESSAGE_SUCCESS);
     }

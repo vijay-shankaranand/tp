@@ -57,6 +57,11 @@ public class DeleteTaskCommand extends Command {
         // Get the selected event after deleting task
         Event eventToDeleteTask = model.getEvent(associatedEventName);
 
+        // Update model to depict which screen it is on currently.
+        model.switchToContactsScreen(false);
+        model.switchToEventsScreen(false);
+        model.switchToTagsScreen(false);
+
         // Update the respective filtered lists to show the components within the event
         model.updateFilteredContactList(new ContactIsInEventPredicate(eventToDeleteTask));
         model.updateFilteredTaskList(new TaskIsInEventPredicate(eventToDeleteTask));

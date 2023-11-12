@@ -54,6 +54,11 @@ public class AddEventCommand extends Command {
         }
         model.addEvent(toAdd);
 
+        // Update model to depict which screen it is on currently.
+        model.switchToContactsScreen(false);
+        model.switchToEventsScreen(false);
+        model.switchToTagsScreen(false);
+
         // Update the relevant filtered lists to display the correct list.
         // Flow of command should be after adding event, it goes to main dashboard.
         model.updateFilteredContactList(Model.PREDICATE_SHOW_ALL_CONTACTS);

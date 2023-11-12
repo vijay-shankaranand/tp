@@ -43,6 +43,10 @@ public class SelectEventCommand extends Command {
         requireNonNull(model);
         List<Event> lastShownEventList = model.getFilteredEventList();
 
+        if (model.isOnContactsScreen() || model.isOnTagsScreen()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_EVENT_NOT_DISPLAYED);
+        }
+
         if (targetIndex.getZeroBased() >= lastShownEventList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
         }
@@ -53,6 +57,11 @@ public class SelectEventCommand extends Command {
         // Get the predicates necessary for the respective filtered lists.
         ContactIsInEventPredicate predicate = new ContactIsInEventPredicate(eventToBeSelected);
         TaskIsInEventPredicate taskPredicate = new TaskIsInEventPredicate(eventToBeSelected);
+
+        // Update model to depict which screen it is on currently.
+        model.switchToContactsScreen(false);
+        model.switchToEventsScreen(false);
+        model.switchToTagsScreen(false);
 
         // Update the respective filtered lists to show the components within the event.
         model.updateFilteredContactList(predicate);

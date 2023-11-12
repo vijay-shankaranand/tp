@@ -9,6 +9,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.contact.Contact;
 import seedu.address.model.contact.ContactIsTaggedPredicate;
@@ -41,12 +42,21 @@ public class FilterByTagCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model) {
+    public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        List<Contact> lastShownList = model.getFilteredContactList();
+
+        if (model.isOnEventsScreen() || model.isOnTagsScreen()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_CONTACT_NOT_DISPLAYED);
+        }
 
         // Update the filtered lists accordingly.
         // If list has already been filtered, it will be filtered upon the previous predicate.
         Predicate<Contact> prevContactPred = model.getContactListPredicate();
+
+        // Update model to depict which screen it is on currently.
+        model.switchToEventsScreen(false);
+        model.switchToTagsScreen(false);
 
         if (prevContactPred != null) {
             model.updateFilteredContactList(predicate.and(prevContactPred));
