@@ -23,11 +23,6 @@ public interface Model {
     Predicate<Event> PREDICATE_SHOW_ALL_EVENTS = unused -> true;
     Predicate<Task> PREDICATE_SHOW_ALL_TASKS = unused -> true;
 
-    /** {@code Predicate} that always evaluate to false */
-    Predicate<Contact> PREDICATE_SHOW_NO_CONTACTS = unused -> false;
-    Predicate<Event> PREDICATE_SHOW_NO_EVENTS = unused -> false;
-    Predicate<Task> PREDICATE_SHOW_NO_TASKS = unused -> false;
-
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
      */
