@@ -1,0 +1,77 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":JobFestGoParser" as JobFestGoParser LOGIC_COLOR
+participant ":AddEventCommandParser" as AddEventCommandParser LOGIC_COLOR
+participant "t:AddEventCommand" as AddEventCommand LOGIC_COLOR
+participant "result:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("add_event\n n/NUS Career Fair\n d/2024-02-15 a/NUS")
+activate LogicManager
+
+LogicManager -> JobFestGoParser : parseCommand("add_event\n n/NUS Career Fair\n d/2024-02-15 a/NUS")
+activate JobFestGoParser
+
+create AddEventCommandParser
+JobFestGoParser -> AddEventCommandParser
+activate AddEventCommandParser
+
+AddEventCommandParser --> JobFestGoParser
+deactivate AddEventCommandParser
+
+JobFestGoParser -> AddEventCommandParser : parse("n/NUS Career Fair\n d/2024-02-15 a/NUS")
+activate AddEventCommandParser
+
+AddEventCommandParser -> AddEventCommandParser : parseName("NUS Career Fair")
+AddEventCommandParser -> AddEventCommandParser : parseDate("2024-02-15")
+AddEventCommandParser -> AddEventCommandParser : parseAddress("NUS")
+create AddEventCommand
+AddEventCommandParser -> AddEventCommand : new AddEventCommand(event)
+activate AddEventCommand
+
+AddEventCommand --> AddEventCommandParser
+deactivate AddEventCommand
+
+AddEventCommandParser --> JobFestGoParser
+deactivate AddEventCommandParser
+AddEventCommandParser -[hidden]-> JobFestGoParser
+destroy AddEventCommandParser
+
+JobFestGoParser --> LogicManager : e
+deactivate JobFestGoParser
+
+LogicManager -> AddEventCommand : execute()
+activate AddEventCommand
+
+AddEventCommand -> Model : addEvent(event)
+activate Model
+
+Model --> Model : updateFilteredEventList(ShowAllEvents)
+
+Model --> AddEventCommand
+deactivate Model
+
+create CommandResult
+AddEventCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> AddEventCommand
+deactivate CommandResult
+CommandResult -[hidden]-> AddEventCommand
+
+AddEventCommand --> LogicManager : result
+deactivate AddEventCommand
+AddEventCommand -[hidden]-> LogicManager
+destroy AddEventCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

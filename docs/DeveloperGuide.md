@@ -52,7 +52,8 @@
 
 ## **Acknowledgements**
 
-_{ list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well }_
+This project is based on the [_AddressBook-Level3_](https://se-education.org/addressbook-level3/) project.
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -119,7 +120,7 @@ The `UI` component,
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Contact` object residing in the `Model`.
+* depends on some classes in the `Model` component, as it displays `Contact` and `Event` objects residing in the `Model`.
 
 ### Logic component
 
@@ -156,7 +157,7 @@ How the parsing works:
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
-<puml src="diagrams/ModelClassDiagram.puml" width="600" />
+<puml src="diagrams/ModelClassDiagram.puml" width="1000" />
 
 
 The `Model` component,
@@ -165,14 +166,6 @@ The `Model` component,
 * stores the currently 'selected' `Contact`/`Event`/`Tag`/`Task` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Contact>`/`ObservableList<Event>`/`ObservableList<Tag>`/`ObservableList<Task>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
-
-<box type="info" seamless>
-
-**Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `JobFestGo`, which `Contact` references. This allows `JobFestGo` to only require one `Tag` object per unique tag, instead of each `Contact` needing their own `Tag` objects.<br>
-
-<puml src="diagrams/BetterModelClassDiagram.puml" width="450" />
-
-</box>
 
 
 ### Storage component
@@ -229,46 +222,6 @@ The following activity diagram summarizes what happens when a user executes the 
     * Pros: Even easier to use as only one mouse click is required. No typing is needed.
     * Cons: Harder to implement.
 
-### Select Event Feature
-
-#### Implementation
-
-The select event mechanism is facilitated by `JobFestGo` as well as its observable lists for `Contact`, `Event`, as well as `Task`.
-
-The mechanism interacts with both the UI and the lists stored within `JobFestGo`, particularly `filteredContacts`, `filteredEvents`, and `filteredTasks`.
-
-Given below is an example usage scenario and how the select event mechanism behaves at each step.
-
-**Step 1.** The user launches the application for the first time. The `JobFestGo` will be initialized with the initial address book state.
-
-**Step 2.** The user executes `select_event 1` command to select the 1st event in JobFestGo. The `select_event` command calls upon the creation of `ContactIsInEventPredicate` and `TaskIsInEventPredicate` to update the respective filtered lists.
-
-The following sequence diagram shows how the select event operation works:
-
-<puml src="diagrams/SelectEventSequenceDiagram.puml" alt="SelectEventSequenceDiagram" />
-
-<box type="info" seamless>
-
-**Note:** The lifelines for `SelectEventCommand` and `SelectEventCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</box>
-
-The following activity diagram summarizes what happens when a user executes the select event command:
-
-<puml src="diagrams/SelectEventActivityDiagram.puml" width="250" />
-
-#### Design considerations:
-
-**Aspect: How select event executes**
-
-* **Current choice:** Highlights the event selected.
-  * Pros: Visually appealing.
-  * Cons: Slightly harder to implement.
-    <br></br>
-* **Alternative 1:** Event list gets updated to only show the selected event.
-  * Pros: Easy to implement.
-  * Cons: Users will have to consistently execute home command to view the other events.
-
 ### Add Tag Feature
 
 #### Implementation
@@ -312,12 +265,115 @@ The following sequence diagram shows how the add tag operation works:
 **Aspect: How the add tag command accepts tag inputs**
 
 * **Current choice:** Users can input the tags comprising only of alphanumeric characters.
-  * Pros: Easy to implement due to lesser parsing involved.
-  * Cons: Users cannot input tags comprising non-alphanumeric characters, such as spaces and special characters.
-  <br></br>
+    * Pros: Easy to implement due to lesser parsing involved.
+    * Cons: Users cannot input tags comprising non-alphanumeric characters, such as spaces and special characters.
+
 * **Alternative:** Users can input the tags comprising alphanumeric characters and non-alphanumeric characters.
-  * Pros: Users can input tags comprising non-alphanumeric characters, such as spaces and special characters.
-  * Cons: Lesser uniqueness of tags as users can input tags with the same name but different non-alphanumeric characters.
+    * Pros: Users can input tags comprising non-alphanumeric characters, such as spaces and special characters.
+    * Cons: Lesser uniqueness of tags as users can input tags with the same name but different non-alphanumeric characters.
+
+### Add Event feature
+
+#### Implementation
+
+The add event mechanism is facilitated by `JobFestGo` as well as its observable lists for `Event`.
+
+The mechanism interacts with both the UI and the `filteredEvents` list stored within `JobFestGo`. It holds a reference to the `Model` component, because the `AddEventCommand` relies on the `Model` to add the event.
+
+It includes the following operations in ModelManager which is implemented by Model:
+
+* `Model#addEvent(Event)` — Adds an event to JobFestGo.
+* `Model#updateFilteredEventList(Predicate)` — Updates the filtered event list according to the given predicate.
+
+Given below is an example usage scenario and how the add event mechanism behaves at each step:
+
+**Step 1.** The user launches the application for the first time. The `JobFestGo` will be initialized with the initial address book state.
+
+**Step 2.** The user executes `add_event n/NUS Career Fest d/2024-02-15 a/NUS` command to add a new event `NUS Career Fest` on `2024-02-15` in JobFestGo. The parser will parse the command and create a new `AddEventCommand` object, if the entered event is valid.
+
+<box type="info" seamless>
+
+**Note:** If the event name entered contains non-alphanumeric characters or the date of event is before current date, `AddEventCommandParser` will throw an error when creating the `AddEventCommand` object.
+
+</box>
+
+**Step 3.** The `AddEventCommand` object, created in step 2, will call `Model#addEvent(Event)` to add the event to JobFestGo. The `AddEventCommand` object will then call `Model#updateFilteredEventList(Predicate)` to update the filtered event list.
+
+The following sequence diagram shows how the add event operation works:
+
+<puml src="diagrams/AddEventSequenceDiagram.puml" alt="AddEventSequenceDiagram" />
+
+<box type="info" seamless>
+
+**Note:** The lifeline for `AddEventCommandParser` and `AddEventCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</box>
+
+The following activity diagram summarizes what happens when a user executes the add event command:
+
+<puml src="diagrams/AddEventActivityDiagram.puml" width="250" />
+
+#### Design considerations:
+
+**Aspect: How the add event command accepts event name inputs**
+
+* **Current choice:** Users can input the event name comprising only of alphanumeric characters.
+  * Pros: Easy to implement due to lesser parsing methods and classes involved.
+  * Cons: Users cannot input event names comprising non-alphanumeric characters, such as spaces and special characters.
+<br></br>
+* **Alternative 1:** Users can input the event name comprising alphanumeric characters and non-alphanumeric characters.
+  * Pros: Users can input event names comprising non-alphanumeric characters, such as spaces and special characters.
+  * Cons: Harder to implement due to more parsing methods and classes involved. There is a need to create an entire new class for eventName whereas the current implementation uses the existing `Name` class.
+
+**Aspect: How the add event command accepts event date inputs**
+
+* **Current choice:** Users can input the event date in the format of `YYYY-MM-DD`.
+  * Pros: Easy to implement due to lesser parsing methods and classes involved.
+  * Cons: Users cannot input event dates in other formats.
+<br></br>
+* **Alternative 1:** Users can input the event date in other formats.
+  * Pros: Users can input event dates in other formats.
+  * Cons: Harder to implement as `LocalDate#parse(String)` accepts only String of a specific format.
+
+### Select Event Feature
+
+#### Implementation
+
+The select event mechanism is facilitated by `JobFestGo` as well as its observable lists for `Contact`, `Event`, as well as `Task`.
+
+The mechanism interacts with both the UI and the lists stored within `JobFestGo`, particularly `filteredContacts`, `filteredEvents`, and `filteredTasks`.
+
+Given below is an example usage scenario and how the select event mechanism behaves at each step.
+
+**Step 1.** The user launches the application for the first time. The `JobFestGo` will be initialized with the initial address book state.
+
+**Step 2.** The user executes `select_event 1` command to select the 1st event in JobFestGo. The `select_event` command calls upon the creation of `ContactIsInEventPredicate` and `TaskIsInEventPredicate` to update the respective filtered lists.
+
+The following sequence diagram shows how the select event operation works:
+
+<puml src="diagrams/SelectEventSequenceDiagram.puml" alt="SelectEventSequenceDiagram" />
+
+<box type="info" seamless>
+
+**Note:** The lifelines for `SelectEventCommand` and `SelectEventCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</box>
+
+The following activity diagram summarizes what happens when a user executes the select event command:
+
+<puml src="diagrams/SelectEventActivityDiagram.puml" width="250" />
+
+#### Design considerations:
+
+**Aspect: How select event executes**
+
+* **Current choice:** Highlights the event selected.
+  * Pros: Visually appealing.
+  * Cons: Slightly harder to implement.
+    <br></br>
+* **Alternative 1:** Event list gets updated to only show the selected event.
+  * Pros: Easy to implement.
+  * Cons: Users will have to consistently execute home command to view the other events.
 
 ### Link/unlink Feature
 
@@ -494,14 +550,14 @@ _{Explain here how the data archiving feature will be implemented}_
 ### Product scope
 
 **Target user profile**:
-* is a job festival event planner
+* is a job festival event planner in Singapore
 * has a need to manage a significant number of contacts of different types (e.g. vendors, customers) and tasks for different events
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: Each event planner has multiple events, each of which can have a large number of contacts and tasks associated and searching for contact would be a hassle. Our product provides a centralised system that would help job event planners organise their contact information and tasks for quick and easy access.
+**Value proposition**: Each event planner has many events to plan, each of which can have a large number of contacts and tasks associated and searching for contact would be a hassle. Our product provides a centralised system that would help job event planners organise their contact information and tasks for quick and easy access.
 
 ### User stories
 
@@ -531,7 +587,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`      | job fest event planner | return to the home page         |                                                                                             |
 | `*`      | job fest event planner | sort contacts by name           | locate a contact easily                                                                     |
 
-*{More to be added}*
 
 ### Use cases
 
@@ -998,21 +1053,22 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
    Use case ends.
 
-*{More to be added}*
 
 ---
 ### Non-Functional Requirements
 1. Environment requirement:
 * Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2. Scalability:
-* Should be able to hold up to 1000 contacts without a noticeable sluggishness in performance for typical usage.
+* Should be able to hold up to 1000 events, contacts and tasks without a noticeable sluggishness in performance for typical usage.
 3. Usability:
 * A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 * The user interface should be intuitive for event planners to use, for non-tech savy job event planners
 4. Performance:
 * The system should respond to all inputs within a reasonable time frame (within 2 seconds)
-
-*{More to be added}*
+5. Size of application:
+* The size of the application's `jar` file should not exceed 100MB
+6. Memory usage:
+* The system should not use more than 2GB of memory when running.
 
 ### Glossary
 
@@ -1074,7 +1130,7 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts, events and tasks. The window size may not be optimum.
 
 1. Saving window preferences
 
@@ -1370,6 +1426,19 @@ testers are expected to do more *exploratory* testing.
    1. Other incorrect delete tag commands to try: `delete_tag`, `delete_tag x`, `...`<br>
       Expected: Similar to previous.
 
+### Adding an event
+
+1. Adding an event
+
+    1. Test case: `add_event n/NUS Career Fair 2023 d/2024-02-15 a/NUS`<br>
+        Expected: Event named NUS Career Fair 2023 with the respective details created, provided that there is no event named NUS Career Fair 2023. If not already at home page, returns to home page.
+
+    1. Test case: `add_event n/NUS Career Fair 2023 d/2024-02-15`<br>
+        Expected: No event is added. Error details shown in the status message.
+
+    1. Other incorrect add task commands to try: `add_event`, `add_event n/NUS Career Fair 2023 d/2024-02-15 a/`<br>
+        Expected: Similar to previous.
+
 ### Deleting an event
 
 1. Deleting an event while all events are being shown
@@ -1491,6 +1560,13 @@ testers are expected to do more *exploratory* testing.
 
     4. Other incorrect add task commands to try: `add_task`, `add_task td/Book Venue d/2024-10-10 ev/`<br>
        Expected: Similar to previous.
+
+
+<box type="info" seamless>
+
+**Note:** If the task has a due date in the next 3 days or is overdue, then the task will appear under the 'Task Due' section of the home page.
+
+</box>
 
 ### Saving data
 

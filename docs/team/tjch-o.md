@@ -5,7 +5,7 @@
 
 ### Project: JobFestGo
 
-JobFestGo is a desktop address book application meant for job event planners which regularly do cold calling to many people (vendors, customers etc). They likely have a large number of contacts and cannot remember the associations of everyone in their contact list. This app will help them to sift through their contacts more easily.
+JobFestGo is a desktop address book application meant for job event planners in Singapore which regularly do cold calling to many people (vendors, customers etc). They likely have a large number of contacts and cannot remember the associations of everyone in their contact list. This app will help them to sift through their contacts more easily.
 
 Given below are my contributions to the project.
 
