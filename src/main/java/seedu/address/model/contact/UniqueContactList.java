@@ -56,17 +56,17 @@ public class UniqueContactList implements Iterable<Contact> {
      * @param name The name of the desired {@code Contact}.
      */
     public Contact getByName(Name name) throws ContactNotFoundException {
-        Contact toGet = null;
+        Contact contactToGet = null;
         for (int i = 0; i < internalList.size(); i++) {
             Contact thisContact = internalList.get(i);
             if (thisContact.getName().equals(name)) {
-                toGet = thisContact;
+                contactToGet = thisContact;
             }
         }
-        if (toGet == null) {
+        if (contactToGet == null) {
             throw new ContactNotFoundException(name);
         } else {
-            return toGet;
+            return contactToGet;
         }
     }
 

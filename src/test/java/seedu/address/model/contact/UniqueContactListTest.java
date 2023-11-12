@@ -133,7 +133,6 @@ public class UniqueContactListTest {
 
     @Test
     public void setContacts_nullUniqueContactList_throwsNullPointerException() {
-
         assertThrows(NullPointerException.class, () -> uniqueContactList.setContacts((UniqueContactList) null));
     }
 
@@ -185,10 +184,11 @@ public class UniqueContactListTest {
     }
 
     @Test
-    public void updateTag_sameTagList_success() {
+    public void updateTag_sameTag_success() {
         uniqueContactList.add(ALICE);
         uniqueContactList.updateTag(new Tag("family"));
         uniqueContactList.updateTag(new Tag("friends"));
+        // update with same tag
         uniqueContactList.updateTag(new Tag("friends"));
         Contact editedAlice = new ContactBuilder().withName("Alice Pauline")
             .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
