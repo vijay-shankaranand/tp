@@ -16,7 +16,7 @@ Class StorageManager
 
 package "JobFestGo Storage" #F4F6F6{
 Class "<<interface>>\nJobFestGoStorage" as JobFestGoStorage
-Class JsonAddressBookStorage
+Class JsonJobFestGoStorage
 Class JsonSerializableJobFestGo
 Class JsonAdaptedContact
 Class JsonAdaptedEvent
@@ -37,8 +37,8 @@ Storage -left-|> UserPrefsStorage
 Storage -right-|> JobFestGoStorage
 
 JsonUserPrefsStorage .up.|> UserPrefsStorage
-JsonAddressBookStorage .up.|> AddressBookStorage
-JsonAddressBookStorage ..> JsonSerializableJobFestGo
+JsonJobFestGoStorage .up.|> JobFestGoStorage
+JsonJobFestGoStorage ..> JsonSerializableJobFestGo
 JsonSerializableJobFestGo --> "*" JsonAdaptedContact
 JsonSerializableJobFestGo --> "*" JsonAdaptedEvent
 JsonSerializableJobFestGo --> "*" JsonAdaptedTask
