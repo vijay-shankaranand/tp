@@ -30,6 +30,7 @@
     - [Use cases](#use-cases)
     - [Non-Functional Requirements](#non-functional-requirements)
     - [Glossary](#glossary)
+ - [Appendix: Effort](#appendix-effort)
  - [Appendix: Instructions for manual testing](#appendix-instructions-for-manual-testing)
     - [Launch and shutdown](#launch-and-shutdown)
     - [Returning to home page](#returning-to-home-page)
@@ -1027,7 +1028,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | Component            | A part of the App that serves a particular function.                 |
 | EventContactDisplay  | A UI component that displays the events, contacts and tasks related to the events. |
 | GUI                  | Graphical User Interface, which is a visual way for users to interact with a software program. |
-| JavaFx               | The UI framework used in the project.                                |
+| JavaFX               | The UI framework used in the project.                                |
 | Logic                | The component responsible for executing commands entered by users.   |
 | MainWindow           | The main window of the UI that houses all the different UI components. |
 | Mainstream OS        | Windows, Linux, Unix, Unix, OS-X.                                    |
@@ -1036,6 +1037,25 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | ResultDisplay        | A UI component that displays the result after executing a command.   |
 | Sequence Diagram     | A diagram that shows how the different components interact with each other for a scenario presented. |
 | UI                   | User Interface.                                                      |
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix: Effort**
+
+| Component           | AB3           | JobFestGo                |
+|---------------------|---------------|--------------------------|
+| Effort              | 10            | 25                       |
+| Line of Code        | 6k            | +16k                     |
+
+The JobFestGo project required a significant amount of effort to adapt the AddressBook-Level3 (AB3) application to our specific target user profile. One of the major changes was the addition of three new entity types, being `Event`, `Task`, and `Tag`, requiring some modification to the existing model as well as the associated logic and UI components. Another major change that was done was the redesign of the user interface (UI) using JavaFX. This took a significant amount of time and effort to pick up and implement in our project.
+
+Although code was reused from AB3, such code had to be refactored to better fit our application. This can be seen in the `Tag` class, in which now there are some modifications done to ensure that such tags have to be unique, and has to go through the creation and deletion process for validity checks. Furthermore, with the additional entity types `Event` and `Task`, more effort had to be put in for input verification as well as writing high quality test cases for each entity. This is a time-consuming process.
+
+With the addition of the new entity types, we had to map relationships between `Event` and `Task`, as well as `Event` and `Contact`. To tackle this, the team created a list of tasks and a list of contacts inside each event. This brought on multiple changes that had to be made to other components, such that it would be displayed accurately on the UI upon each command.
+
+This can be seen in the `LinkCommand` and `UnlinkCommand` for linking contacts to events, and `AddTaskCommand` for adding tasks to events, as well as their relevant parsers and model methods.
+
+Another challenge was the interface redesign, to display the necessary information we wanted. In the case of JobFestGo, this involved adding multiple new UI components, as well as having to carefully construct the flow of events we would like upon each different command being executed. Through multiple testing, we have reached the current stage in which we think best suits the target user profile.
 
 --------------------------------------------------------------------------------------------------------------------
 
