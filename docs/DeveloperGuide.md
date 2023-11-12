@@ -8,7 +8,7 @@
 
 ## **Table of Content**
  - [Acknowledgements](#acknowledgements)
- - [Setting up, getting started](#setting-up-getting-started)
+ - [Setting up, Getting started](#setting-up-getting-started)
  - [Design](#design)
     - [Architecture](#architecture)
     - [UI component](#ui-component)
@@ -17,22 +17,20 @@
     - [Storage component](#storage-component)
     - [Common classes](#common-classes)
  - [Implementation](#implementation)
-    - [Return to home page feature](#return-to-home-page-feature)
-    - [Select Event Feature](#select-event-feature)
-    - [Add Tag Feature](#add-tag-feature)
-    - [Link/unlink Feature](#link-unlink-feature)
-    - [[Proposed] Undo/redo feature](#proposed-undo-redo-feature)
-    - [[Proposed] Data archiving](#proposed-data-archiving)
+    - [Return to Home feature](#return-to-home-feature)
+    - [Select Event feature](#select-event-feature)
+    - [Add Tag feature](#add-tag-feature)
+    - [Link/Unlink feature](#link-unlink-feature)
  - [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
  - [Appendix: Requirements](#appendix-requirements)
     - [Product scope](#product-scope)
     - [User stories](#user-stories)
     - [Use cases](#use-cases)
-    - [Non-Functional Requirements](#non-functional-requirements)
+    - [Non-Functional requirements](#non-functional-requirements)
     - [Glossary](#glossary)
  - [Appendix: Effort](#appendix-effort)
- - [Appendix: Instructions for manual testing](#appendix-instructions-for-manual-testing)
-    - [Launch and shutdown](#launch-and-shutdown)
+ - [Appendix: Instructions for Manual Testing](#appendix-instructions-for-manual-testing)
+    - [Launch and Shutdown](#launch-and-shutdown)
     - [Returning to home page](#returning-to-home-page)
     - [Adding a contact](#adding-a-contact)
     - [Listing all contacts](#listing-all-contacts)
@@ -47,7 +45,7 @@
     - [Selecting an event](#selecting-an-event)
     - [Adding a task](#adding-a-task)
     - [Saving data](#saving-data)
-
+ - [Appendix: Planned Enhancements](#appendix-planned-enhancements)
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Acknowledgements**
@@ -57,7 +55,7 @@ This project is based on the [_AddressBook-Level3_](https://se-education.org/add
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Setting up, getting started**
+## **Setting up, Getting started**
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
@@ -189,7 +187,7 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### Return to home page Feature
+### Return to Home feature
 
 The home mechanism is facilitated by `JobFestGo` as well as its observable lists for `Contact`, `Event`, as well as `Task`.
 
@@ -222,7 +220,7 @@ The following activity diagram summarizes what happens when a user executes the 
     * Pros: Even easier to use as only one mouse click is required. No typing is needed.
     * Cons: Harder to implement.
 
-### Add Tag Feature
+### Add Tag feature
 
 #### Implementation
 
@@ -335,7 +333,7 @@ The following activity diagram summarizes what happens when a user executes the 
   * Pros: Users can input event dates in other formats.
   * Cons: Harder to implement as `LocalDate#parse(String)` accepts only String of a specific format.
 
-### Select Event Feature
+### Select Event feature
 
 #### Implementation
 
@@ -375,7 +373,7 @@ The following activity diagram summarizes what happens when a user executes the 
   * Pros: Easy to implement.
   * Cons: Users will have to consistently execute home command to view the other events.
 
-### Link/unlink Feature
+### Link/Unlink feature
 
 #### Implementation
 
@@ -439,99 +437,6 @@ The `unlink` command does the opposite — it calls `Model#unlinkContactFrom
 * **Alternative 1:** Links/Unlinks all valid input contacts while throwing an error for all invalid contacts.
     * Pros: Users only need to correct the invalid input.
     * Cons: The exceptions are hard to handle.
-
-### \[Proposed\] Undo/redo feature
-
-#### Proposed Implementation
-
-The proposed undo/redo mechanism is facilitated by `VersionedJobFestGo`. It extends `JobFestGo` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
-
-* `VersionedJobFestGo#commit()` — Saves the current address book state in its history.
-* `VersionedJobFestGo#undo()` — Restores the previous address book state from its history.
-* `VersionedJobFestGo#redo()` — Restores a previously undone address book state from its history.
-
-These operations are exposed in the `Model` interface as `Model#commitJobFestGo()`, `Model#undoJobFestGo()` and `Model#redoJobFestGo()` respectively.
-
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
-
-Step 1. The user launches the application for the first time. The `VersionedJobFestGo` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
-
-<puml src="diagrams/UndoRedoState0.puml" alt="UndoRedoState0" />
-
-Step 2. The user executes `delete_contact 5` command to delete the 5th contact in the address book. The `delete_contact` command calls `Model#commitJobFestGo()`, causing the modified state of the address book after the `delete_contact 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
-
-<puml src="diagrams/UndoRedoState1.puml" alt="UndoRedoState1" />
-
-Step 3. The user executes `add_contact n/David …​` to add a new contact. The `add_contact` command also calls `Model#commitJobFestGo()`, causing another modified address book state to be saved into the `addressBookStateList`.
-
-<puml src="diagrams/UndoRedoState2.puml" alt="UndoRedoState2" />
-
-<box type="info" seamless>
-
-**Note:** If a command fails its execution, it will not call `Model#commitJobFestGo()`, so the address book state will not be saved into the `addressBookStateList`.
-
-</box>
-
-Step 4. The user now decides that adding the contact was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoJobFestGo()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
-
-<puml src="diagrams/UndoRedoState3.puml" alt="UndoRedoState3" />
-
-<box type="info" seamless>
-
-**Note:** If the `currentStatePointer` is at index 0, pointing to the initial JobFestGo state, then there are no previous JobFestGo states to restore. The `undo` command uses `Model#canUndoJobFestGo()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
-
-</box>
-
-The following sequence diagram shows how the undo operation works:
-
-<puml src="diagrams/UndoSequenceDiagram.puml" alt="UndoSequenceDiagram" />
-
-<box type="info" seamless>
-
-**Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</box>
-
-The `redo` command does the opposite — it calls `Model#redoJobFestGo()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
-
-<box type="info" seamless>
-
-**Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone JobFestGo states to restore. The `redo` command uses `Model#canRedoJobFestGo()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-</box>
-
-Step 5. The user then decides to execute the command `view_contacts`. Commands that do not modify the address book, such as `view_contacts`, will usually not call `Model#commitJobFestGo()`, `Model#undoJobFestGo()` or `Model#redoJobFestGo()`. Thus, the `addressBookStateList` remains unchanged.
-
-<puml src="diagrams/UndoRedoState4.puml" alt="UndoRedoState4" />
-
-Step 6. The user executes `clear`, which calls `Model#commitJobFestGo()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add_contact n/David …​` command. This is the behavior that most modern desktop applications follow.
-
-<puml src="diagrams/UndoRedoState5.puml" alt="UndoRedoState5" />
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-<puml src="diagrams/CommitActivityDiagram.puml" width="250" />
-
-#### Design considerations:
-
-**Aspect: How undo & redo executes:**
-
-* **Current choice:** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
-  <br></br>
-* **Alternative 1:** Individual command knows how to undo/redo by
-  itself.
-  * Pros: Will use less memory (e.g. for `delete_contact`, just save the contact being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -1113,7 +1018,7 @@ Another challenge was the interface redesign, to display the necessary informati
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Instructions for manual testing**
+## **Appendix: Instructions for Manual Testing**
 
 Given below are instructions to test the app manually.
 
@@ -1124,7 +1029,7 @@ testers are expected to do more *exploratory* testing.
 
 </box>
 
-### Launch and shutdown
+### Launch and Shutdown
 
 1. Initial launch
 
@@ -1204,11 +1109,15 @@ testers are expected to do more *exploratory* testing.
 
 1. Deleting a contact after selecting an event
 
-   1. Prerequisites: Be on the selected event page using the `select_event x` command in which x represents an integer that is smaller than or equal to the event list size. Multiple contacts in the list of contacts linked to the event.
+   1. Prerequisites: Be on the selected event page using the `select_event x` command in which x represents the index of the event to be selected. There must be contacts linked to the event.
 
    1. Test cases and expected outcomes are similar to the previous case except for that the index is based on the currently displayed contact list associated to the selected event.
 
-4. Deleting a contact on other pages causes an error since the contact list is not being displayed.
+<box type="info" seamless>
+
+**Note:** Deleting a contact on other pages causes an error since the contact list is not being displayed.
+
+</box>
 
 ### Editing a contact
 
@@ -1233,9 +1142,15 @@ testers are expected to do more *exploratory* testing.
 
 1. Editing a contact after selecting an event
 
-   1. Prerequisites: Be on the selected event page using the `select_event x` command in which x represents an integer that is smaller than or equal to the event list size. Multiple contacts in the list of contacts linked to the event.
+   1. Prerequisites: Be on the selected event page using the `select_event x` command in which x represents the index of the event to be selected. There must be contacts linked to the event.
 
    1. Test cases and expected outcomes are similar to the previous case except for that the index is based on the currently displayed contact list associated to the selected event.
+
+<box type="info" seamless>
+
+**Note:** Editing a contact on other pages causes an error since the contact list is not being displayed.
+
+</box>
 
 ### Locating contacts by name
 
@@ -1260,11 +1175,15 @@ testers are expected to do more *exploratory* testing.
 
 1. Finding contacts after selecting an event
 
-   1. Prerequisites: Be on the selected event page using the `select_event x` command in which x represents an integer that is smaller than or equal to the event list size. Multiple contacts in the list of contacts linked to the event.
+   1. Prerequisites: Be on the selected event page using the `select_event x` command in which x represents the index of the event to be selected. There must be contacts linked to the event.
 
    1. Test cases and expected outcomes are similar to the previous case except for that only contacts in the currently displayed contact list linked to the selected event will be filtered.
 
-4. Finding contacts on other pages causes an error since the contact list is not being displayed.
+<box type="info" seamless>
+
+**Note:** Finding contacts on other pages causes an error since the contact list is not being displayed.
+
+</box>
 
 ### Adding a tag
 
@@ -1329,15 +1248,19 @@ testers are expected to do more *exploratory* testing.
 
 3. Filtering contacts after selecting an event
 
-   1. Prerequisites: Be on the selected event page using the `select_event x` command in which x represents a positive integer that is smaller than or equal to the event list size. Multiple contacts in the list of contacts linked to the event.
+   1. Prerequisites: Be on the selected event page using the `select_event x` command in which x represents the index of the event to be selected. There must be contacts linked to the event.
 
    1. Test cases and expected outcomes are similar to the previous case except for that only contacts in the currently displayed contact list linked to the selected event will be filtered.
 
-4. Filtering contacts on other pages causes an error since the contact list is not being displayed.
+<box type="info" seamless>
+
+**Note:** Filtering contacts on other pages causes an error since the contact list is not being displayed.
+
+</box>
 
 ### Adding an event
 
-1. Adding an event
+1. An event can be added from any page
 
     1. Test case: `add_event n/NUS Career Fair 2023 d/2024-02-15 a/NUS`<br>
         Expected: Event named NUS Career Fair 2023 with the respective details created, provided that there is no event named NUS Career Fair 2023. If not already at home page, returns to home page.
@@ -1371,11 +1294,15 @@ testers are expected to do more *exploratory* testing.
 
 3. Deleting an event after selecting an event
 
-   1. Prerequisites: Be on the selected event page using the `select_event x` command in which x represents an integer that is smaller than or equal to the event list size.
+   1. Prerequisites: Be on the selected event page using the `select_event x` command in which x represents the index of the event to be selected.
 
    2. Test cases and expected outcomes are similar to the previous case except for that the index is based on the currently displayed event list.
 
-4. Deleting an event on other pages causes an error since the event list is not being displayed.
+<box type="info" seamless>
+
+**Note:** Deleting an event on other pages causes an error since the event list is not being displayed.
+
+</box>
 
 ### Linking contacts to an event
 
@@ -1394,7 +1321,7 @@ testers are expected to do more *exploratory* testing.
 
 ### Unlinking contacts from an event
 
-Similar to `link` command except for that the command word is `unlink` and the expected result is opposite.
+Similar to `link` command except that the command word is `unlink` and the expected result is opposite.
 
 ### Viewing all events
 
@@ -1431,18 +1358,22 @@ Similar to `link` command except for that the command word is `unlink` and the e
 
 1. Selecting an event after selecting an event
 
-   1. Prerequisites: Be on the selected event page using the `select_event x` command in which x represents a positive integer that is smaller than or equal to the event list size.
+   1. Prerequisites: Be on the selected event page using the `select_event x` command in which x represents the index of the event to be selected.
 
    1. Test cases and expected outcomes are similar to the previous case.
 
-4. Selecting~~~~ an event on other pages causes an error since the event list is not being displayed.
+<box type="info" seamless>
+
+**Note:** Selecting an event on other pages causes an error since the event list is not being displayed.
+
+</box>
 
 ### Adding a task
 
 1. A task can be added from any page.
 
    1. Test case: `add_task td/Book Venue d/2024-10-10 ev/NUS Career Fair 2024`<br>
-       Expected: Book Venue task is added to NUS Career Fair 2024 event. Details of the added task shown in the status message. Goes the respective event page and displays the tasks of the event on the right.
+       Expected: Book Venue task is added to NUS Career Fair 2024 event. Details of the added task shown in the status message. Goes to the respective event page and displays the tasks of the event on the right.
 
    2. Test case: `add_task td/Book Venue d/2024-10-10`<br>
        Expected: No task is added. Error details shown in the status message.
@@ -1455,7 +1386,7 @@ Similar to `link` command except for that the command word is `unlink` and the e
 1. A task can be deleted from any page.
 
    1. Test case: `delete_task td/Book Venue ev/NUS Career Fair 2024`<br>
-       Expected: Book Venue task is deleted to NUS Career Fair 2024 event. Command success status message shown. Goes the respective event page and displays the tasks of the event on the right.
+       Expected: Book Venue task is deleted to NUS Career Fair 2024 event. Command success status message shown. Goes to the respective event page and displays the tasks of the event on the right.
 
    2. Test case: `delete_task td/Book Venue`<br>
        Expected: No task is deleted. Error details shown in the status message.
@@ -1474,7 +1405,7 @@ Similar to `link` command except for that the command word is `unlink` and the e
 1. A task can be marked from any page.
 
    1. Test case: `mark_task td/Book Venue ev/NUS Career Fair 2024`<br>
-      Expected: Book Venue task of NUS Career Fair 2024 event is marked as completed. Command success status message shown. Goes the respective event page and displays the tasks of the event on the right.
+      Expected: Book Venue task of NUS Career Fair 2024 event is marked as completed. Command success status message shown. Goes to the respective event page and displays the tasks of the event on the right.
 
    2. Test case: `mark_task td/Book Venue`<br>
       Expected: No task is marked. Error details shown in the status message.
@@ -1484,16 +1415,7 @@ Similar to `link` command except for that the command word is `unlink` and the e
 
 ### Unmarking a task
 
-1. A task can be unmarked from any page.
-
-   1. Test case: `unmark_task td/Book Venue ev/NUS Career Fair 2024`<br>
-      Expected: Book Venue task of NUS Career Fair 2024 event is marked as not completed. Command success status message shown. Goes the respective event page and displays the tasks of the event on the right.
-
-   2. Test case: `unmark_task td/Book Venue`<br>
-      Expected: No task is unmarked. Error details shown in the status message.
-
-   3. Other incorrect add task commands to try: `unmark_task`, `mark_task ev/NUS Career Fair 2024`<br>
-      Expected: Similar to previous
+Similar to `mark_task` command except that the command word is `unmark_task` and the expected result is opposite.
 
 ### Saving data
 
