@@ -1051,9 +1051,7 @@ The JobFestGo project required a significant amount of effort to adapt the Addre
 
 Although code was reused from AB3, such code had to be refactored to better fit our application. This can be seen in the `Tag` class, in which now there are some modifications done to ensure that such tags have to be unique, and has to go through the creation and deletion process for validity checks. Furthermore, with the additional entity types `Event` and `Task`, more effort had to be put in for input verification as well as writing high quality test cases for each entity. This is a time-consuming process.
 
-With the addition of the new entity types, we had to map relationships between `Event` and `Task`, as well as `Event` and `Contact`. To tackle this, the team created a list of tasks and a list of contacts inside each event. This brought on multiple changes that had to be made to other components, such that it would be displayed accurately on the UI upon each command.
-
-This can be seen in the `LinkCommand` and `UnlinkCommand` for linking contacts to events, and `AddTaskCommand` for adding tasks to events, as well as their relevant parsers and model methods.
+With the addition of the new entity types, we had to map relationships between `Event` and `Task`, as well as `Event` and `Contact`. To tackle this, the team created a list of tasks and a list of contacts inside each event. This brought on multiple changes that had to be made to other components, such that it would be displayed accurately on the UI upon each command. This can be seen in the `LinkCommand` and `UnlinkCommand` for linking contacts to events, and `AddTaskCommand` for adding tasks to events, as well as their relevant parsers and model methods.
 
 Another challenge was the interface redesign, to display the necessary information we wanted. In the case of JobFestGo, this involved adding multiple new UI components, as well as having to carefully construct the flow of events we would like upon each different command being executed. Through multiple testing, we have reached the current stage in which we think best suits the target user profile.
 
