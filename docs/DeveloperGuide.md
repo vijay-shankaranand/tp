@@ -40,10 +40,17 @@
     - [Adding a tag](#adding-a-tag)
     - [Viewing all tags](#viewing-all-tags)
     - [Deleting a tag](#deleting-a-tag)
-    - [Deleting an event](#deleting-an-event)
+    - [Filtering contacts by tag](#filtering-contacts-by-tag)
+    - [Adding an event](#adding-an-event)
     - [Viewing all events](#viewing-all-events)
+    - [Deleting an event](#deleting-an-event)
+    - [Linking contacts to an event](#linking-contacts-to-an-event)
+    - [Unlinking contacts from an event](#unlinking-contacts-from-an-event)
     - [Selecting an event](#selecting-an-event)
     - [Adding a task](#adding-a-task)
+    - [Deleting a task](#deleting-a-task)
+    - [Marking a task](#marking-a-task)
+    - [Unmarking a task](#unmarking-a-task)
     - [Saving data](#saving-data)
  - [Appendix: Planned Enhancements](#appendix-planned-enhancements)
 --------------------------------------------------------------------------------------------------------------------
@@ -1271,6 +1278,18 @@ testers are expected to do more *exploratory* testing.
     1. Other incorrect add task commands to try: `add_event`, `add_event n/NUS Career Fair 2023 d/2024-02-15 a/`<br>
         Expected: Similar to previous.
 
+### Viewing all events
+
+1. Viewing all events
+
+    1. Prerequisites: At least one event has been added to or is already existing in JobFestGo.
+
+    1. Test case: `view_events`<br>
+       Expected: All events are listed. Command success status message shown.
+
+    1. Test case: `view_events 1`<br>
+       Expected: All events will still be listed. Recognised as a `view_events` command.
+
 ### Deleting an event
 
 1. Deleting an event while all events are being shown
@@ -1322,18 +1341,6 @@ testers are expected to do more *exploratory* testing.
 ### Unlinking contacts from an event
 
 Similar to `link` command except that the command word is `unlink` and the expected result is opposite.
-
-### Viewing all events
-
-1. Viewing all events
-
-    1. Prerequisites: At least one event has been added to or is already existing in JobFestGo.
-
-    1. Test case: `view_events`<br>
-       Expected: All events are listed. Command success status message shown.
-
-    1. Test case: `view_events 1`<br>
-       Expected: All events will still be listed. Recognised as a `view_events` command.
 
 ### Selecting an event
 
