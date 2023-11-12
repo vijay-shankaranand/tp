@@ -12,19 +12,18 @@ Class MainWindow
 Class HelpWindow
 Class ResultDisplay
 Class EventContactDisplay
-Class ContactListPanel
-Class ContactCard
+Class XYListPanel
+Class XYCard
 Class TagListPanel
 Class TagCard
-Class EventListPanel
-Class EventCard
-Class TaskListPanel
-Class TaskCard
+Class ABListPanel
+Class ABCard
 Class StatusBarFooter
 Class CommandBox
-Class ReminderListPanel
-Class ReminderCard
 }
+
+note "XY = Event, Contact" as N1
+note "AB = Task, Reminder" as N2
 
 package Model <<Rectangle>> {
 Class HiddenModel #FFFFFF
@@ -42,45 +41,39 @@ UiManager -down-> "1" MainWindow
 MainWindow *-down->  "1" CommandBox
 MainWindow *-down-> "1" ResultDisplay
 MainWindow *-down-> "1" EventContactDisplay
-MainWindow *-down-> "1" ContactListPanel
+MainWindow *-down-> "1" XYListPanel
 MainWindow *-down-> "1" StatusBarFooter
 MainWindow *-down-> "1" TagListPanel
-MainWindow *-down-> "1" EventListPanel
 MainWindow --> "0..1" HelpWindow
 
-EventContactDisplay -down-> "1" ContactListPanel
-EventContactDisplay -down-> "1" EventListPanel
-EventContactDisplay -down-> "1" TaskListPanel
-EventContactDisplay *-down-> "1" ReminderListPanel
+EventContactDisplay -down-> "1" XYListPanel
+EventContactDisplay -down-> "1" ABListPanel
 
-ContactListPanel -down-> "*" ContactCard
+XYListPanel -down-> "*" XYCard
 TagListPanel -down-> "*" TagCard
-EventListPanel -down-> "*" EventCard
-TaskListPanel -down-> "*" TaskCard
-ReminderListPanel -down-> "*" ReminderCard
+ABListPanel -down-> "*" ABCard
 
 MainWindow -left-|> UiPart
 
 ResultDisplay --|> UiPart
 EventContactDisplay --|> UiPart
 CommandBox --|> UiPart
-ContactListPanel --|> UiPart
-ContactCard --|> UiPart
+XYListPanel --|> UiPart
+XYCard --|> UiPart
 TagListPanel --|> UiPart
-EventListPanel --|> UiPart
-TaskListPanel --|> UiPart
+TagCard --|> UiPart
+ABListPanel --|> UiPart
+ABCard --|> UiPart
 StatusBarFooter --|> UiPart
 HelpWindow --|> UiPart
 
-ContactCard ..> Model
+XYCard ..> Model
 TagCard ..> Model
-EventCard ..> Model
-TaskCard ..> Model
-ReminderCard ..> Model
+ABCard ..> Model
 UiManager -right-> Logic
 MainWindow -left-> Logic
 
-ContactListPanel -[hidden]left- HelpWindow
+XYListPanel -[hidden]left- HelpWindow
 HelpWindow -[hidden]left- CommandBox
 CommandBox -[hidden]left- ResultDisplay
 ResultDisplay -[hidden]left- StatusBarFooter
