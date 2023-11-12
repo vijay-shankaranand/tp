@@ -50,7 +50,6 @@ public class TestUtil {
      * Returns the contact in the {@code model}'s contact list at {@code index}.
      */
     public static Contact getContact(Model model, Index index) {
-
         return model.getFilteredContactList().get(index.getZeroBased());
     }
 }
