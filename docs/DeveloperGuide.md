@@ -1075,7 +1075,7 @@ testers are expected to do more *exploratory* testing.
    1. Test case: `add_contact n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 t/vendors t/clients`<br>
       Expected: Contact named John Doe with the respective details created, provided that there is no contact named John Doe or has the phone number 98765432. Returns back to home page.
 
-   1. Test case: `add_contact n/John &nbsp;&nbsp; Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 t/vendors t/clients`<br>
+   1. Test case: `add_contact n/John  Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 t/vendors t/clients`<br>
       Expected: No contact is added. Error details shown in the status message.
 
    1. Other incorrect add contact commands to try: `add_contact`, `add_contact` with existing phone number, `...`
