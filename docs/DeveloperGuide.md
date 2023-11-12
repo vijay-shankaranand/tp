@@ -1015,8 +1015,27 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+| Term                 | Definition                                                           |
+|----------------------|----------------------------------------------------------------------|
+| Activity Diagram     | A diagram that shows activities performed by the system after a command. |
+| App                  | An application.                                                      |
+| API                  | An application programming interface.                                |
+| Architecture Diagram | A diagram that explains the high-level design of the App.            |
+| Class Diagram        | A diagram that shows the classes of the App and the relationships between them. |
+| CLI                  | Command Line Interface, in which users type commands to perform actions. |
+| CommandBox           | A UI component that allows users to enter commands.                  |
+| Component            | A part of the App that serves a particular function.                 |
+| EventContactDisplay  | A UI component that displays the events, contacts and tasks related to the events. |
+| GUI                  | Graphical User Interface, which is a visual way for users to interact with a software program. |
+| JavaFx               | The UI framework used in the project.                                |
+| Logic                | The component responsible for executing commands entered by users.   |
+| MainWindow           | The main window of the UI that houses all the different UI components. |
+| Mainstream OS        | Windows, Linux, Unix, Unix, OS-X.                                    |
+| Model                | The data model that is used by the App.                              |
+| PlantUML             | A tool used to create diagrams seen in this guide.                   |
+| ResultDisplay        | A UI component that displays the result after executing a command.   |
+| Sequence Diagram     | A diagram that shows how the different components interact with each other for a scenario presented. |
+| UI                   | User Interface.                                                      |
 
 --------------------------------------------------------------------------------------------------------------------
 
