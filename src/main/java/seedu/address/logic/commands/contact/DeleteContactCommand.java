@@ -37,12 +37,21 @@ public class DeleteContactCommand extends Command {
         requireNonNull(model);
         List<Contact> lastShownList = model.getFilteredContactList();
 
+        if (model.isOnEventsScreen() || model.isOnTagsScreen()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_CONTACT_NOT_DISPLAYED);
+        }
+
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_CONTACT_DISPLAYED_INDEX);
         }
 
         Contact contactToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deleteContact(contactToDelete);
+
+        // Update model to depict which screen it is on currently.
+        model.switchToContactsScreen(false);
+        model.switchToEventsScreen(false);
+        model.switchToTagsScreen(false);
 
         // Update the respective filtered lists to show the correct lists.
         // The flow of the command should be returning to home page after deleting a contact.

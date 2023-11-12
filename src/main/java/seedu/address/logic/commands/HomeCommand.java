@@ -12,6 +12,11 @@ public class HomeCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) {
+        // Update model to depict which screen it is on currently.
+        model.switchToContactsScreen(false);
+        model.switchToEventsScreen(false);
+        model.switchToTagsScreen(false);
+
         model.updateFilteredTaskList(Model.PREDICATE_SHOW_ALL_TASKS);
         return new CommandResult(MESSAGE_SUCCESS, false, false);
     }

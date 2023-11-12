@@ -77,6 +77,11 @@ public class AddTaskCommand extends Command {
             // Event is updated, thus need additional step to get the event.
             Event selectedEvent = model.getEvent(associatedEventName);
 
+            // Update model to depict which screen it is on currently.
+            model.switchToContactsScreen(false);
+            model.switchToEventsScreen(false);
+            model.switchToTagsScreen(false);
+
             // Update the respective filtered lists to show the components within the event.
             model.updateFilteredContactList(new ContactIsInEventPredicate(eventToAddIn));
             model.updateFilteredTaskList(new TaskIsInEventPredicate(eventToAddIn));

@@ -63,6 +63,11 @@ public class UnmarkTaskCommand extends Command {
         // Get event after unmarking task
         Event selectedEvent = model.getEvent(associatedEventName);
 
+        // Update model to depict which screen it is on currently.
+        model.switchToContactsScreen(false);
+        model.switchToEventsScreen(false);
+        model.switchToTagsScreen(false);
+
         // Update the respective filtered lists to show the components within the event
         model.updateFilteredContactList(new ContactIsInEventPredicate(selectedEvent));
         model.updateFilteredTaskList(new TaskIsInEventPredicate(selectedEvent));

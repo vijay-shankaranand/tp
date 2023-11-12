@@ -16,6 +16,12 @@ public class ClearCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.setJobFestGo(new JobFestGo());
+
+        // Update model to depict which screen it is on currently.
+        model.switchToContactsScreen(false);
+        model.switchToEventsScreen(false);
+        model.switchToTagsScreen(false);
+
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }

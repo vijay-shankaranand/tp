@@ -75,6 +75,10 @@ public class EditContactCommand extends Command {
         requireNonNull(model);
         List<Contact> lastShownList = model.getFilteredContactList();
 
+        if (model.isOnEventsScreen() || model.isOnTagsScreen()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_CONTACT_NOT_DISPLAYED);
+        }
+
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_CONTACT_DISPLAYED_INDEX);
         }
@@ -93,6 +97,11 @@ public class EditContactCommand extends Command {
         }
 
         model.setContact(contactToEdit, editedContact);
+
+        // Update model to depict which screen it is on currently.
+        model.switchToContactsScreen(false);
+        model.switchToEventsScreen(false);
+        model.switchToTagsScreen(false);
 
         // Update relevant filtered lists to show the correct lists.
         model.updateFilteredContactList(PREDICATE_SHOW_ALL_CONTACTS);

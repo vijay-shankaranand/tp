@@ -17,6 +17,9 @@ public class ViewTagsCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
+        model.switchToTagsScreen(true);
+        model.switchToContactsScreen(false);
+        model.switchToEventsScreen(false);
         model.updateFilteredTagList(Model.PREDICATE_SHOW_ALL_TAGS);
         return new CommandResult(MESSAGE_SUCCESS);
     }

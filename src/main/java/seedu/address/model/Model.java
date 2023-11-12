@@ -258,4 +258,28 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredTaskList(Predicate<Task> predicate);
+
+    /** Returns true if contact list is being shown. Returns false otherwise. */
+    boolean isOnContactsScreen();
+
+    /** Returns true if events list is being shown. Returns false otherwise. */
+    boolean isOnEventsScreen();
+
+    /** Returns true if tags list is being shown. Returns false otherwise. */
+    boolean isOnTagsScreen();
+
+    /**
+     * Changes the boolean value of isOnContactsScreen to the given {@code isOnContactsScreen}.
+     */
+    void switchToContactsScreen(boolean onContactsScreen);
+
+    /**
+     * Changes the boolean value of isOnEventsScreen to the given {@code isOnEventsScreen}.
+     */
+    void switchToEventsScreen(boolean onEventsScreen);
+
+    /**
+     * Changes the boolean value of isOnTagsScreen to the given {@code isOnTagsScreen}.
+     */
+    void switchToTagsScreen(boolean onTagsScreen);
 }

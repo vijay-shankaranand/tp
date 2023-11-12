@@ -33,6 +33,10 @@ public class ModelManager implements Model {
     private final FilteredList<Event> filteredEvents;
     private final FilteredList<Task> filteredTasks;
 
+    private boolean isOnContactsScreen = false;
+    private boolean isOnEventsScreen = false;
+    private boolean isOnTagsScreen = false;
+
 
     /**
      * Initializes a ModelManager with the given jobfestgo and userPrefs.
@@ -358,4 +362,34 @@ public class ModelManager implements Model {
                 && filteredEvents.equals(otherModelManager.filteredEvents);
     }
 
+    //======== UI Screen Indicators and Accessors ===============================================================
+    @Override
+    public boolean isOnContactsScreen() {
+        return this.isOnContactsScreen;
+    }
+
+    @Override
+    public boolean isOnEventsScreen() {
+        return this.isOnEventsScreen;
+    }
+
+    @Override
+    public boolean isOnTagsScreen() {
+        return this.isOnTagsScreen;
+    }
+
+    @Override
+    public void switchToContactsScreen(boolean onContactsScreen) {
+        this.isOnContactsScreen = onContactsScreen;
+    }
+
+    @Override
+    public void switchToEventsScreen(boolean onEventsScreen) {
+        this.isOnEventsScreen = onEventsScreen;
+    }
+
+    @Override
+    public void switchToTagsScreen(boolean onTagsScreen) {
+        this.isOnTagsScreen = onTagsScreen;
+    }
 }

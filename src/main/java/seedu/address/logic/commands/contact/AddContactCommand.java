@@ -68,6 +68,11 @@ public class AddContactCommand extends Command {
 
         model.addContact(toAdd);
 
+        // Update model to depict which screen it is on currently.
+        model.switchToContactsScreen(false);
+        model.switchToEventsScreen(false);
+        model.switchToTagsScreen(false);
+
         // Update the respective filtered lists to show the relevant components
         // Flow of adding contact should result in it returning to main dashboard
         model.updateFilteredContactList(Model.PREDICATE_SHOW_ALL_CONTACTS);

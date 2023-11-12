@@ -78,6 +78,11 @@ public class LinkCommand extends Command {
             // Get the event after linking contact.
             eventToLink = model.getEvent(eventNameToLink);
 
+            // Update model to depict which screen it is on currently.
+            model.switchToContactsScreen(false);
+            model.switchToEventsScreen(false);
+            model.switchToTagsScreen(false);
+
             // Update the respective filtered lists to show the components within the event
             // Flow of command should be after linking a contact to an event,
             // it goes to the selected event.

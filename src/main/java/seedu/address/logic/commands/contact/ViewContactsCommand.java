@@ -18,6 +18,9 @@ public class ViewContactsCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
+        model.switchToContactsScreen(true);
+        model.switchToEventsScreen(false);
+        model.switchToTagsScreen(false);
         model.updateFilteredContactList(PREDICATE_SHOW_ALL_CONTACTS);
         return new CommandResult(MESSAGE_SUCCESS);
     }

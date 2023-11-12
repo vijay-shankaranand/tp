@@ -73,6 +73,11 @@ public class UnlinkCommand extends Command {
                 model.unlinkContactFromEvent(contact, eventToUnlink);
             }
 
+            // Update model to depict which screen it is on currently.
+            model.switchToContactsScreen(false);
+            model.switchToEventsScreen(false);
+            model.switchToTagsScreen(false);
+
             eventToUnlink = model.getEvent(eventNameToUnlink);
             model.updateFilteredContactList(new ContactIsInEventPredicate(eventToUnlink));
             model.updateFilteredTaskList(new TaskIsInEventPredicate(eventToUnlink));

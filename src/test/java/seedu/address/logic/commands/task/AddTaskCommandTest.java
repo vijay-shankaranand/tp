@@ -343,6 +343,36 @@ public class AddTaskCommandTest {
         public boolean verifyContact(Contact target, Contact editedContact) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public boolean isOnContactsScreen() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean isOnEventsScreen() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean isOnTagsScreen() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void switchToContactsScreen(boolean isOnContactsScreen) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void switchToEventsScreen(boolean isOnEventsScreen) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void switchToTagsScreen(boolean isOnTagsScreen) {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**
@@ -382,6 +412,9 @@ public class AddTaskCommandTest {
     private class ModelStubAcceptingTaskAdded extends ModelStub {
         private final ArrayList<Task> tasksAdded = new ArrayList<>();
         private ArrayList<Event> eventsAdded = new ArrayList<>();
+        private boolean isOnContactsScreen = false;
+        private boolean isOnTagsScreen = false;
+        private boolean isOnEventsScreen = false;
 
         @Override
         public boolean hasTask(Task task) {
@@ -420,6 +453,36 @@ public class AddTaskCommandTest {
         public void addEvent(Event event) {
             requireNonNull(event);
             eventsAdded.add(event);
+        }
+
+        @Override
+        public boolean isOnContactsScreen() {
+            return this.isOnContactsScreen;
+        }
+
+        @Override
+        public boolean isOnEventsScreen() {
+            return this.isOnEventsScreen;
+        }
+
+        @Override
+        public boolean isOnTagsScreen() {
+            return this.isOnTagsScreen;
+        }
+
+        @Override
+        public void switchToContactsScreen(boolean isOnContactsScreen) {
+            this.isOnContactsScreen = isOnContactsScreen;
+        }
+
+        @Override
+        public void switchToEventsScreen(boolean isOnEventsScreen) {
+            this.isOnEventsScreen = isOnEventsScreen;
+        }
+
+        @Override
+        public void switchToTagsScreen(boolean isOnTagsScreen) {
+            this.isOnTagsScreen = isOnTagsScreen;
         }
 
         @Override
