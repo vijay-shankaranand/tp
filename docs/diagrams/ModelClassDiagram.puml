@@ -21,6 +21,12 @@ package Model as ModelPackage <<Rectangle>> {
   Class Contact
   Class Tag
   Class I #FFFFFF
+
+  hide circle
+    UniqueTaskList -[hidden]> I
+    UniqueEventList -[hidden]> I
+    UniqueContactList -[hidden]> I
+    UniqueTagList -[hidden]> I
 }
 
 Class HiddenOutside #FFFFFF
@@ -31,27 +37,26 @@ JobFestGo .up.|> ReadOnlyJobFestGo
 ModelManager .up.|> Model
 Model .right.> ReadOnlyUserPrefs
 Model .left.> ReadOnlyJobFestGo
-ModelManager -left-> "1" JobFestGo
+ModelManager --> "1" JobFestGo
 ModelManager -right-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
-JobFestGo *--> "1" UniqueContactList
 JobFestGo *--> "1" UniqueTaskList
+JobFestGo *--> "1" UniqueContactList
 JobFestGo *--> "1" UniqueEventList
 JobFestGo *--> "1" UniqueTagList
 UniqueEventList --> "~* all" Event
 UniqueTaskList --> "~* all" Task
-UniqueTagList --> "~* all" Tag
 UniqueContactList --> "~* all" Contact
-Event "1" <--> "0..*" Task
-Event --> "0..*" Contact
-Contact --> "0..*" Tag
+UniqueTagList --> "~* all" Tag
+Contact -> "0..*" Tag
+Event -down> "0..*" Contact
+Event "1" <-left-> "0..*" Task
 
-Contact -[hidden]up--> I
-UniqueContactList -[hidden]right-> I
 
-ModelManager --> "~* filtered" Contact
-ModelManager --> "~* filtered" Event
-ModelManager --> "~* filtered" Task
-ModelManager --> "~* filtered" Tag
+ModelManager -> "~* filtered" Contact
+ModelManager -> "~* filtered" Event
+ModelManager -> "~* filtered" Tag
+ModelManager -> "~* filtered" Task
+
 @enduml
