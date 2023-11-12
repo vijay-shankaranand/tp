@@ -605,7 +605,18 @@ can download it [here](https://www.oracle.com/java/technologies/downloads/#java1
 
 ## Known issues
 
-1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
+1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. 
+<br><br>
+**Solution**: Delete the `preferences.json` file created by the application before running the application again.
+2. **Help pop-up window shifts to the bottom left corner of the screen before re-centering on `help` command**. Steps to reproduce the issue:
+    1. Type `help` in the command box.
+    2. Shift the pop-up window to anywhere on the screen.
+    3. Close the pop-up window.
+    4. Type `help` in the command box again.
+    5. The pop-up window will shift to the bottom left corner before re-centering itself.
+<br><br>
+   
+   **Solution:** Run the jar file with GTK 2 using the command `java -Djdk.gtk.version=2 -jar jobfestgo.jar`. This is a known **Mac-only issue** with JavaFX 11 which uses GTK 3 by default. Refer to this [post](https://github.com/javafxports/openjdk-jfx/issues/217) for more details.
 
 --------------------------------------------------------------------------------------------------------------------
 
