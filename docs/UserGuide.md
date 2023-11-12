@@ -161,7 +161,7 @@ Format: `add_contact n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 * Phone number does not provide support for special characters, such as `+` and `-`, as it is more targeted for job fest event planners in **Singapore**.
 * Email should be in the appropriate (@xxx.com) format.
 * A contact can have any number of tags.
-* Only tags from tags list can be used for tagging a contact.
+* Only tags from the tags list can be used for tagging a contact.
 * A contact cannot be added if their phone number already exists.
 * A contact cannot be added if their name already exists.
 
@@ -192,7 +192,7 @@ Format: `view_contacts`
 Deletes the contact at the specified index from JobFestGo.
 </box>
 
-<box type="warning" style="background-color: #C73852; color: white;">
+<box type="warning" style="background-color: #FFAA33; color: white;">
 
 **WARNING:** This command is destructive. Once a contact is deleted, it cannot be recovered.
 </box>
@@ -236,7 +236,7 @@ Examples:
 Finds contacts whose names contain any of the given keywords.
 </box>
 
-<box type="warning" style="background-color: #C73852; color: white">
+<box type="warning" style="background-color: #FFAA33; color: white">
 
 **WARNING:**
 This command is cumulative. Repeatedly using this command will result in the list being successively filtered based on the current displayed list. The examples below illustrate this.
@@ -294,7 +294,7 @@ Format: `view_tags`
 Deletes the specified tag name from JobFestGo.
 </box>
 
-<box type="warning" style="background-color: #C73852; color: white;">
+<box type="warning" style="background-color: #FFAA33; color: white;">
 
 **WARNING:** This command is destructive. Once a tag is deleted, no contacts can be associated with the tag name.
 </box>
@@ -313,7 +313,7 @@ Examples:
 Displays contacts tagged by any of the specified tags.
 </box>
 
-<box type="warning" style="background-color: #C73852; color: white">
+<box type="warning" style="background-color: #FFAA33; color: white">
 
 **WARNING:**
 This command is cumulative. Repeatedly using this command will result in the list being successively filtered based on the current displayed list. The examples below illustrate this.
@@ -346,13 +346,13 @@ Format: `add_event n/NAME d/DATE a/ADDRESS`
 * Event name can only take alphanumeric values.
 * The event name **must not already exist** in JobFestGo.
 * Event name and address should not have more than one whitespace in-between each word.
-* If the event name is very long and cannot be viewed fully, enter `view_events` to see the full text.
+* If the event name is very long and cannot be viewed fully, enter [`view_events`](#viewing-all-events-view-events) to see the full text.
 * Date must be valid and should be in the appropriate (YYYY-MM-DD) format.
 * Date should **not** be before the current date.
 * Past the date of the event, the event will be labelled as completed next to its name in event list.
 
 Examples:
-* `add_event n/CS2103T Presentation d/2023-11-10 a/311, Clementi Ave 2, #02-25` adds an event named `CS2103T Presentation` to JobFestGo. <br><br>
+* `add_event n/CS2103T Presentation d/2023-11-10 a/311, Clementi Ave 2, #02-25` adds an event named `CS2103T Presentation` to JobFestGo. 
 
     ![result for 'add_event'](images/addEventResult.png)
 
@@ -374,7 +374,7 @@ Format: `view_events`
 Deletes the event specified at the index from JobFestGo.
 </box>
 
-<box type="warning" style="background-color: #C73852; color: white;">
+<box type="warning" style="background-color: #FFAA33; color: white;">
 
 **WARNING:** This command is destructive. Once an event is deleted, all tasks associated with the event will be deleted.
 </box>
@@ -404,14 +404,20 @@ Format: `link ev/EVENT_NAME c/CONTACT_NAME [c/MORE_CONTACT_NAMES]`
 * The order of the input does not matter. e.g. `link ev/NUS Career Fest c/Alice Black`
  and `link c/Alice Black ev/NUS Career Fest` are both valid commands and will perform
  the same task.
-* The command will only succeed if all contacts and events keyed in are valid and are existing contacts and events in JobFestGo.
 
 Examples:
 * `link ev/NUS Career Fest c/Alice Black` links `Alice Black` to the event `NUS Career Fest` if `Alice Black` is not linked to `NUS Career Fest`.
 
 <div style="page-break-after: always;"></div>
 
-### Unlinking contacts from an event: `unlink`
+<box type="warning" style="background-color: #C73852; color: white">
+<span slot="icon" style="color: white;"><md>:fas-close:</md></span>
+
+**Errors:**
+If any of the contacts or the event keyed in are not valid and do not exist in JobFestGo, an error will be thrown.
+</box>
+
+### Unlinking contacts from an event : `unlink`
 <box type="info" style="background-color:#1e90ff; color: white;">
 <span slot="icon" style="color: white;"><md>:fas-address-book:</md></span>
 Unlinks specified contacts from the specified event.
@@ -420,13 +426,20 @@ Unlinks specified contacts from the specified event.
 Format: `unlink ev/EVENT_NAME c/CONTACT_NAME [c/MORE_CONTACT_NAMES]`
 
 * Event name and contact name should not have more than one whitespace in-between each word.
-* It functions similarly to [`link`](#linking-contacts-to-an-event-link) except for the fact that the input contacts and event for `unlink`
- must be currently linked. Otherwise, an error will be raised.
 
 Examples:
 * `unlink ev/NUS Career Fest c/Alice Black` unlinks `Alice Black` from the event `NUS Career Fest` if `Alice Black` is linked to `NUS Career Fest`.
 
-### Selecting an event: `select_event`
+<box type="warning" style="background-color: #C73852; color: white">
+<span slot="icon" style="color: white;"><md>:fas-close:</md></span>
+
+**Errors:**
+Similar to [`link`](#linking-contacts-to-an-event-link), if any of the contacts or the event keyed in are not valid and do not exist in JobFestGo, an error will be thrown.
+
+If the input contacts and event for `unlink` are not currently linked, an error will also be thrown.
+</box>
+
+### Selecting an event : `select_event`
 <box type="info" style="background-color:#1e90ff; color: white;">
 <span slot="icon" style="color: white;"><md>:fas-address-book:</md></span>
 Selects an event at the specified index from JobFestGo. The relevant contacts and tasks will be displayed.
@@ -439,7 +452,7 @@ Format: `select_event INDEX`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `select_event 3` selects the third event in the displayed events list.<br><br>
+* `select_event 3` selects the third event in the displayed events list.
 
     ![result for 'select_event 3'](images/selectEventResult.png)
 
@@ -451,8 +464,8 @@ Adds a task to an event in JobFestGo.
 
 Format: `add_task td/TASK_DESCRIPTION d/DEADLINE ev/EVENT_NAME`
 
-* Task Description can take any alphanumeric value, spaces and any of the following characters: `-`, `,`, `.`, `/`, `(`, `)`
-* Task Description and Event Name should not have more than one whitespace in-between each word.
+* Task description can take any alphanumeric value, spaces and any of the following characters: `-`, `,`, `.`, `/`, `(`, `)`
+* Task description and event name should not have more than one whitespace in-between each word.
 * Deadline is a date in the format YYYY-MM-DD.
 * Deadline should not be before today's date.
 * Event name should be the **name of an already existing event**.
@@ -462,13 +475,13 @@ Format: `add_task td/TASK_DESCRIPTION d/DEADLINE ev/EVENT_NAME`
 Examples:
 * `add_task td/Book Venue d/2023-12-23 ev/NUS Career Fair 2023` adds a `Book Venue` by `2023-12-23` task to the event `NUS Career Fair 2023`.
 
-### Deleting a task: `delete_task`
+### Deleting a task : `delete_task`
 <box type="info" style="background-color:#1e90ff; color: white;">
 <span slot="icon" style="color: white;"><md>:fas-address-book:</md></span>
 Deletes the task specified by the task description from its associated event in JobFestGo.
 </box>
 
-<box type="warning" style="background-color: #C73852; color: white">
+<box type="warning" style="background-color: #FFAA33; color: white">
 
 **WARNING:** This command is destructive. Once a task is deleted, it cannot be recovered.
 </box>
@@ -480,13 +493,19 @@ Format: `delete_task td/TASK_DESCRIPTION ev/EVENT_NAME`
 * Both the `TASK_DESCRIPTION` and the `EVENT_NAME` are case-insensitive.
  e.g. `delete_task td/Book Venue ev/NUS Career Fair 2023` and `delete_task td/book venue ev/nus Career FAIR 2023`
  will perform the same operation.
-* Errors will be raised if the specified event does not exist or the event does not have the specified task.
- If such situation happens, you may double-check the task description and the event name and re-enter valid inputs.
 
 Examples:
 * `delete_task td/Book Venue ev/NUS Career Fair 2023` deletes task `Book Venue` from the task list of the event `NUS Career Fair 2023`.
 
-### Marking a task: `mark_task`
+<box type="warning" style="background-color: #C73852; color: white">
+<span slot="icon" style="color: white;"><md>:fas-close:</md></span>
+
+**Errors:**
+If the specified event does not exist or the event does not have the specified task, an error will be thrown.
+If such a situation happens, you may double-check the task description and the event name and re-enter valid inputs.
+</box>
+
+### Marking a task : `mark_task`
 <box type="info" style="background-color:#1e90ff; color: white;">
 <span slot="icon" style="color: white;"><md>:fas-address-book:</md></span>
 Marks the task specified by the task description and its associated event name in JobFestGo as completed.
@@ -500,16 +519,24 @@ Format: `mark_task td/TASK_DESCRIPTION ev/EVENT_NAME`
 * Both the `TASK_DESCRIPTION` and the `EVENT_NAME` are case-insensitive.
   e.g. `mark_task td/Book Venue ev/NUS Career Fair 2023` and `mark_task td/book venue ev/nus Career FAIR 2023`
   will perform the same operation.
-* Errors will be raised if the specified event does not exist or the event does not have the specified task.
-  If such a situation happens, you may double-check the task description and the event name and re-enter valid inputs.
-* Errors will also be raised if the specified task has already been marked as completed.
 
 Examples:
-* `mark_task td/Book Venue ev/NUS Career Fair 2023` marks the task `Book Venue` from the task list of the event `NUS Career Fair 2023` as completed.<br><br>
+* `mark_task td/Book Venue ev/NUS Career Fair 2023` marks the task `Book Venue` from the task list of the event `NUS Career Fair 2023` as completed.
 
-    ![result for 'mark_task'](images/markTaskResult.png)
+<box type="warning" style="background-color: #C73852; color: white">
+<span slot="icon" style="color: white;"><md>:fas-close:</md></span>
 
-### Unmarking a task: `unmark_task`
+**Errors:**
+If the specified event does not exist or the event does not have the specified task, an error will be thrown.
+If such a situation happens, you may double-check the task description and the event name and re-enter valid inputs.
+
+
+If the specified task has already been marked as completed, an error will also be thrown.
+</box>
+
+   ![result for 'mark_task'](images/markTaskResult.png)
+
+### Unmarking a task : `unmark_task`
 <box type="info" style="background-color:#1e90ff; color: white;">
 <span slot="icon" style="color: white;"><md>:fas-address-book:</md></span>
 Marks the task specified by the task description and its associated event name in JobFestGo as not completed.
@@ -517,13 +544,22 @@ Marks the task specified by the task description and its associated event name i
 
 Format: `unmark_task td/TASK_DESCRIPTION ev/EVENT_NAME`
 
-* Task Description and Event Name should not have more than one whitespace in-between each word.
+* Task description and event name should not have more than one whitespace in-between each word.
 * It works exactly the same way as [`mark_task`](#marking-a-task-mark-task) except for the fact that `unmark_task` marks a completed task as not completed.
 * You may `unmark_task` a task when you realize that you have not completed the task but have wrongly marked it as completed.
-* Errors will be raised if the specified task has already been unmarked.
 
 Examples:
 * `unmark_task td/Book Venue ev/NUS Career Fair 2023` marks the task `Book Venue` from the task list of the event `NUS Career Fair 2023` as not completed.
+
+<box type="warning" style="background-color: #C73852; color: white">
+<span slot="icon" style="color: white;"><md>:fas-close:</md></span>
+
+**Errors:**
+If the specified event does not exist or the event does not have the specified task, an error will be thrown.
+If such a situation happens, you may double-check the task description and the event name and re-enter valid inputs.
+
+If the specified task has already been unmarked, an error will be thrown.
+</box>
 
 ### Viewing help : `help`
 <box type="info" style="background-color:#1e90ff; color: white;">
@@ -542,7 +578,7 @@ Format: `help`
 Clears all entries from JobFestGo.
 </box>
 
-<box type="warning" style="background-color: #C73852; color: white">
+<box type="warning" style="background-color: #FFAA33; color: white">
 
 **WARNING:**
 This command is destructive. Once executed, it will delete all contacts, events and tasks from JobFestGo.
@@ -593,7 +629,7 @@ _Details coming soon ..._
 **A**: Given below are the steps to launch JobFestGo using CLI:
 <br>
 1. Open the command prompt
-1. Navigate to the directory where the JAR file is located using cd [JAR file location]
+1. Navigate to the directory where the JAR file is located using `cd [JAR file location]`
 1. Type `java -jar jobfestgo.jar` and press enter
 1. JobFestGo should launch
 
@@ -605,7 +641,18 @@ can download it [here](https://www.oracle.com/java/technologies/downloads/#java1
 
 ## Known issues
 
-1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
+1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. 
+<br><br>
+**Solution**: Delete the `preferences.json` file created by the application before running the application again.
+2. **Help pop-up window shifts to the bottom left corner of the screen before re-centering on `help` command**. Steps to reproduce the issue:
+    1. Type `help` in the command box.
+    2. Shift the pop-up window to anywhere on the screen.
+    3. Close the pop-up window.
+    4. Type `help` in the command box again.
+    5. The pop-up window will shift to the bottom left corner before re-centering itself.
+<br><br>
+   
+   **Solution:** Run the jar file with GTK 2 using the command `java -Djdk.gtk.version=2 -jar jobfestgo.jar`. This is a known **Mac-only issue** with JavaFX 11 which uses GTK 3 by default. Refer to this [post](https://github.com/javafxports/openjdk-jfx/issues/217) for more details.
 
 --------------------------------------------------------------------------------------------------------------------
 
