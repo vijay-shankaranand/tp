@@ -169,11 +169,11 @@ public class LinkCommandTest {
         contactNameList.add(CARL.getName());
         contactNameList.add(BENSON.getName());
 
-        LinkCommand command = new LinkCommand(JOBFEST.getName(), contactNameList);
+        LinkCommand linkCommand = new LinkCommand(JOBFEST.getName(), contactNameList);
 
         String expected = LinkCommand.class.getCanonicalName()
                 + "{eventToLink=" + JOBFEST.getName() + ", "
                 + "contactToLink=[" + CARL.getName() + ", " + BENSON.getName() + "]}";
-        assertEquals(expected, command.toString());
+        assertEquals(expected, linkCommand.toString());
     }
 }
