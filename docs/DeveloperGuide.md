@@ -1473,3 +1473,17 @@ Given below are the planned enhancements for the app for future releases.
     This should be changed to allow the user to enter the index number of the event instead, to allow for faster input.
     For example, currently, the user has to enter `link n/John Doe ev/NUS Career Fair 2024` to link John Doe to the event NUS Career Fair 2024.
     With the enhancement, the user can enter `link n/John Doe ev/1` to link John Doe to the first event in the event list.
+
+7. **Enforce stricter deadline date for `add_task` command**
+
+   The current implementation of JobFestGo enables user to have tasks with deadline past the event date for AAR purposes.
+   For future enhancements, we plan to provide the user the liberty of selecting a period where the event and the tasks for the event will remain in JobFestGo.
+   As an example, for `add_event`, there will be another parameter say `days_past_event` and let the user input the number of days past the event deadline for which tasks can be added.
+   If the date for the task exceeds this parameter, it will flag an error. 
+
+8. **Remove events and tasks past a particular period**
+    
+    The current implementation of JobFestGo enables user to have events and tasks with deadline past the event date for AAR purposes.
+    Users have to manually delete the events and tasks once completed.
+    For future enhancements, continuing from the previous enhancement, we plan to remove the events and tasks past a particular period.
+    This can be done by checking if the current date is past the event date by the number of days specified in the `days_past_event` parameter.
