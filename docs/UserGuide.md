@@ -399,14 +399,18 @@ Format: `link ev/EVENT_NAME c/CONTACT_NAME [c/MORE_CONTACT_NAMES]`
 * Event name and contact name should not have more than one whitespace in-between each word.
 * Only existing contacts and events in JobFestGo can be linked.
 * Contacts that are already linked to the specified event cannot be linked again.
-* Only full words will be matched e.g. `NUS Career Fest` will not match `NUS Career Fest 2023`,
-  `Alice` will not match `Alice Black`
-* The order of the input does not matter. e.g. `link ev/NUS Career Fest c/Alice Black`
- and `link c/Alice Black ev/NUS Career Fest` are both valid commands and will perform
+* Only full names will be matched e.g. `NUS Career Fair` will not match `NUS Career Fair 2023`,
+  `David` will not match `David Li`
+* The order of the input does not matter. e.g. `link ev/NUS Career Fair 2023 c/David Li`
+ and `link c/David Li ev/NUS Career Fair 2023` are both valid commands and will perform
  the same task.
+* The command will only succeed if all contacts and the event keyed in are valid.
+ i.e. They are existing contacts and event in JobFestGo and the contacts are not linked to the event.
 
 Examples:
-* `link ev/NUS Career Fest c/Alice Black` links `Alice Black` to the event `NUS Career Fest` if `Alice Black` is not linked to `NUS Career Fest`.
+* `link ev/NUS Career Fair 2023 c/David Li` links `David Li` to the event `NUS Career Fair 2023` if `David Li` is not linked to `NUS Career Fair 2023`.
+
+![result for 'link'](images/linkResult.png)
 
 <div style="page-break-after: always;"></div>
 

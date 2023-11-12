@@ -64,4 +64,3 @@ Given below are my contributions to the project.
   - [Bug found 3](https://github.com/tjch-o/ped/issues/9)
   - [Bug found 4](https://github.com/tjch-o/ped/issues/11)
   - [Bug found 5](https://github.com/tjch-o/ped/issues/13)
-
