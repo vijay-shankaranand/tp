@@ -6,8 +6,47 @@
 
 # JobFestGo Developer Guide
 
-<!-- * Table of Contents -->
-<page-nav-print />
+## **Table of Content**
+ - [Acknowledgements](#acknowledgements)
+ - [Setting up, getting started](#setting-up-getting-started)
+ - [Design](#design)
+    - [Architecture](#architecture)
+    - [UI component](#ui-component)
+    - [Logic component](#logic-component)
+    - [Model component](#model-component)
+    - [Storage component](#storage-component)
+    - [Common classes](#common-classes)
+ - [Implementation](#implementation)
+    - [Return to home page feature](#return-to-home-page-feature)
+    - [Select Event Feature](#select-event-feature)
+    - [Add Tag Feature](#add-tag-feature)
+    - [Link/unlink Feature](#link-unlink-feature)
+    - [[Proposed] Undo/redo feature](#proposed-undo-redo-feature)
+    - [[Proposed] Data archiving](#proposed-data-archiving)
+ - [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
+ - [Appendix: Requirements](#appendix-requirements)
+    - [Product scope](#product-scope)
+    - [User stories](#user-stories)
+    - [Use cases](#use-cases)
+    - [Non-Functional Requirements](#non-functional-requirements)
+    - [Glossary](#glossary)
+ - [Appendix: Effort](#appendix-effort)
+ - [Appendix: Instructions for manual testing](#appendix-instructions-for-manual-testing)
+    - [Launch and shutdown](#launch-and-shutdown)
+    - [Returning to home page](#returning-to-home-page)
+    - [Adding a contact](#adding-a-contact)
+    - [Listing all contacts](#listing-all-contacts)
+    - [Deleting a contact](#deleting-a-contact)
+    - [Editing a contact](#editing-a-contact)
+    - [Locating contacts by name](#locating-contacts-by-name)
+    - [Adding a tag](#adding-a-tag)
+    - [Viewing all tags](#viewing-all-tags)
+    - [Deleting a tag](#deleting-a-tag)
+    - [Deleting an event](#deleting-an-event)
+    - [Viewing all events](#viewing-all-events)
+    - [Selecting an event](#selecting-an-event)
+    - [Adding a task](#adding-a-task)
+    - [Saving data](#saving-data)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -977,8 +1016,44 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+| Term                 | Definition                                                           |
+|----------------------|----------------------------------------------------------------------|
+| Activity Diagram     | A diagram that shows activities performed by the system after a command. |
+| App                  | An application.                                                      |
+| API                  | An application programming interface.                                |
+| Architecture Diagram | A diagram that explains the high-level design of the App.            |
+| Class Diagram        | A diagram that shows the classes of the App and the relationships between them. |
+| CLI                  | Command Line Interface, in which users type commands to perform actions. |
+| CommandBox           | A UI component that allows users to enter commands.                  |
+| Component            | A part of the App that serves a particular function.                 |
+| EventContactDisplay  | A UI component that displays the events, contacts and tasks related to the events. |
+| GUI                  | Graphical User Interface, which is a visual way for users to interact with a software program. |
+| JavaFX               | The UI framework used in the project.                                |
+| Logic                | The component responsible for executing commands entered by users.   |
+| MainWindow           | The main window of the UI that houses all the different UI components. |
+| Mainstream OS        | Windows, Linux, Unix, Unix, OS-X.                                    |
+| Model                | The data model that is used by the App.                              |
+| PlantUML             | A tool used to create diagrams seen in this guide.                   |
+| ResultDisplay        | A UI component that displays the result after executing a command.   |
+| Sequence Diagram     | A diagram that shows how the different components interact with each other for a scenario presented. |
+| UI                   | User Interface.                                                      |
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix: Effort**
+
+| Component           | AB3           | JobFestGo                |
+|---------------------|---------------|--------------------------|
+| Effort              | 10            | 25                       |
+| Line of Code        | 6k            | +16k                     |
+
+The JobFestGo project required a significant amount of effort to adapt the AddressBook-Level3 (AB3) application to our specific target user profile. One of the major changes was the addition of three new entity types, being `Event`, `Task`, and `Tag`, requiring some modification to the existing model as well as the associated logic and UI components. Another major change that was done was the redesign of the user interface (UI) using JavaFX. This took a significant amount of time and effort to pick up and implement in our project.
+
+Although code was reused from AB3, such code had to be refactored to better fit our application. This can be seen in the `Tag` class, in which now there are some modifications done to ensure that such tags have to be unique, and has to go through the creation and deletion process for validity checks. Furthermore, with the additional entity types `Event` and `Task`, more effort had to be put in for input verification as well as writing high quality test cases for each entity. This is a time-consuming process.
+
+With the addition of the new entity types, we had to map relationships between `Event` and `Task`, as well as `Event` and `Contact`. To tackle this, the team created a list of tasks and a list of contacts inside each event. This brought on multiple changes that had to be made to other components, such that it would be displayed accurately on the UI upon each command. This can be seen in the `LinkCommand` and `UnlinkCommand` for linking contacts to events, and `AddTaskCommand` for adding tasks to events, as well as their relevant parsers and model methods.
+
+Another challenge was the interface redesign, to display the necessary information we wanted. In the case of JobFestGo, this involved adding multiple new UI components, as well as having to carefully construct the flow of events we would like upon each different command being executed. Through multiple testing, we have reached the current stage in which we think best suits the target user profile.
 
 --------------------------------------------------------------------------------------------------------------------
 
