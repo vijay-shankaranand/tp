@@ -10,7 +10,7 @@
 
 **Your one-stop solution for job event planning!**
 
-JobFestGo is a **desktop application** built for job event planners to manage contacts and tasks for their events.
+JobFestGo is a **desktop application** built for job event planners in Singapore to manage contacts and tasks for their events.
 
 Here’s an **overview** of how JobFestGo can help you with your event planning:
 - Store information about your events and their associated contacts

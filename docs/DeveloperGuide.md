@@ -512,14 +512,14 @@ _{Explain here how the data archiving feature will be implemented}_
 ### Product scope
 
 **Target user profile**:
-* is a job festival event planner
+* is a job festival event planner in Singapore
 * has a need to manage a significant number of contacts of different types (e.g. vendors, customers) and tasks for different events
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: Each event planner has multiple events, each of which can have a large number of contacts and tasks associated and searching for contact would be a hassle. Our product provides a centralised system that would help job event planners organise their contact information and tasks for quick and easy access.
+**Value proposition**: Each event planner has many events to plan, each of which can have a large number of contacts and tasks associated and searching for contact would be a hassle. Our product provides a centralised system that would help job event planners organise their contact information and tasks for quick and easy access.
 
 ### User stories
 
