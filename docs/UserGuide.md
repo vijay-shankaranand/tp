@@ -414,7 +414,7 @@ Examples:
 <span slot="icon" style="color: white;"><md>:fas-close:</md></span>
 
 **Errors:**
-If any of the contacts or events keyed in are not valid and do not exist in JobFestGo, an error will be thrown.
+If any of the contacts or the event keyed in are not valid and do not exist in JobFestGo, an error will be thrown.
 </box>
 
 ### Unlinking contacts from an event : `unlink`
@@ -434,12 +434,12 @@ Examples:
 <span slot="icon" style="color: white;"><md>:fas-close:</md></span>
 
 **Errors:**
-Similar to [`link`](#linking-contacts-to-an-event-link), if any of the contacts or events keyed in are not valid and do not exist in JobFestGo, an error will be thrown.
+Similar to [`link`](#linking-contacts-to-an-event-link), if any of the contacts or the event keyed in are not valid and do not exist in JobFestGo, an error will be thrown.
 
 If the input contacts and event for `unlink` are not currently linked, an error will also be thrown.
 </box>
 
-### Selecting an event: `select_event`
+### Selecting an event : `select_event`
 <box type="info" style="background-color:#1e90ff; color: white;">
 <span slot="icon" style="color: white;"><md>:fas-address-book:</md></span>
 Selects an event at the specified index from JobFestGo. The relevant contacts and tasks will be displayed.
