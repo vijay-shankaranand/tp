@@ -838,7 +838,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 1b1. JobFestGo shows an error message.
 
-      Use case ends.
+      Use case resumes at step 1.
 
 * 1a. One of the given contacts is not linked to the given event.
 
