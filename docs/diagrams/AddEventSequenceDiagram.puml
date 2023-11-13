@@ -6,7 +6,7 @@ box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":JobFestGoParser" as JobFestGoParser LOGIC_COLOR
 participant ":AddEventCommandParser" as AddEventCommandParser LOGIC_COLOR
-participant "t:AddEventCommand" as AddEventCommand LOGIC_COLOR
+participant "e:AddEventCommand" as AddEventCommand LOGIC_COLOR
 participant "result:CommandResult" as CommandResult LOGIC_COLOR
 end box
 
