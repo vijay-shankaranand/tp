@@ -54,12 +54,12 @@ Given below are my contributions to the project.
 * **Contributions to team-based tasks**:
   - Updated the app icon.
   - Helped in the ideation and experimentation of the frontend.
-  - Updated the codebase as well as the DG and UG and renamed all methods, variables etc. that previously contained `Person` in their name into `Contact`
-  - Voluntarily contributed in writing additional test cases for code that I have not authored to ensure more comprehensive test coverage
+  - Updated the codebase as well as the DG and UG and renamed all methods, variables etc. that previously contained `Person` in their name into `Contact`.
+  - Voluntarily contributed in writing additional test cases for code that I have not authored to ensure more comprehensive test coverage.
     <br></br>
   
 * **Review/mentoring contributions**:
-  - Regularly reviewed and merged several pull requests for other team members. Some of the PRS I reviewed include:
+  - Regularly reviewed and merged several pull requests for other team members. Some of the PRs I reviewed include:
      - [PR 1](https://github.com/AY2324S1-CS2103T-T09-1/tp/pull/53)
      - [PR 2](https://github.com/AY2324S1-CS2103T-T09-1/tp/pull/69)
      - [PR 3](https://github.com/AY2324S1-CS2103T-T09-1/tp/pull/133)
