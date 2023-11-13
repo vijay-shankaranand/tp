@@ -83,6 +83,8 @@ The table of contents below is provided to enhance your navigation through this 
 
     ![download jar](images/downloadJar.png)
 
+<br>
+
 3. Copy the file to the folder you want to use as the _home folder_ for your JobFestGo.
 
 4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar jobfestgo.jar` command to run the application.
