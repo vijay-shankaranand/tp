@@ -1384,7 +1384,7 @@ Similar to `link` command except that the command word is `unlink` and the expec
 1. A task can be deleted from any page.
 
    1. Test case: `delete_task td/Book Venue ev/NUS Career Fair 2024`<br>
-       Expected: Book Venue task is deleted to NUS Career Fair 2024 event. Command success status message shown. Goes to the respective event page and displays the tasks of the event on the right.
+       Expected: Book Venue task is deleted from NUS Career Fair 2024 event. Command success status message shown. Goes to the respective event page and displays the tasks of the event on the right.
 
    2. Test case: `delete_task td/Book Venue`<br>
        Expected: No task is deleted. Error details shown in the status message.
@@ -1476,8 +1476,9 @@ Given below are the planned enhancements for the app for future releases.
 
    The current implementation of JobFestGo enables users to have tasks with deadline past the event date for AAR purposes.
    For future enhancements, we plan to provide the user the liberty of selecting a period where the event and the tasks for the event will remain in JobFestGo.
-   As an example, for `add_event`, there will be another parameter say `days_past_event` and let the user input the number of days past the event deadline for which tasks can be added.
-   If the date for the task exceeds this parameter, it will flag an error. Example usage : `add_task td/Book Venue d/2024-10-10 ev/NUS Career Fair 2024 days_past_event/7`.
+   As an example, for `add_event`, there will be another parameter `days_past_event` where we can let the user input the number of days past the event deadline for which tasks can be added.
+   The command would look like this: `add_task td/Book Venue d/2024-10-10 ev/NUS Career Fair 2024 days_past_event/7`.
+   If the date for the task exceeds this parameter, it will flag an error. 
 
 8. **Remove events and tasks past a particular period**
     

@@ -21,7 +21,7 @@ Given below are my contributions to the project.
   - Implemented the`view_events` feature
     - What it does: Displays a list of all existing events.
     - Justification: Improves the product by allowing users to remember all the events they are involved in so far.
-    - Highlights: While I got more familiar with JavaFx due to the implementation of `view_tags`, the implementation was slightly challenging due to the added complexity of conditional rendering.
+    - Highlights: While I got more familiar with JavaFx and the codebase due to the implementation of `view_tags`, the implementation was slightly challenging due to the added complexity of conditional rendering.
 
   - Implemented the `home` feature
     - What it does: Returns to the home page from the current screen.
