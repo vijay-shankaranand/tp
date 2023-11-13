@@ -193,8 +193,7 @@ Format: `add_contact n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
 Examples:
 * `add_contact n/John Doe p/98765432 e/johndtr@example.com a/John street, block 123, #01-01`
-* `add_contact n/Johnny t/suppliers e/johnd@example.com a/311, Clementi Ave 2, #02-25 p/98765435`
-
+* `add_contact n/Johnny t/suppliers t/vendors e/johnd@example.com a/311, Clementi Ave 2, #02-25 p/98765435`
 
 ![result for 'add_contact'](images/addContactResult.png)
 
@@ -237,7 +236,7 @@ Format: `delete_contact INDEX`
 
 Examples:
 * `view_contact` followed by `delete_contact 2` deletes the 2nd contact in JobFestGo.
-* `find_contact Betsy` followed by `delete_contact 1` deletes the 1st contact in the results of the `find_contact` command.
+* `find_contact Betsy` followed by `delete_contact 1` deletes the 1st contact in the result of the `find_contact` command.
 
 Return to [table of contents](#table-of-contents).
 
@@ -340,7 +339,7 @@ Deletes the specified tag name from JobFestGo.
 
 <box type="warning" style="background-color: #FFAA33; color: white;">
 
-**WARNING:** This command is destructive. Once a tag is deleted, no contacts can be associated with the tag name.
+**WARNING:** This command is destructive. Once a tag is deleted, no contacts can be associated with the tag.
 </box>
 
 Format: `delete_tag t/TAG_NAME`
@@ -534,7 +533,7 @@ Adds a task to an event in JobFestGo.
 
 Format: `add_task td/TASK_DESCRIPTION d/DEADLINE ev/EVENT_NAME`
 
-* Task description can take any alphanumeric value, spaces and any of the following characters: `-`, `,`, `.`, `/`, `(`, `)`
+* Task description can take any alphanumeric value, spaces and any of the following characters: `-`, `,`, `.`, `/`, `(` and `)`
 * Task description and event name should not have more than one whitespace in-between each word.
 * Deadline is a date in the format YYYY-MM-DD.
 * Deadline should not be before today's date.
