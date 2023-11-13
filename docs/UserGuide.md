@@ -112,6 +112,8 @@ JobFestGo comes with a GUI (Graphical User Interface) that is designed to be int
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## Features
 
 <box type="info" seamless>
@@ -146,6 +148,8 @@ Returns to the home page of JobFestGo regardless of what screen the user is curr
 </box>
 
 Format: `home`
+
+<div style="page-break-after: always;"></div>
 
 ### Adding a contact : `add_contact`
 <box type="info" style="background-color:#1e90ff; color: white;">
@@ -306,6 +310,8 @@ Format: `delete_tag t/TAG_NAME`
 Examples:
 * `delete_tag t/vendors` deletes the tag `vendors` in JobFestGo.
 
+<div style="page-break-after: always;"></div>
+
 ### Filtering contacts by tag : `filter_by_tag`
 
 <box type="info" style="background-color:#1e90ff; color: white;">
@@ -356,6 +362,8 @@ Examples:
 
     ![result for 'add_event'](images/addEventResult.png)
 
+<div style="page-break-after: always;"></div>
+
 ### Viewing all events : `view_events`
 <box type="info" style="background-color:#1e90ff; color: white;">
 <span slot="icon" style="color: white;"><md>:fas-address-book:</md></span>
@@ -365,8 +373,6 @@ Displays a list of all existing events.
 Format: `view_events`
 
 ![result for 'view_events'](images/viewEventsResult.png)
-
-<div style="page-break-after: always;"></div>
 
 ### Deleting an event : `delete_event`
 <box type="info" style="background-color:#1e90ff; color: white;">
@@ -387,6 +393,8 @@ Format: `delete_event INDEX`
 
 Examples:
 * `delete_event 1` deletes the 1st event in the displayed event list.
+
+<div style="page-break-after: always;"></div>
 
 ### Linking contacts to an event : `link`
 <box type="info" style="background-color:#1e90ff; color: white;">
@@ -410,9 +418,7 @@ Format: `link ev/EVENT_NAME c/CONTACT_NAME [c/MORE_CONTACT_NAMES]`
 Examples:
 * `link ev/NUS Career Fair 2023 c/David Li` links `David Li` to the event `NUS Career Fair 2023` if `David Li` is not linked to `NUS Career Fair 2023`.
 
-![result for 'link'](images/linkResult.png)
-
-<div style="page-break-after: always;"></div>
+![result for 'link'](images/linkResult.png){width=550}
 
 <box type="warning" style="background-color: #C73852; color: white">
 <span slot="icon" style="color: white;"><md>:fas-close:</md></span>
@@ -420,6 +426,8 @@ Examples:
 **Errors:**
 If any of the contacts or the event keyed in are not valid and do not exist in JobFestGo, an error will be thrown.
 </box>
+
+<div style="page-break-after: always;"></div>
 
 ### Unlinking contacts from an event : `unlink`
 <box type="info" style="background-color:#1e90ff; color: white;">
@@ -443,6 +451,8 @@ Similar to [`link`](#linking-contacts-to-an-event-link), if any of the contacts 
 If the input contacts and event for `unlink` are not currently linked, an error will also be thrown.
 </box>
 
+<div style="page-break-after: always;"></div>
+
 ### Selecting an event : `select_event`
 <box type="info" style="background-color:#1e90ff; color: white;">
 <span slot="icon" style="color: white;"><md>:fas-address-book:</md></span>
@@ -459,6 +469,8 @@ Examples:
 * `select_event 3` selects the third event in the displayed events list.
 
     ![result for 'select_event 3'](images/selectEventResult.png)
+
+<div style="page-break-after: always;"></div>
 
 ### Adding a task : `add_task`
 <box type="info" style="background-color:#1e90ff; color: white;">
@@ -478,6 +490,8 @@ Format: `add_task td/TASK_DESCRIPTION d/DEADLINE ev/EVENT_NAME`
 
 Examples:
 * `add_task td/Book Venue d/2023-12-23 ev/NUS Career Fair 2023` adds a `Book Venue` by `2023-12-23` task to the event `NUS Career Fair 2023`.
+
+<div style="page-break-after: always;"></div>
 
 ### Deleting a task : `delete_task`
 <box type="info" style="background-color:#1e90ff; color: white;">
@@ -509,6 +523,8 @@ If the specified event does not exist or the event does not have the specified t
 If such a situation happens, you may double-check the task description and the event name and re-enter valid inputs.
 </box>
 
+<div style="page-break-after: always;"></div>
+
 ### Marking a task : `mark_task`
 <box type="info" style="background-color:#1e90ff; color: white;">
 <span slot="icon" style="color: white;"><md>:fas-address-book:</md></span>
@@ -539,6 +555,8 @@ If the specified task has already been marked as completed, an error will also b
 </box>
 
    ![result for 'mark_task'](images/markTaskResult.png)
+
+<div style="page-break-after: always;"></div>
 
 ### Unmarking a task : `unmark_task`
 <box type="info" style="background-color:#1e90ff; color: white;">
@@ -575,6 +593,8 @@ You can click on the 'Copy URL' button and paste the URL into your browser's add
 ![help message](images/helpMessage.png)
 
 Format: `help`
+
+<div style="page-break-after: always;"></div>
 
 ### Clearing all entries : `clear`
 <box type="info" style="background-color:#1e90ff; color: white;">
@@ -624,6 +644,8 @@ _Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## FAQ
 
 **Q**: How do I transfer my data to another computer?<br>
@@ -659,6 +681,8 @@ can download it [here](https://www.oracle.com/java/technologies/downloads/#java1
    **Solution:** Run the jar file with GTK 2 using the command `java -Djdk.gtk.version=2 -jar jobfestgo.jar`. This is a known **Mac-only issue** with JavaFX 11 which uses GTK 3 by default. Refer to this [post](https://github.com/javafxports/openjdk-jfx/issues/217) for more details.
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## Command summary
 
