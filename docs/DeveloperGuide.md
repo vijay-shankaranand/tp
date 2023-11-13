@@ -565,6 +565,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1e1. JobFestGo informs user that tag input is not in tag List.
 
       Use case ends.
+  
+* 1f. Name is not alphanumeric.
+
+    * 1f1. JobFestGo informs user that name input is not alphanumeric.
+
+      Use case ends.
 
 **Use case: Delete a contact**
 
@@ -707,15 +713,21 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-* 1c. Date is in incorrect format.
+* 1c. Event name is not alphanumeric.
 
-    * 1c1. JobFestGo informs user that date is in wrong format.
+    * 1c1. JobFestGo informs user that event name is not alphanumeric.
 
       Use case ends.
 
-* 1d. Date is before current date.
+* 1d. Date is in incorrect format.
 
-    * 1d1. JobFestGo informs user that date is before current date.
+    * 1d1. JobFestGo informs user that date is in wrong format.
+
+      Use case ends.
+
+* 1e. Date is before current date.
+
+    * 1e1. JobFestGo informs user that date is before current date.
 
       Use case ends.
 
