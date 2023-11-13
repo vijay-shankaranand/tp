@@ -37,8 +37,8 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](http://github.com/rionshocker)]
 [[portfolio](team/rionshocker.md)]
 
-* Role: ?
-* Responsibilities: ?
+* Role: UI Lead
+* Responsibilities: UI
 
 ### Shankar Anand
 
