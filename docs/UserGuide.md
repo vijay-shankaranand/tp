@@ -313,7 +313,7 @@ Format: `add_tag t/TAG_NAME`
 * The tag name must be strictly alphanumeric. No other characters (including whitespace) are allowed.
 
 Examples:
-* `add_tag t/vendors`
+* `add_tag t/media`
 
 Return to [table of contents](#table-of-contents).
 
@@ -403,7 +403,7 @@ Format: `add_event n/NAME d/DATE a/ADDRESS`
 * Past the date of the event, the event will be labelled as completed next to its name in event list.
 
 Examples:
-* `add_event n/CS2103T Presentation d/2023-11-10 a/311, Clementi Ave 2, #02-25` adds an event named `CS2103T Presentation` to JobFestGo. 
+* `add_event n/CS2103T Presentation d/2023-12-10 a/311, Clementi Ave 2, #02-25` adds an event named `CS2103T Presentation` to JobFestGo. 
 
     ![result for 'add_event'](images/addEventResult.png)
 
@@ -491,7 +491,7 @@ Format: `unlink ev/EVENT_NAME c/CONTACT_NAME [c/MORE_CONTACT_NAMES]`
 * Event name and contact name should not have more than one whitespace in-between each word.
 
 Examples:
-* `unlink ev/NUS Career Fest c/Alice Black` unlinks `Alice Black` from the event `NUS Career Fest` if `Alice Black` is linked to `NUS Career Fest`.
+* `unlink ev/NUS Career Fair 2023 c/David Li` unlinks `David Li` from the event `NUS Career Fair 2023` if `David Li` is linked to `NUS Career Fair 2023`.
 
 <box type="warning" style="background-color: #C73852; color: white">
 <span slot="icon" style="color: white;"><md>:fas-close:</md></span>
@@ -596,11 +596,11 @@ Format: `mark_task td/TASK_DESCRIPTION ev/EVENT_NAME`
 * Task description and event name should not have more than one whitespace in-between each word.
 * A label indicating the status of the task will be shown next to its description in the task list.
 * Both the `TASK_DESCRIPTION` and the `EVENT_NAME` are case-insensitive.
-  e.g. `mark_task td/Book Venue ev/NUS Career Fair 2023` and `mark_task td/book venue ev/nus Career FAIR 2023`
+  e.g. `mark_task td/Order Food ev/NUS Career Fair 2023` and `mark_task td/order food ev/nus Career FAIR 2023`
   will perform the same operation.
 
 Examples:
-* `mark_task td/Book Venue ev/NUS Career Fair 2023` marks the task `Book Venue` from the task list of the event `NUS Career Fair 2023` as completed.
+* `mark_task td/Order Food ev/NUS Career Fair 2023` marks the task `Order Food` from the task list of the event `NUS Career Fair 2023` as completed.
 
 <box type="warning" style="background-color: #C73852; color: white">
 <span slot="icon" style="color: white;"><md>:fas-close:</md></span>
@@ -632,7 +632,7 @@ Format: `unmark_task td/TASK_DESCRIPTION ev/EVENT_NAME`
 * You may `unmark_task` a task when you realize that you have not completed the task but have wrongly marked it as completed.
 
 Examples:
-* `unmark_task td/Book Venue ev/NUS Career Fair 2023` marks the task `Book Venue` from the task list of the event `NUS Career Fair 2023` as not completed.
+* `unmark_task td/Order Food ev/NUS Career Fair 2023` marks the task `Order Food` from the task list of the event `NUS Career Fair 2023` as not completed.
 
 <box type="warning" style="background-color: #C73852; color: white">
 <span slot="icon" style="color: white;"><md>:fas-close:</md></span>
