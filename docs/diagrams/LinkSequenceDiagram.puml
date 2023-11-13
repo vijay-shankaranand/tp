@@ -33,10 +33,10 @@ create LinkCommand
 LinkCommandParser -> LinkCommand : new LinkCommand(eventName, contactNameList)
 activate LinkCommand
 
-LinkCommand --> LinkCommandParser
+LinkCommand --> LinkCommandParser : l
 deactivate LinkCommand
 
-LinkCommandParser --> JobFestGoParser
+LinkCommandParser --> JobFestGoParser : l
 deactivate LinkCommandParser
 LinkCommandParser -[hidden]-> JobFestGoParser
 destroy LinkCommandParser

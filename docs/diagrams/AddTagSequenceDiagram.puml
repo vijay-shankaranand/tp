@@ -35,10 +35,10 @@ create AddTagCommand
 AddTagCommandParser -> AddTagCommand : new AddTagCommand(tag)
 activate AddTagCommand
 
-AddTagCommand --> AddTagCommandParser
+AddTagCommand --> AddTagCommandParser : t
 deactivate AddTagCommand
 
-AddTagCommandParser --> JobFestGoParser
+AddTagCommandParser --> JobFestGoParser : t
 deactivate AddTagCommandParser
 AddTagCommandParser -[hidden]-> JobFestGoParser
 destroy AddTagCommandParser

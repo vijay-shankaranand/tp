@@ -35,10 +35,10 @@ create SelectEventCommand
 SelectEventCommandParser -> SelectEventCommand : new SelectEventCommand(1)
 activate SelectEventCommand
 
-SelectEventCommand --> SelectEventCommandParser
+SelectEventCommand --> SelectEventCommandParser : se
 deactivate SelectEventCommand
 
-SelectEventCommandParser --> JobFestGoParser
+SelectEventCommandParser --> JobFestGoParser : se
 deactivate SelectEventCommandParser
 SelectEventCommandParser -[hidden]-> JobFestGoParser
 destroy SelectEventCommandParser

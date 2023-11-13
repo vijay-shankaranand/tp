@@ -774,7 +774,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. User requests to select an event.
 2. JobFestGo displays the contacts and tasks related to the event.
-3. User <u>adds a task</u> or <u>deletes a task</u> or <u>marks a task</u> or <u>unmarks a task</u>.
 
       Use case ends.
 

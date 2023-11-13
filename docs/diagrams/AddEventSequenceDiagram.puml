@@ -37,10 +37,10 @@ create AddEventCommand
 AddEventCommandParser -> AddEventCommand : new AddEventCommand(event)
 activate AddEventCommand
 
-AddEventCommand --> AddEventCommandParser
+AddEventCommand --> AddEventCommandParser : e
 deactivate AddEventCommand
 
-AddEventCommandParser --> JobFestGoParser
+AddEventCommandParser --> JobFestGoParser : e
 deactivate AddEventCommandParser
 AddEventCommandParser -[hidden]-> JobFestGoParser
 destroy AddEventCommandParser
