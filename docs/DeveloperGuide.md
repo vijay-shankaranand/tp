@@ -560,49 +560,65 @@ Return to [table of contents](#table-of-contents).
 **Use case: Return to the home page**
 
 **MSS**
-1. User is on any page
-2. User requests to return to the home page
-3. JobFestGo returns user to the home page
-   Use case ends.
+
+1. User is on any page.
+
+2. User requests to return to the home page.
+
+3. JobFestGo returns user to the home page.
+
+    Use case ends.
 
 **Extensions**
-* 2a. The user is already on the home page
-  Use case ends.
+
+* 2a. The user is already on the home page.
+
+    Use case ends.
 
 **Use case: Add a contact**
 
 **MSS**
-1.  User requests to add contact and specifies details of contact
-2.  JobFestGo adds the contact to list of contacts
-3.  JobFestGo shows updated list of contacts
+
+1.  User requests to add contact and specifies details of contact.
+
+2.  JobFestGo adds the contact to list of contacts.
+
+3.  JobFestGo shows updated list of contacts.
+
     Use case ends.
 
 **Extensions**
-* 1a. Any of the mandatory fields not specified
-  * 1a1. JobFestGo informs user that mandatory fields not specified
 
+* 1a. Any of the mandatory fields not specified.
+
+  * 1a1. JobFestGo informs user that mandatory fields not specified.
+    
     Use case resumes at step 1.
 
 * 1b. Phone number already exists.
+
     * 1b1. JobFestGo informs user that phone number already exists.
 
       Use case resumes at step 1.
 
 * 1c. Email is in incorrect format.
+
     * 1c1. JobFestGo informs user that email is in wrong format.
 
       Use case resumes at step 1.
 
 * 1d. Phone number is in incorrect format.
+
     * 1d1. JobFestGo informs user that phone number is in wrong format.
 
       Use case resumes at step 1.
 
 * 1e. Tag is not found in list.
+
     * 1e1. JobFestGo informs user that tag input is not in tag List.
 
       Use case resumes at step 1.
-  
+
 * 1f. Name is not alphanumeric.
 
     * 1f1. JobFestGo informs user that name input is not alphanumeric.
@@ -613,8 +629,9 @@ Return to [table of contents](#table-of-contents).
 
 **MSS**
 
-1.  User requests to list all contacts
-2.  JobFestGo shows a list of all contacts
+1.  User requests to list all contacts.
+
+2.  JobFestGo shows a list of all contacts.
 
     Use case ends.
 
@@ -622,13 +639,13 @@ Return to [table of contents](#table-of-contents).
 
 **MSS**
 
-1.  User requests to list contacts
+1.  User requests to list contacts.
 
-2.  JobFestGo shows a list of contacts
+2.  JobFestGo shows a list of contacts.
 
-3.  User requests to delete a specific contact in the list
+3.  User requests to delete a specific contact in the list.
 
-4.  JobFestGo deletes the contact
+4.  JobFestGo deletes the contact.
 
    Use case ends.
 
@@ -650,41 +667,39 @@ Return to [table of contents](#table-of-contents).
 
 **MSS**
 
-1.  User requests to list all contacts
+1.  User requests to list all contacts.
 
-2.  JobFestGo shows a list of all contacts
-
-      Use case resumes at step 3.
+2.  JobFestGo shows a list of all contacts.
+      
+    Use case ends.
 
 **Use case: Add a tag**
 
 **MSS**
 
-1.  User requests to add tag
+1.  User requests to add a tag and specifies the details.
 
-2.  User keys in the tag to add to the collection of tags
-
-3.  JobFestGo adds the tag
+2.  JobFestGo adds the tag.
 
    Use case ends.
 
 **Extensions**
 
-* 2a. Missing tag name.
+* 1a. Missing tag name.
 
-    * 2a1. JobFestGo shows an error message.
-
-      Use case resumes at step 1.
-
-* 2b. The given tag name contains non-alphanumeric characters.
-
-    * 2b1. JobFestGo shows an error message.
+    * 1a1. JobFestGo shows an error message.
 
       Use case resumes at step 1.
 
-* 3a. The given tag name is already in the tag list.
+* 1b. The given tag name contains non-alphanumeric characters.
 
-    * 3a1. JobFestGo shows an error message.
+    * 1b1. JobFestGo shows an error message.
+  
+      Use case resumes at step 1.
+
+* 1c. The given tag name is already in the tag list.
+
+    * 1c1. JobFestGo shows an error message.
 
       Use case resumes at step 1.
 
@@ -692,9 +707,9 @@ Return to [table of contents](#table-of-contents).
 
 **MSS**
 
-1. User requests to list tags
+1. User requests to list tags.
 
-2. JobFestGo shows a list of all tags
+2. JobFestGo shows a list of all tags.
 
    Use case ends.
 
@@ -702,13 +717,13 @@ Return to [table of contents](#table-of-contents).
 
 **MSS**
 
-1. User requests to list the tags
+1. User requests to list the tags.
 
-2. JobFestGo shows a list of tags
+2. JobFestGo shows a list of tags.
 
-3. User requests to delete a specified tag in the list
+3. User requests to delete a specified tag in the list.
 
-4. JobFestGo deletes the tag
+4. JobFestGo deletes the tag.
 
     Use case ends.
 
@@ -724,7 +739,7 @@ Return to [table of contents](#table-of-contents).
 
       Use case resumes at step 3.
 
-* 3b. Missing tag name.
+* 3b. Missing tag name
 
     * 3b1. JobFestGo shows an error message.
 
@@ -734,9 +749,9 @@ Return to [table of contents](#table-of-contents).
 
 **MSS**
 
-1. User requests to filter contacts by tags
+1. User requests to filter contacts by tags.
 
-2. JobFestGo shows a list of contacts tagged by specified tags
+2. JobFestGo shows a list of contacts tagged by specified tags.
 
    Use case ends.
 
@@ -752,53 +767,47 @@ Return to [table of contents](#table-of-contents).
 
 **MSS**
 
-1. User requests to add event
+1. User requests to add event and specifies the details of the event.
 
-2. User specifies the details of the event
+2.  JobFestGo adds the event to collection of events.
 
-3. JobFestGo adds the event to collection of events
-
-4. JobFestGo shows updated list of events
+3.  JobFestGo shows updated list of events.
 
    Use case ends.
 
 **Extensions**
 
-* 2a. Any of the mandatory fields not specified
+* 1a. Any of the mandatory fields not specified.
 
-    * 2a1. JobFestGo informs user that mandatory fields not specified
-
-      Use case resumes at step 1.
-
-* 2b. Event name already exists.
-
-    * 2b1. JobFestGo informs user that event name already exists.
+    * 1a1. JobFestGo informs user that mandatory fields not specified.
 
       Use case resumes at step 1.
 
-* 2c. Date is in incorrect format.
+* 1b. Event name already exists
 
-    * 2c1. JobFestGo informs user that date is in wrong format.
-
-      Use case resumes at step 1.
-
-* 2d. Date is before current date.
-
-    * 2d1. JobFestGo informs user that date is before current date.
+    * 1b1. JobFestGo informs user that event name already exists.
 
       Use case resumes at step 1.
 
-* 1e. Date is before current date.
+* 1c. Date is in incorrect format.
 
-    * 1e1. JobFestGo informs user that date is before current date.
+    * 1c1. JobFestGo informs user that date is in wrong format.
+
+      Use case resumes at step 1.
+
+* 1d. Date is before current date.
+
+    * 1d1. JobFestGo informs user that date is before current date.
 
       Use case resumes at step 1.
 
 **Use case: View all events**
 
 **MSS**
-1. User requests to list events
-2. JobFestGo shows a list of all events
+
+1. User requests to list events.
+
+2. JobFestGo shows a list of all events.
 
    Use case ends.
 
@@ -806,12 +815,15 @@ Return to [table of contents](#table-of-contents).
 
 **MSS**
 
-1. JobFestGo shows a list of events
-2. User requests to delete a specified event in the list
-3. JobFestGo deletes the event
-4. JobFestGo displays the updated events
+1. JobFestGo shows a list of events.
 
-      Use case ends.
+2. User requests to delete a specified event in the list.
+
+3. JobFestGo deletes the event.
+
+4. JobFestGo displays the updated events.
+
+    Use case ends.
 
 **Extensions**
 
@@ -819,15 +831,15 @@ Return to [table of contents](#table-of-contents).
 
    Use case ends.
 
-* 3a. The given index is invalid.
+* 2b. The given index is invalid.
 
-    * 3a1. JobFestGo shows an error message.
+    * 2b1. JobFestGo shows an error message.
 
       Use case resumes at step 2.
 
-* 3b. Missing index in the command.
+* 2c. Missing index in the command.
 
-    * 3b1. JobFestGo shows an error message.
+    * 2c1. JobFestGo shows an error message.
 
       Use case resumes at step 2.
 
@@ -836,11 +848,12 @@ Return to [table of contents](#table-of-contents).
 **MSS**
 
 1. User requests to select an event.
+
 2. JobFestGo displays the contacts and tasks related to the event.
+
 3. User <u>adds a task</u> or <u>deletes a task</u> or <u>marks a task</u> or <u>unmarks a task</u>.
 
       Use case ends.
-
 
 **Extensions**
 
@@ -859,12 +872,15 @@ Return to [table of contents](#table-of-contents).
 **Use case: Link contacts to an event**
 
 **MSS**
+
 1. User requests to link specified contacts to a specified event.
+
 2. JobFestGo links the contacts to the event.
 
    Use case ends.
 
 **Extensions**
+
 * 1a. The given event does not exist.
 
     * 1a1. JobFestGo shows an error message.
@@ -886,12 +902,15 @@ Return to [table of contents](#table-of-contents).
 **Use case: Unlink contacts from an event**
 
 **MSS**
+
 1. User requests to unlink specified contacts from a specified event.
+
 2. JobFestGo unlinks the contacts from the event.
 
    Use case ends.
 
 **Extensions**
+
 * 1a. The given event does not exist.
 
     * 1a1. JobFestGo shows an error message.
@@ -914,9 +933,11 @@ Return to [table of contents](#table-of-contents).
 
 **MSS**
 
-1.  User requests to add task and specifies details of task with the event to be added in.
+1.  User requests to add a task and specifies the details of the task with the event to be added in.
+
 2.  JobFestGo adds the task to the event specified.
-3.  JobFestGo shows updated list of tasks.
+
+3.  JobFestGo shows updated list of tasks for the event.
 
     Use case ends.
 
@@ -940,7 +961,7 @@ Return to [table of contents](#table-of-contents).
 
       Use case resumes at step 1.
 
-* 1c. Event does not exist.
+* 1d. Event does not exist.
 
     * 1d1. JobFestGo informs user that event does not already exist.
 
@@ -951,7 +972,9 @@ Return to [table of contents](#table-of-contents).
 **MSS**
 
 1.  User requests to delete a specified task.
+
 2.  JobFestGo deletes the task.
+
 3.  JobFestGo shows updated list of tasks.
 
     Use case ends.
@@ -975,7 +998,9 @@ Return to [table of contents](#table-of-contents).
 **MSS**
 
 1.  User requests to mark a specified task as completed.
+
 2.  JobFestGo marks the task as completed.
+
 3.  JobFestGo shows updated status of the task.
 
     Use case ends.
@@ -1005,7 +1030,9 @@ Return to [table of contents](#table-of-contents).
 **MSS**
 
 1.  User requests to unmark a specified completed task as not completed.
+
 2.  JobFestGo unmarks the task as not completed.
+
 3.  JobFestGo shows updated status of the task.
 
     Use case ends.
