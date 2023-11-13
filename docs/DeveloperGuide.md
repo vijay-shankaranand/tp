@@ -169,7 +169,7 @@ How the parsing works:
 The `Model` component,
 
 * stores the JobFestGo data i.e., all `Contact`, `Event`, `Tag`, and `Task` objects which are contained in their respective `UniqueContactList`, `UniqueEventList`, `UniqueTagList`, `UniqueTaskList` objects.
-* stores the currently 'selected' `Contact`/`Event`/`Tag`/`Task` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Contact>`/`ObservableList<Event>`/`ObservableList<Tag>`/`ObservableList<Task>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the currently selected `Contact`/`Event`/`Tag`/`Task` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Contact>`/`ObservableList<Event>`/`ObservableList<Tag>`/`ObservableList<Task>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
@@ -515,55 +515,35 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. User is on any page
 2. User requests to return to the home page
 3. JobFestGo returns user to the home page
-
    Use case ends.
 
 **Extensions**
-
 * 2a. The user is already on the home page
-
   Use case ends.
 
 **Use case: Add a contact**
 
 **MSS**
-
 1.  User requests to add contact and specifies details of contact
 2.  JobFestGo adds the contact to list of contacts
 3.  JobFestGo shows updated list of contacts
-
     Use case ends.
 
 **Extensions**
-
 * 1a. Any of the mandatory fields not specified
-
   * 1a1. JobFestGo informs user that mandatory fields not specified
-
     Use case ends.
-
 * 1b. Phone number already exists.
-
     * 1b1. JobFestGo informs user that phone number already exists.
-
       Use case ends.
-
 * 1c. Email is in incorrect format.
-
     * 1c1. JobFestGo informs user that email is in wrong format.
-
       Use case ends.
-
 * 1d. Phone number is in incorrect format.
-
     * 1d1. JobFestGo informs user that phone number is in wrong format.
-
       Use case ends.
-
 * 1e. Tag is not found in list.
-
     * 1e1. JobFestGo informs user that tag input is not in tag List.
-
       Use case ends.
 
 **Use case: Delete a contact**
@@ -571,8 +551,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  User requests to list contacts
+
 2.  JobFestGo shows a list of contacts
+
 3.  User requests to delete a specific contact in the list
+
 4.  JobFestGo deletes the contact
 
    Use case ends.
@@ -596,6 +579,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  User requests to list all contacts
+
 2.  JobFestGo shows a list of all contacts
 
     Use case ends.
@@ -606,12 +590,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  User requests to add tag
+
 2.  User keys in the tag to add to the collection of tags
+
 3.  JobFestGo adds the tag
 
    Use case ends.
 
 **Extensions**
+
 * 2a. Missing tag name.
 
     * 2a1. JobFestGo shows an error message.
@@ -633,7 +620,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Use case: View all tags**
 
 **MSS**
+
 1. User requests to list tags
+
 2. JobFestGo shows a list of all tags
 
    Use case ends.
@@ -643,11 +632,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User requests to list the tags
+
 2. JobFestGo shows a list of tags
+
 3. User requests to delete a specified tag in the list
+
 4. JobFestGo deletes the tag
 
-      Use case ends.
+    Use case ends.
 
 **Extensions**
 
@@ -670,12 +662,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Use case: Filter contacts by tag**
 
 **MSS**
+
 1. User requests to filter contacts by tags
+
 2. JobFestGo shows a list of contacts tagged by specified tags
 
    Use case ends.
 
 **Extensions**
+
 * 1a. The given tag name is invalid.
 
     * 1a1. JobFestGo shows an error message.
@@ -687,35 +682,38 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User requests to add event
+
 2. User specifies the details of the event
+
 3. JobFestGo adds the event to collection of events
+
 4. JobFestGo shows updated list of events
 
    Use case ends.
 
 **Extensions**
 
-* 1a. Any of the mandatory fields not specified
+* 2a. Any of the mandatory fields not specified
 
-    * 1a1. JobFestGo informs user that mandatory fields not specified
-
-      Use case ends.
-
-* 1b. Event name already exists.
-
-    * 1b1. JobFestGo informs user that event name already exists.
+    * 2a1. JobFestGo informs user that mandatory fields not specified
 
       Use case ends.
 
-* 1c. Date is in incorrect format.
+* 2b. Event name already exists.
 
-    * 1c1. JobFestGo informs user that date is in wrong format.
+    * 2b1. JobFestGo informs user that event name already exists.
 
       Use case ends.
 
-* 1d. Date is before current date.
+* 2c. Date is in incorrect format.
 
-    * 1d1. JobFestGo informs user that date is before current date.
+    * 2c1. JobFestGo informs user that date is in wrong format.
+
+      Use case ends.
+
+* 2d. Date is before current date.
+
+    * 2d1. JobFestGo informs user that date is before current date.
 
       Use case ends.
 
