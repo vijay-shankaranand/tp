@@ -85,4 +85,4 @@ Given below are my contributions to the project:
 <br>
 
 * **Contributions beyond the project team**:
-  - Reviewed a different group's project during PE-D: [PE-D Bugs](https://github.com/Khaleelur-Rahman/ped/issues). Some of the 
+  - Reviewed a different group's project during PE-D: [PE-D Bugs](https://github.com/Khaleelur-Rahman/ped/issues).
