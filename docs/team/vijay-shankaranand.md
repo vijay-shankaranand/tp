@@ -28,7 +28,7 @@ Given below are my contributions to the project.
     - Implemented the `add_event` feature
         - What it does: allows the user to add an event.
         - Justification: This feature improves the product as it provides the user a way to add their events to keep track of their upcoming/past events.
-        - Highlights: This enhancement adds a new class to JobFestGo. This enhancement was challenging as there was a need to refactor certain parts of contact class to use for event class to minimize code duplication. There was also a need to refactor out the name class to minimize code duplication
+        - Highlights: This enhancement adds a new class to JobFestGo. This enhancement was challenging as there was a need to refactor certain parts of contact class to use for event class to minimize code duplication.
     - Implemented the reminder feature
         - What it does: reminds the users on tasks that are due within the next 3 days when they start up JobFestGo.
         - Justification: This feature improves the product as it provides the user a way to be reminded of their upcoming tasks so as to not forget completing them on time.
@@ -62,12 +62,9 @@ Given below are my contributions to the project.
     - Set up labels on Github for issues-tracking 
     - Set up milestones v1.2 and v1.2b on Github for deadline-tracking
     - Update project notes on v1.2 post mortem
-    - Updating of developer guide's diagrams
     - Updating of user guide's screenshots, navigating UI and target audience section
-    - Refactored codebase to modify all AB3 hints to JobFestGo - eg. from AddressBook to JobFestGo
-    - Extensive testing of product before release
+    - Refactored codebase to modify all AB3 hints to JobFestGo - eg. from AddressBook to JobFestG
     - Added automated test-cases to aid in regression testing of our product
-
 
 <br>
 
@@ -76,15 +73,13 @@ Given below are my contributions to the project.
         - [Pull Request 1](https://github.com/AY2324S1-CS2103T-T09-1/tp/pull/271)
         - [Pull Request 2](https://github.com/AY2324S1-CS2103T-T09-1/tp/pull/140)
         - [Pull Request 3](https://github.com/AY2324S1-CS2103T-T09-1/tp/pull/96)
-    - Found the source of critical bug during loading of json which crippled the stability of the product through extensive debugging and advised assigned developer on changes to make
-        - [Bug fix made](https://github.com/AY2324S1-CS2103T-T09-1/tp/pull/239/files)
+      
 <br>
 
 * **Contributions beyond the project team**:
-  I have assisted in finding multiple bugs for the product of one other team.
-  
+<br>
+  I have assisted in finding multiple bugs for the product of another team.
   Here are some bugs I have found while doing extensive testing of their product:
     - [Bug found 1](https://github.com/vijay-shankaranand/ped/issues/9)
     - [Bug found 2](https://github.com/vijay-shankaranand/ped/issues/6)
     - [Bug found 3](https://github.com/vijay-shankaranand/ped/issues/5)
-    - [Bug found 4](https://github.com/vijay-shankaranand/ped/issues/2)
