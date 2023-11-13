@@ -266,15 +266,19 @@ The following sequence diagram shows how the add tag operation works:
 
 </box>
 
+The following activity diagram summarizes what happens when a user executes the add tag command:
+
+<puml src="diagrams/AddTagActivityDiagram.puml" width="250" />
+
 #### Design considerations:
 
 **Aspect: How the add tag command accepts tag inputs**
 
-* **Current choice:** Users can input the tags comprising only of alphanumeric characters.
+* **Current choice:** Users can input tags comprising only of alphanumeric characters.
     * Pros: Easy to implement due to lesser parsing involved.
     * Cons: Users cannot input tags comprising non-alphanumeric characters, such as spaces and special characters.
 
-* **Alternative:** Users can input the tags comprising alphanumeric characters and non-alphanumeric characters.
+* **Alternative:** Users can input tags comprising alphanumeric characters and non-alphanumeric characters.
     * Pros: Users can input tags comprising non-alphanumeric characters, such as spaces and special characters.
     * Cons: Lesser uniqueness of tags as users can input tags with the same name but different non-alphanumeric characters.
 
