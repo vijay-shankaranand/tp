@@ -449,8 +449,6 @@ Format: `link ev/EVENT_NAME c/CONTACT_NAME [c/MORE_CONTACT_NAMES]`
 * The order of the input does not matter. e.g. `link ev/NUS Career Fair 2023 c/David Li`
  and `link c/David Li ev/NUS Career Fair 2023` are both valid commands and will perform
  the same task.
-* The command will only succeed if all contacts and the event keyed in are valid.
- i.e. They are existing contacts and event in JobFestGo and the contacts are not linked to the event.
 
 Examples:
 * `link ev/NUS Career Fair 2023 c/David Li` links `David Li` to the event `NUS Career Fair 2023` if `David Li` is not linked to `NUS Career Fair 2023`.
