@@ -8,8 +8,7 @@ title: "Khaleelur Rahman's Project Portfolio Page"
 JobFestGo is a **desktop application** built for job event planners in Singapore to manage contacts and tasks for their events.
 
 JobFestGo can aid your event planning process in the following ways:
-- Stores information about your events and their associated contacts
-- Tracks status of your event tasks
+- Stores information about your events, and their associated contacts and tasks 
 - Keeps track of upcoming task deadlines
 - Associate contacts with roles for future reference
 
