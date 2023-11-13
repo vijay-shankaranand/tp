@@ -12,6 +12,7 @@ JobFestGo is a **desktop application** built for job event planners in Singapore
 Here are some of the features JobFestGo has to offer:
 - Adding contacts
 - Filtering contacts based on tags
+- Adding and deleting tags
 - Adding events
 - Viewing tasks and contacts related to an event
 
