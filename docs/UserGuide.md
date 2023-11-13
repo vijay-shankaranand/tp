@@ -477,6 +477,8 @@ If any of the contacts or the event keyed in is not valid or does not exist in J
 
 Return to [table of contents](#table-of-contents).
 
+<div style="page-break-after: always;"></div>
+
 ### Unlinking contacts from an event : `unlink`
 <box type="info" style="background-color:#1e90ff; color: white;">
 <span slot="icon" style="color: white;"><md><i class="fas fa-suitcase"></i></md></span>
