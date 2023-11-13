@@ -63,8 +63,10 @@ public class DeleteTaskCommand extends Command {
         model.switchToTagsScreen(false);
 
         // Update the respective filtered lists to show the components within the event
-        model.updateFilteredContactList(new ContactIsInEventPredicate(eventToDeleteTask));
-        model.updateFilteredTaskList(new TaskIsInEventPredicate(eventToDeleteTask));
+        ContactIsInEventPredicate contactListPredicate = new ContactIsInEventPredicate(eventToDeleteTask);
+        TaskIsInEventPredicate taskListPredicate = new TaskIsInEventPredicate(eventToDeleteTask);
+        model.updateFilteredContactList(contactListPredicate);
+        model.updateFilteredTaskList(taskListPredicate);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, taskDescription, associatedEventName),
                 taskDescription, eventToDeleteTask, true);
