@@ -7,17 +7,13 @@ title: "Khaleelur Rahman's Project Portfolio Page"
 
 JobFestGo is a **desktop application** built for job event planners in Singapore to manage contacts and tasks for their events.
 
-JobFestGo can aid your event planning process in the following ways:
-- Stores information about your events and their associated contacts
-- Tracks status of your event tasks
+JobFestGo can aid event planning process in the following ways:
+- Stores information about events, and their associated contacts and tasks 
 - Keeps track of upcoming task deadlines
 - Associate contacts with roles for future reference
 
-With the advantages of a **Graphical User Interface (GUI)**
-and optimized for use with a **Command Line Interface (CLI)**,
-it's a task management tool designed to help you, as a job festival event planner,
-to keep track of tasks and contacts unique to your events. JobFestGo streamlines the process of event planning,
-supercharges productivity and helps you get things done on time.
+JobFestGo is a task management tool designed to help job festival event planners keep track of details for their events.
+It streamlines the process of event planning, supercharges productivity and helps job event planners get things done on time.
 
 Given below are my contributions to the project:
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=khaleelur-rahman&breakdown=true)

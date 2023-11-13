@@ -6,7 +6,7 @@
 
 # JobFestGo Developer Guide
 
-## **Table of Content**
+## **Table of Contents**
  - [Acknowledgements](#acknowledgements)
  - [Setting up, Getting started](#setting-up-getting-started)
  - [Design](#design)
@@ -60,6 +60,7 @@
 
 This project is based on the [_AddressBook-Level3_](https://se-education.org/addressbook-level3/) project.
 
+Return to [table of contents](#table-of-contents).
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -67,7 +68,11 @@ This project is based on the [_AddressBook-Level3_](https://se-education.org/add
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
+Return to [table of contents](#table-of-contents).
+
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## **Design**
 
@@ -111,6 +116,8 @@ For example, the `Logic` component defines its API in the `Logic.java` interface
 
 The sections below give more details of each component.
 
+Return to [table of contents](#table-of-contents).
+
 ### UI component
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
@@ -127,6 +134,8 @@ The `UI` component,
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Contact` and `Event` objects residing in the `Model`.
+
+Return to [table of contents](#table-of-contents).
 
 ### Logic component
 
@@ -160,6 +169,10 @@ How the parsing works:
 * When called upon to parse a user command, the `JobFestGoParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddContactCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddContactCommand`) which the `JobFestGoParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddContactCommandParser`, `DeleteContactCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
+Return to [table of contents](#table-of-contents).
+
+<div style="page-break-after: always;"></div>
+
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
@@ -169,10 +182,13 @@ How the parsing works:
 The `Model` component,
 
 * stores the JobFestGo data i.e., all `Contact`, `Event`, `Tag`, and `Task` objects which are contained in their respective `UniqueContactList`, `UniqueEventList`, `UniqueTagList`, `UniqueTaskList` objects.
-* stores the currently 'selected' `Contact`/`Event`/`Tag`/`Task` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Contact>`/`ObservableList<Event>`/`ObservableList<Tag>`/`ObservableList<Task>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the currently selected `Contact`/`Event`/`Tag`/`Task` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Contact>`/`ObservableList<Event>`/`ObservableList<Tag>`/`ObservableList<Task>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
+Return to [table of contents](#table-of-contents).
+
+<div style="page-break-after: always;"></div>
 
 ### Storage component
 
@@ -185,11 +201,17 @@ The `Storage` component,
 * inherits from both `JobFestGoStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
+Return to [table of contents](#table-of-contents).
+
 ### Common classes
 
 Classes used by multiple components are in the `seedu.address.commons` package.
 
+Return to [table of contents](#table-of-contents).
+
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## **Implementation**
 
@@ -227,6 +249,10 @@ The following activity diagram summarizes what happens when a user executes the 
 * **Alternative 1:** A home button in the accessibility bar right beside `File` and `Help`.
     * Pros: Even easier to use as only one mouse click is required. No typing is needed.
     * Cons: Harder to implement.
+
+Return to [table of contents](#table-of-contents).
+
+<div style="page-break-after: always;"></div>
 
 ### Add Tag feature
 
@@ -282,6 +308,10 @@ The following activity diagram summarizes what happens when a user executes the 
     * Pros: Users can input tags comprising non-alphanumeric characters, such as spaces and special characters.
     * Cons: Lesser uniqueness of tags as users can input tags with the same name but different non-alphanumeric characters.
 
+Return to [table of contents](#table-of-contents).
+
+<div style="page-break-after: always;"></div>
+
 ### Add Event feature
 
 #### Implementation
@@ -323,6 +353,8 @@ The following activity diagram summarizes what happens when a user executes the 
 
 <puml src="diagrams/AddEventActivityDiagram.puml" width="250" />
 
+<div style="page-break-after: always;"></div>
+
 #### Design considerations:
 
 **Aspect: How the add event command accepts event name inputs**
@@ -344,6 +376,10 @@ The following activity diagram summarizes what happens when a user executes the 
 * **Alternative 1:** Users can input the event date in other formats.
   * Pros: Users can input event dates in other formats.
   * Cons: Harder to implement as `LocalDate#parse(String)` accepts only String of a specific format.
+
+Return to [table of contents](#table-of-contents).
+
+<div style="page-break-after: always;"></div>
 
 ### Select Event feature
 
@@ -384,6 +420,10 @@ The following activity diagram summarizes what happens when a user executes the 
 * **Alternative 1:** Event list gets updated to only show the selected event.
   * Pros: Easy to implement.
   * Cons: Users will have to consistently execute home command to view the other events.
+
+Return to [table of contents](#table-of-contents).
+
+<div style="page-break-after: always;"></div>
 
 ### Link/Unlink feature
 
@@ -450,6 +490,8 @@ The `unlink` command does the opposite — it calls `Model#unlinkContactFrom
     * Pros: Users only need to correct the invalid input.
     * Cons: The exceptions are hard to handle.
 
+Return to [table of contents](#table-of-contents).
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -459,6 +501,8 @@ The `unlink` command does the opposite — it calls `Model#unlinkContactFrom
 * [Logging guide](Logging.md)
 * [Configuration guide](Configuration.md)
 * [DevOps guide](DevOps.md)
+
+Return to [table of contents](#table-of-contents).
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -475,6 +519,8 @@ The `unlink` command does the opposite — it calls `Model#unlinkContactFrom
 * is reasonably comfortable using CLI apps
 
 **Value proposition**: Each event planner has many events to plan, each of which can have a large number of contacts and tasks associated and searching for contact would be a hassle. Our product provides a centralised system that would help job event planners organise their contact information and tasks for quick and easy access.
+
+<div style="page-break-after: always;"></div>
 
 ### User stories
 
@@ -504,6 +550,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`      | job fest event planner | return to the home page         |                                                                                             |
 | `*`      | job fest event planner | sort contacts by name           | locate a contact easily                                                                     |
 
+Return to [table of contents](#table-of-contents).
+
 ---
 ### Use cases
 
@@ -512,74 +560,92 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Use case: Return to the home page**
 
 **MSS**
-1. User is on any page
-2. User requests to return to the home page
-3. JobFestGo returns user to the home page
 
-   Use case ends.
+1. User is on any page.
+
+2. User requests to return to the home page.
+
+3. JobFestGo returns user to the home page.
+
+    Use case ends.
 
 **Extensions**
 
-* 2a. The user is already on the home page
+* 2a. The user is already on the home page.
 
-  Use case ends.
+    Use case ends.
 
 **Use case: Add a contact**
 
 **MSS**
 
-1.  User requests to add contact and specifies details of contact
-2.  JobFestGo adds the contact to list of contacts
-3.  JobFestGo shows updated list of contacts
+1.  User requests to add contact and specifies details of contact.
+
+2.  JobFestGo adds the contact to list of contacts.
+
+3.  JobFestGo shows updated list of contacts.
 
     Use case ends.
 
 **Extensions**
 
-* 1a. Any of the mandatory fields not specified
+* 1a. Any of the mandatory fields not specified.
 
-  * 1a1. JobFestGo informs user that mandatory fields not specified
-
-    Use case ends.
+  * 1a1. JobFestGo informs user that mandatory fields not specified.
+    
+    Use case resumes at step 1.
 
 * 1b. Phone number already exists.
 
     * 1b1. JobFestGo informs user that phone number already exists.
 
-      Use case ends.
+      Use case resumes at step 1.
 
 * 1c. Email is in incorrect format.
 
     * 1c1. JobFestGo informs user that email is in wrong format.
 
-      Use case ends.
+      Use case resumes at step 1.
 
 * 1d. Phone number is in incorrect format.
 
     * 1d1. JobFestGo informs user that phone number is in wrong format.
 
-      Use case ends.
+      Use case resumes at step 1.
 
 * 1e. Tag is not found in list.
 
     * 1e1. JobFestGo informs user that tag input is not in tag List.
 
-      Use case ends.
-  
+      Use case resumes at step 1.
+
 * 1f. Name is not alphanumeric.
 
     * 1f1. JobFestGo informs user that name input is not alphanumeric.
 
-      Use case ends.
+      Use case resumes at step 1.
+
+**Use case: List all contacts**
+
+**MSS**
+
+1.  User requests to list all contacts.
+
+2.  JobFestGo shows a list of all contacts.
+
+    Use case ends.
 
 **Use case: Delete a contact**
 
 **MSS**
 
-1.  User requests to list contacts
-2.  JobFestGo shows a list of contacts
-3.  User requests to delete a specific contact in the list
-4.  JobFestGo deletes the contact
+1.  User requests to list contacts.
+
+2.  JobFestGo shows a list of contacts.
+
+3.  User requests to delete a specific contact in the list.
+
+4.  JobFestGo deletes the contact.
 
    Use case ends.
 
@@ -589,7 +655,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 3a1. JobFestGo shows an error message.
 
-      Use case resumes at step 2.
+      Use case resumes at step 3.
 
 * 3b. Missing index.
 
@@ -601,46 +667,49 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to list all contacts
-2.  JobFestGo shows a list of all contacts
+1.  User requests to list all contacts.
 
+2.  JobFestGo shows a list of all contacts.
+      
     Use case ends.
-
 
 **Use case: Add a tag**
 
 **MSS**
 
-1.  User requests to add tag
-2.  User keys in the tag to add to the collection of tags
-3.  JobFestGo adds the tag
+1.  User requests to add a tag and specifies the details.
+
+2.  JobFestGo adds the tag.
 
    Use case ends.
 
 **Extensions**
-* 2a. Missing tag name.
 
-    * 2a1. JobFestGo shows an error message.
+* 1a. Missing tag name.
 
-      Use case resumes at step 2.
+    * 1a1. JobFestGo shows an error message.
 
-* 2b. The given tag name contains non-alphanumeric characters.
+      Use case resumes at step 1.
 
-    * 2b1. JobFestGo shows an error message.
+* 1b. The given tag name contains non-alphanumeric characters.
 
-      Use case resumes at step 2.
+    * 1b1. JobFestGo shows an error message.
+  
+      Use case resumes at step 1.
 
-* 3a. The given tag name is already in the tag list.
+* 1c. The given tag name is already in the tag list.
 
-    * 3a1. JobFestGo shows an error message.
+    * 1c1. JobFestGo shows an error message.
 
-      Use case resumes at step 2.
+      Use case resumes at step 1.
 
 **Use case: View all tags**
 
 **MSS**
-1. User requests to list tags
-2. JobFestGo shows a list of all tags
+
+1. User requests to list tags.
+
+2. JobFestGo shows a list of all tags.
 
    Use case ends.
 
@@ -648,12 +717,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to list the tags
-2. JobFestGo shows a list of tags
-3. User requests to delete a specified tag in the list
-4. JobFestGo deletes the tag
+1. User requests to list the tags.
 
-      Use case ends.
+2. JobFestGo shows a list of tags.
+
+3. User requests to delete a specified tag in the list.
+
+4. JobFestGo deletes the tag.
+
+    Use case ends.
 
 **Extensions**
 
@@ -665,23 +737,26 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 3a1. JobFestGo shows an error message.
 
-      Use case resumes at step 2.
+      Use case resumes at step 3.
 
-* 3b. Missing tag name.
+* 3b. Missing tag name
 
     * 3b1. JobFestGo shows an error message.
 
-      Use case resumes at step 2.
+      Use case resumes at step 3.
 
 **Use case: Filter contacts by tag**
 
 **MSS**
-1. User requests to filter contacts by tags
-2. JobFestGo shows a list of contacts tagged by specified tags
+
+1. User requests to filter contacts by tags.
+
+2. JobFestGo shows a list of contacts tagged by specified tags.
 
    Use case ends.
 
 **Extensions**
+
 * 1a. The given tag name is invalid.
 
     * 1a1. JobFestGo shows an error message.
@@ -692,50 +767,53 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to add event
-2. User specifies the details of the event
-3. JobFestGo adds the event to collection of events
-4. JobFestGo shows updated list of events
+1. User requests to add event and specifies the details of the event.
+
+2.  JobFestGo adds the event to collection of events.
+
+3.  JobFestGo shows updated list of events.
 
    Use case ends.
 
 **Extensions**
 
-* 1a. Any of the mandatory fields not specified
+* 1a. Any of the mandatory fields not specified.
 
-    * 1a1. JobFestGo informs user that mandatory fields not specified
+    * 1a1. JobFestGo informs user that mandatory fields not specified.
 
-      Use case ends.
+      Use case resumes at step 1.
 
 * 1b. Event name already exists.
 
     * 1b1. JobFestGo informs user that event name already exists.
 
-      Use case ends.
+      Use case resumes at step 1.
 
 * 1c. Event name is not alphanumeric.
 
     * 1c1. JobFestGo informs user that event name is not alphanumeric.
 
-      Use case ends.
+      Use case resumes at step 1.
 
 * 1d. Date is in incorrect format.
 
     * 1d1. JobFestGo informs user that date is in wrong format.
 
-      Use case ends.
+      Use case resumes at step 1.
 
 * 1e. Date is before current date.
 
     * 1e1. JobFestGo informs user that date is before current date.
 
-      Use case ends.
+      Use case resumes at step 1.
 
 **Use case: View all events**
 
 **MSS**
-1. User requests to list events
-2. JobFestGo shows a list of all events
+
+1. User requests to list events.
+
+2. JobFestGo shows a list of all events.
 
    Use case ends.
 
@@ -743,12 +821,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. JobFestGo shows a list of events
-2. User requests to delete a specified event in the list
-3. JobFestGo deletes the event
-4. JobFestGo displays the updated events
+1. JobFestGo shows a list of events.
 
-      Use case ends.
+2. User requests to delete a specified event in the list.
+
+3. JobFestGo deletes the event.
+
+4. JobFestGo displays the updated events.
+
+    Use case ends.
 
 **Extensions**
 
@@ -756,15 +837,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
    Use case ends.
 
-* 3a. The given index is invalid.
+* 2b. The given index is invalid.
 
-    * 3a1. JobFestGo shows an error message.
+    * 2b1. JobFestGo shows an error message.
 
       Use case resumes at step 2.
 
-* 3b. Missing index in the command.
+* 2c. Missing index in the command.
 
-    * 3b1. JobFestGo shows an error message.
+    * 2c1. JobFestGo shows an error message.
 
       Use case resumes at step 2.
 
@@ -773,10 +854,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User requests to select an event.
+
 2. JobFestGo displays the contacts and tasks related to the event.
 
       Use case ends.
-
 
 **Extensions**
 
@@ -795,64 +876,72 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Use case: Link contacts to an event**
 
 **MSS**
+
 1. User requests to link specified contacts to a specified event.
+
 2. JobFestGo links the contacts to the event.
 
    Use case ends.
 
 **Extensions**
+
 * 1a. The given event does not exist.
 
     * 1a1. JobFestGo shows an error message.
 
-      Use case ends.
+      Use case resumes at step 1.
 
 * 1b. One of the given contacts does not exist.
 
     * 1b1. JobFestGo shows an error message.
 
-      Use case ends.
+      Use case resumes at step 1.
 
 * 1a. One of the given contacts is already linked to the given event.
 
     * 1a1. JobFestGo shows an error message.
 
-      Use case ends.
+      Use case resumes at step 1.
 
 **Use case: Unlink contacts from an event**
 
 **MSS**
+
 1. User requests to unlink specified contacts from a specified event.
+
 2. JobFestGo unlinks the contacts from the event.
 
    Use case ends.
 
 **Extensions**
+
 * 1a. The given event does not exist.
 
     * 1a1. JobFestGo shows an error message.
 
-      Use case ends.
+      Use case resumes at step 1.
 
 * 1b. One of the given contacts does not exist.
 
     * 1b1. JobFestGo shows an error message.
 
-      Use case ends.
+      Use case resumes at step 1.
 
 * 1a. One of the given contacts is not linked to the given event.
 
     * 1a1. JobFestGo shows an error message.
 
-      Use case ends.
+      Use case resumes at step 1.
 
 **Use case: Add a task**
 
 **MSS**
 
-1.  User requests to add task and specifies details of task with the event to be added in.
+1.  User requests to add a task and specifies the details of the task with the event to be added in.
+
 2.  JobFestGo adds the task to the event specified.
-3.  JobFestGo shows updated list of tasks.
+
+3.  JobFestGo shows updated list of tasks for the event.
 
     Use case ends.
 
@@ -862,32 +951,34 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 1a1. JobFestGo informs user that mandatory fields not specified.
 
-      Use case ends.
+      Use case resumes at step 1.
 
 * 1b. Task description contains non-alphanumeric characters except `-,./() `.
 
     * 1b1. JobFestGo informs user that task description contains non-alphanumeric characters.
 
-      Use case ends.
+      Use case resumes at step 1.
   
 * 1c. Date is invalid.
 
     * 1c1. JobFestGo informs user that date is invalid.
 
-      Use case ends.
+      Use case resumes at step 1.
 
-* 1c. Event does not exist.
+* 1d. Event does not exist.
 
     * 1d1. JobFestGo informs user that event does not already exist.
 
-      Use case ends.
+      Use case resumes at step 1.
 
 **Use case: Delete a task**
 
 **MSS**
 
 1.  User requests to delete a specified task.
+
 2.  JobFestGo deletes the task.
+
 3.  JobFestGo shows updated list of tasks.
 
     Use case ends.
@@ -898,20 +989,22 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 1a1. JobFestGo informs user that mandatory fields not specified.
 
-      Use case ends.
+      Use case resumes at step 1.
 
 * 1b. Task does not exist.
 
     * 1c1. JobFestGo informs user that task does not already exist.
 
-      Use case ends.
+      Use case resumes at step 1.
 
 **Use case: Marking a task**
 
 **MSS**
 
 1.  User requests to mark a specified task as completed.
+
 2.  JobFestGo marks the task as completed.
+
 3.  JobFestGo shows updated status of the task.
 
     Use case ends.
@@ -922,26 +1015,28 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 1a1. JobFestGo informs user that mandatory fields not specified.
 
-      Use case ends.
+      Use case resumes at step 1.
 
 * 1b. Task does not exist.
 
     * 1c1. JobFestGo informs user that task does not already exist.
 
-      Use case ends.
+      Use case resumes at step 1.
 
 * 1c. Task is already marked as completed.
 
     * 1c1. JobFestGo informs user that task is already marked as completed.
 
-      Use case ends.
+      Use case resumes at step 1.
 
 **Use case: Unmarking a task**
 
 **MSS**
 
 1.  User requests to unmark a specified completed task as not completed.
+
 2.  JobFestGo unmarks the task as not completed.
+
 3.  JobFestGo shows updated status of the task.
 
     Use case ends.
@@ -952,19 +1047,21 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 1a1. JobFestGo informs user that mandatory fields not specified.
 
-      Use case ends.
+      Use case resumes at step 1.
 
 * 1b. Task does not exist.
 
     * 1c1. JobFestGo informs user that task does not exist.
 
-      Use case ends.
+      Use case resumes at step 1.
 
 * 1c. Task is not marked as completed.
 
     * 1c1. JobFestGo informs user that task is not marked as completed.
 
-      Use case ends.
+      Use case resumes at step 1.
+
+Return to [table of contents](#table-of-contents).
 
 ---
 ### Non-Functional Requirements
@@ -981,6 +1078,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * The size of the application's `jar` file should not exceed 100MB
 6. Memory usage:
 * The system should not use more than 2GB of memory when running.
+
+Return to [table of contents](#table-of-contents).
 
 ---
 ### Glossary
@@ -1008,6 +1107,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | Sequence Diagram     | A diagram that shows how the different components interact with each other for a scenario presented. |
 | UI                   | User Interface.                                                      |
 
+Return to [table of contents](#table-of-contents).
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Effort**
@@ -1024,6 +1125,8 @@ Although code was reused from AB3, such code had to be refactored to better fit 
 With the addition of the new entity types, we had to map relationships between `Event` and `Task`, as well as `Event` and `Contact`. To tackle this, the team created a list of tasks and a list of contacts inside each event. This brought on multiple changes that had to be made to other components, such that it would be displayed accurately on the UI upon each command. This can be seen in the `LinkCommand` and `UnlinkCommand` for linking contacts to events, and `AddTaskCommand` for adding tasks to events, as well as their relevant parsers and model methods.
 
 Another challenge was the interface redesign, to display the necessary information we wanted. In the case of JobFestGo, this involved adding multiple new UI components, as well as having to carefully construct the flow of events we would like upon each different command being executed. Through multiple testing, we have reached the current stage in which we think best suits the target user profile.
+
+Return to [table of contents](#table-of-contents).
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -1060,6 +1163,10 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The application loads with the updated json file.
 
+Return to [table of contents](#table-of-contents).
+
+<div style="page-break-after: always;"></div>
+
 ### Returning to home page
 
 1. Returning to home page
@@ -1069,6 +1176,8 @@ testers are expected to do more *exploratory* testing.
 
     1. Test case: `home 1`<br>
        Expected: User returns to the home page. Recognised as a `home` command.
+
+Return to [table of contents](#table-of-contents).
 
 ### Adding a contact
 
@@ -1083,6 +1192,8 @@ testers are expected to do more *exploratory* testing.
    1. Other incorrect add contact commands to try: `add_contact`, `add_contact` with existing phone number, `...`
       Expected: Similar to previous.
 
+Return to [table of contents](#table-of-contents).
+
 ### Listing all contacts
 
 1. Listing all contacts
@@ -1094,6 +1205,10 @@ testers are expected to do more *exploratory* testing.
 
    1. Test case: `view_contacts 1`<br>
       Expected: All contacts will still be listed. Recognised as a `view_contacts` command.
+
+Return to [table of contents](#table-of-contents).
+
+<div style="page-break-after: always;"></div>
 
 ### Deleting a contact
 
@@ -1128,6 +1243,10 @@ testers are expected to do more *exploratory* testing.
 
 </box>
 
+Return to [table of contents](#table-of-contents).
+
+<div style="page-break-after: always;"></div>
+
 ### Editing a contact
 
 1. Editing a contact while all contacts are being shown
@@ -1160,6 +1279,8 @@ testers are expected to do more *exploratory* testing.
 **Note:** Editing a contact on other pages causes an error since the contact list is not being displayed.
 
 </box>
+
+Return to [table of contents](#table-of-contents).
 
 ### Locating contacts by name
 
@@ -1194,6 +1315,8 @@ testers are expected to do more *exploratory* testing.
 
 </box>
 
+Return to [table of contents](#table-of-contents).
+
 ### Adding a tag
 
 1. A tag can be added from any page.
@@ -1207,6 +1330,8 @@ testers are expected to do more *exploratory* testing.
    1. Other incorrect add tag commands to try: `add_tag`, `add_tag x`, `...`<br>
       Expected: Similar to previous.
 
+Return to [table of contents](#table-of-contents).
+
 ### Viewing all tags
 
 1. Viewing all tags
@@ -1218,6 +1343,8 @@ testers are expected to do more *exploratory* testing.
 
     1. Test case: `view_tags 1`<br>
        Expected: All tags will still be listed. Recognised as a `view_tags` command.
+
+Return to [table of contents](#table-of-contents).
 
 ### Deleting a tag
 
@@ -1231,6 +1358,8 @@ testers are expected to do more *exploratory* testing.
 
    1. Other incorrect delete tag commands to try: `delete_tag`, `delete_tag x`, `...`<br>
       Expected: Similar to previous.
+
+Return to [table of contents](#table-of-contents).
 
 ### Filtering contacts by tag
 1. Filtering contacts while all contacts are being shown
@@ -1267,6 +1396,8 @@ testers are expected to do more *exploratory* testing.
 
 </box>
 
+Return to [table of contents](#table-of-contents).
+
 ### Adding an event
 
 1. An event can be added from any page
@@ -1280,6 +1411,10 @@ testers are expected to do more *exploratory* testing.
     1. Other incorrect add task commands to try: `add_event`, `add_event n/NUS Career Fair 2023 d/2024-02-15 a/`<br>
         Expected: Similar to previous.
 
+Return to [table of contents](#table-of-contents).
+
+<div style="page-break-after: always;"></div>
+
 ### Viewing all events
 
 1. Viewing all events
@@ -1291,6 +1426,8 @@ testers are expected to do more *exploratory* testing.
 
     1. Test case: `view_events 1`<br>
        Expected: All events will still be listed. Recognised as a `view_events` command.
+
+Return to [table of contents](#table-of-contents).
 
 ### Deleting an event
 
@@ -1325,6 +1462,8 @@ testers are expected to do more *exploratory* testing.
 
 </box>
 
+Return to [table of contents](#table-of-contents).
+
 ### Linking contacts to an event
 
 1. Linking contacts to an event
@@ -1340,9 +1479,13 @@ testers are expected to do more *exploratory* testing.
    4. Test case: `link`<br>
      Expected: Error details shown in the status message with no operation performed.
 
+Return to [table of contents](#table-of-contents).
+
 ### Unlinking contacts from an event
 
 Similar to `link` command except that the command word is `unlink` and the expected result is opposite.
+
+Return to [table of contents](#table-of-contents).
 
 ### Selecting an event
 
@@ -1377,6 +1520,8 @@ Similar to `link` command except that the command word is `unlink` and the expec
 
 </box>
 
+Return to [table of contents](#table-of-contents).
+
 ### Adding a task
 
 1. A task can be added from any page.
@@ -1389,6 +1534,8 @@ Similar to `link` command except that the command word is `unlink` and the expec
 
    3. Other incorrect add task commands to try: `add_task`, `add_task td/Book Venue d/2024-10-10 ev/`<br>
        Expected: Similar to previous.
+
+Return to [table of contents](#table-of-contents).
 
 ### Deleting a task
 
@@ -1409,6 +1556,8 @@ Similar to `link` command except that the command word is `unlink` and the expec
 
 </box>
 
+Return to [table of contents](#table-of-contents).
+
 ### Marking a task
 
 1. A task can be marked from any page.
@@ -1422,9 +1571,13 @@ Similar to `link` command except that the command word is `unlink` and the expec
    3. Other incorrect add task commands to try: `mark_task`, `mark_task ev/NUS Career Fair 2024`<br>
       Expected: Similar to previous.
 
+Return to [table of contents](#table-of-contents).
+
 ### Unmarking a task
 
 Similar to `mark_task` command except that the command word is `unmark_task` and the expected result is opposite.
+
+Return to [table of contents](#table-of-contents).
 
 ### Saving data
 
@@ -1441,6 +1594,8 @@ Similar to `mark_task` command except that the command word is `unmark_task` and
 
    1. Test case: `data/jobfestgo.json` was corrupted.
       Expected: JobFestGo starts with an empty event, contact, and task lists. All events, contacts and tasks are cleared.
+
+Return to [table of contents](#table-of-contents).
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -1497,3 +1652,5 @@ Given below are the planned enhancements for the app for future releases.
     Users have to manually delete the events and tasks once completed.
     For future enhancements, continuing from the previous enhancement, we plan to remove the events and tasks past a particular period for better storage management.
     This can be done by checking if the current date is past the event date by the number of days specified in the `days_past_event` parameter.
+
+Return to [table of contents](#table-of-contents).

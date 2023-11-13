@@ -29,8 +29,6 @@ deactivate SelectEventCommandParser
 JobFestGoParser -> SelectEventCommandParser : parse("1")
 activate SelectEventCommandParser
 
-SelectEventCommandParser -> SelectEventCommandParser : parseIndex("1")
-
 create SelectEventCommand
 SelectEventCommandParser -> SelectEventCommand : new SelectEventCommand(1)
 activate SelectEventCommand
