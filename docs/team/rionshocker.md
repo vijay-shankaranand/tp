@@ -3,6 +3,8 @@
   title: "Jaryl Goh Jun Zhong's Project Portfolio Page"
 ---
 
+## Jaryl Goh Jun Zhong's Project Portfolio Page
+
 ### Project: JobFestGo
 
 JobFestGo is a **desktop application** built for job event planners in Singapore to manage contacts and tasks for their events.
