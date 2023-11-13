@@ -540,37 +540,46 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   * 1a1. JobFestGo informs user that mandatory fields not specified
 
-    Use case ends.
+    Use case resumes at step 1.
 
 * 1b. Phone number already exists.
 
     * 1b1. JobFestGo informs user that phone number already exists.
 
-      Use case ends.
+      Use case resumes at step 1.
 
 * 1c. Email is in incorrect format.
 
     * 1c1. JobFestGo informs user that email is in wrong format.
 
-      Use case ends.
+      Use case resumes at step 1.
 
 * 1d. Phone number is in incorrect format.
 
     * 1d1. JobFestGo informs user that phone number is in wrong format.
 
-      Use case ends.
+      Use case resumes at step 1.
 
 * 1e. Tag is not found in list.
 
     * 1e1. JobFestGo informs user that tag input is not in tag List.
 
-      Use case ends.
+      Use case resumes at step 1.
   
 * 1f. Name is not alphanumeric.
 
     * 1f1. JobFestGo informs user that name input is not alphanumeric.
 
-      Use case ends.
+      Use case resumes at step 1.
+
+**Use case: List all contacts**
+
+**MSS**
+
+1.  User requests to list all contacts
+2.  JobFestGo shows a list of all contacts
+
+    Use case ends.
 
 **Use case: Delete a contact**
 
@@ -589,23 +598,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 3a1. JobFestGo shows an error message.
 
-      Use case resumes at step 2.
+      Use case resumes at step 3.
 
 * 3b. Missing index.
 
     * 3b1. JobFestGo shows an error message.
 
-      Use case resumes at step 2.
-
-**Use case: List all contacts**
-
-**MSS**
-
-1.  User requests to list all contacts
-2.  JobFestGo shows a list of all contacts
-
-    Use case ends.
-
+      Use case resumes at step 3.
 
 **Use case: Add a tag**
 
@@ -622,19 +621,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 2a1. JobFestGo shows an error message.
 
-      Use case resumes at step 2.
+      Use case resumes at step 1.
 
 * 2b. The given tag name contains non-alphanumeric characters.
 
     * 2b1. JobFestGo shows an error message.
 
-      Use case resumes at step 2.
+      Use case resumes at step 1.
 
 * 3a. The given tag name is already in the tag list.
 
     * 3a1. JobFestGo shows an error message.
 
-      Use case resumes at step 2.
+      Use case resumes at step 1.
 
 **Use case: View all tags**
 
@@ -665,13 +664,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 3a1. JobFestGo shows an error message.
 
-      Use case resumes at step 2.
+      Use case resumes at step 3.
 
 * 3b. Missing tag name.
 
     * 3b1. JobFestGo shows an error message.
 
-      Use case resumes at step 2.
+      Use case resumes at step 3.
 
 **Use case: Filter contacts by tag**
 
@@ -705,31 +704,31 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 1a1. JobFestGo informs user that mandatory fields not specified
 
-      Use case ends.
+      Use case resumes at step 1.
 
 * 1b. Event name already exists.
 
     * 1b1. JobFestGo informs user that event name already exists.
 
-      Use case ends.
+      Use case resumes at step 1.
 
 * 1c. Event name is not alphanumeric.
 
     * 1c1. JobFestGo informs user that event name is not alphanumeric.
 
-      Use case ends.
+      Use case resumes at step 1.
 
 * 1d. Date is in incorrect format.
 
     * 1d1. JobFestGo informs user that date is in wrong format.
 
-      Use case ends.
+      Use case resumes at step 1.
 
 * 1e. Date is before current date.
 
     * 1e1. JobFestGo informs user that date is before current date.
 
-      Use case ends.
+      Use case resumes at step 1.
 
 **Use case: View all events**
 
@@ -806,19 +805,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 1a1. JobFestGo shows an error message.
 
-      Use case ends.
+      Use case resumes at step 1.
 
 * 1b. One of the given contacts does not exist.
 
     * 1b1. JobFestGo shows an error message.
 
-      Use case ends.
+      Use case resumes at step 1.
 
 * 1a. One of the given contacts is already linked to the given event.
 
     * 1a1. JobFestGo shows an error message.
 
-      Use case ends.
+      Use case resumes at step 1.
 
 **Use case: Unlink contacts from an event**
 
@@ -833,7 +832,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 1a1. JobFestGo shows an error message.
 
-      Use case ends.
+      Use case resumes at step 1.
 
 * 1b. One of the given contacts does not exist.
 
@@ -845,7 +844,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 1a1. JobFestGo shows an error message.
 
-      Use case ends.
+      Use case resumes at step 1.
 
 **Use case: Add a task**
 
@@ -863,25 +862,25 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 1a1. JobFestGo informs user that mandatory fields not specified.
 
-      Use case ends.
+      Use case resumes at step 1.
 
 * 1b. Task description contains non-alphanumeric characters except `-,./() `.
 
     * 1b1. JobFestGo informs user that task description contains non-alphanumeric characters.
 
-      Use case ends.
+      Use case resumes at step 1.
   
 * 1c. Date is invalid.
 
     * 1c1. JobFestGo informs user that date is invalid.
 
-      Use case ends.
+      Use case resumes at step 1.
 
 * 1c. Event does not exist.
 
     * 1d1. JobFestGo informs user that event does not already exist.
 
-      Use case ends.
+      Use case resumes at step 1.
 
 **Use case: Delete a task**
 
@@ -899,13 +898,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 1a1. JobFestGo informs user that mandatory fields not specified.
 
-      Use case ends.
+      Use case resumes at step 1.
 
 * 1b. Task does not exist.
 
     * 1c1. JobFestGo informs user that task does not already exist.
 
-      Use case ends.
+      Use case resumes at step 1.
 
 **Use case: Marking a task**
 
@@ -923,19 +922,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 1a1. JobFestGo informs user that mandatory fields not specified.
 
-      Use case ends.
+      Use case resumes at step 1.
 
 * 1b. Task does not exist.
 
     * 1c1. JobFestGo informs user that task does not already exist.
 
-      Use case ends.
+      Use case resumes at step 1.
 
 * 1c. Task is already marked as completed.
 
     * 1c1. JobFestGo informs user that task is already marked as completed.
 
-      Use case ends.
+      Use case resumes at step 1.
 
 **Use case: Unmarking a task**
 
@@ -953,19 +952,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 1a1. JobFestGo informs user that mandatory fields not specified.
 
-      Use case ends.
+      Use case resumes at step 1.
 
 * 1b. Task does not exist.
 
     * 1c1. JobFestGo informs user that task does not exist.
 
-      Use case ends.
+      Use case resumes at step 1.
 
 * 1c. Task is not marked as completed.
 
     * 1c1. JobFestGo informs user that task is not marked as completed.
 
-      Use case ends.
+      Use case resumes at step 1.
 
 ---
 ### Non-Functional Requirements
