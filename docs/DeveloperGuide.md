@@ -783,21 +783,27 @@ Return to [table of contents](#table-of-contents).
 
       Use case resumes at step 1.
 
-* 1b. Event name already exists
+* 1b. Event name already exists.
 
     * 1b1. JobFestGo informs user that event name already exists.
 
       Use case resumes at step 1.
 
-* 1c. Date is in incorrect format.
+* 1c. Event name is not alphanumeric.
 
-    * 1c1. JobFestGo informs user that date is in wrong format.
+    * 1c1. JobFestGo informs user that event name is not alphanumeric.
 
       Use case resumes at step 1.
 
-* 1d. Date is before current date.
+* 1d. Date is in incorrect format.
 
-    * 1d1. JobFestGo informs user that date is before current date.
+    * 1d1. JobFestGo informs user that date is in wrong format.
+
+      Use case resumes at step 1.
+
+* 1e. Date is before current date.
+
+    * 1e1. JobFestGo informs user that date is before current date.
 
       Use case resumes at step 1.
 
