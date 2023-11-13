@@ -1027,9 +1027,6 @@ Return to [table of contents](#table-of-contents).
 * The user interface should be intuitive for event planners to use, for non-tech savy job event planners
 4. Performance:
 * The system should respond to all inputs within a reasonable time frame (within 2 seconds)
-
-<div style="page-break-after: always;"></div>
-
 5. Size of application:
 * The size of the application's `jar` file should not exceed 100MB
 6. Memory usage:
