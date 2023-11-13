@@ -30,7 +30,6 @@ deactivate AddTagCommandParser
 JobFestGoParser -> AddTagCommandParser : parse("t/vendor")
 activate AddTagCommandParser
 
-AddTagCommandParser -> AddTagCommandParser : parseTag("vendor")
 create AddTagCommand
 AddTagCommandParser -> AddTagCommand : new AddTagCommand(tag)
 activate AddTagCommand

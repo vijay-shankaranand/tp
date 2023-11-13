@@ -30,9 +30,6 @@ deactivate AddEventCommandParser
 JobFestGoParser -> AddEventCommandParser : parse("n/NUS Career Fair\n d/2024-02-15 a/NUS")
 activate AddEventCommandParser
 
-AddEventCommandParser -> AddEventCommandParser : parseName("NUS Career Fair")
-AddEventCommandParser -> AddEventCommandParser : parseDate("2024-02-15")
-AddEventCommandParser -> AddEventCommandParser : parseAddress("NUS")
 create AddEventCommand
 AddEventCommandParser -> AddEventCommand : new AddEventCommand(event)
 activate AddEventCommand
