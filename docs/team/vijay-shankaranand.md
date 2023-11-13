@@ -7,15 +7,19 @@ title: "Vijayanandan Shankar Anand's Project Portfolio Page"
 
 JobFestGo is a **desktop application** built for job event planners in Singapore to manage contacts and tasks for their events.
 
-Here’s an **overview** of how JobFestGo can help you with your event planning:
-- Store information about your events and their associated contacts
-- Track status of your event tasks
-- Keep track of upcoming task deadlines
-- Search for contacts by name or tag
+Features of JobFestGo include:
+- Adding contacts
+- Adding events
+- Adding tasks
+- Reminders for tasks
 
-Optimized for use via a **Command Line Interface (CLI)** while still having the benefits of a **Graphical User Interface (GUI)**, it is a task management tool meant to assist you as a job festival event planner in tracking event-specific tasks and contacts. This removes the hassle of having to shuffle through your contact list based on names that you might not remember and organise your tasks according to events while obtaining your information **efficiently**.
+It is a management tool meant to assist you in effectively, efficiently managing your tasks and contacts for events.
 
 Given below are my contributions to the project.
+
+* **Code contributed**: [RepoSense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=vijay-shankaranand&breakdown=true)
+
+<br>
 
 * **Enhancements implemented**:
     - Improved the `add_contact` feature
@@ -24,18 +28,15 @@ Given below are my contributions to the project.
     - Implemented the `add_event` feature
         - What it does: allows the user to add an event.
         - Justification: This feature improves the product as it provides the user a way to add their events to keep track of their upcoming/past events.
-        - Highlights: This enhancement adds a new class to JobFestGo. This enhancement was challenging as there was a need to refactor certain parts of contact class to use for event class to minimize code duplication.
+        - Highlights: This enhancement adds a new class to JobFestGo. This enhancement was challenging as there was a need to refactor certain parts of contact class to use for event class to minimize code duplication. There was also a need to refactor out the name class to minimize code duplication
     - Implemented the reminder feature
         - What it does: reminds the users on tasks that are due within the next 3 days when they start up JobFestGo.
-        - Justification: This feature improves the product as it provides the user a way to keep track of their upcoming tasks.
+        - Justification: This feature improves the product as it provides the user a way to be reminded of their upcoming tasks so as to not forget completing them on time.
         - Highlights: Figuring out the logic to implement this feature was challenging as there was a need to check if the task is due within the next 3 days and if the task is not marked as done using a new predicate.
   
 
 <br>
 
-* **Code contributed**: [RepoSense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=vijay-shankaranand&breakdown=true)
-
-<br>
 
 * **Contributions to the UG**:
     - Did up the `add_contact` feature
@@ -49,7 +50,7 @@ Given below are my contributions to the project.
   <br>
 
 * **Contributions to the DG**:
-    - Fixed the existing PlantUML diagrams for the project to align to our product, changing hints of AB3 to JobFestGo.
+    - Fixed the existing PlantUML diagrams such as Model & UI diagrams to make it neater.
     - Did up the `add_contact` feature as well as its use-cases
     - Did up the implementation section for the `add_event` feature and its use-cases, detailing the thought process
     - Dedicated time to pick up the syntax and features of PlantUML to optimize our diagrams for neatness and readability
@@ -64,7 +65,6 @@ Given below are my contributions to the project.
     - Updating of developer guide's diagrams
     - Updating of user guide's screenshots, navigating UI and target audience section
     - Refactored codebase to modify all AB3 hints to JobFestGo - eg. from AddressBook to JobFestGo
-    - Found the source of critical bug during loading of json which crippled the stability of the product
     - Extensive testing of product before release
     - Added automated test-cases to aid in regression testing of our product
 
@@ -76,8 +76,9 @@ Given below are my contributions to the project.
         - [Pull Request 1](https://github.com/AY2324S1-CS2103T-T09-1/tp/pull/271)
         - [Pull Request 2](https://github.com/AY2324S1-CS2103T-T09-1/tp/pull/140)
         - [Pull Request 3](https://github.com/AY2324S1-CS2103T-T09-1/tp/pull/96)
-
-  <br>
+    - Found the source of critical bug during loading of json which crippled the stability of the product through extensive debugging and advised assigned developer on changes to make
+        - [Bug fix made](https://github.com/AY2324S1-CS2103T-T09-1/tp/pull/239/files)
+<br>
 
 * **Contributions beyond the project team**:
   I have assisted in finding multiple bugs for the product of one other team.
