@@ -29,8 +29,8 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 [[github](http://github.com/xyT-T)] [[portfolio](team/xyt-t.md)]
 
-* Role: ?
-* Responsibilities: ?
+* Role: Backend Developer
+* Responsibilities: Implementation of various features
 
 ### Jaryl Goh Jun Zhong
 
