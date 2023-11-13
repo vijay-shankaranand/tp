@@ -14,8 +14,7 @@ Here’s an **overview** of how JobFestGo can help you with your event planning:
 - Stay on schedule with automated deadline reminders
 - Search for contacts by name or tag
 
-Optimized for use via a **Command Line Interface (CLI)** while still having the benefits of a **Graphical User Interface (GUI)**, it is a task management tool meant to assist you as a job festival event planner in tracking event-specific tasks and contacts. This removes the hassle of having to shuffle through your contact list based on names that you might not remember and organise your tasks according to events while obtaining your information **efficiently**.
-
+Optimized for use via a **Command Line Interface (CLI)** while still having the benefits of a **Graphical User Interface (GUI)**, JobFestGo is a management tool tailored for **job festival event planners**. With systematic organization of contacts and tasks, you can **enhance productivity** and **streamline your workflow** effortlessly!
 Given below are my contributions to the project.
 
 * **Enhancements implemented**:
@@ -33,7 +32,11 @@ Given below are my contributions to the project.
     - What it does: allows the user to mark a task as completed or not completed in JobFestGo.
     - Justification: This feature improves user experience by enabling the user to easily track the progress of their tasks and plan their work accordingly.
 
+<br>
+
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=xyt-t&breakdown=false&sort=groupTitle%20dsc&sortWithin=title&since=2023-09-22&timeframe=commit&mergegroup=&groupSelect=groupByRepos)
+
+<br>
 
 * **Contributions to the UG**:
   - Did up the `filter_by_tag` feature
@@ -41,20 +44,28 @@ Given below are my contributions to the project.
   - Did up the `delete_task` feature
   - Did up the `mark_task` and `unmark_task` feature
 
+<br>
+
 * **Contributions to the DG**:
   - Did up the implementation of `link` and `unlink` feature, detailing the thought process
   - Did up the `filter_by_tag`, `link`, `unlink`, `delete_task`, `mark_task` and `unmark_task` features as well as their use-cases
+
+<br>
 
 * **Contributions to team-based tasks**:
   - Reviewing UG and ensuring its clarity and coherence
   - Updating DG to minimize the repetition
   - Maintaining issue tracker of some issues
 
+<br>
+
 * **Review/mentoring contributions**:
   - I regularly help to review PRs of my team members and here are some of the PRs I have reviewed:
     - [Pull Request 1](https://github.com/AY2324S1-CS2103T-T09-1/tp/pull/95)
     - [Pull Request 2](https://github.com/AY2324S1-CS2103T-T09-1/tp/pull/106)
     - [Pull Request 3](https://github.com/AY2324S1-CS2103T-T09-1/tp/pull/162)
+
+<br>
 
 * **Contributions beyond the project team**:
   - I help one other team with product testing and here are some of the bugs I have reported:
