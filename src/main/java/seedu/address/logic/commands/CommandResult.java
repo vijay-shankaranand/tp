@@ -184,7 +184,11 @@ public class CommandResult {
      * @return true if the current screen should remain displayed, else false
      */
     public boolean shouldStayOnScreen() {
-        return this.isSelectScreen || this.shouldRemainOnScreen;
+        if (taskDescription != null && isSelectScreen) {
+            return false;
+        } else {
+            return this.shouldRemainOnScreen;
+        }
     }
 
     @Override

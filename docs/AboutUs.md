@@ -59,5 +59,5 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](http://github.com/tjch-o)]
 [[portfolio](team/tjch-o.md)]
 
-* Role: ?
-* Responsibilities: ?
+* Role: UI Developer
+* Responsibilities: Implementation of various features involving UI

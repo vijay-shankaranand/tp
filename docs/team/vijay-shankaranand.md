@@ -49,9 +49,10 @@ Given below are my contributions to the project.
   <br>
 
 * **Contributions to the DG**:
-    - Fixed the PlantUML diagrams for the project to align to our product, changing hints of AB3 to JobFestGo.
+    - Fixed the existing PlantUML diagrams for the project to align to our product, changing hints of AB3 to JobFestGo.
     - Did up the `add_contact` feature as well as its use-cases
     - Did up the implementation section for the `add_event` feature and its use-cases, detailing the thought process
+    - Dedicated time to pick up the syntax and features of PlantUML to optimize our diagrams for neatness and readability
 
 <br>
 

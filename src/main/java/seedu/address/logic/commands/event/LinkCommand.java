@@ -86,8 +86,10 @@ public class LinkCommand extends Command {
             // Update the respective filtered lists to show the components within the event
             // Flow of command should be after linking a contact to an event,
             // it goes to the selected event.
-            model.updateFilteredContactList(new ContactIsInEventPredicate(eventToLink));
-            model.updateFilteredTaskList(new TaskIsInEventPredicate(eventToLink));
+            ContactIsInEventPredicate contactListPredicate = new ContactIsInEventPredicate(eventToLink);
+            TaskIsInEventPredicate taskListPredicate = new TaskIsInEventPredicate(eventToLink);
+            model.updateFilteredContactList(contactListPredicate);
+            model.updateFilteredTaskList(taskListPredicate);
 
             return new CommandResult(String.format(MESSAGE_SUCCESS, contactNameListToLink, eventNameToLink),
                     model.getEvent(eventNameToLink), false);

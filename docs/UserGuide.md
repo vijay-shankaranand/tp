@@ -53,8 +53,8 @@ Optimized for use via a **Command Line Interface (CLI)** while still having the 
     - [Exiting the program : `exit`](#exiting-the-program-exit)
     - [Saving the data](#saving-the-data)
     - [Editing the data file](#editing-the-data-file)
-    - [Archiving data files `[coming in v2.0]`](#archiving-data-files-coming-in-v20)
-    - [Progress bar for completed tasks of an event `[coming in v2.0]`](#progress-bar-for-completed-tasks-of-an-event-coming-in-v20)
+    - [Archiving data files `[coming in v2.0]`](#archiving-data-files-coming-in-v2-0)
+    - [Progress bar for completed tasks of an event `[coming in v2.0]`](#progress-bar-for-completed-tasks-of-an-event-coming-in-v2-0)
   - [FAQ](#faq)
   - [Known issues](#known-issues)
   - [Command summary](#command-summary)
@@ -80,6 +80,9 @@ Optimized for use via a **Command Line Interface (CLI)** while still having the 
    ![Ui](images/Ui.png)
 
 5. Type the command in the command box and press Enter to execute it. e.g. typing `help` and pressing Enter will open the help window.
+
+<br>
+
    <br>
 
    Some example commands you can try:
@@ -96,6 +99,8 @@ Optimized for use via a **Command Line Interface (CLI)** while still having the 
 
 6. Refer to the [Features](#features) below for details of each command.
 
+Return to [table of contents](#table-of-contents).
+
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
 
@@ -109,6 +114,8 @@ JobFestGo comes with a GUI (Graphical User Interface) that is designed to be int
 
 **PLEASE NOTE:** If there is an ellipsis (...) at the end of a text field in any section of JobFestGo, please extend the window fully so the full text can be seen.
 </box>
+
+Return to [table of contents](#table-of-contents).
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -149,6 +156,8 @@ Returns to the home page of JobFestGo regardless of what screen the user is curr
 
 Format: `home`
 
+Return to [table of contents](#table-of-contents).
+
 <div style="page-break-after: always;"></div>
 
 ### Adding a contact : `add_contact`
@@ -176,6 +185,8 @@ Examples:
 
 ![result for 'add_contact'](images/addContactResult.png)
 
+Return to [table of contents](#table-of-contents).
+
 <div style="page-break-after: always;"></div>
 
 ### Listing all contacts : `view_contacts`
@@ -187,6 +198,8 @@ Displays a list of all contacts in JobFestGo.
 Format: `view_contacts`
 
   ![result for 'view_contacts'](images/viewContactsResults.png)
+
+Return to [table of contents](#table-of-contents).
 
 <div style="page-break-after: always;"></div>
 
@@ -213,6 +226,10 @@ Examples:
 * `view_contact` followed by `delete_contact 2` deletes the 2nd contact in JobFestGo.
 * `find_contact Betsy` followed by `delete_contact 1` deletes the 1st contact in the results of the `find_contact` command.
 
+Return to [table of contents](#table-of-contents).
+
+<div style="page-break-after: always;"></div>
+
 ### Editing a contact : `edit_contact`
 <box type="info" style="background-color:#1e90ff; color: white;">
 <span slot="icon" style="color: white;"><md>:fas-address-book:</md></span>
@@ -233,6 +250,10 @@ Format: `edit_contact INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]â€¦â
 Examples:
 *  `edit_contact 1 p/91234567 e/johndoe@example.com` edits the phone number and email address of the 1st contact to be `91234567` and `johndoe@example.com` respectively.
 *  `edit_contact 2 n/Betsy Crower t/` edits the name of the 2nd contact to be `Betsy Crower` and clears all existing tags.
+
+Return to [table of contents](#table-of-contents).
+
+<div style="page-break-after: always;"></div>
 
 ### Locating contacts by name : `find_contact`
 <box type="info" style="background-color:#1e90ff; color: white;">
@@ -262,7 +283,9 @@ Examples:
 * Suppose we have a contact `Hans` in JobFestGo.
   `select_event 1` followed by `find_contact Hans` will not include `Hans`, if `Hans` is not linked to the first event.
 
-![result for 'find_contact alex david'](images/findAlexDavidResult.png)
+![result for 'find_contact alex david'](images/findAlexDavidResult.png){width=600}
+
+Return to [table of contents](#table-of-contents).
 
 ### Adding a tag : `add_tag`
 <box type="info" style="background-color:#1e90ff; color: white;">
@@ -278,6 +301,8 @@ Format: `add_tag t/TAG_NAME`
 Examples:
 * `add_tag t/vendors`
 
+Return to [table of contents](#table-of-contents).
+
 <div style="page-break-after: always;"></div>
 
 ### Viewing all tags : `view_tags`
@@ -289,6 +314,8 @@ Displays a list of all existing tags.
 Format: `view_tags`
 
   ![result for 'view_tags'](images/viewTagsResult.png)
+
+Return to [table of contents](#table-of-contents).
 
 <div style="page-break-after: always;"></div>
 
@@ -309,6 +336,8 @@ Format: `delete_tag t/TAG_NAME`
 
 Examples:
 * `delete_tag t/vendors` deletes the tag `vendors` in JobFestGo.
+
+Return to [table of contents](#table-of-contents).
 
 <div style="page-break-after: always;"></div>
 
@@ -339,7 +368,9 @@ Examples:
 * Suppose we have a contact `Hans` in JobFestGo who is tagged by `vendor`.
   `select_event 1` followed by `filter_by_tag vendor` will not include `Hans`, if `Hans` is not linked to the first event.
 
-![result for 'filter_by_tag vendors customers'](images/filterByRoleResult.png)
+![result for 'filter_by_tag vendors customers'](images/filterByRoleResult.png){width=690}
+
+Return to [table of contents](#table-of-contents).
 
 ### Adding an event : `add_event`
 <box type="info" style="background-color:#1e90ff; color: white;">
@@ -362,6 +393,8 @@ Examples:
 
     ![result for 'add_event'](images/addEventResult.png)
 
+Return to [table of contents](#table-of-contents).
+
 <div style="page-break-after: always;"></div>
 
 ### Viewing all events : `view_events`
@@ -373,6 +406,8 @@ Displays a list of all existing events.
 Format: `view_events`
 
 ![result for 'view_events'](images/viewEventsResult.png)
+
+Return to [table of contents](#table-of-contents).
 
 ### Deleting an event : `delete_event`
 <box type="info" style="background-color:#1e90ff; color: white;">
@@ -393,6 +428,8 @@ Format: `delete_event INDEX`
 
 Examples:
 * `delete_event 1` deletes the 1st event in the displayed event list.
+
+Return to [table of contents](#table-of-contents).
 
 <div style="page-break-after: always;"></div>
 
@@ -418,7 +455,7 @@ Format: `link ev/EVENT_NAME c/CONTACT_NAME [c/MORE_CONTACT_NAMES]`
 Examples:
 * `link ev/NUS Career Fair 2023 c/David Li` links `David Li` to the event `NUS Career Fair 2023` if `David Li` is not linked to `NUS Career Fair 2023`.
 
-![result for 'link'](images/linkResult.png){width=550}
+![result for 'link'](images/linkResult.png){width=525}
 
 <box type="warning" style="background-color: #C73852; color: white">
 <span slot="icon" style="color: white;"><md>:fas-close:</md></span>
@@ -427,7 +464,7 @@ Examples:
 If any of the contacts or the event keyed in is not valid or does not exist in JobFestGo, an error will be thrown.
 </box>
 
-<div style="page-break-after: always;"></div>
+Return to [table of contents](#table-of-contents).
 
 ### Unlinking contacts from an event : `unlink`
 <box type="info" style="background-color:#1e90ff; color: white;">
@@ -451,6 +488,8 @@ Similar to [`link`](#linking-contacts-to-an-event-link), if any of the contacts 
 If the input contacts and event for `unlink` are not currently linked, an error will also be thrown.
 </box>
 
+Return to [table of contents](#table-of-contents).
+
 <div style="page-break-after: always;"></div>
 
 ### Selecting an event : `select_event`
@@ -469,6 +508,8 @@ Examples:
 * `select_event 3` selects the third event in the displayed events list.
 
     ![result for 'select_event 3'](images/selectEventResult.png)
+
+Return to [table of contents](#table-of-contents).
 
 <div style="page-break-after: always;"></div>
 
@@ -490,6 +531,8 @@ Format: `add_task td/TASK_DESCRIPTION d/DEADLINE ev/EVENT_NAME`
 
 Examples:
 * `add_task td/Book Venue d/2023-12-23 ev/NUS Career Fair 2023` adds a `Book Venue` by `2023-12-23` task to the event `NUS Career Fair 2023`.
+
+Return to [table of contents](#table-of-contents).
 
 <div style="page-break-after: always;"></div>
 
@@ -523,6 +566,8 @@ If the specified event does not exist or the event does not have the specified t
 If such a situation happens, you may double-check the task description and the event name and re-enter valid inputs.
 </box>
 
+Return to [table of contents](#table-of-contents).
+
 <div style="page-break-after: always;"></div>
 
 ### Marking a task : `mark_task`
@@ -554,7 +599,9 @@ If such a situation happens, you may double-check the task description and the e
 If the specified task has already been marked as completed, an error will also be thrown.
 </box>
 
-   ![result for 'mark_task'](images/markTaskResult.png)
+   ![result for 'mark_task'](images/markTaskResult.png){width=600}
+
+Return to [table of contents](#table-of-contents).
 
 <div style="page-break-after: always;"></div>
 
@@ -583,6 +630,8 @@ If such a situation happens, you may double-check the task description and the e
 If the specified task has already been unmarked, an error will be thrown.
 </box>
 
+Return to [table of contents](#table-of-contents).
+
 ### Viewing help : `help`
 <box type="info" style="background-color:#1e90ff; color: white;">
 <span slot="icon" style="color: white;"><md>:fas-address-book:</md></span>
@@ -593,6 +642,8 @@ You can click on the 'Copy URL' button and paste the URL into your browser's add
 ![help message](images/helpMessage.png)
 
 Format: `help`
+
+Return to [table of contents](#table-of-contents).
 
 <div style="page-break-after: always;"></div>
 
@@ -611,6 +662,8 @@ This command cannot be undone. Proceed with caution.
 
 Format: `clear`
 
+Return to [table of contents](#table-of-contents).
+
 ### Exiting the program : `exit`
 <box type="info" style="background-color:#1e90ff; color: white;">
 <span slot="icon" style="color: white;"><md>:fas-address-book:</md></span>
@@ -619,9 +672,13 @@ Exits the program.
 
 Format: `exit`
 
+Return to [table of contents](#table-of-contents).
+
 ### Saving the data
 
 JobFestGo data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+
+Return to [table of contents](#table-of-contents).
 
 ### Editing the data file
 
@@ -634,17 +691,21 @@ If your changes to the data file makes its format invalid, JobFestGo will discar
 
 </box>
 
+Return to [table of contents](#table-of-contents).
+
 ### Archiving data files `[coming in v2.0]`
 
 _Details coming soon ..._
+
+Return to [table of contents](#table-of-contents).
 
 ### Progress bar for completed tasks of an event `[coming in v2.0]`
 
 _Details coming soon ..._
 
---------------------------------------------------------------------------------------------------------------------
+Return to [table of contents](#table-of-contents).
 
-<div style="page-break-after: always;"></div>
+--------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
 
@@ -666,7 +727,11 @@ _Details coming soon ..._
 **A**: Open a command prompt and type `java -version` . If you do not have Java installed, you
 can download it [here](https://www.oracle.com/java/technologies/downloads/#java11).
 
+Return to [table of contents](#table-of-contents).
+
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## Known issues
 
@@ -682,6 +747,8 @@ can download it [here](https://www.oracle.com/java/technologies/downloads/#java1
 <br><br>
    
    **Solution:** Run the jar file with GTK 2 using the command `java -Djdk.gtk.version=2 -jar jobfestgo.jar`. This is a known **Mac-only issue** with JavaFX 11 which uses GTK 3 by default. Refer to this [post](https://github.com/javafxports/openjdk-jfx/issues/217) for more details.
+
+Return to [table of contents](#table-of-contents).
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -714,3 +781,5 @@ Action     | Format, Examples
 **Help**   | `help`
 **Clear**  | `clear`
 **Exit**   | `exit`
+
+Return to [table of contents](#table-of-contents).

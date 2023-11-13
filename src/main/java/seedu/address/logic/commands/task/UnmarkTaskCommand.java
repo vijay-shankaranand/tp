@@ -69,8 +69,10 @@ public class UnmarkTaskCommand extends Command {
         model.switchToTagsScreen(false);
 
         // Update the respective filtered lists to show the components within the event
-        model.updateFilteredContactList(new ContactIsInEventPredicate(selectedEvent));
-        model.updateFilteredTaskList(new TaskIsInEventPredicate(selectedEvent));
+        ContactIsInEventPredicate contactListPredicate = new ContactIsInEventPredicate(selectedEvent);
+        TaskIsInEventPredicate taskListPredicate = new TaskIsInEventPredicate(selectedEvent);
+        model.updateFilteredContactList(contactListPredicate);
+        model.updateFilteredTaskList(taskListPredicate);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, taskDescription, associatedEventName),
                 taskDescription, selectedEvent, true);

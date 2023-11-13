@@ -13,19 +13,26 @@ Given below are my contributions to the project.
 
 * **Enhancements implemented**:
 
-  I created 3 new commands to improve user experience.
+  - Implemented the `view_tags` feature
+    - What it does: Displays a list of all existing tags.
+    - Justification: Improves the product by allowing users to remember contacts of a certain category that they can contact for events.
+    - Highlights: This enhancement was challenging because I was not familiar with JavaFx and the codebase that handles the UI, which made debugging difficult.
 
-  1. `view_tags` command which displays a list of all existing tags.
+  - Implemented the`view_events` feature
+    - What it does: Displays a list of all existing events.
+    - Justification: Improves the product by allowing users to remember all the events they are involved in so far.
+    - Highlights: While I got more familiar with JavaFx and the codebase due to the implementation of `view_tags`, the implementation was slightly challenging due to the added complexity of conditional rendering.
 
-  2. `view_events` command which displays a list of all existing events.
-
-  3. `home` command which allows the user to return to the home page from the current screen.
+  - Implemented the `home` feature
+    - What it does: Returns to the home page from the current screen.
+    - Justification: Improves the product by acting as a reset after executing other commands and users can then proceed with additional actions
+    - Highlights: Coming up with the approach for this enhancement was challenging since I had to figure out how to reset all the filters for the event, contact and task list and have it be reflected in the UI.
 
 * **Contributions to the UG**:
   - Contributed to the sections related to the commands I have created, where I mainly explained how to use the commands.
   - Continuously reviewed the user guide, ensuring its logical flow to eliminate potential confusion among users.
   - Done meticulous proofreading to avoid various types of errors including grammar, spelling and punctuation.
-  - Dedicated the time to familiarise myself with Markbind's syntax and utilised my CSS and Bootstrap expertise to enhance the user guide's visual appeal. I incorporated custom summary boxes, error boxes and icons that align with the theme of JobFestGo while improving the look of the warning boxes.
+  - Dedicated the time to familiarise myself with MarkBind's syntax and utilised my CSS and Bootstrap expertise to enhance the user guide's visual appeal. I incorporated custom summary boxes, error boxes and icons that align with the theme of JobFestGo while improving the look of the warning boxes.
 
 * **Contributions to the DG**:
   - Did up the `view_tags` feature as well as its use-cases
@@ -36,9 +43,8 @@ Given below are my contributions to the project.
 
 * **Contributions to team-based tasks**:
   - Updated the app icon
-
+  - Helped in the ideation and experimentation of the frontend
   - Updated the codebase as well as the DG and UG and renamed all methods and variables that previously contained `Person` in their name into `Contact`
-
   - Voluntarily contributed in writing additional test cases for code that I have not authored to ensure more comprehensive test coverage
 
 * **Review/mentoring contributions**:
@@ -56,7 +62,7 @@ Given below are my contributions to the project.
 
 * **Contributions beyond the project team**:
 
-  I have assisted in finding multiple bugs for the products of other teams.
+  I have assisted in finding multiple bugs for the products of one other team.
 
   Here are some of the bugs I have found while doing extensive testing:
   - [Bug found 1](https://github.com/tjch-o/ped/issues/3)

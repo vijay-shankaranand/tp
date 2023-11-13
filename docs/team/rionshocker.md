@@ -44,6 +44,7 @@ Given below are my contributions to the project.
   - Did up the `select_event` feature
   - Reviewed and proof-read the UG, checking to see if it appeared as it seems on the website
   - Helped to ensure line breaks are placed properly for ease of exporting to PDF
+  - Added navigability for better use of the UG
 
 <br>
 

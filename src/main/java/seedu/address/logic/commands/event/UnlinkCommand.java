@@ -79,8 +79,10 @@ public class UnlinkCommand extends Command {
             model.switchToTagsScreen(false);
 
             eventToUnlink = model.getEvent(eventNameToUnlink);
-            model.updateFilteredContactList(new ContactIsInEventPredicate(eventToUnlink));
-            model.updateFilteredTaskList(new TaskIsInEventPredicate(eventToUnlink));
+            ContactIsInEventPredicate contactListPredicate = new ContactIsInEventPredicate(eventToUnlink);
+            TaskIsInEventPredicate taskListPredicate = new TaskIsInEventPredicate(eventToUnlink);
+            model.updateFilteredContactList(contactListPredicate);
+            model.updateFilteredTaskList(taskListPredicate);
 
             return new CommandResult(String.format(MESSAGE_SUCCESS, contactNameListToUnlink, eventNameToUnlink),
                     model.getEvent(eventNameToUnlink), false);
