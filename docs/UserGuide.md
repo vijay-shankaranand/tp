@@ -8,7 +8,11 @@
 
 ### Welcome to JobFestGo
 
-**Your Ultimate Job Event Planning Companion!**
+<div class="icon-text">
+  <strong>Your Ultimate Job Event Planning Companion!</strong>
+  <i class="fas fa-suitcase"></i>
+<br></br>
+</div>
 
 JobFestGo is a dedicated **desktop application** designed to streamline **job event planning for professionals in Singapore**.
 It serves as a comprehensive solution for efficiently managing contacts and tasks associated with your events.
@@ -115,7 +119,7 @@ Return to [table of contents](#table-of-contents).
 
 ## Navigating the GUI
 
-JobFestGo comes with a GUI (Graphical User Interface) that is designed to be intuitive and easy to use for a pleasant visual experience for our users. Here's a quick rundown of what each section is for:
+JobFestGo comes with a GUI (Graphical User Interface) that is designed to be intuitive and easy to use for a pleasant visual experience for you. Here's a quick rundown of what each section is for:
 
 ![GUI](images/GUI.png)
 
@@ -159,7 +163,7 @@ Return to [table of contents](#table-of-contents).
 
 ### Returning to home page : `home`
 <box type="info" style="background-color:#1e90ff; color: white;">
-<span slot="icon" style="color: white;"><md>:fas-address-book:</md></span>
+<span slot="icon" style="color: white;"><md><i class="fas fa-suitcase"></i></md></span>
 Returns to the home page of JobFestGo regardless of what screen the user is currently on.
 </box>
 
@@ -171,7 +175,7 @@ Return to [table of contents](#table-of-contents).
 
 ### Adding a contact : `add_contact`
 <box type="info" style="background-color:#1e90ff; color: white;">
-<span slot="icon" style="color: white;"><md>:fas-address-book:</md></span>
+<span slot="icon" style="color: white;"><md><i class="fas fa-suitcase"></i></md></span>
 Adds a contact to JobFestGo.
 </box>
 
@@ -200,7 +204,7 @@ Return to [table of contents](#table-of-contents).
 
 ### Listing all contacts : `view_contacts`
 <box type="info" style="background-color:#1e90ff; color: white;">
-<span slot="icon" style="color: white;"><md>:fas-address-book:</md></span>
+<span slot="icon" style="color: white;"><md><i class="fas fa-suitcase"></i></md></span>
 Displays a list of all contacts in JobFestGo.
 </box>
 
@@ -214,7 +218,7 @@ Return to [table of contents](#table-of-contents).
 
 ### Deleting a contact : `delete_contact`
 <box type="info" style="background-color:#1e90ff; color: white;">
-<span slot="icon" style="color: white;"><md>:fas-address-book:</md></span>
+<span slot="icon" style="color: white;"><md><i class="fas fa-suitcase"></i></md></span>
 Deletes the contact at the specified index from JobFestGo.
 </box>
 
@@ -241,7 +245,7 @@ Return to [table of contents](#table-of-contents).
 
 ### Editing a contact : `edit_contact`
 <box type="info" style="background-color:#1e90ff; color: white;">
-<span slot="icon" style="color: white;"><md>:fas-address-book:</md></span>
+<span slot="icon" style="color: white;"><md><i class="fas fa-suitcase"></i></md></span>
 Edits an existing contact at the specified index in JobFestGo.
 </box>
 
@@ -266,7 +270,7 @@ Return to [table of contents](#table-of-contents).
 
 ### Locating contacts by name : `find_contact`
 <box type="info" style="background-color:#1e90ff; color: white;">
-<span slot="icon" style="color: white;"><md>:fas-address-book:</md></span>
+<span slot="icon" style="color: white;"><md><i class="fas fa-suitcase"></i></md></span>
 Finds contacts whose names contain any of the given keywords.
 </box>
 
@@ -298,7 +302,7 @@ Return to [table of contents](#table-of-contents).
 
 ### Adding a tag : `add_tag`
 <box type="info" style="background-color:#1e90ff; color: white;">
-<span slot="icon" style="color: white;"><md>:fas-address-book:</md></span>
+<span slot="icon" style="color: white;"><md><i class="fas fa-suitcase"></i></md></span>
 Adds a tag with the specified name to JobFestGo.
 </box>
 
@@ -316,7 +320,7 @@ Return to [table of contents](#table-of-contents).
 
 ### Viewing all tags : `view_tags`
 <box type="info" style="background-color:#1e90ff; color: white;">
-<span slot="icon" style="color: white;"><md>:fas-address-book:</md></span>
+<span slot="icon" style="color: white;"><md><i class="fas fa-suitcase"></i></md></span>
 Displays a list of all existing tags.
 </box>
 
@@ -330,7 +334,7 @@ Return to [table of contents](#table-of-contents).
 
 ### Deleting a tag : `delete_tag`
 <box type="info" style="background-color:#1e90ff; color: white;">
-<span slot="icon" style="color: white;"><md>:fas-address-book:</md></span>
+<span slot="icon" style="color: white;"><md><i class="fas fa-suitcase"></i></md></span>
 Deletes the specified tag name from JobFestGo.
 </box>
 
@@ -353,7 +357,7 @@ Return to [table of contents](#table-of-contents).
 ### Filtering contacts by tag : `filter_by_tag`
 
 <box type="info" style="background-color:#1e90ff; color: white;">
-<span slot="icon" style="color: white;"><md>:fas-address-book:</md></span>
+<span slot="icon" style="color: white;"><md><i class="fas fa-suitcase"></i></md></span>
 Displays contacts tagged by any of the specified tags.
 </box>
 
@@ -383,7 +387,7 @@ Return to [table of contents](#table-of-contents).
 
 ### Adding an event : `add_event`
 <box type="info" style="background-color:#1e90ff; color: white;">
-<span slot="icon" style="color: white;"><md>:fas-address-book:</md></span>
+<span slot="icon" style="color: white;"><md><i class="fas fa-suitcase"></i></md></span>
 Adds an event to JobFestGo.
 </box>
 
@@ -408,7 +412,7 @@ Return to [table of contents](#table-of-contents).
 
 ### Viewing all events : `view_events`
 <box type="info" style="background-color:#1e90ff; color: white;">
-<span slot="icon" style="color: white;"><md>:fas-address-book:</md></span>
+<span slot="icon" style="color: white;"><md><i class="fas fa-suitcase"></i></md></span>
 Displays a list of all existing events.
 </box>
 
@@ -420,7 +424,7 @@ Return to [table of contents](#table-of-contents).
 
 ### Deleting an event : `delete_event`
 <box type="info" style="background-color:#1e90ff; color: white;">
-<span slot="icon" style="color: white;"><md>:fas-address-book:</md></span>
+<span slot="icon" style="color: white;"><md><i class="fas fa-suitcase"></i></md></span>
 Deletes the event specified at the index from JobFestGo.
 </box>
 
@@ -444,7 +448,7 @@ Return to [table of contents](#table-of-contents).
 
 ### Linking contacts to an event : `link`
 <box type="info" style="background-color:#1e90ff; color: white;">
-<span slot="icon" style="color: white;"><md>:fas-address-book:</md></span>
+<span slot="icon" style="color: white;"><md><i class="fas fa-suitcase"></i></md></span>
 Links specified contacts to the specified event.
 </box>
 
@@ -475,7 +479,7 @@ Return to [table of contents](#table-of-contents).
 
 ### Unlinking contacts from an event : `unlink`
 <box type="info" style="background-color:#1e90ff; color: white;">
-<span slot="icon" style="color: white;"><md>:fas-address-book:</md></span>
+<span slot="icon" style="color: white;"><md><i class="fas fa-suitcase"></i></md></span>
 Unlinks specified contacts from the specified event.
 </box>
 
@@ -501,7 +505,7 @@ Return to [table of contents](#table-of-contents).
 
 ### Selecting an event : `select_event`
 <box type="info" style="background-color:#1e90ff; color: white;">
-<span slot="icon" style="color: white;"><md>:fas-address-book:</md></span>
+<span slot="icon" style="color: white;"><md><i class="fas fa-suitcase"></i></md></span>
 Selects an event at the specified index from JobFestGo. The relevant contacts and tasks will be displayed.
 </box>
 
@@ -522,7 +526,7 @@ Return to [table of contents](#table-of-contents).
 
 ### Adding a task : `add_task`
 <box type="info" style="background-color:#1e90ff; color: white;">
-<span slot="icon" style="color: white;"><md>:fas-address-book:</md></span>
+<span slot="icon" style="color: white;"><md><i class="fas fa-suitcase"></i></md></span>
 Adds a task to an event in JobFestGo.
 </box>
 
@@ -545,7 +549,7 @@ Return to [table of contents](#table-of-contents).
 
 ### Deleting a task : `delete_task`
 <box type="info" style="background-color:#1e90ff; color: white;">
-<span slot="icon" style="color: white;"><md>:fas-address-book:</md></span>
+<span slot="icon" style="color: white;"><md><i class="fas fa-suitcase"></i></md></span>
 Deletes the task specified by the task description from its associated event in JobFestGo.
 </box>
 
@@ -579,7 +583,7 @@ Return to [table of contents](#table-of-contents).
 
 ### Marking a task : `mark_task`
 <box type="info" style="background-color:#1e90ff; color: white;">
-<span slot="icon" style="color: white;"><md>:fas-address-book:</md></span>
+<span slot="icon" style="color: white;"><md><i class="fas fa-suitcase"></i></md></span>
 Marks the task specified by the task description and its associated event name in JobFestGo as completed.
 </box>
 
@@ -614,7 +618,7 @@ Return to [table of contents](#table-of-contents).
 
 ### Unmarking a task : `unmark_task`
 <box type="info" style="background-color:#1e90ff; color: white;">
-<span slot="icon" style="color: white;"><md>:fas-address-book:</md></span>
+<span slot="icon" style="color: white;"><md><i class="fas fa-suitcase"></i></md></span>
 Marks the task specified by the task description and its associated event name in JobFestGo as not completed.
 </box>
 
@@ -641,7 +645,7 @@ Return to [table of contents](#table-of-contents).
 
 ### Viewing help : `help`
 <box type="info" style="background-color:#1e90ff; color: white;">
-<span slot="icon" style="color: white;"><md>:fas-address-book:</md></span>
+<span slot="icon" style="color: white;"><md><i class="fas fa-suitcase"></i></md></span>
 Shows a link to the user guide which will contain all the details required to use the app appropriately.
 You can click on the 'Copy URL' button and paste the URL into your browser's address bar.
 </box>
@@ -656,7 +660,7 @@ Return to [table of contents](#table-of-contents).
 
 ### Clearing all entries : `clear`
 <box type="info" style="background-color:#1e90ff; color: white;">
-<span slot="icon" style="color: white;"><md>:fas-address-book:</md></span>
+<span slot="icon" style="color: white;"><md><i class="fas fa-suitcase"></i></md></span>
 Clears all entries from JobFestGo.
 </box>
 
@@ -673,7 +677,7 @@ Return to [table of contents](#table-of-contents).
 
 ### Exiting the program : `exit`
 <box type="info" style="background-color:#1e90ff; color: white;">
-<span slot="icon" style="color: white;"><md>:fas-address-book:</md></span>
+<span slot="icon" style="color: white;"><md><i class="fas fa-suitcase"></i></md></span>
 Exits the program.
 </box>
 
