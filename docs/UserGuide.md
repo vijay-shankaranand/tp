@@ -79,8 +79,10 @@ Optimized for use via a **Command Line Interface (CLI)** while still having the 
 
    ![Ui](images/Ui.png)
 
+5. Type the command in the command box and press Enter to execute it. e.g. typing `help` and pressing Enter will open the help window.
+
 <br>
-5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.
+
    <br>
 
    Some example commands you can try:
@@ -459,7 +461,7 @@ Examples:
 <span slot="icon" style="color: white;"><md>:fas-close:</md></span>
 
 **Errors:**
-If any of the contacts or the event keyed in are not valid and do not exist in JobFestGo, an error will be thrown.
+If any of the contacts or the event keyed in is not valid or does not exist in JobFestGo, an error will be thrown.
 </box>
 
 Return to [table of contents](#table-of-contents).
@@ -717,6 +719,9 @@ Return to [table of contents](#table-of-contents).
 1. Navigate to the directory where the JAR file is located using `cd [JAR file location]`
 1. Type `java -jar jobfestgo.jar` and press enter
 1. JobFestGo should launch
+
+**Q**: What do I do if I want to save contacts with the same name? <br>
+**A**: Currently our system does not support contacts with the same name. A workaround would be to use a numeric value after the name to differenciate the contacts. For example, `John Doe 1` and `John Doe 2`.
 
 **Q**: How can I check my Java version?<br>
 **A**: Open a command prompt and type `java -version` . If you do not have Java installed, you
