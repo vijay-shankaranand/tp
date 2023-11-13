@@ -8,9 +8,11 @@
 
 ### Welcome to JobFestGo
 
-**Your one-stop solution for job event planning!**
+**Your Ultimate Job Event Planning Companion!**
 
-JobFestGo is a **desktop application** built for job event planners in Singapore to manage contacts and tasks for their events.
+JobFestGo is a dedicated **desktop application** designed to streamline **job event planning for professionals in Singapore**.
+It serves as a comprehensive solution for efficiently managing contacts and tasks associated with your events.
+Whether you're a seasoned event planner or just starting, JobFestGo has you covered.
 
 Here’s an **overview** of how JobFestGo can help you with your event planning:
 - Store information about your events and their associated contacts
@@ -18,13 +20,20 @@ Here’s an **overview** of how JobFestGo can help you with your event planning:
 - Keep track of upcoming task deadlines
 - Search for contacts by name or tag
 
-Optimized for use via a **Command Line Interface (CLI)** while still having the benefits of a **Graphical User Interface (GUI)**, it is a task management tool meant to assist you as a job festival event planner in tracking event-specific tasks and contacts. This removes the hassle of having to shuffle through your contact list based on names that you might not remember and organise your tasks according to events while obtaining your information **efficiently**.
+Optimized for use via a **Command Line Interface (CLI)** while still having the benefits of a **Graphical User Interface (GUI)**, it is a task management tool meant to assist you as a job festival event planner in tracking event-specific tasks and contacts. This removes the hassle of having to shuffle through your contact list based on names that you might not remember and organise your tasks according to events while obtaining your information efficiently.
 
-**If you are new here**, visit our [quick start](#quick-start) guide to get started with JobFestGo!
+This guide is crafted to provide you with a detailed understanding of JobFestGo's functionalities and how they can enhance your job event planning experience. We aim to empower you with the knowledge needed to navigate through the application seamlessly, ensuring you make the most out of its features.
+
+**New to JobFestGo? Explore Our Quick Start Guide:**
+
+If you're just getting started, we recommend checking out our [quick start](#quick-start) guide. It's designed to help you familiarize yourself with JobFestGo and get you up and running in no time!
+
+Thank you for choosing JobFestGo as your job event planning companion. We're here to make your event planning journey smoother and more enjoyable!
 
 --------------------------------------------------------------------------------------------------------------------
 
 ### Table of Contents
+The table of contents below is provided to enhance your navigation through this guide. To swiftly access a specific section, click on the corresponding link.
   - [Quick start](#quick-start)
   - [Navigating the GUI](#navigating-the-gui)
   - [Features](#features)
