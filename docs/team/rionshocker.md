@@ -9,13 +9,13 @@
 
 JobFestGo is a **desktop application** built for job event planners in Singapore to manage contacts and tasks for their events.
 
-Here’s an **overview** of how JobFestGo can help you with your event planning:
-- Store information about your events and their associated contacts
-- Track status of your event tasks
-- Keep track of upcoming task deadlines
-- Search for contacts by name or tag
+Here are some of the features JobFestGo has to offer:
+- Adding contacts
+- Filtering contacts based on tags
+- Adding events
+- Viewing tasks and contacts related to an event
 
-Optimized for use via a **Command Line Interface (CLI)** while still having the benefits of a **Graphical User Interface (GUI)**, it is a task management tool meant to assist you as a job festival event planner in tracking event-specific tasks and contacts. This removes the hassle of having to shuffle through your contact list based on names that you might not remember and organise your tasks according to events while obtaining your information **efficiently**.
+It is an application that is meant to streamline daily operations that job event planners are required to do, while also tapping on their ability to use a Command Line Interface.
 
 Given below are my contributions to the project.
 
@@ -55,6 +55,7 @@ Given below are my contributions to the project.
   - Did up the `select_event` feature and its use-cases
   - Added instructions for manual testing for `add_contact`, `edit_contact`, `view_contacts`, `delete_tag`, and `select_event` commands
   - Did up the table of contents section
+  - Added navigability for better use of the DG
 
 <br>
 
