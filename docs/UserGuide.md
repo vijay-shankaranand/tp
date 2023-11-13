@@ -79,7 +79,7 @@ Optimized for use via a **Command Line Interface (CLI)** while still having the 
 
    ![Ui](images/Ui.png)
 
-5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.
+5. Type the command in the command box and press Enter to execute it. e.g. typing `help` and pressing Enter will open the help window.
    <br>
 
    Some example commands you can try:
@@ -424,7 +424,7 @@ Examples:
 <span slot="icon" style="color: white;"><md>:fas-close:</md></span>
 
 **Errors:**
-If any of the contacts or the event keyed in are not valid and do not exist in JobFestGo, an error will be thrown.
+If any of the contacts or the event keyed in is not valid or does not exist in JobFestGo, an error will be thrown.
 </box>
 
 <div style="page-break-after: always;"></div>
