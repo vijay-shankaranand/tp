@@ -18,8 +18,10 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](http://github.com/Khaleelur-Rahman)]
 [[portfolio](team/khaleelur-rahman.md)]
 
-* Role: ?
-* Responsibilities: ?
+* Role: Backend Lead
+* Responsibilities: 
+  - In charge of `Model` and `Storage` components
+  - Scheduling and assigning of tasks, and its associated deadlines 
 
 ### Tong Xinyao
 
