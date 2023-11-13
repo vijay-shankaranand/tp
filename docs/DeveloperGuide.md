@@ -504,7 +504,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`      | job fest event planner | return to the home page         |                                                                                             |
 | `*`      | job fest event planner | sort contacts by name           | locate a contact easily                                                                     |
 
-
+---
 ### Use cases
 
 (For all use cases below, the **System** is the `JobFestGo` and the **Actor** is the `user`, unless specified otherwise)
@@ -955,22 +955,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Use case: Return to the home page**
-
-**MSS**
-1. User is on any page
-2. User requests to return to the home page
-3. JobFestGo returns user to the home page
-
-   Use case ends.
-
-**Extensions**
-
-* 2a. The user is already on the home page
-
-   Use case ends.
-
-
 ---
 ### Non-Functional Requirements
 1. Environment requirement:
@@ -987,11 +971,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 6. Memory usage:
 * The system should not use more than 2GB of memory when running.
 
+---
 ### Glossary
 
 | Term                 | Definition                                                           |
 |----------------------|----------------------------------------------------------------------|
 | Activity Diagram     | A diagram that shows activities performed by the system after a command. |
+| AddressBook-Level3   | A project created by the SE-EDU initiative, which this project is built on. |
 | App                  | An application.                                                      |
 | API                  | An application programming interface.                                |
 | Architecture Diagram | A diagram that explains the high-level design of the App.            |
