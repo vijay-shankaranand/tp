@@ -53,8 +53,8 @@ Optimized for use via a **Command Line Interface (CLI)** while still having the 
     - [Exiting the program : `exit`](#exiting-the-program-exit)
     - [Saving the data](#saving-the-data)
     - [Editing the data file](#editing-the-data-file)
-    - [Archiving data files `[coming in v2.0]`](#archiving-data-files-coming-in-v20)
-    - [Progress bar for completed tasks of an event `[coming in v2.0]`](#progress-bar-for-completed-tasks-of-an-event-coming-in-v20)
+    - [Archiving data files `[coming in v2.0]`](#archiving-data-files-coming-in-v2-0)
+    - [Progress bar for completed tasks of an event `[coming in v2.0]`](#progress-bar-for-completed-tasks-of-an-event-coming-in-v2-0)
   - [FAQ](#faq)
   - [Known issues](#known-issues)
   - [Command summary](#command-summary)
@@ -79,6 +79,7 @@ Optimized for use via a **Command Line Interface (CLI)** while still having the 
 
    ![Ui](images/Ui.png)
 
+<br>
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.
    <br>
 
