@@ -659,6 +659,9 @@ _Details coming soon ..._
 1. Type `java -jar jobfestgo.jar` and press enter
 1. JobFestGo should launch
 
+**Q**: What do I do if I want to save contacts with the same name? <br>
+**A**: Currently our system does not support contacts with the same name. A workaround would be to use a numeric value after the name to differenciate the contacts. For example, `John Doe 1` and `John Doe 2`.
+
 **Q**: How can I check my Java version?<br>
 **A**: Open a command prompt and type `java -version` . If you do not have Java installed, you
 can download it [here](https://www.oracle.com/java/technologies/downloads/#java11).

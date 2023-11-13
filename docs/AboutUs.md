@@ -49,8 +49,8 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](http://github.com/vijay-shankaranand)]
 [[portfolio](team/vijay-shankaranand.md)]
 
-* Role: UI Expert
-* Responsibilities: Scheduling and tracking, UI
+* Role: Backend Developer
+* Responsibilities: Implementation of various features
 
 ### Choo Tze Jie
 
