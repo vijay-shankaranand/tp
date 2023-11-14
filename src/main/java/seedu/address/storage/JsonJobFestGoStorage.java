@@ -56,6 +56,9 @@ public class JsonJobFestGoStorage implements JobFestGoStorage {
         } catch (IllegalValueException ive) {
             logger.info("Illegal values found in " + filePath + ": " + ive.getMessage());
             throw new DataLoadingException(ive);
+        } catch (NullPointerException npe) {
+            logger.info("Null pointer found in " + filePath + ": " + npe.getMessage());
+            throw new DataLoadingException(npe);
         }
     }
 
